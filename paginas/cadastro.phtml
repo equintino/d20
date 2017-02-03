@@ -1,0 +1,128 @@
+<script>
+  function myFunction(){
+    var x = document.getElementById('mySelect').value;
+      document.getElementById('aqui').innerHTML='<img height=240px src="../web/imagens/'+x+'.png" />';
+    if(x=='humano'){
+      var y = 'Humanos uma raça muito comum e muitas vezes escolhida, boa para iniciantes no RPG, é uma raça neutra, sem benefícios ou malefícios, os humanos não tem nenhuma vantagem ou poder melhor que as outras raças, mas também não tem nenhuma desvantagem.Podem ter várias cores de pele, cabelos e olhos e chegar até 2,20m ';
+    }
+    if(x=='elfo'){
+      var y = 'Elfos  são pessoas de uma raça mística com aparência humanóide geralmente belos e loiros. São mais baixos e menos fortes, porém mais rápidos e habilidosos que os humanos. Há quem diga que são Semi-Deuses e Imortais.São seres mágicos, ligados à natureza, o que os diferencia de Magos e Feiticeiros, que advém do estudo das artes arcanas por outras raças.São excelentes arqueiros e possuem natural aptidão para as magias da Natureza.';
+    }
+    if(x=='anao'){
+      var y = 'Os anões demoram a sorrir, ou a brincar e suspeitam muito de estranhos, mas são generosos com os poucos que ganham sua confiança. Eles valorizam o ouro, as gemas, as jóias e os objetos de arte feitos com esses materiais preciosos e muitos já sucumbiram ao poder da ambição. Eles não combatem nem tímida, nem temerariamente, mas com coragem e tenacidade cuidadosas. Seu senso de justiça é forte, mas pode se transformar em uma sede de vingança. Entre os gnomos, que são conhecidos por se darem bem com os anões, é comum dizerem o seguinte juramento: “Se estou mentindo, que eu enraiveça um anão”.';
+    }
+    if(x=='halfling'){
+      var y = 'Como raça amigável, tentam se dar bem com todas as outras raças, mesmo assim, não que dizer que considerem todos amigos, no geral consideram amigos verdadeiros apenas os de sua própria raça; porém quando fazem amigos sem ser de sua espécie, são extremamente leais, mostrando ferocidade quando esse amigo está em perigo. Vivem no geral em comunidades pacificas, com grandes fazendas e bosques, nunca construíram um reino próprio, nem reconhecem qualquer tipo de nobreza dos de sua espécie, procurando sempre os anciões de sua família em busca de orientação, essa base construída em cima da família ajudou os halflings a mantes suas tradições por milhares de anos, independente do que estivesse ocorrendo no reino. Criaturas que querem se dar bem com todos, possuem no geral alinhamento leal e bom, não gostando de ver os outros sofrerem ou passar por opressão, mantendo sempre um forte as suas tradições, assim como os velhos hábitos e conforto. A divindade dos Halflings é Yondalla O Abençoado, o protetor dos halflings, a língua usada por ele é um idioma próprio. Como dito anteriormente, eles se aventuram mais com propósitos de proteger a comunidade, família e amigos, porém em uma batalha, por seu tamanho reduzido, usam mais de astúcia e furtividade do que força bruta ou mágia.'
+    }
+    document.getElementById('aqui.texto').innerHTML=y;
+  }
+</script>
+<?php 
+    $variaveis=array('NOME DO PERSONAGEM '=>'personagem','RAÇA '=>'raca','CLASSE '=>'classe','TENDÊNCIA1 '=>'tendencia1','TENDÊNCIA2 '=>'tendencia2');
+    $act=$_GET['act'];
+    $x=$_GET['pag'];
+    $y=$x+2;
+        if($x==0){ 
+           $class='class="disabled"';
+        }else{
+           $class='title=RECUAR';
+        }
+?>
+<div  class="conteudo" >
+    <div class="cad">
+        <?php if($act=='lista'):?>
+               <?php 
+                  $dao=new Dao();
+                  $search=new ModelSearchCriteria();
+                  $search->settabela('personagem');
+                  $lista=$dao->encontre($search);
+                  $titulos=array('PERSONAGEM','RAÇA','CLASSE','TENDÊNCIA1','TENDÊNCIA2');
+                  //echo count($lista);die;
+                  echo '<div class=paginacao>';
+                    echo 'Páginas ';
+                    echo ($x)+1 .' de ';
+                    echo ceil(count($lista));
+                  echo '</div>';
+                  if(($x)+1 == ceil(count($lista))){
+                     $class2='class=disabled';
+                  }else{
+                     $class2='title="AVANÇAR"';
+                  }
+        echo '<fieldset class=lista><legend><a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x-1)).' '.$class.' ><< </a> FICHA DE PERSONAGENS <a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x+1,'contador'=>count($lista))).' '.$class2.'> >> </a></legend>';
+           echo '<table cellspacing=0 border=1>';
+                  foreach($lista as $keys => $item){
+                    if($x < $keys && $keys < $y){
+                     echo '<tr><td>'.$titulos[0].'</td><td>'.$item->getpersonagem().'</td></tr>';
+                     echo '<tr><td>'.$titulos[1].'</td><td>'.$item->getraca().'</td></tr>';
+                     echo '<tr><td>'.$titulos[2].'</td><td>'.$item->getclasse().'</td></tr>';
+                     echo '<tr><td>'.$titulos[3].'</td><td>'.$item->gettendencia1().'</td></tr>';
+                     echo '<tr><td>'.$titulos[4].'</td><td>'.$item->gettendencia2().'</td></tr>';
+                     echo '<tr><td colspan=2 class=divisao>&nbsp</td><tr>';
+                     echo '<div id="aqui" class="raca"><img height=240px src="../web/imagens/'.$item->getraca().'.png" /></div>';
+                       //print_r($item);die;
+                     //$y++;
+                    }elseif($keys > $y){
+                       break;
+                    }
+                  }
+                       echo '</table>';
+      echo '</fieldset>';
+               ?>
+        <?php elseif($act=='cad'): ?>
+        <fieldset>
+            <legend>CADASTRO DE PERSONAGEM</legend>
+         <table>
+         <form class="font_1" id="cadastro" action="../paginas/add.php?act=cad" method="POST">
+             <?php foreach($variaveis as $keys => $item){
+                if($item=='raca'){
+                  echo '<tr><td align=right>* '.$keys.': </td>';
+                    echo '<td><select id="mySelect" name=raca onchange="myFunction()">';
+                      echo '<option>&nbsp</option>';
+                      echo '<option value=humano>HUMANO</option>';
+                      echo '<option value=anao>ANÃO</option>';
+                      echo '<option value=elfo>ELFO</option>';
+                      echo '<option value=halfling>HALFLING</option>';
+                    echo '</select></td></tr>';
+                }elseif($item=='classe'){
+                   echo '<tr><td align=right>* '.$keys.': </td>';
+                    echo '<td><select name=classe>';
+                      echo '<option>&nbsp</option>';
+                      echo '<option value=bruxo>BRUXO</option>';
+                      echo '<option value=guerreiro>GUERREIRO</option>';
+                      echo '<option value=gatuno>GATUNO</option>';
+                      echo '<option value=sacerdote>SACERDOTE</option>';
+                      echo '<option value=paladino>PALADINO</option>';
+                      echo '<option value=arqueiro>ARQUEIRO</option>';
+                      echo '<option value=mago>MAGO</option>';
+                    echo '</select></td></tr>';
+                 }elseif($item=='tendencia1'){
+                  echo '<tr><td align=right>* '.$keys.': </td>';
+                    echo '<td><select name=tendencia1>';
+                      echo '<option>&nbsp</option>';
+                      echo '<option value=bom>BOM</option>';
+                      echo '<option value=neutro>NEUTRO</option>';
+                      echo '<option value=mau>MAU</option>';
+                    echo '</select></td></tr>';
+                 }elseif($item=='tendencia2'){
+                  echo '<tr><td align=right>* '.$keys.': </td>';
+                    echo '<td><select name=tendencia2>';
+                      echo '<option>&nbsp</option>';
+                      echo '<option value=leal>LEAL</option>';
+                      echo '<option value=neutro>NEUTRO</option>';
+                      echo '<option value=caótico>CAÓTICO</option>';
+                    echo '</select></td></tr>';
+                 }else{
+                    echo "<tr><td align=\"right\">* $keys: </td><td><input type=\"text\" name=\"".$item."\" size=\"40\" / required></td></tr>";
+                 }
+             }
+             echo '<div id="aqui" class="raca"></div>';
+             echo '<div id="aqui.texto" align="justify" class="texto"></div>';
+             ?>
+             <tr><td></td><td align="right"><input type="submit" value="GRAVA">
+               &nbsp<input type="reset" value="LIMPA"></td></tr>
+         </form>
+         </table>
+        </fieldset>
+        <?php endif; ?>
+    </div>
+</div>

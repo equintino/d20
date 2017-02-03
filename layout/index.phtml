@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br">
+<head>
+    <title>EMQDesenv - Aplicações</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://fonts.googleapis.com/css?family=Lovers+Quarrel|Miltonian+Tattoo|Sriracha" rel="stylesheet" /> 
+    <link rel="shortcut icon" href="emqdesenv.ico" type="image/x-icon" />
+    <meta name="description" content="emqdesenv - Aplicações" />
+    <meta name="keywords" content="sistemas, PHP" />
+    <meta name="author" content="Edmilson Messias Quintino" />
+
+    <!-- Definindo o tamanho da tela --> 
+    <meta name="viewport" content="width=device-width">  
+    <link rel="stylesheet" href="css/layout.css" type="text/css" media='screen'/>   
+    <link rel="stylesheet" href="css/mobile.css" media="(max-width: 939px)">
+    <!--<link rel="stylesheet" href="css/mobile2.css" media="(max-width: 939px)"> -->
+        
+    <script>
+      function mes(){
+         var d= new Date();
+         var mes= prompt('Quaal o número do mês?',d.getMonth()+1);
+         if(!mes){
+           window.location.assingn('inidex.php');
+         }else{
+           window.location.assign('index.php?pagina=relMensal&mes='+mes+'&act=rel');
+         }
+      }
+   </script>
+
+</head>
+<body id="page">
+  <div class="SITE_ROOT" id="SITE_ROOT" >
+    <div class="tail-top-right"></div>
+    <div id="main">        
+        <!-- header -->
+      <div id="cabecalho">
+          <span class="titulo">D20 &nbsp - </span> &nbsp&nbsp <span class="cor_1" id="logo">Jogo de RPG</span>
+          <div class='tempo'>
+              <iframe scrolling="no" frameborder=0 width="180px" height="47px" src="tempo.html"></iframe>
+          </div>
+          <hr size="0.5" class="l1">
+         <div class="menu" >
+             <!--<button>-->
+                   <?php 
+                     $mes_=  ModelValidador::nomeMes(date('m'));
+                     $menu=array('home'=>'Home','cadastro'=>'Cadastro de Personagem','lista'=>'Personagens','dado'=>'Rolagem de Dado','dado2'=>'Rolagem de Dado2'); 
+                     echo '<ul>';
+                     foreach($menu as $key => $item){
+                       if($item == 'Cadastro de Personagem'){
+                          echo '<li><a href="'.Utils::createLink('cadastro',array('act'=>'cad','pag'=>0)).'" ><button class="bnt">'.$item.'</button></a></li>';
+                       }elseif($item == 'Personagens'){
+                          echo '<li><a href="'.Utils::createLink('cadastro',array('act'=>'lista','pag'=>0)).'" ><button class="bnt">'.$item.'</button></a></li>';
+                       }else{
+                          echo '<li><a href="'.Utils::createLink($key).'" ><button class="bnt">'.$item.'</button></a></li>';
+                       }
+                     }
+                     echo '</ul>';
+                   ?>
+             <!--</button>-->
+          </div>
+       </div>
+        <!-- content -->
+        <div id="content">
+            <div class="wrapper">
+                <div class="col-1">
+                </div>
+                <div class="col-2">
+                    <div class="indent">
+                        <?php if ($flashes): ?>
+                            <ul id="flashes">
+                            <?php foreach ($flashes as $flash): ?>
+                                <li><?php echo $flash; ?></li>
+                            <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+                        <?php require $template; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+     </div>
+   </div>        
+          <div  id="rodape" >
+              <div class="rodape"> D20 - Jogos de RPG
+                      <span style="line-height:1em;"><br>©Copyright, All rights reserved</span>
+              </div> 
+          </div>
+</body>
+</html>

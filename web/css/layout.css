@@ -1,0 +1,215 @@
+#cabecalho{  
+    width: 95%; 
+    margin: 0 20px;
+}
+#rodape{
+      width: 100%; 
+      #position: relative; 
+      height: 58px; 
+      #bottom: auto; 
+      #top: 1050px;
+      background-color: darkslategrey;
+      padding: 10px 5px;
+      color: white;
+      margin: auto;
+      text-align: center;
+  }
+.titulo{
+    float: left;
+    font-size: 28px;
+    clear: left;
+    #color: white;
+}
+.cor_1{
+    color: red;
+    font-size: 30px;
+}
+.menu{
+    float: right;
+    #font-size: 250px;
+    #position: relative;
+    #margin-top: -4px;
+    #border: 1px solid red;
+    height: 40px;
+}
+.tempo{
+    float: right;
+    color: yellow;
+    #border: 1px solid yellow;
+    overflow: hidden;
+}
+.bnt{
+    font-size: 16px;
+}
+a:link{
+    text-decoration: none;
+}
+.conteudo{
+    #margin-left: 5px;
+    font-family: sans-serif;
+    height: 680px;
+    font-size: 18px;
+    width: 970px;
+    #border: solid 1px red;
+    margin: auto;
+    #overflow: auto;
+}
+ul li{
+    display: inline;
+}
+.resultado{
+    font-size: 30px;
+    color: maroon;
+}
+.ref{
+    margin-left: 510px;
+}
+.l1{
+    position: relative;
+    top: 10px;
+}
+.SITE_ROOT {
+  min-height: 100%;
+  position: relative;
+  margin: 0 auto; 
+  width:980px;
+  padding-bottom:40px;
+}
+.s6{
+    left: 20px; 
+    width: 940px; 
+    position: absolute; 
+    top: 164px; 
+    height: 5px;
+}
+body{
+    margin: 0;
+    padding: 0;
+    background-image: url('../imagens/Wiki-background.jpg');
+    background-repeat: no-repeat;
+    #background-position-x: 50%;
+    #background-position-y: 25%;
+    background-size: 100%;
+    #color: white;
+    #backface-visibility: hidden;
+    #background-color: black;
+}
+/* aplica somente a partir de 320px */
+/*@media screen and (min-width: 320px) {
+   body { #font-size: 80%; }
+}
+ 
+/* aplica somente a partir de 480px em landscape */
+/*@media screen and (min-width: 480px) and (orientation: landscape) {
+   nav { #float: left; }
+}*/
+.rel{
+    float: left;
+    width: 470px;
+    #margin: -20px 5px 0;
+    #border: 1px solid green;
+}
+.rel th, .resumo th{
+    background-color: green;
+    color: white;
+}
+.rel td, .resumo td{
+    background-color: white;
+    opacity: 0.7;
+    font-weight: bolder;
+    font-size: 13px;
+}
+.resumo{
+    float: right;
+    width: 450px;
+    margin: auto;
+    #margin-left: 0;
+    #border: 1px solid red;
+}
+.separa{
+    background-color: blue;
+}
+.totais{
+    background-color: darkgray;
+}
+    @media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable, #printable * {
+    visibility: visible;
+  }
+  #printable {
+    position: absolute;
+    #margin: auto;
+    left: 30%;
+    top: 30%;
+  }
+}
+.texto{
+    margin: 0 40px;
+}
+.lista{
+    width: 700px;
+    margin: auto;
+    #height: 835px;
+    overflow: auto;
+    #background-color: white;
+    #opacity: 0.8; 
+    #border: 1px solid black;
+}
+.lista table{
+    margin: 10px 30px;
+}
+.lista table, .lista table td {
+   #background-color: cornsilk; 
+}
+.disabled {
+   pointer-events: none;
+   cursor: default;
+}
+.lista table .divisao{
+    #background-color: wheat;
+}
+fieldset{
+    border: 2px solid white;    
+    background:rgba(255,255,255, 0.8);
+    font-weight: bolder;
+    height: 320px;
+    width: 750px;
+}
+fieldset legend{
+    font-size: 30px;
+    color: brown;
+}
+.raca{
+    float: right;
+    margin-right: 15px;
+}
+.texto{
+    position: absolute;
+    top: 320px;
+    width: 450px;
+    height: 100px;
+    overflow: auto;
+    #border: 1px solid #ccc;
+    #background-color: silver;
+    text-justify: auto;
+}
+.cad{
+    margin: 50px auto;
+    width: 680px;
+    #border: 1px solid red;
+}
+.info{
+    position: absolute;
+    font-size: 12px;
+    font-style: italic;
+    color: red;
+}
+.paginacao{
+    float: right;
+    #border: 1px solid red;
+    #width: 200px;
+    text-align: center;
+}
