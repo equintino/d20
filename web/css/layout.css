@@ -46,6 +46,7 @@
     text-transform: uppercase;
     #border: none;
     padding: 1px;
+    border-radius: 5px;
 }
 a:link{
     text-decoration: none;
@@ -210,6 +211,7 @@ fieldset legend{
     font-weight: 700;
     border: none;
     cursor: pointer;
+    border-radius: 15px;
 }
 .botao2{
     position: absolute;
@@ -219,6 +221,7 @@ fieldset legend{
     font-weight: 700;
     border: none;
     cursor: pointer;
+    border-radius: 15px;
 }
 .botao-verde{
     font-size: 16px;
@@ -226,6 +229,7 @@ fieldset legend{
     background-color: #006000;
     color: white;
     box-shadow: 0 5px 0 #003f00;
+    border-radius: 15px;
 }
 .botao-verde2{
     font-size: 16px;
@@ -233,6 +237,7 @@ fieldset legend{
     background-color: #006000;
     color: white;
     box-shadow: 0 5px 0 #003f00;
+    border-radius: 15px;
 }
 .botao-verde:hover{
     background-color: #006000;
@@ -257,6 +262,33 @@ fieldset legend{
     top: 485px;
     right: 80px;
     box-shadow: none;
+}
+.rolar{
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-family: arial;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    background-color: red;
+    color: white;
+}
+.rolar-red{
+    box-shadow: 0 5px 0 #bd0000;
+}
+.rolar:hover{
+    background-color: #bd0000;
+}
+.rolar-red:active{
+    position: relative;
+    top: 5px;
+    box-shadow: none;
+}
+.t_dado{
+    font-size: 20px;
+    text-shadow: 2px 2px 2px white;
+    color: red;
 }
 #cadastro table tr td{
     padding: 2px;

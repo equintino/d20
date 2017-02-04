@@ -1,7 +1,7 @@
 <script>
   function myFunction(){
     var x = document.getElementById('mySelect').value;
-      document.getElementById('aqui').innerHTML='<img height=240px src="../web/imagens/'+x+'.png" />';
+      document.getElementById('aqui').innerHTML='<img height=240px src="../web/imagens/personagens/'+x+'/'+x+'.png" />';
     if(x=='humano'){
       var y = 'Humanos uma raça muito comum e muitas vezes escolhida, boa para iniciantes no RPG, é uma raça neutra, sem benefícios ou malefícios, os humanos não tem nenhuma vantagem ou poder melhor que as outras raças, mas também não tem nenhuma desvantagem.Podem ter várias cores de pele, cabelos e olhos e chegar até 2,20m ';
     }
@@ -62,7 +62,7 @@
                      echo '<tr><td>'.$titulos[3].'</td><td>'.$item->gettendencia1().'</td></tr>';
                      echo '<tr><td>'.$titulos[4].'</td><td>'.$item->gettendencia2().'</td></tr>';
                      echo '<tr><td colspan=2 class=divisao>&nbsp</td><tr>';
-                     echo '<div id="aqui" class="raca">Bem-vindo '.strtoupper($item->getjogador()).'  <img height=240px src="../web/imagens/'.$item->getraca().'.png" /></div>';
+                     echo '<div id="aqui" class="raca">Bem-vindo '.strtoupper($item->getjogador()).'  <img height=240px src="../web/imagens/personagens/'.$item->getraca().'/'.$item->getraca().'.png" /></div>';
                        //print_r($item);die;
                      //$y++;
                     }elseif($keys > $y){

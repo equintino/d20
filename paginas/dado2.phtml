@@ -17,13 +17,20 @@ if(@!$dado){
  ?>
 <center>
     <form action="index.php?pagina=dado2&act=1" method="post">
-        <select name="dado" required="">
+        <!--<select name="dado" required="">
             <option></option>
             <option value="6">D6</option>
             <option value="20">D20</option>
-        </select> 
+        </select> -->
+        <legenda class="t_dado">Escolha o dado abaixo</legenda>
+        <br><br>
+        <img height=60px src='../web/imagens/d6.png'>
+        <input type='radio' name='dado' value='6' required="">
+        <img height=60px src='../web/imagens/d20.png'>
+        <input type='radio' name='dado' value='20'>
         <input type="hidden" name="rolar" value="1">
-        <input type="submit" value="ROLAR">
+        <br><br>
+        <input class='rolar rolar-red' type="submit" value="ok">
     </form>
 </center>
 <br><br>
