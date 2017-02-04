@@ -18,7 +18,7 @@
   }
 </script>
 <?php 
-    $variaveis=array('NOME DO PERSONAGEM '=>'personagem','RAÇA '=>'raca','CLASSE '=>'classe','TENDÊNCIA1 '=>'tendencia1','TENDÊNCIA2 '=>'tendencia2');
+    $variaveis=array('JOGADOR'=>'jogador','PERSONAGEM'=>'personagem','RAÇA'=>'raca','CLASSE'=>'classe','TENDÊNCIA1'=>'tendencia1','TENDÊNCIA2'=>'tendencia2','SEXO'=>'sexo');
     $act=$_GET['act'];
     $x=$_GET['pag'];
     $y=$x+2;
@@ -36,6 +36,10 @@
                   $search=new ModelSearchCriteria();
                   $search->settabela('personagem');
                   $lista=$dao->encontre($search);
+                  @$level=$_GET['level'];
+                  if(!$level){
+                     $level=1; 
+                  }
                   $titulos=array('PERSONAGEM','RAÇA','CLASSE','TENDÊNCIA1','TENDÊNCIA2');
                   //echo count($lista);die;
                   echo '<div class=paginacao>';
@@ -48,7 +52,7 @@
                   }else{
                      $class2='title="AVANÇAR"';
                   }
-        echo '<fieldset class=lista><legend><a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x-1)).' '.$class.' ><< </a> FICHA DE PERSONAGENS <a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x+1,'contador'=>count($lista))).' '.$class2.'> >> </a></legend>';
+        echo '<fieldset class=lista><legend><a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x-1)).' '.$class.' ><< </a> FICHA DE PERSONAGEM <a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x+1,'contador'=>count($lista))).' '.$class2.'> >> </a>&nbsp&nbsp LEVEL '.$level.'</legend>';
            echo '<table cellspacing=0 border=1>';
                   foreach($lista as $keys => $item){
                     if($x < $keys && $keys < $y){
@@ -58,7 +62,7 @@
                      echo '<tr><td>'.$titulos[3].'</td><td>'.$item->gettendencia1().'</td></tr>';
                      echo '<tr><td>'.$titulos[4].'</td><td>'.$item->gettendencia2().'</td></tr>';
                      echo '<tr><td colspan=2 class=divisao>&nbsp</td><tr>';
-                     echo '<div id="aqui" class="raca"><img height=240px src="../web/imagens/'.$item->getraca().'.png" /></div>';
+                     echo '<div id="aqui" class="raca">Bem-vindo '.strtoupper($item->getjogador()).'  <img height=240px src="../web/imagens/'.$item->getraca().'.png" /></div>';
                        //print_r($item);die;
                      //$y++;
                     }elseif($keys > $y){
@@ -71,11 +75,11 @@
         <?php elseif($act=='cad'): ?>
         <fieldset>
             <legend>CADASTRO DE PERSONAGEM</legend>
-         <table>
          <form class="font_1" id="cadastro" action="../paginas/add.php?act=cad" method="POST">
+         <table>
              <?php foreach($variaveis as $keys => $item){
                 if($item=='raca'){
-                  echo '<tr><td align=right>* '.$keys.': </td>';
+                  echo '<tr><td align=right> '.$keys.': </td>';
                     echo '<td><select id="mySelect" name=raca onchange="myFunction()">';
                       echo '<option>&nbsp</option>';
                       echo '<option value=humano>HUMANO</option>';
@@ -84,7 +88,7 @@
                       echo '<option value=halfling>HALFLING</option>';
                     echo '</select></td></tr>';
                 }elseif($item=='classe'){
-                   echo '<tr><td align=right>* '.$keys.': </td>';
+                   echo '<tr><td align=right> '.$keys.': </td>';
                     echo '<td><select name=classe>';
                       echo '<option>&nbsp</option>';
                       echo '<option value=bruxo>BRUXO</option>';
@@ -96,7 +100,7 @@
                       echo '<option value=mago>MAGO</option>';
                     echo '</select></td></tr>';
                  }elseif($item=='tendencia1'){
-                  echo '<tr><td align=right>* '.$keys.': </td>';
+                  echo '<tr><td align=right> '.$keys.': </td>';
                     echo '<td><select name=tendencia1>';
                       echo '<option>&nbsp</option>';
                       echo '<option value=bom>BOM</option>';
@@ -104,24 +108,28 @@
                       echo '<option value=mau>MAU</option>';
                     echo '</select></td></tr>';
                  }elseif($item=='tendencia2'){
-                  echo '<tr><td align=right>* '.$keys.': </td>';
+                  echo '<tr><td align=right> '.$keys.': </td>';
                     echo '<td><select name=tendencia2>';
                       echo '<option>&nbsp</option>';
                       echo '<option value=leal>LEAL</option>';
                       echo '<option value=neutro>NEUTRO</option>';
                       echo '<option value=caótico>CAÓTICO</option>';
                     echo '</select></td></tr>';
+                 }elseif($item=='sexo'){
+                  echo '<tr><td align=right> '.$keys.': </td>';
+                    echo '<td><input type=radio name=sexo value=M> MASCULINO';
+                    echo ' <input type=radio name=sexo value=F> FEMININO</td></tr>';
                  }else{
-                    echo "<tr><td align=\"right\">* $keys: </td><td><input type=\"text\" name=\"".$item."\" size=\"40\" / required></td></tr>";
+                    echo "<tr><td align=\"right\"> $keys: </td><td><input type=\"text\" name=\"".$item."\" size=\"40\" / required></td></tr>";
                  }
              }
              echo '<div id="aqui" class="raca"></div>';
              echo '<div id="aqui.texto" align="justify" class="texto"></div>';
              ?>
-             <tr><td></td><td align="right"><input type="submit" value="GRAVA">
-               &nbsp<input type="reset" value="LIMPA"></td></tr>
-         </form>
          </table>
+            <div><input type="submit" value="GRAVA" class='botao botao-verde2'>
+               &nbsp<input type="reset" value="LIMPA" class='botao2 botao-verde'></div>
+            </form>
         </fieldset>
         <?php endif; ?>
     </div>

@@ -11,7 +11,6 @@
         foreach ($this->query($this->getEncontreSql($search)) as $row){
             $model = new Model();
             modelMapper::map($model, $row);
-            //print_r($model);die;
             $result[$model->getid()] = $model;
         }
         return $result;
@@ -31,7 +30,6 @@
    }
    public function grava(Model $model){
         if ($model->getid() === null) {
-         //print_r($model);die;
             return $this->insert($model);
         }
         return $this->update($model);
@@ -68,10 +66,9 @@
         $model->setexcluido(0);
         $model->setcriado($now);
         $model->setmodificado($now);        
-        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`personagem`,`raca`,`classe`,`tendencia1`,`tendencia2`,`idade`,`tabela`,`criado`,`modificado`,`excluido`) VALUES (:id,:personagem,:raca,:classe,:tendencia1,:tendencia2,:idade,:tabela,:criado,:modificado,:excluido)';
+        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`jogador`,`personagem`,`raca`,`classe`,`tendencia1`,`tendencia2`,`idade`,`tabela`,`sexo`,`criado`,`modificado`,`excluido`) VALUES (:id,:jogador,:personagem,:raca,:classe,:tendencia1,:tendencia2,:idade,:tabela,:sexo,:criado,:modificado,:excluido)';
 	$search = new ModelSearchCriteria();
         $search->settabela($model->gettabela());
-        //print_r($this->execute($sql, $model));die;
         return $this->execute($sql, $model);
    }
    private function insert2(Model $model){
@@ -91,7 +88,6 @@
         return $this->execute2($sql, $model);
    }
    public function execute($sql,$model){
-        //print_r($sql);die;
         $statement = $this->getDb()->prepare($sql);
         $this->executeStatement($statement, $this->getParams($model));
         $search=new ModelSearchCriteria();        
@@ -111,7 +107,7 @@
         return $model;
    }
    private function getParams(Model $model){
-        $params = array(':id'=> $model->getid(),':personagem'=> $model->getpersonagem(),':raca'=> $model->getraca(),':classe'=> $model->getclasse(),':tendencia1'=> $model->gettendencia1(),':tendencia2'=> $model->gettendencia2(),':idade'=> $model->getidade(),':tabela'=> $model->gettabela(),':criado'=> $model->getcriado(),':modificado'=> $model->getmodificado(),':excluido'=> $model->getexcluido(),);
+        $params = array(':id'=> $model->getid(),':jogador'=> $model->getjogador(),':personagem'=> $model->getpersonagem(),':raca'=> $model->getraca(),':classe'=> $model->getclasse(),':tendencia1'=> $model->gettendencia1(),':tendencia2'=> $model->gettendencia2(),':idade'=> $model->getidade(),':tabela'=> $model->gettabela(),':sexo'=> $model->getsexo(),':criado'=> $model->getcriado(),':modificado'=> $model->getmodificado(),':excluido'=> $model->getexcluido(),);
 	 return $params;
    }
    private function getParams2(Model $model){
@@ -124,9 +120,8 @@
         }
    }
    public function query($sql){
-        set_time_limit(3600);           
+        set_time_limit(3600);
         $statement = $this->getDb()->query($sql, PDO::FETCH_ASSOC);
-         //print_r($statement);die; 
         if ($statement === false) {
             self::throwDbError($this->getDb()->errorInfo());
         }
@@ -136,21 +131,20 @@
         // TODO log error, send email, etc.
         throw new Exception('DB error [' . $errorInfo[0] . ', ' . $errorInfo[1] . ']: ' . $errorInfo[2]);
    }
-   private function getEncontreSql(ModelSearchCriteria $search = null) { 
+   private function getEncontreSql(ModelSearchCriteria $search = null) {               
           if ($search->getpersonagem() !== null) {
              if($search->getmes()){
                  $sql="SELECT * FROM $tabela WHERE mes='".$search->getmes()."' AND excluido = 0 ";
              }else{
                  $sql='SELECT * FROM '.$search->gettabela().' WHERE excluido = 0 ';
              }
-          }else{ 
-             $sql = 'SELECT * FROM `'.$search->gettabela().'` WHERE excluido = 0 ';
-           //print_r($sql);die; 
+          }else{
+             $sql = 'SELECT * FROM `d20`.`'.$search->gettabela().'` WHERE excluido = 0 ';
           }
         return $sql;
   }
     private function criaTabela($tabela){
-        $sql="CREATE TABLE IF NOT EXISTS `$tabela` ( `id` INT(5) NOT NULL AUTO_INCREMENT , `mes` INT(2) NULL , `dt` DATE NULL , `descricao` TEXT NULL , `entrada` DECIMAL(12,2) NULL , `saida` DECIMAL(12,2) NULL , `diz_ofe` ENUM('diz','ofe') NULL , `criado` varchar(50) NULL , `modificado` varchar(50) NULL , `excluido` INT(1) NOT NULL DEFAULT '0', PRIMARY KEY (`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;";
+        $sql="CREATE TABLE IF NOT EXISTS `d20`.`$tabela` ( `id` INT(5) NOT NULL AUTO_INCREMENT , `mes` INT(2) NULL , `dt` DATE NULL , `descricao` TEXT NULL , `entrada` DECIMAL(12,2) NULL , `saida` DECIMAL(12,2) NULL , `diz_ofe` ENUM('diz','ofe') NULL , `criado` varchar(50) NULL , `modificado` varchar(50) NULL , `excluido` INT(1) NOT NULL DEFAULT '0', PRIMARY KEY (`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;";
         return $sql;
    }
 }

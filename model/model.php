@@ -1,6 +1,7 @@
 <?php 
  class Model{
  private $id;
+ private $jogador;
  private $personagem;
  private $raca;
  private $classe;
@@ -8,6 +9,7 @@
  private $tendencia2;
  private $idade;
  private $tabela;
+ private $sexo;
  private $criado;
  private $modificado;
  private $excluido;
@@ -16,6 +18,12 @@
  }
  public function setid($id ){
 	$this->id=$id;
+ }
+ public function getjogador(){
+	return $this->jogador;
+ }
+ public function setjogador($jogador ){
+	$this->jogador=$jogador;
  }
  public function getpersonagem(){
 	return $this->personagem;
@@ -59,6 +67,12 @@
  public function settabela($tabela ){
 	$this->tabela=$tabela;
  }
+ public function getsexo(){
+	return $this->sexo;
+ }
+ public function setsexo($sexo ){
+	$this->sexo=$sexo;
+ }
  public function getcriado(){
 	return $this->criado;
  }
@@ -78,4 +92,3 @@
 	$this->excluido=$excluido;
  }
  }
- ?>

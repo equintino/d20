@@ -40,6 +40,12 @@
 }
 .bnt{
     font-size: 16px;
+    cursor: pointer;
+    font-family: arial;
+    font-weight: 700;
+    text-transform: uppercase;
+    #border: none;
+    padding: 1px;
 }
 a:link{
     text-decoration: none;
@@ -175,7 +181,7 @@ fieldset{
     border: 2px solid white;    
     background:rgba(255,255,255, 0.8);
     font-weight: bolder;
-    height: 320px;
+    height: 360px;
     width: 750px;
 }
 fieldset legend{
@@ -188,13 +194,72 @@ fieldset legend{
 }
 .texto{
     position: absolute;
-    top: 320px;
+    top: 350px;
     width: 450px;
     height: 100px;
     overflow: auto;
-    #border: 1px solid #ccc;
+    #border: 5px solid green;
     #background-color: silver;
     text-justify: auto;
+}
+.botao{
+    position: absolute;
+    top: 480px;
+    right: 80px;
+    font-family: arial;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+}
+.botao2{
+    position: absolute;
+    top: 480px;
+    right: 160px;
+    font-family: arial;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+}
+.botao-verde{
+    font-size: 16px;
+    paddin: 2px;
+    background-color: #006000;
+    color: white;
+    box-shadow: 0 5px 0 #003f00;
+}
+.botao-verde2{
+    font-size: 16px;
+    paddin: 2px;
+    background-color: #006000;
+    color: white;
+    box-shadow: 0 5px 0 #003f00;
+}
+.botao-verde:hover{
+    background-color: #006000;
+    color: white;
+}
+.botao-verde:active{
+    font-size: 16px;
+    paddin: 2px;
+    background-color: #006000;
+    color: white;   
+    position: absolute;
+    top: 485px;
+    right: 160px;
+    box-shadow: none;
+}
+.botao-verde2:active{
+    font-size: 16px;
+    paddin: 2px;
+    background-color: #006000;
+    color: white;   
+    position: absolute;
+    top: 485px;
+    right: 80px;
+    box-shadow: none;
+}
+#cadastro table tr td{
+    padding: 2px;
 }
 .cad{
     margin: 50px auto;

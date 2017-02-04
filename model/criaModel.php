@@ -1,8 +1,8 @@
 <?php
-    $filename='Model.php';
+    $filename='model.php';
     $mode='w+';
     $handle=fopen($filename, $mode);
-    $variaveis=array('id','personagem','raca','classe','tendencia1','tendencia2','idade','tabela','criado','modificado','excluido');
+    $variaveis=array('id','jogador','personagem','raca','classe','tendencia1','tendencia2','idade','tabela','sexo','criado','modificado','excluido');
     $texto="<?php \r\n class Model{\r\n";
     foreach($variaveis as $item){
       $texto .=' private $'.$item.';'."\r\n";

@@ -8,6 +8,14 @@
           $this->id = $id;
           return $this;
       }
+   private $jogador;
+       public function getjogador(){
+        return $this->jogador;
+      }
+      public function setjogador($jogador){
+          $this->jogador = $jogador;
+          return $this;
+      }
    private $personagem;
        public function getpersonagem(){
         return $this->personagem;
@@ -62,6 +70,14 @@
       }
       public function settabela($tabela){
           $this->tabela = $tabela;
+          return $this;
+      }
+   private $sexo;
+       public function getsexo(){
+        return $this->sexo;
+      }
+      public function setsexo($sexo){
+          $this->sexo = $sexo;
           return $this;
       }
    private $criado;

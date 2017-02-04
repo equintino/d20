@@ -4,6 +4,9 @@
 	if (array_key_exists('id', $properties)){
 	  $model->setid($properties['id']);
 	}
+	if (array_key_exists('jogador', $properties)){
+	  $model->setjogador($properties['jogador']);
+	}
 	if (array_key_exists('personagem', $properties)){
 	  $model->setpersonagem($properties['personagem']);
 	}
@@ -24,6 +27,9 @@
 	}
 	if (array_key_exists('tabela', $properties)){
 	  $model->settabela($properties['tabela']);
+	}
+	if (array_key_exists('sexo', $properties)){
+	  $model->setsexo($properties['sexo']);
 	}
 	if (array_key_exists('criado', $properties)){
 	  $model->setcriado($properties['criado']);
