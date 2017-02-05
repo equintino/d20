@@ -1,3 +1,9 @@
+<script>
+  function rolaDado($rdado,y){
+    var x = $rdado;
+    document.getElementById('dado'+y).innerHTML = '<img height=56px src='+x+' />';
+  }
+</script>
 <?php
 @$act=$_GET['act'];
 @$dado=$_POST['dado'];
@@ -5,11 +11,12 @@ if(@!$dado){
   @$dado=$_GET['dado'];
 }
 @$rolar=$_POST['rolar'];
- function redirecionar($tempo,$url, $mensagem){
+ function redirecionar($tempo,$url, $mensagem, $dado){
   header("Refresh: $tempo; url=$url");
+  echo '<script>rolaDado(\'imagens/dado/rd'.$dado.'.gif\','.$dado.')</script>';
   echo "<div class=carregando>";
   echo '<center>'.$mensagem.  '</center><br/>';
-  echo '<center><img src="imagens/dado.gif" alt="" /><br/><br/><tt><i>girando o dado...</i></tt></center>';
+  //echo '<center><img height=70px src="imagens/dado/rd'.$dado.'.gif" alt="" /><br/><br/></center>';
   echo "</div>";
  }
  echo '<div class="conteudo">';
@@ -23,10 +30,10 @@ if(@!$dado){
             <option value="20">D20</option>
         </select> -->
         <legenda class="t_dado">Escolha o dado abaixo</legenda>
-        <br><br>
-        <img height=60px src='../web/imagens/d6.png'>
+        <br><br>       
+        <span id='dado6'><img height=60px title='Dado de 6 lados' src='../web/imagens/d6.png'></span>
         <input type='radio' name='dado' value='6' required="">
-        <img height=60px src='../web/imagens/d20.png'>
+        <span id='dado20'><img height=60px title='Dado de 20 lados' src='../web/imagens/d20.png'></span>
         <input type='radio' name='dado' value='20'>
         <input type="hidden" name="rolar" value="1">
         <br><br>
@@ -36,7 +43,7 @@ if(@!$dado){
 <br><br>
  <?php
  if($rolar){
-	redirecionar('1','index.php?pagina=dado2&dado='.$dado.'&abrir=1','AGUARDE');
+	redirecionar('1','index.php?pagina=dado2&dado='.$dado.'&abrir=1','AGUARDE',$dado);
  }elseif($dado){
 	$dado_ = rand(1,$dado);
         echo '<center>';
