@@ -6,7 +6,7 @@
     $variaveis=array('id','jogador','personagem','raca','classe','tendencia1','tendencia2','idade','tabela','sexo','criado','modificado','excluido');
     $tabela='`\'.$model->gettabela().\'`';
     $variaveis2=array('id','personagem','raca','tendencia1','tendencia2','idade','criado','modificado','excluido');
-    $tabela2=''.$banco.'';
+    //$tabela2=''.$banco.'';
     $texto="<?php \r\n class dao{\r\n";
     $texto .= '   '."private ".'$db'." = null;\r\n".
               '   public function __destruct(){'."\r\n".
@@ -198,18 +198,14 @@
    }'."\r\n";
     $texto .= '   private function getEncontreSql(ModelSearchCriteria $search = null) {               
           if ($search->getpersonagem() !== null) {
-             if($search->getmes()){
-                 $sql="SELECT * FROM $tabela WHERE mes=\'".$search->getmes()."\' AND excluido = 0 ";
-             }else{
-                 $sql=\'SELECT * FROM \'.$search->gettabela().\' WHERE excluido = 0 \';
-             }
+                 $sql="SELECT * FROM ".$search->gettabela()." WHERE personagem=\'".$search->getpersonagem()."\' AND excluido = 0 ";
           }else{
-             $sql = \'SELECT * FROM `'.$banco.'`.`\'.$search->gettabela().\'` WHERE excluido = 0 \';
+             $sql = \'SELECT * FROM `\'.$search->gettabela().\'` WHERE excluido = 0 \';
           }
         return $sql;
   }'."\r\n";
     $texto .= '    private function criaTabela($tabela){
-        $sql="CREATE TABLE IF NOT EXISTS `'.$banco.'`.`$tabela` ( `id` INT(5) NOT NULL AUTO_INCREMENT , `mes` INT(2) NULL , `dt` DATE NULL , `descricao` TEXT NULL , `entrada` DECIMAL(12,2) NULL , `saida` DECIMAL(12,2) NULL , `diz_ofe` ENUM(\'diz\',\'ofe\') NULL , `criado` varchar(50) NULL , `modificado` varchar(50) NULL , `excluido` INT(1) NOT NULL DEFAULT \'0\', PRIMARY KEY (`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;";
+        $sql="CREATE TABLE IF NOT EXISTS `$tabela` ( `id` INT(5) NOT NULL AUTO_INCREMENT , `mes` INT(2) NULL , `dt` DATE NULL , `descricao` TEXT NULL , `entrada` DECIMAL(12,2) NULL , `saida` DECIMAL(12,2) NULL , `diz_ofe` ENUM(\'diz\',\'ofe\') NULL , `criado` varchar(50) NULL , `modificado` varchar(50) NULL , `excluido` INT(1) NOT NULL DEFAULT \'0\', PRIMARY KEY (`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;";
         return $sql;
    }'."\r\n";
     $texto .= '}';

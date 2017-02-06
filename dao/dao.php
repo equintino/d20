@@ -8,6 +8,7 @@
             set_time_limit(3600);
             ini_set('memory_limit', '-1');
         $result = array();
+            //print_r(($search));die;
         foreach ($this->query($this->getEncontreSql($search)) as $row){
             $model = new Model();
             modelMapper::map($model, $row);
@@ -133,18 +134,18 @@
    }
    private function getEncontreSql(ModelSearchCriteria $search = null) {               
           if ($search->getpersonagem() !== null) {
-             if($search->getmes()){
-                 $sql="SELECT * FROM $tabela WHERE mes='".$search->getmes()."' AND excluido = 0 ";
-             }else{
-                 $sql='SELECT * FROM '.$search->gettabela().' WHERE excluido = 0 ';
-             }
+             //if($search->getmes()){
+                 $sql="SELECT * FROM ".$search->gettabela()." WHERE personagem='".$search->getpersonagem()."' AND excluido = 0 ";
+             //}else{
+                // $sql='SELECT * FROM '.$search->gettabela().' WHERE excluido = 0 ';
+             //}
           }else{
-             $sql = 'SELECT * FROM `d20`.`'.$search->gettabela().'` WHERE excluido = 0 ';
+             $sql = 'SELECT * FROM `'.$search->gettabela().'` WHERE excluido = 0 ';
           }
         return $sql;
   }
     private function criaTabela($tabela){
-        $sql="CREATE TABLE IF NOT EXISTS `d20`.`$tabela` ( `id` INT(5) NOT NULL AUTO_INCREMENT , `mes` INT(2) NULL , `dt` DATE NULL , `descricao` TEXT NULL , `entrada` DECIMAL(12,2) NULL , `saida` DECIMAL(12,2) NULL , `diz_ofe` ENUM('diz','ofe') NULL , `criado` varchar(50) NULL , `modificado` varchar(50) NULL , `excluido` INT(1) NOT NULL DEFAULT '0', PRIMARY KEY (`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;";
+        $sql="CREATE TABLE IF NOT EXISTS `$tabela` ( `id` INT(5) NOT NULL AUTO_INCREMENT , `mes` INT(2) NULL , `dt` DATE NULL , `descricao` TEXT NULL , `entrada` DECIMAL(12,2) NULL , `saida` DECIMAL(12,2) NULL , `diz_ofe` ENUM('diz','ofe') NULL , `criado` varchar(50) NULL , `modificado` varchar(50) NULL , `excluido` INT(1) NOT NULL DEFAULT '0', PRIMARY KEY (`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;";
         return $sql;
    }
 }

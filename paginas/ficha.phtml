@@ -1,0 +1,74 @@
+<style>
+    #rodape{
+        visibility: hidden;
+    }
+</style>
+<?php 
+    $variaveis=array('JOGADOR'=>'jogador','PERSONAGEM'=>'personagem','RAÇA'=>'raca','CLASSE'=>'classe','TENDÊNCIA1'=>'tendencia1','TENDÊNCIA2'=>'tendencia2','SEXO'=>'sexo');
+    @$personagem=$_GET['personagem'];
+    if(!$personagem){
+      $personagem='nulo';
+    }
+?>
+<div  class="conteudo" >
+    <div class="jogador">
+               <?php 
+                  $dao=new Dao();
+                  $search=new ModelSearchCriteria();
+                  $search->settabela('personagem');
+                  $search->setpersonagem($personagem);
+                  $lista=$dao->encontre($search);
+                  //print_r($lista);die;
+                  @$level=$_GET['level'];
+                  if(!$level){
+                     $level=1; 
+                  }
+                  $titulos=array('PERSONAGEM','RAÇA','CLASSE','TENDÊNCIA1','TENDÊNCIA2');
+        echo '<br><br><br>';
+        echo '<fieldset class=ficha><legend>FICHA DE PERSONAGEM &nbsp&nbsp LEVEL '.$level.'</legend>';
+           echo '<table cellspacing=0 border=1>';
+              if(!$lista){
+                die('Personagem Inexistente');
+              }
+                  foreach($lista as $keys => $item){
+                     echo '<tr><td class=nomes>'.$titulos[0].'</td><td class=nomes2>'.$item->getpersonagem().'</td></tr>';
+                     echo '<tr><td class=nomes>'.$titulos[1].'</td><td class=nomes2>'.$item->getraca().'</td></tr>';
+                     echo '<tr><td class=nomes>'.$titulos[2].'</td><td class=nomes2>'.$item->getclasse().'</td></tr>';
+                     echo '<tr><td class=nomes>'.$titulos[3].'</td><td class=nomes2>'.$item->gettendencia1().'</td></tr>';
+                     echo '<tr><td class=nomes>'.$titulos[4].'</td><td class=nomes2>'.$item->gettendencia2().'</td></tr>';
+                     //echo '<tr><td colspan=2 class=divisao>Características</td><tr>';
+                     echo '<div id="aqui" class="raca">Bem-vindo '.strtoupper($item->getjogador()).'  <img height=240px src="../web/imagens/personagens/'.$item->getraca().'/'.$item->getraca().'.png" /></div>';
+                     echo '<div class=historia>';                    
+                       echo '<span class=hTitulo>Uma breve história</span>'; 
+                       echo '<span class=hTexto><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vulputate ligula quam, sed mattis quam iaculis vitae. Duis nisl neque, volutpat ut venenatis ut, mollis pharetra velit. Vestibulum ligula ex, laoreet in convallis eget, feugiat non arcu. Integer porttitor sapien risus, et mattis ligula laoreet in. In urna velit, volutpat ut augue sed, cursus condimentum sem. Phasellus commodo libero quis dolor accumsan, et finibus leo lacinia. Proin vehicula pretium lectus, vitae tincidunt ante faucibus vel.</p>
+                        <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus ultricies nunc sit amet lorem ornare cursus. Maecenas rhoncus sollicitudin dui at interdum. Proin posuere aliquam elit quis ullamcorper. Maecenas eget posuere justo. Cras mattis lectus volutpat lorem tincidunt, sed ultrices ante porttitor. Fusce eu pulvinar leo, a volutpat mi.</p></span>';
+                     echo '</div>';
+                  }
+                       echo '</table>';
+                       echo '<from action="#" method=POST>';
+                       echo '<table>';
+                       echo '<caption class=fichaTitulo>Características</caption>';
+                       $tCaracteristicas=array('F'=>'Força','H'=>'Habilidade','R'=>'Resistência','A'=>'Armadura','PF'=>'Poder de Fogo','PV'=>'Pontos de Vida','PM'=>'Pontos de Magia','PE'=>'Pontos de Experiência');
+                       foreach($tCaracteristicas as $key => $item){
+                         if($item[0] == 'P'){
+                           $item=(explode(' ',$item));
+                           echo '<tr><td><span class=destaque>'.$item[0][0].'</span>'.substr($item[0], 1).' '.$item[1].'<span class=destaque> '.$item[2][0].'</span>'.substr($item[2], 1).'</td><td><input type=text name='.$key.' maxlength = "4" size=5></td></tr>';
+                         }else{
+                          echo '<tr><td><span class=destaque>'.$item[0].'</span>'. substr($item, 1).'</td><td><input type=text name='.$key.' maxlength = "4" size=5></td></tr>';
+                         }
+                       }
+                       echo '</table>';
+                       echo '<br>';
+                       echo '<div class=vantagens>';
+                       echo '<caption class=fichaTitulo>Vantagens</caption>';
+                       echo '<span class=linhas><hr><hr><hr><hr><hr><hr></span>';
+                       echo '</div>';
+                       echo '<div class=desvantagens>';
+                       echo '<caption class=fichaTitulo>Desvantagens</caption>';
+                       echo '<span class=linhas><hr><hr><hr><hr><hr><hr></span>';
+                       echo '</div>';
+                       echo '</form>';
+      echo '</fieldset>';
+               ?>
+    </div>
+</div>

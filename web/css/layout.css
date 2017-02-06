@@ -325,3 +325,88 @@ fieldset legend{
     color: white;
     text-shadow: 2px 2px 2px red;
 }
+.home h1{
+    color: red;
+}
+.home{
+    margin: 100px; auto;
+    width: 800px;
+    text-align: justify;
+    background: rgba(0, 0, 0,0.5);
+    color: white;
+    padding: 5px;
+    height: 680px;
+    overflow: auto;
+}
+.home h1{
+    text-align: center;
+}
+.home p { 
+    text-indent: 50px;
+    padding: 0px;
+    width: 90%;
+    margin: auto;
+}
+.nomes{
+    background-color: gray;
+    color: white;
+    font-family: Georgia;
+}
+.nomes2{
+    text-align: center;
+    font-family: courier;
+    #color: silver;
+}
+.fichaTitulo{
+    font-family: Times New Roman;
+    font-size: 25px;
+}
+.destaque{
+    font-size: 22px;
+    color: red;
+}
+.ficha{
+    width: 700px;
+    margin: auto;
+    height: 600px;
+    #overflow: auto;
+    #background-color: white;
+    #opacity: 0.8; 
+    #border: 1px solid black;
+}
+.ficha table{
+    margin: 10px 30px;
+}
+.historia{
+    font-family: Times New Roman;
+    font-size: 25px;
+    margin: 20px;
+    clear: both;
+    float: right;
+}
+.hTitulo{
+    float: right;
+    font-family: courier;
+    font-size: 22px;
+}
+.hTexto{ 
+    clear: both;
+    float: right;  
+    width: 300px;
+    height: 200px;
+    overflow: auto;
+    #text-align: justify;
+    font-family: courier;
+    font-size: 12px;
+    text-indent: 30px;   
+}
+.vantagens, .desvantagens{
+    font-family: Times New Roman;
+    font-size: 25px;
+    width: 250px;
+    margin: 0 32px;
+    text-align: center;
+}
+.linhas{
+    padding: 5px;
+}
