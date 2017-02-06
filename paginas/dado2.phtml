@@ -1,7 +1,7 @@
 <script>
   function rolaDado($rdado,y){
     var x = $rdado;
-    document.getElementById('dado'+y).innerHTML = '<img height=56px src='+x+' />';
+    document.getElementById('dado'+y).innerHTML = '<img height=60px src='+x+' />';
   }
 </script>
 <?php
@@ -15,7 +15,7 @@ if(@!$dado){
   header("Refresh: $tempo; url=$url");
   echo '<script>rolaDado(\'imagens/dado/rd'.$dado.'.gif\','.$dado.')</script>';
   echo "<div class=carregando>";
-  echo '<center>'.$mensagem.  '</center><br/>';
+  echo '<center class=msg>'.$mensagem.  '</center><br/>';
   //echo '<center><img height=70px src="imagens/dado/rd'.$dado.'.gif" alt="" /><br/><br/></center>';
   echo "</div>";
  }
@@ -30,8 +30,8 @@ if(@!$dado){
             <option value="20">D20</option>
         </select> -->
         <legenda class="t_dado">Escolha o dado abaixo</legenda>
-        <br><br>       
-        <span id='dado6'><img height=60px title='Dado de 6 lados' src='../web/imagens/d6.png'></span>
+        <br><br>  
+        <span id='dado6'><img height=56px title='Dado de 6 lados' src='../web/imagens/d6.png'></span>
         <input type='radio' name='dado' value='6' required="">
         <span id='dado20'><img height=60px title='Dado de 20 lados' src='../web/imagens/d20.png'></span>
         <input type='radio' name='dado' value='20'>
@@ -42,14 +42,15 @@ if(@!$dado){
 </center>
 <br><br>
  <?php
+        echo '<div class=resultado>';
  if($rolar){
-	redirecionar('1','index.php?pagina=dado2&dado='.$dado.'&abrir=1','AGUARDE',$dado);
+	redirecionar('1','index.php?pagina=dado2&dado='.$dado.'&abrir=1','Aguarde...',$dado);
  }elseif($dado){
 	$dado_ = rand(1,$dado);
-        echo '<center>';
-           echo "Você rolou o dado e...<br />";
-           echo "Tirou um <span class='resultado'>$dado_</span>";
-        echo '</center>';
+           //echo "Você rolou o dado e...<br />";
+           echo "Você tirou<br><span>$dado_</span>";
+           //echo '<script>document.write(processa('.$dado_.',1,100,1));</script>';
+        echo '</div>';
  }
  echo '</div>';
 ?>
