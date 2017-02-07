@@ -23,7 +23,7 @@ if(@!$dado){
  echo '<br><br><br>';
  ?>
 <center>
-    <form action="index.php?pagina=dado2&act=1" method="post">
+    <form action="index.php?pagina=dado&act=1" method="post">
         <!--<select name="dado" required="">
             <option></option>
             <option value="6">D6</option>
@@ -44,7 +44,7 @@ if(@!$dado){
  <?php
         echo '<div class=resultado>';
  if($rolar){
-	redirecionar('1','index.php?pagina=dado2&dado='.$dado.'&abrir=1','Aguarde...',$dado);
+	redirecionar('1','index.php?pagina=dado&dado='.$dado.'&abrir=1','Aguarde...',$dado);
  }elseif($dado){
 	$dado_ = rand(1,$dado);
            //echo "Você rolou o dado e...<br />";

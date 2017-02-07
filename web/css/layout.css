@@ -156,27 +156,22 @@ body{
 .texto{
     margin: 0 40px;
 }
-.lista{
+.cad{
+    #margin: 50px auto;
+    #width: 680px;
+    #border: 1px solid red;
+}
+.lista, .cad{
     width: 700px;
-    margin: auto;
-    #height: 835px;
+    margin: 73px 122px;
     overflow: auto;
-    #background-color: white;
-    #opacity: 0.8; 
-    #border: 1px solid black;
 }
 .lista table{
     margin: 10px 30px;
 }
-.lista table, .lista table td {
-   #background-color: cornsilk; 
-}
 .disabled {
    pointer-events: none;
    cursor: default;
-}
-.lista table .divisao{
-    #background-color: wheat;
 }
 fieldset{
     border: 2px solid white;    
@@ -293,11 +288,6 @@ fieldset legend{
 #cadastro table tr td{
     padding: 2px;
 }
-.cad{
-    margin: 50px auto;
-    width: 680px;
-    #border: 1px solid red;
-}
 .info{
     position: absolute;
     font-size: 12px;
@@ -369,10 +359,6 @@ fieldset legend{
     width: 700px;
     margin: auto;
     height: 600px;
-    #overflow: auto;
-    #background-color: white;
-    #opacity: 0.8; 
-    #border: 1px solid black;
 }
 .ficha table{
     margin: 10px 30px;
@@ -409,4 +395,9 @@ fieldset legend{
 }
 .linhas{
     padding: 5px;
+}
+.verFicha{
+    font-size: 8px;
+    font-style: italic;
+    color: red;
 }
