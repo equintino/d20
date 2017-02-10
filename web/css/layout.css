@@ -185,6 +185,7 @@ fieldset legend{
     color: brown;
 }
 .raca{
+    font-family: 'Architects Daughter', cursive;
     float: right;
     margin-right: 15px;
 }
@@ -348,7 +349,18 @@ fieldset legend{
     #color: silver;
 }
 .fichaTitulo{
-    font-family: Times New Roman;
+    #font-family: 'Gloria Hallelujah', cursive;
+    
+    #font-family: 'Indie Flower', cursive;
+    #font-family: 'Lobster', cursive;
+    #font-family: 'VT323', monospace;
+    #font-family: 'Pacifico', cursive;
+    #font-family: 'Shadows Into Light', cursive;
+    #font-family: 'Dancing Script', cursive;
+    #font-family: 'Acme', sans-serif;
+    #font-family: 'Risque', cursive;
+    #font-family: 'Lobster Two', cursive;
+    font-family: 'Architects Daughter', cursive;
     font-size: 25px;
 }
 .destaque{
@@ -372,7 +384,8 @@ fieldset legend{
 }
 .hTitulo{
     float: right;
-    font-family: courier;
+    font-family: 'Satisfy', cursive;
+    #font-family: courier;
     font-size: 22px;
 }
 .hTexto{ 
@@ -387,7 +400,8 @@ fieldset legend{
     text-indent: 30px;   
 }
 .vantagens, .desvantagens{
-    font-family: Times New Roman;
+    font-family: 'Architects Daughter', cursive;
+    #font-family: Times New Roman;
     font-size: 25px;
     width: 250px;
     margin: 0 32px;
