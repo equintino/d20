@@ -341,7 +341,8 @@ fieldset legend{
 .nomes{
     background-color: gray;
     color: white;
-    font-family: Georgia;
+    #font-family: Georgia;
+    font-family: 'Kaushan Script', cursive;
 }
 .nomes2{
     text-align: center;
@@ -375,6 +376,10 @@ fieldset legend{
 .ficha table{
     margin: 10px 30px;
 }
+.ficha legend, .lista legend{
+    #font-family: 'Permanent Marker', cursive;
+    font-family: 'Audiowide', cursive;  
+}
 .historia{
     font-family: Times New Roman;
     font-size: 25px;
@@ -387,6 +392,7 @@ fieldset legend{
     font-family: 'Satisfy', cursive;
     #font-family: courier;
     font-size: 22px;
+    margin-right: 80px;
 }
 .hTexto{ 
     clear: both;
@@ -394,10 +400,11 @@ fieldset legend{
     width: 300px;
     height: 200px;
     overflow: auto;
-    #text-align: justify;
-    font-family: courier;
+    text-align: justify;
+    font-family: 'Satisfy', cursive;
     font-size: 12px;
-    text-indent: 30px;   
+    text-indent: 30px; 
+    background-color: blanchedalmond;
 }
 .vantagens, .desvantagens{
     font-family: 'Architects Daughter', cursive;
@@ -408,10 +415,37 @@ fieldset legend{
     text-align: center;
 }
 .linhas{
-    padding: 5px;
+    #padding: 4px;
 }
 .verFicha{
     font-size: 8px;
     font-style: italic;
     color: red;
+}
+.raca, .atr{   
+    font-family: courier;
+}
+.escudo{
+    position: absolute;
+    top: 660px;
+    margin: 0px 200px;
+}
+.defesa{
+    position: absolute;
+    top: 673px;
+    left: 198px;
+    margin: 0px 200px;
+    font-size: 10px;
+}
+.equipamento{
+    #border: 1px solid red;
+    position: absolute;
+    top: 700px;
+    left: 520px;
+    width: 300px;
+    height: 200px;
+    font-family: 'Architects Daughter', cursive;
+    font-size: 25px;
+    margin: 0 32px;
+    text-align: center;
 }
