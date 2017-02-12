@@ -9,7 +9,12 @@
     document.getElementById('resultado').innerHTML = '';
     //alert(dado);
     //document.write('<img height=60px src="imagens/dado/rd'+dado+'.gif" />');
-    document.getElementById('dado'+dado).innerHTML = '<img height=60px src="imagens/dado/rd'+dado+'.gif" />';
+    if(dado == '6x2'){
+       document.getElementById('dado'+dado).innerHTML = '<img height=60px src="imagens/dado/rd'+dado+'.gif" />';
+       document.getElementById('dado2'+dado).innerHTML = '<img height=60px src="imagens/dado/rd'+dado+'.gif" />';
+    }else{
+       document.getElementById('dado'+dado).innerHTML = '<img height=60px src="imagens/dado/rd'+dado+'.gif" />';
+   }
   //alert('O valor selecionado é '+ getRadioValor('dado'));
   //,'.$dado.'
  }
@@ -63,7 +68,9 @@ if(@!$dado){
         <legenda class="t_dado">Escolha o dado abaixo</legenda>
         <br><br>  
         <span id='dado6'><img height=56px title='Dado de 6 lados' src='../web/imagens/d6.png'></span>
-        <input type='radio' id="dado" name='dado' value='6' required="">
+        <input type='radio' id="dado" name='dado' value='6' required="">  
+        <span id="dado6x2"><img height=56px title='Dado de 6 lados' src='../web/imagens/d6.png'></span><span id='dado26x2'><img height=56px title='Dado de 6 lados' src='../web/imagens/d6.png'></span>
+        <input type='radio' id="dadox2" name='dado' value='6x2' required="">
         <span id='dado20'><img height=60px title='Dado de 20 lados' src='../web/imagens/d20.png'></span>
         <input type='radio' id="dado2" name='dado' value='20'>
         <input type="hidden" name="rolar" value="1">
@@ -79,7 +86,12 @@ if(@!$dado){
  <?php
         echo '<div id=resultado class=resultado>';
  if($rolar){
-	$dado_ = rand(1,$dado);
+        //echo $dado;
+        if($dado == '6x2'){
+           $dado_ = rand(1,6)+rand(1,6);
+        }else{
+           $dado_ = rand(1,$dado);
+        }
            //echo "Você rolou o dado e...<br />";
            echo "Você tirou<br><span>$dado_</span>";
 	//redirecionar('1','index.php?pagina=dado&dado='.$dado.'&abrir=1','Aguarde...',$dado);
