@@ -407,17 +407,6 @@ fieldset legend{
     text-indent: 30px; 
     background-color: blanchedalmond;
 }
-.vantagens, .desvantagens{
-    font-family: 'Architects Daughter', cursive;
-    #font-family: Times New Roman;
-    font-size: 25px;
-    width: 250px;
-    margin: 0 32px;
-    text-align: center;
-}
-.linhas{
-    #padding: 4px;
-}
 .verFicha{
     font-size: 8px;
     font-style: italic;
@@ -426,16 +415,29 @@ fieldset legend{
 .raca, .atr{   
     font-family: courier;
 }
+.vantagens, .desvantagens{
+    font-family: 'Architects Daughter', cursive;
+    #font-family: Times New Roman;
+    font-size: 25px;
+    width: 250px;
+    margin: 0 32px;
+    text-align: center;
+    #border: 1px solid red;
+}
+.hLinhas{
+    position: relative;
+    #top: -80px;
+}
 .escudo{
-    position: absolute;
-    top: 660px;
-    margin: 0px 200px;
+    position: relative;
+    #top: 5px;
+    margin: -120px 200px;
 }
 .defesa{
     position: absolute;
-    top: 673px;
-    left: 198px;
-    margin: 0px 200px;
+    #top: 673px;
+    #left: 198px;
+    margin: 45px 228px;
     font-size: 10px;
 }
 .equipamento{
@@ -449,4 +451,31 @@ fieldset legend{
     font-size: 25px;
     margin: 0 32px;
     text-align: center;
+}
+.tabelaFicha{
+    #clear: left;
+    #float: left;
+}
+.motivacao{
+    clear: both;
+    #border: 1px solid red;
+    float: right;
+    height: 200px;
+    width: 200px;
+    margin-top: 60px;
+}
+.atributo{
+    #float: left;
+}
+.motivacaoTexto{ 
+    text-align: justify;
+    font-family: 'Satisfy', cursive;
+    font-size: 12px;
+    text-indent: 30px; 
+    color: gray;
+}
+.motivacaoJogador{
+    color: red;
+    #font-family: Georgia;
+    font-family: 'Kaushan Script', cursive;
 }

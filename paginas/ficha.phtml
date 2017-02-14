@@ -26,7 +26,7 @@
                   $titulos=array('PERSONAGEM','RAÇA','CLASSE','TENDÊNCIA1','TENDÊNCIA2');
         echo '<br><br><br>';
         echo '<fieldset class="ficha"><legend>FICHA DE PERSONAGEM &nbsp&nbsp LEVEL '.$level.'</legend>';
-           echo '<table cellspacing=0 border=1>';
+           echo '<table cellspacing=0 border=1 class=tabelaFicha>';
               if(!$lista){
                 die('Personagem Inexistente');
               }
@@ -36,8 +36,12 @@
                      echo '<tr><td class=nomes>'.$titulos[2].'</td><td class=nomes2>'.$item->getclasse().'</td></tr>';
                      echo '<tr><td class=nomes>'.$titulos[3].'</td><td class=nomes2>'.$item->gettendencia1().'</td></tr>';
                      echo '<tr><td class=nomes>'.$titulos[4].'</td><td class=nomes2>'.$item->gettendencia2().'</td></tr>';
+                     echo '<div class=motivacao>';
+                       echo '<span class=fichaTitulo>Motivação</span>';
+                       echo '<p class=motivacaoTexto>Recuperar o tesouro da minha familia</p>';
+                     echo '</div>';
                      //echo '<tr><td colspan=2 class=divisao>Características</td><tr>';
-                     echo '<div id="aqui" class="raca">Bem-vindo '.strtoupper($item->getjogador()).'  <img height=240px src="../web/imagens/personagens/'.$item->getraca().'/'.$item->getraca().'.png" /></div>';
+                     echo '<div id="aqui" class="raca">Bem-vindo <span class=motivacaoJogador>'.strtoupper($item->getjogador()).'</span>  <br><img height=240px src="../web/imagens/personagens/'.$item->getraca().'/'.$item->getraca().'.png" /></div>';
                      echo '<div class=historia>';                    
                        echo '<span class=hTitulo>Uma breve história</span>'; 
                        echo '<span class=hTexto ><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vulputate ligula quam, sed mattis quam iaculis vitae. Duis nisl neque, volutpat ut venenatis ut, mollis pharetra velit. Vestibulum ligula ex, laoreet in convallis eget, feugiat non arcu. Integer porttitor sapien risus, et mattis ligula laoreet in. In urna velit, volutpat ut augue sed, cursus condimentum sem. Phasellus commodo libero quis dolor accumsan, et finibus leo lacinia. Proin vehicula pretium lectus, vitae tincidunt ante faucibus vel.</p>
@@ -50,7 +54,7 @@
                   echo '</div>';
                        echo '</table>';
                        echo '<from action="#" method=POST>';
-                       echo '<table>';
+                       echo '<table class=atributo>';
                        echo '<caption class=fichaTitulo>Atributos</caption>';
                        $tCaracteristicas=array('F'=>'Força','A'=>'Agilidade','I'=>'Inteligência','V'=>'Vontade','PV'=>'Pontos de Vida','PM'=>'Pontos de Magia','PE'=>'Pontos de Experiência');
                        foreach($tCaracteristicas as $key => $item){
@@ -65,18 +69,18 @@
                        echo '<br>';
                        echo '<div class=vantagens>';
                        echo '<caption class=fichaTitulo>Habilidades</caption>';
+                       echo '<span class=hLinhas><hr><hr><hr><hr><hr><hr></span>';
                        echo '<div class=escudo><img height=80px src=../web/imagens/escudo.png /></div>';
                        echo '<div class=defesa>Defesa</div>';
-                       echo '<span class=linhas><hr><hr><hr><hr><hr><hr></span>';
                        echo '</div>';
-                       echo '<div class=vantagens>';
+                       /*echo '<div class=vantagens>';
                        echo '<caption class=fichaTitulo>Vantagens</caption>';
                        echo '<span class=linhas><hr><hr><hr><hr><hr><hr></span>';
                        echo '</div>';
                        echo '<div class=desvantagens>';
                        echo '<caption class=fichaTitulo>Desvantagens</caption>';
                        echo '<span class=linhas><hr><hr><hr><hr><hr><hr></span>';
-                       echo '</div>';
+                       echo '</div>';*/
                        echo '</form>';
       echo '</fieldset>';
                ?>
