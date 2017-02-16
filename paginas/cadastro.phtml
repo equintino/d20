@@ -136,6 +136,28 @@
                &nbsp<input type="reset" value="LIMPA" class='botao2 botao-verde'></div>
             </form>
         </fieldset>
+        <?php elseif($act=='cad2'): ?>
+        <fieldset class="cad">
+            <legend>CADASTRO DE PERSONAGEM CONTINUAÇÃO</legend>
+         <form class="font_1" id="cadastro2" action="../paginas/add.php?act=cad2" method="POST">
+             <?php
+                $habilidades['guerreiro']=array('ARREMESSO PODDEROSO','ATAQUE DE BÚFALO','ATAQUE GIRATÓRIO','ATAQUE SIMULTÂNEO','ATAQUE DO TROVÃO','BRIGÃO','COMBATE TÁTICO','COMBATE EM GRUPO','DEFLETOR','FORÇA DE COMBATE','GOLPE DEVASTADOR','GOLPE COM ESCUDO','GRITO DE GUERRA','INVESTIDA MORTAL','KNOCK OUT','QUEBRA-ESCUDO','SEM ESCAPATÓRIA','PERNAS FORTES','PROTEGER ALIADO');
+                foreach($habilidades as $key => $item){
+                 if($key=='guerreiro'){
+                  echo '<tr><td align=right> Habilidade: </td>';
+                    echo '<td><select name=habilidade >';
+                      echo '<option>&nbsp</option>';
+                      for($x=0;$x<count($item);$x++){
+                        echo '<option value='.$item[$x].'>'.$item[$x].'</option>';
+                      }
+                    echo '</select></td></tr>';
+                }
+                }
+             ?>
+         <table>
+         </table>
+        </form>
+        </fieldset>
         <?php endif; ?>
     </div>
 </div>
