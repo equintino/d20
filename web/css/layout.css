@@ -191,9 +191,9 @@ fieldset legend{
 }
 .texto{
     position: absolute;
-    top: 350px;
+    top: 360px;
     width: 450px;
-    height: 100px;
+    height: 150px;
     overflow: auto;
     #border: 5px solid green;
     #background-color: silver;
@@ -201,8 +201,8 @@ fieldset legend{
 }
 .botao{
     position: absolute;
-    top: 480px;
-    right: 80px;
+    top: 500px;
+    right: 125px;
     font-family: arial;
     font-weight: 700;
     border: none;
@@ -211,8 +211,8 @@ fieldset legend{
 }
 .botao2{
     position: absolute;
-    top: 480px;
-    right: 160px;
+    top: 500px;
+    right: 200px;
     font-family: arial;
     font-weight: 700;
     border: none;
@@ -245,8 +245,7 @@ fieldset legend{
     background-color: #006000;
     color: white;   
     position: absolute;
-    top: 485px;
-    right: 160px;
+    top: 505px;
     box-shadow: none;
 }
 .botao-verde2:active{
@@ -255,8 +254,7 @@ fieldset legend{
     background-color: #006000;
     color: white;   
     position: absolute;
-    top: 485px;
-    right: 80px;
+    top: 505px;
     box-shadow: none;
 }
 .rolar{
