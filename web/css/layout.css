@@ -157,11 +157,12 @@ body{
     margin: 0 40px;
 }
 .cad{
-    #margin: 50px auto;
-    #width: 680px;
-    #border: 1px solid red;
+    width: 700px;
+    margin: 73px 122px;
+    height: 690px;
+    overflow: auto;
 }
-.lista, .cad{
+.lista{
     width: 700px;
     margin: 73px 122px;
     overflow: auto;
@@ -348,7 +349,7 @@ fieldset legend{
     font-family: courier;
     #color: silver;
 }
-.fichaTitulo{
+.fichaTitulo, .cadTitulo{
     #font-family: 'Gloria Hallelujah', cursive;
     
     #font-family: 'Indie Flower', cursive;
@@ -375,7 +376,7 @@ fieldset legend{
 .ficha table{
     margin: 10px 30px;
 }
-.ficha legend, .lista legend{
+.ficha legend, .lista legend, .cad legend{
     #font-family: 'Permanent Marker', cursive;
     font-family: 'Audiowide', cursive;  
 }
@@ -476,4 +477,59 @@ fieldset legend{
     color: red;
     #font-family: Georgia;
     font-family: 'Kaushan Script', cursive;
+}
+.cad legend span{
+    font-size: 18px;
+}
+.bloco, .cadHistoria{
+    #border: 1px solid red;
+    margin: auto;
+    background-color: rgba(255,235,205,0.5);
+    box-shadow: 2px 2px 2px gray;
+    padding: 3px;
+}
+.continua{
+    position: relative;
+    font-family: arial;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    font-size: 16px;
+    color: white;
+}
+.continua-verde{
+    background-color: #006000;
+    box-shadow: 0 5px 0 #003f00;
+}
+.continua-verde:hover{
+    background-color: #006000;
+    color: white;
+}
+.continua-verde:active{
+    font-size: 16px;
+    paddin: 2px;
+    background-color: #006000;
+    color: white;   
+    position: relative;
+    top: 5px;
+    box-shadow: none;
+}
+.add{
+    width: 340px;
+    margin: 100px auto;
+    text-align: right;
+    color: white;
+    text-shadow: 2px 2px 2px black;
+    #background-color: rgba(0,0,255,0.5);
+}
+.habLista{
+    font-size: 13px;
+    font-family: courier;
+}
+.cadHistoria{
+    font-size: 15px;
+    font-family: courier;
+    width: 670px;
+    font-style: italic;
 }

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../web/css/layout.css" type="text/css" media='screen'/>  
 <?php
   include_once '../dao/dao.php';
   include_once '../model/model.php';
@@ -26,6 +27,8 @@
      $dao->grava2($model);
   }
 ?>
+<div class='add'>
 <h3>REGISTRO GRAVADO COM SUCESSO</h3>
 <!--<button onclick="history.go(-2)" >VOLTAR</button>-->
-<button onclick= window.location.assign("../web/") >PÁGINA INICIAL</button>
+<a href='../web/index.php?pagina=cadastro&act=cad2&classe=<?php echo $model->getclasse() ?>&personagem=<?= $model->getpersonagem(); ?>' ><button class='continua continua-verde'>Continua...</button></a>
+</div>

@@ -24,7 +24,9 @@
 <?php 
     $variaveis=array('JOGADOR'=>'jogador','PERSONAGEM'=>'personagem','RAÇA'=>'raca','CLASSE'=>'classe','TENDÊNCIA1'=>'tendencia1','TENDÊNCIA2'=>'tendencia2','SEXO'=>'sexo');
     $act=$_GET['act'];
-    $x=$_GET['pag'];
+    @$x=$_GET['pag'];
+    @$classe=$_GET['classe'];
+    @$personagem=$_GET['personagem'];
     $y=$x+2;
         if($x==0){ 
            $class='class="disabled"';
@@ -138,23 +140,66 @@
         </fieldset>
         <?php elseif($act=='cad2'): ?>
         <fieldset class="cad">
-            <legend>CADASTRO DE PERSONAGEM CONTINUAÇÃO</legend>
+            <legend>CADASTRO DE PERSONAGEM <span>(Continuação)</span></legend>
          <form class="font_1" id="cadastro2" action="../paginas/add.php?act=cad2" method="POST">
+             <table class="cadCont">
              <?php
-                $habilidades['guerreiro']=array('ARREMESSO PODDEROSO','ATAQUE DE BÚFALO','ATAQUE GIRATÓRIO','ATAQUE SIMULTÂNEO','ATAQUE DO TROVÃO','BRIGÃO','COMBATE TÁTICO','COMBATE EM GRUPO','DEFLETOR','FORÇA DE COMBATE','GOLPE DEVASTADOR','GOLPE COM ESCUDO','GRITO DE GUERRA','INVESTIDA MORTAL','KNOCK OUT','QUEBRA-ESCUDO','SEM ESCAPATÓRIA','PERNAS FORTES','PROTEGER ALIADO');
+               switch ($classe){
+                case 'guerreiro':
+                    $habilidades['guerreiro']=array('s01-ARREMESSO PODDEROSO','ta1-ATAQUE DE BÚFALO','a01-ATAQUE GIRATÓRIO','a02-ATAQUE SIMULTÂNEO','ta2-ATAQUE DO TROVÃO','s02-BRIGÃO','r01-COMBATE TÁTICO','r02-COMBATE EM GRUPO','s03-DEFLETOR','s04-FORÇA DE COMBATE','a03-GOLPE DEVASTADOR','tr1-GOLPE COM ESCUDO','a04-GRITO DE GUERRA','a05-INVESTIDA MORTAL','a06-KNOCK OUT','ta3-QUEBRA-ESCUDO','tr2-SEM ESCAPATÓRIA','s05-PERNAS FORTES','s06-PROTEGER ALIADO');
+                    break;
+                case 'paladino':
+                    $habilidades['paladino']=array('ts1-ANIMAL CELESTIAL 1','ts2-ANIMAL CELESTIAL 2','a01-ATAQUE GIRATÁRIO','tr1-AURA DIVINA','ts3-CAVALEIRO EXPERIENTE','r01-COMBATE TÁTICO','ts4-CONFIANÇA NOS DEUSES','ts5-CORPO SANTO','ta1-EXORCISMO','s01-FORÇA DE COMBATE','a02-GRITO DE GUERRA','ts6-INQUISITOR','ts7-INVESTIDA MONTADA','a03-INVESTIDA MORTAL','a04-JUSTIÇA FINAL','a05-KNOCK OUT','ts8-MONTARIA ESPECIAL 1','ts9-MONTARIA ESPECIAL 2','ta2-TOQUE DE CURA');
+                    break;
+               }
+                //print_r($habilidades);die;
                 foreach($habilidades as $key => $item){
-                 if($key=='guerreiro'){
-                  echo '<tr><td align=right> Habilidade: </td>';
-                    echo '<td><select name=habilidade >';
-                      echo '<option>&nbsp</option>';
-                      for($x=0;$x<count($item);$x++){
-                        echo '<option value='.$item[$x].'>'.$item[$x].'</option>';
+                  echo '<div align=left class=cadTitulo>&nbsp&nbspClasse: '.strtoupper($key).'</div>';
+                  echo '<div align=right class=cadTitulo>Defina a habilidade de '.strtoupper($personagem).'&nbsp&nbsp</div>';
+                  $y=count($item)/3;
+                  $x=0;
+                  //echo $y.'<br>';
+                  echo '<table class=bloco>';
+                    echo '<tr>';
+                      for($x=$x;$x<count($item);$x++){
+                        echo '<td><input type=radio name=habilidade> <span class=habLista>'.substr($item[$x],4).'</span>';
+                        echo '</td>';
+                        switch ($x){
+                          case 3:
+                          case 7:
+                          case 11:
+                          case 15:
+                          case 19:
+                          case 23:
+                          case 27;
+                          echo '</tr><tr>';
+                          break;
+                        }
                       }
-                    echo '</select></td></tr>';
+                      echo '</tr>';
+                      $y=$y-3;
+                      for($x=$x;$x<$y;$x++){
+                        echo '<td><input type=radio name=habilidade> '.substr($item[$x],4);
+                        echo '</td>';
+                      }
+                    echo '</tr></table>';
                 }
-                }
+                echo '<br><div align=center class=cadTitulo>Nos fale um pouco sobre '.strtoupper($personagem).'</div>';
+                echo '<div class=cadHistoria>';
+                echo '<label>Idade: </label>';
+                echo '<input type=text size=4 name=nasc>';
+                echo '<label> Altura: </label>';
+                echo '<input type=text size=4 name=alt>';
+                echo '<label> Peso: </label>';
+                echo '<input type=text size=6 name=peso>';
+                echo '<label> Cidade Natal: </label>';
+                echo '<input type=text name=cidade>';
+                echo '<br><br>';
+                echo '<label> O porquê entrou nesta aventura? </label>';
+                echo '<br>';
+                echo '<textarea rows="4" cols="79" name=motivacao></textarea>';
+                echo '</div>';
              ?>
-         <table>
          </table>
         </form>
         </fieldset>
