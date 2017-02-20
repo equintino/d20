@@ -533,3 +533,32 @@ fieldset legend{
     width: 670px;
     font-style: italic;
 }
+.cad2Hab{
+    font-size: 16px;
+    padding: 0 4px;
+    position: relative;
+    font-family: arial;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    font-size: 16px;
+    color: white;
+    top: 10px;
+    left: 620px;
+}
+.cad2Hab-verde{
+    background-color: #007c00;
+    box-shadow: 0 5px 0 #003f00;
+}
+.cad2Hab-verde:hover{
+    background-color: #006000;
+    #color: white;
+}
+.cad2Hab-verde:active{
+    background-color: #006000;
+    color: white;   
+    position: relative;
+    top: 15px;
+    box-shadow: none;
+}

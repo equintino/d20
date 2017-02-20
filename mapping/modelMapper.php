@@ -40,5 +40,20 @@
 	if (array_key_exists('excluido', $properties)){
 	  $model->setexcluido($properties['excluido']);
 	}
+	if (array_key_exists('habilidade', $properties)){
+	  $model->sethabilidade($properties['habilidade']);
+	}
+	if (array_key_exists('altura', $properties)){
+	  $model->setaltura($properties['altura']);
+	}
+	if (array_key_exists('peso', $properties)){
+	  $model->setpeso($properties['peso']);
+	}
+	if (array_key_exists('cidade', $properties)){
+	  $model->setcidade($properties['cidade']);
+	}
+	if (array_key_exists('motivacao', $properties)){
+	  $model->setmotivacao($properties['motivacao']);
+	}
   } 
  }

@@ -13,6 +13,11 @@
  private $criado;
  private $modificado;
  private $excluido;
+ private $habilidade;
+ private $altura;
+ private $peso;
+ private $cidade;
+ private $motivacao;
  public function getid(){
 	return $this->id;
  }
@@ -90,5 +95,35 @@
  }
  public function setexcluido($excluido ){
 	$this->excluido=$excluido;
+ }
+ public function gethabilidade(){
+	return $this->habilidade;
+ }
+ public function sethabilidade($habilidade ){
+	$this->habilidade=$habilidade;
+ }
+ public function getaltura(){
+	return $this->altura;
+ }
+ public function setaltura($altura ){
+	$this->altura=$altura;
+ }
+ public function getpeso(){
+	return $this->peso;
+ }
+ public function setpeso($peso ){
+	$this->peso=$peso;
+ }
+ public function getcidade(){
+	return $this->cidade;
+ }
+ public function setcidade($cidade ){
+	$this->cidade=$cidade;
+ }
+ public function getmotivacao(){
+	return $this->motivacao;
+ }
+ public function setmotivacao($motivacao ){
+	$this->motivacao=$motivacao;
  }
  }

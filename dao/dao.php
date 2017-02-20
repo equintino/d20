@@ -14,6 +14,7 @@
             modelMapper::map($model, $row);
             $result[$model->getid()] = $model;
         }
+         //print_r($result);die;
         return $result;
    }
    public function encontrePorId(ModelSearchCriteria $search=null){

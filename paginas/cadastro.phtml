@@ -152,17 +152,17 @@
                     $habilidades['paladino']=array('ts1-ANIMAL CELESTIAL 1','ts2-ANIMAL CELESTIAL 2','a01-ATAQUE GIRATÁRIO','tr1-AURA DIVINA','ts3-CAVALEIRO EXPERIENTE','r01-COMBATE TÁTICO','ts4-CONFIANÇA NOS DEUSES','ts5-CORPO SANTO','ta1-EXORCISMO','s01-FORÇA DE COMBATE','a02-GRITO DE GUERRA','ts6-INQUISITOR','ts7-INVESTIDA MONTADA','a03-INVESTIDA MORTAL','a04-JUSTIÇA FINAL','a05-KNOCK OUT','ts8-MONTARIA ESPECIAL 1','ts9-MONTARIA ESPECIAL 2','ta2-TOQUE DE CURA');
                     break;
                }
-                //print_r($habilidades);die;
+              if(@$habilidades){
                 foreach($habilidades as $key => $item){
                   echo '<div align=left class=cadTitulo>&nbsp&nbspClasse: '.strtoupper($key).'</div>';
-                  echo '<div align=right class=cadTitulo>Defina a habilidade de '.strtoupper($personagem).'&nbsp&nbsp</div>';
+                  echo '<div align=right class=cadTitulo>Escolha três habilidades para '.strtoupper($personagem).'&nbsp&nbsp</div>';
                   $y=count($item)/3;
                   $x=0;
                   //echo $y.'<br>';
                   echo '<table class=bloco>';
                     echo '<tr>';
                       for($x=$x;$x<count($item);$x++){
-                        echo '<td><input type=radio name=habilidade> <span class=habLista>'.substr($item[$x],4).'</span>';
+                        echo '<td><input type=checkbox name=habilidade> <span class=habLista>'.substr($item[$x],4).'</span>';
                         echo '</td>';
                         switch ($x){
                           case 3:
@@ -184,12 +184,13 @@
                       }
                     echo '</tr></table>';
                 }
+              }
                 echo '<br><div align=center class=cadTitulo>Nos fale um pouco sobre '.strtoupper($personagem).'</div>';
                 echo '<div class=cadHistoria>';
                 echo '<label>Idade: </label>';
-                echo '<input type=text size=4 name=nasc>';
+                echo '<input type=text size=4 name=idade>';
                 echo '<label> Altura: </label>';
-                echo '<input type=text size=4 name=alt>';
+                echo '<input type=text size=4 name=altura>';
                 echo '<label> Peso: </label>';
                 echo '<input type=text size=6 name=peso>';
                 echo '<label> Cidade Natal: </label>';
@@ -200,6 +201,9 @@
                 echo '<textarea rows="4" cols="79" name=motivacao></textarea>';
                 echo '</div>';
              ?>
+                 <div>
+                     <!--<input type="reset" value="LIMPA" class='cad2Hab cad2Hab-verde'>
+               &nbsp--><input type="submit" value="AVANÇA" class='cad2Hab cad2Hab-verde'>                       </div>
          </table>
         </form>
         </fieldset>
