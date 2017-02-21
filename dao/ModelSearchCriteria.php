@@ -104,4 +104,44 @@
           $this->excluido = $excluido;
           return $this;
       }
+   private $habilidade;
+       public function gethabilidade(){
+        return $this->habilidade;
+      }
+      public function sethabilidade($habilidade){
+          $this->habilidade = $habilidade;
+          return $this;
+      }
+   private $altura;
+       public function getaltura(){
+        return $this->altura;
+      }
+      public function setaltura($altura){
+          $this->altura = $altura;
+          return $this;
+      }
+   private $peso;
+       public function getpeso(){
+        return $this->peso;
+      }
+      public function setpeso($peso){
+          $this->peso = $peso;
+          return $this;
+      }
+   private $cidade;
+       public function getcidade(){
+        return $this->cidade;
+      }
+      public function setcidade($cidade){
+          $this->cidade = $cidade;
+          return $this;
+      }
+   private $motivacao;
+       public function getmotivacao(){
+        return $this->motivacao;
+      }
+      public function setmotivacao($motivacao){
+          $this->motivacao = $motivacao;
+          return $this;
+      }
 }

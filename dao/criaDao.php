@@ -3,7 +3,7 @@
     $mode='w+';
     $handle=fopen($filename, $mode);
     $banco='d20';
-    $variaveis=array('id','jogador','personagem','raca','classe','tendencia1','tendencia2','idade','tabela','sexo','criado','modificado','excluido');
+    $variaveis=array('id','jogador','personagem','raca','classe','tendencia1','tendencia2','idade','tabela','sexo','criado','modificado','excluido','habilidade','altura','peso','cidade','motivacao');
     $tabela='`\'.$model->gettabela().\'`';
     $variaveis2=array('id','personagem','raca','tendencia1','tendencia2','idade','criado','modificado','excluido');
     //$tabela2=''.$banco.'';

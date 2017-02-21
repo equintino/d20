@@ -8,13 +8,11 @@
             set_time_limit(3600);
             ini_set('memory_limit', '-1');
         $result = array();
-            //print_r(($search));die;
         foreach ($this->query($this->getEncontreSql($search)) as $row){
             $model = new Model();
             modelMapper::map($model, $row);
             $result[$model->getid()] = $model;
         }
-         //print_r($result);die;
         return $result;
    }
    public function encontrePorId(ModelSearchCriteria $search=null){
@@ -31,7 +29,9 @@
         return $model;
    }
    public function grava(Model $model){
-        if ($model->getid() === null) {
+    print_r($model);die;
+        if ($model->getpersonagem() === null) {
+         print_r($this->insert($model));die;
             return $this->insert($model);
         }
         return $this->update($model);
@@ -68,7 +68,7 @@
         $model->setexcluido(0);
         $model->setcriado($now);
         $model->setmodificado($now);        
-        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`jogador`,`personagem`,`raca`,`classe`,`tendencia1`,`tendencia2`,`idade`,`tabela`,`sexo`,`criado`,`modificado`,`excluido`) VALUES (:id,:jogador,:personagem,:raca,:classe,:tendencia1,:tendencia2,:idade,:tabela,:sexo,:criado,:modificado,:excluido)';
+        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`jogador`,`personagem`,`raca`,`classe`,`tendencia1`,`tendencia2`,`idade`,`tabela`,`sexo`,`criado`,`modificado`,`excluido`,`habilidade`,`altura`,`peso`,`cidade`,`motivacao`) VALUES (:id,:jogador,:personagem,:raca,:classe,:tendencia1,:tendencia2,:idade,:tabela,:sexo,:criado,:modificado,:excluido,:habilidade,:altura,:peso,:cidade,:motivacao)';
 	$search = new ModelSearchCriteria();
         $search->settabela($model->gettabela());
         return $this->execute($sql, $model);
@@ -109,7 +109,7 @@
         return $model;
    }
    private function getParams(Model $model){
-        $params = array(':id'=> $model->getid(),':jogador'=> $model->getjogador(),':personagem'=> $model->getpersonagem(),':raca'=> $model->getraca(),':classe'=> $model->getclasse(),':tendencia1'=> $model->gettendencia1(),':tendencia2'=> $model->gettendencia2(),':idade'=> $model->getidade(),':tabela'=> $model->gettabela(),':sexo'=> $model->getsexo(),':criado'=> $model->getcriado(),':modificado'=> $model->getmodificado(),':excluido'=> $model->getexcluido(),);
+        $params = array(':id'=> $model->getid(),':jogador'=> $model->getjogador(),':personagem'=> $model->getpersonagem(),':raca'=> $model->getraca(),':classe'=> $model->getclasse(),':tendencia1'=> $model->gettendencia1(),':tendencia2'=> $model->gettendencia2(),':idade'=> $model->getidade(),':tabela'=> $model->gettabela(),':sexo'=> $model->getsexo(),':criado'=> $model->getcriado(),':modificado'=> $model->getmodificado(),':excluido'=> $model->getexcluido(),':habilidade'=> $model->gethabilidade(),':altura'=> $model->getaltura(),':peso'=> $model->getpeso(),':cidade'=> $model->getcidade(),':motivacao'=> $model->getmotivacao(),);
 	 return $params;
    }
    private function getParams2(Model $model){
@@ -135,11 +135,7 @@
    }
    private function getEncontreSql(ModelSearchCriteria $search = null) {               
           if ($search->getpersonagem() !== null) {
-             //if($search->getmes()){
                  $sql="SELECT * FROM ".$search->gettabela()." WHERE personagem='".$search->getpersonagem()."' AND excluido = 0 ";
-             //}else{
-                // $sql='SELECT * FROM '.$search->gettabela().' WHERE excluido = 0 ';
-             //}
           }else{
              $sql = 'SELECT * FROM `'.$search->gettabela().'` WHERE excluido = 0 ';
           }

@@ -42,7 +42,9 @@
      $dao->grava2($model);
   }
   if($act == 'cad2'){
-    print_r($_POST);die;
+    $model->setpersonagem($_GET['personagem']);
+    //print_r($model);die;
+    $dao->grava($model);
   }
 ?>
 <div class='add'>
