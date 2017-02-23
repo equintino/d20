@@ -29,9 +29,7 @@
         return $model;
    }
    public function grava(Model $model){
-    print_r($model);die;
-        if ($model->getpersonagem() === null) {
-         print_r($this->insert($model));die;
+        if ($model->getid() === null) {
             return $this->insert($model);
         }
         return $this->update($model);
@@ -71,6 +69,11 @@
         $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`jogador`,`personagem`,`raca`,`classe`,`tendencia1`,`tendencia2`,`idade`,`tabela`,`sexo`,`criado`,`modificado`,`excluido`,`habilidade`,`altura`,`peso`,`cidade`,`motivacao`) VALUES (:id,:jogador,:personagem,:raca,:classe,:tendencia1,:tendencia2,:idade,:tabela,:sexo,:criado,:modificado,:excluido,:habilidade,:altura,:peso,:cidade,:motivacao)';
 	$search = new ModelSearchCriteria();
         $search->settabela($model->gettabela());
+        return $this->execute($sql, $model);
+   }
+   private function update(Model $model){
+        $model->setmodificado(new DateTime(), new DateTimeZone('America/Sao_Paulo'));
+        $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, jogador = :jogador, personagem = :personagem, raca = :raca, classe = :classe, tendencia1 = :tendencia1, tendencia2 = :tendencia2, idade = :idade, tabela = :tabela, sexo = :sexo, criado = :criado, modificado = :modificado, excluido = :excluido, habilidade = :habilidade, altura = :altura, peso = :peso, cidade = :cidade, motivacao = :motivacao WHERE id = :id ';
         return $this->execute($sql, $model);
    }
    private function insert2(Model $model){

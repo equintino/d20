@@ -100,6 +100,20 @@
         $search->settabela($model->gettabela());
         return $this->execute($sql, $model);
    }'."\r\n";
+    $texto .= '   private function update(Model $model){
+        $model->setmodificado(new DateTime(), new DateTimeZone(\'America/Sao_Paulo\'));
+        $sql = \'UPDATE '.$tabela.' SET';
+           $x=1;
+           foreach($variaveis as $item){
+              $texto .= " $item = :$item";
+              if(count($variaveis)>$x){
+                $texto .= ',';
+              }
+              $x++;
+          }
+             $texto .= ' WHERE id = :id \';
+        return $this->execute($sql, $model);
+   }'."\r\n";
     $texto .= '   private function insert2(Model $model){
         date_default_timezone_set("Brazil/East");
         $now = mktime (date(\'H\'), date(\'i\'), date(\'s\'), date("m")  , date("d"), date("Y"));
