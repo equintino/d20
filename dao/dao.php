@@ -28,6 +28,15 @@
         modelMapper::map($model, $row);
         return $model;
    }
+	public function encontrePorPersonagem(ModelSearchCriteria $search=null){
+           $row = $this->query('SELECT * FROM `'.$search->gettabela().'` WHERE excluido = 0 and `personagem` = "' . $search->getpersonagem().'"')->fetch();
+        if (!$row) {
+            return null;
+        }
+        $model = new Model();
+        modelMapper::map($model, $row);
+        return $model;
+   }
    public function grava(Model $model){
         if ($model->getid() === null) {
             return $this->insert($model);
@@ -72,8 +81,10 @@
         return $this->execute($sql, $model);
    }
    private function update(Model $model){
-        $model->setmodificado(new DateTime(), new DateTimeZone('America/Sao_Paulo'));
-        $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, jogador = :jogador, personagem = :personagem, raca = :raca, classe = :classe, tendencia1 = :tendencia1, tendencia2 = :tendencia2, idade = :idade, tabela = :tabela, sexo = :sexo, criado = :criado, modificado = :modificado, excluido = :excluido, habilidade = :habilidade, altura = :altura, peso = :peso, cidade = :cidade, motivacao = :motivacao WHERE id = :id ';
+        date_default_timezone_set("Brazil/East");
+        $now = mktime (date("H"), date("i"), date("s"), date("m")  , date("d"), date("Y"));
+        $model->setmodificado($now);
+        $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, jogador = :jogador, personagem = :personagem, raca = :raca, classe = :classe, tendencia1 = :tendencia1, tendencia2 = :tendencia2, idade = :idade, tabela = :tabela, sexo = :sexo, modificado = :modificado, excluido = :excluido, habilidade = :habilidade, altura = :altura, peso = :peso, cidade = :cidade, motivacao = :motivacao WHERE personagem = :personagem ';
         return $this->execute($sql, $model);
    }
    private function insert2(Model $model){
@@ -106,7 +117,7 @@
         $statement = $this->getDb()->prepare($sql);
         $this->executeStatement($statement, $this->getParams2($model));
         $search=new ModelSearchCriteria();
-        if (!$model->getid()) {
+        if (!$model->getpersonagem()) {
              return $this->encontrePorId($search->setid($this->getDb()->lastInsertId()));
         }
         return $model;

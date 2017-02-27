@@ -162,7 +162,7 @@
                   echo '<table class=bloco>';
                     echo '<tr>';
                       for($x=$x;$x<count($item);$x++){
-                        echo '<td><input type=checkbox name=habilidade> <span class=habLista>'.substr($item[$x],4).'</span>';
+                        echo '<td><input type=checkbox name=\''.$item[$x].'\'> <span class=habLista>'.substr($item[$x],4).'</span>';
                         echo '</td>';
                         switch ($x){
                           case 3:
@@ -177,11 +177,11 @@
                         }
                       }
                       echo '</tr>';
-                      $y=$y-3;
+                      /*$y=$y-3;
                       for($x=$x;$x<$y;$x++){
-                        echo '<td><input type=radio name=habilidade> '.substr($item[$x],4);
+                        echo '<td><input type=radio name='.substr($item[$x],4).'> '.substr($item[$x],4);
                         echo '</td>';
-                      }
+                      }*/
                     echo '</tr></table>';
                 }
               }
@@ -200,6 +200,22 @@
                 echo '<br>';
                 echo '<textarea rows="4" cols="79" name=motivacao></textarea>';
                 echo '</div>';
+             ?>
+                 <div>
+                     <!--<input type="reset" value="LIMPA" class='cad2Hab cad2Hab-verde'>
+               &nbsp--><input type="submit" value="AVANÇA" class='cad2Hab cad2Hab-verde'>                       </div>
+         </table>
+        </form>
+        </fieldset>
+        <?php elseif($act=='cad3'): ?>
+        <fieldset class="cad">
+            <legend>CADASTRO DE PERSONAGEM <span>(Continuação)</span></legend>
+         <form class="font_1" id="cadastro2" action="../paginas/add.php?act=cad2&personagem=<?php echo $personagem ?>" method="POST">
+             <table class="cadCont">
+             <?php
+                  echo '<div align=left class=cadTitulo>&nbsp&nbspClasse: '.strtoupper($_GET['classe']).'</div>';
+				  echo '<div class="moeda cadTitulo">$ 400</div>';
+                  echo '<div align=right class=cadTitulo>Armamentos & Equipamentos para '.strtoupper($_GET['personagem']).'&nbsp&nbsp</div>';
              ?>
                  <div>
                      <!--<input type="reset" value="LIMPA" class='cad2Hab cad2Hab-verde'>

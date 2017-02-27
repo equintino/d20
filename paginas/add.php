@@ -7,6 +7,8 @@
   include_once '../dao/ModelSearchCriteria.php';
   include_once '../validacao/ModelValidador.php';
   $act=$_GET['act'];
+  $habilidade = null;
+  $x=0;
   $dao = new Dao();
   $model = new Model();
   $search = new ModelSearchCriteria();
@@ -14,12 +16,27 @@
      $search->settabela('personagem');
   //print_r($_POST);die;
   foreach($_POST as $key => $item){
-    $classe='set'.$key;
-    $model->$classe($item);
+	  if($item == 'on'){
+		$habilidade .=$key.'/';
+		$x++;
+	  }else{
+		$classe='set'.$key;
+		$model->$classe($item);
+	  }
+  }
+  if($x<3||$x>3){
+    echo '<div class="add hab">';
+    echo '<h3>VOCË SELECIONOU <span class=dest>'.$x.'</span> HABILIDADE(S),<br> SELECIONE <span class=dest>3</span> HABILIDADES!</h3>';
+    echo '<button class=\'continua continua-verde\' onclick=history.go(-1);>Voltar</button>';
+    echo '</div>';
+    die;
+  }else{
+	$model->sethabilidade($habilidade);
   }
   if($act == 'cad'){
      $search->setpersonagem($model->getpersonagem());
      $busca=$dao->encontre($search);
+	 //print_r($busca);die;
      if($busca){
         foreach($dao->encontre($search) as $dados);
         if($dados->getpersonagem()){
@@ -31,7 +48,9 @@
         }else{       
           $dao->grava($model);
         }
-     }
+     }else{
+		$dao->grava($model); 
+	 }
   }
   //$model->settabela(strtolower(ModelValidacao::nomeMes($_POST['mes'])));
   /*echo '<pre>';
@@ -42,9 +61,28 @@
      $dao->grava2($model);
   }
   if($act == 'cad2'){
-    $model->setpersonagem($_GET['personagem']);
-    //print_r($model);die;
+	$search->settabela('personagem');
+    $search->setpersonagem($_GET['personagem']);
+	
+	$dados=$dao->encontrePorPersonagem($search);
+	//print_r($dados);echo '<br><br>';
+	$model->setid($dados->getid());
+	$model->setjogador($dados->getjogador());
+	$model->setpersonagem($dados->getpersonagem());
+	$model->setraca($dados->getraca());
+	$model->setclasse($dados->getclasse());
+	$model->settendencia1($dados->gettendencia1());
+	$model->settendencia2($dados->gettendencia2());
+	$model->setsexo($dados->getsexo());
     $dao->grava($model);
+	echo '<div class=\'add\'>'.
+			'<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.
+			'<a href=\'../web/index.php?pagina=cadastro&act=cad3&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'\' ><button class=\'continua continua-verde\'>Continua...</button></a>'.
+		  '</div>';
+	die;
+  }
+  if($act == 'cad3'){
+	  print_r($_POST);die;
   }
 ?>
 <div class='add'>

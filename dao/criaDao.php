@@ -36,6 +36,15 @@
         modelMapper::map($model, $row);
         return $model;
    }'."\r\n";
+	$texto .= '	public function encontrePorPersonagem(ModelSearchCriteria $search=null){
+           $row = $this->query(\'SELECT * FROM `\'.$search->gettabela().\'` WHERE excluido = 0 and `personagem` = "\' . $search->getpersonagem().\'"\')->fetch();
+        if (!$row) {
+            return null;
+        }
+        $model = new Model();
+        modelMapper::map($model, $row);
+        return $model;
+   }'."\r\n";
     $texto .= '   public function grava(Model $model){
         if ($model->getid() === null) {
             return $this->insert($model);
@@ -101,17 +110,21 @@
         return $this->execute($sql, $model);
    }'."\r\n";
     $texto .= '   private function update(Model $model){
-        $model->setmodificado(new DateTime(), new DateTimeZone(\'America/Sao_Paulo\'));
+        date_default_timezone_set("Brazil/East");
+        $now = mktime (date("H"), date("i"), date("s"), date("m")  , date("d"), date("Y"));
+        $model->setmodificado($now);
         $sql = \'UPDATE '.$tabela.' SET';
            $x=1;
            foreach($variaveis as $item){
-              $texto .= " $item = :$item";
-              if(count($variaveis)>$x){
-                $texto .= ',';
-              }
+				if($item != 'criado'){
+					$texto .= " $item = :$item";
+				  if(count($variaveis)>$x){
+					$texto .= ',';
+				  }
+				}
               $x++;
           }
-             $texto .= ' WHERE id = :id \';
+             $texto .= ' WHERE personagem = :personagem \';
         return $this->execute($sql, $model);
    }'."\r\n";
     $texto .= '   private function insert2(Model $model){
@@ -174,7 +187,7 @@
         $statement = $this->getDb()->prepare($sql);
         $this->executeStatement($statement, $this->getParams2($model));
         $search=new ModelSearchCriteria();
-        if (!$model->getid()) {
+        if (!$model->getpersonagem()) {
              return $this->encontrePorId($search->setid($this->getDb()->lastInsertId()));
         }
         return $model;

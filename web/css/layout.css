@@ -562,3 +562,16 @@ fieldset legend{
     top: 15px;
     box-shadow: none;
 }
+.moeda{
+	position: relative;
+	top: -40px;
+	clear: both;
+	float: right;
+}
+.hab{
+	text-align: center;
+}
+.dest{
+	font-size: 30px;
+	color: red;
+}
