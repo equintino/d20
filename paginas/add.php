@@ -24,15 +24,6 @@
 		$model->$classe($item);
 	  }
   }
-  if($x<3||$x>3){
-    echo '<div class="add hab">';
-    echo '<h3>VOCË SELECIONOU <span class=dest>'.$x.'</span> HABILIDADE(S),<br> SELECIONE <span class=dest>3</span> HABILIDADES!</h3>';
-    echo '<button class=\'continua continua-verde\' onclick=history.go(-1);>Voltar</button>';
-    echo '</div>';
-    die;
-  }else{
-	$model->sethabilidade($habilidade);
-  }
   if($act == 'cad'){
      $search->setpersonagem($model->getpersonagem());
      $busca=$dao->encontre($search);
@@ -61,6 +52,15 @@
      $dao->grava2($model);
   }
   if($act == 'cad2'){
+	  if($x<3||$x>3){
+		echo '<div class="add hab">';
+		echo '<h3>VOCË SELECIONOU <span class=dest>'.$x.'</span> HABILIDADE(S),<br> SELECIONE <span class=dest>3</span> HABILIDADES!</h3>';
+		echo '<button class=\'continua continua-verde\' onclick=history.go(-1);>Voltar</button>';
+		echo '</div>';
+		die;
+	  }else{
+		$model->sethabilidade($habilidade);
+	  }
 	$search->settabela('personagem');
     $search->setpersonagem($_GET['personagem']);
 	

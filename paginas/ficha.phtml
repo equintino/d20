@@ -38,7 +38,7 @@
                      echo '<tr><td class=nomes>'.$titulos[4].'</td><td class=nomes2>'.$item->gettendencia2().'</td></tr>';
                      echo '<div class=motivacao>';
                        echo '<span class=fichaTitulo>Motivação</span>';
-                       echo '<p class=motivacaoTexto>Recuperar o tesouro da minha familia</p>';
+                       echo '<p class=motivacaoTexto>'.$item->getmotivacao().'</p>';
                      echo '</div>';
                      //echo '<tr><td colspan=2 class=divisao>Características</td><tr>';
                      echo '<div id="aqui" class="raca">Bem-vindo <span class=motivacaoJogador>'.strtoupper($item->getjogador()).'</span>  <br><img height=240px src="../web/imagens/personagens/'.$item->getraca().'/'.$item->getraca().'.png" /></div>';
