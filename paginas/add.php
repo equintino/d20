@@ -82,7 +82,11 @@
 	die;
   }
   if($act == 'cad3'){
-	  print_r($_POST);die;
+	  $model->setpersonagem($_GET['personagem']);
+	  $model->settabela('atributos');
+	  print_r($_GET);echo '<br>';
+	  print_r($_POST);echo '<br>';
+	  print_r($model);die;
   }
 ?>
 <div class='add'>

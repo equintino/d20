@@ -21,6 +21,11 @@
    alert(x);
   }
 </script>
+<style>
+	#rodape{
+		visibility: hidden;
+	}
+</style>
 <?php 
     $variaveis=array('JOGADOR'=>'jogador','PERSONAGEM'=>'personagem','RAÇA'=>'raca','CLASSE'=>'classe','TENDÊNCIA1'=>'tendencia1','TENDÊNCIA2'=>'tendencia2','SEXO'=>'sexo');
     $act=$_GET['act'];
@@ -214,16 +219,30 @@
         <?php elseif($act=='cad3'): ?>
         <fieldset class="cad">
             <legend>CADASTRO DE PERSONAGEM <span>(Continuação)</span></legend>
-         <form class="font_1" id="cadastro2" action="../paginas/add.php?act=cad2&personagem=<?php echo $personagem ?>" method="POST">
+         <form class="font_1" id="cadastro2" action="../paginas/add.php?act=cad3&personagem=<?php echo $personagem ?>" method="POST">
              <table class="cadCont">
              <?php
                   echo '<div align=left class=cadTitulo>&nbsp&nbspClasse: '.strtoupper($_GET['classe']).'</div>';
 				  echo '<div class="moeda cadTitulo">$ 400</div>';
-                  echo '<div align=right class=cadTitulo>Armamentos & Equipamentos para '.strtoupper($_GET['personagem']).'&nbsp&nbsp</div>';
+                  echo '<div align=right class=cadTitulo>Atributos, Armamentos & Equipamentos para '.strtoupper($_GET['personagem']).'&nbsp&nbsp</div>';
+				  
+                       echo '<table class=atributo>';
+                       echo '<caption class=fichaTitulo>Atributos</caption>';
+                       $tCaracteristicas=array('F'=>'Força','A'=>'Agilidade','I'=>'Inteligência','V'=>'Vontade','PV'=>'Pontos de Vida','PM'=>'Pontos de Magia','PE'=>'Pontos de Experiência');
+                       foreach($tCaracteristicas as $key => $item_){
+                         if($item_[0] == 'P'){
+                           $item_=(explode(' ',$item_));
+                           echo '<tr><td><span class="destaque atr">'.$item_[0][0].'</span>'.substr($item_[0], 1).' '.$item_[1].'<span class="destaque atr"> '.$item_[2][0].'</span>'.substr($item_[2], 1).'</td><td><input type=text name='.$key.' maxlength = "4" size=2></td></tr>';
+                         }else{
+                          echo '<tr><td><span class="destaque atr">'.$item_[0].'</span>'. substr($item_, 1).'</td><td><input type=text name='.$key.' maxlength = "4" size=2></td></tr>';
+                         }
+                       }
+                       echo '</table>';
              ?>
-                 <div>
-                     <!--<input type="reset" value="LIMPA" class='cad2Hab cad2Hab-verde'>
-               &nbsp--><input type="submit" value="AVANÇA" class='cad2Hab cad2Hab-verde'>                       </div>
+				<div>
+                    <input type="reset" value="LIMPA" class='cad3Hab cad3Hab-verde'>
+					<input type="submit" value="AVANÇA" class='cad3Hab cad3Hab-verde'>                     
+				</div>
          </table>
         </form>
         </fieldset>

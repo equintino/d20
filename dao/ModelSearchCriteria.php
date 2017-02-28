@@ -152,4 +152,68 @@
           $this->breveHistoria = $breveHistoria;
           return $this;
       }
+   private $id_atrib;
+       public function getid_atrib(){
+        return $this->id_atrib;
+      }
+      public function setid_atrib($id_atrib){
+          $this->id_atrib = $id_atrib;
+          return $this;
+      }
+   private $F;
+       public function getF(){
+        return $this->F;
+      }
+      public function setF($F){
+          $this->F = $F;
+          return $this;
+      }
+   private $A;
+       public function getA(){
+        return $this->A;
+      }
+      public function setA($A){
+          $this->A = $A;
+          return $this;
+      }
+   private $I;
+       public function getI(){
+        return $this->I;
+      }
+      public function setI($I){
+          $this->I = $I;
+          return $this;
+      }
+   private $V;
+       public function getV(){
+        return $this->V;
+      }
+      public function setV($V){
+          $this->V = $V;
+          return $this;
+      }
+   private $PV;
+       public function getPV(){
+        return $this->PV;
+      }
+      public function setPV($PV){
+          $this->PV = $PV;
+          return $this;
+      }
+   private $PM;
+       public function getPM(){
+        return $this->PM;
+      }
+      public function setPM($PM){
+          $this->PM = $PM;
+          return $this;
+      }
+   private $PE;
+       public function getPE(){
+        return $this->PE;
+      }
+      public function setPE($PE){
+          $this->PE = $PE;
+          return $this;
+      }
 }

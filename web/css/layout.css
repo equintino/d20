@@ -580,6 +580,36 @@ fieldset legend{
     #list-style-type: circle;
 	font-size: 17px;
 	text-align: left;
+	#font-style: italic;
 	#border: 1px solid red;
 	#margin-left: -40px;
+}
+.cad3Hab{
+    font-size: 16px;
+    padding: 0 4px;
+    position: relative;
+    font-family: arial;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    font-size: 16px;
+    color: white;
+    top: 10px;
+    left: 560px;
+}
+.cad3Hab-verde{
+    background-color: #007c00;
+    box-shadow: 0 5px 0 #003f00;
+}
+.cad3Hab-verde:hover{
+    background-color: #006000;
+    #color: white;
+}
+.cad3Hab-verde:active{
+    background-color: #006000;
+    color: white;   
+    position: relative;
+    top: 15px;
+    box-shadow: none;
 }

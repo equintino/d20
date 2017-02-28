@@ -58,5 +58,29 @@
 	if (array_key_exists('breveHistoria', $properties)){
 	  $model->setbreveHistoria($properties['breveHistoria']);
 	}
+	if (array_key_exists('id_atrib', $properties)){
+	  $model->setid_atrib($properties['id_atrib']);
+	}
+	if (array_key_exists('F', $properties)){
+	  $model->setF($properties['F']);
+	}
+	if (array_key_exists('A', $properties)){
+	  $model->setA($properties['A']);
+	}
+	if (array_key_exists('I', $properties)){
+	  $model->setI($properties['I']);
+	}
+	if (array_key_exists('V', $properties)){
+	  $model->setV($properties['V']);
+	}
+	if (array_key_exists('PV', $properties)){
+	  $model->setPV($properties['PV']);
+	}
+	if (array_key_exists('PM', $properties)){
+	  $model->setPM($properties['PM']);
+	}
+	if (array_key_exists('PE', $properties)){
+	  $model->setPE($properties['PE']);
+	}
   } 
  }

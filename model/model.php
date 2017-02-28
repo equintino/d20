@@ -19,6 +19,14 @@
  private $cidade;
  private $motivacao;
  private $breveHistoria;
+ private $id_atrib;
+ private $F;
+ private $A;
+ private $I;
+ private $V;
+ private $PV;
+ private $PM;
+ private $PE;
  public function getid(){
 	return $this->id;
  }
@@ -132,5 +140,53 @@
  }
  public function setbreveHistoria($breveHistoria ){
 	$this->breveHistoria=$breveHistoria;
+ }
+ public function getid_atrib(){
+	return $this->id_atrib;
+ }
+ public function setid_atrib($id_atrib ){
+	$this->id_atrib=$id_atrib;
+ }
+ public function getF(){
+	return $this->F;
+ }
+ public function setF($F ){
+	$this->F=$F;
+ }
+ public function getA(){
+	return $this->A;
+ }
+ public function setA($A ){
+	$this->A=$A;
+ }
+ public function getI(){
+	return $this->I;
+ }
+ public function setI($I ){
+	$this->I=$I;
+ }
+ public function getV(){
+	return $this->V;
+ }
+ public function setV($V ){
+	$this->V=$V;
+ }
+ public function getPV(){
+	return $this->PV;
+ }
+ public function setPV($PV ){
+	$this->PV=$PV;
+ }
+ public function getPM(){
+	return $this->PM;
+ }
+ public function setPM($PM ){
+	$this->PM=$PM;
+ }
+ public function getPE(){
+	return $this->PE;
+ }
+ public function setPE($PE ){
+	$this->PE=$PE;
  }
  }

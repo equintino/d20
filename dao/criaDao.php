@@ -5,7 +5,7 @@
     $banco='d20';
     $variaveis=array('id','jogador','personagem','raca','classe','tendencia1','tendencia2','idade','tabela','sexo','criado','modificado','excluido','habilidade','altura','peso','cidade','motivacao','breveHistoria');
     $tabela='`\'.$model->gettabela().\'`';
-    $variaveis2=array('id','personagem','raca','tendencia1','tendencia2','idade','criado','modificado','excluido');
+	$variaveis2=array('id_atrib','F','A','I','V','PV','PM','PE','personagem');
     //$tabela2=''.$banco.'';
     $texto="<?php \r\n class dao{\r\n";
     $texto .= '   '."private ".'$db'." = null;\r\n".
