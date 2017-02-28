@@ -2,7 +2,7 @@
     $filename='model.php';
     $mode='w+';
     $handle=fopen($filename, $mode);
-    $variaveis=array('id','jogador','personagem','raca','classe','tendencia1','tendencia2','idade','tabela','sexo','criado','modificado','excluido','habilidade','altura','peso','cidade','motivacao');
+    $variaveis=array('id','jogador','personagem','raca','classe','tendencia1','tendencia2','idade','tabela','sexo','criado','modificado','excluido','habilidade','altura','peso','cidade','motivacao','breveHistoria');
     $texto="<?php \r\n class Model{\r\n";
     foreach($variaveis as $item){
       $texto .=' private $'.$item.';'."\r\n";

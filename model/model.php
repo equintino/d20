@@ -18,6 +18,7 @@
  private $peso;
  private $cidade;
  private $motivacao;
+ private $breveHistoria;
  public function getid(){
 	return $this->id;
  }
@@ -125,5 +126,11 @@
  }
  public function setmotivacao($motivacao ){
 	$this->motivacao=$motivacao;
+ }
+ public function getbreveHistoria(){
+	return $this->breveHistoria;
+ }
+ public function setbreveHistoria($breveHistoria ){
+	$this->breveHistoria=$breveHistoria;
  }
  }

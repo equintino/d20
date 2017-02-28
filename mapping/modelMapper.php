@@ -55,5 +55,8 @@
 	if (array_key_exists('motivacao', $properties)){
 	  $model->setmotivacao($properties['motivacao']);
 	}
+	if (array_key_exists('breveHistoria', $properties)){
+	  $model->setbreveHistoria($properties['breveHistoria']);
+	}
   } 
  }

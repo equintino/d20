@@ -144,4 +144,12 @@
           $this->motivacao = $motivacao;
           return $this;
       }
+   private $breveHistoria;
+       public function getbreveHistoria(){
+        return $this->breveHistoria;
+      }
+      public function setbreveHistoria($breveHistoria){
+          $this->breveHistoria = $breveHistoria;
+          return $this;
+      }
 }

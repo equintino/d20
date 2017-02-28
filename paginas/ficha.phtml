@@ -44,10 +44,10 @@
                      echo '<div id="aqui" class="raca">Bem-vindo <span class=motivacaoJogador>'.strtoupper($item->getjogador()).'</span>  <br><img height=240px src="../web/imagens/personagens/'.$item->getraca().'/'.$item->getraca().'.png" /></div>';
                      echo '<div class=historia>';                    
                        echo '<span class=hTitulo>Uma breve história</span>'; 
-                       echo '<span class=hTexto ><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vulputate ligula quam, sed mattis quam iaculis vitae. Duis nisl neque, volutpat ut venenatis ut, mollis pharetra velit. Vestibulum ligula ex, laoreet in convallis eget, feugiat non arcu. Integer porttitor sapien risus, et mattis ligula laoreet in. In urna velit, volutpat ut augue sed, cursus condimentum sem. Phasellus commodo libero quis dolor accumsan, et finibus leo lacinia. Proin vehicula pretium lectus, vitae tincidunt ante faucibus vel.</p>
-                        <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus ultricies nunc sit amet lorem ornare cursus. Maecenas rhoncus sollicitudin dui at interdum. Proin posuere aliquam elit quis ullamcorper. Maecenas eget posuere justo. Cras mattis lectus volutpat lorem tincidunt, sed ultrices ante porttitor. Fusce eu pulvinar leo, a volutpat mi.</p></span>';
+                       echo '<span class=hTexto >
+                        <p>Tenho '.$item->getidade().' anos, '.$item->getaltura().'m de altura, peso '.$item->getpeso().'Kg, nasci na cidade de '.$item->getcidade().'.</p><p>'.$item->getbreveHistoria().'</p></span>';
                      echo '</div>';
-                  }
+                  //}
                   echo '<div class=equipamento>';        
                        echo '<span>Equipamento</span>';
                        echo '<span class=linhas><hr><hr><hr><hr><hr><hr><hr><hr><hr></span>';
@@ -57,19 +57,25 @@
                        echo '<table class=atributo>';
                        echo '<caption class=fichaTitulo>Atributos</caption>';
                        $tCaracteristicas=array('F'=>'Força','A'=>'Agilidade','I'=>'Inteligência','V'=>'Vontade','PV'=>'Pontos de Vida','PM'=>'Pontos de Magia','PE'=>'Pontos de Experiência');
-                       foreach($tCaracteristicas as $key => $item){
-                         if($item[0] == 'P'){
-                           $item=(explode(' ',$item));
-                           echo '<tr><td><span class="destaque atr">'.$item[0][0].'</span>'.substr($item[0], 1).' '.$item[1].'<span class="destaque atr"> '.$item[2][0].'</span>'.substr($item[2], 1).'</td><td><input type=text name='.$key.' maxlength = "4" size=5></td></tr>';
+                       foreach($tCaracteristicas as $key => $item_){
+                         if($item_[0] == 'P'){
+                           $item_=(explode(' ',$item_));
+                           echo '<tr><td><span class="destaque atr">'.$item_[0][0].'</span>'.substr($item_[0], 1).' '.$item_[1].'<span class="destaque atr"> '.$item_[2][0].'</span>'.substr($item_[2], 1).'</td><td><input type=text name='.$key.' maxlength = "4" size=5></td></tr>';
                          }else{
-                          echo '<tr><td><span class="destaque atr">'.$item[0].'</span>'. substr($item, 1).'</td><td><input type=text name='.$key.' maxlength = "4" size=5></td></tr>';
+                          echo '<tr><td><span class="destaque atr">'.$item_[0].'</span>'. substr($item_, 1).'</td><td><input type=text name='.$key.' maxlength = "4" size=5></td></tr>';
                          }
                        }
                        echo '</table>';
                        echo '<br>';
                        echo '<div class=vantagens>';
                        echo '<caption class=fichaTitulo>Habilidades</caption>';
-                       echo '<span class=hLinhas><hr><hr><hr><hr><hr><hr></span>';
+					   echo '<br>';
+					   $hab=explode('/',$item->gethabilidade());
+					   echo '<ul>';
+						   echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.substr($hab[0],4).'</li><br>';
+						   echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.substr($hab[1],4).'</li><br>';
+						   echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.substr($hab[2],4).'</li>';
+					   echo '<ul>';
                        echo '<div class=escudo><img height=80px src=../web/imagens/escudo.png /></div>';
                        echo '<div class=defesa>Defesa</div>';
                        echo '</div>';
@@ -82,6 +88,7 @@
                        echo '<span class=linhas><hr><hr><hr><hr><hr><hr></span>';
                        echo '</div>';*/
                        echo '</form>';
+					   }
       echo '</fieldset>';
                ?>
     </div>

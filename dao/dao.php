@@ -75,7 +75,7 @@
         $model->setexcluido(0);
         $model->setcriado($now);
         $model->setmodificado($now);        
-        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`jogador`,`personagem`,`raca`,`classe`,`tendencia1`,`tendencia2`,`idade`,`tabela`,`sexo`,`criado`,`modificado`,`excluido`,`habilidade`,`altura`,`peso`,`cidade`,`motivacao`) VALUES (:id,:jogador,:personagem,:raca,:classe,:tendencia1,:tendencia2,:idade,:tabela,:sexo,:criado,:modificado,:excluido,:habilidade,:altura,:peso,:cidade,:motivacao)';
+        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`jogador`,`personagem`,`raca`,`classe`,`tendencia1`,`tendencia2`,`idade`,`tabela`,`sexo`,`criado`,`modificado`,`excluido`,`habilidade`,`altura`,`peso`,`cidade`,`motivacao`,`breveHistoria`) VALUES (:id,:jogador,:personagem,:raca,:classe,:tendencia1,:tendencia2,:idade,:tabela,:sexo,:criado,:modificado,:excluido,:habilidade,:altura,:peso,:cidade,:motivacao,:breveHistoria)';
 	$search = new ModelSearchCriteria();
         $search->settabela($model->gettabela());
         return $this->execute($sql, $model);
@@ -84,7 +84,7 @@
         date_default_timezone_set("Brazil/East");
         $now = mktime (date("H"), date("i"), date("s"), date("m")  , date("d"), date("Y"));
         $model->setmodificado($now);
-        $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, jogador = :jogador, personagem = :personagem, raca = :raca, classe = :classe, tendencia1 = :tendencia1, tendencia2 = :tendencia2, idade = :idade, tabela = :tabela, sexo = :sexo, modificado = :modificado, excluido = :excluido, habilidade = :habilidade, altura = :altura, peso = :peso, cidade = :cidade, motivacao = :motivacao WHERE personagem = :personagem ';
+        $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, jogador = :jogador, personagem = :personagem, raca = :raca, classe = :classe, tendencia1 = :tendencia1, tendencia2 = :tendencia2, idade = :idade, tabela = :tabela, sexo = :sexo, modificado = :modificado, excluido = :excluido, habilidade = :habilidade, altura = :altura, peso = :peso, cidade = :cidade, motivacao = :motivacao, breveHistoria = :breveHistoria WHERE personagem = :personagem ';
         return $this->execute($sql, $model);
    }
    private function insert2(Model $model){
@@ -123,7 +123,7 @@
         return $model;
    }
    private function getParams(Model $model){
-        $params = array(':id'=> $model->getid(),':jogador'=> $model->getjogador(),':personagem'=> $model->getpersonagem(),':raca'=> $model->getraca(),':classe'=> $model->getclasse(),':tendencia1'=> $model->gettendencia1(),':tendencia2'=> $model->gettendencia2(),':idade'=> $model->getidade(),':tabela'=> $model->gettabela(),':sexo'=> $model->getsexo(),':criado'=> $model->getcriado(),':modificado'=> $model->getmodificado(),':excluido'=> $model->getexcluido(),':habilidade'=> $model->gethabilidade(),':altura'=> $model->getaltura(),':peso'=> $model->getpeso(),':cidade'=> $model->getcidade(),':motivacao'=> $model->getmotivacao(),);
+        $params = array(':id'=> $model->getid(),':jogador'=> $model->getjogador(),':personagem'=> $model->getpersonagem(),':raca'=> $model->getraca(),':classe'=> $model->getclasse(),':tendencia1'=> $model->gettendencia1(),':tendencia2'=> $model->gettendencia2(),':idade'=> $model->getidade(),':tabela'=> $model->gettabela(),':sexo'=> $model->getsexo(),':criado'=> $model->getcriado(),':modificado'=> $model->getmodificado(),':excluido'=> $model->getexcluido(),':habilidade'=> $model->gethabilidade(),':altura'=> $model->getaltura(),':peso'=> $model->getpeso(),':cidade'=> $model->getcidade(),':motivacao'=> $model->getmotivacao(),':breveHistoria'=> $model->getbreveHistoria(),);
 	 return $params;
    }
    private function getParams2(Model $model){

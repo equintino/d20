@@ -418,7 +418,7 @@ fieldset legend{
     font-family: 'Architects Daughter', cursive;
     #font-family: Times New Roman;
     font-size: 25px;
-    width: 250px;
+    width: 280px;
     margin: 0 32px;
     text-align: center;
     #border: 1px solid red;
@@ -430,13 +430,13 @@ fieldset legend{
 .escudo{
     position: relative;
     #top: 5px;
-    margin: -120px 200px;
+    margin: -120px 190px;
 }
 .defesa{
     position: absolute;
     #top: 673px;
     #left: 198px;
-    margin: 45px 228px;
+    margin: 45px 218px;
     font-size: 10px;
 }
 .equipamento{
@@ -574,4 +574,12 @@ fieldset legend{
 .dest{
 	font-size: 30px;
 	color: red;
+}
+.vantagens ul{
+    #display: block;
+    #list-style-type: circle;
+	font-size: 17px;
+	text-align: left;
+	#border: 1px solid red;
+	#margin-left: -40px;
 }
