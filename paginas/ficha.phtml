@@ -72,9 +72,9 @@
 					   echo '<br>';
 					   $hab=explode('/',$item->gethabilidade());
 					   echo '<ul>';
-						   echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.substr($hab[0],4).'</li><br>';
-						   echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.substr($hab[1],4).'</li><br>';
-						   echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.substr($hab[2],4).'</li>';
+						   echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.str_replace('_',' ',substr($hab[0],4)).'</li><br>';
+						   echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.str_replace('_',' ',substr($hab[1],4)).'</li><br>';
+						   echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.str_replace('_',' ',substr($hab[2],4)).'</li>';
 					   echo '<ul>';
                        echo '<div class=escudo><img height=80px src=../web/imagens/escudo.png /></div>';
                        echo '<div class=defesa>Defesa</div>';
