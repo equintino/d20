@@ -256,7 +256,17 @@
                                echo 'value='.$atrib->getPE().'>';
                             }
                          }else{
-                          echo '<tr><td><span class="destaque atr">'.$item_[0].'</span>'. substr($item_, 1).'</td><td><input type=text name='.$key.' maxlength = "4" size=2></td></tr>';
+                          echo '<tr><td><span class="destaque atr">'.$item_[0].'</span>'. substr($item_, 1).'</td><td><input type=text name='.$key.' maxlength = "4" size=2 value=';
+                           if($item_[0]=='F'){
+                             echo $atrib->getF();
+                           }elseif($item_[0]=='A'){
+                             echo $atrib->getA();
+                           }elseif($item_[0]=='I'){
+                             echo $atrib->getI();
+                           }elseif($item_[0]=='V'){
+                             echo $atrib->getV();
+                           }
+                           echo '></td></tr>';
                          }
                        }
                        echo '</table>';
