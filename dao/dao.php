@@ -29,7 +29,7 @@
         return $model;
    }
 	public function encontrePorPersonagem(ModelSearchCriteria $search=null){
-           $row = $this->query('SELECT * FROM `'.$search->gettabela().'` WHERE excluido = 0 and `personagem` = "' . $search->getpersonagem().'"')->fetch();
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` = '0' and `personagem` = '".$search->getpersonagem()."'")->fetch();
         if (!$row) {
             return null;
         }
@@ -95,12 +95,12 @@
         $model->setcriado($now);
         $model->setmodificado($now); 
         $this->execute2($this->criaTabela($model->gettabela()), $model);       
-        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id_atrib`,`F`,`A`,`I`,`V`,`PV`,`PM`,`PE`) VALUES (:id_atrib,:F,:A,:I,:V,:PV,:PM,:PE)';
+        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id_atrib`,`F`,`A`,`I`,`V`,`PV`,`PM`,`PE`,`personagem`) VALUES (:id_atrib,:F,:A,:I,:V,:PV,:PM,:PE,:personagem)';
 	return $this->execute2($sql, $model);
    }
    private function update2(Model $model,$tabela){
         $model->setmodificado(new DateTime(), new DateTimeZone('America/Sao_Paulo'));
-        $sql = 'UPDATE `'.$tabela.'` SET id_atrib = :id_atrib, F = :F, A = :A, I = :I, V = :V, PV = :PV, PM = :PM, PE = :PE WHERE id = :id ';
+        $sql = 'UPDATE `'.$tabela.'` SET id_atrib = :id_atrib, F = :F, A = :A, I = :I, V = :V, PV = :PV, PM = :PM, PE = :PE, personagem = :personagem WHERE id = :id ';
         return $this->execute2($sql, $model);
    }
    public function execute($sql,$model){
@@ -127,7 +127,7 @@
 	 return $params;
    }
    private function getParams2(Model $model){
-        $params = array(':id_atrib'=> $model->getid_atrib(),':F'=> $model->getF(),':A'=> $model->getA(),':I'=> $model->getI(),':V'=> $model->getV(),':PV'=> $model->getPV(),':PM'=> $model->getPM(),':PE'=> $model->getPE(),);
+        $params = array(':id_atrib'=> $model->getid_atrib(),':F'=> $model->getF(),':A'=> $model->getA(),':I'=> $model->getI(),':V'=> $model->getV(),':PV'=> $model->getPV(),':PM'=> $model->getPM(),':PE'=> $model->getPE(),':personagem'=> $model->getpersonagem(),);
 	 return $params;
    }
    private function executeStatement(PDOStatement $statement, array $params){

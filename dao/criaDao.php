@@ -37,7 +37,7 @@
         return $model;
    }'."\r\n";
 	$texto .= '	public function encontrePorPersonagem(ModelSearchCriteria $search=null){
-           $row = $this->query(\'SELECT * FROM `\'.$search->gettabela().\'` WHERE excluido = 0 and `personagem` = "\' . $search->getpersonagem().\'"\')->fetch();
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` = \'0\' and `personagem` = \'".$search->getpersonagem()."\'")->fetch();
         if (!$row) {
             return null;
         }

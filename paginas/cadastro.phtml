@@ -201,7 +201,7 @@
                 echo '<label> Cidade Natal: </label>';
                 echo '<input type=text name=cidade>';
                 echo '<br><br>';
-                echo '<label> De que povo é? </label>';
+                echo '<label> Fale sobre a origem, os costumes e cultura do seu povo: </label>';
                 echo '<br>';
                 echo '<textarea rows="4" cols="79" name=breveHistoria></textarea>';
 				echo '<br>';
@@ -216,7 +216,15 @@
          </table>
         </form>
         </fieldset>
-        <?php elseif($act=='cad3'): ?>
+        <?php elseif($act=='cad3'): 
+            $dao=new Dao();
+            $search=new ModelSearchCriteria();
+            $search->settabela('atributos');
+            $search->setpersonagem($_GET['personagem']);
+            $atrib=$dao->encontrePorPersonagem($search);
+            //print_r($atrib->getPV());
+            //print_r($lista->getpe());die;
+        ?>
         <fieldset class="cad">
             <legend>CADASTRO DE PERSONAGEM <span>(Continuação)</span></legend>
          <form class="font_1" id="cadastro2" action="../paginas/add.php?act=cad3&personagem=<?php echo $personagem ?>" method="POST">
@@ -232,7 +240,21 @@
                        foreach($tCaracteristicas as $key => $item_){
                          if($item_[0] == 'P'){
                            $item_=(explode(' ',$item_));
-                           echo '<tr><td><span class="destaque atr">'.$item_[0][0].'</span>'.substr($item_[0], 1).' '.$item_[1].'<span class="destaque atr"> '.$item_[2][0].'</span>'.substr($item_[2], 1).'</td><td><input type=text name='.$key.' maxlength = "4" size=2></td></tr>';
+                           echo '<tr><td><span class="destaque atr">'.$item_[0][0].'</span>'.substr($item_[0], 1).' '.$item_[1].'<span class="destaque atr"> ';
+                           if($item_[2][0]=='V'||$item_[2][0]=='M'){ 
+                               echo  $item_[2][0].'</span>'.substr($item_[2], 1).'</td><td><input type=text name='.$key.' maxlength = "4" size=2 ';
+                               if($atrib->getPV()==0&&$atrib->getPM()==0){
+                                   echo 'value="60">';
+                               }elseif($item_[2][0]=='V'){
+                                   echo 'value='.$atrib->getPV().'>';
+                               }elseif($item_[2][0]=='M'){
+                                   echo 'value='.$atrib->getPM().'>';
+                               }
+                               echo '</td></tr>';
+                            }else{
+                               echo  $item_[2][0].'</span>'.substr($item_[2], 1).'</td><td><input type=text name='.$key.' maxlength = "4" size=2 ';
+                               echo 'value='.$atrib->getPE().'>';
+                            }
                          }else{
                           echo '<tr><td><span class="destaque atr">'.$item_[0].'</span>'. substr($item_, 1).'</td><td><input type=text name='.$key.' maxlength = "4" size=2></td></tr>';
                          }
