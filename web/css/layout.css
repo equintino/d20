@@ -613,3 +613,8 @@ fieldset legend{
     top: 15px;
     box-shadow: none;
 }
+.cad3Atrib{
+    #border: 1px solid red;
+    margin: 0 30px;
+    font-family: 'Indie Flower', cursive;
+}
