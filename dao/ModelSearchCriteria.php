@@ -216,4 +216,68 @@
           $this->PE = $PE;
           return $this;
       }
+   private $ARMA;
+       public function getARMA(){
+        return $this->ARMA;
+      }
+      public function setARMA($ARMA){
+          $this->ARMA = $ARMA;
+          return $this;
+      }
+   private $CUSTO;
+       public function getCUSTO(){
+        return $this->CUSTO;
+      }
+      public function setCUSTO($CUSTO){
+          $this->CUSTO = $CUSTO;
+          return $this;
+      }
+   private $DANO;
+       public function getDANO(){
+        return $this->DANO;
+      }
+      public function setDANO($DANO){
+          $this->DANO = $DANO;
+          return $this;
+      }
+   private $TIPO;
+       public function getTIPO(){
+        return $this->TIPO;
+      }
+      public function setTIPO($TIPO){
+          $this->TIPO = $TIPO;
+          return $this;
+      }
+   private $FN;
+       public function getFN(){
+        return $this->FN;
+      }
+      public function setFN($FN){
+          $this->FN = $FN;
+          return $this;
+      }
+   private $GRUPO;
+       public function getGRUPO(){
+        return $this->GRUPO;
+      }
+      public function setGRUPO($GRUPO){
+          $this->GRUPO = $GRUPO;
+          return $this;
+      }
+   private $OBS;
+       public function getOBS(){
+        return $this->OBS;
+      }
+      public function setOBS($OBS){
+          $this->OBS = $OBS;
+          return $this;
+      }
+   private $figura;
+       public function getfigura(){
+        return $this->figura;
+      }
+      public function setfigura($figura){
+          $this->figura = $figura;
+          return $this;
+      }
 }

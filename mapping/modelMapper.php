@@ -82,5 +82,29 @@
 	if (array_key_exists('PE', $properties)){
 	  $model->setPE($properties['PE']);
 	}
+	if (array_key_exists('ARMA', $properties)){
+	  $model->setARMA($properties['ARMA']);
+	}
+	if (array_key_exists('CUSTO', $properties)){
+	  $model->setCUSTO($properties['CUSTO']);
+	}
+	if (array_key_exists('DANO', $properties)){
+	  $model->setDANO($properties['DANO']);
+	}
+	if (array_key_exists('TIPO', $properties)){
+	  $model->setTIPO($properties['TIPO']);
+	}
+	if (array_key_exists('FN', $properties)){
+	  $model->setFN($properties['FN']);
+	}
+	if (array_key_exists('GRUPO', $properties)){
+	  $model->setGRUPO($properties['GRUPO']);
+	}
+	if (array_key_exists('OBS', $properties)){
+	  $model->setOBS($properties['OBS']);
+	}
+	if (array_key_exists('figura', $properties)){
+	  $model->setfigura($properties['figura']);
+	}
   } 
  }
