@@ -28,7 +28,7 @@
         modelMapper::map($model, $row);
         return $model;
    }
-	public function encontrePorPersonagem(ModelSearchCriteria $search=null){
+   public function encontrePorPersonagem(ModelSearchCriteria $search=null){
            $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` =  '0' and `personagem` = '".$search->getpersonagem()."'")->fetch();
         if (!$row) {
             return null;
@@ -37,8 +37,8 @@
         modelMapper::map($model, $row);
         return $model;
    }
-	public function encontrePorFoto(ModelSearchCriteria $search=null){
-           $row = $this->query("SELECT id,ARMA,figura FROM `".$search->gettabela()."` WHERE `excluido` =  '0' and `id` = '".$search->getid()."'")->fetch();
+   public function encontrePorArma(ModelSearchCriteria $search=null){
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` =  '0' and `id` = '".$search->getid()."'")->fetch();
         if (!$row) {
             return null;
         }
@@ -46,7 +46,7 @@
         modelMapper::map($model, $row);
         return $model;
    }
-	public function totalLinhas(ModelSearchCriteria $search=null){
+   public function totalLinhas(ModelSearchCriteria $search=null){
            $row = $this->query("SELECT id FROM `".$search->gettabela()."` WHERE `excluido` =  '0' ORDER BY id DESC ")->fetch();
         if (!$row) {
             return null;

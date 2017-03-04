@@ -619,10 +619,11 @@ fieldset legend{
     font-family: 'Indie Flower', cursive;
 }
 .armas{
+    //border: 1px solid red;
     position: absolute;
     top: 310px;
     left: 450px;
-    width: 350px;
+    width: 360px;
     height: 210px;
 }
 .armasTitulo{
@@ -633,4 +634,7 @@ fieldset legend{
 .besta{
     position: relative;
     top: 50px;
+}
+.armabnt{
+    margin-top: 50px;
 }

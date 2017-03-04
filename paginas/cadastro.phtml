@@ -20,6 +20,47 @@
     var x = "DICA... \r\n     Use sua imaginação. A primeira coisa a fazer é escolher um conceito, uma idéia básica. O que seu personagem vai ser? Um guerreiro bárbaro com um machado mágico e uma pele de pantera jogada sobre os ombros? Um feiticeiro caçador de monstros? Um lutador de rua em busca de vingança? Um elfo caçador de recompensas? Você pode ser tudo isso e qualquer outra coisa que imaginar.";
    alert(x);
   }
+ function verificarCheckBox() {
+    var check = document.getElementsByName(1); 
+            //alert(check);
+    for (var i=0;i<check.length;i++){ 
+        if (check[i].checked === true){ 
+            alert('CheckBox Marcado... Faça alguma coisa...');
+
+        }  else {
+           alert('CheckBox Não Marcado... Faça alguma outra coisa...');
+        }
+    }
+}
+function valida(){
+ 
+ //valida campos checkbox das bebidas
+    var todos_inputs = document.getElementsByTagName('input'); 
+     /*alert(todos_inputs[9].checked); 
+     alert(todos_inputs[9].id);*/ 
+    for (var i=0; i<todos_inputs.length; i++){
+        if(todos_inputs[i].checked){
+          var custo = custo + todos_inputs[i].id;
+          alert(custo);
+             if(todos_inputs[i].checked == true){
+                   var ok = true;
+                   break;
+             }
+             else
+                   var ok = false;
+         }
+     }
+ 
+     if (ok == false){
+     alert('Selecione a(s) bebida(s) preferida(s)!');
+     document.orcamento.bebi1.focus();
+     return false;
+     }
+ 
+ 
+     alert("Contato enviado com sucesso, em breve entraremos em contato!");
+     document.orcamento.submit();
+}
 </script>
 <style>
 	#rodape{
@@ -271,33 +312,50 @@
                        }
                        echo '</table>';
                        echo '<div class="fichaTitulo armasTitulo">Armamentos</div>';
-                       echo '<div class=armas>';
+                       echo '<div id="armamento" class=armas>';
                           $search->settabela('tb_arm_dist');
                           $linhas=$dao->totalLinhas($search);
+                       //echo '<select name:itemArma>'; 
                           for($x=1;$x<($linhas['id']+1);$x++){
                              $search->setid($x);
-                             $dist=$dao->encontrePorFoto($search); 
+                             $dist=$dao->encontrePorArma($search);
+                             $desc='Arma: '.$dist->getARMA()."\r\n".
+                                   'Custo: '.$dist->getCUSTO()."\r\n".
+                                   'Dano: '.$dist->getDANO()."\r\n".
+                                   'Tipo: '.$dist->getTIPO()."\r\n".
+                                   'Força Necessária: '.$dist->getFN()."\r\n".
+                                   'Grupo: '.$dist->getGRUPO()."\r\n".
+                                   'Obs: '.$dist->getOBS();
+                             //print_r($dist);die;
                              if($search->getid()<3){
-                                echo '<img height=50px title=\''.$dist->getARMA().'\' src=\'gera.php?id='.$dist->getid().'\'>&nbsp&nbsp&nbsp&nbsp';
+                                echo '<img height=50px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'\'>';
+                                echo '<input type=checkbox name='.$dist->getid().' checked="true" id='.$dist->getCUSTO().'>';
+                                //echo '<script>verificarCheckBox()</script>';die;
+                                //$custo=$dist->getCUSTO()+$dist->getCUSTO();
                              }else{
                                 if($search->getid() == 3){
                                    echo '<br>';
-                                   echo '<img height=80px title=\''.$dist->getARMA().'\' src=\'gera.php?id='.$dist->getid().'\'>&nbsp&nbsp&nbsp&nbsp';
+                                   echo '<img height=80px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'\'>';
+                                   echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'>';
                                  }elseif($search->getid()<6){
-                                   echo '<img height=75px title=\''.$dist->getARMA().'\' src=\'gera.php?id='.$dist->getid().'\'>&nbsp&nbsp&nbsp&nbsp';
+                                   echo '<img height=75px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'\'>';
+                                   echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'>';
                                  }elseif($search->getid()==6){
-                                   echo '<img height=110px title=\''.$dist->getARMA().'\' src=\'gera.php?id='.$dist->getid().'\'>&nbsp&nbsp&nbsp&nbsp';
+                                   echo '<img height=109px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'\'>';
+                                   echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'>';
                                  }else{
-                                   echo '<span class=besta><img height=50px title=\''.$dist->getARMA().'\' src=\'gera.php?id='.$dist->getid().'\'></span>&nbsp&nbsp&nbsp&nbsp';
+                                   echo '<span class=besta><img height=50px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'\'>';
+                                   echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'></span>&nbsp&nbsp&nbsp&nbsp';
                                  }
                              }
                           }
+                       //echo '</select>';
                        echo '</div>';
              ?>
-				<div>
+		<div class="armabnt">
                     <input type="reset" value="LIMPA" class='cad3Hab cad3Hab-verde'>
-					<input type="submit" value="AVANÇA" class='cad3Hab cad3Hab-verde'>                     
-				</div>
+					<input onclick="valida();" type="submit" value="AVANÇA" class='cad3Hab cad3Hab-verde'>                     
+		</div>
          </table>
         </form>
         </fieldset>
