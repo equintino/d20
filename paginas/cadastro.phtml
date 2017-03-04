@@ -270,8 +270,28 @@
                          }
                        }
                        echo '</table>';
-                       echo '<div>';
-                          print_r($search);die;
+                       echo '<div class="fichaTitulo armasTitulo">Armamentos</div>';
+                       echo '<div class=armas>';
+                          $search->settabela('tb_arm_dist');
+                          $linhas=$dao->totalLinhas($search);
+                          for($x=1;$x<($linhas['id']+1);$x++){
+                             $search->setid($x);
+                             $dist=$dao->encontrePorFoto($search); 
+                             if($search->getid()<3){
+                                echo '<img height=50px title=\''.$dist->getARMA().'\' src=\'gera.php?id='.$dist->getid().'\'>&nbsp&nbsp&nbsp&nbsp';
+                             }else{
+                                if($search->getid() == 3){
+                                   echo '<br>';
+                                   echo '<img height=80px title=\''.$dist->getARMA().'\' src=\'gera.php?id='.$dist->getid().'\'>&nbsp&nbsp&nbsp&nbsp';
+                                 }elseif($search->getid()<6){
+                                   echo '<img height=75px title=\''.$dist->getARMA().'\' src=\'gera.php?id='.$dist->getid().'\'>&nbsp&nbsp&nbsp&nbsp';
+                                 }elseif($search->getid()==6){
+                                   echo '<img height=110px title=\''.$dist->getARMA().'\' src=\'gera.php?id='.$dist->getid().'\'>&nbsp&nbsp&nbsp&nbsp';
+                                 }else{
+                                   echo '<span class=besta><img height=50px title=\''.$dist->getARMA().'\' src=\'gera.php?id='.$dist->getid().'\'></span>&nbsp&nbsp&nbsp&nbsp';
+                                 }
+                             }
+                          }
                        echo '</div>';
              ?>
 				<div>

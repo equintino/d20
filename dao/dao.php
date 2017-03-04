@@ -17,9 +17,9 @@
    }
    public function encontrePorId(ModelSearchCriteria $search=null){
         if($search->getid() != null){
-           $row = $this->query('SELECT * FROM `'.$search->gettabela().'` WHERE excluido = 0 and id = ' . (int) $search->getid())->fetch();
+           $row = $this->query('SELECT * FROM `'.$search->gettabela().'` WHERE excluido = "0" and id = ' . (int) $search->getid())->fetch();
         }else{ 
-           $row = $this->query('SELECT * FROM `'.$search->gettabela().'` WHERE excluido = 0')->fetchAll();
+           $row = $this->query('SELECT * FROM `'.$search->gettabela().'` WHERE excluido = "0"')->fetchAll();
         }
         if (!$row) {
             return null;
@@ -29,13 +29,29 @@
         return $model;
    }
 	public function encontrePorPersonagem(ModelSearchCriteria $search=null){
-           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` = '0' and `personagem` = '".$search->getpersonagem()."'")->fetch();
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` =  '0' and `personagem` = '".$search->getpersonagem()."'")->fetch();
         if (!$row) {
             return null;
         }
         $model = new Model();
         modelMapper::map($model, $row);
         return $model;
+   }
+	public function encontrePorFoto(ModelSearchCriteria $search=null){
+           $row = $this->query("SELECT id,ARMA,figura FROM `".$search->gettabela()."` WHERE `excluido` =  '0' and `id` = '".$search->getid()."'")->fetch();
+        if (!$row) {
+            return null;
+        }
+        $model = new Model();
+        modelMapper::map($model, $row);
+        return $model;
+   }
+	public function totalLinhas(ModelSearchCriteria $search=null){
+           $row = $this->query("SELECT id FROM `".$search->gettabela()."` WHERE `excluido` =  '0' ORDER BY id DESC ")->fetch();
+        if (!$row) {
+            return null;
+        }
+        return $row;
    }
    public function grava(Model $model){
         if ($model->getid() === null) {
@@ -184,9 +200,9 @@
    }
    private function getEncontreSql(ModelSearchCriteria $search = null) {               
           if ($search->getpersonagem() !== null) {
-                 $sql="SELECT * FROM ".$search->gettabela()." WHERE personagem='".$search->getpersonagem()."' AND excluido = 0 ";
+                 $sql="SELECT * FROM ".$search->gettabela()." WHERE personagem='".$search->getpersonagem()."' AND excluido = '0' ";
           }else{
-             $sql = 'SELECT * FROM `'.$search->gettabela().'` WHERE excluido = 0 ';
+             $sql = 'SELECT * FROM `'.$search->gettabela().'` WHERE excluido = "0" ';
           }
         return $sql;
   }

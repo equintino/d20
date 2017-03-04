@@ -26,9 +26,9 @@
    }'."\r\n";
     $texto .= '   public function encontrePorId(ModelSearchCriteria $search=null){
         if($search->getid() != null){
-           $row = $this->query(\'SELECT * FROM `\'.$search->gettabela().\'` WHERE excluido = 0 and id = \' . (int) $search->getid())->fetch();
+           $row = $this->query(\'SELECT * FROM `\'.$search->gettabela().\'` WHERE excluido = "0" and id = \' . (int) $search->getid())->fetch();
         }else{ 
-           $row = $this->query(\'SELECT * FROM `\'.$search->gettabela().\'` WHERE excluido = 0\')->fetchAll();
+           $row = $this->query(\'SELECT * FROM `\'.$search->gettabela().\'` WHERE excluido = "0"\')->fetchAll();
         }
         if (!$row) {
             return null;
@@ -38,7 +38,7 @@
         return $model;
    }'."\r\n";
 	$texto .= '	public function encontrePorPersonagem(ModelSearchCriteria $search=null){
-           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` = \'0\' and `personagem` = \'".$search->getpersonagem()."\'")->fetch();
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` =  \'0\' and `personagem` = \'".$search->getpersonagem()."\'")->fetch();
         if (!$row) {
             return null;
         }
@@ -294,9 +294,9 @@
    }'."\r\n";
     $texto .= '   private function getEncontreSql(ModelSearchCriteria $search = null) {               
           if ($search->getpersonagem() !== null) {
-                 $sql="SELECT * FROM ".$search->gettabela()." WHERE personagem=\'".$search->getpersonagem()."\' AND excluido = 0 ";
+                 $sql="SELECT * FROM ".$search->gettabela()." WHERE personagem=\'".$search->getpersonagem()."\' AND excluido = \'0\' ";
           }else{
-             $sql = \'SELECT * FROM `\'.$search->gettabela().\'` WHERE excluido = 0 \';
+             $sql = \'SELECT * FROM `\'.$search->gettabela().\'` WHERE excluido = "0" \';
           }
         return $sql;
   }'."\r\n";
