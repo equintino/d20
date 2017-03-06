@@ -263,7 +263,7 @@ function valida(){
             $search->settabela('atributos');
             $search->setpersonagem($_GET['personagem']);
             $atrib=$dao->encontrePorPersonagem($search);
-            //print_r($atrib->getPV());
+            //print_r($atrib);die;
             //print_r($lista->getpe());die;
         ?>
         <fieldset class="cad">
@@ -274,7 +274,7 @@ function valida(){
                   echo '<div align=left class=cadTitulo>&nbsp&nbspClasse: '.strtoupper($_GET['classe']).'</div>';
 				  echo '<div class="moeda cadTitulo">$ 400</div>';
                   echo '<div align=right class=cadTitulo>Atributos, Armamentos & Equipamentos para '.strtoupper($_GET['personagem']).'&nbsp&nbsp</div>';
-				  
+			/*	  
                        echo '<table class=cad3Atrib>';
                        echo '<caption class=fichaTitulo>Atributos</caption>';
                        $tCaracteristicas=array('F'=>'Força','A'=>'Agilidade','I'=>'Inteligência','V'=>'Vontade','PV'=>'Pontos de Vida','PM'=>'Pontos de Magia','PE'=>'Pontos de Experiência');
@@ -284,33 +284,41 @@ function valida(){
                            echo '<tr><td><span class="destaque atr">'.$item_[0][0].'</span>'.substr($item_[0], 1).' '.$item_[1].'<span class="destaque atr"> ';
                            if($item_[2][0]=='V'||$item_[2][0]=='M'){ 
                                echo  $item_[2][0].'</span>'.substr($item_[2], 1).'</td><td><input type=text name='.$key.' maxlength = "4" size=2 ';
-                               if($atrib->getPV()==0&&$atrib->getPM()==0){
-                                   echo 'value="60">';
-                               }elseif($item_[2][0]=='V'){
-                                   echo 'value='.$atrib->getPV().'>';
-                               }elseif($item_[2][0]=='M'){
-                                   echo 'value='.$atrib->getPM().'>';
+                               if($atrib){
+                                 if($atrib->getPV()==0&&$atrib->getPM()==0){
+                                     echo 'value="60">';
+                                 }elseif($item_[2][0]=='V'){
+                                        echo 'value='.$atrib->getPV().'>';
+                                 }elseif($item_[2][0]=='M'){
+                                        echo 'value='.$atrib->getPM().'>';
+                                 }
                                }
                                echo '</td></tr>';
                             }else{
                                echo  $item_[2][0].'</span>'.substr($item_[2], 1).'</td><td><input type=text name='.$key.' maxlength = "4" size=2 ';
-                               echo 'value='.$atrib->getPE().'>';
+                               if($atrib){
+                                 echo 'value='.$atrib->getPE().'>';
+                               }else{
+                                echo '>';
+                               }
                             }
                          }else{
                           echo '<tr><td><span class="destaque atr">'.$item_[0].'</span>'. substr($item_, 1).'</td><td><input type=text name='.$key.' maxlength = "4" size=2 value=';
-                           if($item_[0]=='F'){
-                             echo $atrib->getF();
-                           }elseif($item_[0]=='A'){
-                             echo $atrib->getA();
-                           }elseif($item_[0]=='I'){
-                             echo $atrib->getI();
-                           }elseif($item_[0]=='V'){
-                             echo $atrib->getV();
-                           }
+                         if($atrib){
+                            if($item_[0]=='F'){
+                              echo $atrib->getFORCA();
+                            }elseif($item_[0]=='A'){
+                              echo $atrib->getAGILIDADE();
+                            }elseif($item_[0]=='I'){
+                              echo $atrib->getINTELIGENCIA();
+                            }elseif($item_[0]=='V'){
+                              echo $atrib->getVONTADE();
+                            }
+                         }
                            echo '></td></tr>';
                          }
                        }
-                       echo '</table>';
+                       echo '</table>';*/
                        echo '<div class="fichaTitulo armasTitulo">Armamentos</div>';
                        echo '<div id="armamento" class=armas>';
                           $search->settabela('tb_arm_dist');
@@ -329,7 +337,7 @@ function valida(){
                              //print_r($dist);die;
                              if($search->getid()<3){
                                 echo '<img height=50px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'\'>';
-                                echo '<input type=checkbox name='.$dist->getid().' checked="true" id='.$dist->getCUSTO().'>';
+                                echo '<input type=checkbox name='.$dist->getid().'  id='.$dist->getCUSTO().'>';
                                 //echo '<script>verificarCheckBox()</script>';die;
                                 //$custo=$dist->getCUSTO()+$dist->getCUSTO();
                              }else{
@@ -353,7 +361,7 @@ function valida(){
                        echo '</div>';
              ?>
 		<div class="armabnt">
-                    <input type="reset" value="LIMPA" class='cad3Hab cad3Hab-verde'>
+                    <!--<input onclick='history.go(-2)' value="VOLTAR" class='cad3Hab cad3Hab-verde'>-->
 					<input onclick="valida();" type="submit" value="AVANÇA" class='cad3Hab cad3Hab-verde'>                     
 		</div>
          </table>

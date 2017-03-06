@@ -5,7 +5,7 @@
     $banco='d20';
     $variaveis=array('id','jogador','personagem','raca','classe','tendencia1','tendencia2','idade','tabela','sexo','criado','modificado','excluido','habilidade','altura','peso','cidade','motivacao','breveHistoria');
     $tabela='`\'.$model->gettabela().\'`';
-    $variaveis2=array('id_atrib','F','A','I','V','PV','PM','PE','personagem');
+    $variaveis2=array('id_atrib','FORCA','AGILIDADE','INTELIGENCIA','VONTADE','PV','PM','PE','CLASSE_COMUM','HABILIDADE_AUTOMATICA','personagem');
     $variaveis3=array('id','ARMA','CUSTO','DANO','TIPO','FN','GRUPO','OBS','figura');
     //$tabela2=''.$banco.'';
     $texto="<?php \r\n class dao{\r\n";
@@ -54,6 +54,15 @@
         $model = new Model();
         modelMapper::map($model, $row);
         return $model;
+   }'."\r\n";    
+     $texto .= '   public function encontrePorRaca(ModelSearchCriteria $search=null){
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` =  \'0\' and `RACA` = \'".$search->getraca()."\'")->fetch();
+        if (!$row) {
+            return null;
+        }
+        $model = new Model();
+        modelMapper::map($model, $row);
+        return $model;
    }'."\r\n";
      $texto .= '   public function totalLinhas(ModelSearchCriteria $search=null){
            $row = $this->query("SELECT id FROM `".$search->gettabela()."` WHERE `excluido` =  \'0\' ORDER BY id DESC ")->fetch();
@@ -69,7 +78,7 @@
         return $this->update($model);
    }'."\r\n";
     $texto .= '   public function grava2(Model $model){
-        if ($model->getid() === null) {
+        if ($model->getid_atrib() === null) {
             return $this->insert2($model);
         }
         return $this->update2($model);
@@ -153,7 +162,7 @@
     $texto .= '   private function insert2(Model $model){
         date_default_timezone_set("Brazil/East");
         $now = mktime (date(\'H\'), date(\'i\'), date(\'s\'), date("m")  , date("d"), date("Y"));
-        $model->setid(null);
+        $model->setid_atrib(null);
         $model->setexcluido(0);
         $model->setcriado($now);
         $model->setmodificado($now); 

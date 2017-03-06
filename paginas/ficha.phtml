@@ -57,12 +57,32 @@
                        echo '<table class=atributo>';
                        echo '<caption class=fichaTitulo>Atributos</caption>';
                        $tCaracteristicas=array('F'=>'Força','A'=>'Agilidade','I'=>'Inteligência','V'=>'Vontade','PV'=>'Pontos de Vida','PM'=>'Pontos de Magia','PE'=>'Pontos de Experiência');
+                       $search->settabela('atributos');
+                       $atrib=$dao->encontrePorPersonagem($search);
+                       //print_r($atrib->getF());
                        foreach($tCaracteristicas as $key => $item_){
                          if($item_[0] == 'P'){
                            $item_=(explode(' ',$item_));
-                           echo '<tr><td><span class="destaque atr">'.$item_[0][0].'</span>'.substr($item_[0], 1).' '.$item_[1].'<span class="destaque atr"> '.$item_[2][0].'</span>'.substr($item_[2], 1).'</td><td><input type=text name='.$key.' maxlength = "4" size=2></td></tr>';
+                           echo '<tr><td><span class="destaque atr">'.$item_[0][0].'</span>'.substr($item_[0], 1).' '.$item_[1].'<span class="destaque atr"> '.$item_[2][0].'</span>'.substr($item_[2], 1).'</td><td>';//<input type=text name='.$key.' maxlength = "4" size=2 value=';
+                  if($item_[2][0]=='V'){                 
+                    echo $atrib->getPV().'</td></tr>';
+                  }elseif($item_[2][0]=='M'){                
+                    echo $atrib->getPM().'</td></tr>';
+                  }elseif($item_[2][0]=='E'){                
+                    echo $atrib->getPE().'</td></tr>';
+                  }
                          }else{
-                          echo '<tr><td><span class="destaque atr">'.$item_[0].'</span>'. substr($item_, 1).'</td><td><input type=text name='.$key.' maxlength = "4" size=2></td></tr>';
+                          echo '<tr><td width=220px><span class="destaque atr">'.$item_[0].'</span>'. substr($item_, 1).'</td><td align=right>';//<input type=text name='.$key.' maxlength = "4" size=2 value=';
+                          if($item_[0]=='F'){
+                             echo $atrib->getFORCA();
+                          }elseif($item_[0]=='A'){
+                             echo $atrib->getAGILIDADE();
+                          }elseif($item_[0]=='I'){
+                             echo $atrib->getINTELIGENCIA(); 
+                          }elseif($item_[0]=='V'){
+                             echo $atrib->getVONTADE(); 
+                          }
+                          echo '</td></tr>';
                          }
                        }
                        echo '</table>';

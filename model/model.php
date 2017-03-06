@@ -20,13 +20,15 @@
  private $motivacao;
  private $breveHistoria;
  private $id_atrib;
- private $F;
- private $A;
- private $I;
- private $V;
+ private $FORCA;
+ private $AGILIDADE;
+ private $INTELIGENCIA;
+ private $VONTADE;
  private $PV;
  private $PM;
  private $PE;
+ private $CLASSE_COMUM;
+ private $HABILIDADE_AUTOMATICA;
  private $ARMA;
  private $CUSTO;
  private $DANO;
@@ -155,29 +157,29 @@
  public function setid_atrib($id_atrib ){
 	$this->id_atrib=$id_atrib;
  }
- public function getF(){
-	return $this->F;
+ public function getFORCA(){
+	return $this->FORCA;
  }
- public function setF($F ){
-	$this->F=$F;
+ public function setFORCA($FORCA ){
+	$this->FORCA=$FORCA;
  }
- public function getA(){
-	return $this->A;
+ public function getAGILIDADE(){
+	return $this->AGILIDADE;
  }
- public function setA($A ){
-	$this->A=$A;
+ public function setAGILIDADE($AGILIDADE ){
+	$this->AGILIDADE=$AGILIDADE;
  }
- public function getI(){
-	return $this->I;
+ public function getINTELIGENCIA(){
+	return $this->INTELIGENCIA;
  }
- public function setI($I ){
-	$this->I=$I;
+ public function setINTELIGENCIA($INTELIGENCIA ){
+	$this->INTELIGENCIA=$INTELIGENCIA;
  }
- public function getV(){
-	return $this->V;
+ public function getVONTADE(){
+	return $this->VONTADE;
  }
- public function setV($V ){
-	$this->V=$V;
+ public function setVONTADE($VONTADE ){
+	$this->VONTADE=$VONTADE;
  }
  public function getPV(){
 	return $this->PV;
@@ -196,6 +198,18 @@
  }
  public function setPE($PE ){
 	$this->PE=$PE;
+ }
+ public function getCLASSE_COMUM(){
+	return $this->CLASSE_COMUM;
+ }
+ public function setCLASSE_COMUM($CLASSE_COMUM ){
+	$this->CLASSE_COMUM=$CLASSE_COMUM;
+ }
+ public function getHABILIDADE_AUTOMATICA(){
+	return $this->HABILIDADE_AUTOMATICA;
+ }
+ public function setHABILIDADE_AUTOMATICA($HABILIDADE_AUTOMATICA ){
+	$this->HABILIDADE_AUTOMATICA=$HABILIDADE_AUTOMATICA;
  }
  public function getARMA(){
 	return $this->ARMA;

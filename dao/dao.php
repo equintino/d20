@@ -46,6 +46,15 @@
         modelMapper::map($model, $row);
         return $model;
    }
+   public function encontrePorRaca(ModelSearchCriteria $search=null){
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` =  '0' and `RACA` = '".$search->getraca()."'")->fetch();
+        if (!$row) {
+            return null;
+        }
+        $model = new Model();
+        modelMapper::map($model, $row);
+        return $model;
+   }
    public function totalLinhas(ModelSearchCriteria $search=null){
            $row = $this->query("SELECT id FROM `".$search->gettabela()."` WHERE `excluido` =  '0' ORDER BY id DESC ")->fetch();
         if (!$row) {
@@ -60,7 +69,7 @@
         return $this->update($model);
    }
    public function grava2(Model $model){
-        if ($model->getid() === null) {
+        if ($model->getid_atrib() === null) {
             return $this->insert2($model);
         }
         return $this->update2($model);
@@ -112,17 +121,17 @@
    private function insert2(Model $model){
         date_default_timezone_set("Brazil/East");
         $now = mktime (date('H'), date('i'), date('s'), date("m")  , date("d"), date("Y"));
-        $model->setid(null);
+        $model->setid_atrib(null);
         $model->setexcluido(0);
         $model->setcriado($now);
         $model->setmodificado($now); 
         $this->execute2($this->criaTabela($model->gettabela()), $model);       
-        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id_atrib`,`F`,`A`,`I`,`V`,`PV`,`PM`,`PE`,`personagem`) VALUES (:id_atrib,:F,:A,:I,:V,:PV,:PM,:PE,:personagem)';
+        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id_atrib`,`FORCA`,`AGILIDADE`,`INTELIGENCIA`,`VONTADE`,`PV`,`PM`,`PE`,`CLASSE_COMUM`,`HABILIDADE_AUTOMATICA`,`personagem`) VALUES (:id_atrib,:FORCA,:AGILIDADE,:INTELIGENCIA,:VONTADE,:PV,:PM,:PE,:CLASSE_COMUM,:HABILIDADE_AUTOMATICA,:personagem)';
 	return $this->execute2($sql, $model);
    }
    private function update2(Model $model,$tabela){
         $model->setmodificado(new DateTime(), new DateTimeZone('America/Sao_Paulo'));
-        $sql = 'UPDATE `'.$tabela.'` SET id_atrib = :id_atrib, F = :F, A = :A, I = :I, V = :V, PV = :PV, PM = :PM, PE = :PE, personagem = :personagem WHERE id = :id ';
+        $sql = 'UPDATE `'.$tabela.'` SET id_atrib = :id_atrib, FORCA = :FORCA, AGILIDADE = :AGILIDADE, INTELIGENCIA = :INTELIGENCIA, VONTADE = :VONTADE, PV = :PV, PM = :PM, PE = :PE, CLASSE_COMUM = :CLASSE_COMUM, HABILIDADE_AUTOMATICA = :HABILIDADE_AUTOMATICA, personagem = :personagem WHERE id = :id ';
         return $this->execute2($sql, $model);
    }
    private function insert3(Model $model){
@@ -174,7 +183,7 @@
 	 return $params;
    }
    private function getParams2(Model $model){
-        $params = array(':id_atrib'=> $model->getid_atrib(),':F'=> $model->getF(),':A'=> $model->getA(),':I'=> $model->getI(),':V'=> $model->getV(),':PV'=> $model->getPV(),':PM'=> $model->getPM(),':PE'=> $model->getPE(),':personagem'=> $model->getpersonagem(),);
+        $params = array(':id_atrib'=> $model->getid_atrib(),':FORCA'=> $model->getFORCA(),':AGILIDADE'=> $model->getAGILIDADE(),':INTELIGENCIA'=> $model->getINTELIGENCIA(),':VONTADE'=> $model->getVONTADE(),':PV'=> $model->getPV(),':PM'=> $model->getPM(),':PE'=> $model->getPE(),':CLASSE_COMUM'=> $model->getCLASSE_COMUM(),':HABILIDADE_AUTOMATICA'=> $model->getHABILIDADE_AUTOMATICA(),':personagem'=> $model->getpersonagem(),);
 	 return $params;
    }
    private function getParams3(Model $model){

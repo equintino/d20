@@ -61,17 +61,17 @@
 	if (array_key_exists('id_atrib', $properties)){
 	  $model->setid_atrib($properties['id_atrib']);
 	}
-	if (array_key_exists('F', $properties)){
-	  $model->setF($properties['F']);
+	if (array_key_exists('FORCA', $properties)){
+	  $model->setFORCA($properties['FORCA']);
 	}
-	if (array_key_exists('A', $properties)){
-	  $model->setA($properties['A']);
+	if (array_key_exists('AGILIDADE', $properties)){
+	  $model->setAGILIDADE($properties['AGILIDADE']);
 	}
-	if (array_key_exists('I', $properties)){
-	  $model->setI($properties['I']);
+	if (array_key_exists('INTELIGENCIA', $properties)){
+	  $model->setINTELIGENCIA($properties['INTELIGENCIA']);
 	}
-	if (array_key_exists('V', $properties)){
-	  $model->setV($properties['V']);
+	if (array_key_exists('VONTADE', $properties)){
+	  $model->setVONTADE($properties['VONTADE']);
 	}
 	if (array_key_exists('PV', $properties)){
 	  $model->setPV($properties['PV']);
@@ -81,6 +81,12 @@
 	}
 	if (array_key_exists('PE', $properties)){
 	  $model->setPE($properties['PE']);
+	}
+	if (array_key_exists('CLASSE_COMUM', $properties)){
+	  $model->setCLASSE_COMUM($properties['CLASSE_COMUM']);
+	}
+	if (array_key_exists('HABILIDADE_AUTOMATICA', $properties)){
+	  $model->setHABILIDADE_AUTOMATICA($properties['HABILIDADE_AUTOMATICA']);
 	}
 	if (array_key_exists('ARMA', $properties)){
 	  $model->setARMA($properties['ARMA']);

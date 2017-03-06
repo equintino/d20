@@ -160,36 +160,36 @@
           $this->id_atrib = $id_atrib;
           return $this;
       }
-   private $F;
-       public function getF(){
-        return $this->F;
+   private $FORCA;
+       public function getFORCA(){
+        return $this->FORCA;
       }
-      public function setF($F){
-          $this->F = $F;
+      public function setFORCA($FORCA){
+          $this->FORCA = $FORCA;
           return $this;
       }
-   private $A;
-       public function getA(){
-        return $this->A;
+   private $AGILIDADE;
+       public function getAGILIDADE(){
+        return $this->AGILIDADE;
       }
-      public function setA($A){
-          $this->A = $A;
+      public function setAGILIDADE($AGILIDADE){
+          $this->AGILIDADE = $AGILIDADE;
           return $this;
       }
-   private $I;
-       public function getI(){
-        return $this->I;
+   private $INTELIGENCIA;
+       public function getINTELIGENCIA(){
+        return $this->INTELIGENCIA;
       }
-      public function setI($I){
-          $this->I = $I;
+      public function setINTELIGENCIA($INTELIGENCIA){
+          $this->INTELIGENCIA = $INTELIGENCIA;
           return $this;
       }
-   private $V;
-       public function getV(){
-        return $this->V;
+   private $VONTADE;
+       public function getVONTADE(){
+        return $this->VONTADE;
       }
-      public function setV($V){
-          $this->V = $V;
+      public function setVONTADE($VONTADE){
+          $this->VONTADE = $VONTADE;
           return $this;
       }
    private $PV;
@@ -214,6 +214,22 @@
       }
       public function setPE($PE){
           $this->PE = $PE;
+          return $this;
+      }
+   private $CLASSE_COMUM;
+       public function getCLASSE_COMUM(){
+        return $this->CLASSE_COMUM;
+      }
+      public function setCLASSE_COMUM($CLASSE_COMUM){
+          $this->CLASSE_COMUM = $CLASSE_COMUM;
+          return $this;
+      }
+   private $HABILIDADE_AUTOMATICA;
+       public function getHABILIDADE_AUTOMATICA(){
+        return $this->HABILIDADE_AUTOMATICA;
+      }
+      public function setHABILIDADE_AUTOMATICA($HABILIDADE_AUTOMATICA){
+          $this->HABILIDADE_AUTOMATICA = $HABILIDADE_AUTOMATICA;
           return $this;
       }
    private $ARMA;

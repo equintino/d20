@@ -62,7 +62,7 @@
 		$model->sethabilidade($habilidade);
 	  }
 	$search->settabela('personagem');
-    $search->setpersonagem($_GET['personagem']);
+        $search->setpersonagem($_GET['personagem']);
 	
 	$dados=$dao->encontrePorPersonagem($search);
 	//print_r($dados);echo '<br><br>';
@@ -74,11 +74,41 @@
 	$model->settendencia1($dados->gettendencia1());
 	$model->settendencia2($dados->gettendencia2());
 	$model->setsexo($dados->getsexo());
-    $dao->grava($model);
+        
+        $search->setraca($model->getraca());
+        $search->settabela('tb_racas');
+        $dadosRaca=$dao->encontrePorRaca($search);
+   /*print_r($_POST);
+   echo '<br><br>';
+   print_r($model);
+   echo '<br><br>';
+   print_r($dadosRaca);
+   die;*/
+        //print_r($dadosRaca);die;
+        $dao->grava($model);
+        //print_r($model);die;
+        $dadosRaca->settabela('atributos');
+        $dadosRaca->setpersonagem($model->getpersonagem());
+        $dadosRaca->setPV(60);
+        $dadosRaca->setPM(60);
+        $dadosRaca->setPE(0);
+        if($model->getraca()=='humano'){
+          echo '<div class=maisum>';
+           echo 'Selecione + 1 a uma das 4 opções abaixo:<br>';
+           echo '<lable>Força</lable><input type=radio name=maisum value=F>';
+           echo '<lable>Agilidade</lable><input type=radio name=maisum value=A>';
+           echo '<lable>Inteligência</lable><input type=radio name=maisum value=I>';
+           echo '<lable>Vontade</lable><input type=radio name=maisum value=V>';
+           echo '</div>';
+           ;die;
+        }
+        //if()
+        print_r($dadosRaca);die;
+        $dao->grava2($dadosRaca);
 	echo '<div class=\'add\'>'.
-			'<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.
-			'<a href=\'../web/index.php?pagina=cadastro&act=cad3&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'\' ><button class=\'continua continua-verde\'>Continua...</button></a>'.
-		  '</div>';
+               '<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.
+               '<a href=\'../web/index.php?pagina=cadastro&act=cad3&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'\' ><button class=\'continua continua-verde\'>Continua...</button></a>'.
+             '</div>';
 	die;
   }
   if($act == 'cad3'){
