@@ -296,4 +296,20 @@
           $this->figura = $figura;
           return $this;
       }
+   private $BONUS_ATRIBUTO;
+       public function getBONUS_ATRIBUTO(){
+        return $this->BONUS_ATRIBUTO;
+      }
+      public function setBONUS_ATRIBUTO($BONUS_ATRIBUTO){
+          $this->BONUS_ATRIBUTO = $BONUS_ATRIBUTO;
+          return $this;
+      }
+   private $PROFICIENCIA;
+       public function getPROFICIENCIA(){
+        return $this->PROFICIENCIA;
+      }
+      public function setPROFICIENCIA($PROFICIENCIA){
+          $this->PROFICIENCIA = $PROFICIENCIA;
+          return $this;
+      }
 }

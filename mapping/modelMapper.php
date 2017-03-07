@@ -112,5 +112,11 @@
 	if (array_key_exists('figura', $properties)){
 	  $model->setfigura($properties['figura']);
 	}
+	if (array_key_exists('BONUS_ATRIBUTO', $properties)){
+	  $model->setBONUS_ATRIBUTO($properties['BONUS_ATRIBUTO']);
+	}
+	if (array_key_exists('PROFICIENCIA', $properties)){
+	  $model->setPROFICIENCIA($properties['PROFICIENCIA']);
+	}
   } 
  }

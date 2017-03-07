@@ -37,6 +37,8 @@
  private $GRUPO;
  private $OBS;
  private $figura;
+ private $BONUS_ATRIBUTO;
+ private $PROFICIENCIA;
  public function getid(){
 	return $this->id;
  }
@@ -258,5 +260,17 @@
  }
  public function setfigura($figura ){
 	$this->figura=$figura;
+ }
+ public function getBONUS_ATRIBUTO(){
+	return $this->BONUS_ATRIBUTO;
+ }
+ public function setBONUS_ATRIBUTO($BONUS_ATRIBUTO ){
+	$this->BONUS_ATRIBUTO=$BONUS_ATRIBUTO;
+ }
+ public function getPROFICIENCIA(){
+	return $this->PROFICIENCIA;
+ }
+ public function setPROFICIENCIA($PROFICIENCIA ){
+	$this->PROFICIENCIA=$PROFICIENCIA;
  }
  }
