@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../web/css/layout.css" type="text/css" media='screen'/>  
+<link rel="stylesheet" href="../web/css/layout.css" type="text/css" media='screen'/>
 <?php
   include_once '../dao/dao.php';
   include_once '../model/model.php';
@@ -15,14 +15,16 @@
      $model->settabela('personagem');
      $search->settabela('personagem');
   //print_r($_POST);die;
-  foreach($_POST as $key => $item){
-	  if($item == 'on'){
-		$habilidade .=$key.'/';
-		$x++;
-	  }else{
-		$classe='set'.$key;
-		$model->$classe($item);
-	  }
+  if(!@$_GET['maisum']){
+     foreach($_POST as $key => $item){
+             if($item == 'on'){
+                   $habilidade .=$key.'/';
+                   $x++;
+             }else{
+                   $classe='set'.$key;
+                   $model->$classe($item);
+             }
+     }
   }
   if($act == 'cad'){
      $search->setpersonagem($model->getpersonagem());
@@ -52,7 +54,7 @@
      $dao->grava2($model);
   }
   if($act == 'cad2'){
-	  if($x<3||$x>3){
+	  if(($x<3||$x>3) && !@$_GET['maisum']){
 		echo '<div class="add hab">';
 		echo '<h3>VOCË SELECIONOU <span class=dest>'.$x.'</span> HABILIDADE(S),<br> SELECIONE <span class=dest>3</span> HABILIDADES!</h3>';
 		echo '<button class=\'continua continua-verde\' onclick=history.go(-1);>Voltar</button>';
@@ -90,15 +92,12 @@
         //print_r($dadosClasse);die;
         $dao->grava($model);
         //print_r($model);die;
-        $dadosRaca->settabela('atributos');
-        $dadosRaca->setpersonagem($model->getpersonagem());
-        $dadosRaca->setPV(60);
-        $dadosRaca->setPM(60);
-        $dadosRaca->setPE(0);
         if($model->getraca()=='humano'){
+         if(!@$_GET['maisum']){
+          echo '<form action="../paginas/add.php?act=cad2&maisum=1&personagem='.$model->getpersonagem().'" method=post>';
           echo '<div class=maisum>';
-           $valor=prompt("escrava alguma coisa");
-           echo $valor;die;
+           //$valor='<script>prompt("escrava alguma coisa")</script>';
+           //echo $valor;die;
             //$opcao=readline("opção: ");
            echo 'Selecione + 1 a uma das 4 opções abaixo:<br>';
            echo '<lable>Força</lable><input type=radio name=maisum value=F>';
@@ -106,8 +105,23 @@
            echo '<lable>Inteligência</lable><input type=radio name=maisum value=I>';
            echo '<lable>Vontade</lable><input type=radio name=maisum value=V>';
            echo '</div>';
-           ;die;
+           echo '<div class=maisumbnt>';
+           echo '<button class=\'continua continua-verde\' >Continua...</button>';
+           echo '</div>';
+           echo '</form>';
+           die;
+         }else{
+           print_r($_GET);echo '<br><br>';
+           print_r($_POST);echo '<br><br>';
+           print_r($model);
+           die;
+         }
         }
+        $dadosRaca->settabela('atributos');
+        $dadosRaca->setpersonagem($model->getpersonagem());
+        $dadosRaca->setPV(60);
+        $dadosRaca->setPM(60);
+        $dadosRaca->setPE(0);
         //if()
         //print_r($model);echo '<br><br>';
         $bonus=explode(';',$dadosClasse->getBONUS_ATRIBUTO());
