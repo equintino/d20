@@ -7,6 +7,8 @@
   include_once '../dao/ModelSearchCriteria.php';
   include_once '../validacao/ModelValidador.php';
   $act=$_GET['act'];
+  @$atribamais=$_POST['maisum'];
+  $humanoF=$humanoA=$humanoI=$humanoV=0;
   $habilidade = null;
   $x=0;
   $dao = new Dao();
@@ -111,10 +113,30 @@
            echo '</form>';
            die;
          }else{
-           print_r($_GET);echo '<br><br>';
-           print_r($_POST);echo '<br><br>';
-           print_r($model);
-           die;
+          echo $atribamais;
+           switch ($atribamais){
+              case 'F':
+                $humanoF=1;
+                break;
+              case 'A':
+                $humanoA=1;
+                break;
+              case 'I':
+                $humanoI=1;
+                break;
+              case 'V':
+                $humanoV=1;
+                break;
+              default :
+                $humanoF=$humanoA=$humanoI=$humanoV=0;
+                break;
+           }
+           //echo $humanoF;die;
+           //print_r($_GET);echo '<br><br>';
+           //print_r($_POST);echo '<br><br>';
+           //echo "humanoF -> $humanoF - humanoA -> $humanoA - humanoI -> $humanoI - humanoV -> $humanoV";echo '<br><br>';
+           //print_r($model);
+           //die;
          }
         }
         $dadosRaca->settabela('atributos');
@@ -129,22 +151,25 @@
            case 'F':
              //echo 'é um F - '.$dadosRaca->getForca(). '-> ';
              //echo $dadosRaca->getForca()+1;
-             $dadosRaca->setFORCA($dadosRaca->getForca()+1);
+             //echo $dadosRaca->getForca();echo ' - ';
+             $dadosRaca->setFORCA($dadosRaca->getForca()+1+$humanoF);
+             //echo $dadosRaca->getForca();die;
              break;
            case 'A':
              //echo 'é um A - '.$dadosRaca->getAGILIDADE().'-> ';
-             //echo $dadosRaca->getAGILIDADE()+1;
-             $dadosRaca->setAGILIDADE($dadosRaca->getAGILIDADE()+1);
+             //echo $dadosRaca->getAGILIDADE();echo ' - ';die;
+             $dadosRaca->setAGILIDADE($dadosRaca->getAGILIDADE()+1+$humanoA);
+             //echo $dadosRaca->getAGILIDADE();
              break;
            case 'I':
              ////echo 'é um I - '.$dadosRaca->getINTELIGENCIA().'-> ';
-             echo $dadosRaca->getINTELIGENCIA()+1;
-             $dadosRaca->setINTELIGENCIA($dadosRaca->getINTELIGENCIA()+1);
+             //echo $dadosRaca->getINTELIGENCIA()+1;
+             $dadosRaca->setINTELIGENCIA($dadosRaca->getINTELIGENCIA()+1+$humanoI);
              break;
            case 'V':
              //echo 'é um V - '.$dadosRaca->getVONTADE().'-> ';
              //echo $dadosRaca->getVONTADE()+1;
-             $dadosRaca->setVONTADE($dadosRaca->getVONTADE()+1);
+             $dadosRaca->setVONTADE($dadosRaca->getVONTADE()+1+$humanoV);
              break;
         }
         echo '<br><br>';
@@ -173,7 +198,7 @@
         //echo $bonus[0][0];
         //echo '<br><br>';
         //echo $bonus[1][0];echo '<br><br>';
-        //print_r($dadosRaca);die;
+        print_r($dadosRaca);die;
         $dao->grava2($dadosRaca);
 	echo '<div class=\'add\'>'.
                '<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.
