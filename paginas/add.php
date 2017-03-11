@@ -92,7 +92,13 @@
    print_r($dadosRaca);
    die;*/
         //print_r($dadosClasse);die;
-        $dao->grava($model);
+   //print_r($_GET);echo '<br><br>';
+   //print_r($_POST);echo '<br><br>';
+   //print_r($model);die;
+        if(!@$_GET['maisum']){
+           $dao->grava($model);
+        }
+        
         //print_r($model);die;
         if($model->getraca()=='humano'){
          if(!@$_GET['maisum']){
@@ -113,24 +119,6 @@
            echo '</form>';
            die;
          }else{
-          echo $atribamais;
-           switch ($atribamais){
-              case 'F':
-                $humanoF=1;
-                break;
-              case 'A':
-                $humanoA=1;
-                break;
-              case 'I':
-                $humanoI=1;
-                break;
-              case 'V':
-                $humanoV=1;
-                break;
-              default :
-                $humanoF=$humanoA=$humanoI=$humanoV=0;
-                break;
-           }
            //echo $humanoF;die;
            //print_r($_GET);echo '<br><br>';
            //print_r($_POST);echo '<br><br>';
@@ -195,10 +183,26 @@
              $dadosRaca->setVONTADE($dadosRaca->getVONTADE()+1);
              break;
         }
+        if($model->getraca()=='humano'){
+           switch ($atribamais){
+              case 'F':
+                $dadosRaca->setFORCA($dadosRaca->getFORCA()+1);
+                break;
+              case 'A':
+                $dadosRaca->setAGILIDADE($dadosRaca->getAGILIDADE()+1);
+                break;
+              case 'I':
+                $dadosRaca->setINTELIGENCIA($dadosRaca->getINTELIGENCIA()+1);
+                break;
+              case 'V':
+                $dadosRaca->setVONTADE($dadosRaca->getVONTADE()+1);
+                break;
+           }
+        }
         //echo $bonus[0][0];
         //echo '<br><br>';
         //echo $bonus[1][0];echo '<br><br>';
-        print_r($dadosRaca);die;
+        //print_r($dadosRaca);die;
         $dao->grava2($dadosRaca);
 	echo '<div class=\'add\'>'.
                '<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.

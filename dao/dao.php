@@ -72,6 +72,7 @@
         return $row;
    }
    public function grava(Model $model){
+    //print_r($model);die;
         if ($model->getid() === null) {
             return $this->insert($model);
         }
@@ -125,6 +126,7 @@
         $now = mktime (date("H"), date("i"), date("s"), date("m")  , date("d"), date("Y"));
         $model->setmodificado($now);
         $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, jogador = :jogador, personagem = :personagem, raca = :raca, classe = :classe, tendencia1 = :tendencia1, tendencia2 = :tendencia2, idade = :idade, tabela = :tabela, sexo = :sexo, modificado = :modificado, excluido = :excluido, habilidade = :habilidade, altura = :altura, peso = :peso, cidade = :cidade, motivacao = :motivacao, breveHistoria = :breveHistoria WHERE personagem = :personagem ';
+        //print_r($this->execute($sql, $model));die;
         return $this->execute($sql, $model);
    }
    private function insert2(Model $model){
@@ -167,6 +169,7 @@
         if (!$model->getid()) {
             return $this->encontrePorId($search->setid($this->getDb()->lastInsertId()));
         }
+        //print_r(($model));die;
         return $model;
    }
    public function execute2($sql,$model){
