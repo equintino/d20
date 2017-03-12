@@ -1,0 +1,114 @@
+id;HABILIDADE;REQUISITOS;TIPO;MANA ;DESCRICAO;excluido
+1;Animal Celestial 1;Montaria Especial 1 e Aura Divina;Suporte;0;"Sua montaria foi tocada pelos deuses e
+pode mudar sua forma quando quiser. A qualquer momento
+ele pode se transformar em um roedor, canino,
+felino ou eqüino comum. Esta forma possui a mesma
+coloração que o cavalo e poderá ficar nesta forma o
+tempo que quiser.";0
+2;Animal Celestial 2;Animal Celestial 1;Suporte;0;"Sua montaria foi tocada pelos deuses e
+agora possui Asas Pesadas ou Toque de Cura. Escolha
+assim que adquirir esta habilidade.";0
+3;Ataque Giratório;Nenhum;Ação;10;"Este ataque que pode acertar todos os
+oponentes adjacentes. Faça um ataque para cada um
+destes oponentes.";0
+4;Aura Divina;Nenhum;Reação;0;"Você deve ser sempre justo e seguir os
+ensinamentos dos deuses. Todo demônio, morto - vivo
+ou espírito maligno deve ser bem sucedido em um teste
+de Vontade (Dificuldade 5 + sua Von) ou fugirá de
+medo de você. Criaturas com Mente Vazia devem testar
+Força e se falhar serão completamente destruídos.
+Se você for injusto, agir de má fé ou trair a justiça, você
+perderá esta habilidade imediatamente.";0
+5;Cavaleiro Experiente;Nenhum;Suporte;0;"Você sempre vence testes de Agilidade
+para controlar e cavalgar animais selvagens ou para
+controlar montarias em combate.";0
+6;Combate Tático;Nenhum;Reação;0;"Se você derrotar um oponente, você
+ganha imediatamente um ataque extra em qualquer
+oponente que esteja adjacente.";0
+7;Confiança nos Deuses;Aura Divina;Suporte;0;"Você e todos seus aliados que estejam
+até 6 metros de você, sempre receberão Vontade+1 enquanto
+estiverem perto de você.
+Especial: Se você perder a habilidade Aura Divina,
+você também perderá esta habilidade.";0
+8;Corpo Santo;Aura Divina;Suporte;0;"Seus ferimentos se recuperam duas vezes
+mais rápido que o normal e você é imune a doenças
+e venenos.";0
+9;Exorcismo;Aura Divina;Ação;10;"Você pode destruir instantaneamente
+qualquer morto-vivo que tenha Mente Vazia e que esteja
+na sua área de visão.";0
+10;Força de Combate;Nenhum;Suporte;0;"Todos seus ataques corporais causam
++1 de dano para cada 2 pontos de força que você tiver.";0
+11;Grito de Guerra;Nenhum;Ação;10;"Você pode dar um grito fervoroso que
+motiva todos seus aliados. Eles recebem (assim como
+você) +1 em todas as rolagens até o final da batalha.
+Este bônus não é cumulativo.";0
+12;Inquisidor;Aura Divina;Suporte;0;"Você sempre saberá quando alguém estiver
+mentindo. Lembre-se que nem sempre omitir é
+mentir, depende das intenções da pessoa que está omitindo.
+Mentir é passar informações erradas propositalmente.
+Especial: Se você perder a habilidade Aura Divina,
+você também perderá esta habilidade.";0
+13;Investida Montada;Nenhum;Suporte;0;"Sempre que fizer uma investida sob
+uma montaria, acrescente +10 de dano ao ataque.";0
+14;Investida Mortal;Nenhum;Ação;10;"Em carga você pode desferir um poderoso
+golpe. Se estiver distante do oponente, você pode
+correr até ele e fazer um ataque normal que causa +10
+de dano.";0
+15;Justiça Final;Aura Divina;Ação;20;"Você pode fazer um ataque comum que
+causará +10 de dano, ou +15 se a criatura for um demônio,
+morto-vivo ou espírito maligno. O tipo deste
+dano adicional é você que escolhe (Fogo, Frio ou Eletricidade).
+Especial: Se você perder a habilidade Aura Divina,
+você também perderá esta habilidade.";0
+16;Knock Out;Nenhum;Ação;10;"Faça um ataque normal com uma arma
+de FN 5 ou mais. O oponente recebe metade do dano,
+mas não poderá fazer nada no seu próximo turno. E
+todos os turnos seguintes (até o final da batalha) terá
+que testar Força (dificuldade 12) antes de poder agir.";0
+17;Montaria Especial 1;Nenhum;Suporte;0;"Você tem um cavalo e possui um contato
+muito forte com este animal. Ele nunca o largará e
+fará de tudo para protegê-lo. Com assovios e sons você
+consegue pedir para que ele faça ações simples.";0
+18;Montaria Especial 2;Montaria Especial 1;Suporte;0;"Você possui contato telepático com sua
+montaria e poderá ver o que ele vê após um tempo se
+concentrando.
+Ele também ganha +10 de vida e mana.";0
+19;Toque da Cura;Aura Divina;Ação;10;"Com seu toque você pode recuperar até
+10 pontos de vida de qualquer aliado. Para isto você
+deve ser bem sucedido em um teste de Vontade (Dificuldade
+8).
+Especial: Se você perder a habilidade Aura Divina,
+você também perderá esta habilidade.";0
+20;Força de Combate 2;"Nível 5; Força de Combate";Suporte;0;"Todos seus ataques corporais causam +1
+de dano para cada ponto de força que você tiver.";0
+21;Grito de Guerra 2;"Nível 5; Grito de Guerra";Ação;10;"Você pode dar um grito fervoroso que
+motiva todos seus aliados. Eles recebem (assim como
+você) +2 em todas as rolagens até o final da batalha.
+Este bônus não é cumulativo.";0
+22;Guerreiro de Aço;Nível 5 ;Suporte;0;"O bônus de defesa por equipamento (armadura
+e escudo) pode somar até +6.";0
+23;Implacável;Nível 5;Suporte;0;"Sempre que errar um ataque corporal,
+você causa dano igual à metade do dano do ataque.";0
+24;Justiça Final 2;"Nível 5; Aura Divina e Justiça Final";Ação;20;"Você pode fazer um ataque comum que
+causará +20 de dano, ou +30 se a criatura for um demônio,
+morto-vivo ou espírito maligno. O tipo deste dano adicional
+é você que escolhe (fogo, frio ou eletricidade).
+Especial: Se você perder a habilidade Aura Divina,
+você também perderá esta habilidade.";0
+25;Montaria Especial 3;"Nível 5; Montaria Especial 2";Suporte;0;"Sua montaria ganhará +1 em três atributos
+a sua escolha.";0
+26;Montaria Especial 4;"Nível 5; Montaria Especial 3";Suporte;0;"Sua montaria ganhará +10 de Vida e
+Mana, e +1 em três atributos a sua escolha.";0
+27;Poder Divino;"Nível 10; Von 6; Aura Divina e Justiça Final";Ação;30;"Você pode carregar sua arma com o poder
+dos deuses. Sua arma ficará com este efeito até você
+acertar o próximo golpe, que causará o triplo do dano.
+Caso a criatura seja um demônio ou morto-vivo, você
+causa +30 de dano adicional.";0
+28;Toque da Cura 2;"Nível 5; Toque da Cura";Ação;10;"Com seu toque você pode recuperar até 20
+pontos de vida de qualquer aliado. Para isto você deve ser
+bem sucedido em um teste de Vontade (Dificuldade 10).
+Especial: Se você perder a habilidade Aura Divina,
+você também perderá esta habilidade.";0
+29;Valor da Vitória;Nível 5;Suporte;0;"Ao final da batalha, se você tiver derrotado
+Pelo menos um oponente, você recupera 10
+pontos de mana para cada criatura derrotada.";0

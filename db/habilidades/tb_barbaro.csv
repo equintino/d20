@@ -1,0 +1,114 @@
+id;NOME;REQUISITOS;TIPO;MANA ;DESCRIÇÃO;excluido
+1;Arremesso Poderoso;Nenhum;Suporte;0;"Você pode usar sua Força em vez de sua
+Agilidade para atacar com armas de arremesso (como
+lanças e machadinhas).";0
+2;Ataque do Búfalo;Nenhum;Ação;10;"Você pode fazer um ataque normal
+usando uma arma de FN 5 ou mais. Se acertar, alem do
+dano, o oponente cairá para traz (a menos que ele seja
+2 vezes mais pesado que você).";0
+3;Ataque Giratório;Nenhum;Ação;10;"Este ataque que pode acertar todos os
+oponentes adjacentes. Faça um ataque para cada um
+destes oponentes.";0
+4;Brigão;Nenhum;Suporte;0;Seu ataque de soco causa +2 de dano.;0
+5;Combate Tático;Nenhum;Reação;0;"Se você derrotar um oponente, você ganha
+imediatamente um ataque extra em qualquer oponente
+que esteja adjacente.";0
+6;Companheiro Animal 1;Nenhum;Suporte;0;"Você possui um contato com um animal.
+Escolha um destes animais ao escolher esta habilidade:
+Lobo, Águia, Cobra, Coruja ou Cavalo.";0
+7;Companheiro Animal 2;Companheiro Animal 1;Suporte;0;"Você passa a ter um contato telepático
+com seu companheiro animal, e ele receberá +10 de
+vida e mana.";0
+8;Espírito Animal: Lobo;Nenhum;Suporte;0;"Seu espírito possui a forma de um lobo.
+Você ganha +1 nas rolagens de ataque corporal.
+Especial: Você só pode ter uma habilidade Espírito
+Animal.";0
+9;Espírito Animal: Cavalo;Nenhum;Suporte;0;"Seu espírito possui a forma de um cavalo.
+Você rola 3d6 em testes de Força para correr e se
+movimentar.
+Especial: Você só pode ter uma habilidade Espírito
+Animal.";0
+10;Espírito Animal: Urso;Nenhum;Suporte;0;"Seu espírito possui a forma de um urso.
+Você rola 3d6 em testes de Força para erguer objetos
+pesados, e ganha +2 no dano desarmado.
+Especial: Você só pode ter uma habilidade Espírito
+Animal.";0
+11;Força de Combate;Nenhum;Suporte;0;"Todos seus ataques corporais causam +1
+de dano para cada 2 pontos de força que você tiver.";0
+12;Fúria de Batalha;Nenhum;Ação;30;"Com uma ação você pode invocar uma
+fúria destrutiva de dentro de si, ficando neste estado
+até o final da batalha ou até ficar dois turnos sem poder
+atacar. Você recebe temporariamente +2 na Força e
+fica imune a medo ou intimidação.";0
+13;Golpe Devastador;Nenhum;Ação;30;"Você pode fazer um ataque corporal que
+causa o dobro de dano, e a vítima não poderá agir no
+próximo turno.";0
+14;Guia Espiritual;Nenhum;Suporte;0;"Você possui um guia espiritual que entra
+em contato com você por sonhos. Este guia pode
+assumir qualquer forma, mas normalmente escolhe a
+forma de um animal. Ele irá lhe alertar se alguma coisa
+acontecer enquanto você estiver dormindo, e pode
+(quando o mestre achar necessário) alertar sobre algum
+perigo iminente ou uma mensagem do futuro.
+Você pode usar o guia espiritual para relembrar de
+fatos passados da sua vida, ou saber informações sobre
+animais e plantas. Para isto, basta meditar por alguns
+Minutos.";0
+15;Investida Mortal;Nenhum;Ação;10;"Em carga você pode desferir um poderoso
+golpe. Se estiver distante do oponente, você pode
+correr até ele e fazer um ataque normal que causa +10
+de dano.";0
+16;Mordida;Nenhum;Ação;10;"Você pode fazer um ataque corporal
+com sua boca. O dano é igual a sua Força +4. Se estiver
+em Fúria, o dano será sua Força x2.";0
+17;Pernas Fortes;Nenhum;Suporte;0;"Você sempre rola 3d6 em testes de Força
+para não ser derrubado.";0
+18;Rastrear;Nenhum;Ação;0;"Você pode seguir pegadas facilmente, e
+pode identificar o tipo de pegada a partir de um teste
+de Inteligência. Dificuldade pode variar entre 10 a 16.";0
+19;Resistência Selvagem;Nenhum;Suporte;0;"Quando sem armadura, você ganha +2
+de bônus na Defesa.
+Este bônus conta como bônus de armadura.";0
+20;Sabedoria Selvagem;Nenhum;Suporte;0;"Você pode rolar 3d6 quando fizer testes
+de Inteligência referentes a conhecimentos de plantas,
+animais e natureza.";0
+21;Berserker;"Nível 10; Fúria de Batalha";Ação;50;"Sua raiva é tanta que seus olhos e sua
+boca se enchem de sangue. Se você estiver no estado
+de fúria e usar esta habilidade, você traz as forças mais
+brutais do fundo da sua alma, ficando imortal por 4 turnos.
+Todo dano será anulado.";0
+22;Companheiro Animal 3;"Nível 5; Companheiro Animal 2";Suporte;0;"Seu companheiro animal ganhará +1
+em três atributos a sua escolha.";0
+23;Companheiro Animal 4;"Nível 5; Companheiro Animal 3";Suporte;0;"Seu companheiro animal ganhará +10
+de Vida e Mana, e For, Agi e Von +1.";0
+24;Destruição Total;Nível 5;Ação;10;"Você pode fazer um ataque normal a um
+inimigo usando uma arma pesada (FN 5 ou mais). Se
+acertar, em vez de causar dano você pode optar por
+destruir uma arma, armadura, escudo ou item visível
+do inimigo.";0
+25;Força de Combate 2;Nível 5;Suporte;0;"Nível 5; Força de Combate
+Descrição: Todos seus ataques corporais causam +1
+de dano para cada ponto de força que você tiver.";0
+26;Fúria Animal;"Nível 5; Fúria de Batalha e Espírito
+Animal";Suporte;0;"Quando em fúria, você fica mais peludo,
+seus dentes e suas unhas ficam mais pontudas e
+você fica imune a Frio e Eletricidade.";0
+27;Fúria de Batalha 2;"Nível 5; Fúria de Batalha";Ação;40;"Com uma ação você pode invocar uma
+fúria destrutiva de dentro de si, ficando neste estado
+até o final da batalha ou até ficar dois turnos sem poder
+atacar. Você recebe temporariamente +4 na Força e
+fica imune a medo ou intimidação.";0
+28;Onda Destruidora;"Nível 5; Fúria de Batalha";Ação;20;"Quando estiver em fúria, você pode dar
+um golpe no chão de onde estiver e derrubar todos a
+sua volta (incluindo aliados) em até 6m. Todos estes
+podem fazer um teste de Agi (dif. 14) para evitar a queda.
+Se você estiver em um superfície frágil poderá destruí-
+la. O mestre dará a última palavra.";0
+29;Implacável;Nível 5;Suporte;0;"Sempre que errar um ataque corporal,
+você causa dano igual à metade do dano do ataque.";0
+30;Resistência Selvagem 2;"Nível 5; Resistência Selvagem";Suporte;0;"Quando sem armadura, você ganha +4
+de bônus na Defesa.
+Este bônus conta como bônus de armadura.";0
+31;Valor da Vitória;Nível 5;Reação;0;"Cada vez que você derrota um oponente
+(isso inclui se ele se render ou fugir após a batalha)
+você recupera 10 pontos de vida e 10 pontos de mana.";0

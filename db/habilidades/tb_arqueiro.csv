@@ -1,0 +1,149 @@
+id;HABILIDADE;REQUISITO;TIPO;MANA;DESCRICAO;excluido
+1;Agilidade de Combate;Nenhum;Suporte;0;"Você pode usar sua Agilidade para fazer
+ataques corporais com armas de FN 4 ou menos.";0
+2;Ataque Aleijador;Nenhum;Ação;20;"Faça um ataque normal à distância.
+Você pode acertar a junta do joelho ou o pé de seu
+oponente, comprometendo sua locomoção. Além de
+receber o dano, sempre que a vitima tentar se locomover
+(caminhar ou correr) receberá 10 pontos de dano.
+Este efeito dura até a vitima descansar por pelo menos
+1 minuto.";0
+3;Chuva de Flechas;Nenhum;Ação;40;"Você pode disparar até 5 flechas num único
+ataque e num único alvo. Role uma única vez independente
+do número de flechas que você usar. ";0
+4;Combate com Duas Armas 1;Nenhum;Suporte;0;"Você pode fazer um ataque para cada
+arma que estiver usando. A soma da FN das armas deve
+ser no máximo 2.";0
+5;Combate com Duas Armas 2;Combate com Duas Armas 1;Suporte;0;"Você pode fazer um ataque para cada
+arma que estiver usando. A soma da FN das armas deve
+ser no máximo 5.";0
+6;Combate com Duas Armas 3;Combate com Duas Armas 2;Suporte;0;" Combate com Duas Armas 2.
+Descrição: Você pode fazer um ataque para cada
+arma que estiver usando. A soma da FN das armas deve
+ser no máximo 8.";0
+7;Companheiro Animal 1;Nenhum;Suporte;0;"Você possui um contato com um animal.
+Escolha um destes animais ao escolher esta habilidade:
+Lobo comum, Águia, Cobra, Coruja ou Cavalo
+(Veja a ficha dos animais no capítulo 7).";0
+8;Companheiro Animal 2;Companheiro Animal 1;Suporte;0;" Companheiro Animal
+Descrição: Você passa a ter um contato telepático
+com seu companheiro animal, e ele receberá +10 de
+vida e mana.";0
+9;Contato de Gaia;Nenhum;Suporte;0;"Você deve sempre respeitar a natureza
+(plantas e animais). Com um teste bem sucedido de Inteligência
+ou Vontade (Dif 6 + Von do animal) você
+pode se comunicar com um animal por meio de gestos
+e olhares. Se em qualquer momento você desrespeitar
+a natureza, deixar que outros o façam ou deixar de ajudar
+quando ela precisar, você perderá esta habilidade, e
+nunca mais poderá adquiri-la novamente.";0
+10;Espírito Animal: Águia;Nenhum;Suporte;0;"Seu espírito possui a forma de uma águia.
+Você ganha +1 nas rolagens de ataque a distância.
+Especial: Você só pode ter uma habilidade Espírito
+Animal.";0
+11;Espírito Animal: Lobo;Nenhum;Suporte;0;"Seu espírito possui a forma de um lobo.
+Você ganha +1 nas rolagens de ataque corporal. Especial:
+Você só pode ter uma habilidade Espírito Animal.";0
+12;Espírito Animal: Coruja;Nenhum;Suporte;0;"Seu espírito possui a forma de uma coruja.
+Você rola 3d6 em testes de Inteligência relativos
+ao conhecimento.
+Especial: Você só pode ter uma habilidade Espírito
+Animal.";0
+13;Espírito Animal: Cobra;Nenhum;Suporte;0;"Seu espírito possui a forma de uma cobra.
+Você ganha +1 na defesa.
+Especial: Você só pode ter uma habilidade Espírito
+Animal.";0
+14;Espírito Animal: Cavalo;Nenhum;Suporte;0;"Descrição: Seu espírito possui a forma de um cavalo.
+Você rola 3d6 em testes de Força para correr e se
+movimentar.
+Especial: Você só pode ter uma habilidade Espírito
+Animal.";0
+15;Evasão;Nenhum;Reação;20;"Se o seu inimigo fizer um ataque corporal
+e acertar, você pode declarar evasão, e obrigar o
+inimigo a rolar novamente os dados. Só pode usar esta
+habilidade uma vez por rodada.";0
+16;Fabricar Flechas;Nenhum;Ação;0;"Usando uma faca ou adaga, você pode
+transformar pedaços de galhos e madeira em flechas. 1
+hora de trabalho rende 20 flechas. ";0
+17;Falhas da Armadura;Nenhum;Suporte;0;"Você sabe como acertar ataques entre
+as frestas e falhas das armaduras do inimigo. Ignore
+sempre o bônus de armadura da defesa do oponente.";0
+18;Flecha Elementa;Nenhum;Ação;10;"Você pode encantar uma flecha com
+um poder. Este encantamento dura 1 rodada. Qualquer
+alvo atingido por ela recebe um dano adicional de +8
+de fogo, frio ou elétrico (a sua escolha). ";0
+19;Flecha Fantasma;Nenhum;Ação;10;"Você pode encantar uma flecha com
+um poder. Este encantamento dura 1 rodada. Esta flecha
+atinge alvos incorpóreos e ignora paredes, portas,
+armaduras, escudos e qualquer coisa não seja orgânica
+ou sobrenatural. Causa +6 de dano adicional.";0
+20;Flechas Rápidas;Nenhum;Ação;10;"Você pode fazer 2 ataques com arco
+neste turno. Podendo escolher alvos diferentes.";0
+21;Furtividade;Nenhum;Suporte;0;" Você pode rolar 3d6 quando fizer testes
+de Agilidades para se movimentar em silencio, se esconder
+e furtar bolsos (se for proficiente).";0
+22;Guia Espiritual;Nenhum;Suporte;0;"Você possui um guia espiritual que entra
+em contato com você por sonhos. Este guia pode
+assumir qualquer forma, mas normalmente escolhe a
+forma de um animal. Ele irá lhe alertar se alguma coisa
+acontecer enquanto você estiver dormindo, e pode
+(quando o mestre achar necessário) alertar sobre algum
+perigo iminente ou uma mensagem do futuro.
+Você pode usar o guia espiritual para relembrar de fatos
+passados da sua vida, ou saber informações sobre animais e
+plantas. Para isto, basta meditar por alguns minutos.";0
+23;Medicina Natural;Nenhum;Suporte;0;"Você pode rolar 3d6 quando fizer testes
+de Inteligência para fazer curativos, e conhecer ervas
+medicinais. Este teste pode prevenir que um aliado
+contraia veneno ou doenças comuns.";0
+24;Rastrear;Nenhum;Ação;0;" Você pode seguir pegadas facilmente, e
+pode identificar o tipo de pegada a partir de um teste de
+Inteligência. Dificuldade pode variar entre 10 a 16.";0
+25;Sabedoria Selvagem;Nenhum;Suporte;0;"Você pode rolar 3d6 quando fizer testes
+de Inteligência referentes a conhecimentos de plantas,
+animais e natureza.";0
+26;Tiro Certeiro;Nenhum;Ação;10;"Você pode fazer um ataque normal à
+distância rolando 3d6. ";0
+27;Arquearia de Mestre;Nível 10;Suporte;0;Você sempre rola 3d6 para ataques usando arco.;0
+28;Caçador de [Monstro];Nível 5;Suporte;0;"Escolha um monstro (orc, troll, ogro, goblin
+ou qualquer outro monstro) quando comprar esta habilidade.
+Você sempre causa +6 de dano em todos os ataques
+contra esta criatura. Além de rolar sempre 3d6 quando fizer
+testes ligados ao conhecimento desta criatura.";0
+29;Camuflagem;"Nível 5; Furtividade";Suporte;0;"Você pode se camuflar em florestas usando
+galhos e folhas, ou nas sombras de becos e ruas usando
+uma capa preta e barro. Se fizer isso, você ganha um
+bônus de +4 nos testes para se esconder. ";0
+30;Chuva de Flechas 2;"Nível 5; Chuva de Flechas";Ação;10;"Você pode atirar varias flechas em um
+só ataque. Para cada flecha extra, gaste 10 pontos de
+mana. Você pode escolher alvos diferentes para cada
+flecha extra. Máximo 6 flechas por ataque e você pode
+escolher múltiplos alvos.
+Exemplo: Para fazer um ataque com 3 flechas, gaste
+20 pontos de mana.";0
+31;Companheiro Animal 3;"Nível 5; Companheiro Animal 2";Suporte;0;"Seu companheiro animal ganhará +1
+em três atributos a sua escolha.";0
+32;Companheiro Animal 4;"Nível 5; Companheiro Animal 3";Suporte;0;"Seu companheiro animal ganhará +10
+de Vida e Mana, e +1 em três atributos a sua escolha.";0
+33;Flecha Elemental 2;"Nível 5; Flecha Elemental";Ação;20;"Você pode encantar uma flecha com
+um poder. Este encantamento dura 1 rodada. Qualquer
+alvo atingido por ela recebe um dano adicional de +16
+de fogo, frio ou elétrico (a sua escolha). ";0
+34;Flecha Fantasma 2;"Nível 5; Flecha Fantasma";Ação;20;"Você pode encantar uma flecha com um poder.Este encantamento dura 1 rodada. Esta flecha
+atinge alvos incorpóreos e ignora paredes, portas,
+armaduras, escudos e qualquer coisa não seja orgânica
+ou sobrenatural. Causa +12 de dano adicional.";0
+35;Herbalismo;"Nível 5; Medicina Natural";Suporte;0;" Você sabe fazer muitas coisas com ervas
+raras. Se ficar um dia inteiro procurando estas ervas em
+uma floresta, você é capaz de encontrar uma delas (se
+elas existirem nesta floresta; consulte o mestre).
+Encontrando a Erva da Lua e a Folha de Garraka,
+você pode fazer uma pasta verde e aplicar em uma arma
+ou flecha. Ao atingir a pasta se solta e a vítima sentirá
+uma dor horrível. Se ela falhar em um teste de Vontade
+(dif 12), a vítima não poderá agir por 2 turnos
+devido a intensa dor.
+Encontrando a Flor de Isura e a Erva dos Passos,
+você pode fazer um chá que recupera 60 pontos de
+vida. O chá deve ser feito com água fervente. Ele perde
+seu efeito se não for tomado na hora. ";0

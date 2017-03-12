@@ -189,47 +189,80 @@ function valida(){
             <legend>CADASTRO DE PERSONAGEM <span>(Continuação)</span></legend>
          <form class="font_1" id="cadastro2" action="../paginas/add.php?act=cad2&personagem=<?php echo $personagem ?>" method="POST">
              <table class="cadCont">
-             <?php
+             <?php 
+               $dao=new Dao();
+               $search=new ModelSearchCriteria();
+               //print_r($classe);die;
                switch ($classe){
                 case 'guerreiro':
-                    $habilidades['guerreiro']=array('s01-ARREMESSO PODDEROSO','ta1-ATAQUE DE BÚFALO','a01-ATAQUE GIRATÓRIO','a02-ATAQUE SIMULTÂNEO','ta2-ATAQUE DO TROVÃO','s02-BRIGÃO','r01-COMBATE TÁTICO','r02-COMBATE EM GRUPO','s03-DEFLETOR','s04-FORÇA DE COMBATE','a03-GOLPE DEVASTADOR','tr1-GOLPE COM ESCUDO','a04-GRITO DE GUERRA','a05-INVESTIDA MORTAL','a06-KNOCK OUT','ta3-QUEBRA-ESCUDO','tr2-SEM ESCAPATÓRIA','s05-PERNAS FORTES','s06-PROTEGER ALIADO');
+                    //$habilidades['guerreiro']=array('s01-ARREMESSO PODDEROSO','ta1-ATAQUE DE BÚFALO','a01-ATAQUE GIRATÓRIO','a02-ATAQUE SIMULTÂNEO','ta2-ATAQUE DO TROVÃO','s02-BRIGÃO','r01-COMBATE TÁTICO','r02-COMBATE EM GRUPO','s03-DEFLETOR','s04-FORÇA DE COMBATE','a03-GOLPE DEVASTADOR','tr1-GOLPE COM ESCUDO','a04-GRITO DE GUERRA','a05-INVESTIDA MORTAL','a06-KNOCK OUT','ta3-QUEBRA-ESCUDO','tr2-SEM ESCAPATÓRIA','s05-PERNAS FORTES','s06-PROTEGER ALIADO');
+                    $search->settabela('tb_guerreiro');
+                    $habilidades=$dao->encontre($search);
+                    //print_r($habilidades);die;
                     break;
                 case 'paladino':
-                    $habilidades['paladino']=array('ts1-ANIMAL CELESTIAL 1','ts2-ANIMAL CELESTIAL 2','a01-ATAQUE GIRATÁRIO','tr1-AURA DIVINA','ts3-CAVALEIRO EXPERIENTE','r01-COMBATE TÁTICO','ts4-CONFIANÇA NOS DEUSES','ts5-CORPO SANTO','ta1-EXORCISMO','s01-FORÇA DE COMBATE','a02-GRITO DE GUERRA','ts6-INQUISITOR','ts7-INVESTIDA MONTADA','a03-INVESTIDA MORTAL','a04-JUSTIÇA FINAL','a05-KNOCK OUT','ts8-MONTARIA ESPECIAL 1','ts9-MONTARIA ESPECIAL 2','ta2-TOQUE DE CURA');
+                    //$habilidades['paladino']=array('ts1-ANIMAL CELESTIAL 1','ts2-ANIMAL CELESTIAL 2','a01-ATAQUE GIRATÁRIO','tr1-AURA DIVINA','ts3-CAVALEIRO EXPERIENTE','r01-COMBATE TÁTICO','ts4-CONFIANÇA NOS DEUSES','ts5-CORPO SANTO','ta1-EXORCISMO','s01-FORÇA DE COMBATE','a02-GRITO DE GUERRA','ts6-INQUISITOR','ts7-INVESTIDA MONTADA','a03-INVESTIDA MORTAL','a04-JUSTIÇA FINAL','a05-KNOCK OUT','ts8-MONTARIA ESPECIAL 1','ts9-MONTARIA ESPECIAL 2','ta2-TOQUE DE CURA');
+                    $search->settabela('tb_paladino');
+                    $habilidades=$dao->encontre($search);
+                    break;
+                case 'gatuno':
+                    $search->settabela('tb_gatuno');
+                    $habilidades=$dao->encontre($search);
+                    break;
+                case 'barbaro':
+                    $search->settabela('tb_barbaro');
+                    $habilidades=$dao->encontre($search);
+                    break;
+                case 'arqueiro':
+                    $search->settabela('tb_arqueiro');
+                    $habilidades=$dao->encontre($search);
                     break;
                }
               if(@$habilidades){
-                foreach($habilidades as $key => $item){
-                  echo '<div align=left class=cadTitulo>&nbsp&nbspClasse: '.strtoupper($key).'</div>';
+                  echo '<div align=left class=cadTitulo>&nbsp&nbspClasse: '.strtoupper($classe).'</div>';
                   echo '<div align=right class=cadTitulo>Escolha três habilidades para '.strtoupper($personagem).'&nbsp&nbsp</div>';
-                  $y=count($item)/3;
-                  $x=0;
-                  //echo $y.'<br>';
                   echo '<table class=bloco>';
-                    echo '<tr>';
-                      for($x=$x;$x<count($item);$x++){
-                        echo '<td><input type=checkbox name=\''.$item[$x].'\'> <span class=habLista>'.substr($item[$x],4).'</span>';
+                  //$y=count($habilidades)/3;
+                  echo '<tr>';
+                foreach($habilidades as $key => $item){
+                  //$x=0;
+                  //echo $y.'<br>';die;
+                    //echo '<tr>';
+                      //for($x=0;$x<count($habilidades);$x++){
+                       //print_r($item->gethabilidade());die;
+                        echo '<td><input type=checkbox name=\''.$item->getid().'\'title=\'';
+                           echo 'TIPO: '.($item->getTIPO())."\r\n";
+                           echo 'MANA: '.($item->getMANA())."\r\n"; 
+                           echo 'REQUISITOS: '.($item->getREQUISITOS())."\r\n";
+                           echo 'DESCRIÇÃO: '.($item->getDESCRICAO());                           
+                        echo '\'> <span title=\'';
+                           echo 'TIPO: '.($item->getTIPO())."\r\n";
+                           echo 'MANA: '.($item->getMANA())."\r\n"; 
+                           echo 'REQUISITOS: '.($item->getREQUISITOS())."\r\n";
+                           echo 'DESCRIÇÃO: '.($item->getDESCRICAO());
+                        echo '\' class=habLista>'.$item->gethabilidade().'</span>';
                         echo '</td>';
-                        switch ($x){
-                          case 3:
-                          case 7:
-                          case 11:
-                          case 15:
-                          case 19:
-                          case 23:
-                          case 27;
+                        switch ($item->getid()){
+                          case 4:
+                          case 8:
+                          case 12:
+                          case 16:
+                          case 20:
+                          case 24:
+                          case 28:
+                          case 32:
                           echo '</tr><tr>';
                           break;
                         }
-                      }
-                      echo '</tr>';
+                      //}
+                      //echo '</tr>';
                       /*$y=$y-3;
                       for($x=$x;$x<$y;$x++){
                         echo '<td><input type=radio name='.substr($item[$x],4).'> '.substr($item[$x],4);
                         echo '</td>';
                       }*/
-                    echo '</tr></table>';
                 }
+                    echo '</tr></table>';
               }
                 echo '<br><div align=center class=cadTitulo>Nos fale um pouco sobre '.strtoupper($personagem).'</div>';
                 echo '<div class=cadHistoria>';

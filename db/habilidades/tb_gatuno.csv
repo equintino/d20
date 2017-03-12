@@ -1,0 +1,106 @@
+id,HABILIDADE,REQUISITOS,TIPO,MANA ,DESCRICAO,excluido
+1,Acrobacia,Nenhum,Suporte,0,"Você pode rolar 3d6 quando fizer testes
+de Agilidades para equilibrar-se, saltar com precisão e
+cair sem se machucar.",0
+2,Agilidade de Combate,Nenhum,Suporte,0,"Você pode usar sua Agilidade para fazer
+ataques corporais com armas de FN 4 ou menos.",0
+3,Armadilhas 1,Nenhum,Ação,0,"Com um teste bem sucedido de Inteligência
+você pode perceber armadilhas. Para desarmá-
+-las você deve fazer um teste de Agilidade. A dificuldade
+para ambos os teste varia entre 10 a 16 (depende
+da armadilha).",0
+4,Armadilhas 2,Armadilhas 1,Ação,0,"Para armar uma armadilha você deve ter
+os materiais necessários e fazer um teste de Inteligência.
+A dificuldade para localizar e desarmar esta armadilha
+é o resultado do teste usado para armá-la.",0
+5,Arrombamento,Nenhum,Ação,0,"Usando um Kit de Arrombamento e
+realizando um teste bem sucedido de Agilidade você
+pode abrir fechaduras. A dificuldade varia com o tipo
+de fechadura (normalmente 12).",0
+6,Ataque Aleijador,Nenhum,Ação,20,"Faça um ataque normal à distância.
+Você pode acertar a junta do joelho ou o pé de seu
+oponente, comprometendo sua locomoção. Além de
+receber o dano, sempre que a vitima tentar se locomover
+(caminhar ou correr) receberá 10 pontos de dano.
+Este efeito dura até a vitima descansar por pelo menos
+1 minuto.",0
+7,Ataque Evasivo,Nenhum,Ação,5,"Faça um ataque normal com uma arma
+de peso 2 ou menos. Após o ataque você pode se esconder
+em algum lugar para impedir que o inimigo te
+Ataque.",0
+8,Ataque Redirecionado,Nenhum,Reação,10,"Quando alguém te atacar e errar, você
+pode direcionar o ataque do inimigo para outro inimigo
+adjacente a ele, e acertar automaticamente. Você deve
+estar usando uma arma corporal para fazer isto.",0
+9,Combate com Duas Armas 1,Nenhum,Suporte,0,"Você pode fazer um ataque para cada
+arma que estiver usando. A soma da FN das armas deve
+ser no máximo 2.",0
+10,Combate com Duas Armas 2,Combate com Duas Armas 1,Suporte,0,"Combate com Duas Armas 1.
+Descrição: Você pode fazer um ataque para cada
+arma que estiver usando. A soma da FN das armas deve
+ser no máximo 5.",0
+11,Combate com Duas Armas 3,Combate com Duas Armas 2,Suporte,0,"Combate com Duas Armas 2.
+Descrição: Você pode fazer um ataque para cada
+arma que estiver usando. A soma da FN das armas deve
+ser no máximo 8.",0
+12,Contatos no Crime,Nenhum,Suporte,0,"Você possui muitos contatos entre os
+grandes criminosos. Com isto você pode descobrir informações
+privilegiadas. Obviamente o mestre poderá
+restringir informações que forem problemáticas para a
+aventura.
+Você também pode comprar mercadorias roubadas
+pela metade do preço no mercado negro (encontrado
+apenas nas grandes cidades).",0
+13,Evasão,Nenhum,Reação,20,"Se o seu inimigo fizer um ataque corporal
+e acertar, você pode declarar evasão, e obrigar o
+inimigo a rolar novamente os dados. Só pode usar esta
+habilidade uma vez por rodada.",0
+14,Falhas da Armadura,Nenhum,Suporte,0,"Você sabe como acertar ataques entre as
+frestas e falhas das armaduras do inimigo. Ignore sempre
+o bônus de armadura da defesa do oponente.",0
+15,Fuga de Mestre,Nenhum,Suporte,0,"Você pode rolar 3d6 quando fizer testes
+de Agilidade para despistar oponentes e dar nós. Você
+também pode escapar de nós ou correntes vencendo
+um teste de Agilidade.",0
+16,Furtividade,Nenhum,Suporte,0,"Você pode rolar 3d6 quando fizer testes
+de Agilidades para se movimentar em silêncio, se esconder
+e furtar bolsos (se for proficiente).",0
+17,Golpes Rápidos,Nenhum,Ação,20,"Você pode fazer dois ataques corporais
+em uma ação, usando uma arma leve (Peso 2 ou menos).",0
+18,Mentiroso,Nenhum,Ação,0,"Você é um perito na arte do disfarce e do
+blefe. Role 3d6 quando fizer testes de Inteligência para
+mentir, se disfarçar, intimidar ou imitar outra pessoa.",0
+19,Mestre das Adagas 1,Nenhum,Suporte,0,"Você pode arremessar duas armas de arremesso
+de peso 1 em um turno.",0
+20,Mestre das Adagas 2,Mestre das Adagas 1,Suporte,0,"Você pode arremessar quatro armas de
+arremesso de peso 1 em um turno.",0
+21,Truque Sujo,Nenhum,Ação,10,"Quando estiver em distância corporal do
+oponente e ele estiver te vendo, faça um teste de Inteligência
+(Dificuldade 7 + Int do oponente). Se vencer,
+você fez alguns movimentos de corpo que enganaram
+o oponente, o fazendo perder equilíbrio ou o deixando
+confuso. Ele não poderá agir no próximo turno.",0
+22,Adagas Improvisadas,Nível 5,Suporte,0,"Você pode pegar garrafas quebradas, lascas
+de madeira, pedaços de vidro e usar como se fosse uma
+adaga (podendo usar qualquer habilidade relacionada).",0
+23,Camuflagem,Nível 5; Furtividade,Suporte,0,"Você pode se camuflar em florestas
+usando galhos e folhas, ou nas sombras de becos e ruas
+usando uma capa preta e barro. Se fizer isso, você ganha
+um bônus de +4 nos testes para se esconder.",0
+24,Golpes Rápidos 2,Nível 5; Golpes Rápidos,Ação,20,"Você pode fazer quatro ataques corporais
+em uma ação, usando uma arma leve (Peso 2 ou
+Menos).",0
+25,Golpes Rápidos 3,Nível 10; Golpes Rápidos 2,Ação,30,"Você pode fazer 8 ataques corporais em
+uma ação usando uma arma de peso 2 ou menos.",0
+26,Improvisação Ladina,Nível 5,Suporte,0,"Você pode pegar quaisquer objetos que
+encontrar para montar armadilhas ou abrir fechadura
+sem ter o kit de arrombamento.",0
+27,Mestre das Adagas 3,Nível 5; Mestre das Adagas 2,Suporte,0,"Você pode arremessar cinco armas de
+arremesso de peso 1 em um turno.",0
+28,Mestre das Adagas 4,Nível 5; Mestre das Adagas 3,Suporte,0,"Você pode arremessar seis armas de arremesso
+de peso 1 em um turno.",0
+29,Mestre Especialista,Nível 10,Suporte,0,"Você rola 4d6 em todos os testes que
+você for rolar 3d6.",0
+30,Movimentos Evasivos,Nível 5,Suporte,0,"Você ganha +1 na sua defesa para cada
+2 pontos que tiver em Agilidade. Esta habilidade só
+funciona se você estiver sem armadura.",0

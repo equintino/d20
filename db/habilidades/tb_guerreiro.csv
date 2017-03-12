@@ -1,0 +1,98 @@
+id;HABILIDADE;REQUISITOS;TIPO;MANA ;DESCRIÇÃO;excluido
+1;Arremesso Poderoso;Nenhum;Suporte;0;"Você pode usar sua Força em vez de sua
+Agilidade para atacar com armas de arremesso (como
+lanças e machadinhas).";0
+2;Ataque do Búfalo;Nenhum;Ação;10;"Você pode fazer um ataque normal
+usando uma arma de FN 5 ou mais. Se acertar, alem do
+dano, o oponente cairá para traz (a menos que ele seja
+2 vezes mais pesado que você).";0
+3;Ataque Giratório;Nenhum;Ação;10;"Este ataque que pode acertar todos os
+oponentes adjacentes. Faça um ataque para cada um
+destes oponentes.";0
+4;Ataque Simultâneo;Nenhum;Ação;20;"Faça um ataque normal contra um oponente.
+Se acertar, todos aliados que estiverem adjacentes
+ao mesmo oponente, poderão fazer um ataque
+normal extra.";0
+5;Ataque do Trovão;Nenhum;Ação;20;"Faça um ataque corporal com uma arma
+de FN 5 ou mais, para causar +10 pontos de dano (elétrico)A vitima deve ser bem sucedida em um teste de
+Força (Dificuldade 12) ou ficará paralisada por uma rodada
+devido ao choque.";0
+6;Brigão;Nenhum;Suporte;0;Seu ataque de soco causa +2 de dano.;0
+7;Combate Tático;Nenhum;Reação;0;"Se você derrotar um oponente, você ganha
+imediatamente um ataque extra em qualquer oponente
+que esteja adjacente.";0
+8;Combate em Grupo;Nenhum;Reação;0;"Você ganha +1 nos ataques corporais
+para cada aliado que esteja em combate corporal com a
+mesma criatura que você.";0
+9;Defletor;Nenhum;Suporte;0;"Quando estiver usando um escudo ou
+arma de duas mãos, você recebe Defesa +2 contra ataques
+a distância.";0
+10;Força de Combate;Nenhum;Suporte;0;"Todos seus ataques corporais causam +1 de
+dano para cada 2 pontos de força que você tiver";0
+11;Golpe Devastador;Nenhum;Ação;30;"Você pode fazer um ataque corporal que
+causa o dobro de dano, e a vítima não poderá agir no
+próximo turno.";0
+12;Golpe com Escudo;Nenhum;Reação;0;"Se fizer um ataque e errar, você pode fazer
+um ataque extra com seu escudo que causará dano
+igual a sua força. O oponente também deve vencer um
+teste de Força (dif 12) ou cairá no chão.";0
+13;Grito de Guerra;Nenhum;Ação;10;"Você pode dar um grito fervoroso que
+motiva todos seus aliados. Eles recebem (assim como
+você) +1 em todas as rolagens até o final da batalha.
+Este bônus não é cumulativo.";0
+14;Investida Mortal;Nenhum;Ação;10;"Em carga você pode desferir um poderoso
+golpe. Se estiver distante do oponente, você pode
+correr até ele e fazer um ataque normal que causa +10
+de dano.";0
+15;Knock Out;Nenhum;Ação;10;"Faça um ataque normal com uma arma
+de FN 5 ou mais. O oponente recebe metade do dano,
+mas não poderá fazer nada no seu próximo turno. E todos
+os turnos seguintes (até o final da batalha) terá que
+testar Força (dificuldade 12) antes de poder agir.";0
+16;Quebra-Escudo;Nenhum;Ação;10;"Você deve fazer este ataque utilizando
+uma arma pesada (FN 5 ou mais). Se acertar o ataque,
+não causará dano algum no oponente, porém, seu escudo
+ou armadura será destruído.";0
+17;Sem Escapatória;Nenhum;Reação;0;"Se um oponente que está adjacente a
+você tentar se afastar (ou se levantar), você poderá fazer
+um ataque normal (sem habilidades de ação) contra
+ele. Se acertar, além de causar o dano, o oponente não
+poderá se movimentar neste turno.";0
+18;Pernas Fortes;Nenhum;Suporte;0;"Você sempre rola 3d6 em testes de Força
+para não ser derrubado.";0
+19;Proteger Aliado;Nenhum;Suporte;0;"Sempre que seus aliados forem atacados,
+você ajudará com seu escudo. Se você usa um escudo
+grande, todos aliados adjacentes a você recebem Defesa
++1.";0
+20;Força de Combate 2;"Nível 5; Força de Combate";Suporte;0;"Todos seus ataques corporais causam +1
+de dano para cada ponto de força que você tiver.";0
+21;Força de Explosão;Nível 5;Suporte;0;"Todos seus ataques corporais derrubam
+o inimigo no chão (menos inimigos que sejam 2 vezes
+mais pesados que você). Ele ainda pode fazer um teste
+de Força (dif: [sua For] +4) para não cair.
+Especial: Se você usar qualquer habilidade que derrube
+o oponente, a dificuldade do teste de Força aumenta
+Para +4.";0
+22;Golpe Devastador 2;"Nível 5; Golpe Devastador";Ação;60;"Você pode fazer um ataque corporal que
+causa o triplo de dano, e a vítima não poderá agir no
+próximo turno.";0
+23;Grito de Guerra 2;"Nível 5; Grito de Guerra";Ação;10;"Você pode dar um grito fervoroso que
+motiva todos seus aliados. Eles recebem (assim como
+você) +2 em todas as rolagens até o final da batalha.
+Este bônus não é cumulativo.";0
+24;Grito de Intimidação;"Nível 5; Grito de Guerra";Ação;10;"Você pode dar um grito para intimidar
+seus inimigos. Cada inimigo que estiver na batalha
+deve vencer um teste de Vontade (Dif 14) ou ficará
+paralisado por 2 turnos.";0
+25;Guerreiro de Aço;Nível 5;Suporte;0;"O bônus de defesa por equipamento (armadura
+e escudo) pode somar até +6.";0
+26;Implacável;Nível 5;Suporte;0;"Sempre que errar um ataque corporal,
+você causa dano igual à metade do dano do ataque.";0
+27;Investida Forte;Nível 5;Suporte;0;"Sempre que você fizer uma investida
+carregando um escudo, o oponente deve testar Força
+(Dif = [sua For] +8). Se falhar, ele cairá no chão.";0
+28;Matador de Dragão;Nível 10;Ação;50;"Faça um ataque corporal normal, se
+acertar reduza a vida do oponente pela metade.";0
+29;Valor da Vitória;Nível 5;Reação;0;"Cada vez que você derrota um oponente
+(isso inclui se ele se render ou fugir após a batalha)
+você recupera 10 pontos de vida e 10 pontos de mana.";0

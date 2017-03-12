@@ -118,5 +118,14 @@
 	if (array_key_exists('PROFICIENCIA', $properties)){
 	  $model->setPROFICIENCIA($properties['PROFICIENCIA']);
 	}
+	if (array_key_exists('REQUISITOS', $properties)){
+	  $model->setREQUISITOS($properties['REQUISITOS']);
+	}
+	if (array_key_exists('MANA', $properties)){
+	  $model->setMANA($properties['MANA']);
+	}
+	if (array_key_exists('DESCRICAO', $properties)){
+	  $model->setDESCRICAO($properties['DESCRICAO']);
+	}
   } 
  }

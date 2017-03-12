@@ -39,6 +39,9 @@
  private $figura;
  private $BONUS_ATRIBUTO;
  private $PROFICIENCIA;
+ private $REQUISITOS;
+ private $MANA;
+ private $DESCRICAO;
  public function getid(){
 	return $this->id;
  }
@@ -272,5 +275,23 @@
  }
  public function setPROFICIENCIA($PROFICIENCIA ){
 	$this->PROFICIENCIA=$PROFICIENCIA;
+ }
+ public function getREQUISITOS(){
+	return $this->REQUISITOS;
+ }
+ public function setREQUISITOS($REQUISITOS ){
+	$this->REQUISITOS=$REQUISITOS;
+ }
+ public function getMANA(){
+	return $this->MANA;
+ }
+ public function setMANA($MANA ){
+	$this->MANA=$MANA;
+ }
+ public function getDESCRICAO(){
+	return $this->DESCRICAO;
+ }
+ public function setDESCRICAO($DESCRICAO ){
+	$this->DESCRICAO=$DESCRICAO;
  }
  }

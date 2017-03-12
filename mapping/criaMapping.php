@@ -6,6 +6,7 @@
     $variaveis2=array('id_atrib','FORCA','AGILIDADE','INTELIGENCIA','VONTADE','PV','PM','PE','CLASSE_COMUM','HABILIDADE_AUTOMATICA');
     $variaveis3=array('ARMA','CUSTO','DANO','TIPO','FN','GRUPO','OBS','figura');
     $variaveis4=array('BONUS_ATRIBUTO','PROFICIENCIA');
+    $variaveis5=array('REQUISITOS','MANA','DESCRICAO');
     $texto="<?php \r\n class modelMapper{\r\n";
     $texto .= '  public static function map(Model $model, array $properties){'."\r\n";
     foreach($variaveis as $item){
@@ -24,6 +25,11 @@
               "\t".'}'."\r\n";
     }
     foreach($variaveis4 as $item){
+      $texto .="\t".'if (array_key_exists(\''.$item.'\', $properties)){'."\r\n".
+              "\t".'  $model->set'.$item.'($properties[\''.$item.'\']);'."\r\n".
+              "\t".'}'."\r\n";
+    }
+    foreach($variaveis5 as $item){
       $texto .="\t".'if (array_key_exists(\''.$item.'\', $properties)){'."\r\n".
               "\t".'  $model->set'.$item.'($properties[\''.$item.'\']);'."\r\n".
               "\t".'}'."\r\n";

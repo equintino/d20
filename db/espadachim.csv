@@ -1,0 +1,31 @@
+id;HABILIDADE;REQUISITO;TIPO;MANA;DESCRICAO;OBS;excluido
+1;ACROBACIA;NENHUM;SUPORTE;0;Vocˆ pode rolar 3d6 quando fizer testes de Agilidades para equilibrar-se, saltar com precis?o e cair sem se machucar.;;0
+2;AGILIDADE DE COMBATE;NENHUM;SUPORTE;0;Vocˆ pode usar sua Agilidade para fazer ataques corporais com armas de FN 4 ou menos.;;0
+3;ATAQUE GIRAT?RIO;NENHUM;A€?O;10;Este ataque pode acertar todos os oponentes adjacentes. Fa‡a um ataque para cada um destes oponentes.;;0
+4;ATAQUE REDIRECIONADO;NENHUM;REA€?O;0;Quando algu‚m te atacar e errar, vocˆ adjacente a ele, e acertar automaticamente. Vocˆ deve estar usando uma arma corporal para fazer isto.;;0
+5;COMBATE COM DUAS ARMAS 1;NENHUM;SUPORTE;0;Vocˆ pode fazer um ataque para cada arma que estiver usando. A soma da FN das armas deve ser no m ximo 2.;;0
+6;COMBATE COM DUAS ARMAS 2;COMBATE COM DUAS ARMAS 1;SUPORTE;0;Vocˆ pode fazer um ataque para cada arma que estiver usando. A soma da FN das armas deve ser no m ximo 5.;;0
+7;COMBATE COM DUAS ARMAS 3;COMBATE COM DUAS ARMAS 2;SUPORTE;0;Vocˆ pode fazer um ataque para cada arma que estiver usando. A soma da FN das armas deve ser no m ximo 8.;;0
+8;COMBATE T?TICO;NENHUM;REA€?O;0;Se vocˆ derrotar um oponente, vocˆ ganha imediatamente um ataque extra em qualquer oponente que esteja adjacente.;;0
+9;CORTE ARTERIAL;NENHUM;A€?O;30;Fa‡a um ataque corporal com uma arma de corte. Se acertar, a v¡tima come‡ar  a sangrar sem parar perdendo 10 pontos de dano a cada turno seguinte. S¢ poder  parar o sangramento se for feito curativos o mais r pido poss¡vel.;Criaturas imunes a acertos cr¡ticos e que n?o possuem pontos vitais ou sangramento s?o imunes a este ataque.;0
+10;CORTE DO VENTO;NENHUM;A€?O;5;Vocˆ ‚ capaz de cortar o ar, enviando uma rajada de vento que corta alvos distantes. Fa‡a um ataque corporal (corte) para acertar alvos … distƒncia.;;0
+11;DAN€A DE ESPADAS 1;NENHUM;A€?O;30;Vocˆ come‡a uma dan‡a que acompanha o fluxo da batalha. Esta dan‡a dura at‚ o final da batalha ou at‚ vocˆ se desconcentrar (cair no ch?o, tontear, etc.). Durante este per¡odo vocˆ ganha temporariamente Agilidade +2.;;0
+12;DESARMAR OPONENTE;NENHUM;A€?O;20;Vocˆ pode usar a sua arma para tirar a arma do seu oponente. Fa‡a um teste resistido de Agilidade contra seu inimigo. Se vocˆ vencer, a arma dele cair  no ch?o entre vocˆ e ele.;;0
+13;ESCUDO IMPROVISADO;NENHUM;SUPORTE;;Vocˆ pode usar qualquer coisa que esteja em uma de suas m?os como se fosse um escudo pequeno (defesa +1). Se usar uma capa ou peda‡o grande de pano, o b“nus ‚ +2.;;0
+14;ESPADA FANTASMA;NENHUM;A€?O;15;Uma espada espectral surge junto com a sua ao fazer este ataque. Fa‡a um ataque com sua espada e cause +8 pontos de dano (Corte). Este ataque pode ferir criaturas incorp¢reas. n?o pode ultrapassar +4.;;0
+15;FALHAS DA ARMADURA;NENHUM;SUPORTE;;Vocˆ sabe como acertar ataques entre as frestas e falhas das armaduras do inimigo. Ignore sempre o b“nus de armadura da defesa do oponente.;;0
+16;INVESTIDA MORTAL;NENHUM;A€?O;10;Em carga vocˆ pode desferir um poderoso golpe. Se estiver distante do oponente, vocˆ pode correr at‚ ele e fazer um ataque normal que causa +10 de dano.;;0
+17;LAMINA DAS CHAMAS;NENHUM;A€?O;10;Vocˆ carrega sua arma (de corte) com uma energia que incendeia a lƒmina da sua arma. Sua arma estar  em chamas por at‚ 1 rodada. O ataque com esta arma causar  +8 de dano adicional (fogo).;;0
+18;SEM ESCAPAT?RIA;NENHUM;REA€?O;;Se um oponente que est  adjacente a vocˆ tentar se afastar (ou se levantar), vocˆ poder  fazer um ataque normal (sem habilidades de a‡?o) contra ele. Se acertar, al‚m de causar o dano, o oponente n?o poder  se movimentar neste turno.;;0
+19;TEMPESDADE DE LAMINAS;NENHUM;A€?O;30;Fa‡a um ataque corporal normal com uma arma de corte. Se acertar, cause o dano e fa‡a um ataque extra com um redutor de -1 na rolagem. Se acertar este tamb‚m, siga com ataques extras, mas sempre aumentando o redutor, at‚ errar um ataque.;;0
+20;TIRO CERTEIRO;NENHUM;A€?O;10;Vocˆ pode fazer um ataque normal … distƒncia rolando 3d6.;;0
+21;TOUCHE;NENHUM;A€?O;10;Vocˆ pode rolar 3d6 em um ataque corporal com uma arma leve (peso 3);;0
+22;ATAQUE DA HYDRA;NENHUM;A€?O;30;Fa‡a um ataque normal com uma arma de uma m?o. Se acertar o ataque role 1d6 e multiplique o dano pelo resultado.;HABILIDADE AVAN€ADA;0
+23;DAN€A DE ESPADAS 2;"N?VEL 5;DAN€A DE ESPADAS 1";A€?O;40;Vocˆ come‡a uma dan‡a que acompanha o fluxo da batalha. Esta dan‡a dura at‚ o final da batalha ou at‚ vocˆ se desconcentrar (cair no ch?o, tontear, etc.). Durante este per¡odo vocˆ ganha temporariamente Agilidade +4.;;0
+24;CORA€?O DA BATALHA;N?VEL 5 ;SUPORTE;;Sempre que receber dano, vocˆ recupera 5 pontos de mana. S¢ pode ganhar 5 de mana por turno.;;0
+25;IMPLAC?VEL;N?VEL 5;SUPORTE;;Sempre que errar um ataque corporal, vocˆ causa dano igual … metade do dano do ataque (arredondando para baixo).;;0
+26;MOVIMENTOS EVASIVOS;N?VEL 5;SUPORTE;;Vocˆ ganha +1 na sua defesa para cada 2 pontos que tiver em Agilidade. Esta habilidade s¢ funciona se vocˆ estiver sem armadura.;;0
+27;NOVE DEM?NIOS;N?VEL 5;A€?O;25;Fa‡a um ataque corporal normal com uma arma de uma m?o. Se acertar, a vitima deve vencer um teste de Vontade (dificuldade 14) ou ficar  paralisada por 2 turnos. A vitima estar  vivendo em sua mente um pesadelo horr¡vel e assustador.;Esta t‚cnica secreta ‚ proibida por muitos espadachins.;0
+28;RETALHAMENTO;N?VEL 5;REA€?O;;Se vocˆ fizer um acerto cr¡tico, role 1d6. Se cair 6 vocˆ decapitou a v¡tima matando-a na hora (exceto se ela for imune a cr¡tico).;;0
+29;SENHOR DAS LAMINAS;N?VEL 10;REA€?O;30;Sempre que fizer uma a‡?o de ataque com uma arma corporal de corte em um turno, vocˆ pode fazer um ataque extra com esta mesma arma.;;0
+30;VALOR DA VIT?RIA;N?VEL 5;REA€?O;;Cada vez que vocˆ derrota um oponente (isso inclui se ele se render ou fugir ap¢s a batalha) vocˆ recupera 10 pontos de vida e 10 pontos de mana.;;0
