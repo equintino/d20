@@ -90,11 +90,12 @@
                        echo '<div class=vantagens>';
                        echo '<caption class=fichaTitulo>Habilidades</caption>';
 					   echo '<br>';
+                                           //print_r($item->gethabilidade());die;
 					   $hab=explode('/',$item->gethabilidade());
 					   echo '<ul>';
-						   echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.str_replace('_',' ',substr($hab[0],4)).'</li><br>';
-						   echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.str_replace('_',' ',substr($hab[1],4)).'</li><br>';
-						   echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.str_replace('_',' ',substr($hab[2],4)).'</li>';
+						   echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.str_replace('_',' ',$hab[0]).'</li><br>';
+						   echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.str_replace('_',' ',$hab[1]).'</li><br>';
+						   echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.str_replace('_',' ',$hab[2]).'</li>';
 					   echo '<ul>';
                        echo '<div class=escudo><img height=80px src=../web/imagens/escudo.png /></div>';
                        echo '<div class=defesa>Defesa</div>';

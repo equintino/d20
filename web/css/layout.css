@@ -154,11 +154,21 @@ body{
   }
 }
 .texto{
-    margin: 0 40px;
+    margin: 0 80px;
+    #border: 1px solid red;
 }
 .cad{
-    width: 700px;
-    margin: 73px 122px;
+    width: 900px;
+    margin: 73px 20px;
+    height: 690px;
+    overflow: auto;
+}
+.cad table{
+    margin: 0 80px;
+}
+.cad2{
+    width: 900px;
+    margin: 73px 20px;
     height: 690px;
     overflow: auto;
 }
@@ -192,8 +202,8 @@ fieldset legend{
 }
 .texto{
     position: absolute;
-    top: 360px;
-    width: 450px;
+    top: 370px;
+    width: 600px;
     height: 150px;
     overflow: auto;
     #border: 5px solid green;
@@ -203,7 +213,7 @@ fieldset legend{
 .botao{
     position: absolute;
     top: 500px;
-    right: 125px;
+    right: 100px;
     font-family: arial;
     font-weight: 700;
     border: none;
@@ -213,7 +223,7 @@ fieldset legend{
 .botao2{
     position: absolute;
     top: 500px;
-    right: 200px;
+    right: 180px;
     font-family: arial;
     font-weight: 700;
     border: none;
@@ -545,7 +555,7 @@ fieldset legend{
     font-size: 16px;
     color: white;
     top: 10px;
-    left: 620px;
+    left: 700px;
 }
 .cad2Hab-verde{
     background-color: #007c00;

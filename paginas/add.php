@@ -91,7 +91,7 @@
    echo '<br><br>';
    print_r($dadosRaca);
    die;*/
-        //print_r($dadosClasse);die;
+        //print_r($search);die;
    //print_r($_GET);echo '<br><br>';
    //print_r($_POST);echo '<br><br>';
    //print_r($model);die;
@@ -134,6 +134,7 @@
         $dadosRaca->setPE(0);
         //if()
         //print_r($model);echo '<br><br>';
+        //print_r($dadosClasse);die;
         $bonus=explode(';',$dadosClasse->getBONUS_ATRIBUTO());
         switch($bonus[0][0]){
            case 'F':
