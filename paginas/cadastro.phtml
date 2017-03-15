@@ -144,13 +144,14 @@ function valida(){
                    echo '<tr><td align=right> '.$keys.': </td>';
                     echo '<td><select name=classe>';
                       echo '<option>&nbsp</option>';
-                      echo '<option value=bruxo>BRUXO</option>';
+                      echo '<option value=espadachim>ESPADACHIM</option>';
                       echo '<option value=guerreiro>GUERREIRO</option>';
-                      echo '<option value=gatuno>GATUNO</option>';
-                      echo '<option value=sacerdote>SACERDOTE</option>';
+                      echo '<option value=barbaro>BÁRBARO</option>';
                       echo '<option value=paladino>PALADINO</option>';
                       echo '<option value=arqueiro>ARQUEIRO</option>';
+                      echo '<option value=gatuno>GATUNO</option>';
                       echo '<option value=mago>MAGO</option>';
+                      echo '<option value=sacerdote>SACERDOTE</option>';
                     echo '</select></td></tr>';
                  }elseif($item=='tendencia1'){
                   echo '<tr><td align=right> '.$keys.': </td>';
@@ -195,27 +196,40 @@ function valida(){
                $dao=new Dao();
                $search=new ModelSearchCriteria();
                switch ($classe){
+                case 'espadachim':
+                    $search->settabela('tb_espadachim');
+                    $habilidades=$dao->encontre($search);
+                    break;
                 case 'guerreiro':
                     $search->settabela('tb_guerreiro');
-                    $habilidades=$dao->encontre($search);
-                    break;
-                case 'paladino':
-                    $search->settabela('tb_paladino');
-                    $habilidades=$dao->encontre($search);
-                    break;
-                case 'gatuno':
-                    $search->settabela('tb_gatuno');
                     $habilidades=$dao->encontre($search);
                     break;
                 case 'barbaro':
                     $search->settabela('tb_barbaro');
                     $habilidades=$dao->encontre($search);
                     break;
+                case 'paladino':
+                    $search->settabela('tb_paladino');
+                    $habilidades=$dao->encontre($search);
+                    break;
                 case 'arqueiro':
                     $search->settabela('tb_arqueiro');
                     $habilidades=$dao->encontre($search);
                     break;
+                case 'gatuno':
+                    $search->settabela('tb_gatuno');
+                    $habilidades=$dao->encontre($search);
+                    break;
+                case 'mago':
+                    $search->settabela('tb_mago');
+                    $habilidades=$dao->encontre($search);
+                    break;
+                case 'sacerdote':
+                    $search->settabela('tb_sacerdote');
+                    $habilidades=$dao->encontre($search);
+                    break;
                }
+               //print_r($habilidades);die;
               if(@$habilidades){
                   echo '<div align=left class=cadTitulo>&nbsp&nbspClasse: '.strtoupper($classe).'</div>';
                   echo '<div align=right class=cadTitulo>Escolha três habilidades para '.strtoupper($personagem).'&nbsp&nbsp</div>';
