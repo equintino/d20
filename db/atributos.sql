@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 28-Fev-2017 às 04:00
--- Versão do servidor: 10.1.21-MariaDB
--- PHP Version: 7.1.1
+-- Generation Time: 16-Mar-2017 às 03:10
+-- Versão do servidor: 10.1.19-MariaDB
+-- PHP Version: 7.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -27,15 +27,40 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `atributos` (
-  `F` int(5) NOT NULL,
-  `A` int(5) NOT NULL,
-  `I` int(5) NOT NULL,
-  `V` int(5) NOT NULL,
-  `PV` int(5) NOT NULL,
-  `PM` int(5) NOT NULL,
-  `PE` int(5) NOT NULL
+  `id_atrib` int(5) NOT NULL,
+  `FORCA` int(5) DEFAULT NULL,
+  `AGILIDADE` int(5) DEFAULT NULL,
+  `INTELIGENCIA` int(5) DEFAULT NULL,
+  `VONTADE` int(5) DEFAULT NULL,
+  `PV` int(5) DEFAULT NULL,
+  `PM` int(5) DEFAULT NULL,
+  `PE` int(5) DEFAULT NULL,
+  `excluido` enum('0','1') NOT NULL DEFAULT '0',
+  `personagem` varchar(50) NOT NULL,
+  `CLASSE_COMUM` varchar(100) DEFAULT NULL,
+  `HABILIDADE_AUTOMATICA` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `atributos`
+--
+ALTER TABLE `atributos`
+  ADD PRIMARY KEY (`id_atrib`),
+  ADD UNIQUE KEY `personagem` (`personagem`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `atributos`
+--
+ALTER TABLE `atributos`
+  MODIFY `id_atrib` int(5) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 27-Fev-2017 às 23:41
--- Versão do servidor: 10.1.21-MariaDB
--- PHP Version: 7.1.1
+-- Generation Time: 16-Mar-2017 às 03:10
+-- Versão do servidor: 10.1.19-MariaDB
+-- PHP Version: 7.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -44,7 +44,8 @@ CREATE TABLE `personagem` (
   `altura` varchar(10) DEFAULT NULL,
   `peso` varchar(10) DEFAULT NULL,
   `cidade` varchar(100) DEFAULT NULL,
-  `motivacao` text
+  `motivacao` text,
+  `breveHistoria` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
