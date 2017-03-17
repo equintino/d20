@@ -237,11 +237,11 @@ function valida(){
                   //$y=count($habilidades)/3;
                   echo '<tr>';
                 foreach($habilidades as $key => $item){
-                  //$x=0;
-                  //echo $y.'<br>';die;
-                    //echo '<tr>';
-                      //for($x=0;$x<count($habilidades);$x++){
-                       //print_r($item->gethabilidade());die;
+                       $requisitos=explode (';',$item->getREQUISITOS());
+                       
+                       if(in_array('Nível 5',$requisitos) || in_array('Nível 10',$requisitos)){
+                          $cor='red';
+                       }   
                         echo '<td><input type=checkbox name=\''.$item->gethabilidade().'\'title=\'';
                            echo 'TIPO: '.($item->getTIPO())."\r\n";
                            echo 'MANA: '.($item->getMANA())."\r\n"; 
@@ -252,7 +252,7 @@ function valida(){
                            echo 'MANA: '.($item->getMANA())."\r\n"; 
                            echo 'REQUISITOS: '.($item->getREQUISITOS())."\r\n";
                            echo 'DESCRIÇÃO: '.($item->getDESCRICAO());
-                        echo '\' class=habLista>'.$item->gethabilidade().'</span>';
+                        echo '\' class=habLista><font color='.$cor.'>'.$item->gethabilidade().'</font>';
                         echo '</td>';
                         switch ($item->getid()){
                           case 4:
