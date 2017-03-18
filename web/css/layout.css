@@ -175,10 +175,19 @@ body{
 .lista{
     width: 700px;
     margin: 73px 122px;
-    overflow: auto;
+    #overflow: auto;
+    border: 2px solid white;    
+    background:rgba(255,255,255, 0.8);
+    font-weight: bolder;
+    height: 360px;
+    width: 750px;
 }
 .lista table{
     margin: 10px 30px;
+}
+.lista legend{
+    font-size: 30px;
+    color: brown;    
 }
 .disabled {
    pointer-events: none;

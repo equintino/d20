@@ -314,7 +314,7 @@ function valida(){
                   echo '<div align=left class=cadTitulo>&nbsp&nbspClasse: '.strtoupper($_GET['classe']).'</div>';
 				  echo '<div class="moeda cadTitulo"><img height= 20px src=../web/imagens/coin.gif />400</div>';
                   echo '<div align=right class=cadTitulo>Armamentos para '.strtoupper($_GET['personagem']).'&nbsp&nbsp</div>';
-                       echo '<fieldset class="fichaTitulo armasTitulo">';
+                       echo '<fieldset>';
                           echo '<legend>Distância</legend>';
                           echo '<div id="armamento" class=armas>';
                              $search->settabela('tb_armas_distancia');
@@ -352,7 +352,7 @@ function valida(){
                              }
                           echo '</div>';
                        echo '</fieldset>';
-                       echo '<fieldset class="fichaTitulo armasTitulo">';
+                       echo '<fieldset>';
                           echo '<legend>Corporais</legend>';
                           echo '<div id="armamento" class=armas>';
                              $search->settabela('tb_armas_corporais');
