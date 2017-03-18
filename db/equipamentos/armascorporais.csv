@@ -1,0 +1,29 @@
+"id","ARMA","CUSTO","DANO","TIPO","FN","GRUPO","OBS","excluido"
+1,"Soco",0,"For","Contusão",0,"Desarmado",,0
+2,"Adaga",50,6,"Corte ou Perfuração",1,"Arma Simples","Arremesso",0
+3,"Espada Curta",100,8,"Corte ou Perfuração",2,"Arma Simples",,0
+4,"Espada Longa",150,10,"Corte ou Perfuração","4(2)","Arma Complexa",,0
+5,"Espada Grande",200,12,"Corte ou Perfuração","8(4)","Arma Complexa",,0
+6,"Katar",150,8,"Corte ou Perfuração",1,"Arma Simples",,0
+7,"Sabre",200,10,"Corte ou Perfuração",3,"Arma Simples",,0
+8,"Rapiera",200,10,"Perfuração",2,"Arma Complexa",,0
+9,"Cimitarra",250,11," Corte","5(3)","Arma Complexa",,0
+10,"Claymore",300,13,"Corte ou Perfuração","8(4)","Arma Complexa",,0
+11,"Machadinha",100,8,"Corte",2,"Arma Simples","Arremesso",0
+12,"Machado de Batalha",150,10,"Corte","4(2)","Arma Complexa",,0
+13,"Machado Pesado",200,12,"Corte","8(4)","Arma Complexa",,0
+14,"Clava",50,6,"Contusão",2,"Arma Simples",,0
+15,"Martelo Leve",100,8,"Contusão","4(2)","Arma Complexa",,0
+16,"Martelo de Guerra",150,10,"Contusão","6(3)","Arma Complexa",,0
+17,"Martelo Pesado",200,12,"Contusão","8(4)","Arma Complexa",,0
+18,"Maça leve",100,8,"Contusão","4(2)","Arma Simples",,0
+19,"Maça Pesada",150,10,"Contusão","6(3)","Arma Complexa",,0
+20,"Mangual",100,10,"Contusão","7(4)","Arma Complexa",,0
+21,"Picareta Simples",100,8,"Perfuração",2,"Arma Simples",,0
+22,"Picareta de Guerra",150,10,"Perfuração","4(2)","Arma Complexa",,0
+23,"Bastão",50,6,"Contusão",1,"Arma Simples","Duas Mãos",0
+24,"Lança",100,8,"Perfuração",2,"Arma Complexa","Arremesso",0
+25,"Tridente",150,10,"Perfuração",3,"Arma Complexa","Duas Mãos;Arremesso",0
+26,"Foice",200,11,"Perfuração",3,"Arma Complexa","Duas Mãos",0
+27,"Alabarda",150,10,"Corte",3,"Arma Complexa","Duas Mãos",0
+28,"Glaive",200,12,"Corte",4,"Arma Complexa","Duas Mãos",0

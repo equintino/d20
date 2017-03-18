@@ -241,7 +241,9 @@ function valida(){
                        
                        if(in_array('Nível 5',$requisitos) || in_array('Nível 10',$requisitos)){
                           $cor='red';
-                       }   
+                       }else{
+                          $cor=null;
+                       }
                         echo '<td><input type=checkbox name=\''.$item->gethabilidade().'\'title=\'';
                            echo 'TIPO: '.($item->getTIPO())."\r\n";
                            echo 'MANA: '.($item->getMANA())."\r\n"; 
@@ -311,92 +313,84 @@ function valida(){
              <?php
                   echo '<div align=left class=cadTitulo>&nbsp&nbspClasse: '.strtoupper($_GET['classe']).'</div>';
 				  echo '<div class="moeda cadTitulo"><img height= 20px src=../web/imagens/coin.gif />400</div>';
-                  echo '<div align=right class=cadTitulo>Atributos, Armamentos & Equipamentos para '.strtoupper($_GET['personagem']).'&nbsp&nbsp</div>';
-			/*	  
-                       echo '<table class=cad3Atrib>';
-                       echo '<caption class=fichaTitulo>Atributos</caption>';
-                       $tCaracteristicas=array('F'=>'Força','A'=>'Agilidade','I'=>'Inteligência','V'=>'Vontade','PV'=>'Pontos de Vida','PM'=>'Pontos de Magia','PE'=>'Pontos de Experiência');
-                       foreach($tCaracteristicas as $key => $item_){
-                         if($item_[0] == 'P'){
-                           $item_=(explode(' ',$item_));
-                           echo '<tr><td><span class="destaque atr">'.$item_[0][0].'</span>'.substr($item_[0], 1).' '.$item_[1].'<span class="destaque atr"> ';
-                           if($item_[2][0]=='V'||$item_[2][0]=='M'){ 
-                               echo  $item_[2][0].'</span>'.substr($item_[2], 1).'</td><td><input type=text name='.$key.' maxlength = "4" size=2 ';
-                               if($atrib){
-                                 if($atrib->getPV()==0&&$atrib->getPM()==0){
-                                     echo 'value="60">';
-                                 }elseif($item_[2][0]=='V'){
-                                        echo 'value='.$atrib->getPV().'>';
-                                 }elseif($item_[2][0]=='M'){
-                                        echo 'value='.$atrib->getPM().'>';
-                                 }
-                               }
-                               echo '</td></tr>';
-                            }else{
-                               echo  $item_[2][0].'</span>'.substr($item_[2], 1).'</td><td><input type=text name='.$key.' maxlength = "4" size=2 ';
-                               if($atrib){
-                                 echo 'value='.$atrib->getPE().'>';
-                               }else{
-                                echo '>';
-                               }
-                            }
-                         }else{
-                          echo '<tr><td><span class="destaque atr">'.$item_[0].'</span>'. substr($item_, 1).'</td><td><input type=text name='.$key.' maxlength = "4" size=2 value=';
-                         if($atrib){
-                            if($item_[0]=='F'){
-                              echo $atrib->getFORCA();
-                            }elseif($item_[0]=='A'){
-                              echo $atrib->getAGILIDADE();
-                            }elseif($item_[0]=='I'){
-                              echo $atrib->getINTELIGENCIA();
-                            }elseif($item_[0]=='V'){
-                              echo $atrib->getVONTADE();
-                            }
-                         }
-                           echo '></td></tr>';
-                         }
-                       }
-                       echo '</table>';*/
-                       echo '<div class="fichaTitulo armasTitulo">Armamentos</div>';
-                       echo '<div id="armamento" class=armas>';
-                          $search->settabela('tb_arm_dist');
-                          $linhas=$dao->totalLinhas($search);
-                       //echo '<select name:itemArma>'; 
-                          for($x=1;$x<($linhas['id']+1);$x++){
-                             $search->setid($x);
-                             $dist=$dao->encontrePorArma($search);
-                             $desc='Arma: '.$dist->getARMA()."\r\n".
-                                   'Custo: '.$dist->getCUSTO()."\r\n".
-                                   'Dano: '.$dist->getDANO()."\r\n".
-                                   'Tipo: '.$dist->getTIPO()."\r\n".
-                                   'Força Necessária: '.$dist->getFN()."\r\n".
-                                   'Grupo: '.$dist->getGRUPO()."\r\n".
-                                   'Obs: '.$dist->getOBS();
-                             //print_r($dist);die;
-                             if($search->getid()<3){
-                                echo '<img height=50px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'\'>';
-                                echo '<input type=checkbox name='.$dist->getid().'  id='.$dist->getCUSTO().'>';
-                                //echo '<script>verificarCheckBox()</script>';die;
-                                //$custo=$dist->getCUSTO()+$dist->getCUSTO();
-                             }else{
-                                if($search->getid() == 3){
-                                   echo '<br>';
-                                   echo '<img height=80px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'\'>';
-                                   echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'>';
-                                 }elseif($search->getid()<6){
-                                   echo '<img height=75px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'\'>';
-                                   echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'>';
-                                 }elseif($search->getid()==6){
-                                   echo '<img height=109px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'\'>';
-                                   echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'>';
-                                 }else{
-                                   echo '<span class=besta><img height=50px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'\'>';
-                                   echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'></span>&nbsp&nbsp&nbsp&nbsp';
-                                 }
+                  echo '<div align=right class=cadTitulo>Armamentos para '.strtoupper($_GET['personagem']).'&nbsp&nbsp</div>';
+                       echo '<fieldset class="fichaTitulo armasTitulo">';
+                          echo '<legend>Distância</legend>';
+                          echo '<div id="armamento" class=armas>';
+                             $search->settabela('tb_armas_distancia');
+                             $linhas=$dao->totalLinhas($search);
+                          //echo '<select name:itemArma>'; 
+                             for($x=1;$x<($linhas['id']+1);$x++){
+                                $search->setid($x);
+                                $dist=$dao->encontrePorArma($search);
+                                $desc='Arma: '.$dist->getARMA()."\r\n".
+                                      'Custo: '.$dist->getCUSTO()."\r\n".
+                                      'Dano: '.$dist->getDANO()."\r\n".
+                                      'Tipo: '.$dist->getTIPO()."\r\n".
+                                      'Força Necessária: '.$dist->getFN()."\r\n".
+                                      'Grupo: '.$dist->getGRUPO()."\r\n".
+                                      'Obs: '.$dist->getOBS();
+                                if($search->getid()<3){
+                                   echo '<img height=50px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'&tabela=tb_armas_distancia\'>';
+                                   echo '<input type=checkbox name='.$dist->getid().'  id='.$dist->getCUSTO().'>';
+                                }else{
+                                   if($search->getid() == 3){
+                                      echo '<br>';
+                                      echo '<img height=80px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'&tabela=tb_armas_distancia\'>';
+                                      echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'>';
+                                    }elseif($search->getid()<6){
+                                      echo '<img height=75px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'&tabela=tb_armas_distancia\'>';
+                                      echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'>';
+                                    }elseif($search->getid()==6){
+                                      echo '<img height=109px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'&tabela=tb_armas_distancia\'>';
+                                      echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'>';
+                                    }else{
+                                      echo '<span class=besta><img height=50px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'&tabela=tb_armas_distancia\'>';
+                                      echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'></span>&nbsp&nbsp&nbsp&nbsp';
+                                    }
+                                }
                              }
-                          }
-                       //echo '</select>';
-                       echo '</div>';
+                          echo '</div>';
+                       echo '</fieldset>';
+                       echo '<fieldset class="fichaTitulo armasTitulo">';
+                          echo '<legend>Corporais</legend>';
+                          echo '<div id="armamento" class=armas>';
+                             $search->settabela('tb_armas_corporais');
+                             $linhas=$dao->totalLinhas($search);
+                             //print_r($linhas);die;
+                             for($x=1;$x<($linhas['id']+1);$x++){
+                                $search->setid($x);
+                                $dist=$dao->encontrePorArma($search);
+                                //print_r($dist);die;
+                                $desc='Arma: '.$dist->getARMA()."\r\n".
+                                      'Custo: '.$dist->getCUSTO()."\r\n".
+                                      'Dano: '.$dist->getDANO()."\r\n".
+                                      'Tipo: '.$dist->getTIPO()."\r\n".
+                                      'Força Necessária: '.$dist->getFN()."\r\n".
+                                      'Grupo: '.$dist->getGRUPO()."\r\n".
+                                      'Obs: '.$dist->getOBS();
+                                if($search->getid()<3){
+                                   echo '<img height=90px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'&tabela=tb_armas_corporais\'>';
+                                   echo '<input type=checkbox name='.$dist->getid().'  id='.$dist->getCUSTO().'>';
+                                }else{
+                                   if($search->getid() == 3){
+                                      echo '<br>';
+                                      echo '<img height=80px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'&tabela=tb_armas_corporais\'>';
+                                      echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'&tabela=tb_armas_corporais>';
+                                    }elseif($search->getid()<6){
+                                      echo '<img height=75px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'&tabela=tb_armas_corporais\'>';
+                                      echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'>';
+                                    }elseif($search->getid()==6){
+                                      echo '<img height=109px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'&tabela=tb_armas_corporais\'>';
+                                      echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'>';
+                                    }else{
+                                      echo '<span class=besta><img height=50px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'&tabela=tb_armas_corporais\'>';
+                                      echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'></span>&nbsp&nbsp&nbsp&nbsp';
+                                    }
+                                }
+                             }
+                          echo '</div>';
+                       echo '</fieldset>';
              ?>
 		<div class="armabnt">
                     <!--<input onclick='history.go(-2)' value="VOLTAR" class='cad3Hab cad3Hab-verde'>-->
