@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 18-Mar-2017 às 19:26
+-- Generation Time: 16-Mar-2017 às 03:12
 -- Versão do servidor: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tb_sacerdote` (
-  `id` int(2) NOT NULL,
+  `id` int(2) DEFAULT NULL,
   `habilidade` varchar(29) DEFAULT NULL,
   `REQUISITOS` varchar(45) DEFAULT NULL,
   `TIPO` varchar(7) DEFAULT NULL,
@@ -79,16 +79,6 @@ INSERT INTO `tb_sacerdote` (`id`, `habilidade`, `REQUISITOS`, `TIPO`, `MANA`, `D
 (34, 'Manter Golem', 'Nível 5; Criar Golem', 'Ação', 10, '14', 'Você pode estender a longevidade de um Golem. Cada vez que é feita esta magia em um golem, duplique sua duração (duração x2). Exemplo: Se usar esta magia em um golem que dura 1 hora, ele durará 2 horas. Se fizer esta magia em um golem que dura 2 horas, ele durará 4 horas.', '', '0'),
 (35, 'Neutralizar Mana', 'Nível 5', 'Ação', 80, '14', 'Todos que estiverem até 4m de você perderão 60 pontos de mana.', '', '0'),
 (36, 'Recarregar Mana 2', 'Nível 5; Recarregar Mana', 'Ação', 0, '0', 'Você deve sacrificar 10 pontos de vida para recuperar 30 pontos de mana.', '', '0');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `tb_sacerdote`
---
-ALTER TABLE `tb_sacerdote`
-  ADD PRIMARY KEY (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

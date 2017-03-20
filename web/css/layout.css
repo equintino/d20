@@ -161,7 +161,7 @@ body{
     width: 900px;
     margin: 73px 20px;
     height: 690px;
-    overflow: auto;
+    #overflow: auto;
 }
 .cad table{
     margin: 0 80px;
@@ -677,4 +677,68 @@ fieldset legend{
     position: absolute;
     left: 700px;
     top: 170px;
+}
+.armascorporais{
+    #border: 1px solid red;
+    margin-left: 80px;
+}
+.machadinha{
+    position: absolute;
+    top: 330px;
+    left: 130px;
+}
+.machadobatalha{
+    position: absolute;
+    top: 360px;
+    left: 200px;
+}
+.machadopesado{
+    position: absolute;
+    top: 390px;
+    left: 275px;
+}
+.glaive{
+    position: absolute;
+    top: 490px;
+    left: 340px;
+}
+.alabarda{
+    position: absolute;
+    top: 540px;
+    left: 410px;
+}
+.adaga{
+    position: absolute;
+    top: 455px;
+    left: 130px;
+}
+.espadacurta{
+    position: absolute;
+    top: 515px;
+    left: 130px;
+}
+.rapieira{
+    position: absolute;
+    top: 560px;
+    left: 180px;
+}
+.sabre{
+    position: absolute;
+    top: 615px;
+    left: 180px;
+}
+.espadalonga{
+    position: absolute;
+    top: 665px;
+    left: 145px;
+}
+.cimitarra{
+    position: absolute;
+    top: 730px;
+    left: 155px;
+}
+.claymore{
+    position: absolute;
+    top: 790px;
+    left: 175px;
 }
