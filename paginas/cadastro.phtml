@@ -303,8 +303,6 @@ function valida(){
             $search->settabela('atributos');
             $search->setpersonagem($_GET['personagem']);
             $atrib=$dao->encontrePorPersonagem($search);
-            //print_r($atrib);die;
-            //print_r($lista->getpe());die;
         ?>
         <fieldset class="cad">
             <legend>CADASTRO DE PERSONAGEM <span>(Continuação)</span></legend>
@@ -321,9 +319,24 @@ function valida(){
                       echo '<img src=../web/imagens/itens/armascorporais/armascorporais2.png />';
                       
                       //itens//
-                      echo '<div class=machadinha>';
-                        echo '<input type=checkbox name=machadinha />';
+                    $listaArmas=array('Machadinha','Machado de Batalha','Machado Pesado','Glaive','Alabarda','Adaga','Espada Curta','Rapiera','Sabre','Espada Longa','Cimitarra','Claymore','Bordão','Soqueira','Bico-de-Corvo','Maça Estrela','Maça Leve','Maça Pesada');
+            $search->settabela('tb_armas_corporais');
+                    foreach($listaArmas as $item){
+                       $search->setARMA($item);
+                       $armasCoporais=$dao->encontrePorArma($search);
+                       //print_r($armasCoporais->getARMA());
+                       $desc='Arma: '.$armasCoporais->getARMA()."\r\n".
+                             'Custo: '.$armasCoporais->getCUSTO()."\r\n".
+                             'Dano: '.$armasCoporais->getDANO()."\r\n".
+                             'Tipo: '.$armasCoporais->getTIPO()."\r\n".
+                             'Força Necessária: '.$armasCoporais->getFN()."\r\n".
+                             'Grupo: '.$armasCoporais->getGRUPO()."\r\n".
+                             'Obs: '.$armasCoporais->getOBS();
+                      echo '<div class='.str_replace(' ','',$item).' >';
+                        echo '<input type=checkbox name='.$item.' title="'.
+                             $desc.'" />';
                       echo '</div>';
+                    }die;
                       echo '<div class=machadobatalha>';
                         echo '<input type=checkbox name=machadobatalha />';
                       echo '</div>';

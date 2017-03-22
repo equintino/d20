@@ -682,63 +682,93 @@ fieldset legend{
     #border: 1px solid red;
     margin-left: 80px;
 }
-.machadinha{
+.Machadinha{
     position: absolute;
     top: 330px;
     left: 130px;
 }
-.machadobatalha{
+.MachadodeBatalha{
     position: absolute;
     top: 360px;
     left: 200px;
 }
-.machadopesado{
+.MachadoPesado{
     position: absolute;
     top: 390px;
     left: 275px;
 }
-.glaive{
+.Glaive{
     position: absolute;
     top: 490px;
     left: 340px;
 }
-.alabarda{
+.Alabarda{
     position: absolute;
     top: 540px;
     left: 410px;
 }
-.adaga{
+.Adaga{
     position: absolute;
     top: 455px;
     left: 130px;
 }
-.espadacurta{
+.EspadaCurta{
     position: absolute;
     top: 515px;
     left: 130px;
 }
-.rapieira{
+.Rapiera{
     position: absolute;
     top: 560px;
     left: 180px;
 }
-.sabre{
+.Sabre{
     position: absolute;
     top: 615px;
     left: 180px;
 }
-.espadalonga{
+.EspadaLonga{
     position: absolute;
     top: 665px;
     left: 145px;
 }
-.cimitarra{
+.Cimitarra{
     position: absolute;
     top: 730px;
     left: 155px;
 }
-.claymore{
+.Claymore{
     position: absolute;
     top: 790px;
     left: 175px;
+}
+.Bordão{
+    position: absolute;
+    top: 295px;
+    left: 675px;
+}
+.Soqueira{
+    position: absolute;
+    top: 343px;
+    left: 570px;
+}
+.Bico-de-Corvo{
+    position: absolute;
+    top: 403px;
+    left: 525px;
+}
+.MaçaEstrela{
+    position: absolute;
+    top: 450px;
+    left: 530px;
+}
+.MaçaLeve{
+    position: absolute;
+    top: 495px;
+    left: 530px;
+}
+.MaçaPesada{
+    position: absolute;
+    top: 540px;
+    left: 530px;
 }

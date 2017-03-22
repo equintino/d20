@@ -1,6 +1,7 @@
 <?php 
  class modelMapper{
   public static function map(Model $model, array $properties){
+   //print_r($properties);
 	if (array_key_exists('id', $properties)){
 	  $model->setid($properties['id']);
 	}

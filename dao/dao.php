@@ -26,6 +26,7 @@
         }
         $model = new Model();
         modelMapper::map($model, $row);
+        //print_r($model);die;
         return $model;
    }
    public function encontrePorPersonagem(ModelSearchCriteria $search=null){
@@ -38,7 +39,7 @@
         return $model;
    }
    public function encontrePorArma(ModelSearchCriteria $search=null){
-           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` =  '0' and `id` = '".$search->getid()."'")->fetch();
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` =  '0' and `ARMA` = '".$search->getARMA()."'")->fetch();
         if (!$row) {
             return null;
         }
