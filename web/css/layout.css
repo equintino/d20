@@ -684,91 +684,135 @@ fieldset legend{
 }
 .Machadinha{
     position: absolute;
-    top: 330px;
+    top: 350px;
     left: 130px;
 }
 .MachadodeBatalha{
     position: absolute;
-    top: 360px;
+    top: 380px;
     left: 200px;
 }
 .MachadoPesado{
     position: absolute;
-    top: 390px;
+    top: 410px;
     left: 275px;
 }
 .Glaive{
     position: absolute;
-    top: 490px;
+    top: 510px;
     left: 340px;
 }
 .Alabarda{
     position: absolute;
-    top: 540px;
+    top: 560px;
     left: 410px;
 }
 .Adaga{
     position: absolute;
-    top: 455px;
+    top: 475px;
     left: 130px;
 }
 .EspadaCurta{
     position: absolute;
-    top: 515px;
+    top: 535px;
     left: 130px;
 }
 .Rapiera{
     position: absolute;
-    top: 560px;
+    top: 580px;
     left: 180px;
 }
 .Sabre{
     position: absolute;
-    top: 615px;
+    top: 635px;
     left: 180px;
 }
 .EspadaLonga{
     position: absolute;
-    top: 665px;
+    top: 685px;
     left: 145px;
 }
 .Cimitarra{
     position: absolute;
-    top: 730px;
+    top: 750px;
     left: 155px;
 }
 .Claymore{
     position: absolute;
-    top: 790px;
+    top: 810px;
     left: 175px;
 }
 .Bordão{
     position: absolute;
-    top: 295px;
+    top: 315px;
     left: 675px;
 }
 .Soqueira{
     position: absolute;
-    top: 343px;
+    top: 363px;
     left: 570px;
 }
 .Bico-de-Corvo{
     position: absolute;
-    top: 403px;
+    top: 423px;
     left: 525px;
 }
 .MaçaEstrela{
     position: absolute;
-    top: 450px;
+    top: 470px;
     left: 530px;
 }
 .MaçaLeve{
     position: absolute;
-    top: 495px;
+    top: 515px;
     left: 530px;
 }
 .MaçaPesada{
     position: absolute;
-    top: 540px;
+    top: 560px;
     left: 530px;
+}
+.Clava{
+    position: absolute;
+    top: 618px;
+    left: 560px;
+}
+.Mangual{
+    position: absolute;
+    top: 688px;
+    left: 590px;
+}
+.MartelodeGuerra{
+    position: absolute;
+    top: 740px;
+    left: 620px;
+}
+.Marreta{
+    position: absolute;
+    top: 810px;
+    left: 580px;
+}
+.Azagaia{
+    position: absolute;
+    top: 480px;
+    left: 675px;
+}
+.Lança{
+    position: absolute;
+    top: 580px;
+    left: 720px;
+}
+.Tridente{
+    position: absolute;
+    top: 600px;
+    left: 778px;
+}
+.MarteloLucerno{
+    position: absolute;
+    top: 600px;
+    left: 830px;
+}
+.nota{
+    font-size: 10px;
+    font-style: italic;
 }

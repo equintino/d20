@@ -312,6 +312,7 @@ function valida(){
                   echo '<div align=left class=cadTitulo>&nbsp&nbspClasse: '.strtoupper($_GET['classe']).'</div>';
                   echo '<div class="moeda cadTitulo"><img height= 20px src=../web/imagens/coin.gif />400</div>';
                   echo '<div align=right class=cadTitulo>Armamentos para '.strtoupper($_GET['personagem']).'&nbsp&nbsp</div>';
+                    echo '<span class=nota>Coloque o mouse em cima dos quadradinhos para ver a descrição das armas.</span>';
                     echo '<div class=armascorporais>';
                     echo '<fieldsel>';
                     echo '<legend>Armas Corporais</legend>';
@@ -319,7 +320,7 @@ function valida(){
                       echo '<img src=../web/imagens/itens/armascorporais/armascorporais2.png />';
                       
                       //itens//
-                    $listaArmas=array('Machadinha','Machado de Batalha','Machado Pesado','Glaive','Alabarda','Adaga','Espada Curta','Rapiera','Sabre','Espada Longa','Cimitarra','Claymore','Bordão','Soqueira','Bico-de-Corvo','Maça Estrela','Maça Leve','Maça Pesada');
+                    $listaArmas=array('Machadinha','Machado de Batalha','Machado Pesado','Glaive','Alabarda','Adaga','Espada Curta','Rapiera','Sabre','Espada Longa','Cimitarra','Claymore','Bordão','Soqueira','Bico-de-Corvo','Maça Estrela','Maça Leve','Maça Pesada','Clava','Mangual','Martelo de Guerra','Marreta','Azagaia','Lança','Tridente','Martelo Lucerno');
             $search->settabela('tb_armas_corporais');
                     foreach($listaArmas as $item){
                        $search->setARMA($item);
@@ -336,40 +337,7 @@ function valida(){
                         echo '<input type=checkbox name='.$item.' title="'.
                              $desc.'" />';
                       echo '</div>';
-                    }die;
-                      echo '<div class=machadobatalha>';
-                        echo '<input type=checkbox name=machadobatalha />';
-                      echo '</div>';
-                      echo '<div class=machadopesado>';
-                        echo '<input type=checkbox name=machadopesado />';
-                      echo '</div>';
-                      echo '<div class=glaive>';
-                        echo '<input type=checkbox name=glaive />';
-                      echo '</div>';
-                      echo '<div class=alabarda>';
-                        echo '<input type=checkbox name=alabarda />';
-                      echo '</div>';
-                      echo '<div class=adaga>';
-                        echo '<input type=checkbox name=adaga />';
-                      echo '</div>';
-                      echo '<div class=espadacurta>';
-                        echo '<input type=checkbox name=espadacurta />';
-                      echo '</div>';
-                      echo '<div class=rapieira>';
-                        echo '<input type=checkbox name=rapieira />';
-                      echo '</div>';
-                      echo '<div class=sabre>';
-                        echo '<input type=checkbox name=sabre />';
-                      echo '</div>';
-                      echo '<div class=espadalonga>';
-                        echo '<input type=checkbox name=espadalonga />';
-                      echo '</div>';
-                      echo '<div class=cimitarra>';
-                        echo '<input type=checkbox name=cimitarra />';
-                      echo '</div>';
-                      echo '<div class=claymore>';
-                        echo '<input type=checkbox name=claymore />';
-                      echo '</div>';
+                    }
                       echo '<input type="submit" value="AVANÇA" class=\'cad2Hab cad2Hab-verde\'> ' ;         
                       
                     echo '</div>';die;
