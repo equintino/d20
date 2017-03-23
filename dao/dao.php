@@ -30,7 +30,16 @@
         return $model;
    }
    public function encontrePorPersonagem(ModelSearchCriteria $search=null){
-           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` =  '0' and `personagem` = '".$search->getpersonagem()."'")->fetch();
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE excluido = '0' and `personagem` = '".$search->getpersonagem()."'");
+        if (!$row) {
+            return null;
+        }
+        $model = new Model();
+        modelMapper::map($model, $row);
+        return $model;
+   }
+   public function encontrePorPersonagemRaca(ModelSearchCriteria $search=null){
+           $row = $this->query("SELECT * FROM `personagem` left join `tb_racas` on personagem.raca=tb_racas.RACA WHERE personagem.excluido = 0 and personagem.personagem = '".$search->getpersonagem()."'")->fetch();
         if (!$row) {
             return null;
         }
