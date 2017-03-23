@@ -56,6 +56,7 @@
      $dao->grava2($model);
   }
   if($act == 'cad2'){
+print_r($_POST);die;
 	  if(($x<3||$x>3) && !@$_GET['maisum']){
 		echo '<div class="add hab">';
 		echo '<h3>VOCË SELECIONOU <span class=dest>'.$x.'</span> HABILIDADE(S),<br> SELECIONE <span class=dest>3</span> HABILIDADES!</h3>';
