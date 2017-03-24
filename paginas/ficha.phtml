@@ -40,14 +40,12 @@
                        echo '<span class=fichaTitulo>Motivação</span>';
                        echo '<p class=motivacaoTexto>'.$item->getmotivacao().'</p>';
                      echo '</div>';
-                     //echo '<tr><td colspan=2 class=divisao>Características</td><tr>';
                      echo '<div id="aqui" class="raca">Bem-vindo <span class=motivacaoJogador>'.strtoupper($item->getjogador()).'</span>  <br><img height=240px src="../web/imagens/personagens/'.$item->getraca().'/'.$item->getraca().'.png" /></div>';
                      echo '<div class=historia>';                    
                        echo '<span class=hTitulo>Uma breve história</span>'; 
                        echo '<span class=hTexto >
                         <p>Tenho '.$item->getidade().' anos, '.$item->getaltura().'m de altura, peso '.$item->getpeso().'Kg, nasci na cidade de '.$item->getcidade().'.</p><p>'.$item->getbreveHistoria().'</p></span>';
                      echo '</div>';
-                  //}
                   echo '<div class=equipamento>';        
                        echo '<span>Equipamento</span>';
                        echo '<span class=linhas><hr><hr><hr><hr><hr><hr><hr><hr><hr></span>';
@@ -59,8 +57,8 @@
                        $tCaracteristicas=array('F'=>'Força','A'=>'Agilidade','I'=>'Inteligência','V'=>'Vontade','PV'=>'Pontos de Vida','PM'=>'Pontos de Magia','PE'=>'Pontos de Experiência');
                        $search->settabela('atributos');
                        $atrib=$dao->encontrePorPersonagem($search);
-                       $personagemRaca=$dao->encontrePorPersonagemRaca($search);
-                       print_r($atrib);die;
+                       //print_r($atrib);die;
+                       //=$dao->encontrePorPersonagemRaca($search);
                        foreach($tCaracteristicas as $key => $item_){
                          if($item_[0] == 'P'){
                            $item_=(explode(' ',$item_));
@@ -98,7 +96,7 @@
 						   echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.str_replace('_',' ',$hab[0]).'</li><br>';
 						   echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.str_replace('_',' ',$hab[1]).'</li><br>';
 						   echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.str_replace('_',' ',$hab[2]).'</li><br>';
-                                                    if($personagemRaca->getHABILIDADE_AUTOMATICA()){
+                                                    if($atrib->getHABILIDADE_AUTOMATICA()){
                                                         echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.$atrib->getHABILIDADE_AUTOMATICA().'</li>';
                                                     }
 					   echo '<ul>';

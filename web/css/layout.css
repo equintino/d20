@@ -406,9 +406,11 @@ fieldset legend{
 }
 .hTexto{ 
     clear: both;
-    float: right;  
-    width: 300px;
+    float: right; 
+    margin-right: 30px;
+    width: 360px;
     height: 200px;
+    padding: 8px;
     overflow: auto;
     text-align: justify;
     font-family: 'Satisfy', cursive;
@@ -584,7 +586,7 @@ fieldset legend{
 }
 .habilidades{
     position: absolute;
-    top: 650px;
+    top: 620px;
     font-family: 'Architects Daughter', cursive;
     font-size: 25px;
     width: 280px;

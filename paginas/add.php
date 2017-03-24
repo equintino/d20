@@ -16,11 +16,13 @@
   $search = new ModelSearchCriteria();
      $model->settabela('personagem');
      $search->settabela('personagem');
-  //print_r($_POST);die;
+  //print_r(strstr($_POST,'_'));die;
   if(!@$_GET['maisum']){
      foreach($_POST as $key => $item){
-             if($item == 'on'){
+      //print_r(strstr($key,'_'));die;
+             if(strstr($key,'_')){
                    $habilidade .=$key.'/';
+                   //echo $habilidade;
                    $x++;
              }else{
                    $classe='set'.$key;
@@ -56,7 +58,6 @@
      $dao->grava2($model);
   }
   if($act == 'cad2'){
-print_r($_POST);die;
 	  if(($x<3||$x>3) && !@$_GET['maisum']){
 		echo '<div class="add hab">';
 		echo '<h3>VOCË SELECIONOU <span class=dest>'.$x.'</span> HABILIDADE(S),<br> SELECIONE <span class=dest>3</span> HABILIDADES!</h3>';
