@@ -26,20 +26,10 @@
         }
         $model = new Model();
         modelMapper::map($model, $row);
-        //print_r($model);die;
         return $model;
    }
    public function encontrePorPersonagem(ModelSearchCriteria $search=null){
-           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE excluido = '0' and `personagem` = '".$search->getpersonagem()."'")->fetch();
-        if (!$row) {
-            return null;
-        }
-        $model = new Model();
-        modelMapper::map($model, $row);
-        return $model;
-   }
-   public function encontrePorPersonagemRaca(ModelSearchCriteria $search=null){
-           $row = $this->query("SELECT * FROM `personagem` left join `tb_racas` on personagem.raca=tb_racas.RACA WHERE personagem.excluido = 0 and personagem.personagem = '".$search->getpersonagem()."'")->fetch();
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE excluido = '0' and personagem = '".$search->getpersonagem()."'")->fetch();
         if (!$row) {
             return null;
         }
@@ -74,6 +64,15 @@
         modelMapper::map($model, $row);
         return $model;
    }
+   public function encontrePorHabilidade(ModelSearchCriteria $search=null){
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` =  '0' and `habilidade` = '".$search->gethabilidade()."'")->fetch();
+        if (!$row) {
+            return null;
+        }
+        $model = new Model();
+        modelMapper::map($model, $row);
+        return $model;
+   }
    public function totalLinhas(ModelSearchCriteria $search=null){
            $row = $this->query("SELECT id FROM `".$search->gettabela()."` WHERE `excluido` =  '0' ORDER BY id DESC ")->fetch();
         if (!$row) {
@@ -82,7 +81,6 @@
         return $row;
    }
    public function grava(Model $model){
-    //print_r($model);die;
         if ($model->getid() === null) {
             return $this->insert($model);
         }
@@ -136,7 +134,6 @@
         $now = mktime (date("H"), date("i"), date("s"), date("m")  , date("d"), date("Y"));
         $model->setmodificado($now);
         $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, jogador = :jogador, personagem = :personagem, raca = :raca, classe = :classe, tendencia1 = :tendencia1, tendencia2 = :tendencia2, idade = :idade, tabela = :tabela, sexo = :sexo, modificado = :modificado, excluido = :excluido, habilidade = :habilidade, altura = :altura, peso = :peso, cidade = :cidade, motivacao = :motivacao, breveHistoria = :breveHistoria WHERE personagem = :personagem ';
-        //print_r($this->execute($sql, $model));die;
         return $this->execute($sql, $model);
    }
    private function insert2(Model $model){
@@ -147,12 +144,12 @@
         $model->setcriado($now);
         $model->setmodificado($now); 
         $this->execute2($this->criaTabela($model->gettabela()), $model);       
-        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id_atrib`,`FORCA`,`AGILIDADE`,`INTELIGENCIA`,`VONTADE`,`PV`,`PM`,`PE`,`CLASSE_COMUM`,`HABILIDADE_AUTOMATICA`,`personagem`) VALUES (:id_atrib,:FORCA,:AGILIDADE,:INTELIGENCIA,:VONTADE,:PV,:PM,:PE,:CLASSE_COMUM,:HABILIDADE_AUTOMATICA,:personagem)';
+        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id_atrib`,`FORCA`,`AGILIDADE`,`INTELIGENCIA`,`VONTADE`,`PV`,`PM`,`PE`,`CLASSE_COMUM`,`HABILIDADE_AUTOMATICA`,`personagem`,`DESCRICAO`) VALUES (:id_atrib,:FORCA,:AGILIDADE,:INTELIGENCIA,:VONTADE,:PV,:PM,:PE,:CLASSE_COMUM,:HABILIDADE_AUTOMATICA,:personagem,:DESCRICAO)';
 	return $this->execute2($sql, $model);
    }
    private function update2(Model $model,$tabela){
         $model->setmodificado(new DateTime(), new DateTimeZone('America/Sao_Paulo'));
-        $sql = 'UPDATE `'.$tabela.'` SET id_atrib = :id_atrib, FORCA = :FORCA, AGILIDADE = :AGILIDADE, INTELIGENCIA = :INTELIGENCIA, VONTADE = :VONTADE, PV = :PV, PM = :PM, PE = :PE, CLASSE_COMUM = :CLASSE_COMUM, HABILIDADE_AUTOMATICA = :HABILIDADE_AUTOMATICA, personagem = :personagem WHERE id = :id ';
+        $sql = 'UPDATE `'.$tabela.'` SET id_atrib = :id_atrib, FORCA = :FORCA, AGILIDADE = :AGILIDADE, INTELIGENCIA = :INTELIGENCIA, VONTADE = :VONTADE, PV = :PV, PM = :PM, PE = :PE, CLASSE_COMUM = :CLASSE_COMUM, HABILIDADE_AUTOMATICA = :HABILIDADE_AUTOMATICA, personagem = :personagem, DESCRICAO = :DESCRICAO WHERE id = :id ';
         return $this->execute2($sql, $model);
    }
    private function insert3(Model $model){
@@ -179,7 +176,6 @@
         if (!$model->getid()) {
             return $this->encontrePorId($search->setid($this->getDb()->lastInsertId()));
         }
-        //print_r(($model));die;
         return $model;
    }
    public function execute2($sql,$model){
@@ -205,7 +201,7 @@
 	 return $params;
    }
    private function getParams2(Model $model){
-        $params = array(':id_atrib'=> $model->getid_atrib(),':FORCA'=> $model->getFORCA(),':AGILIDADE'=> $model->getAGILIDADE(),':INTELIGENCIA'=> $model->getINTELIGENCIA(),':VONTADE'=> $model->getVONTADE(),':PV'=> $model->getPV(),':PM'=> $model->getPM(),':PE'=> $model->getPE(),':CLASSE_COMUM'=> $model->getCLASSE_COMUM(),':HABILIDADE_AUTOMATICA'=> $model->getHABILIDADE_AUTOMATICA(),':personagem'=> $model->getpersonagem(),);
+        $params = array(':id_atrib'=> $model->getid_atrib(),':FORCA'=> $model->getFORCA(),':AGILIDADE'=> $model->getAGILIDADE(),':INTELIGENCIA'=> $model->getINTELIGENCIA(),':VONTADE'=> $model->getVONTADE(),':PV'=> $model->getPV(),':PM'=> $model->getPM(),':PE'=> $model->getPE(),':CLASSE_COMUM'=> $model->getCLASSE_COMUM(),':HABILIDADE_AUTOMATICA'=> $model->getHABILIDADE_AUTOMATICA(),':personagem'=> $model->getpersonagem(),':DESCRICAO'=> $model->getDESCRICAO(),);
 	 return $params;
    }
    private function getParams3(Model $model){

@@ -49,6 +49,8 @@
                   echo '<div class=equipamento>';        
                        echo '<span>Equipamento</span>';
                        echo '<span class=linhas><hr><hr><hr><hr><hr><hr><hr><hr><hr></span>';
+                       echo '<div class=escudo><img height=80px src=../web/imagens/escudo.png /></div>';
+                       echo '<div class=defesa>Defesa</div>';
                   echo '</div>';
                        echo '</table>';
                        echo '<from action="#" method=POST>';
@@ -57,12 +59,10 @@
                        $tCaracteristicas=array('F'=>'Força','A'=>'Agilidade','I'=>'Inteligência','V'=>'Vontade','PV'=>'Pontos de Vida','PM'=>'Pontos de Magia','PE'=>'Pontos de Experiência');
                        $search->settabela('atributos');
                        $atrib=$dao->encontrePorPersonagem($search);
-                       //print_r($atrib);die;
-                       //=$dao->encontrePorPersonagemRaca($search);
                        foreach($tCaracteristicas as $key => $item_){
                          if($item_[0] == 'P'){
                            $item_=(explode(' ',$item_));
-                           echo '<tr><td><span class="destaque atr">'.$item_[0][0].'</span>'.substr($item_[0], 1).' '.$item_[1].'<span class="destaque atr"> '.$item_[2][0].'</span>'.substr($item_[2], 1).'</td><td>';//<input type=text name='.$key.' maxlength = "4" size=2 value=';
+                           echo '<tr><td width=92% ><span class="destaque atr">'.$item_[0][0].'</span>'.substr($item_[0], 1).' '.$item_[1].'<span class="destaque atr"> '.$item_[2][0].'</span>'.substr($item_[2], 1).'</td><td>';//<input type=text name='.$key.' maxlength = "4" size=2 value=';
                            //print_r($atrib);die;
                   if($item_[2][0]=='V'){                 
                     echo $atrib->getPV().'</td></tr>';
@@ -89,19 +89,32 @@
                        echo '<br><br>';
                        echo '<table class=habilidades>';
                        echo '<caption class=fichaTitulo>Habilidades</caption>';
-					   echo '<br>';
-                                           //print_r($item);die;
+					   echo '<br><br>';
 					   $hab=explode('/',$item->gethabilidade());
+                                           $search->settabela('tb_'.$item->getclasse());
+                                           $search->gettabela();
 					   echo '<ul>';
 						   echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.str_replace('_',' ',$hab[0]).'</li><br>';
+                                        $search->sethabilidade(str_replace('_',' ',$hab[0]));
+                                        $descricao=($dao->encontrePorHabilidade($search));
+                                        echo '<div class=descricao>'.$descricao->getDESCRICAO().'</div>';
 						   echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.str_replace('_',' ',$hab[1]).'</li><br>';
+                                        $search->sethabilidade(str_replace('_',' ',$hab[1]));
+                                        $descricao=($dao->encontrePorHabilidade($search));
+                                        echo '<div class=descricao>'.$descricao->getDESCRICAO().'</div>';
 						   echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.str_replace('_',' ',$hab[2]).'</li><br>';
+                                        $search->sethabilidade(str_replace('_',' ',$hab[2]));
+                                        $descricao=($dao->encontrePorHabilidade($search));
+                                        echo '<div class=descricao>'.$descricao->getDESCRICAO().'</div>';
                                                     if($atrib->getHABILIDADE_AUTOMATICA()){
                                                         echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.$atrib->getHABILIDADE_AUTOMATICA().'</li>';
+//print_r($atrib);die;
+                                        //$search->settabela('tb_racas');
+                                        //$search->setRACA(atrib->getRACA()));
+                                        //$descricao=($dao->encontrePorRaca($search));
+                                        echo '<div class=descricao>'.$atrib->getDESCRICAO().'</div>';
                                                     }
 					   echo '<ul>';
-                       echo '<div class=escudo><img height=80px src=../web/imagens/escudo.png /></div>';
-                       echo '<div class=defesa>Defesa</div>';
                        echo '</table>';
                        echo '</form>';
 					   }

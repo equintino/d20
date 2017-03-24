@@ -19,21 +19,19 @@
   //print_r(strstr($_POST,'_'));die;
   if(!@$_GET['maisum']){
      foreach($_POST as $key => $item){
-      //print_r(strstr($key,'_'));die;
-             if(strstr($key,'_')){
+                if(in_array('get'.$key,get_class_methods($model))){
+                   $classe='set'.$key;
+                   $model->$classe($item);
+                }else{
                    $habilidade .=$key.'/';
                    //echo $habilidade;
                    $x++;
-             }else{
-                   $classe='set'.$key;
-                   $model->$classe($item);
-             }
+                }
      }
   }
   if($act == 'cad'){
      $search->setpersonagem($model->getpersonagem());
      $busca=$dao->encontre($search);
-	 //print_r($busca);die;
      if($busca){
         foreach($dao->encontre($search) as $dados);
         if($dados->getpersonagem()){
@@ -71,7 +69,6 @@
         $search->setpersonagem($_GET['personagem']);
 	
 	$dados=$dao->encontrePorPersonagem($search);
-	//print_r($dados);echo '<br><br>';
 	$model->setid($dados->getid());
 	$model->setjogador($dados->getjogador());
 	$model->setpersonagem($dados->getpersonagem());
@@ -86,29 +83,17 @@
         $dadosRaca=$dao->encontrePorRaca($search);
         $search->setclasse($model->getclasse());
         $search->settabela('tb_classes');
+
         $dadosClasse=$dao->encontrePorClasse($search);
-   /*print_r($_POST);
-   echo '<br><br>';
-   print_r($model);
-   echo '<br><br>';
-   print_r($dadosRaca);
-   die;*/
-        //print_r($search);die;
-   //print_r($_GET);echo '<br><br>';
-   //print_r($_POST);echo '<br><br>';
-   //print_r($model);die;
+
         if(!@$_GET['maisum']){
            $dao->grava($model);
         }
         
-        //print_r($model);die;
         if($model->getraca()=='humano'){
          if(!@$_GET['maisum']){
           echo '<form action="../paginas/add.php?act=cad2&maisum=1&personagem='.$model->getpersonagem().'" method=post>';
           echo '<div class=maisum>';
-           //$valor='<script>prompt("escrava alguma coisa")</script>';
-           //echo $valor;die;
-            //$opcao=readline("opção: ");
            echo 'Selecione + 1 a uma das 4 opções abaixo:<br>';
            echo '<lable>Força</lable><input type=radio name=maisum value=F>';
            echo '<lable>Agilidade</lable><input type=radio name=maisum value=A>';
@@ -120,13 +105,6 @@
            echo '</div>';
            echo '</form>';
            die;
-         }else{
-           //echo $humanoF;die;
-           //print_r($_GET);echo '<br><br>';
-           //print_r($_POST);echo '<br><br>';
-           //echo "humanoF -> $humanoF - humanoA -> $humanoA - humanoI -> $humanoI - humanoV -> $humanoV";echo '<br><br>';
-           //print_r($model);
-           //die;
          }
         }
         $dadosRaca->settabela('atributos');
@@ -134,55 +112,33 @@
         $dadosRaca->setPV(60);
         $dadosRaca->setPM(60);
         $dadosRaca->setPE(0);
-        //if()
-        //print_r($model);echo '<br><br>';
-        //print_r($dadosClasse);die;
         $bonus=explode(';',$dadosClasse->getBONUS_ATRIBUTO());
         switch($bonus[0][0]){
            case 'F':
-             //echo 'é um F - '.$dadosRaca->getForca(). '-> ';
-             //echo $dadosRaca->getForca()+1;
-             //echo $dadosRaca->getForca();echo ' - ';
              $dadosRaca->setFORCA($dadosRaca->getForca()+1+$humanoF);
-             //echo $dadosRaca->getForca();die;
              break;
            case 'A':
-             //echo 'é um A - '.$dadosRaca->getAGILIDADE().'-> ';
-             //echo $dadosRaca->getAGILIDADE();echo ' - ';die;
              $dadosRaca->setAGILIDADE($dadosRaca->getAGILIDADE()+1+$humanoA);
-             //echo $dadosRaca->getAGILIDADE();
              break;
            case 'I':
-             ////echo 'é um I - '.$dadosRaca->getINTELIGENCIA().'-> ';
-             //echo $dadosRaca->getINTELIGENCIA()+1;
              $dadosRaca->setINTELIGENCIA($dadosRaca->getINTELIGENCIA()+1+$humanoI);
              break;
            case 'V':
-             //echo 'é um V - '.$dadosRaca->getVONTADE().'-> ';
-             //echo $dadosRaca->getVONTADE()+1;
              $dadosRaca->setVONTADE($dadosRaca->getVONTADE()+1+$humanoV);
              break;
         }
         echo '<br><br>';
         switch($bonus[1][0]){
            case 'F':
-             //echo 'é um F - '.$dadosRaca->getForca(). '-> ';
-             //echo $dadosRaca->getForca()+1;
              $dadosRaca->setFORCA($dadosRaca->getForca()+1);
              break;
            case 'A':
-             //echo 'é um A - '.$dadosRaca->getAGILIDADE().'-> ';
-             //echo $dadosRaca->getAGILIDADE()+1;
              $dadosRaca->setAGILIDADE($dadosRaca->getAGILIDADE()+1);
              break;
            case 'I':
-             //echo 'é um I - '.$dadosRaca->getINTELIGENCIA().'-> ';
-             //echo $dadosRaca->getINTELIGENCIA()+1;
              $dadosRaca->setINTELIGENCIA($dadosRaca->getINTELIGENCIA()+1);
              break;
            case 'V':
-             //echo 'é um V - '.$dadosRaca->getVONTADE().'-> ';
-             //echo $dadosRaca->getVONTADE()+1;
              $dadosRaca->setVONTADE($dadosRaca->getVONTADE()+1);
              break;
         }
@@ -202,10 +158,7 @@
                 break;
            }
         }
-        //echo $bonus[0][0];
-        //echo '<br><br>';
-        //echo $bonus[1][0];echo '<br><br>';
-        //print_r($dadosRaca);die;
+        $dadosRaca->setDESCRICAO($dadosRaca->getOBS());
         $dao->grava2($dadosRaca);
 	echo '<div class=\'add\'>'.
                '<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.

@@ -431,15 +431,15 @@ fieldset legend{
     #top: -80px;
 }
 .escudo{
-    position: relative;
+    #position: relative;
     #top: 5px;
-    margin: -160px 200px;
+    #margin: -160px 200px;
 }
 .defesa{
-    position: absolute;
-    #top: 673px;
-    #left: 198px;
-    margin: 90px 225px;
+    position: relative;
+    top: -75px;
+    left: 3px;
+    #margin: 90px 225px;
     font-size: 10px;
 }
 .equipamento{
@@ -586,7 +586,7 @@ fieldset legend{
 }
 .habilidades{
     position: absolute;
-    top: 620px;
+    top: 640px;
     font-family: 'Architects Daughter', cursive;
     font-size: 25px;
     width: 280px;
@@ -803,4 +803,12 @@ fieldset legend{
 .nota{
     font-size: 10px;
     font-style: italic;
+}
+.descricao{
+    text-align: justify;
+    font-family: 'Satisfy', cursive;
+    font-size: 12px;
+    #border: 1px solid red;
+    width: 350px;
+    margin: 0 20px;
 }

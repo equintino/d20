@@ -5,9 +5,8 @@
     $banco='d20';
     $variaveis=array('id','jogador','personagem','raca','classe','tendencia1','tendencia2','idade','tabela','sexo','criado','modificado','excluido','habilidade','altura','peso','cidade','motivacao','breveHistoria');
     $tabela='`\'.$model->gettabela().\'`';
-    $variaveis2=array('id_atrib','FORCA','AGILIDADE','INTELIGENCIA','VONTADE','PV','PM','PE','CLASSE_COMUM','HABILIDADE_AUTOMATICA','personagem');
+    $variaveis2=array('id_atrib','FORCA','AGILIDADE','INTELIGENCIA','VONTADE','PV','PM','PE','CLASSE_COMUM','HABILIDADE_AUTOMATICA','personagem','DESCRICAO');
     $variaveis3=array('id','ARMA','CUSTO','DANO','TIPO','FN','GRUPO','OBS','figura');
-    //$tabela2=''.$banco.'';
     $texto="<?php \r\n class dao{\r\n";
     $texto .= '   '."private ".'$db'." = null;\r\n".
               '   public function __destruct(){'."\r\n".
@@ -38,7 +37,7 @@
         return $model;
    }'."\r\n";
      $texto .= '   public function encontrePorPersonagem(ModelSearchCriteria $search=null){
-           $row = $this->query("SELECT * FROM `personagem` left join `tb_racas` on personagem.raca=tb_racas.RACA WHERE personagem.excluido = 0 and personagem.personagem = '".$search->getpersonagem()."'")->fetch();
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE excluido = \'0\' and personagem = \'".$search->getpersonagem()."\'")->fetch();
         if (!$row) {
             return null;
         }
@@ -47,7 +46,7 @@
         return $model;
    }'."\r\n";
      $texto .= '   public function encontrePorArma(ModelSearchCriteria $search=null){
-           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` =  \'0\' and `id` = \'".$search->getid()."\'")->fetch();
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` =  \'0\' and `ARMA` = \'".$search->getARMA()."\'")->fetch();
         if (!$row) {
             return null;
         }
@@ -73,6 +72,15 @@
         modelMapper::map($model, $row);
         return $model;
    }'."\r\n";
+     $texto .= '   public function encontrePorHabilidade(ModelSearchCriteria $search=null){
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` =  \'0\' and `habilidade` = \'".$search->gethabilidade()."\'")->fetch();
+        if (!$row) {
+            return null;
+        }
+        $model = new Model();
+        modelMapper::map($model, $row);
+        return $model;
+   }'."\r\n";                  
      $texto .= '   public function totalLinhas(ModelSearchCriteria $search=null){
            $row = $this->query("SELECT id FROM `".$search->gettabela()."` WHERE `excluido` =  \'0\' ORDER BY id DESC ")->fetch();
         if (!$row) {
