@@ -57,6 +57,10 @@ function valida(){
      alert("Contato enviado com sucesso, em breve entraremos em contato!");
      document.orcamento.submit();
 }
+function moeda(valor){
+    var x=400-valor;
+    document.getElementById('moeda').innerHTML=x;
+}
 </script>
 <style>
 	#rodape{
@@ -305,7 +309,8 @@ function valida(){
              <table>
              <?php
                   echo '<div align=left class=cadTitulo>&nbsp&nbspClasse: '.strtoupper($_GET['classe']).'</div>';
-                  echo '<div class="moeda cadTitulo"><img height= 20px src=../web/imagens/coin.gif />400</div>';
+                  echo '<div class="moeda cadTitulo" id=moedas ><img height= 20px src=../web/imagens/coin.gif /><span id=moeda></span></div>';
+                  echo '<script>moeda(0);</script>';
                   echo '<div align=right class=cadTitulo>Armamentos para '.strtoupper($_GET['personagem']).'&nbsp&nbsp</div>';
                     echo '<span class=nota>Coloque o mouse em cima dos quadradinhos para ver a descrição das armas.</span>';
                     echo '<div class=armascorporais>';
@@ -328,7 +333,8 @@ function valida(){
                              'Grupo: '.$armasCoporais->getGRUPO()."\r\n".
                              'Obs: '.$armasCoporais->getOBS();
                       echo '<div class='.str_replace(' ','',$item).' >';
-                        echo '<input type=checkbox name='.$item.' title="'.
+//echo $armasCoporais->getCUSTO();die;
+                        echo '<input type=checkbox onclick=moeda('.$armasCoporais->getCUSTO().'); name='.$item.' title="'.
                              $desc.'" />';
                       echo '</div>';
                     }
