@@ -16,7 +16,6 @@
   $search = new ModelSearchCriteria();
      $model->settabela('personagem');
      $search->settabela('personagem');
-  //print_r(strstr($_POST,'_'));die;
   if(!@$_GET['maisum']){
      foreach($_POST as $key => $item){
                 if(in_array('get'.$key,get_class_methods($model))){
@@ -24,7 +23,6 @@
                    $model->$classe($item);
                 }else{
                    $habilidade .=$key.'/';
-                   //echo $habilidade;
                    $x++;
                 }
      }
@@ -45,14 +43,9 @@
         }
      }else{
 		$dao->grava($model); 
-	 }
+    }
   }
-  //$model->settabela(strtolower(ModelValidacao::nomeMes($_POST['mes'])));
-  /*echo '<pre>';
-  PRINT_R($_POST);
-  PRINT_R($_GET);DIE;*/
   if($act == 'rel'){ 
-     //print_r($model);die;
      $dao->grava2($model);
   }
   if($act == 'cad2'){

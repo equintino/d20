@@ -153,10 +153,6 @@ body{
     top: 30%;
   }
 }
-.texto{
-    margin: 0 80px;
-    #border: 1px solid red;
-}
 .cad, .lista, .ficha{
     width: 900px;
     height: 690px;
@@ -214,10 +210,15 @@ fieldset legend{
     margin-right: 15px;
 }
 .texto{
+    margin: 0 80px;
+}
+.texto{
+    font-family: 'Satisfy', cursive;
+    font-size: 20px;
     position: absolute;
-    top: 370px;
+    top: 420px;
     width: 600px;
-    height: 150px;
+    height: 200px;
     overflow: auto;
     #border: 5px solid green;
     #background-color: silver;
@@ -515,7 +516,7 @@ fieldset legend{
     box-shadow: none;
 }
 .add{
-    width: 340px;
+    width: 500px;
     margin: 100px auto;
     text-align: right;
     color: white;
@@ -529,7 +530,7 @@ fieldset legend{
 .cadHistoria{
     font-size: 15px;
     font-family: courier;
-    width: 670px;
+    width: 700px;
     font-style: italic;
 }
 .cad2Hab{
@@ -654,7 +655,7 @@ fieldset legend{
 .maisum{
     #border: 1px solid red;
     #color: red;
-    width: 450px;
+    width: 550px;
     margin: 100px auto;
     font-size: 25px;
     #text-shadow: 2px 2px 2px red;
