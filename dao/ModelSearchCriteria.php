@@ -312,4 +312,20 @@
           $this->PROFICIENCIA = $PROFICIENCIA;
           return $this;
       }
+   private $armadura;
+       public function getarmadura(){
+        return $this->armadura;
+      }
+      public function setarmadura($armadura){
+          $this->armadura = $armadura;
+          return $this;
+      }
+   private $defesa;
+       public function getdefesa(){
+        return $this->defesa;
+      }
+      public function setdefesa($defesa){
+          $this->defesa = $defesa;
+          return $this;
+      }
 }

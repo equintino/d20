@@ -81,7 +81,16 @@
         $model = new Model();
         modelMapper::map($model, $row);
         return $model;
-   }'."\r\n";                  
+   }'."\r\n";  
+     $texto .= '   public function encontrePorArmadura(ModelSearchCriteria $search=null){
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` =  \'0\' and `armadura` = \'".$search->getarmadura()."\'")->fetch();
+        if (!$row) {
+            return null;
+        }
+        $model = new Model();
+        modelMapper::map($model, $row);
+        return $model;
+   }'."\r\n";                 
      $texto .= '   public function totalLinhas(ModelSearchCriteria $search=null){
            $row = $this->query("SELECT id FROM `".$search->gettabela()."` WHERE `excluido` =  \'0\' ORDER BY id DESC ")->fetch();
         if (!$row) {
@@ -307,9 +316,9 @@
           }
         $texto .= "\t".'return $this->execute4($sql, $model);
    }'."\r\n";
-    $texto .= '   private function update4(Model $model,$tabela){
+    $texto .= '   private function update4(Model $model){
         $model->setmodificado(new DateTime(), new DateTimeZone(\'America/Sao_Paulo\'));
-        $sql = \'UPDATE `\'.$tabela.\'` SET';
+        $sql = \'UPDATE `\'.$model->gettabela().\'` SET';
            $x=1;
            foreach($variaveis4 as $item){
               $texto .= " $item = :$item";

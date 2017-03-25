@@ -533,7 +533,7 @@ fieldset legend{
     width: 700px;
     font-style: italic;
 }
-.cad2Hab{
+.cad2Hab, .cad4Hab{
     font-size: 16px;
     padding: 0 4px;
     position: relative;
@@ -544,18 +544,24 @@ fieldset legend{
     border-radius: 15px;
     font-size: 16px;
     color: white;
-    top: 10px;
-    left: 700px;
 }
-.cad2Hab-verde{
+.cad2Hab{
+    top: 10px;
+    left: 700px;    
+}
+.cad4Hab{
+    top: 10px;
+    left: 600px;    
+}
+.cad2Hab-verde, .cad4Hab-verde{
     background-color: #007c00;
     box-shadow: 0 5px 0 #003f00;
 }
-.cad2Hab-verde:hover{
+.cad2Hab-verde:hover, .cad4Hab-verde:hover{
     background-color: #006000;
     #color: white;
 }
-.cad2Hab-verde:active{
+.cad2Hab-verde:active, .cad4Hab-verde:active{
     background-color: #006000;
     color: white;   
     position: relative;
@@ -895,4 +901,44 @@ fieldset legend{
     position: absolute;
     top: 1100px;
     left: 350px;
+}
+.ArmaduraSimples{
+    position: absolute;
+    top: 680px;
+    left: 300px;
+}
+.ArmaduradeBatalha{
+    position: absolute;
+    top: 680px;
+    left: 560px;
+}
+.ArmaduraCompleta{
+    position: absolute;
+    top: 680px;
+    left: 720px;
+}
+.TúnicaPesada{
+    position: absolute;
+    top: 1150px;
+    left: 320px;
+}
+.EscudodeCorpo{
+    position: absolute;
+    top: 1100px;
+    left: 450px;
+}
+.EscudoMédio{
+    position: absolute;
+    top: 970px;
+    left: 560px;
+}
+.EscudoPequeno{
+    position: absolute;
+    top: 1125px;
+    left: 650px;
+}
+.ArmaduradeCouro{
+    position: absolute;
+    top: 1100px;
+    left: 800px;
 }

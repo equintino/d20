@@ -73,6 +73,16 @@
         modelMapper::map($model, $row);
         return $model;
    }
+   public function encontrePorArmadura(ModelSearchCriteria $search=null){
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` =  '0' and `armadura` = '".$search->getarmadura()."'")->fetch();
+           //print_r($row);die;
+        if (!$row) {
+            return null;
+        }
+        $model = new Model();
+        modelMapper::map($model, $row);
+        return $model;
+   }
    public function totalLinhas(ModelSearchCriteria $search=null){
            $row = $this->query("SELECT id FROM `".$search->gettabela()."` WHERE `excluido` =  '0' ORDER BY id DESC ")->fetch();
         if (!$row) {
@@ -185,9 +195,9 @@
         $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`ARMA`,`CUSTO`,`personagem`) VALUES (:id,:ARMA,:CUSTO,:personagem)';
 	return $this->execute4($sql, $model);
    }
-   private function update4(Model $model,$tabela){
+   private function update4(Model $model){
         $model->setmodificado(new DateTime(), new DateTimeZone('America/Sao_Paulo'));
-        $sql = 'UPDATE `'.$tabela.'` SET id = :id, ARMA = :ARMA, CUSTO = :CUSTO, personagem = :personagem WHERE id = :id ';
+        $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, ARMA = :ARMA, CUSTO = :CUSTO, personagem = :personagem WHERE id = :id ';
         return $this->execute4($sql, $model);
    }
    public function execute($sql,$model){

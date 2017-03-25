@@ -42,6 +42,8 @@
  private $REQUISITOS;
  private $MANA;
  private $DESCRICAO;
+ private $armadura;
+ private $defesa;
  public function getid(){
 	return $this->id;
  }
@@ -293,5 +295,17 @@
  }
  public function setDESCRICAO($DESCRICAO ){
 	$this->DESCRICAO=$DESCRICAO;
+ }
+ public function getarmadura(){
+	return $this->armadura;
+ }
+ public function setarmadura($armadura ){
+	$this->armadura=$armadura;
+ }
+ public function getdefesa(){
+	return $this->defesa;
+ }
+ public function setdefesa($defesa ){
+	$this->defesa=$defesa;
  }
  }

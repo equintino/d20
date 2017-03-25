@@ -160,18 +160,33 @@
 	die;
   }
   if($act == 'cad3'){
+    if(!$_POST){
+	echo '<div class=\'add\'>'.
+               '<h3>Nenhum item selecionado.</h3>'.
+               '<button onclick=history.go(-1); class=\'continua continua-verde\'>Voltar</button>'.
+             '</div>';
+        die;
+    }
 	  $model->setpersonagem($_GET['personagem']);
           $model->setclasse($_GET['classe']);
 	  $model->settabela('armamentos');
           $model->setpersonagem($_GET['personagem']);
           $armas = null;
+          $recurso=400;
           $custo = 0;
           foreach($_POST as $key => $item){
             $armas .= $key.'/';
             $custo = $custo+$item;
           }
+          if(($recurso - $custo)<0){
+	echo '<div class=\'add\'>'.
+               '<h3>Você não possui recursos suficientes.</h3>'.
+               '<button onclick=history.go(-1); class=\'continua continua-verde\'>Voltar</button>'.
+             '</div>';
+        die;
+          }
           $model->setARMA($armas);
-          $model->setCUSTO($custo);
+          $model->setCUSTO($recurso-$custo);
         $dao->grava4($model);
 	echo '<div class=\'add\'>'.
                '<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.
@@ -180,7 +195,45 @@
 	die;
   } 
   if($act == 'cad4'){
-     print_r($_POST);echo '<br>';
+    if(!$_POST){
+	echo '<div class=\'add\'>'.
+               '<h3>Nenhum item selecionado.</h3>'.
+               '<button onclick=history.go(-1); class=\'continua continua-verde\'>Voltar</button>'.
+             '</div>';
+        die;
+    }
+     $personagem=$_GET['personagem'];
+     $search->settabela('armamentos');
+     $search->setpersonagem($personagem);
+     $model->setclasse($_GET['classe']);
+     $armas=$custo=null;
+     $armamento=$dao->encontrePorPersonagem($search);
+          foreach($_POST as $key => $item){
+            $armas .= $key.'/';
+            $custo = $custo+$item;
+          }
+     if($armamento){
+        $saldo=$armamento->getCUSTO()-$custo;
+        $armamento->setARMA($armamento->getARMA().$armas);
+        $armamento->setCUSTO($saldo);
+        $armamento->settabela('armamentos');
+        $dao->grava4($armamento);
+     }else{
+        $saldo=400-$custo;
+        $model->setARMA($armas);
+        $model->setCUSTO($saldo);
+        $model->settabela('armamentos');
+        $model->setpersonagem($personagem);
+        $model->setid(null);
+        $dao->grava4($model);
+     }
+	echo '<div class=\'add\'>'.
+               '<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.
+               '<a href=\'../web/index.php?pagina=cadastro&act=cad5&classe='.$model->getclasse().'&personagem='. $personagem.'\' ><button class=\'continua continua-verde\'>Continua...</button></a>'.
+             '</div>';
+	die;
+  }
+  if($act == 'cad5'){
      print_r($_GET);
      die;
   }

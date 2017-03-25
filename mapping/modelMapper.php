@@ -1,7 +1,6 @@
 <?php 
  class modelMapper{
   public static function map(Model $model, array $properties){
-   //print_r($properties);
 	if (array_key_exists('id', $properties)){
 	  $model->setid($properties['id']);
 	}
@@ -127,6 +126,12 @@
 	}
 	if (array_key_exists('DESCRICAO', $properties)){
 	  $model->setDESCRICAO($properties['DESCRICAO']);
+	}
+	if (array_key_exists('armadura', $properties)){
+	  $model->setarmadura($properties['armadura']);
+	}
+	if (array_key_exists('defesa', $properties)){
+	  $model->setdefesa($properties['defesa']);
 	}
   } 
  }

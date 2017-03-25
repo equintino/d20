@@ -6,6 +6,7 @@
     $variaveis2=array('id_atrib','FORCA','AGILIDADE','INTELIGENCIA','VONTADE','PV','PM','PE','CLASSE_COMUM','HABILIDADE_AUTOMATICA');
     $variaveis3=array('ARMA','CUSTO','DANO','TIPO','FN','GRUPO','OBS','figura');
     $variaveis4=array('BONUS_ATRIBUTO','PROFICIENCIA');
+    $variaveis5=array('armadura','defesa');
     
     $texto="<?php \r\n class ModelSearchCriteria{\r\n";
     foreach($variaveis as $item){
@@ -39,6 +40,16 @@
       }'."\r\n";
     }
       foreach($variaveis4 as $item){
+      $texto .= '   private $'.$item.';
+       public function get'.$item.'(){
+        return $this->'.$item.';
+      }
+      public function set'.$item.'($'.$item.'){
+          $this->'.$item.' = $'.$item.';
+          return $this;
+      }'."\r\n";
+    }
+      foreach($variaveis5 as $item){
       $texto .= '   private $'.$item.';
        public function get'.$item.'(){
         return $this->'.$item.';
