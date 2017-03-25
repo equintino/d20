@@ -57,9 +57,28 @@ function valida(){
      alert("Contato enviado com sucesso, em breve entraremos em contato!");
      document.orcamento.submit();
 }
-function moeda(valor){
+function moeda2(valor){
     var x=400-valor;
+    //alert(document.getElementRyName('arma_').checked);//{
+       //alert(x);
+    //}
     document.getElementById('moeda').innerHTML=x;
+}
+
+function moeda(saldo) {
+    var custo = document.forms[0];
+    var saldo;
+    var txt = "";
+    var i;
+    for (i = 0; i < custo.length; i++) {
+        if (custo[i].checked) {
+            txt = (txt*1) + (custo[i].value*1);
+        }
+    }
+    if(400-txt < 0){
+      alert('Você não tem recursos suficiente.');
+    }
+    document.getElementById("moeda").innerHTML = saldo-txt;
 }
 </script>
 <style>
@@ -283,11 +302,11 @@ function moeda(valor){
                 echo '<br>';
                 echo '<label> Fale sobre a origem, os costumes e cultura do seu povo: </label>';
                 echo '<br>';
-                echo '<textarea rows="4" cols="90" name=breveHistoria></textarea>';
+                echo '<textarea rows="4" cols="85" name=breveHistoria></textarea>';
 				echo '<br>';
                 echo '<label> O porquê entrou nesta aventura? </label>';
                 echo '<br>';
-                echo '<textarea rows="4" cols="90" name=motivacao></textarea>';
+                echo '<textarea rows="4" cols="85" name=motivacao></textarea>';
                 echo '</div>';
              ?>
                  <div>
@@ -310,7 +329,7 @@ function moeda(valor){
              <?php
                   echo '<div align=left class=cadTitulo>&nbsp&nbspClasse: '.strtoupper($_GET['classe']).'</div>';
                   echo '<div class="moeda cadTitulo" id=moedas ><img height= 20px src=../web/imagens/coin.gif /><span id=moeda></span></div>';
-                  echo '<script>moeda(0);</script>';
+                  echo '<script>moeda(400);</script>';
                   echo '<div align=right class=cadTitulo>Armamentos para '.strtoupper($_GET['personagem']).'&nbsp&nbsp</div>';
                     echo '<span class=nota>Coloque o mouse em cima dos quadradinhos para ver a descrição das armas.</span>';
                     echo '<div class=armascorporais>';
@@ -334,7 +353,7 @@ function moeda(valor){
                              'Obs: '.$armasCoporais->getOBS();
                       echo '<div class='.str_replace(' ','',$item).' >';
 //echo $armasCoporais->getCUSTO();die;
-                        echo '<input type=checkbox onclick=moeda('.$armasCoporais->getCUSTO().'); name='.$item.' title="'.
+                        echo '<input type=checkbox onchange=moeda(\'400\'); value='.$armasCoporais->getCUSTO().' name=\''.$item.'\' title="'.
                              $desc.'" />';
                       echo '</div>';
                     }
