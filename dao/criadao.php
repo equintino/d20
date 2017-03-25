@@ -7,6 +7,7 @@
     $tabela='`\'.$model->gettabela().\'`';
     $variaveis2=array('id_atrib','FORCA','AGILIDADE','INTELIGENCIA','VONTADE','PV','PM','PE','CLASSE_COMUM','HABILIDADE_AUTOMATICA','personagem','DESCRICAO');
     $variaveis3=array('id','ARMA','CUSTO','DANO','TIPO','FN','GRUPO','OBS','figura');
+    $variaveis4=array('id','ARMA','CUSTO','personagem');
     $texto="<?php \r\n class dao{\r\n";
     $texto .= '   '."private ".'$db'." = null;\r\n".
               '   public function __destruct(){'."\r\n".
@@ -105,6 +106,12 @@
             return $this->insert3($model);
         }
         return $this->update3($model);
+   }'."\r\n";
+    $texto .= '   public function grava4(Model $model){
+        if ($model->getid() === null) {
+            return $this->insert4($model);
+        }
+        return $this->update4($model);
    }'."\r\n";
     $texto .= '   public function exclui($id) {
         $sql = \'delete from '.$tabela.' WHERE id = :id\';
@@ -268,6 +275,52 @@
              $texto .= ' WHERE id = :id \';
         return $this->execute3($sql, $model);
    }'."\r\n";
+    $texto .= '   private function insert4(Model $model){
+        date_default_timezone_set("Brazil/East");
+        $now = mktime (date(\'H\'), date(\'i\'), date(\'s\'), date("m")  , date("d"), date("Y"));
+        $model->setid(null);
+        $model->setexcluido(0);
+        $model->setcriado($now);
+        $model->setmodificado($now); 
+        $this->execute4($this->criaTabela($model->gettabela()), $model);       
+        $sql = \'INSERT INTO `\'.$model->gettabela().\'` (';
+          $x = 1;
+          foreach($variaveis4 as $item){
+            $texto .= '`'.$item.'`';
+            if(count($variaveis4)>$x){
+             $texto .= ',';
+            }else{
+             $texto .=  ') ';
+            }
+            $x++;
+          }
+        $texto .= 'VALUES (';
+          $x = 1;
+          foreach($variaveis4 as $item){
+            $texto .= ':'.$item;
+            if(count($variaveis4)>$x){
+             $texto .= ',';
+            }else{
+             $texto .=  ')\';'."\r\n";
+            }
+            $x++;
+          }
+        $texto .= "\t".'return $this->execute4($sql, $model);
+   }'."\r\n";
+    $texto .= '   private function update4(Model $model,$tabela){
+        $model->setmodificado(new DateTime(), new DateTimeZone(\'America/Sao_Paulo\'));
+        $sql = \'UPDATE `\'.$tabela.\'` SET';
+           $x=1;
+           foreach($variaveis4 as $item){
+              $texto .= " $item = :$item";
+              if(count($variaveis4)>$x){
+                $texto .= ',';
+              }
+              $x++;
+          }
+             $texto .= ' WHERE id = :id \';
+        return $this->execute4($sql, $model);
+   }'."\r\n";
     $texto .= '   public function execute($sql,$model){
         $statement = $this->getDb()->prepare($sql);
         $this->executeStatement($statement, $this->getParams($model));
@@ -296,6 +349,15 @@
         }
         return $model;
    }'."\r\n";
+    $texto .= '   public function execute4($sql,$model){
+        $statement = $this->getDb()->prepare($sql);
+        $this->executeStatement($statement, $this->getParams4($model));
+        $search=new ModelSearchCriteria();
+        if (!$model->getpersonagem()) {
+             return $this->encontrePorId($search->setid($this->getDb()->lastInsertId()));
+        }
+        return $model;
+   }'."\r\n";
     $texto .= '   private function getParams(Model $model){
         $params = array(';
         foreach($variaveis as $item){
@@ -313,6 +375,13 @@
     $texto .= '   private function getParams3(Model $model){
         $params = array(';
         foreach($variaveis3 as $item){
+            $texto .= "':".$item."'".'=> $model->get'.$item.'(),';
+        }
+    $texto .= ");\r\n\t return".' $params;
+   }'."\r\n";
+    $texto .= '   private function getParams4(Model $model){
+        $params = array(';
+        foreach($variaveis4 as $item){
             $texto .= "':".$item."'".'=> $model->get'.$item.'(),';
         }
     $texto .= ");\r\n\t return".' $params;

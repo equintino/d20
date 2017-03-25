@@ -98,6 +98,12 @@
         }
         return $this->update3($model);
    }
+   public function grava4(Model $model){
+        if ($model->getid() === null) {
+            return $this->insert4($model);
+        }
+        return $this->update4($model);
+   }
    public function exclui($id) {
         $sql = 'delete from `'.$model->gettabela().'` WHERE id = :id';
         $statement = $this->getDb()->prepare($sql);
@@ -168,6 +174,22 @@
         $sql = 'UPDATE `'.$tabela.'` SET id = :id, ARMA = :ARMA, CUSTO = :CUSTO, DANO = :DANO, TIPO = :TIPO, FN = :FN, GRUPO = :GRUPO, OBS = :OBS, figura = :figura WHERE id = :id ';
         return $this->execute3($sql, $model);
    }
+   private function insert4(Model $model){
+        date_default_timezone_set("Brazil/East");
+        $now = mktime (date('H'), date('i'), date('s'), date("m")  , date("d"), date("Y"));
+        $model->setid(null);
+        $model->setexcluido(0);
+        $model->setcriado($now);
+        $model->setmodificado($now); 
+        $this->execute4($this->criaTabela($model->gettabela()), $model);       
+        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`ARMA`,`CUSTO`,`personagem`) VALUES (:id,:ARMA,:CUSTO,:personagem)';
+	return $this->execute4($sql, $model);
+   }
+   private function update4(Model $model,$tabela){
+        $model->setmodificado(new DateTime(), new DateTimeZone('America/Sao_Paulo'));
+        $sql = 'UPDATE `'.$tabela.'` SET id = :id, ARMA = :ARMA, CUSTO = :CUSTO, personagem = :personagem WHERE id = :id ';
+        return $this->execute4($sql, $model);
+   }
    public function execute($sql,$model){
         $statement = $this->getDb()->prepare($sql);
         $this->executeStatement($statement, $this->getParams($model));
@@ -196,6 +218,15 @@
         }
         return $model;
    }
+   public function execute4($sql,$model){
+        $statement = $this->getDb()->prepare($sql);
+        $this->executeStatement($statement, $this->getParams4($model));
+        $search=new ModelSearchCriteria();
+        if (!$model->getpersonagem()) {
+             return $this->encontrePorId($search->setid($this->getDb()->lastInsertId()));
+        }
+        return $model;
+   }
    private function getParams(Model $model){
         $params = array(':id'=> $model->getid(),':jogador'=> $model->getjogador(),':personagem'=> $model->getpersonagem(),':raca'=> $model->getraca(),':classe'=> $model->getclasse(),':tendencia1'=> $model->gettendencia1(),':tendencia2'=> $model->gettendencia2(),':idade'=> $model->getidade(),':tabela'=> $model->gettabela(),':sexo'=> $model->getsexo(),':criado'=> $model->getcriado(),':modificado'=> $model->getmodificado(),':excluido'=> $model->getexcluido(),':habilidade'=> $model->gethabilidade(),':altura'=> $model->getaltura(),':peso'=> $model->getpeso(),':cidade'=> $model->getcidade(),':motivacao'=> $model->getmotivacao(),':breveHistoria'=> $model->getbreveHistoria(),);
 	 return $params;
@@ -206,6 +237,10 @@
    }
    private function getParams3(Model $model){
         $params = array(':id'=> $model->getid(),':ARMA'=> $model->getARMA(),':CUSTO'=> $model->getCUSTO(),':DANO'=> $model->getDANO(),':TIPO'=> $model->getTIPO(),':FN'=> $model->getFN(),':GRUPO'=> $model->getGRUPO(),':OBS'=> $model->getOBS(),':figura'=> $model->getfigura(),);
+	 return $params;
+   }
+   private function getParams4(Model $model){
+        $params = array(':id'=> $model->getid(),':ARMA'=> $model->getARMA(),':CUSTO'=> $model->getCUSTO(),':personagem'=> $model->getpersonagem(),);
 	 return $params;
    }
    private function executeStatement(PDOStatement $statement, array $params){

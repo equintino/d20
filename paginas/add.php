@@ -161,10 +161,28 @@
   }
   if($act == 'cad3'){
 	  $model->setpersonagem($_GET['personagem']);
-	  $model->settabela('atributos');
-	  print_r($_GET);echo '<br>';
-	  print_r($_POST);echo '<br>';
-	  print_r($model);die;
+          $model->setclasse($_GET['classe']);
+	  $model->settabela('armamentos');
+          $model->setpersonagem($_GET['personagem']);
+          $armas = null;
+          $custo = 0;
+          foreach($_POST as $key => $item){
+            $armas .= $key.'/';
+            $custo = $custo+$item;
+          }
+          $model->setARMA($armas);
+          $model->setCUSTO($custo);
+        $dao->grava4($model);
+	echo '<div class=\'add\'>'.
+               '<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.
+               '<a href=\'../web/index.php?pagina=cadastro&act=cad4&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'\' ><button class=\'continua continua-verde\'>Continua...</button></a>'.
+             '</div>';
+	die;
+  } 
+  if($act == 'cad4'){
+     print_r($_POST);echo '<br>';
+     print_r($_GET);
+     die;
   }
 ?>
 <div class='add'>
