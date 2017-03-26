@@ -199,7 +199,7 @@
         $model->setexcluido(0);
         $model->setcriado($now);
         $model->setmodificado($now); 
-        $this->execute4($this->criaTabela($model->gettabela()), $model);       
+        //$this->execute4($this->criaTabela($model->gettabela()), $model);       
         $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`ARMA`,`CUSTO`,`personagem`,`armadura`) VALUES (:id,:ARMA,:CUSTO,:personagem,:armadura)';
 	return $this->execute4($sql, $model);
    }

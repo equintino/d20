@@ -141,7 +141,7 @@ function moeda(saldo) {
         <script>dica();</script>
         <fieldset class="cad">
             <legend>CADASTRO DE PERSONAGEM</legend>
-         <form class="font_1" id="cadastro" action="../paginas/add.php?act=cad" method="POST">
+         <form class="font_1" id="cadastro" action="../paginas/add.php?act=cad&personagem=<?php echo $personagem ?>" method="POST">
          <table>
              <?php foreach($variaveis as $keys => $item){
                 if($item=='raca'){
@@ -314,9 +314,11 @@ function moeda(saldo) {
             $search->settabela('armamentos');
             $search->setpersonagem($_GET['personagem']);
             $atrib=$dao->encontrePorPersonagem($search);
-            $recurso=$atrib->getCUSTO();
-            if(!$recurso){
+            
+            if(!$atrib){
                $recurso=400;
+            }else{
+               $recurso=$atrib->getCUSTO();
             }
         ?>
         <fieldset class="cad">
@@ -421,11 +423,23 @@ function moeda(saldo) {
             $search->settabela('armamentos');
             $search->setpersonagem($_GET['personagem']);
             $atrib=$dao->encontrePorPersonagem($search);
-            $recurso=$atrib->getCUSTO();
+            //print_r($atrib);die;
+            if($atrib){
+               $recurso=$atrib->getCUSTO();
+               //echo $recurso;die;
+            }else{
+               $recurso=400;
+            }
+            
+            if($act=='cad5'){
+               $cad='cad6';
+            }elseif($act=='cad6'){
+               $cad='cad7';
+            }
          ?>
          <fieldset class="cad">
             <legend>CADASTRO DE PERSONAGEM <span>(Continuação)</span></legend>
-         <form class="font_1" id="cadastro2" action="../paginas/add.php?act=cad5&personagem=<?php echo $_GET['personagem'] ?>&classe=<?= $_GET['classe'] ?>" method="POST">
+         <form class="font_1" id="cadastro2" action="../paginas/add.php?act=<?= $act ?>&personagem=<?php echo $_GET['personagem'] ?>&classe=<?= $_GET['classe'] ?>" method="POST">
              <table>
              <?php
                   echo '<div align=left class=cadTitulo>&nbsp&nbspClasse: '.strtoupper($_GET['classe']).'</div>';
@@ -443,6 +457,7 @@ function moeda(saldo) {
                       echo '<img class=conj2 src=../web/imagens/itens/conjuracao/conjuracao2.png />';
                     }
                        //itens//
+                    //echo $act;die;
                     if($act=='cad5'){
                         $listaArmas=array('Armadura Simples','Armadura de Batalha','Armadura Completa','Túnica Pesada','Escudo de Corpo','Escudo Médio','Escudo Pequeno','Armadura de Couro');
                         $search->settabela('tb_armaduras');
@@ -450,6 +465,7 @@ function moeda(saldo) {
                         $listaArmas=array('Cajado','Cetro','Grimório','Missal','Orbe de Cristal','Punhal','Símbolo Sagrado','Varinha');
                         $search->settabela('tb_conjuracao');
                     }
+                    //print_r($listaArmas);die;
                     foreach($listaArmas as $item){
                       if($act=='cad5'){
                          $search->setarmadura($item);
@@ -464,6 +480,7 @@ function moeda(saldo) {
                       }elseif($act=='cad6'){
                          $search->setitem($item);
                          $armaduras=$dao->encontrePorItem($search);
+                         //print_r($armaduras);die;
                          $desc='Item: '.$armaduras->getitem()."\r\n".
                                'Custo: '.$armaduras->getCUSTO()."\r\n".
                                'FN: '.$armaduras->getFN()."\r\n".
@@ -479,7 +496,7 @@ function moeda(saldo) {
                   echo '<script>moeda('.$recurso.');</script>';
                       echo '<input type=button value="VOLTAR" onclick=history.go(-2) class=\'cad4Hab cad4Hab-verde\'> ' ; 
                       echo '<input type="submit" value="AVANÇA" class=\'cad4Hab cad4Hab-verde\'> ' ; 
-                      echo '<a href=\'../web/index.php?pagina=cadastro&act=cad6&classe='.$_GET['classe'].'&personagem='. $_GET['personagem'].'\'><input type=button class=\'cad4Hab cad4Hab-verde\' value=PULAR></a>';         
+                      echo '<a href=\'../web/index.php?pagina=cadastro&act='.$cad.'&classe='.$_GET['classe'].'&personagem='. $_GET['personagem'].'\'><input type=button class=\'cad4Hab cad4Hab-verde\' value=PULAR></a>';         
                     echo '<br><br>'; 
                     echo '</div>';
                     die;
