@@ -44,6 +44,7 @@
  private $DESCRICAO;
  private $armadura;
  private $defesa;
+ private $item;
  public function getid(){
 	return $this->id;
  }
@@ -307,5 +308,11 @@
  }
  public function setdefesa($defesa ){
 	$this->defesa=$defesa;
+ }
+ public function getitem(){
+	return $this->item;
+ }
+ public function setitem($item ){
+	$this->item=$item;
  }
  }

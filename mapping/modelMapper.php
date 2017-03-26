@@ -133,5 +133,8 @@
 	if (array_key_exists('defesa', $properties)){
 	  $model->setdefesa($properties['defesa']);
 	}
+	if (array_key_exists('item', $properties)){
+	  $model->setitem($properties['item']);
+	}
   } 
  }

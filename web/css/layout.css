@@ -942,3 +942,53 @@ fieldset legend{
     top: 1100px;
     left: 800px;
 }
+.conj{
+    margin: 20px 0;
+    float: left;
+    #border: 1px solid red;
+}
+.conj2{
+    margin: 160px 0;
+    float: left;
+    #border: 1px solid red;
+}
+.Grimório{
+    position: absolute;
+    top: 520px;
+    left: 120px;
+}
+.Cajado{
+    position: absolute;
+    top: 660px;
+    left: 240px;
+}
+.Cetro{
+    position: absolute;
+    top: 660px;
+    left: 380px;
+}
+.Missal{
+    position: absolute;
+    top: 520px;
+    left: 485px;
+}
+.Varinha{
+    position: absolute;
+    top: 480px;
+    left: 700px;
+}
+.OrbedeCristal{
+    position: absolute;
+    top: 600px;
+    left: 650px;
+}
+.SímboloSagrado{
+    position: absolute;
+    top: 600px;
+    left: 820px;
+}
+.Punhal{
+    position: absolute;
+    top: 700px;
+    left: 770px;
+}

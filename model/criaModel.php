@@ -7,7 +7,7 @@
     $variaveis3=array('ARMA','CUSTO','DANO','TIPO','FN','GRUPO','OBS','figura');
     $variaveis4=array('BONUS_ATRIBUTO','PROFICIENCIA');
     $variaveis5=array('REQUISITOS','MANA','DESCRICAO');
-    $variaveis6=array('armadura','defesa');
+    $variaveis6=array('armadura','defesa','item');
     $texto="<?php \r\n class Model{\r\n";
     foreach($variaveis as $item){
       $texto .=' private $'.$item.';'."\r\n";

@@ -328,4 +328,12 @@
           $this->defesa = $defesa;
           return $this;
       }
+   private $item;
+       public function getitem(){
+        return $this->item;
+      }
+      public function setitem($item){
+          $this->item = $item;
+          return $this;
+      }
 }

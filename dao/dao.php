@@ -75,7 +75,15 @@
    }
    public function encontrePorArmadura(ModelSearchCriteria $search=null){
            $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` =  '0' and `armadura` = '".$search->getarmadura()."'")->fetch();
-           //print_r($row);die;
+        if (!$row) {
+            return null;
+        }
+        $model = new Model();
+        modelMapper::map($model, $row);
+        return $model;
+   }
+   public function encontrePorItem(ModelSearchCriteria $search=null){
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` =  '0' and `item` = '".$search->getitem()."'")->fetch();
         if (!$row) {
             return null;
         }
@@ -192,12 +200,12 @@
         $model->setcriado($now);
         $model->setmodificado($now); 
         $this->execute4($this->criaTabela($model->gettabela()), $model);       
-        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`ARMA`,`CUSTO`,`personagem`) VALUES (:id,:ARMA,:CUSTO,:personagem)';
+        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`ARMA`,`CUSTO`,`personagem`,`armadura`) VALUES (:id,:ARMA,:CUSTO,:personagem,:armadura)';
 	return $this->execute4($sql, $model);
    }
    private function update4(Model $model){
         $model->setmodificado(new DateTime(), new DateTimeZone('America/Sao_Paulo'));
-        $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, ARMA = :ARMA, CUSTO = :CUSTO, personagem = :personagem WHERE id = :id ';
+        $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, ARMA = :ARMA, CUSTO = :CUSTO, personagem = :personagem, armadura = :armadura WHERE id = :id ';
         return $this->execute4($sql, $model);
    }
    public function execute($sql,$model){
@@ -250,7 +258,7 @@
 	 return $params;
    }
    private function getParams4(Model $model){
-        $params = array(':id'=> $model->getid(),':ARMA'=> $model->getARMA(),':CUSTO'=> $model->getCUSTO(),':personagem'=> $model->getpersonagem(),);
+        $params = array(':id'=> $model->getid(),':ARMA'=> $model->getARMA(),':CUSTO'=> $model->getCUSTO(),':personagem'=> $model->getpersonagem(),':armadura'=> $model->getarmadura(),);
 	 return $params;
    }
    private function executeStatement(PDOStatement $statement, array $params){

@@ -7,6 +7,8 @@
   include_once '../dao/ModelSearchCriteria.php';
   include_once '../validacao/ModelValidador.php';
   $act=$_GET['act'];
+  $personagem = $_GET['personagem'];
+  $classe = $_GET['classe'];
   @$atribamais=$_POST['maisum'];
   $humanoF=$humanoA=$humanoI=$humanoV=0;
   $habilidade = null;
@@ -194,7 +196,7 @@
              '</div>';
 	die;
   } 
-  if($act == 'cad4'){
+  if($act == 'cad4' || $act == 'cad5'){
     if(!$_POST){
 	echo '<div class=\'add\'>'.
                '<h3>Nenhum item selecionado.</h3>'.
@@ -202,7 +204,7 @@
              '</div>';
         die;
     }
-     $personagem=$_GET['personagem'];
+     //$personagem=$_GET['personagem'];
      $search->settabela('armamentos');
      $search->setpersonagem($personagem);
      $model->setclasse($_GET['classe']);
@@ -214,13 +216,25 @@
           }
      if($armamento){
         $saldo=$armamento->getCUSTO()-$custo;
-        $armamento->setARMA($armamento->getARMA().$armas);
+        if($act=='cad4'){
+           $armamento->setARMA($armamento->getARMA().$armas);
+           $cad='cad5';
+        }else{
+           $armamento->setarmadura($armamento->getarmadura().$armas);
+           $cad='cad6';
+        }
         $armamento->setCUSTO($saldo);
         $armamento->settabela('armamentos');
         $dao->grava4($armamento);
      }else{
         $saldo=400-$custo;
-        $model->setARMA($armas);
+        if($act=='cad4'){
+           $model->setARMA($armas);
+           $cad='cad5';
+        }else{
+           $model->setarmadura($armas);
+           $cad='cad6';
+        }
         $model->setCUSTO($saldo);
         $model->settabela('armamentos');
         $model->setpersonagem($personagem);
@@ -229,14 +243,30 @@
      }
 	echo '<div class=\'add\'>'.
                '<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.
-               '<a href=\'../web/index.php?pagina=cadastro&act=cad5&classe='.$model->getclasse().'&personagem='. $personagem.'\' ><button class=\'continua continua-verde\'>Continua...</button></a>'.
+               '<a href=\'../web/index.php?pagina=cadastro&act='.$cad.'&classe='.$model->getclasse().'&personagem='. $personagem.'\' ><button class=\'continua continua-verde\'>Continua...</button></a>'.
              '</div>';
 	die;
   }
-  if($act == 'cad5'){
-     print_r($_GET);
+  /*if($act == 'cad5'){
+    if(!$_POST){
+	echo '<div class=\'add\'>'.
+               '<h3>Nenhum item selecionado.</h3>'.
+               '<button onclick=history.go(-1); class=\'continua continua-verde\'>Voltar</button>'.
+             '</div>';
+        die;
+    }
+     $search->settabela('armamentos');
+     $search->setpersonagem($personagem);
+     $armamento=$dao->encontrePorPersonagem($search);
+     $armas=$custo=null;
+     $armamento=$dao->encontrePorPersonagem($search);
+          foreach($_POST as $key => $item){
+            $armas .= $key.'/';
+            $custo = $custo+$item;
+          }
+     print_r($custo);
      die;
-  }
+  }*/
 ?>
 <div class='add'>
 <h3>REGISTRO GRAVADO COM SUCESSO</h3>
