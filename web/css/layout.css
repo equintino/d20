@@ -414,8 +414,10 @@ fieldset legend{
     padding: 8px;
     overflow: auto;
     text-align: justify;
-    font-family: 'Satisfy', cursive;
-    font-size: 12px;
+    #font-family: 'Satisfy', cursive;
+    font-family: 'Architects Daughter', cursive;
+    font-style: italic;
+    font-size: 14px;
     text-indent: 30px; 
     background-color: blanchedalmond;
 }
@@ -813,8 +815,10 @@ fieldset legend{
 }
 .descricao{
     text-align: justify;
-    font-family: 'Satisfy', cursive;
-    font-size: 12px;
+    #font-family: 'Satisfy', cursive;
+    font-family: 'Architects Daughter', cursive;
+    font-style: italic;
+    font-size: 14px;
     #border: 1px solid red;
     width: 350px;
     margin: 0 20px;
