@@ -423,10 +423,8 @@ function moeda(saldo) {
             $search->settabela('armamentos');
             $search->setpersonagem($_GET['personagem']);
             $atrib=$dao->encontrePorPersonagem($search);
-            //print_r($atrib);die;
             if($atrib){
                $recurso=$atrib->getCUSTO();
-               //echo $recurso;die;
             }else{
                $recurso=400;
             }

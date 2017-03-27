@@ -7,8 +7,6 @@
    function mostrarDado(){
     var dado = getRadioValor('dado');
     document.getElementById('resultado').innerHTML = '';
-    //alert(dado);
-    //document.write('<img height=60px src="imagens/dado/rd'+dado+'.gif" />');
     if(dado == '6x2'){
        document.getElementById('dado'+dado).innerHTML = '<img height=60px src="imagens/dado/rd'+dado+'.gif" />';
        document.getElementById('dado2'+dado).innerHTML = '<img height=60px src="imagens/dado/rd'+dado+'.gif" />';
@@ -19,8 +17,6 @@
    }else{
       document.getElementById('dado'+dado).innerHTML = '<img height=60px src="imagens/dado/rd'+dado+'.gif" />';    
     }
-  //alert('O valor selecionado é '+ getRadioValor('dado'));
-  //,'.$dado.'
  }
   
  function getRadioValor(name){
@@ -33,16 +29,6 @@
   }  
   return null;
  }
-  /*botao.addEventListener('mousedown', function (event) {
-     x += 1;
-});
-  function teste(){
-  document.getElementById("test").addEventListener("click", function( event ) {
-    // mostra o contador de cliques dentro da div clicada
-    event.target.innerHTML = "Total de cliques: " + event.detail;
-  }, false);
- }
- */
 </script>
 <?php
 @$act=$_GET['act'];
@@ -51,30 +37,27 @@ if(@!$dado){
   @$dado=$_GET['dado'];
 }
 @$rolar=$_POST['rolar'];
- function redirecionar($tempo,$url, $mensagem, $dado){
-  //header("Refresh: $tempo; url=$url");
+ /*function redirecionar($tempo,$url, $mensagem, $dado){
   echo '<script>rolaDado(\'imagens/dado/rd'.$dado.'.gif\','.$dado.')</script>';
   echo "<div class=carregando>";
   echo '<center class=msg>'.$mensagem.  '</center><br/>';
-  //echo '<center><img height=70px src="imagens/dado/rd'.$dado.'.gif" alt="" /><br/><br/></center>';
   echo "</div>";
- }
- echo '<div class="conteudo">';
- echo '<br><br><br>';
+ }*/
  ?>
+<div class="conteudo">
+<br><br><br>
 <center>
     <form action="index.php?pagina=dado&act=1" method="post">
         <legenda class="t_dado">Escolha o dado abaixo</legenda>
-        <br><br>  
+        <div class="dados"> 
         <span id='dado6'><img height=56px title='Dado de 6 lados' src='../web/imagens/d6.png'></span>
         <input type='radio' id="dado" name='dado' value='6' required="">  
         <span id="dado6x2"><img height=56px title='Dado de 6 lados' src='../web/imagens/d6.png'></span><span id='dado26x2'><img height=56px title='Dado de 6 lados' src='../web/imagens/d6.png'></span>
         <input type='radio' id="dadox2" name='dado' value='6x2' checked="checked" required="">
         <span id='dado6x3'><img height=56px title='Dado de 6 lados' src='../web/imagens/d6.png'></span><span id='dado26x3'><img height=56px title='Dado de 6 lados' src='../web/imagens/d6.png'></span><span id='dado36x3'><img height=56px title='Dado de 6 lados' src='../web/imagens/d6.png'></span>
-
         <input type='radio' id="dadox3" name='dado' value='6x3'>
         <input type="hidden" name="rolar" value="1">
-        <br><br>
+        </div>
         <button title="Aperte e segure para girar o dado." class='rolar rolar-red' onmousedown="mostrarDado()"; >Segure para girar</button>       
     </form>
 </center>
@@ -90,15 +73,7 @@ if(@!$dado){
         }else{
            $dado_ = rand(1,$dado);
         }
-           //echo "Você rolou o dado e...<br />";
            echo "Você tirou<br><span>$dado_</span>";
-	//redirecionar('1','index.php?pagina=dado&dado='.$dado.'&abrir=1','Aguarde...',$dado);
- }/*elseif($dado){
-	$dado_ = rand(1,$dado);
-           //echo "Você rolou o dado e...<br />";
-           echo "Você tirou<br><span>$dado_</span>";
-           //echo '<script>document.write(processa('.$dado_.',1,100,1));</script>';
-        echo '</div>';
- }*/
- echo '</div>';
-?>
+ }
+ ?>
+ </div>

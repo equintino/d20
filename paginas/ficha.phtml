@@ -18,14 +18,12 @@
                   $search->settabela('personagem');
                   $search->setpersonagem($personagem);
                   $lista=$dao->encontre($search);
-                  //print_r($lista);die;
                   @$level=$_GET['level'];
                   if(!$level){
                      $level=1; 
                   }
                   $titulos=array('PERSONAGEM','RAÇA','CLASSE','TENDÊNCIA1','TENDÊNCIA2');
-        echo '<br><br><br>';
-        echo '<fieldset class="ficha"><legend>FICHA DE PERSONAGEM &nbsp&nbsp LEVEL '.$level.'</legend>';
+        echo '<fieldset class="cad"><legend>FICHA DE PERSONAGEM &nbsp&nbsp LEVEL '.$level.'</legend>';
            echo '<table cellspacing=0 border=1 class=tabelaFicha>';
               if(!$lista){
                 die('Personagem Inexistente');
