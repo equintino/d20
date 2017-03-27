@@ -64,11 +64,6 @@ if(@!$dado){
  ?>
 <center>
     <form action="index.php?pagina=dado&act=1" method="post">
-        <!--<select name="dado" required="">
-            <option></option>
-            <option value="6">D6</option>
-            <option value="20">D20</option>
-        </select> -->
         <legenda class="t_dado">Escolha o dado abaixo</legenda>
         <br><br>  
         <span id='dado6'><img height=56px title='Dado de 6 lados' src='../web/imagens/d6.png'></span>
@@ -77,15 +72,10 @@ if(@!$dado){
         <input type='radio' id="dadox2" name='dado' value='6x2' checked="checked" required="">
         <span id='dado6x3'><img height=56px title='Dado de 6 lados' src='../web/imagens/d6.png'></span><span id='dado26x3'><img height=56px title='Dado de 6 lados' src='../web/imagens/d6.png'></span><span id='dado36x3'><img height=56px title='Dado de 6 lados' src='../web/imagens/d6.png'></span>
 
-<!--<img height=60px title='Dado de 20 lados' src='../web/imagens/d20.png'>--></span>
         <input type='radio' id="dadox3" name='dado' value='6x3'>
         <input type="hidden" name="rolar" value="1">
         <br><br>
-        <!--<input class='rolar rolar-red' type="submit" value="ok">-->
-        <button title="Aperte e segure para girar o dado." class='rolar rolar-red' onmousedown="mostrarDado()"; >Segure para girar</button> 
-        <!--rolaDado('imagens/dado/rd20.gif','20')-->
-        
-        <!--<button class='rolar rolar-red' onmousedown/onmouseup="alert('vou parar')"; >Para</button> -->
+        <button title="Aperte e segure para girar o dado." class='rolar rolar-red' onmousedown="mostrarDado()"; >Segure para girar</button>       
     </form>
 </center>
 <br><br>
