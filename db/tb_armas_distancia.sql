@@ -1,33 +1,33 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 3.5.8.2
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: 27-Mar-2017 às 03:45
--- Versão do servidor: 10.1.19-MariaDB
--- PHP Version: 7.0.13
+-- Host: sql113.byethost7.com
+-- Generation Time: Mar 27, 2017 at 01:59 PM
+-- Server version: 5.6.34-79.1
+-- PHP Version: 5.3.3
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- Database: `d20`
+-- Database: `b7_16656868_d20`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_armas_distancia`
+-- Table structure for table `tb_armas_distancia`
 --
 
-CREATE TABLE `tb_armas_distancia` (
-  `id` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tb_armas_distancia` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `ARMA` varchar(50) DEFAULT NULL,
   `CUSTO` int(3) DEFAULT NULL,
   `DANO` int(2) DEFAULT NULL,
@@ -36,11 +36,12 @@ CREATE TABLE `tb_armas_distancia` (
   `GRUPO` varchar(13) DEFAULT NULL,
   `OBS` text,
   `figura` mediumblob NOT NULL,
-  `excluido` enum('0','1') NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `excluido` enum('0','1') NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
--- Extraindo dados da tabela `tb_armas_distancia`
+-- Dumping data for table `tb_armas_distancia`
 --
 
 INSERT INTO `tb_armas_distancia` (`id`, `ARMA`, `CUSTO`, `DANO`, `TIPO`, `FN`, `GRUPO`, `OBS`, `figura`, `excluido`) VALUES
@@ -70,25 +71,6 @@ INSERT INTO `tb_armas_distancia` (`id`, `ARMA`, `CUSTO`, `DANO`, `TIPO`, `FN`, `
 (18, 'Flecha Comum', 2, NULL, NULL, NULL, NULL, 'Flecha usada em todos os tipos de arco.', '', '0'),
 (19, 'Flecha Garateia', 10, NULL, NULL, NULL, NULL, 'Fecha especial para acoplar uma garatéia na ponta e uma corda.', '', '0');
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `tb_armas_distancia`
---
-ALTER TABLE `tb_armas_distancia`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `tb_armas_distancia`
---
-ALTER TABLE `tb_armas_distancia`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

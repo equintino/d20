@@ -1,32 +1,32 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 3.5.8.2
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: 27-Mar-2017 às 03:45
--- Versão do servidor: 10.1.19-MariaDB
--- PHP Version: 7.0.13
+-- Host: sql113.byethost7.com
+-- Generation Time: Mar 27, 2017 at 02:00 PM
+-- Server version: 5.6.34-79.1
+-- PHP Version: 5.3.3
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- Database: `d20`
+-- Database: `b7_16656868_d20`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_armas_corporais`
+-- Table structure for table `tb_armas_corporais`
 --
 
-CREATE TABLE `tb_armas_corporais` (
+CREATE TABLE IF NOT EXISTS `tb_armas_corporais` (
   `id` int(2) NOT NULL,
   `ARMA` varchar(18) DEFAULT NULL,
   `CUSTO` int(3) DEFAULT NULL,
@@ -36,11 +36,12 @@ CREATE TABLE `tb_armas_corporais` (
   `GRUPO` varchar(13) DEFAULT NULL,
   `OBS` varchar(50) DEFAULT NULL,
   `excluido` int(1) DEFAULT NULL,
-  `figura` blob NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `figura` blob NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `tb_armas_corporais`
+-- Dumping data for table `tb_armas_corporais`
 --
 
 INSERT INTO `tb_armas_corporais` (`id`, `ARMA`, `CUSTO`, `DANO`, `TIPO`, `FN`, `GRUPO`, `OBS`, `excluido`, `figura`) VALUES
@@ -89,16 +90,6 @@ INSERT INTO `tb_armas_corporais` (`id`, `ARMA`, `CUSTO`, `DANO`, `TIPO`, `FN`, `
 (33, 'Marreta', 175, '10', 'Contusão', '7', NULL, 'Duas Mãos', 0, ''),
 (34, 'Azagaia', 50, '5', 'Prfuração', '2', NULL, 'Arremesso', 0, ''),
 (35, 'Martelo Lucerno', 275, '11', 'Contusão;Perfuração', '7', NULL, 'Duas Mãos', 0, '');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `tb_armas_corporais`
---
-ALTER TABLE `tb_armas_corporais`
-  ADD PRIMARY KEY (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

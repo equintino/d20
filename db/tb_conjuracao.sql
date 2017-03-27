@@ -1,44 +1,45 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 3.5.8.2
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: 27-Mar-2017 às 04:36
--- Versão do servidor: 10.1.19-MariaDB
--- PHP Version: 7.0.13
+-- Host: sql113.byethost7.com
+-- Generation Time: Mar 27, 2017 at 02:02 PM
+-- Server version: 5.6.34-79.1
+-- PHP Version: 5.3.3
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- Database: `d20`
+-- Database: `b7_16656868_d20`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_conjuracao`
+-- Table structure for table `tb_conjuracao`
 --
 
-CREATE TABLE `tb_conjuracao` (
-  `id` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tb_conjuracao` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `item` varchar(100) NOT NULL,
   `CUSTO` int(5) NOT NULL,
   `FN` int(5) NOT NULL,
   `peso` decimal(10,1) NOT NULL,
   `DESCRICAO` text NOT NULL,
   `excluido` enum('0','1') NOT NULL DEFAULT '0',
-  `OBS` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `OBS` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
--- Extraindo dados da tabela `tb_conjuracao`
+-- Dumping data for table `tb_conjuracao`
 --
 
 INSERT INTO `tb_conjuracao` (`id`, `item`, `CUSTO`, `FN`, `peso`, `DESCRICAO`, `excluido`, `OBS`) VALUES
@@ -51,25 +52,6 @@ INSERT INTO `tb_conjuracao` (`id`, `item`, `CUSTO`, `FN`, `peso`, `DESCRICAO`, `
 (7, 'Símbolo Sagrado', 25, 1, '0.1', 'Um medalhão com o símbolo de uma divindade. Canalizador,\r\nCerne Místico', '0', ''),
 (8, 'Varinha', 25, 1, '0.2', 'Uma pequena haste com 25 a 40 centímetros de comprimento feito\r\nde madeira nobre. Canalizador, Asseste Mágico', '0', '');
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `tb_conjuracao`
---
-ALTER TABLE `tb_conjuracao`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `tb_conjuracao`
---
-ALTER TABLE `tb_conjuracao`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
