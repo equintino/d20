@@ -155,13 +155,16 @@ body{
 }
 .cad, .lista, .ficha{
     width: 900px;
-    height: 690px;
+    height: 850px;
+    padding: 5px 40px;
+    #border: 1px solid red;
 }
 .ficha{
-    margin: auto;
+    #margin: auto;
 }
 .cad, .lista{
     margin: 73px 20px;
+    #border: 1px solid red;
 }
 .cad table{
     margin: 0 80px;
@@ -173,17 +176,12 @@ body{
     overflow: auto;
 }
 .lista{
-    #width: 700px;
-    #margin: 73px 122px;
-    #overflow: auto;
     border: 2px solid white;    
     background:rgba(255,255,255, 0.8);
     font-weight: bolder;
-    #height: 360px;
-    #width: 750px;
 }
 .lista table{
-    margin: 10px 30px;
+    margin: 40px 80px;
 }
 .lista legend{
     font-size: 30px;
@@ -207,7 +205,7 @@ fieldset legend{
 .raca{
     font-family: 'Architects Daughter', cursive;
     float: right;
-    margin-right: 15px;
+    margin-right: 80px;
 }
 .texto{
     margin: 0 80px;
@@ -387,6 +385,7 @@ fieldset legend{
 }
 .ficha table{
     margin: 10px 30px;
+    #border: 1px solid red;
 }
 .ficha legend, .lista legend, .cad legend{
     font-family: 'Audiowide', cursive;  
