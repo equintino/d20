@@ -452,7 +452,7 @@ function moeda(saldo) {
                     }elseif($act=='cad6'){
                     echo '<legend>Itens de Conjuração</legend>';
                       echo '<img class=conj src=../web/imagens/itens/conjuracao/conjuracao.png />';
-                      echo '<img class=conj2 src=../web/imagens/itens/conjuracao/conjuracao2.png />';
+                      echo '<img height=310px class=conj2 src=../web/imagens/itens/conjuracao/conjuracao2.png />';
                     }
                        //itens//
                     //echo $act;die;
@@ -478,7 +478,6 @@ function moeda(saldo) {
                       }elseif($act=='cad6'){
                          $search->setitem($item);
                          $armaduras=$dao->encontrePorItem($search);
-                         //print_r($armaduras);die;
                          $desc='Item: '.$armaduras->getitem()."\r\n".
                                'Custo: '.$armaduras->getCUSTO()."\r\n".
                                'FN: '.$armaduras->getFN()."\r\n".
@@ -491,6 +490,9 @@ function moeda(saldo) {
                              $desc.'" />';
                       echo '</div>';
                     }
+                    echo '<div class=Cajado_ title="Pode ser usado em combate como um Bordão.">*</div>';
+                    echo '<div class=Cetro_ title="Pode ser usado em combate como uma Clava.">*</div>';
+                    echo '<div class=Punhal_ title="Pode ser usado em combate como uma Adaga.">*</div>';
                   echo '<script>moeda('.$recurso.');</script>';
                       echo '<input type=button value="VOLTAR" onclick=history.go(-2) class=\'cad4Hab cad4Hab-verde\'> ' ; 
                       echo '<input type="submit" value="AVANÇA" class=\'cad4Hab cad4Hab-verde\'> ' ; 
