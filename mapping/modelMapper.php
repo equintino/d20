@@ -136,5 +136,8 @@
 	if (array_key_exists('item', $properties)){
 	  $model->setitem($properties['item']);
 	}
+	if (array_key_exists('equipamento', $properties)){
+	  $model->setequipamento($properties['equipamento']);
+	}
   } 
  }

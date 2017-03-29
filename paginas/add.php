@@ -201,7 +201,7 @@
              '</div>';
 	die;
   } 
-  if($act == 'cad4' || $act == 'cad5' || $act == 'cad6'){
+  if($act == 'cad4' || $act == 'cad5' || $act == 'cad6' || $act=='cad7'){
     if(!$_POST){
 	echo '<div class=\'add\'>'.
                '<h3>Nenhum item selecionado.</h3>'.
@@ -209,17 +209,17 @@
              '</div>';
         die;
     }
-     //$personagem=$_GET['personagem'];
      $search->settabela('armamentos');
      $search->setpersonagem($personagem);
      $model->setclasse($_GET['classe']);
      $armas=$custo=null;
+//print_r($_POST);
      $armamento=$dao->encontrePorPersonagem($search);
-     //print_r($armamento);die;
           foreach($_POST as $key => $item){
             $armas .= $key.'/';
             $custo = $custo+$item;
           }
+//print_r($armamento);die;
      if($armamento){
         $saldo=$armamento->getCUSTO()-$custo;
         if($act=='cad4'){
@@ -231,6 +231,9 @@
         }elseif($act=='cad6'){
            $armamento->setARMA($armamento->getARMA().$armas);
            $cad='cad7';
+        }elseif($act=='cad7'){
+           $armamento->setequipamento($armamento->getequipamento().$armas);
+           $cad='cad8';
         }
         $armamento->setCUSTO($saldo);
         $armamento->settabela('armamentos');

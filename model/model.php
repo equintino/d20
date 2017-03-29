@@ -45,6 +45,7 @@
  private $armadura;
  private $defesa;
  private $item;
+ private $equipamento;
  public function getid(){
 	return $this->id;
  }
@@ -314,5 +315,11 @@
  }
  public function setitem($item ){
 	$this->item=$item;
+ }
+ public function getequipamento(){
+	return $this->equipamento;
+ }
+ public function setequipamento($equipamento ){
+	$this->equipamento=$equipamento;
  }
  }

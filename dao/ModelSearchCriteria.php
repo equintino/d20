@@ -336,4 +336,12 @@
           $this->item = $item;
           return $this;
       }
+   private $equipamento;
+       public function getequipamento(){
+        return $this->equipamento;
+      }
+      public function setequipamento($equipamento){
+          $this->equipamento = $equipamento;
+          return $this;
+      }
 }

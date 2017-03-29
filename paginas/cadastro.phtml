@@ -417,7 +417,7 @@ function moeda(saldo) {
                     echo '</div>';
                     die;
         ?>
-        <?php elseif($act=='cad5'||$act=='cad6'): 
+        <?php elseif($act=='cad5'||$act=='cad6'||$act=='cad7'): 
             $dao=new Dao();
             $search=new ModelSearchCriteria();
             $search->settabela('armamentos');
@@ -433,6 +433,8 @@ function moeda(saldo) {
                $cad='cad6';
             }elseif($act=='cad6'){
                $cad='cad7';
+            }elseif($act=='cad7'){
+                $cad='cad8';
             }
          ?>
          <fieldset class="cad">
@@ -442,8 +444,12 @@ function moeda(saldo) {
              <?php
                   echo '<div align=left class=cadTitulo>&nbsp&nbspClasse: '.strtoupper($_GET['classe']).'</div>';
                   echo '<div class="moeda cadTitulo" id=moedas ><img height= 20px src=../web/imagens/coin.gif /><span id=moeda></span></div>';
-                  echo '<div align=right class=cadTitulo>Armaduras para '.strtoupper($_GET['personagem']).'&nbsp&nbsp</div>';
+                  if($act=='cad5'||$act=='cad6'){
+                    echo '<div align=right class=cadTitulo>Armaduras para '.strtoupper($_GET['personagem']).'&nbsp&nbsp</div>';
                     echo '<span class=nota>Coloque o mouse em cima dos quadradinhos para ver a descrição das armas.</span>';
+                  }elseif($act=='cad7'){
+                    echo '<div align=right class=cadTitulo>Ítens para '.strtoupper($_GET['personagem']).'&nbsp&nbsp</div>';
+                  }
                     echo '<div class=armascorporais>';
                     echo '<fieldsel>';
                     if($act=='cad5'){
@@ -453,9 +459,39 @@ function moeda(saldo) {
                     echo '<legend>Itens de Conjuração</legend>';
                       echo '<img class=conj src=../web/imagens/itens/conjuracao/conjuracao.png />';
                       echo '<img height=310px class=conj2 src=../web/imagens/itens/conjuracao/conjuracao2.png />';
+                    }elseif($act=='cad7'){
+                    echo '<legend>Itens Gerais</legend>';
+                      $search->setpersonagem(null);
+                      $search->settabela('tb_equipamento_geral');
+                      $equipamentos=$dao->encontre($search);
+                        echo '<table class=equipamentos><tr>';
+                            echo '<th>ITEM</th>';
+                            echo '<th>CUSTO</th>';
+                            echo '<th>PESO</th>';
+                            echo '<th>DESCRIÇÃO</th>';
+                            echo '<th>COMPRAR</th>';
+                            echo '</tr>';
+                            foreach($equipamentos as $item){
+                              echo '<tr>';
+                                  echo '<td>'.$item->getitem().'</td>';
+                                  echo '<td align=center>'.$item->getCUSTO().'</td>';
+                                  echo '<td align=center>'.$item->getpeso().'</td>';
+                                  echo '<td>'.$item->getDESCRICAO().'</td>';
+                                  echo '<td align=center><input type=checkbox onchange=moeda(\''.$recurso.'\') value='.$item->getCUSTO().' name=\''.$item->getitem().'\'  /></td>';
+                              echo '</tr>';
+                            }
+                            echo '</table>';
+                        echo '<script>moeda('.$recurso.');</script>';
+                        echo '<table>';
+                     // echo '<input type=button value="VOLTAR" onclick=history.go(-2) class=\'cad4Hab cad4Hab-verde\'> ' ; 
+                      echo '<input type="submit" value="CONCLUIR" class=\'cad4Hab cad4Hab-verde\'>&nbsp&nbsp' ; 
+                      //echo '<a href=\'../web/index.php?pagina=cadastro&act=cad8&classe='.$_GET['classe'].'&personagem='. $_GET['personagem'].'\'><input type=button class=\'cad4Hab cad4Hab-verde\' value=PULAR></a>';         
+                    echo '<br><br>'; 
+                      echo '</table>';
+                    echo '</div>';
+                    die;
                     }
                        //itens//
-                    //echo $act;die;
                     if($act=='cad5'){
                         $listaArmas=array('Armadura Simples','Armadura de Batalha','Armadura Completa','Túnica Pesada','Escudo de Corpo','Escudo Médio','Escudo Pequeno','Armadura de Couro');
                         $search->settabela('tb_armaduras');
@@ -463,7 +499,6 @@ function moeda(saldo) {
                         $listaArmas=array('Cajado','Cetro','Grimório','Missal','Orbe de Cristal','Punhal','Símbolo Sagrado','Varinha');
                         $search->settabela('tb_conjuracao');
                     }
-                    //print_r($listaArmas);die;
                     foreach($listaArmas as $item){
                       if($act=='cad5'){
                          $search->setarmadura($item);
@@ -490,9 +525,11 @@ function moeda(saldo) {
                              $desc.'" />';
                       echo '</div>';
                     }
-                    echo '<div class=Cajado_ title="Pode ser usado em combate como um Bordão.">*</div>';
-                    echo '<div class=Cetro_ title="Pode ser usado em combate como uma Clava.">*</div>';
-                    echo '<div class=Punhal_ title="Pode ser usado em combate como uma Adaga.">*</div>';
+                    if($act=='cad6'){
+                        echo '<div class=Cajado_ title="Pode ser usado em combate como um Bordão.">*</div>';
+                        echo '<div class=Cetro_ title="Pode ser usado em combate como uma Clava.">*</div>';
+                        echo '<div class=Punhal_ title="Pode ser usado em combate como uma Adaga.">*</div>';
+                    }
                   echo '<script>moeda('.$recurso.');</script>';
                       echo '<input type=button value="VOLTAR" onclick=history.go(-2) class=\'cad4Hab cad4Hab-verde\'> ' ; 
                       echo '<input type="submit" value="AVANÇA" class=\'cad4Hab cad4Hab-verde\'> ' ; 
@@ -500,6 +537,12 @@ function moeda(saldo) {
                     echo '<br><br>'; 
                     echo '</div>';
                     die;
+        ?>
+        <?php elseif($act=='cad8'): 
+            echo '<div class=\'addFim\'>'.
+               '<h3>PARABENS!<br>SUA FICHA ESTÁ COMPLETA.<br>BOM JOGO!</h3>';
+             '</div>';
+                die;
                     
                     
                     
