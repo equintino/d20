@@ -436,7 +436,7 @@ fieldset legend{
     #margin: 90px 225px;
     font-size: 10px;
 }
-.equipamentos, th, td{
+.equipamentos, .equipamentos th, .equipamentos td{
     border: 1px solid black;
     border-collapse: collapse;
 }

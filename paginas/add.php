@@ -213,13 +213,11 @@
      $search->setpersonagem($personagem);
      $model->setclasse($_GET['classe']);
      $armas=$custo=null;
-//print_r($_POST);
      $armamento=$dao->encontrePorPersonagem($search);
           foreach($_POST as $key => $item){
             $armas .= $key.'/';
             $custo = $custo+$item;
           }
-//print_r($armamento);die;
      if($armamento){
         $saldo=$armamento->getCUSTO()-$custo;
         if($act=='cad4'){
@@ -254,7 +252,6 @@
         $model->settabela('armamentos');
         $model->setpersonagem($personagem);
         $model->setid(null);
-        //print_r($model);die;
         $dao->grava4($model);
      }
 	echo '<div class=\'add\'>'.
