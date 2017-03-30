@@ -155,8 +155,10 @@ body{
     padding: 5px 40px;
     #border: 1px solid red;
 }
-.ficha{
-    #margin: auto;
+.cadficha{
+    width: 900px;
+    height: 850px;
+    padding: 5px 40px;
 }
 .cad{
     margin: 73px auto;
@@ -369,25 +371,15 @@ fieldset legend{
 }
 .fichaTitulo{
     text-align: center;
-    #border: 1px solid red;
+    #border: 1px solid maroon;
+    margin-top: 20px;
 }
 .destaque{
     font-size: 22px;
     color: red;
 }
-.ficha table{
-    margin: 10px 30px;
-    #border: 1px solid red;
-}
 .ficha legend, .lista legend, .cad legend{
     font-family: 'Audiowide', cursive;  
-}
-.historia{
-    font-family: Times New Roman;
-    font-size: 25px;
-    margin: 20px;
-    clear: both;
-    float: right;
 }
 .hTitulo{
     float: right;
@@ -421,7 +413,7 @@ fieldset legend{
     font-family: courier;
 }
 .hLinhas{
-    position: relative;
+    #position: relative;
     #top: -80px;
 }
 .escudo{
@@ -444,28 +436,19 @@ fieldset legend{
     color: white;
     background-color: green;
 }
-.equipamento{
-    #border: 1px solid red;
-    position: absolute;
-    top: 700px;
-    left: 508px;
-    width: 300px;
-    height: 200px;
-    font-family: 'Architects Daughter', cursive;
-    font-size: 25px;
-    margin: 0 32px;
-    text-align: center;
+.tabelaFicha{
+    float: left;
+    width: 350px;
+    margin: 20px 20px;
+    #border: 1px solid blue;
 }
 .motivacao{
-    clear: both;
-    #border: 1px solid red;
+    #clear: both;
+    #border: 1px solid green;
     float: right;
     height: 200px;
     width: 200px;
     margin-top: 60px;
-}
-.atributo{
-    #float: left;
 }
 .motivacaoTexto{ 
     text-align: justify;
@@ -473,6 +456,17 @@ fieldset legend{
     font-size: 12px;
     text-indent: 30px; 
     color: gray;
+}
+.historia{
+    font-family: Times New Roman;
+    font-size: 25px;
+    margin: 20px;
+    float: left;
+    #border: 1px solid yellow;
+}
+.atributo{
+    #margin: 100px 0;
+    #border: 1px solid red;
 }
 .motivacaoJogador{
     color: red;
@@ -593,7 +587,7 @@ fieldset legend{
 .vantagens ul{
     font-size: 17px;
     text-align: left;
-    border: 1px solid red;
+    #border: 1px solid red;
 }
 .vantagens, .desvantagens{
     font-family: 'Architects Daughter', cursive;
@@ -601,11 +595,24 @@ fieldset legend{
     width: 280px;
 }
 .habilidades{
+    #position: absolute;
+    #top: 640px;
+    font-family: 'Architects Daughter', cursive;
+    font-size: 23px;
+    width: 460px;
+    #border: 1px solid cyan;
+}
+.equipamento{
+    #border: 1px solid silver;
     position: absolute;
-    top: 640px;
+    top: 760px;
+    left: 508px;
+    width: 300px;
+    height: 200px;
     font-family: 'Architects Daughter', cursive;
     font-size: 25px;
-    width: 280px;
+    margin: 0 32px;
+    text-align: center;
 }
 .cad3Hab{
     font-size: 16px;
@@ -643,7 +650,7 @@ fieldset legend{
     #width: 500px;
 }
 .armas{
-    //border: 1px solid red;
+    #border: 1px solid red;
     position: relative;
     #top: 310px;
     #left: 450px;
@@ -1017,4 +1024,9 @@ fieldset legend{
     position: absolute;
     top: 742px;
     left: 690px;
+}
+.tipo{
+    font-size: 10px;
+    margin-left: 18px;
+    color: red;
 }
