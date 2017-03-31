@@ -132,8 +132,15 @@
                     echo '<div>Armamento</div>';
                     echo $item->getARMA();
                     echo '<div>Armadura</div>';
-                    echo '<img height=100px src=../web/gera.php?id=8&tabela=tb_armaduras />';
-                    echo $item->getarmadura();
+                        $armaduras=(explode('/',$item->getarmadura()));
+                        foreach($armaduras as $armadura){
+                            $search->setarmadura(str_replace('_',' ',$armadura));
+                            $search->settabela('tb_armaduras');
+                            if($search->getarmadura()){
+                                $figarmadura=$dao->encontrePorArmadura($search);
+                                echo '<img height=100px src=../web/gera.php?id='.$figarmadura->getid().'&tabela=tb_armaduras />';
+                            }
+                        }
                     echo '<div>Equipamento</div>';
                     echo $item->getequipamento();
                     echo '<div>Recurso</div>';
