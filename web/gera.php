@@ -9,7 +9,8 @@ $conn = mysqli_connect("localhost", "root", "", "d20");
 //EXIBE IMAGEM                                                                        
 $sql = mysqli_query($conn, "SELECT * FROM ".$tabela." WHERE id = ".$id."");         
 //print_r($sql);die;
-$row = mysqli_fetch_array($sql, MYSQLI_ASSOC);    
+$row = mysqli_fetch_array($sql, MYSQLI_ASSOC); 
+//print_r($row);
    //$tipo   = $row["tipo"];                        
    $bytes  = $row["figura"];                        
    //EXIBE IMAGEM                                 
