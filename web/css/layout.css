@@ -1,19 +1,23 @@
 #cabecalho{  
     width: 95%; 
     margin: 0 20px;
+    #border: 1px solid green; 
+}
+#menu{
+    /*
+    #float: right;
+    #border: 1px solid red;
+    #height: 40px;
+    */
 }
 #rodape{
       width: 100%; 
-      #position: relative; 
       height: 58px; 
-      #bottom: auto; 
-      #top: 1050px;
       background-color: darkslategrey;
       padding: 10px 5px;
       color: white;
-      margin: auto;
       text-align: center;
-  }
+}
 .titulo{
     float: left;
     font-size: 28px;
@@ -24,19 +28,35 @@
     color: red;
     font-size: 30px;
 }
-.menu{
-    float: right;
-    #font-size: 250px;
-    #position: relative;
-    #margin-top: -4px;
-    #border: 1px solid red;
-    height: 40px;
-}
 .tempo{
     float: right;
     color: yellow;
     #border: 1px solid yellow;
     overflow: hidden;
+}
+.lista{
+    #width: 800px;
+    #height: 50px;
+    #padding: 5px 40px;
+    #border: 1px solid red;
+}
+.lista fieldset{
+    height: 1px;
+    #border: 1px solid green;
+}
+.lista table{
+    margin: 40px 80px;
+}
+.lista legend{
+    font-size: 30px;
+    color: brown;    
+}
+.raca{
+    font-family: 'Architects Daughter', cursive;
+    float: right;
+    margin-right: 30px;
+    color: white;
+    text-shadow: 5px 2px 2px red;
 }
 .bnt{
     font-size: 16px;
@@ -155,6 +175,13 @@ body{
     padding: 5px 40px;
     #border: 1px solid red;
 }
+.cad3 fieldset, .cad fieldset{
+    width: 900px;
+    height: 850px;
+    padding: 5px 40px;
+    margin-top: 80px;
+    border: 1px solid red;
+}
 .cadficha{
     width: 900px;
     height: 850px;
@@ -178,13 +205,6 @@ body{
     background:rgba(255,255,255, 0.8);
     font-weight: bolder;
 }*/
-.lista table{
-    margin: 40px 80px;
-}
-.lista legend{
-    font-size: 30px;
-    color: brown;    
-}
 .disabled {
    pointer-events: none;
    cursor: default;
@@ -200,11 +220,6 @@ fieldset legend{
     font-size: 30px;
     color: brown;
 }
-.raca{
-    font-family: 'Architects Daughter', cursive;
-    float: right;
-    margin-right: 80px;
-}
 .texto{
     margin: 0 80px;
 }
@@ -212,7 +227,7 @@ fieldset legend{
     font-family: 'Satisfy', cursive;
     font-size: 20px;
     position: absolute;
-    top: 420px;
+    top: 380px;
     width: 600px;
     height: 200px;
     overflow: auto;
@@ -336,14 +351,14 @@ fieldset legend{
     color: red;
 }
 .home{
-    margin: 100px; auto;
+    margin: auto;
     width: 800px;
     text-align: justify;
     background: rgba(0, 0, 0,0.5);
     color: white;
     padding: 5px;
-    height: 680px;
-    overflow: auto;
+    height: 700px;
+    #overflow: auto;
 }
 .home h1{
     text-align: center;
@@ -361,6 +376,7 @@ fieldset legend{
     font-family: 'Kaushan Script', cursive;
 }
 .nomes2{
+    background: rgba(255, 255, 255,0.5);
     text-align: center;
     font-family: courier;
     #color: silver;

@@ -131,12 +131,10 @@
                 foreach($equipamentos as $item){
                     echo '<div>Armamento</div>';
                         $armas=(explode('/',$item->getARMA()));
-                        //print_r(str_replace('_',' ',$armas));die;
                         foreach($armas as $arma){
                            $search->setARMA(str_replace('_',' ',$arma));
                            $search->settabela('tb_armas_corporais');
                            $figarma=$dao->encontrePorArma($search);
-                           //print_r($search->getARMA());
                            if($figarma){
                               echo '<img src=../web/gera.php?id='.$figarma->getid().'&tabela='.$search->gettabela().' />';
                            }else{
