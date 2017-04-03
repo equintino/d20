@@ -203,11 +203,13 @@
   } 
   if($act == 'cad4' || $act == 'cad5' || $act == 'cad6' || $act=='cad7'){
     if(!$_POST){
+      if($act != 'cad7'){
 	echo '<div class=\'add\'>'.
                '<h3>Nenhum item selecionado.</h3>'.
                '<button onclick=history.go(-1); class=\'continua continua-verde\'>Voltar</button>'.
              '</div>';
         die;
+      }
     }
      $search->settabela('armamentos');
      $search->setpersonagem($personagem);

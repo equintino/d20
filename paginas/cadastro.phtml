@@ -109,9 +109,9 @@ function moeda(saldo) {
                   }
                   $titulos=array('PERSONAGEM','RAÇA','CLASSE','TENDÊNCIA1','TENDÊNCIA2');
                   echo '<div class=paginacao>';
-                    echo 'Páginas ';
+                    echo '<span class=pag >Páginas ';
                     echo ($x)+1 .' de ';
-                    echo ceil(count($lista));
+                    echo ceil(count($lista)).'</span>';
                   echo '</div>';
                   if(($x)+1 == ceil(count($lista))){
                      $class2='class=disabled';
@@ -139,8 +139,8 @@ function moeda(saldo) {
                ?>
         <?php elseif($act=='cad'): ?>
           <script>dica();</script>
-          <div>
-          <fieldset class='cad' >
+          <div class='cad'>
+          <fieldset>
             <legend>CADASTRO DE PERSONAGEM</legend>
             <form class="font_1" id="cadastro" action="../paginas/add.php?act=cad&personagem=<?php echo $personagem ?>" method="POST">
               <table>
@@ -360,8 +360,8 @@ function moeda(saldo) {
                         echo '</div>';
                       }
                    ?>
-                 <input type="submit" value="AVANÇA" class='cad2Hab cad2Hab-verde' /> &nbsp   
-                    <a href=\'../web/index.php?pagina=cadastro&act=cad4&classe='.$_GET['classe'].'&personagem='<?= $_GET['personagem'] ?>'><input type=button class='cad2Hab cad2Hab-verde' value=PULAR /></a> 
+                 <input type="submit" value="AVANÇA" class='cad2Hab cad2Hab-verde' />  
+                    <a href="../web/index.php?pagina=cadastro&act=cad4&classe=<?= $_GET['classe'] ?>&personagem=<?= $_GET['personagem'] ?>"><input type=button class='cad2Hab cad2Hab-verde' value=PULAR /></a> 
                  </table> 
            </form>
          <script>moeda('<?= $recurso ?>');</script>
@@ -380,49 +380,51 @@ function moeda(saldo) {
                $recurso=400;
             }
          ?>
-         <fieldset class="cad">
+        <div class="cad4">
+         <fieldset>
             <legend>CADASTRO DE PERSONAGEM <span>(Continuação)</span></legend>
-         <form class="font_1" id="cadastro2" action="../paginas/add.php?act=cad4&personagem=<?php echo $search->getpersonagem() ?>&classe=<?= $_GET['classe'] ?>" method="POST">
-             <table>
-             <?php
-                  echo '<div align=left class=cadTitulo>&nbsp&nbspClasse: '.strtoupper($_GET['classe']).'</div>';
-                  echo '<div class="moeda cadTitulo" id=moedas ><img height= 20px src=../web/imagens/coin.gif /><span id=moeda></span></div>';
-                  echo '<div align=right class=cadTitulo>Armamentos para '.strtoupper($_GET['personagem']).'&nbsp&nbsp</div>';
-                    echo '<span class=nota>Coloque o mouse em cima dos quadradinhos para ver a descrição das armas.</span>';
-                    echo '<div class=armascorporais>';
-                    echo '<fieldsel>';
-                    echo '<legend>Armas a Distância</legend>';
-                      echo '<img class=dist src=../web/imagens/itens/armasdistancia/armasdistancia.png />';
+            <form class="font_1" id="cadastro2" action="../paginas/add.php?act=cad4&personagem=<?php echo $search->getpersonagem() ?>&classe=<?= $_GET['classe'] ?>" method="POST">
+               <table>
+                 <?php
+                    echo '<div align=left class=cadTitulo>&nbsp&nbspClasse: '.strtoupper($_GET['classe']).'</div>';
+                    echo '<div class="moeda cadTitulo" id=moedas ><img height= 20px src=../web/imagens/coin.gif /><span id=moeda></span></div>';
+                    echo '<div align=right class=cadTitulo>Armamentos para '.strtoupper($_GET['personagem']).'&nbsp&nbsp</div>';
+                      echo '<span class=nota>Coloque o mouse em cima dos quadradinhos para ver a descrição das armas.</span>';
+                      echo '<div class=armascorporais>';
+                      echo '<fieldsel>';
+                      echo '<legend>Armas a Distância</legend>';
+                        echo '<img class=dist src=../web/imagens/itens/armasdistancia/armasdistancia.png />';
                       
                        //itens//
                     $listaArmas=array('Besta Pesada','Besta Leve','Prodd','Virote Comum','Virote Garateia','Zarabatana','Balas','Funda','Fustíbalo','Arco Recurvo','Arco Composto','Arco Simples','Arco de Guerra','Plumbata','Flecha Comum','Flecha Garateia');
-            $search->settabela('tb_armas_distancia');
-                    foreach($listaArmas as $item){
-                       $search->setARMA($item);
-                       $armasDistancia=$dao->encontrePorArma($search);
-                       //print_r($armasDistancia->getARMA());
-                       $desc='Arma: '.$armasDistancia->getARMA()."\r\n".
-                             'Custo: '.$armasDistancia->getCUSTO()."\r\n".
-                             'Dano: '.$armasDistancia->getDANO()."\r\n".
-                             'Tipo: '.$armasDistancia->getTIPO()."\r\n".
-                             'Força Necessária: '.$armasDistancia->getFN()."\r\n".
-                             'Grupo: '.$armasDistancia->getGRUPO()."\r\n".
-                             'Obs: '.$armasDistancia->getOBS();
-                      echo '<div class='.str_replace(' ','',$item).' >';
-//echo $armasCoporais->getCUSTO();die;
-                        echo '<input type=checkbox onchange=moeda(\''.$recurso.'\'); value='.$armasDistancia->getCUSTO().' name=\''.$item.'\' title="'.
-                             $desc.'" />';
-                      echo '</div>';
-                    }
-                  echo '<script>moeda('.$recurso.');</script>';
-                      echo '<input type="button" value="VOLTAR" class=\'cad4Hab cad2Hab-verde\' onclick=history.go(-1) > ' ;  
-                      echo '<input type="submit" value="AVANÇA" class=\'cad4Hab cad2Hab-verde\'> ' ;  
-                      echo '<a href=\'../web/index.php?pagina=cadastro&act=cad5&classe='.$_GET['classe'].'&personagem='. $_GET['personagem'].'\'><input type=button class=\'cad4Hab cad4Hab-verde\' value=PULAR></a>';        
-                     
-                    echo '<br><br>';  
-                    echo '</div>';
+                    $search->settabela('tb_armas_distancia');
+                       foreach($listaArmas as $item){
+                          $search->setARMA($item);
+                          $armasDistancia=$dao->encontrePorArma($search);
+                          //print_r($armasDistancia->getARMA());
+                          $desc='Arma: '.$armasDistancia->getARMA()."\r\n".
+                                'Custo: '.$armasDistancia->getCUSTO()."\r\n".
+                                'Dano: '.$armasDistancia->getDANO()."\r\n".
+                                'Tipo: '.$armasDistancia->getTIPO()."\r\n".
+                                'Força Necessária: '.$armasDistancia->getFN()."\r\n".
+                                'Grupo: '.$armasDistancia->getGRUPO()."\r\n".
+                                'Obs: '.$armasDistancia->getOBS();
+                         echo '<div class='.str_replace(' ','',$item).' >';
+   //echo $armasCoporais->getCUSTO();die;
+                           echo '<input type=checkbox onchange=moeda(\''.$recurso.'\'); value='.$armasDistancia->getCUSTO().' name=\''.$item.'\' title="'.
+                                $desc.'" />';
+                         echo '</div>';
+                       }
+                    echo '<script>moeda('.$recurso.');</script>';
+                    echo '<input type="button" value="VOLTAR" class=\'cad4Hab cad2Hab-verde\' onclick=history.go(-1) > ' ;  
+                    echo '<input type="submit" value="AVANÇA" class=\'cad4Hab cad2Hab-verde\'> ' ;  
+                    echo '<a href=\'../web/index.php?pagina=cadastro&act=cad5&classe='.$_GET['classe'].'&personagem='. $_GET['personagem'].'\'><input type=button class=\'cad4Hab cad4Hab-verde\' value=PULAR></a>'; 
         ?>
-                 </fieldset>
+           <br><br><br>
+           </table>
+          </form>
+        </fieldset>
+        </div>
         <?php elseif($act=='cad5'||$act=='cad6'||$act=='cad7'): 
             $dao=new Dao();
             $search=new ModelSearchCriteria();
@@ -443,9 +445,10 @@ function moeda(saldo) {
                 $cad='cad8';
             }
          ?>
-         <fieldset class="cad">
-            <legend>CADASTRO DE PERSONAGEM <span>(Continuação)</span></legend>
-         <form class="font_1" id="cadastro2" action="../paginas/add.php?act=<?= $act ?>&personagem=<?php echo $_GET['personagem'] ?>&classe=<?= $_GET['classe'] ?>" method="POST">
+         <div class="cad5">
+         <fieldset>
+          <legend>CADASTRO DE PERSONAGEM <span>(Continuação)</span></legend>
+          <form class="font_1" id="cadastro2" action="../paginas/add.php?act=<?= $act ?>&personagem=<?php echo $_GET['personagem'] ?>&classe=<?= $_GET['classe'] ?>" method="POST">
              <table>
              <?php
                   echo '<div align=left class=cadTitulo>&nbsp&nbspClasse: '.strtoupper($_GET['classe']).'</div>';
@@ -486,15 +489,14 @@ function moeda(saldo) {
                                   echo '<td align=center><input type=checkbox onchange=moeda(\''.$recurso.'\') value='.$item->getCUSTO().' name=\''.$item->getitem().'\'  /></td>';
                               echo '</tr>';
                             }
-                            echo '</table>';
-                        echo '<script>moeda('.$recurso.');</script>';
-                        echo '<table>';
-                     // echo '<input type=button value="VOLTAR" onclick=history.go(-2) class=\'cad4Hab cad4Hab-verde\'> ' ; 
-                      echo '<input type="submit" value="CONCLUIR" class=\'cad4Hab cad4Hab-verde\'>&nbsp&nbsp' ; 
-                      //echo '<a href=\'../web/index.php?pagina=cadastro&act=cad8&classe='.$_GET['classe'].'&personagem='. $_GET['personagem'].'\'><input type=button class=\'cad4Hab cad4Hab-verde\' value=PULAR></a>';         
-                    echo '<br><br>'; 
-                      echo '</table>';
-                    echo '</div>';
+                         ?>
+                        </table>
+                        <script>moeda('<?= $recurso ?>')</script>
+                        <div class="conclui">
+                          <input type="submit" value="CONCLUIR" class='cad4Hab cad4Hab-verde'>        
+                          <br><br> 
+                        </div>
+                    <?php 
                     die;
                     }
                        //itens//
@@ -531,19 +533,20 @@ function moeda(saldo) {
                              $desc.'" />';
                       echo '</div>';
                     }
+                    ?>
+          </div>       
+                  <?php
                     if($act=='cad6'){
                         echo '<div class=Cajado_ title="Pode ser usado em combate como um Bordão.">*</div>';
                         echo '<div class=Cetro_ title="Pode ser usado em combate como uma Clava.">*</div>';
                         echo '<div class=Punhal_ title="Pode ser usado em combate como uma Adaga.">*</div>';
                     }
-                  echo '<script>moeda('.$recurso.');</script>';
-                      echo '<input type=button value="VOLTAR" onclick=history.go(-2) class=\'cad4Hab cad4Hab-verde\'> ' ; 
-                      echo '<input type="submit" value="AVANÇA" class=\'cad4Hab cad4Hab-verde\'> ' ; 
-                      echo '<a href=\'../web/index.php?pagina=cadastro&act='.$cad.'&classe='.$_GET['classe'].'&personagem='. $_GET['personagem'].'\'><input type=button class=\'cad4Hab cad4Hab-verde\' value=PULAR></a>';         
-                    echo '<br><br>'; 
-                    echo '</div>';
-                    die;
-        ?>
+                    ?>
+                  <script>moeda('<?= $recurso ?>');</script>
+                      <input type=button value="VOLTAR" onclick=history.go(-2) class='cad4Hab cad4Hab-verde'>&nbsp
+                      <input type="submit" value="AVANÇA" class='cad4Hab cad4Hab-verde'>&nbsp
+                      <a href="../web/index.php?pagina=cadastro&act=<?= $cad ?>&classe=<?= $_GET['classe'] ?>&personagem=<?= $_GET['personagem'] ?>"><input type=button class='cad4Hab cad4Hab-verde' value=PULAR></a>  
+                    </div>
         <?php elseif($act=='cad8'): 
             echo '<div class=\'addFim\'>'.
                '<h3>PARABENS!<br>SUA FICHA ESTÁ COMPLETA.<br>BOM JOGO!</h3>';

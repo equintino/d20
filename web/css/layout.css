@@ -51,12 +51,16 @@
     font-size: 30px;
     color: brown;    
 }
+.pag{
+    color: white;
+    text-shadow: 2px 2px black;    
+}
 .raca{
     font-family: 'Architects Daughter', cursive;
     float: right;
     margin-right: 30px;
     color: white;
-    text-shadow: 5px 2px 2px red;
+    text-shadow: 2px 2px black;
 }
 .bnt{
     font-size: 16px;
@@ -169,36 +173,35 @@ body{
     top: 30%;
   }
 }
-.cad, .lista, .ficha{
+.lista, .ficha{
     width: 900px;
     height: 850px;
-    padding: 5px 40px;
-    #border: 1px solid red;
+    #padding: 5px 40px;
 }
-.cad3 fieldset, .cad fieldset{
+.cad fieldset{
     width: 900px;
     height: 850px;
-    padding: 5px 40px;
-    margin-top: 80px;
-    border: 1px solid red;
+}
+.cad table{
+    margin: 0 80px;
+}
+.cad2 fieldset{
+    width: 900px;
+    margin: auto;
+    height: 690px;
+    #overflow: auto;
+}
+.cad3 fieldset, .cad4 fieldset, .cad5 fieldset{
+    width: 900px;
+    height: 800px;
+    #padding: 5px 40px;
+    #margin-top: 80px;
+    #border: 1px solid red;
 }
 .cadficha{
     width: 900px;
     height: 850px;
     padding: 5px 40px;
-}
-.cad{
-    margin: 73px auto;
-    #border: 1px solid red;
-}
-.cad table{
-    margin: 0 80px;
-}
-.cad2{
-    width: 970px;
-    margin: 73px 2px;
-    height: 690px;
-    overflow: auto;
 }
 /*.lista{
     border: 2px solid white;    
@@ -619,16 +622,32 @@ fieldset legend{
     #border: 1px solid cyan;
 }
 .equipamento{
+    background-image: url('../imagens/fundo.png');
+    background-size: 100% 100%;
     #border: 1px solid silver;
+    box-shadow: 4px 4px 4px gray;
     position: absolute;
     top: 760px;
     left: 508px;
-    width: 300px;
-    height: 200px;
+    width: 400px;
+    height: 600px;
     font-family: 'Architects Daughter', cursive;
     font-size: 25px;
     margin: 0 32px;
     text-align: center;
+}
+.equiTitulo{
+    position: absolute;
+    top: 702px;
+    left: 508px;
+    width: 400px;
+    font-family: 'Architects Daughter', cursive;
+    font-size: 25px;
+    margin: 0 32px;
+    text-align: center;   
+}
+.armamento1{
+    margin-top: 80px; 
 }
 .cad3Hab{
     font-size: 16px;
@@ -709,136 +728,138 @@ fieldset legend{
     #border: 1px solid red;
     margin-left: 80px;
 }
+/* CAD3 */
 .Machadinha{
     position: absolute;
-    top: 350px;
-    left: 140px;
+    top: 330px;
+    left: 115px;
 }
 .MachadodeBatalha{
     position: absolute;
-    top: 380px;
-    left: 210px;
+    top: 360px;
+    left: 185px;
 }
 .MachadoPesado{
     position: absolute;
-    top: 410px;
-    left: 285px;
+    top: 390px;
+    left: 260px;
 }
 .Glaive{
     position: absolute;
-    top: 510px;
-    left: 350px;
+    top: 490px;
+    left: 325px;
 }
 .Alabarda{
     position: absolute;
-    top: 560px;
-    left: 420px;
+    top: 540px;
+    left: 395px;
 }
 .Adaga{
     position: absolute;
-    top: 475px;
-    left: 140px;
+    top: 455px;
+    left: 115px;
 }
 .EspadaCurta{
     position: absolute;
-    top: 535px;
-    left: 140px;
+    top: 515px;
+    left: 115px;
 }
 .Rapiera{
     position: absolute;
-    top: 580px;
-    left: 190px;
+    top: 560px;
+    left: 165px;
 }
 .Sabre{
     position: absolute;
-    top: 635px;
-    left: 190px;
+    top: 615px;
+    left: 165px;
 }
 .EspadaLonga{
     position: absolute;
-    top: 685px;
-    left: 155px;
+    top: 665px;
+    left: 130px;
 }
 .Cimitarra{
     position: absolute;
-    top: 750px;
-    left: 165px;
+    top: 730px;
+    left: 140px;
 }
 .Claymore{
     position: absolute;
-    top: 810px;
-    left: 185px;
+    top: 790px;
+    left: 160px;
 }
 .Bordão{
     position: absolute;
-    top: 315px;
-    left: 685px;
+    top: 295px;
+    left: 660px;
 }
 .Soqueira{
     position: absolute;
-    top: 363px;
-    left: 580px;
+    top: 343px;
+    left: 555px;
 }
 .Bico-de-Corvo{
     position: absolute;
-    top: 423px;
-    left: 535px;
+    top: 403px;
+    left: 510px;
 }
 .MaçaEstrela{
     position: absolute;
-    top: 470px;
-    left: 540px;
+    top: 450px;
+    left: 515px;
 }
 .MaçaLeve{
     position: absolute;
-    top: 515px;
-    left: 540px;
+    top: 495px;
+    left: 515px;
 }
 .MaçaPesada{
     position: absolute;
-    top: 560px;
-    left: 540px;
+    top: 540px;
+    left: 515px;
 }
 .Clava{
     position: absolute;
-    top: 618px;
-    left: 570px;
+    top: 598px;
+    left: 545px;
 }
 .Mangual{
     position: absolute;
-    top: 688px;
-    left: 600px;
+    top: 668px;
+    left: 575px;
 }
 .MartelodeGuerra{
     position: absolute;
-    top: 740px;
-    left: 630px;
+    top: 720px;
+    left: 605px;
 }
 .Marreta{
     position: absolute;
-    top: 810px;
-    left: 590px;
+    top: 790px;
+    left: 565px;
 }
 .Azagaia{
     position: absolute;
-    top: 480px;
-    left: 685px;
+    top: 460px;
+    left: 660px;
 }
 .Lança{
     position: absolute;
-    top: 580px;
-    left: 730px;
+    top: 560px;
+    left: 705px;
 }
 .Tridente{
     position: absolute;
-    top: 600px;
-    left: 788px;
+    top: 580px;
+    left: 763px;
 }
 .MarteloLucerno{
     position: absolute;
-    top: 600px;
-    left: 840px;
+    top: 580px;
+    left: 815px;
 }
+/* FIM CAD3 */
 .nota{
     font-size: 10px;
     font-style: italic;
@@ -856,126 +877,130 @@ fieldset legend{
 .dist{
     margin: 10px 100px;
 }
+/* cad4 */
 .BestaPesada{
     position: absolute;
-    top: 330px;
-    left: 350px;
+    top: 310px;
+    left: 320px;
 }
 .BestaLeve{
     position: absolute;
-    top: 480px;
-    left: 300px;
+    top: 460px;
+    left: 280px;
 }
 .Prodd{
     position: absolute;
-    top: 325px;
-    left: 632px;
+    top: 305px;
+    left: 602px;
 }
 .ViroteComum{
     position: absolute;
-    top: 430px;
-    left: 542px;
+    top: 410px;
+    left: 512px;
 }
 .ViroteGarateia{
     position: absolute;
-    top: 490px;
-    left: 542px;
+    top: 470px;
+    left: 512px;
 }
 .Zarabatana{
     position: absolute;
-    top: 600px;
-    left: 542px;
+    top: 580px;
+    left: 512px;
 }
 .Balas{
     position: absolute;
-    top: 660px;
-    left: 657px;
+    top: 640px;
+    left: 627px;
 }
 .Funda{
     position: absolute;
-    top: 770px;
-    left: 690px;
+    top: 750px;
+    left: 660px;
 }
 .Fustíbalo{
     position: absolute;
-    top: 765px;
-    left: 785px;
+    top: 745px;
+    left: 755px;
 }
 .ArcoRecurvo{
     position: absolute;
-    top: 895px;
-    left: 255px;
+    top: 875px;
+    left: 225px;
 }
 .ArcoComposto{
     position: absolute;
-    top: 920px;
-    left: 365px;
+    top: 900px;
+    left: 335px;
 }
 .ArcoSimples{
     position: absolute;
-    top: 943px;
-    left: 470px;
+    top: 923px;
+    left: 440px;
 }
 .ArcodeGuerra{
     position: absolute;
-    top: 1075px;
-    left: 570px;
+    top: 1055px;
+    left: 540px;
 }
 .Plumbata{
     position: absolute;
-    top: 1075px;
-    left: 750px;
+    top: 1055px;
+    left: 720px;
 }
 .FlechaComum{
     position: absolute;
-    top: 998px;
-    left: 350px;
+    top: 978px;
+    left: 320px;
 }
 .FlechaGarateia{
     position: absolute;
-    top: 1100px;
-    left: 360px;
+    top: 1080px;
+    left: 330px;
 }
 .ArmaduraSimples{
     position: absolute;
-    top: 680px;
-    left: 310px;
+    top: 660px;
+    left: 280px;
 }
 .ArmaduradeBatalha{
     position: absolute;
-    top: 680px;
-    left: 560px;
+    top: 660px;
+    left: 530px;
 }
 .ArmaduraCompleta{
     position: absolute;
-    top: 680px;
-    left: 730px;
+    top: 660px;
+    left: 700px;
 }
+/* fim cad4 */
+/* Cad5 */
 .TúnicaPesada{
     position: absolute;
-    top: 1150px;
-    left: 330px;
+    top: 1090px;
+    left: 300px;
 }
 .EscudodeCorpo{
     position: absolute;
-    top: 1100px;
-    left: 460px;
+    top: 1080px;
+    left: 435px;
 }
 .EscudoMédio{
     position: absolute;
-    top: 970px;
-    left: 570px;
+    top: 950px;
+    left: 550px;
 }
 .EscudoPequeno{
     position: absolute;
-    top: 1125px;
-    left: 640px;
+    top: 1105px;
+    left: 620px;
 }
 .ArmaduradeCouro{
     position: absolute;
     top: 1100px;
-    left: 810px;
+    left: 780px;
 }
+/* fim CAD5 */
 .conj{
     margin: 20px 0;
     float: left;
@@ -986,63 +1011,68 @@ fieldset legend{
     float: left;
     #border: 1px solid red;
 }
+/* CAD6 */
 .Grimório{
     position: absolute;
-    top: 520px;
-    left: 120px;
+    top: 500px;
+    left: 100px;
 }
 .Cajado{
     position: absolute;
-    top: 660px;
-    left: 240px;
+    top: 630px;
+    left: 220px;
 }
 .Cajado_{
     position: absolute;
-    top: 625px;
-    left: 220px;
+    top: 605px;
+    left: 195px;
 }
 .Cetro{
     position: absolute;
-    top: 670px;
-    left: 380px;
+    top: 650px;
+    left: 360px;
 }
 .Cetro_{
     position: absolute;
-    top: 692px;
-    left: 380px;
+    top: 672px;
+    left: 355px;
 }
 .Missal{
     position: absolute;
-    top: 520px;
-    left: 485px;
+    top: 500px;
+    left: 465px;
 }
 .Varinha{
     position: absolute;
-    top: 480px;
-    left: 715px;
+    top: 460px;
+    left: 695px;
 }
 .OrbedeCristal{
     position: absolute;
-    top: 610px;
-    left: 650px;
+    top: 590px;
+    left: 620px;
 }
 .SímboloSagrado{
     position: absolute;
-    top: 630px;
-    left: 820px;
+    top: 610px;
+    left: 800px;
 }
 .Punhal{
     position: absolute;
-    top: 750px;
-    left: 750px;
+    top: 730px;
+    left: 720px;
 }
 .Punhal_{
     position: absolute;
-    top: 742px;
-    left: 690px;
+    top: 722px;
+    left: 665px;
 }
 .tipo{
     font-size: 10px;
     margin-left: 18px;
     color: red;
+}
+.conclui{
+    #float: right;
+    margin-left: 150px;
 }

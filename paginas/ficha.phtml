@@ -124,19 +124,20 @@
                     }
                 echo '<ul>';
             echo '</div>';
-            echo '<div class=equipamento>';        
+            echo '<div class=equiTitulo>Armamento</div>'; 
+            echo '<div class=equipamento>';       
                 $search->settabela('armamentos');
                 $equipamentos=$dao->encontre($search);
                 
                 foreach($equipamentos as $item){
-                    echo '<div>Armamento</div>';
                         $armas=(explode('/',$item->getARMA()));
+                             echo '<div class=armamento1>';
                         foreach($armas as $arma){
                            $search->setARMA(str_replace('_',' ',$arma));
                            $search->settabela('tb_armas_corporais');
                            $figarma=$dao->encontrePorArma($search);
                            if($figarma){
-                              echo '<img src=../web/gera.php?id='.$figarma->getid().'&tabela='.$search->gettabela().' />';
+                              echo '<img src=../web/gera.php?id='.$figarma->getid().'&tabela='.$search->gettabela().' /> ';
                            }else{
                               $search->settabela('tb_armas_distancia');
                               $figarma=$dao->encontrePorArma($search);
@@ -152,6 +153,7 @@
                               }
                            }
                         }
+                        echo '</div>';
                     echo '<div>Armadura</div>';
                         $armaduras=(explode('/',$item->getarmadura()));
                         foreach($armaduras as $armadura){
