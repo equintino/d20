@@ -4,7 +4,7 @@
 $id = $_GET["id"]; 
 $tabela=$_GET['tabela'];
 //CONECTA AO MYSQL                                               
-$conn = mysqli_connect("localhost", "root", "", "d20"); 
+$conn = mysqli_connect("localhost", "root", "", "d20New"); 
 
 //EXIBE IMAGEM                                                                        
 $sql = mysqli_query($conn, "SELECT * FROM ".$tabela." WHERE id = ".$id."");         
