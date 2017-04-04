@@ -1076,3 +1076,6 @@ fieldset legend{
     #float: right;
     margin-left: 150px;
 }
+.sombra{
+    box-shadow: 4px 4px 4px gray;
+}
