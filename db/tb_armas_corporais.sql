@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 04-Abr-2017 às 20:41
+-- Generation Time: 05-Abr-2017 às 15:21
 -- Versão do servidor: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `d20New`
+-- Database: `d20`
 --
 
 -- --------------------------------------------------------
