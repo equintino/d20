@@ -124,7 +124,7 @@
                     }
                 echo '<ul>';
             echo '</div>';
-            echo '<div class=equiTitulo>Armamento</div>'; 
+            echo '<div class=equiTitulo>Inventário</div>'; 
             echo '<div class=equipamento>';       
                 $search->settabela('armamentos');
                 $equipamentos=$dao->encontre($search);
@@ -161,7 +161,7 @@
                             $search->settabela('tb_armaduras');
                             if($search->getarmadura()){
                                 $figarmadura=$dao->encontrePorArmadura($search);
-                                echo '<img height=100px src=../web/gera.php?id='.$figarmadura->getid().'&tabela=tb_armaduras />';
+                                echo '<img src=../web/gera.php?id='.$figarmadura->getid().'&tabela=tb_armaduras />';
                             }
                         }
                     echo '<div>Equipamento</div>';
