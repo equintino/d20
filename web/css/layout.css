@@ -621,31 +621,6 @@ fieldset legend{
     width: 460px;
     #border: 1px solid cyan;
 }
-.equipamento{
-    background-image: url('../imagens/fundo.png');
-    background-size: 100% 100%;
-    #border: 1px solid silver;
-    box-shadow: 4px 4px 4px gray;
-    position: absolute;
-    top: 760px;
-    left: 508px;
-    width: 400px;
-    height: 600px;
-    font-family: 'Architects Daughter', cursive;
-    font-size: 25px;
-    margin: 0 32px;
-    text-align: center;
-}
-.equiTitulo{
-    position: absolute;
-    top: 702px;
-    left: 508px;
-    width: 400px;
-    font-family: 'Architects Daughter', cursive;
-    font-size: 25px;
-    margin: 0 32px;
-    text-align: center;   
-}
 .armamento1{
     margin-top: 80px; 
 }
@@ -1078,4 +1053,68 @@ fieldset legend{
 }
 .sombra{
     box-shadow: 4px 4px 4px gray;
+}
+.equipamento{
+    background-image: url('../imagens/fundo.png');
+    background-size: 100% 100%;
+    #border: 1px solid silver;
+    box-shadow: 4px 4px 4px gray;
+    /*position: absolute;
+    top: 760px;
+    left: 508px;*/
+    width: 100%;
+    height: 900px;
+    font-family: 'Architects Daughter', cursive;
+    font-size: 25px;
+    #margin: 0 302px;
+    text-align: center;
+    padding-top: 40px;
+}
+.equiTitulo{
+    /*position: relative;
+    top: 702px;
+    left: 508px;*/
+    width: 400px;
+    font-family: 'Architects Daughter', cursive;
+    font-size: 25px;
+    margin: 0 32px;
+    text-align: center;  
+}
+.equipamento .cont{
+    margin: 100px 120px;
+    #border: 1px solid red;
+}
+.equipamento .armamento1{
+    #margin: 100px 50px;
+    #border: 1px solid yellow;
+}
+.equipamento .foto{
+    float: left;
+}
+.equipamento .ver{
+    float: left;
+    font-size: 10px;
+    #border: 1px solid red;
+    text-align: left;
+    width: 200px;
+    #position: absolute;
+}
+.equipamento .armadura1{
+    margin: 40px 50px;
+    #border: 1px solid red;
+}
+.armadura1 .foto{
+    float: left;
+    #border: 1px solid green;
+}
+.armadura1 .ver{
+    float: left;
+    font-size: 10px;
+    #border: 1px solid red;
+    text-align: left;
+    #position: absolute;
+}
+.equi2{
+    font-size: 10px;
+    margin-left: 20px;
 }

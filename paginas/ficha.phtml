@@ -12,167 +12,203 @@
 ?>
 <div  class="conteudo" >
     <div class="jogador">
-    <?php 
-        $dao=new Dao();
-        $search=new ModelSearchCriteria();
-        $search->settabela('personagem');
-        $search->setpersonagem($personagem);
-        $lista=$dao->encontre($search);
-        @$level=$_GET['level'];
-        if(!$level){
-            $level=1; 
-        }
-        $titulos=array('PERSONAGEM','RAÇA','CLASSE','TENDÊNCIA1','TENDÊNCIA2');
-        echo '<fieldset class="cadficha"><legend>FICHA DE PERSONAGEM &nbsp&nbsp LEVEL '.$level.'</legend>';
-            echo '<div class=tabelaFicha>';
-                echo '<table cellspacing=0 border=1>';
-                    if(!$lista){
-                        die('Personagem Inexistente');
-                    }
-                    foreach($lista as $keys => $item){
-                        echo '<tr><td class=nomes>'.$titulos[0].'</td><td class=nomes2>'.$item->getpersonagem().'</td></tr>';
-                        echo '<tr><td class=nomes>'.$titulos[1].'</td><td class=nomes2>'.$item->getraca().'</td></tr>';
-                        echo '<tr><td class=nomes>'.$titulos[2].'</td><td class=nomes2>'.$item->getclasse().'</td></tr>';
-                        echo '<tr><td class=nomes>'.$titulos[3].'</td><td class=nomes2>'.$item->gettendencia1().'</td></tr>';
-                        echo '<tr><td class=nomes>'.$titulos[4].'</td><td class=nomes2>'.$item->gettendencia2().'</td></tr>';
-                    }
-                echo '</table>';
-            echo '</div>';
-            echo '<div class=motivacao>';
-                echo '<span class=fichaTitulo>Motivação</span>';
-                echo '<p class=motivacaoTexto>'.$item->getmotivacao().'</p>';
-            echo '</div>';
-            echo '<div id="aqui" class="raca">Bem-vindo <span class=motivacaoJogador>'.strtoupper($item->getpersonagem()).'</span>  <br><img height=240px src="../web/imagens/personagens/'.$item->getraca().'/'.$item->getraca().'.png" /></div>';
-            echo '<div class=historia>';                    
-                echo '<span class=hTitulo>Uma breve história</span>'; 
-                echo '<span class=hTexto >
-                <p>Tenho '.$item->getidade().' anos, '.$item->getaltura().'m de altura, peso '.$item->getpeso().'Kg, nasci na cidade de '.$item->getcidade().'.</p><p>'.$item->getbreveHistoria().'</p></span>';
-            echo '</div>';
-            echo '<div class=atributo>';
-                echo '<table>';
-                    echo '<caption class=fichaTitulo>Atributos</caption>';
-                    $tCaracteristicas=array('F'=>'Força','A'=>'Agilidade','I'=>'Inteligência','V'=>'Vontade','PV'=>'Pontos de Vida','PM'=>'Pontos de Magia','PE'=>'Pontos de Experiência');
-                    $search->settabela('atributos');
-                    $atrib=$dao->encontrePorPersonagem($search);
-                    foreach($tCaracteristicas as $key => $item_){
-                        if($item_[0] == 'P'){
-                            $item_=(explode(' ',$item_));
-                            echo '<tr><td width=92% ><span class="destaque atr">'.$item_[0][0].'</span>'.substr($item_[0], 1).' '.$item_[1].'<span class="destaque atr"> '.$item_[2][0].'</span>'.substr($item_[2], 1).'</td><td>';//<input type=text name='.$key.' maxlength = "4" size=2 value=';
-                            if($item_[2][0]=='V'){                 
-                                echo $atrib->getPV().'</td></tr>';
-                            }elseif($item_[2][0]=='M'){                
-                                echo $atrib->getPM().'</td></tr>';
-                            }elseif($item_[2][0]=='E'){                
-                                echo $atrib->getPE().'</td></tr>';
+        <?php 
+            $dao=new Dao();
+            $search=new ModelSearchCriteria();
+            $search->settabela('personagem');
+            $search->setpersonagem($personagem);
+            $lista=$dao->encontre($search);
+            @$level=$_GET['level'];
+            if(!$level){
+                $level=1; 
+            }
+            $titulos=array('PERSONAGEM','RAÇA','CLASSE','TENDÊNCIA1','TENDÊNCIA2');
+            echo '<fieldset class="cadficha"><legend>FICHA DE PERSONAGEM &nbsp&nbsp LEVEL '.$level.'</legend>';
+                echo '<div class=tabelaFicha>';
+                    echo '<table cellspacing=0 border=1>';
+                        if(!$lista){
+                            die('Personagem Inexistente');
+                        }
+                        foreach($lista as $keys => $item){
+                            echo '<tr><td class=nomes>'.$titulos[0].'</td><td class=nomes2>'.$item->getpersonagem().'</td></tr>';
+                            echo '<tr><td class=nomes>'.$titulos[1].'</td><td class=nomes2>'.$item->getraca().'</td></tr>';
+                            echo '<tr><td class=nomes>'.$titulos[2].'</td><td class=nomes2>'.$item->getclasse().'</td></tr>';
+                            echo '<tr><td class=nomes>'.$titulos[3].'</td><td class=nomes2>'.$item->gettendencia1().'</td></tr>';
+                            echo '<tr><td class=nomes>'.$titulos[4].'</td><td class=nomes2>'.$item->gettendencia2().'</td></tr>';
+                            $habilidades=$item->gethabilidade();
+                            $classe=$item->getclasse();
+                        }
+                    echo '</table>';
+                echo '</div>';
+                echo '<div class=motivacao>';
+                    echo '<span class=fichaTitulo>Motivação</span>';
+                    echo '<p class=motivacaoTexto>'.$item->getmotivacao().'</p>';
+                echo '</div>';
+                echo '<div id="aqui" class="raca">Bem-vindo <span class=motivacaoJogador>'.strtoupper($item->getpersonagem()).'</span>  <br><img height=240px src="../web/imagens/personagens/'.$item->getraca().'/'.$item->getraca().'.png" /></div>';
+                echo '<div class=historia>';                    
+                    echo '<span class=hTitulo>Uma breve história</span>'; 
+                    echo '<span class=hTexto >
+                    <p>Tenho '.$item->getidade().' anos, '.$item->getaltura().'m de altura, peso '.$item->getpeso().'Kg, nasci na cidade de '.$item->getcidade().'.</p><p>'.$item->getbreveHistoria().'</p></span>';
+                echo '</div>';
+                echo '<div class=atributo>';
+                    echo '<table>';
+                        echo '<caption class=fichaTitulo>Atributos</caption>';
+                        $tCaracteristicas=array('F'=>'Força','A'=>'Agilidade','I'=>'Inteligência','V'=>'Vontade','PV'=>'Pontos de Vida','PM'=>'Pontos de Magia','PE'=>'Pontos de Experiência');
+                        $search->settabela('atributos');
+                        $atrib=$dao->encontrePorPersonagem($search);
+                        foreach($tCaracteristicas as $key => $item_){
+                            if($item_[0] == 'P'){
+                                $item_=(explode(' ',$item_));
+                                echo '<tr><td width=92% ><span class="destaque atr">'.$item_[0][0].'</span>'.substr($item_[0], 1).' '.$item_[1].'<span class="destaque atr"> '.$item_[2][0].'</span>'.substr($item_[2], 1).'</td><td>';//<input type=text name='.$key.' maxlength = "4" size=2 value=';
+                                if($item_[2][0]=='V'){                 
+                                    echo $atrib->getPV().'</td></tr>';
+                                }elseif($item_[2][0]=='M'){                
+                                    echo $atrib->getPM().'</td></tr>';
+                                }elseif($item_[2][0]=='E'){                
+                                    echo $atrib->getPE().'</td></tr>';
+                                }
+                            }else{
+                                echo '<tr><td width=220px><span class="destaque atr">'.$item_[0].'</span>'. substr($item_, 1).'</td><td align=right>';//<input type=text name='.$key.' maxlength = "4" size=2 value=';
+                                if($item_[0]=='F'){
+                                    echo $atrib->getFORCA();
+                                }elseif($item_[0]=='A'){
+                                    echo $atrib->getAGILIDADE();
+                                }elseif($item_[0]=='I'){
+                                    echo $atrib->getINTELIGENCIA(); 
+                                }elseif($item_[0]=='V'){
+                                    echo $atrib->getVONTADE(); 
+                                }
+                                echo '</td></tr>';
                             }
+                        }
+                    echo '</table>';
+                echo '</div>';
+                //echo '<div class=equiTitulo>Inventário</div>'; 
+                echo '<div class=equipamento>'; 
+                    echo '<div class=cont>';
+                        $search->settabela('armamentos');
+                        $equipamentos=$dao->encontre($search); 
+                        foreach($equipamentos as $item){
+                            $armas=(explode('/',$item->getARMA()));
+                            echo '<div class=armamento1>';
+                                //echo 'Armas';
+                                foreach($armas as $arma){
+                                   $search->setARMA(str_replace('_',' ',$arma));
+                                   $search->settabela('tb_armas_corporais');
+                                   $figarma=$dao->encontrePorArma($search);
+                                   if(!$figarma){
+                                      $search->settabela('tb_armas_distancia');
+                                      $figarma=$dao->encontrePorArma($search);
+                                      if(!$figarma){
+                                         $search->setitem(str_replace('_',' ',$arma));
+                                         $search->settabela('tb_conjuracao');
+                                         $figarma=$dao->encontrePorItem($search);
+                                      }
+                                   }
+                                    if($figarma){
+                                        echo '<div class=ver id=ver>';
+                                        echo '<img class=foto src=../web/gera.php?id='.$figarma->getid().'&tabela='.$search->gettabela().' />';
+                                            $lista2=array('Arma: '=>$figarma->getARMA(),'Dana: '=>$figarma->getDANO(),'FN: '=>$figarma->getFN(),'Obs.: '=>$figarma->getOBS());
+                                            foreach($lista2 as $key => $item_){
+                                                if($item_){
+                                                    echo $key.$item_.'<br>';
+                                                }
+                                            }
+                                        echo '</div>';
+                                    }
+                                }
+                            echo '</div>';
+                            echo '<br><br><br>';
+                            $armaduras=(explode('/',$item->getarmadura()));
+                            echo '<div class=armadura1>';
+                                //echo 'Armadura';
+                                foreach($armaduras as $armadura){
+                                    $search->setarmadura(str_replace('_',' ',$armadura));
+                                    $search->settabela('tb_armaduras');
+                                    if($search->getarmadura()){
+                                        $figarmadura=$dao->encontrePorArmadura($search);
+                                        echo '<div class=ver id=ver>';
+                                        echo '<img class=foto src=../web/gera.php?id='.$figarmadura->getid().'&tabela=tb_armaduras />';
+                                            $ver = 'Ítem: '.$figarmadura->getarmadura().'<br>'.
+                                                 'Defesa: '.$figarmadura->getdefesa().'<br>'.
+                                                 'FN: '.$figarmadura->getFN().'<br>'.
+                                                 'Peso: '.$figarmadura->getpeso().'<br>'.
+                                                 'Obs.: '.$figarmadura->getOBS().'<br>';
+                                            echo $ver;
+                                        echo '</div>';
+                                    }
+                                }
+                            echo '</div>';
+                            echo '<br><br><br>';
+                            //echo '<div>Equipamento</div>';
+                            $search->settabela('tb_equipamento_geral');
+                            $equipamentos=explode('/',$item->getequipamento());
+                            echo '<table border=1 class=equi2>';
+                            echo '<tr><th>ÍTEM</th><th>PESO</th><th>DESCRIÇÃO</th></tr>';
+                            foreach(str_replace('_',' ',$equipamentos) as $item3){
+                                $search->setitem($item3);
+                                if($item3){
+                                    $detalhe=$dao->encontrePorItem($search);
+                                    echo '<tr>';
+                                    echo '<td align=left>'.$detalhe->getitem().'</td>';
+                                    echo '<td align=center>'.$detalhe->getpeso().'</td>';
+                                    echo '<td align=left>'.$detalhe->getDESCRICAO().'</td>';
+                                    echo '</tr>';
+                                }
+                            }
+                            echo '</table>';
+                            echo '<div>Recurso</div>';
+                            echo '<img src=imagens/bau.png />';
+                            echo $item->getCUSTO();
+                        }/*
+                        echo '<div class=escudo><img height=80px src=../web/imagens/escudo.png /></div>';
+                        echo '<div class=defesa>Defesa</div>';
+                    echo '</div>';
+                echo '</div>';
+                echo '<div class=habilidades>';
+                    echo '<div class=fichaTitulo>Habilidades</div>';
+                    $hab=explode('/',$habilidades);
+                    $search->settabela('tb_'.$classe);
+                    $search->gettabela();
+                    echo '<ul>';
+                        echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.str_replace('_',' ',$hab[0]).'</li><br>';
+                        $search->sethabilidade(str_replace('_',' ',$hab[0]));
+                        $descricao=($dao->encontrePorHabilidade($search));
+                        if($descricao->getMANA()==0){
+                            $mana=null;
                         }else{
-                            echo '<tr><td width=220px><span class="destaque atr">'.$item_[0].'</span>'. substr($item_, 1).'</td><td align=right>';//<input type=text name='.$key.' maxlength = "4" size=2 value=';
-                            if($item_[0]=='F'){
-                                echo $atrib->getFORCA();
-                            }elseif($item_[0]=='A'){
-                                echo $atrib->getAGILIDADE();
-                            }elseif($item_[0]=='I'){
-                                echo $atrib->getINTELIGENCIA(); 
-                            }elseif($item_[0]=='V'){
-                                echo $atrib->getVONTADE(); 
-                            }
-                            echo '</td></tr>';
+                                $mana=' Mana '.$descricao->getMANA();
+                        }                                        
+                        echo '<div class=tipo>('.$descricao->getTIPO().') '.$mana.'</div>';
+                        echo '<div class=descricao>'.$descricao->getDESCRICAO().'</div>';
+                        echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.str_replace('_',' ',$hab[1]).'</li><br>';
+                        $search->sethabilidade(str_replace('_',' ',$hab[1]));
+                        $descricao=($dao->encontrePorHabilidade($search));
+                        if($descricao->getMANA()==0){
+                            $mana=null;
+                        }else{
+                            $mana=' Mana '.$descricao->getMANA();
+                        } 
+                        echo '<div class=tipo>('.$descricao->getTIPO().') '.$mana.'</div>';
+                        echo '<div class=descricao>'.$descricao->getDESCRICAO().'</div>';
+                        echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.str_replace('_',' ',$hab[2]).'</li><br>';
+                        $search->sethabilidade(str_replace('_',' ',$hab[2]));
+                        $descricao=($dao->encontrePorHabilidade($search));
+                        if($descricao->getMANA()==0){
+                            $mana=null;
+                        }else{
+                            $mana=' Mana '.$descricao->getMANA();
+                        } 
+                        echo '<div class=tipo>('.$descricao->getTIPO().') '.$mana.'</div>';
+                        echo '<div class=descricao>'.$descricao->getDESCRICAO().'</div>';
+                        if($atrib->getHABILIDADE_AUTOMATICA()){
+                            echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.$atrib->getHABILIDADE_AUTOMATICA().'</li>';
+                            echo '<div class=tipo>(Suporte)</div>';
+                            echo '<div class=descricao>'.$atrib->getDESCRICAO().'</div>';
                         }
-                    }
-                echo '</table>';
-            echo '</div>';
-            echo '<div class=habilidades>';
-                echo '<div class=fichaTitulo>Habilidades</div>';
-                $hab=explode('/',$item->gethabilidade());
-                $search->settabela('tb_'.$item->getclasse());
-                $search->gettabela();
-                echo '<ul>';
-                    echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.str_replace('_',' ',$hab[0]).'</li><br>';
-                    $search->sethabilidade(str_replace('_',' ',$hab[0]));
-                    $descricao=($dao->encontrePorHabilidade($search));
-                    if($descricao->getMANA()==0){
-                        $mana=null;
-                    }else{
-                        $mana=' Mana '.$descricao->getMANA();
-                    }                                        
-                    echo '<div class=tipo>('.$descricao->getTIPO().') '.$mana.'</div>';
-                    echo '<div class=descricao>'.$descricao->getDESCRICAO().'</div>';
-                    echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.str_replace('_',' ',$hab[1]).'</li><br>';
-                    $search->sethabilidade(str_replace('_',' ',$hab[1]));
-                    $descricao=($dao->encontrePorHabilidade($search));
-                    if($descricao->getMANA()==0){
-                        $mana=null;
-                    }else{
-                        $mana=' Mana '.$descricao->getMANA();
-                    } 
-                    echo '<div class=tipo>('.$descricao->getTIPO().') '.$mana.'</div>';
-                    echo '<div class=descricao>'.$descricao->getDESCRICAO().'</div>';
-                    echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.str_replace('_',' ',$hab[2]).'</li><br>';
-                    $search->sethabilidade(str_replace('_',' ',$hab[2]));
-                    $descricao=($dao->encontrePorHabilidade($search));
-                    if($descricao->getMANA()==0){
-                        $mana=null;
-                    }else{
-                        $mana=' Mana '.$descricao->getMANA();
-                    } 
-                    echo '<div class=tipo>('.$descricao->getTIPO().') '.$mana.'</div>';
-                    echo '<div class=descricao>'.$descricao->getDESCRICAO().'</div>';
-                    if($atrib->getHABILIDADE_AUTOMATICA()){
-                        echo '<li><img height=10px src="..\web\imagens\circulo.gif"> '.$atrib->getHABILIDADE_AUTOMATICA().'</li>';
-                        echo '<div class=tipo>(Suporte)</div>';
-                        echo '<div class=descricao>'.$atrib->getDESCRICAO().'</div>';
-                    }
-                echo '<ul>';
-            echo '</div>';
-            echo '<div class=equiTitulo>Inventário</div>'; 
-            echo '<div class=equipamento>';       
-                $search->settabela('armamentos');
-                $equipamentos=$dao->encontre($search);
-                
-                foreach($equipamentos as $item){
-                        $armas=(explode('/',$item->getARMA()));
-                             echo '<div class=armamento1>';
-                        foreach($armas as $arma){
-                           $search->setARMA(str_replace('_',' ',$arma));
-                           $search->settabela('tb_armas_corporais');
-                           $figarma=$dao->encontrePorArma($search);
-                           if($figarma){
-                              echo '<img src=../web/gera.php?id='.$figarma->getid().'&tabela='.$search->gettabela().' /> ';
-                           }else{
-                              $search->settabela('tb_armas_distancia');
-                              $figarma=$dao->encontrePorArma($search);
-                              if($figarma){
-                                  echo '<img src=../web/gera.php?id='.$figarma->getid().'&tabela='.$search->gettabela().' />';
-                              }else{
-                                 $search->setitem(str_replace('_',' ',$arma));
-                                 $search->settabela('tb_conjuracao');
-                                 $figarma=$dao->encontrePorItem($search);
-                                 if($figarma){
-                                  echo '<img src=../web/gera.php?id='.$figarma->getid().'&tabela='.$search->gettabela().' />';
-                                 }
-                              }
-                           }
-                        }
-                        echo '</div>';
-                    echo '<div>Armadura</div>';
-                        $armaduras=(explode('/',$item->getarmadura()));
-                        foreach($armaduras as $armadura){
-                            $search->setarmadura(str_replace('_',' ',$armadura));
-                            $search->settabela('tb_armaduras');
-                            if($search->getarmadura()){
-                                $figarmadura=$dao->encontrePorArmadura($search);
-                                echo '<img src=../web/gera.php?id='.$figarmadura->getid().'&tabela=tb_armaduras />';
-                            }
-                        }
-                    echo '<div>Equipamento</div>';
-                    echo $item->getequipamento();
-                    echo '<div>Recurso</div>';
-                    echo '<img src=imagens/bau.png />';
-                    echo $item->getCUSTO();
-                }
-            echo '<div class=escudo><img height=80px src=../web/imagens/escudo.png /></div>';
-            echo '<div class=defesa>Defesa</div>';
-        echo '</fieldset>';
-    ?>
+                    echo '<ul>';
+                echo '</div>';
+            echo '</fieldset>';
+        ?>
     </div>
 </div>
