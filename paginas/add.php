@@ -217,7 +217,7 @@
      $model->setclasse($_GET['classe']);
      if($_GET['raca']){
         $model->setraca($_GET['raca']);
-     }die;
+     }
      $armas=$custo=$defesa=null;
      $armamento=$dao->encontrePorPersonagem($search);
           foreach($_POST as $key => $item){
@@ -226,6 +226,9 @@
                 $defesa = $defesa+$itemArma[1];
                 if($defesa > 4){
                     $defesa = 4;
+                }
+                if($_GET['raca']=='halfling'){
+                    $defesa = $defesa+1;
                 }
                 $key = $itemArma[0];
             }
@@ -239,7 +242,7 @@
            $cad='cad5';
         }elseif($act=='cad5'){
            $armamento->setarmadura($armamento->getarmadura().$armas);
-           $armamento->setdefesa($defesa);
+           $armamento->setdefesa($defesa+5);
            $cad='cad6';
         }elseif($act=='cad6'){
            $armamento->setARMA($armamento->getARMA().$armas);
@@ -258,7 +261,7 @@
            $cad='cad5';
         }elseif($act=='cad5'){
            $model->setarmadura($armas);
-           $model->setdefesa($defesa);
+           $model->setdefesa($defesa+5);
            $cad='cad6';
         }elseif($act=='cad6'){
            $model->setARMA($armas);
