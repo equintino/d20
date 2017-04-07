@@ -200,12 +200,12 @@
         $model->setcriado($now);
         $model->setmodificado($now); 
         $this->execute4($this->criaTabela($model->gettabela()), $model);       
-        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`ARMA`,`CUSTO`,`personagem`,`armadura`,`equipamento`) VALUES (:id,:ARMA,:CUSTO,:personagem,:armadura,:equipamento)';
+        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`ARMA`,`CUSTO`,`personagem`,`armadura`,`equipamento`,`defesa`) VALUES (:id,:ARMA,:CUSTO,:personagem,:armadura,:equipamento,:defesa)';
 	return $this->execute4($sql, $model);
    }
    private function update4(Model $model){
         $model->setmodificado(new DateTime(), new DateTimeZone('America/Sao_Paulo'));
-        $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, ARMA = :ARMA, CUSTO = :CUSTO, personagem = :personagem, armadura = :armadura, equipamento = :equipamento WHERE id = :id ';
+        $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, ARMA = :ARMA, CUSTO = :CUSTO, personagem = :personagem, armadura = :armadura, equipamento = :equipamento, defesa = :defesa WHERE id = :id ';
         return $this->execute4($sql, $model);
    }
    public function execute($sql,$model){
@@ -258,7 +258,7 @@
 	 return $params;
    }
    private function getParams4(Model $model){
-        $params = array(':id'=> $model->getid(),':ARMA'=> $model->getARMA(),':CUSTO'=> $model->getCUSTO(),':personagem'=> $model->getpersonagem(),':armadura'=> $model->getarmadura(),':equipamento'=> $model->getequipamento(),);
+        $params = array(':id'=> $model->getid(),':ARMA'=> $model->getARMA(),':CUSTO'=> $model->getCUSTO(),':personagem'=> $model->getpersonagem(),':armadura'=> $model->getarmadura(),':equipamento'=> $model->getequipamento(),':defesa'=> $model->getdefesa(),);
 	 return $params;
    }
    private function executeStatement(PDOStatement $statement, array $params){

@@ -9,6 +9,7 @@
   $act=$_GET['act'];
   $personagem = $_GET['personagem'];
   @$classe = $_GET['classe'];
+  @$raca = $_GET['raca'];
   @$atribamais=$_POST['maisum'];
   $humanoF=$humanoA=$humanoI=$humanoV=0;
   $habilidade = null;
@@ -48,7 +49,7 @@
     }
 	echo '<div class=\'add\'>'.
                '<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.
-               '<a href=\'../web/index.php?pagina=cadastro&act=cad2&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'\' ><button class=\'continua continua-verde\'>Continua...</button></a>'.
+               '<a href=\'../web/index.php?pagina=cadastro&act=cad2&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'\' ><button class=\'continua continua-verde\'>Continua...</button></a>'.
              '</div>';
 	die;
   }
@@ -162,7 +163,7 @@
         $dao->grava2($dadosRaca);
 	echo '<div class=\'add\'>'.
                '<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.
-               '<a href=\'../web/index.php?pagina=cadastro&act=cad3&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'\' ><button class=\'continua continua-verde\'>Continua...</button></a>'.
+               '<a href=\'../web/index.php?pagina=cadastro&act=cad3&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'\' ><button class=\'continua continua-verde\'>Continua...</button></a>'.
              '</div>';
 	die;
   }
@@ -197,7 +198,7 @@
         $dao->grava4($model);
 	echo '<div class=\'add\'>'.
                '<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.
-               '<a href=\'../web/index.php?pagina=cadastro&act=cad4&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'\' ><button class=\'continua continua-verde\'>Continua...</button></a>'.
+               '<a href=\'../web/index.php?pagina=cadastro&act=cad4&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'\' ><button class=\'continua continua-verde\'>Continua...</button></a>'.
              '</div>';
 	die;
   } 
@@ -214,9 +215,20 @@
      $search->settabela('armamentos');
      $search->setpersonagem($personagem);
      $model->setclasse($_GET['classe']);
-     $armas=$custo=null;
+     if($_GET['raca']){
+        $model->setraca($_GET['raca']);
+     }die;
+     $armas=$custo=$defesa=null;
      $armamento=$dao->encontrePorPersonagem($search);
           foreach($_POST as $key => $item){
+            if($act=='cad5'){
+                $itemArma=(explode('/',$key));
+                $defesa = $defesa+$itemArma[1];
+                if($defesa > 4){
+                    $defesa = 4;
+                }
+                $key = $itemArma[0];
+            }
             $armas .= $key.'/';
             $custo = $custo+$item;
           }
@@ -227,6 +239,7 @@
            $cad='cad5';
         }elseif($act=='cad5'){
            $armamento->setarmadura($armamento->getarmadura().$armas);
+           $armamento->setdefesa($defesa);
            $cad='cad6';
         }elseif($act=='cad6'){
            $armamento->setARMA($armamento->getARMA().$armas);
@@ -245,6 +258,7 @@
            $cad='cad5';
         }elseif($act=='cad5'){
            $model->setarmadura($armas);
+           $model->setdefesa($defesa);
            $cad='cad6';
         }elseif($act=='cad6'){
            $model->setARMA($armas);
@@ -258,7 +272,7 @@
      }
 	echo '<div class=\'add\'>'.
                '<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.
-               '<a href=\'../web/index.php?pagina=cadastro&act='.$cad.'&classe='.$model->getclasse().'&personagem='. $personagem.'\' ><button class=\'continua continua-verde\'>Continua...</button></a>'.
+               '<a href=\'../web/index.php?pagina=cadastro&act='.$cad.'&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $personagem.'\' ><button class=\'continua continua-verde\'>Continua...</button></a>'.
              '</div>';
 	die;
   }
@@ -286,5 +300,5 @@
 <!--<div class='add'>
 <h3>REGISTRO GRAVADO COM SUCESSO</h3>
 <!--<button onclick="history.go(-2)" >VOLTAR</button>-->
-<!--<a href='../web/index.php?pagina=cadastro&act=cad2&classe=<?php echo $model->getclasse() ?>&personagem=<?= $model->getpersonagem(); ?>' ><button class='continua continua-verde'>Continua...</button></a>
+<!--<a href='../web/index.php?pagina=cadastro&act=cad2&raca='.$model->getraca().'&classe=<?php echo $model->getclasse() ?>&personagem=<?= $model->getpersonagem(); ?>' ><button class='continua continua-verde'>Continua...</button></a>
 </div>-->

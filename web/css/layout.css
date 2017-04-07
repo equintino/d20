@@ -55,13 +55,6 @@
     color: white;
     text-shadow: 2px 2px black;    
 }
-.raca{
-    font-family: 'Architects Daughter', cursive;
-    float: right;
-    margin-right: 30px;
-    color: white;
-    text-shadow: 2px 2px black;
-}
 .bnt{
     font-size: 16px;
     cursor: pointer;
@@ -223,14 +216,22 @@ fieldset legend{
     font-size: 30px;
     color: brown;
 }
+.raca{
+    position: absolute;
+    font-family: 'Architects Daughter', cursive;
+    #float: right;
+    left: 5px;
+    color: white;
+    text-shadow: 2px 2px black;
+}
 .texto{
-    margin: 0 80px;
+    margin: 0px 80px;
 }
 .texto{
     font-family: 'Satisfy', cursive;
     font-size: 20px;
-    position: absolute;
-    top: 380px;
+    #position: absolute;
+    #top: 380px;
     width: 600px;
     height: 200px;
     overflow: auto;
@@ -240,7 +241,7 @@ fieldset legend{
 }
 .botao{
     position: absolute;
-    top: 500px;
+    top: 620px;
     right: 100px;
     font-family: arial;
     font-weight: 700;
@@ -250,7 +251,7 @@ fieldset legend{
 }
 .botao2{
     position: absolute;
-    top: 500px;
+    top: 620px;
     right: 180px;
     font-family: arial;
     font-weight: 700;
@@ -260,7 +261,7 @@ fieldset legend{
 }
 .botao-verde{
     font-size: 16px;
-    paddin: 2px;
+    padding: 2px;
     background-color: #006000;
     color: white;
     box-shadow: 0 5px 0 #003f00;
@@ -284,7 +285,7 @@ fieldset legend{
     background-color: #006000;
     color: white;   
     position: absolute;
-    top: 505px;
+    top: 625px;
     box-shadow: none;
 }
 .botao-verde2:active{
@@ -293,7 +294,7 @@ fieldset legend{
     background-color: #006000;
     color: white;   
     position: absolute;
-    top: 505px;
+    top: 625px;
     box-shadow: none;
 }
 .rolar{
@@ -436,16 +437,36 @@ fieldset legend{
     #top: -80px;
 }
 .escudo{
-    #position: relative;
-    #top: 5px;
+    position: relative;
+    top: 100px;
     #margin: -160px 200px;
+    #margin-top: 20px;
+    #border: 1px solid green;
 }
 .defesa{
     position: relative;
-    top: -75px;
-    left: 3px;
+    top: 22px;
+    left: 20px;
     #margin: 90px 225px;
     font-size: 10px;
+    #border: 1px solid red;
+    #width: 100px;
+}
+#def{
+    position: relative;
+    top: 10px;
+    left: 15px;
+    #margin: 20px;
+    #border: 1px solid red;
+    font-size: 25px;
+}
+.habilidades{
+    #position: absolute;
+    #top: 640px;
+    font-family: 'Architects Daughter', cursive;
+    font-size: 18px;
+    width: 100%;
+    #border: 1px solid cyan;
 }
 .equipamentos, .equipamentos th, .equipamentos td{
     border: 1px solid black;
@@ -522,7 +543,7 @@ fieldset legend{
 }
 .continua-verde:active{
     font-size: 16px;
-    paddin: 2px;
+    padding: 2px;
     background-color: #006000;
     color: white;   
     position: relative;
@@ -603,7 +624,7 @@ fieldset legend{
 	font-size: 30px;
 	color: red;
 }
-.vantagens ul{
+/*.vantagens ul{
     font-size: 17px;
     text-align: left;
     #border: 1px solid red;
@@ -612,15 +633,7 @@ fieldset legend{
     font-family: 'Architects Daughter', cursive;
     font-size: 25px;
     width: 280px;
-}
-.habilidades{
-    #position: absolute;
-    #top: 640px;
-    font-family: 'Architects Daughter', cursive;
-    font-size: 18px;
-    width: 100%;
-    #border: 1px solid cyan;
-}
+}*/
 .armamento1{
     margin-top: 80px; 
 }
@@ -1065,7 +1078,7 @@ fieldset legend{
     width: 100%;
     height: 1200px;
     font-family: 'Architects Daughter', cursive;
-    font-size: 15px;
+    #font-size: 15px;
     #margin: 0 302px;
     text-align: center;
     padding-top: 40px;
@@ -1081,7 +1094,7 @@ fieldset legend{
     text-align: center;  
 }
 .equipamento .cont{
-    margin: 100px 120px;
+    margin: 120px 120px;
     #border: 1px solid red;
 }
 .equipamento .armamento1{
@@ -1093,10 +1106,14 @@ fieldset legend{
 }
 .equipamento .ver{
     float: left;
-    font-size: 10px;
+    font-size: 15px;
     #border: 1px solid gray;
+    border-radius: 100px;
+    box-shadow: -5px -5px 2px gray;
+    -webkit-box-shadow: -5px -5px 2px gray;
+    -moz-box-shadow: -5px -5px 2px gray;
     text-align: left;
-    width: 190px;
+    width: 230px;
     text-justify: auto;
     padding: 8px;
     #position: absolute;
@@ -1121,6 +1138,10 @@ fieldset legend{
 .equi2{
     font-size: 10px;
     margin-left: 20px;
+}
+.equi2 th{
+    background-color: green;
+    color: white;
 }
 .nomesArma{
     #margin: 0 20px;
