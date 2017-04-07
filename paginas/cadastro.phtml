@@ -519,9 +519,9 @@ function moeda(saldo) {
                                'Obs: '.$armaduras->getOBS();
                         echo '<div class='.str_replace(' ','',$item).' >';
                       }elseif($act=='cad6'){
-                         $search->setitem($item);
-                         $armaduras=$dao->encontrePorItem($search);
-                         $desc='Item: '.$armaduras->getitem()."\r\n".
+                         $search->setARMA($item);
+                         $armaduras=$dao->encontrePorArma($search);
+                         $desc='Item: '.$armaduras->getARMA()."\r\n".
                                'Custo: '.$armaduras->getCUSTO()."\r\n".
                                'FN: '.$armaduras->getFN()."\r\n".
                                'Peso: '.$armaduras->getpeso()."\r\n".
