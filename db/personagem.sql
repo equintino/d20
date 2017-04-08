@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 16-Mar-2017 às 03:10
+-- Generation Time: 08-Abr-2017 às 19:45
 -- Versão do servidor: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -45,7 +45,8 @@ CREATE TABLE `personagem` (
   `peso` varchar(10) DEFAULT NULL,
   `cidade` varchar(100) DEFAULT NULL,
   `motivacao` text,
-  `breveHistoria` text
+  `breveHistoria` text,
+  `ARMA` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

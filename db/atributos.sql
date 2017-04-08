@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Mar 24, 2017 at 06:31 
--- Server version: 10.1.21-MariaDB
--- PHP Version: 7.1.1
+-- Host: 127.0.0.1
+-- Generation Time: 08-Abr-2017 às 19:45
+-- Versão do servidor: 10.1.19-MariaDB
+-- PHP Version: 7.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `atributos`
+-- Estrutura da tabela `atributos`
 --
 
 CREATE TABLE `atributos` (
@@ -39,16 +39,8 @@ CREATE TABLE `atributos` (
   `personagem` varchar(50) NOT NULL,
   `CLASSE_COMUM` varchar(100) DEFAULT NULL,
   `HABILIDADE_AUTOMATICA` varchar(100) DEFAULT NULL,
-  `DESCRICAO` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `atributos`
---
-
-INSERT INTO `atributos` (`id_atrib`, `FORCA`, `AGILIDADE`, `INTELIGENCIA`, `VONTADE`, `PV`, `PM`, `PE`, `excluido`, `personagem`, `CLASSE_COMUM`, `HABILIDADE_AUTOMATICA`, `DESCRICAO`) VALUES
-(1, 4, 4, 4, 3, 60, 60, 0, '0', 'JK', 'TODAS', '', ''),
-(10, 5, 3, 3, 3, 60, 60, 0, '0', 'JK2', 'GUERREIRO,PALADINO,SACERDOTE', 'VIGOR DA MONTANHA', 'IImine a veneno, rola 3D6 para teste de força para restituir a fadiga');
+  `DESCRICAO` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
@@ -69,7 +61,7 @@ ALTER TABLE `atributos`
 -- AUTO_INCREMENT for table `atributos`
 --
 ALTER TABLE `atributos`
-  MODIFY `id_atrib` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_atrib` int(5) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
