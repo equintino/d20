@@ -41,11 +41,12 @@
 }
 .lista fieldset{
     height: 1px;
+    margin: auto;
     #border: 1px solid green;
 }
 .lista table{
-    float: right;
-    margin: 40px 150px;
+    float: left;
+    margin: 50px 45px;
 }
 .lista legend{
     font-size: 30px;
@@ -216,13 +217,14 @@ fieldset legend{
     font-size: 30px;
     color: brown;
 }
-.raca{
-    position: absolute;
+.lista .raca{
+    #position: absolute;
     font-family: 'Architects Daughter', cursive;
-    #float: right;
+    float: right;
     left: 5px;
     color: white;
     text-shadow: 2px 2px black;
+    #border: 1px solid red;
 }
 .texto{
     margin: 0px 80px;
@@ -241,7 +243,7 @@ fieldset legend{
 }
 .botao{
     position: absolute;
-    top: 620px;
+    top: 500px;
     right: 100px;
     font-family: arial;
     font-weight: 700;
@@ -251,7 +253,7 @@ fieldset legend{
 }
 .botao2{
     position: absolute;
-    top: 620px;
+    top: 500px;
     right: 180px;
     font-family: arial;
     font-weight: 700;
@@ -285,7 +287,7 @@ fieldset legend{
     background-color: #006000;
     color: white;   
     position: absolute;
-    top: 625px;
+    top: 505px;
     box-shadow: none;
 }
 .botao-verde2:active{
@@ -294,7 +296,7 @@ fieldset legend{
     background-color: #006000;
     color: white;   
     position: absolute;
-    top: 625px;
+    top: 505px;
     box-shadow: none;
 }
 .rolar{
@@ -337,7 +339,9 @@ fieldset legend{
     color: red;
 }
 .paginacao{
-    float: right;
+    position: absolute;
+    right: 30px;
+    #float: right;
     #border: 1px solid red;
     #width: 200px;
     text-align: center;
@@ -392,7 +396,7 @@ fieldset legend{
 .fichaTitulo{
     text-align: center;
     #border: 1px solid maroon;
-    margin-top: 20px;
+    #margin-top: 200px;
 }
 .destaque{
     font-size: 22px;
@@ -402,16 +406,20 @@ fieldset legend{
     font-family: 'Audiowide', cursive;  
 }
 .hTitulo{
-    float: right;
+    #float: right;
+    position: absolute;
     font-family: 'Satisfy', cursive;
     #font-family: courier;
     font-size: 22px;
-    margin-right: 80px;
+    top: 350px;
+    left: 200px;
+    #margin: -10px 80px;
 }
 .hTexto{ 
-    clear: both;
+    #clear: both;
     float: right; 
-    margin-right: 30px;
+    #position: relative;
+    margin: -50px 20px;
     width: 360px;
     height: 200px;
     padding: 8px;
@@ -422,14 +430,15 @@ fieldset legend{
     font-style: italic;
     font-size: 14px;
     text-indent: 30px; 
-    background-color: blanchedalmond;
+    background-color: rgba(255,235,205,0.5);
+    border-radius: 20px;
 }
 .verFicha{
     font-size: 8px;
     font-style: italic;
     color: red;
 }
-.raca, .atr{   
+.lista .raca, .atr{   
     font-family: courier;
 }
 .hLinhas{
@@ -437,25 +446,26 @@ fieldset legend{
     #top: -80px;
 }
 .escudo{
-    position: relative;
-    top: 100px;
+    position: absolute;
+    top: 200px;
+    left: 330px;
     #margin: -160px 200px;
     #margin-top: 20px;
     #border: 1px solid green;
 }
 .defesa{
-    position: relative;
-    top: 22px;
-    left: 20px;
+    position: absolute;
+    top: 215px;
+    left: 355px;
     #margin: 90px 225px;
     font-size: 10px;
     #border: 1px solid red;
     #width: 100px;
 }
 #def{
-    position: relative;
-    top: 10px;
-    left: 15px;
+    position: absolute;
+    top: 13px;
+    #left: 25px;
     #margin: 20px;
     #border: 1px solid red;
     font-size: 25px;
@@ -479,7 +489,7 @@ fieldset legend{
 .tabelaFicha{
     float: left;
     width: 350px;
-    margin: 20px 20px;
+    margin: 20px 60px;
     #border: 1px solid blue;
 }
 .motivacao{
@@ -853,12 +863,14 @@ fieldset legend{
     font-style: italic;
 }
 .descricao{
-    text-align: justify;
+    #text-align: center;
     #font-family: 'Satisfy', cursive;
     font-family: 'Architects Daughter', cursive;
     font-style: italic;
     font-size: 14px;
-    #border: 1px solid red;
+    #border: 1px solid gray;
+    border-radius: 5px;
+    #box-shadow: -2px -2px 2px gray;
     width: 80%;
     margin: auto;
 }
@@ -1103,6 +1115,7 @@ fieldset legend{
 }
 .equipamento .foto{
     float: left;
+    margin-top: 30px;
 }
 .equipamento .ver{
     float: left;

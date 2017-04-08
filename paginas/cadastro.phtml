@@ -102,7 +102,7 @@ function moeda(saldo) {
 ?>
 <div  class="conteudo" >
     <?php if($act=='lista'):?>
-        <?php 
+         <?php 
             $dao=new Dao();
             $search=new ModelSearchCriteria();
             $search->settabela('personagem');
@@ -122,8 +122,11 @@ function moeda(saldo) {
             }else{
                 $class2='title="AVANÇAR"';
             }
-            echo '<div class=lista>';
-                echo '<fieldset><legend><a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x-1)).' '.$class.' ><< </a> FICHA DE PERSONAGEM <a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x+1,'contador'=>count($lista))).' '.$class2.'> >> </a>&nbsp&nbsp LEVEL '.$level.'</legend>';
+         ?>
+         <div class=lista>
+            <fieldset>
+               <?php
+                  echo '<legend><a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x-1)).' '.$class.' ><< </a> FICHA DE PERSONAGEM <a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x+1,'contador'=>count($lista))).' '.$class2.'> >> </a>&nbsp&nbsp LEVEL '.$level.'</legend>';
                     echo '<table cellspacing=0 border=1>';
                         foreach($lista as $keys => $item){
                             if($x < $keys && $keys < $y){
@@ -138,10 +141,10 @@ function moeda(saldo) {
                             }
                         }
                     echo '</table>';
-                echo '</fieldset>';
-            echo '</div>';
-        ?>
-        <?php elseif($act=='cad'): ?>
+               ?>
+            </fieldset>
+         </div>
+         <?php elseif($act=='cad'): ?>
             <script>dica();</script>
             <div class='cad'>
                 <fieldset>
@@ -550,13 +553,13 @@ function moeda(saldo) {
                       <input type=button value="VOLTAR" onclick=history.go(-2) class='cad4Hab cad4Hab-verde'>&nbsp
                       <input type="submit" value="AVANÇA" class='cad4Hab cad4Hab-verde'>&nbsp
                       <a href="../web/index.php?pagina=cadastro&act=<?= $cad ?>&classe=<?= $_GET['classe'] ?>&raca=<?= $_GET['raca'] ?>&personagem=<?= $_GET['personagem'] ?>"><input type=button class='cad4Hab cad4Hab-verde' value=PULAR></a>  
-                    </div>
-        <?php elseif($act=='cad8'): 
+         <?php elseif($act=='cad8'): 
             echo '<div class=\'addFim\'>'.
                '<h3>PARABENS!<br>SUA FICHA ESTÁ COMPLETA.<br>BOM JOGO!</h3>';
              '</div>';
                 die;
-                    
+         ?> 
+</div>          
                     
                     
                     
