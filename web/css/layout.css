@@ -363,6 +363,7 @@ fieldset legend{
     width: 800px;
     text-align: justify;
     background: rgba(0, 0, 0,0.5);
+    border-radius: 5px;
     color: white;
     padding: 5px;
     height: 700px;
