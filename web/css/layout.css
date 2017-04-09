@@ -396,6 +396,7 @@ fieldset legend{
 }
 .fichaTitulo{
     text-align: center;
+    margin-left: 45px;
     #border: 1px solid maroon;
     #margin-top: 200px;
 }
