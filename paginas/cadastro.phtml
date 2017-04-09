@@ -366,7 +366,7 @@ function moeda(saldo) {
                                     }
                         ?>
                         <input type="submit" value="AVANÇA" class='cad2Hab cad2Hab-verde' />  
-                        <a href="../web/index.php?pagina=cadastro&act=cad4&classe=<?= $_GET['classe'] ?>&personagem=<?= $_GET['personagem'] ?>&raca=<?= $_GET['raca'] ?>"><input type=button class='cad2Hab cad2Hab-verde' value=PULAR /></a> 
+                        <a href="../web/index.php?pagina=cadastro&act=cad4&classe=<?= $_GET['classe'] ?>&personagem=<?= $_GET['personagem'] ?>&raca=<?= $raca ?>"><input type=button class='cad2Hab cad2Hab-verde' value=PULAR /></a> 
                     </table> 
                 </form>
                 <script>moeda('<?= $recurso ?>');</script>
@@ -421,7 +421,7 @@ function moeda(saldo) {
                                         echo '<script>moeda('.$recurso.');</script>';
                                         echo '<input type="button" value="VOLTAR" class=\'cad4Hab cad2Hab-verde\' onclick=history.go(-1) > ' ;  
                                         echo '<input type="submit" value="AVANÇA" class=\'cad4Hab cad2Hab-verde\'> ' ;  
-                                        echo '<a href=\'../web/index.php?pagina=cadastro&act=cad5&classe='.$_GET['classe'].'&raca='.$_GET['raca'].'&personagem='. $_GET['personagem'].'\'><input type=button class=\'cad4Hab cad4Hab-verde\' value=PULAR></a>'; 
+                                        echo '<a href=\'../web/index.php?pagina=cadastro&act=cad5&classe='.$_GET['classe'].'&raca='.$raca.'&personagem='. $_GET['personagem'].'\'><input type=button class=\'cad4Hab cad4Hab-verde\' value=PULAR></a>'; 
                         ?>
                         <br><br><br>
                     </table>
@@ -552,7 +552,7 @@ function moeda(saldo) {
                   <script>moeda('<?= $recurso ?>');</script>
                       <input type=button value="VOLTAR" onclick=history.go(-2) class='cad4Hab cad4Hab-verde'>&nbsp
                       <input type="submit" value="AVANÇA" class='cad4Hab cad4Hab-verde'>&nbsp
-                      <a href="../web/index.php?pagina=cadastro&act=<?= $cad ?>&classe=<?= $_GET['classe'] ?>&raca=<?= $_GET['raca'] ?>&personagem=<?= $_GET['personagem'] ?>"><input type=button class='cad4Hab cad4Hab-verde' value=PULAR></a>  
+                      <a href="../web/index.php?pagina=cadastro&act=<?= $cad ?>&classe=<?= $_GET['classe'] ?>&raca=<?= $raca ?>&personagem=<?= $_GET['personagem'] ?>"><input type=button class='cad4Hab cad4Hab-verde' value=PULAR></a>  
          <?php elseif($act=='cad8'): 
             echo '<div class=\'addFim\'>'.
                '<h3>PARABENS!<br>SUA FICHA ESTÁ COMPLETA.<br>BOM JOGO!</h3>';

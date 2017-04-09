@@ -10,6 +10,9 @@
   $personagem = $_GET['personagem'];
   @$classe = $_GET['classe'];
   @$raca = $_GET['raca'];
+  if($raca){
+     $raca=$_POST;
+  }
   @$atribamais=$_POST['maisum'];
   $humanoF=$humanoA=$humanoI=$humanoV=0;
   $habilidade = null;
@@ -179,6 +182,7 @@
           $model->setclasse($_GET['classe']);
 	  $model->settabela('armamentos');
           $model->setpersonagem($_GET['personagem']);
+          $model->setraca($_GET['raca']);
           $armas = null;
           $recurso=400;
           $custo = 0;
@@ -212,8 +216,17 @@
         die;
       }
     }
-     $search->settabela('armamentos');
      $search->setpersonagem($personagem);
+     $search->settabela('atributos');
+     $atrib=$dao->encontre($search);
+     foreach($atrib as $atributo){
+         if($atributo->getFORCA() > $atributo->getAGILIDADE()){
+            $maisAtrib=$atributo->getFORCA();
+         }else{
+            $maisAtrib=$atributo->getAGILIDADE();
+         }
+     }
+     $search->settabela('armamentos');
      $model->setclasse($_GET['classe']);
      if($_GET['raca']){
         $model->setraca($_GET['raca']);
@@ -242,7 +255,7 @@
            $cad='cad5';
         }elseif($act=='cad5'){
            $armamento->setarmadura($armamento->getarmadura().$armas);
-           $armamento->setdefesa($defesa+5);
+           $armamento->setdefesa($defesa+5+$maisAtrib);
            $cad='cad6';
         }elseif($act=='cad6'){
            $armamento->setARMA($armamento->getARMA().$armas);
@@ -261,7 +274,7 @@
            $cad='cad5';
         }elseif($act=='cad5'){
            $model->setarmadura($armas);
-           $model->setdefesa($defesa+5);
+           $model->setdefesa($defesa+5+$maisAtrib);
            $cad='cad6';
         }elseif($act=='cad6'){
            $model->setARMA($armas);
@@ -300,8 +313,3 @@
      die;
   }*/
 ?>
-<!--<div class='add'>
-<h3>REGISTRO GRAVADO COM SUCESSO</h3>
-<!--<button onclick="history.go(-2)" >VOLTAR</button>-->
-<!--<a href='../web/index.php?pagina=cadastro&act=cad2&raca='.$model->getraca().'&classe=<?php echo $model->getclasse() ?>&personagem=<?= $model->getpersonagem(); ?>' ><button class='continua continua-verde'>Continua...</button></a>
-</div>-->
