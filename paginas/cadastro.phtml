@@ -559,6 +559,19 @@ function moeda(saldo) {
              '</div>';
                 die;
          ?> 
+   <?php elseif($act=='avatar'):
+      $dao = new Dao();
+      $search = new ModelSearchCriteria();
+      $search->settabela('tb_avatar');
+      $avatares=$dao->encontre($search);
+      echo '<div class=avatar>';
+         foreach($avatares as $avatar){
+            echo '<input type=radio value='.$avatar->getid().' name=avatar />';
+            echo '<img src=gera.php?tabela=tb_avatar&id='.$avatar->getid().' />';
+         }
+      echo '</div>';
+      die;
+   ?>
 </div>          
                     
                     
