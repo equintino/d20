@@ -102,7 +102,7 @@ function moeda(saldo) {
 ?>
 <div  class="conteudo" >
     <?php if($act=='lista'):?>
-         <?php 
+        <?php 
             $dao=new Dao();
             $search=new ModelSearchCriteria();
             $search->settabela('personagem');
@@ -122,8 +122,8 @@ function moeda(saldo) {
             }else{
                 $class2='title="AVANÇAR"';
             }
-         ?>
-         <div class=lista>
+        ?>
+        <div class=lista>
             <fieldset>
                <?php
                   echo '<legend><a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x-1)).' '.$class.' ><< </a> FICHA DE PERSONAGEM <a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x+1,'contador'=>count($lista))).' '.$class2.'> >> </a>&nbsp&nbsp LEVEL '.$level.'</legend>';
@@ -143,73 +143,72 @@ function moeda(saldo) {
                     echo '</table>';
                ?>
             </fieldset>
-         </div>
-         <?php elseif($act=='cad'): ?>
-            <script>dica();</script>
-            <div class='cad'>
-                <fieldset>
-                    <legend>CADASTRO DE PERSONAGEM</legend>
-                    <form class="font_1" id="cadastro" action="../paginas/add.php?act=cad&personagem=<?php echo $personagem ?>&raca=<?= $raca ?>" method="POST">
-                        <table>
-                            <?php foreach($variaveis as $keys => $item){
-                                    if($item=='raca'){
-                                        echo '<tr><td align=right> '.$keys.': </td>';
-                                        echo '<td><select id="mySelect" name=raca onchange="myFunction()">';
+        </div>
+    <?php elseif($act=='cad'): ?>
+        <script>dica();</script>
+        <div class='cad'>
+            <fieldset>
+                <legend>CADASTRO DE PERSONAGEM</legend>
+                <form class="font_1" id="cadastro" action="../paginas/add.php?act=cad&personagem=<?php echo $personagem ?>&raca=<?= $raca ?>" method="POST">
+                    <table>
+                        <?php foreach($variaveis as $keys => $item){
+                            if($item=='raca'){
+                                echo '<tr><td align=right> '.$keys.': </td>';
+                                echo '<td><select id="mySelect" name=raca onchange="myFunction()">';
+                                    echo '<option>&nbsp</option>';
+                                    echo '<option value=humano>HUMANO</option>';
+                                    echo '<option value=anao>ANÃO</option>';
+                                    echo '<option value=elfo>ELFO</option>';
+                                    echo '<option value=halfling>HALFLING</option>';
+                                echo '</select></td></tr>';
+                            }elseif($item=='classe'){
+                                echo '<tr><td align=right> '.$keys.': </td>';
+                                    echo '<td><select name=classe>';
                                         echo '<option>&nbsp</option>';
-                                        echo '<option value=humano>HUMANO</option>';
-                                        echo '<option value=anao>ANÃO</option>';
-                                        echo '<option value=elfo>ELFO</option>';
-                                        echo '<option value=halfling>HALFLING</option>';
-                                        echo '</select></td></tr>';
-                                    }elseif($item=='classe'){
-                                        echo '<tr><td align=right> '.$keys.': </td>';
-                                            echo '<td><select name=classe>';
-                                            echo '<option>&nbsp</option>';
-                                                echo '<option value=espadachim>ESPADACHIM</option>';
-                                                echo '<option value=guerreiro>GUERREIRO</option>';
-                                                echo '<option value=barbaro>BÁRBARO</option>';
-                                                echo '<option value=paladino>PALADINO</option>';
-                                                echo '<option value=arqueiro>ARQUEIRO</option>';
-                                                echo '<option value=gatuno>GATUNO</option>';
-                                                echo '<option value=mago>MAGO</option>';
-                                                echo '<option value=sacerdote>SACERDOTE</option>';
-                                            echo '</select></td></tr>';
-                                    }elseif($item=='tendencia1'){
-                                        echo '<tr><td align=right> '.$keys.': </td>';
-                                            echo '<td><select name=tendencia1>';
-                                                echo '<option>&nbsp</option>';
-                                                echo '<option value=bom>BOM</option>';
-                                                echo '<option value=neutro>NEUTRO</option>';
-                                                echo '<option value=mau>MAU</option>';
-                                            echo '</select></td></tr>';
-                                    }elseif($item=='tendencia2'){
-                                        echo '<tr><td align=right> '.$keys.': </td>';
-                                            echo '<td><select name=tendencia2>';
-                                                echo '<option>&nbsp</option>';
-                                                echo '<option value=leal>LEAL</option>';
-                                                echo '<option value=neutro>NEUTRO</option>';
-                                                echo '<option value=caótico>CAÓTICO</option>';
-                                            echo '</select></td></tr>';
-                                    }elseif($item=='sexo'){
-                                        echo '<tr><td align=right> '.$keys.': </td>';
-                                            echo '<td><input type=radio name=sexo value=M> MASCULINO';
-                                        echo ' <input type=radio name=sexo value=F> FEMININO</td></tr>';
-                                    }else{
-                                        echo "<tr><td align=\"right\"> $keys: </td><td><input type=\"text\" name=\"".$item."\" size=\"40\" / required></td></tr>";
-                                    }
-                                }
-                                echo '<table><tr><td>';
-                                echo '<div id="aqui" class="raca"></div>';
-                                echo '<div id="aqui.texto" align="justify" class="texto"></div>';
-                                echo '</td></tr></table>';
-                            ?>
+                                        echo '<option value=espadachim>ESPADACHIM</option>';
+                                        echo '<option value=guerreiro>GUERREIRO</option>';
+                                        echo '<option value=barbaro>BÁRBARO</option>';
+                                        echo '<option value=paladino>PALADINO</option>';
+                                        echo '<option value=arqueiro>ARQUEIRO</option>';
+                                        echo '<option value=gatuno>GATUNO</option>';
+                                        echo '<option value=mago>MAGO</option>';
+                                        echo '<option value=sacerdote>SACERDOTE</option>';
+                                    echo '</select></td></tr>';
+                            }elseif($item=='tendencia1'){
+                                echo '<tr><td align=right> '.$keys.': </td>';
+                                    echo '<td><select name=tendencia1>';
+                                        echo '<option>&nbsp</option>';
+                                        echo '<option value=bom>BOM</option>';
+                                        echo '<option value=neutro>NEUTRO</option>';
+                                        echo '<option value=mau>MAU</option>';
+                                    echo '</select></td></tr>';
+                            }elseif($item=='tendencia2'){
+                                echo '<tr><td align=right> '.$keys.': </td>';
+                                    echo '<td><select name=tendencia2>';
+                                        echo '<option>&nbsp</option>';
+                                        echo '<option value=leal>LEAL</option>';
+                                        echo '<option value=neutro>NEUTRO</option>';
+                                        echo '<option value=caótico>CAÓTICO</option>';
+                                    echo '</select></td></tr>';
+                            }elseif($item=='sexo'){
+                                echo '<tr><td align=right> '.$keys.': </td>';
+                                echo '<td><input type=radio name=sexo value=M> MASCULINO';
+                                echo ' <input type=radio name=sexo value=F> FEMININO</td></tr>';
+                            }else{
+                                echo "<tr><td align=\"right\"> $keys: </td><td><input type=\"text\" name=\"".$item."\" size=\"40\" / required></td></tr>";
+                            }
+                        }?>
+                        <table><tr><td>
+                            <div id="aqui" class="raca"></div>
+                            <div id="aqui.texto" align="justify" class="texto"></div>
+                            </td></tr>
                         </table>
                         <input type="reset" value="LIMPA" class='botao2 botao-verde2'>
                         <input type="submit" value="GRAVA" class='botao botao-verde2'>
-                    </form>
-                </fieldset>
-            </div>
-        <?php elseif($act=='cad2'): ?>
+                </form>
+            </fieldset>
+        </div>
+    <?php elseif($act=='cad2'): ?>
         <div class='cad2'>
             <fieldset>
                 <legend>CADASTRO DE PERSONAGEM <span>(Continuação)</span></legend>
@@ -317,19 +316,18 @@ function moeda(saldo) {
                 </form>
             </fieldset>
         </div>
-        <?php elseif($act=='cad3'): 
-            $dao=new Dao();
-            $search=new ModelSearchCriteria();
-            $search->settabela('armamentos');
-            $search->setpersonagem($_GET['personagem']);
-            $atrib=$dao->encontrePorPersonagem($search);
-            
-            if(!$atrib){
-               $recurso=400;
-            }else{
-               $recurso=$atrib->getCUSTO();
-            }
-        ?>
+    <?php elseif($act=='cad3'): 
+        $dao=new Dao();
+        $search=new ModelSearchCriteria();
+        $search->settabela('armamentos');
+        $search->setpersonagem($_GET['personagem']);
+        $atrib=$dao->encontrePorPersonagem($search);            
+        if(!$atrib){
+            $recurso=400;
+        }else{
+            $recurso=$atrib->getCUSTO();
+        }
+    ?>
         <div class='cad3'>
             <fieldset>
                 <legend>CADASTRO DE PERSONAGEM <span>(Continuação)</span></legend>
@@ -372,18 +370,18 @@ function moeda(saldo) {
                 <script>moeda('<?= $recurso ?>');</script>
             </fieldset>
         </div>
-        <?php elseif($act=='cad4'): 
-            $dao=new Dao();
-            $search=new ModelSearchCriteria();
-            $search->settabela('armamentos');
-            $search->setpersonagem($_GET['personagem']);
-            $atrib=$dao->encontrePorPersonagem($search);
-            if($atrib){
-               $recurso=$atrib->getCUSTO();
-            }else{
-               $recurso=400;
-            }
-         ?>
+    <?php elseif($act=='cad4'): 
+        $dao=new Dao();
+        $search=new ModelSearchCriteria();
+        $search->settabela('armamentos');
+        $search->setpersonagem($_GET['personagem']);
+        $atrib=$dao->encontrePorPersonagem($search);
+        if($atrib){
+            $recurso=$atrib->getCUSTO();
+        }else{
+            $recurso=400;
+        }
+    ?>
         <div class="cad4">
             <fieldset>
                 <legend>CADASTRO DE PERSONAGEM <span>(Continuação)</span></legend>
@@ -428,236 +426,147 @@ function moeda(saldo) {
                 </form>
             </fieldset>
         </div>
-        <?php elseif($act=='cad5'||$act=='cad6'||$act=='cad7'): 
-            $dao=new Dao();
-            $search=new ModelSearchCriteria();
-            $search->settabela('armamentos');
-            $search->setpersonagem($_GET['personagem']);
-            $atrib=$dao->encontrePorPersonagem($search);
-            if($atrib){
-               $recurso=$atrib->getCUSTO();
-            }else{
-               $recurso=400;
-            }
-            
-            if($act=='cad5'){
-               $cad='cad6';
-            }elseif($act=='cad6'){
-               $cad='cad7';
-            }elseif($act=='cad7'){
-                $cad='cad8';
-            }
-         ?>
-            <div class="cad5">
-                <fieldset>
-                    <legend>CADASTRO DE PERSONAGEM <span>(Continuação)</span></legend>
-                    <form class="font_1" id="cadastro2" action="../paginas/add.php?act=<?= $act ?>&personagem=<?php echo $_GET['personagem'] ?>&classe=<?= $_GET['classe'] ?>&raca=<?= $_GET['raca'] ?>" method="POST">
-                        <table>
-                            <?php
-                                echo '<div align=left class=cadTitulo>&nbsp&nbspClasse: '.strtoupper($_GET['classe']).'</div>';
-                                echo '<div class="moeda cadTitulo" id=moedas ><img height= 20px src=../web/imagens/coin.gif /><span id=moeda></span></div>';
-                                if($act=='cad5'||$act=='cad6'){
-                                    echo '<div align=right class=cadTitulo>Armaduras para '.strtoupper($_GET['personagem']).'&nbsp&nbsp</div>';
-                                    echo '<span class=nota>Coloque o mouse em cima dos quadradinhos para ver a descrição das armas.</span>';
-                                }elseif($act=='cad7'){
-                                    echo '<div align=right class=cadTitulo>Ítens para '.strtoupper($_GET['personagem']).'&nbsp&nbsp</div>';
+    <?php elseif($act=='cad5'||$act=='cad6'||$act=='cad7'): 
+        $dao=new Dao();
+        $search=new ModelSearchCriteria();
+        $search->settabela('armamentos');
+        $search->setpersonagem($_GET['personagem']);
+        $atrib=$dao->encontrePorPersonagem($search);
+        if($atrib){
+            $recurso=$atrib->getCUSTO();
+        }else{
+            $recurso=400;
+        }            
+        if($act=='cad5'){
+            $cad='cad6';
+        }elseif($act=='cad6'){
+            $cad='cad7';
+        }elseif($act=='cad7'){
+            $cad='cad8';
+        }
+    ?>
+        <div class="cad5">
+            <fieldset>
+                <legend>CADASTRO DE PERSONAGEM <span>(Continuação)</span></legend>
+                <form class="font_1" id="cadastro2" action="../paginas/add.php?act=<?= $act ?>&personagem=<?php echo $_GET['personagem'] ?>&classe=<?= $_GET['classe'] ?>&raca=<?= $_GET['raca'] ?>" method="POST">
+                    <table>
+                        <?php
+                            echo '<div align=left class=cadTitulo>&nbsp&nbspClasse: '.strtoupper($_GET['classe']).'</div>';
+                            echo '<div class="moeda cadTitulo" id=moedas ><img height= 20px src=../web/imagens/coin.gif /><span id=moeda></span></div>';
+                            if($act=='cad5'||$act=='cad6'){
+                                echo '<div align=right class=cadTitulo>Armaduras para '.strtoupper($_GET['personagem']).'&nbsp&nbsp</div>';
+                                echo '<span class=nota>Coloque o mouse em cima dos quadradinhos para ver a descrição das armas.</span>';
+                            }elseif($act=='cad7'){
+                                echo '<div align=right class=cadTitulo>Ítens para '.strtoupper($_GET['personagem']).'&nbsp&nbsp</div>';
+                            }
+                            echo '<div class=armascorporais>';
+                            echo '<fieldsel>';
+                            if($act=='cad5'){
+                                echo '<legend>Armaduras & Escudos</legend>';
+                                echo '<img class=dist src=../web/imagens/itens/armaduras/armaduras.png />';
+                            }elseif($act=='cad6'){
+                                echo '<legend>Itens de Conjuração</legend>';
+                                echo '<img class=conj src=../web/imagens/itens/conjuracao/conjuracao.png />';
+                                echo '<img height=310px class=conj2 src=../web/imagens/itens/conjuracao/conjuracao2.png />';
+                            }elseif($act=='cad7'){
+                                echo '<legend>Itens Gerais</legend>';
+                                $search->setpersonagem(null);
+                                $search->settabela('tb_equipamento_geral');
+                                $equipamentos=$dao->encontre($search);
+                                echo '<table class=equipamentos><tr>';
+                                    echo '<th>ITEM</th>';
+                                    echo '<th>CUSTO</th>';
+                                    echo '<th>PESO</th>';
+                                    echo '<th>DESCRIÇÃO</th>';
+                                    echo '<th>COMPRAR</th>';
+                                echo '</tr>';
+                                foreach($equipamentos as $item){
+                                    echo '<tr>';
+                                        echo '<td>'.$item->getitem().'</td>';
+                                        echo '<td align=center>'.$item->getCUSTO().'</td>';
+                                        echo '<td align=center>'.$item->getpeso().'</td>';
+                                        echo '<td>'.$item->getDESCRICAO().'</td>';
+                                        echo '<td align=center><input type=checkbox onchange=moeda(\''.$recurso.'\') value='.$item->getCUSTO().' name=\''.$item->getitem().'\'  /></td>';
+                                    echo '</tr>';
                                 }
-                                echo '<div class=armascorporais>';
-                                echo '<fieldsel>';
-                                if($act=='cad5'){
-                                    echo '<legend>Armaduras & Escudos</legend>';
-                                    echo '<img class=dist src=../web/imagens/itens/armaduras/armaduras.png />';
-                                }elseif($act=='cad6'){
-                                    echo '<legend>Itens de Conjuração</legend>';
-                                    echo '<img class=conj src=../web/imagens/itens/conjuracao/conjuracao.png />';
-                                    echo '<img height=310px class=conj2 src=../web/imagens/itens/conjuracao/conjuracao2.png />';
-                                }elseif($act=='cad7'){
-                                    echo '<legend>Itens Gerais</legend>';
-                                    $search->setpersonagem(null);
-                                    $search->settabela('tb_equipamento_geral');
-                                    $equipamentos=$dao->encontre($search);
-                                    echo '<table class=equipamentos><tr>';
-                                            echo '<th>ITEM</th>';
-                                            echo '<th>CUSTO</th>';
-                                            echo '<th>PESO</th>';
-                                            echo '<th>DESCRIÇÃO</th>';
-                                            echo '<th>COMPRAR</th>';
-                                        echo '</tr>';
-                                        foreach($equipamentos as $item){
-                                            echo '<tr>';
-                                                echo '<td>'.$item->getitem().'</td>';
-                                                echo '<td align=center>'.$item->getCUSTO().'</td>';
-                                                echo '<td align=center>'.$item->getpeso().'</td>';
-                                                echo '<td>'.$item->getDESCRICAO().'</td>';
-                                                echo '<td align=center><input type=checkbox onchange=moeda(\''.$recurso.'\') value='.$item->getCUSTO().' name=\''.$item->getitem().'\'  /></td>';
-                                            echo '</tr>';
-                                        }
-                            ?>
-                        </table>
-                        <script>moeda('<?= $recurso ?>')</script>
-                        <div class="conclui">
-                            <input type="submit" value="CONCLUIR" class='cad4Hab cad4Hab-verde'>        
-                            <br><br> 
-                        </div>
-                    <?php 
-                    die;
-                    }
+                                echo '</table>';
+                                echo '<script>moeda('.$recurso.')</script>';
+                                echo '<div class="conclui">';
+                                    echo '<input type="submit" value="CONCLUIR" class="cad4Hab cad4Hab-verde">';        
+                                    echo '<br><br>'; 
+                                echo '</div>';
+                                die;
+                            }
                        //itens//
-                    if($act=='cad5'){
-                        $listaArmas=array('Armadura Simples','Armadura de Batalha','Armadura Completa','Túnica Pesada','Escudo de Corpo','Escudo Médio','Escudo Pequeno','Armadura de Couro');
-                        $search->settabela('tb_armaduras');
-                    }elseif($act=='cad6'){
-                        $listaArmas=array('Cajado','Cetro','Grimório','Missal','Orbe de Cristal','Punhal','Símbolo Sagrado','Varinha');
-                        $search->settabela('tb_conjuracao');
-                    }
-                    foreach($listaArmas as $item){
-                      if($act=='cad5'){
-                         $search->setarmadura($item);
-                         $armaduras=$dao->encontrePorArmadura($search);
-                         $desc='Armadura: '.$armaduras->getarmadura()."\r\n".
-                               'Custo: '.$armaduras->getCUSTO()."\r\n".
-                               'Defesa: '.$armaduras->getdefesa()."\r\n".
-                               'FN: '.$armaduras->getFN()."\r\n".
-                               'Peso: '.$armaduras->getpeso()."\r\n".
-                               'Obs: '.$armaduras->getOBS();
-                        echo '<div class='.str_replace(' ','',$item).' >';
-                        $item = $item.'/'.$armaduras->getdefesa();
-                        $value=$armaduras->getCUSTO();
-                      }elseif($act=='cad6'){
-                         $search->setARMA($item);
-                         $armaduras=$dao->encontrePorArma($search);
-                         $desc='Item: '.$armaduras->getARMA()."\r\n".
-                               'Custo: '.$armaduras->getCUSTO()."\r\n".
-                               'FN: '.$armaduras->getFN()."\r\n".
-                               'Peso: '.$armaduras->getpeso()."\r\n".
-                               'Descrição: '.$armaduras->getDESCRICAO()."\r\n".
-                               'Obs: '.$armaduras->getOBS();
-                        echo '<div class='.str_replace(' ','',$item).' >';
-                        $value=$armaduras->getCUSTO();
-                      }
-                      //echo '<h1>'.$recurso.'</h1>';
-                        echo '<input type=checkbox onchange=moeda(\''.$recurso.'\'); value='.$value.' name=\''.$item.'\' title="'.
-                             $desc.'" />';
-                      echo '</div>';
-                    }
-                    ?>
-          </div>       
-                  <?php
-                    if($act=='cad6'){
-                        echo '<div class=Cajado_ title="Pode ser usado em combate como um Bordão.">*</div>';
-                        echo '<div class=Cetro_ title="Pode ser usado em combate como uma Clava.">*</div>';
-                        echo '<div class=Punhal_ title="Pode ser usado em combate como uma Adaga.">*</div>';
-                    }
-                    ?>
-                  <script>moeda('<?= $recurso ?>');</script>
-                      <input type=button value="VOLTAR" onclick=history.go(-2) class='cad4Hab cad4Hab-verde'>&nbsp
-                      <input type="submit" value="AVANÇA" class='cad4Hab cad4Hab-verde'>&nbsp
-                      <a href="../web/index.php?pagina=cadastro&act=<?= $cad ?>&classe=<?= $_GET['classe'] ?>&raca=<?= $raca ?>&personagem=<?= $_GET['personagem'] ?>"><input type=button class='cad4Hab cad4Hab-verde' value=PULAR></a>  
-         <?php elseif($act=='cad8'): 
-            echo '<div class=\'addFim\'>'.
-               '<h3>PARABENS!<br>SUA FICHA ESTÁ COMPLETA.<br>BOM JOGO!</h3>';
+                            if($act=='cad5'){
+                                $listaArmas=array('Armadura Simples','Armadura de Batalha','Armadura Completa','Túnica Pesada','Escudo de Corpo','Escudo Médio','Escudo Pequeno','Armadura de Couro');
+                                $search->settabela('tb_armaduras');
+                            }elseif($act=='cad6'){
+                                $listaArmas=array('Cajado','Cetro','Grimório','Missal','Orbe de Cristal','Punhal','Símbolo Sagrado','Varinha');
+                                $search->settabela('tb_conjuracao');
+                            }
+                            foreach($listaArmas as $item){
+                                if($act=='cad5'){
+                                    $search->setarmadura($item);
+                                    $armaduras=$dao->encontrePorArmadura($search);
+                                    $desc='Armadura: '.$armaduras->getarmadura()."\r\n".
+                                          'Custo: '.$armaduras->getCUSTO()."\r\n".
+                                          'Defesa: '.$armaduras->getdefesa()."\r\n".
+                                          'FN: '.$armaduras->getFN()."\r\n".
+                                          'Peso: '.$armaduras->getpeso()."\r\n".
+                                          'Obs: '.$armaduras->getOBS();
+                                    echo '<div class='.str_replace(' ','',$item).' >';
+                                    $item = $item.'/'.$armaduras->getdefesa();
+                                    $value=$armaduras->getCUSTO();
+                                }elseif($act=='cad6'){
+                                    $search->setARMA($item);
+                                    $armaduras=$dao->encontrePorArma($search);
+                                    $desc='Item: '.$armaduras->getARMA()."\r\n".
+                                          'Custo: '.$armaduras->getCUSTO()."\r\n".
+                                          'FN: '.$armaduras->getFN()."\r\n".
+                                          'Peso: '.$armaduras->getpeso()."\r\n".
+                                          'Descrição: '.$armaduras->getDESCRICAO()."\r\n".
+                                          'Obs: '.$armaduras->getOBS();
+                                    echo '<div class='.str_replace(' ','',$item).' >';
+                                        $value=$armaduras->getCUSTO();
+                                }
+                                        echo '<input type=checkbox onchange=moeda(\''.$recurso.'\'); value='.$value.' name=\''.$item.'\' title="'.$desc.'" />';
+                                    echo '</div>';
+                            }
+                            if($act=='cad6'){
+                                echo '<div class=Cajado_ title="Pode ser usado em combate como um Bordão.">*</div>';
+                                echo '<div class=Cetro_ title="Pode ser usado em combate como uma Clava.">*</div>';
+                                echo '<div class=Punhal_ title="Pode ser usado em combate como uma Adaga.">*</div>';
+                            }
+                        ?>
+                        <script>moeda('<?= $recurso ?>');</script>
+                        <input type=button value="VOLTAR" onclick=history.go(-2) class='cad4Hab cad4Hab-verde'>&nbsp
+                        <input type="submit" value="AVANÇA" class='cad4Hab cad4Hab-verde'>&nbsp
+                        <a href="../web/index.php?pagina=cadastro&act=<?= $cad ?>&classe=<?= $_GET['classe'] ?>&raca=<?= $raca ?>&personagem=<?= $_GET['personagem'] ?>"><input type=button class='cad4Hab cad4Hab-verde' value=PULAR></a> 
+                        <br><br>
+                    </table>
+                </form>
+            </fieldset>
+        </div>
+    <?php elseif($act=='cad8'): 
+        echo '<div class=\'addFim\'>'.
+             '<h3>PARABENS!<br>SUA FICHA ESTÁ COMPLETA.<br>BOM JOGO!</h3>';
              '</div>';
-                die;
-         ?> 
-   <?php elseif($act=='avatar'):
-      $dao = new Dao();
-      $search = new ModelSearchCriteria();
-      $search->settabela('tb_avatar');
-      $avatares=$dao->encontre($search);
-      echo '<div class=avatar>';
-         foreach($avatares as $avatar){
-            echo '<span class='.$avatar->getraca().$avatar->getid().'>';
-               echo '<input type=radio value='.$avatar->getid().' name=avatar />';
-            echo '</span>';
-         }
-      echo '</div>';
-      die;
-   ?>
-</div>          
-                    
-                    
-                    
-                       echo '<fieldset>';
-                          echo '<legend>Distância</legend>';
-                          echo '<div id="armamento" class=armas>';
-                             $search->settabela('tb_armas_distancia');
-                             $linhas=$dao->totalLinhas($search);
-                          //echo '<select name:itemArma>'; 
-                             for($x=1;$x<($linhas['id']+1);$x++){
-                                $search->setid($x);
-                                $dist=$dao->encontrePorArma($search);
-                                $desc='Arma: '.$dist->getARMA()."\r\n".
-                                      'Custo: '.$dist->getCUSTO()."\r\n".
-                                      'Dano: '.$dist->getDANO()."\r\n".
-                                      'Tipo: '.$dist->getTIPO()."\r\n".
-                                      'Força Necessária: '.$dist->getFN()."\r\n".
-                                      'Grupo: '.$dist->getGRUPO()."\r\n".
-                                      'Obs: '.$dist->getOBS();
-                                if($search->getid()<3){
-                                   echo '<img height=50px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'&tabela=tb_armas_distancia\'>';
-                                   echo '<input type=checkbox name='.$dist->getid().'  id='.$dist->getCUSTO().'>';
-                                }else{
-                                   if($search->getid() == 3){
-                                      echo '<br>';
-                                      echo '<img height=80px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'&tabela=tb_armas_distancia\'>';
-                                      echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'>';
-                                    }elseif($search->getid()<6){
-                                      echo '<img height=75px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'&tabela=tb_armas_distancia\'>';
-                                      echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'>';
-                                    }elseif($search->getid()==6){
-                                      echo '<img height=109px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'&tabela=tb_armas_distancia\'>';
-                                      echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'>';
-                                    }else{
-                                      echo '<span class=besta><img height=50px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'&tabela=tb_armas_distancia\'>';
-                                      echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'></span>&nbsp&nbsp&nbsp&nbsp';
-                                    }
-                                }
-                             }
-                          echo '</div>';
-                       echo '</fieldset>';
-                       echo '<fieldset>';
-                          echo '<legend>Corporais</legend>';
-                          echo '<div id="armamento" class=armas>';
-                             $search->settabela('tb_armas_corporais');
-                             $linhas=$dao->totalLinhas($search);
-                             for($x=1;$x<($linhas['id']+1);$x++){
-                                $search->setid($x);
-                                $dist=$dao->encontrePorArma($search);
-                                $desc='Arma: '.$dist->getARMA()."\r\n".
-                                      'Custo: '.$dist->getCUSTO()."\r\n".
-                                      'Dano: '.$dist->getDANO()."\r\n".
-                                      'Tipo: '.$dist->getTIPO()."\r\n".
-                                      'Força Necessária: '.$dist->getFN()."\r\n".
-                                      'Grupo: '.$dist->getGRUPO()."\r\n".
-                                      'Obs: '.$dist->getOBS();
-                                if($search->getid()<3){
-                                   echo '<img height=90px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'&tabela=tb_armas_corporais\'>';
-                                   echo '<input type=checkbox name='.$dist->getid().'  id='.$dist->getCUSTO().'>';
-                                }else{
-                                   if($search->getid() == 3){
-                                      echo '<br>';
-                                      echo '<img height=80px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'&tabela=tb_armas_corporais\'>';
-                                      echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'&tabela=tb_armas_corporais>';
-                                    }elseif($search->getid()<6){
-                                      echo '<img height=75px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'&tabela=tb_armas_corporais\'>';
-                                      echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'>';
-                                    }elseif($search->getid()==6){
-                                      echo '<img height=109px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'&tabela=tb_armas_corporais\'>';
-                                      echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'>';
-                                    }else{
-                                      echo '<span class=besta><img height=50px title=\''.$desc.'\' src=\'gera.php?id='.$dist->getid().'&tabela=tb_armas_corporais\'>';
-                                      echo '<input type=checkbox  name='.$dist->getid().' id='.$dist->getCUSTO().'></span>&nbsp&nbsp&nbsp&nbsp';
-                                    }
-                                }
-                             }
-                          echo '</div>';
-                       echo '</fieldset>';
-             ?>
-		<div class="armabnt">
-                    <!--<input onclick='history.go(-2)' value="VOLTAR" class='cad3Hab cad3Hab-verde'>-->
-					<input onclick="valida();" type="submit" value="AVANÇA" class='cad3Hab cad3Hab-verde'>                     
-		</div>
-         </table>
-        </form>
-        <?php endif; ?>
+        die;
+    ?> 
+    <?php elseif($act=='avatar'):
+        $dao = new Dao();
+        $search = new ModelSearchCriteria();
+        $search->settabela('tb_avatar');
+        $avatares=$dao->encontre($search);
+        echo '<div class=avatar>';
+            foreach($avatares as $avatar){
+                echo '<span class='.$avatar->getraca().$avatar->getid().'>';
+                echo '<input type=radio value='.$avatar->getid().' name=avatar />';
+                echo '</span>';
+            }
+        echo '</div>';
+        die;
+    ?>           
+    <?php endif; ?>
 </div>
