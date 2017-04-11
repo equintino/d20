@@ -266,6 +266,9 @@
         }
         $armamento->setCUSTO($saldo);
         $armamento->settabela('armamentos');
+        if(!$armamento->getdefesa()){
+            $armamento->setdefesa(5+$maisAtrib);
+        }
         $dao->grava4($armamento);
      }else{
         $saldo=400-$custo;
