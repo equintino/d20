@@ -1193,3 +1193,33 @@ fieldset legend{
     top: 415px;
     left: 775px
 }
+.halfling5{
+    position: absolute;
+    top: 565px;
+    left: 235px
+}
+.halfling6{
+    position: absolute;
+    top: 545px;
+    left: 425px
+}
+.halfling7{
+    position: absolute;
+    top: 605px;
+    left: 555px
+}
+.halfling8{
+    position: absolute;
+    top: 675px;
+    left: 755px
+}
+.halfling9{
+    position: absolute;
+    top: 875px;
+    left: 305px
+}
+.halfling10{
+    position: absolute;
+    top: 875px;
+    left: 595px
+}
