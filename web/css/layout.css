@@ -1165,7 +1165,31 @@ fieldset legend{
 }
 .avatar{
     width: 800px;
+    height: 900px;
     margin: auto;
-    background: rgba(0, 0, 255, 0.5);
+    background: rgba(255, 255, 255, 0.5);
     border-radius: 20px;
+    background-image: url('../imagens/personagens/halfling/halflingFundo.png');
+    background-repeat: no-repeat;
+    border: 1px solid white;
+}
+.halfling1{
+    position: absolute;
+    top: 345px;
+    left: 165px
+}
+.halfling2{
+    position: absolute;
+    top: 405px;
+    left: 375px
+}
+.halfling3{
+    position: absolute;
+    top: 375px;
+    left: 575px
+}
+.halfling4{
+    position: absolute;
+    top: 415px;
+    left: 775px
 }

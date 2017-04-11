@@ -566,8 +566,9 @@ function moeda(saldo) {
       $avatares=$dao->encontre($search);
       echo '<div class=avatar>';
          foreach($avatares as $avatar){
-            echo '<input type=radio value='.$avatar->getid().' name=avatar />';
-            echo '<img src=gera.php?tabela=tb_avatar&id='.$avatar->getid().' />';
+            echo '<span class='.$avatar->getraca().$avatar->getid().'>';
+               echo '<input type=radio value='.$avatar->getid().' name=avatar />';
+            echo '</span>';
          }
       echo '</div>';
       die;
