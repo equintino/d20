@@ -562,9 +562,17 @@ function moeda(saldo) {
         $search->settabela('tb_avatar');
         $search->setraca($raca);
         $avatares=$dao->encontrePorAvatar($search);
+        switch($raca){
+            case "halfling":
+                $avatarFundo='halfling';
+                break;
+            case "humano":
+                $avatarFundo='humano';
+                break;
+        }
         //print_r($avatares);die;
         //print_r($dao->encontrePorRaca($search));die;
-        echo '<div class=avatar>';
+        echo '<div class='.$avatarFundo.'Fundo>';
             foreach($avatares as $avatar){
                //print_r($avatares);die;
                 echo '<span class='.$raca.$avatar->getid().'>';
