@@ -91,6 +91,19 @@
         modelMapper::map($model, $row);
         return $model;
    }
+   public function encontrePorAvatar(ModelSearchCriteria $search=null){
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` =  '0' and `raca` = '".$search->getraca()."'")->fetchAll();
+        if (!$row) {
+            return null;
+        }
+        $result = array();
+        foreach ($row as $row_){
+            $model = new Model();
+            modelMapper::map($model, $row_);
+            $result[$model->getid()] = $model;
+        }
+        return $result;
+   }
    public function totalLinhas(ModelSearchCriteria $search=null){
            $row = $this->query("SELECT id FROM `".$search->gettabela()."` WHERE `excluido` =  '0' ORDER BY id DESC ")->fetch();
         if (!$row) {

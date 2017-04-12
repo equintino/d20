@@ -1,7 +1,8 @@
 <script>
   function myFunction(){
     var x = document.getElementById('mySelect').value;
-      document.getElementById('aqui').innerHTML='<img height=240px src="../web/imagens/personagens/'+x+'/'+x+'.png" />';
+    var trocaAvatar = "<a href='index.php?pagina=cadastro&act=avatar&raca="+x+"'><font size=2>Trocar Avatar</font></a>";
+      document.getElementById('aqui').innerHTML='<img height=240px src="../web/imagens/personagens/'+x+'/'+x+'.png" />'+trocaAvatar;
     if(x=='humano'){
       var y = 'Humanos uma raça muito comum e muitas vezes escolhida, boa para iniciantes no RPG, é uma raça neutra, sem benefícios ou malefícios, os humanos não tem nenhuma vantagem ou poder melhor que as outras raças, mas também não tem nenhuma desvantagem.Podem ter várias cores de pele, cabelos e olhos e chegar até 2,20m ';
     }
@@ -200,6 +201,7 @@ function moeda(saldo) {
                         }?>
                         <table><tr><td>
                             <div id="aqui" class="raca"></div>
+                            <!--<span class="trocaAvatar">Trocar Avatar</span>-->
                             <div id="aqui.texto" align="justify" class="texto"></div>
                             </td></tr>
                         </table>
@@ -558,10 +560,14 @@ function moeda(saldo) {
         $dao = new Dao();
         $search = new ModelSearchCriteria();
         $search->settabela('tb_avatar');
-        $avatares=$dao->encontre($search);
+        $search->setraca($raca);
+        $avatares=$dao->encontrePorAvatar($search);
+        //print_r($avatares);die;
+        //print_r($dao->encontrePorRaca($search));die;
         echo '<div class=avatar>';
             foreach($avatares as $avatar){
-                echo '<span class='.$avatar->getraca().$avatar->getid().'>';
+               //print_r($avatares);die;
+                echo '<span class='.$raca.$avatar->getid().'>';
                 echo '<input type=radio value='.$avatar->getid().' name=avatar />';
                 echo '</span>';
             }
