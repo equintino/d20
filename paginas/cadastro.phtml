@@ -573,8 +573,8 @@ function moeda(saldo) {
         //print_r($avatares);die;
         //print_r($dao->encontrePorRaca($search));die;
         echo '<div class='.$avatarFundo.'Fundo>';
+               //print_r(count($avatares));die;
             foreach($avatares as $avatar){
-               //print_r($avatares);die;
                 echo '<span class='.$raca.$avatar->getid().'>';
                 echo '<input type=radio value='.$avatar->getid().' name=avatar />';
                 echo '</span>';
