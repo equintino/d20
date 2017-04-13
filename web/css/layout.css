@@ -1175,7 +1175,7 @@ fieldset legend{
 }
 .humanoFundo{
     width: 800px;
-    height: 900px;
+    height: 980px;
     margin: auto;
     background: rgba(255, 255, 255, 0.5);
     border-radius: 20px;
@@ -1235,61 +1235,61 @@ fieldset legend{
 }
 .humano11{
     position: absolute;
-    top: 305px;
-    left: 225px
+    top: 315px;
+    left: 215px
 }
 .humano12{
     position: absolute;
-    top: 255px;
-    left: 415px
+    top: 265px;
+    left: 405px
 }
 .humano13{
     position: absolute;
-    top: 235px;
-    left: 598px
+    top: 255px;
+    left: 578px
 }
 .humano14{
     position: absolute;
-    top: 245px;
-    left: 748px
+    top: 265px;
+    left: 738px
 }
 .humano15{
     position: absolute;
-    top: 460px;
-    left: 288px
+    top: 490px;
+    left: 278px
 }
 .humano16{
     position: absolute;
-    top: 430px;
-    left: 448px
+    top: 440px;
+    left: 438px
 }
 .humano17{
     position: absolute;
-    top: 430px;
-    left: 638px
+    top: 440px;
+    left: 628px
 }
 .humano18{
     position: absolute;
-    top: 410px;
-    left: 728px
+    top: 430px;
+    left: 718px
 }
 .humano19{
     position: absolute;
-    top: 660px;
-    left: 128px
+    top: 670px;
+    left: 118px
 }
 .humano20{
     position: absolute;
-    top: 660px;
-    left: 428px
+    top: 680px;
+    left: 418px
 }
 .humano21{
     position: absolute;
-    top: 898px;
-    left: 600px
+    top: 928px;
+    left: 595px
 }
 .humano22{
     position: absolute;
-    top: 868px;
-    left: 800px
+    top: 758px;
+    left: 840px
 }
