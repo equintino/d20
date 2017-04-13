@@ -78,6 +78,33 @@ function moeda(saldo) {
     }
     document.getElementById("moeda").innerHTML = saldo-txt;
 }
+function abrir(URL) {
+
+  var width = 150;
+  var height = 250;
+
+  var left = 99;
+  var top = 99;
+
+  window.open(URL,'janela', 'width='+width+', height='+height+', top='+top+', left='+left+', scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
+}
+function mudaImagem(i) {    
+
+	if (i == 1) {
+
+        document.getElementById("imagem1").src="imagem1.jpg";
+
+        document.getElementById("imagem2").src="imagem2_not.jpg";    
+
+    } else if (i == 2) {       
+
+    	document.getElementById("imagem1").src=" imagem1_not.jpg";        
+
+    	document.getElementById("imagem2").src="imagem2.jpg";    
+
+    }
+
+}
 </script>
 <style>
 	#rodape{
