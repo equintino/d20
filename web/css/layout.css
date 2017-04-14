@@ -1293,3 +1293,29 @@ fieldset legend{
     top: 758px;
     left: 840px
 }
+.racaAvatar{
+    position: absolute;
+    top: 216px;
+    left: 335px;
+    font-family: arial;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    #border-radius: 15px;
+    font-size: 14px;
+    color: red;
+    text-shadow: 0 2px 0 black;
+}
+.racaAvatar-red{
+    #font-size: 16px;
+    #padding: 4px;
+    #background-color: #a8af98;
+    #color: white;
+    #box-shadow: 0 5px 0 #6a6d61;
+}
+.racaAvatar-red:active{
+    position: absolute;
+    top: 220px;
+    box-shadow: none;
+    text-shadow: none;
+}

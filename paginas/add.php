@@ -6,6 +6,7 @@
   include_once '../mapping/modelMapper.php';
   include_once '../dao/ModelSearchCriteria.php';
   include_once '../validacao/ModelValidador.php';
+  print_r($_POST);die;
   $act=$_GET['act'];
   $personagem = $_GET['personagem'];
   @$classe = $_GET['classe'];

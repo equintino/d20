@@ -1,8 +1,10 @@
 <script>
   function myFunction(){
     var x = document.getElementById('mySelect').value;
-    var trocaAvatar = "<a href='index.php?pagina=cadastro&act=avatar&raca="+x+"' onclick='submit'><font size=2>Trocar Avatar</font></a>";
-      document.getElementById('aqui').innerHTML='<img height=240px src="../web/imagens/personagens/'+x+'/'+x+'.png" />'+trocaAvatar;
+    racaAvatar = x;
+    //var trocaAvatar = "<button onclick=mudaImagem(x,1,4)><font size=2>Trocar Avatar</font></button>";
+            /*"<a href='index.php?pagina=cadastro&act=avatar&raca="+x+"' onclick=mudaImagem(x,1,4)><font size=2>Trocar Avatar</font></a>";*/
+      document.getElementById('aqui').innerHTML='<img height=200px src="../web/imagens/personagens/'+x+'/'+x+'.png" />';//+trocaAvatar;
     if(x=='humano'){
       var y = 'Humanos uma raça muito comum e muitas vezes escolhida, boa para iniciantes no RPG, é uma raça neutra, sem benefícios ou malefícios, os humanos não tem nenhuma vantagem ou poder melhor que as outras raças, mas também não tem nenhuma desvantagem.Podem ter várias cores de pele, cabelos e olhos e chegar até 2,20m ';
     }
@@ -33,7 +35,6 @@
     }
 }
 function valida(){
- 
     var todos_inputs = document.getElementsByTagName('input'); 
     for (var i=0; i<todos_inputs.length; i++){
         if(todos_inputs[i].checked){
@@ -47,14 +48,11 @@ function valida(){
                    var ok = false;
          }
      }
- 
      if (ok == false){
      alert('Selecione a(s) bebida(s) preferida(s)!');
      document.orcamento.bebi1.focus();
      return false;
      }
- 
- 
      alert("Contato enviado com sucesso, em breve entraremos em contato!");
      document.orcamento.submit();
 }
@@ -79,31 +77,26 @@ function moeda(saldo) {
     document.getElementById("moeda").innerHTML = saldo-txt;
 }
 function abrir(URL) {
-
   var width = 150;
   var height = 250;
-
   var left = 99;
   var top = 99;
-
   window.open(URL,'janela', 'width='+width+', height='+height+', top='+top+', left='+left+', scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
 }
-function mudaImagem(i) {    
-
-	if (i == 1) {
-
-        document.getElementById("imagem1").src="imagem1.jpg";
-
-        document.getElementById("imagem2").src="imagem2_not.jpg";    
-
-    } else if (i == 2) {       
-
-    	document.getElementById("imagem1").src=" imagem1_not.jpg";        
-
-    	document.getElementById("imagem2").src="imagem2.jpg";    
-
-    }
-
+acrescimoGlobal=0;
+function mudaImagem(raca,i,max){
+   var i = i+acrescimoGlobal;
+   var max;
+   if(acrescimoGlobal == max-1){
+      acrescimoGlobal=0;
+   }else{
+      acrescimoGlobal++;
+   }
+   var x = '<img height=200px src=\'../web/imagens/personagens/'+raca+'/'+raca+i+'.png\' \>';
+   //alert(x);
+   raca;
+   var trocaAvatar = "<a href='index.php?pagina=cadastro&act=avatar&raca="+x+"' onclick='submit'><font size=2>Trocar Avatar</font></a>";
+   document.getElementById("aqui").innerHTML=x;
 }
 </script>
 <style>
@@ -179,7 +172,12 @@ function mudaImagem(i) {
                 <legend>CADASTRO DE PERSONAGEM</legend>
                 <form class="font_1" id="cadastro" action="../paginas/add.php?act=cad&personagem=<?php echo $personagem ?>&raca=<?= $raca ?>" method="POST">
                     <table>
-                        <?php foreach($variaveis as $keys => $item){
+                        <?php
+                           /*$dao = new Dao();
+                           $search = new ModelSearchCriteria();
+                           $search->settabela('tb_avatar');
+                           $avatares=$dao->encontre($search);*/
+                           foreach($variaveis as $keys => $item){
                             if($item=='raca'){
                                 echo '<tr><td align=right> '.$keys.': </td>';
                                 echo '<td><select id="mySelect" name=raca onchange="myFunction()">';
@@ -227,14 +225,15 @@ function mudaImagem(i) {
                             }
                         }?>
                         <table><tr><td>
-                            <div id="aqui" class="raca"></div>
+                            <div id="aqui" class="raca"></div> 
                             <!--<span class="trocaAvatar">Trocar Avatar</span>-->
                             <div id="aqui.texto" align="justify" class="texto"></div>
                             </td></tr>
                         </table>
                         <input type="reset" value="LIMPA" class='botao2 botao-verde2'>
                         <input type="submit" value="GRAVA" class='botao botao-verde2'>
-                </form>
+                </form>               
+                <span class='racaAvatar racaAvatar-red' onclick=mudaImagem(racaAvatar,1,12)>Trocar Avatar</span>
             </fieldset>
         </div>
     <?php elseif($act=='cad2'): ?>
@@ -584,7 +583,7 @@ function mudaImagem(i) {
         die;
     ?> 
     <?php elseif($act=='avatar'):
-        print_r($_POST);die;
+        //print_r($_POST);die;
         $dao = new Dao();
         $search = new ModelSearchCriteria();
         $search->settabela('tb_avatar');
@@ -598,10 +597,10 @@ function mudaImagem(i) {
                 $avatarFundo='humano';
                 break;
         }
-        //print_r($avatares);die;
-        //print_r($dao->encontrePorRaca($search));die;
+        echo '<div id=\'avatar\'></div>';
         echo '<div class='.$avatarFundo.'Fundo>';
-               //print_r(count($avatares));die;
+        $total= count($avatares);
+        echo "<button onclick=mudaImagem('humano',1,$total);>Mudar Avatar</button>";
             foreach($avatares as $avatar){
                 echo '<span class='.$raca.$avatar->getid().'>';
                 echo '<input type=radio value='.$avatar->getid().' name=avatar />';
