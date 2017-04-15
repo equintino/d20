@@ -6,7 +6,8 @@
   include_once '../mapping/modelMapper.php';
   include_once '../dao/ModelSearchCriteria.php';
   include_once '../validacao/ModelValidador.php';
-  print_r($_POST);die;
+  //setcookie('nome','edmilson');
+  $avatar=$_COOKIE['avatar'];
   $act=$_GET['act'];
   $personagem = $_GET['personagem'];
   @$classe = $_GET['classe'];
@@ -38,19 +39,22 @@
      $search->setpersonagem($model->getpersonagem());
      $busca=$dao->encontre($search);
      if($busca){
-        foreach($dao->encontre($search) as $dados);
+        foreach($busca as $dados);
         if($dados->getpersonagem()){
           echo '<div class=add>';
-          echo '<h3>PERSONAGEM JÁ EXISTE!</h3>';
+          echo '<h3>PERSONAGEM <font color=red size=15px>'.$dados->getpersonagem().'</font> JÁ EXISTE!</h3>';
           echo '<button class=\'continua continua-verde\' onclick=history.go(-1);>Voltar</button>';
           echo '</div>';
           die;
-        }else{       
-          $dao->grava($model);
+        }else{
+            die;
+            $dao->grava($model);
         }
-     }else{
-		$dao->grava($model); 
-    }
+      }else{
+         $model->setavatar($avatar);
+         //print_r($model);die;
+         $dao->grava($model); 
+      }
 	echo '<div class=\'add\'>'.
                '<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.
                '<a href=\'../web/index.php?pagina=cadastro&act=cad2&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'\' ><button class=\'continua continua-verde\'>Continua...</button></a>'.
@@ -71,8 +75,7 @@
 		$model->sethabilidade($habilidade);
 	  }
 	$search->settabela('personagem');
-        $search->setpersonagem($_GET['personagem']);
-	
+        $search->setpersonagem($_GET['personagem']);	
 	$dados=$dao->encontrePorPersonagem($search);
 	$model->setid($dados->getid());
 	$model->setjogador($dados->getjogador());
@@ -82,7 +85,7 @@
 	$model->settendencia1($dados->gettendencia1());
 	$model->settendencia2($dados->gettendencia2());
 	$model->setsexo($dados->getsexo());
-        
+        $model->setavatar($dados->getavatar());
         $search->setraca($model->getraca());
         $search->settabela('tb_racas');
         $dadosRaca=$dao->encontrePorRaca($search);

@@ -58,6 +58,9 @@
 	if (array_key_exists('breveHistoria', $properties)){
 	  $model->setbreveHistoria($properties['breveHistoria']);
 	}
+	if (array_key_exists('avatar', $properties)){
+	  $model->setavatar($properties['avatar']);
+	}
 	if (array_key_exists('id_atrib', $properties)){
 	  $model->setid_atrib($properties['id_atrib']);
 	}

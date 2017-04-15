@@ -152,6 +152,14 @@
           $this->breveHistoria = $breveHistoria;
           return $this;
       }
+   private $avatar;
+       public function getavatar(){
+        return $this->avatar;
+      }
+      public function setavatar($avatar){
+          $this->avatar = $avatar;
+          return $this;
+      }
    private $id_atrib;
        public function getid_atrib(){
         return $this->id_atrib;

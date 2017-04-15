@@ -4,7 +4,7 @@
     racaAvatar = x;
     //var trocaAvatar = "<button onclick=mudaImagem(x,1,4)><font size=2>Trocar Avatar</font></button>";
             /*"<a href='index.php?pagina=cadastro&act=avatar&raca="+x+"' onclick=mudaImagem(x,1,4)><font size=2>Trocar Avatar</font></a>";*/
-      document.getElementById('aqui').innerHTML='<img height=200px src="../web/imagens/personagens/'+x+'/'+x+'.png" />';//+trocaAvatar;
+      document.getElementById('aqui').innerHTML='<img height=200px src="../web/imagens/personagens/'+x+'/'+x+'1.png" />';//+trocaAvatar;
     if(x=='humano'){
       var y = 'Humanos uma raça muito comum e muitas vezes escolhida, boa para iniciantes no RPG, é uma raça neutra, sem benefícios ou malefícios, os humanos não tem nenhuma vantagem ou poder melhor que as outras raças, mas também não tem nenhuma desvantagem.Podem ter várias cores de pele, cabelos e olhos e chegar até 2,20m ';
     }
@@ -97,6 +97,7 @@ function mudaImagem(raca,i,max){
    raca;
    var trocaAvatar = "<a href='index.php?pagina=cadastro&act=avatar&raca="+x+"' onclick='submit'><font size=2>Trocar Avatar</font></a>";
    document.getElementById("aqui").innerHTML=x;
+   document.cookie = "avatar="+raca+i+"; path=/projetos/producao/d20/paginas/";
 }
 </script>
 <style>
@@ -156,7 +157,7 @@ function mudaImagem(raca,i,max){
                                 echo '<tr><td class=nomes>'.$titulos[2].'</td><td class=nomes2>'.$item->getclasse().'</td></tr>';
                                 echo '<tr><td class=nomes>'.$titulos[3].'</td><td class=nomes2>'.$item->gettendencia1().'</td></tr>';
                                 echo '<tr><td class=nomes>'.$titulos[4].'</td><td class=nomes2>'.$item->gettendencia2().'</td></tr>';
-                                echo '<div id="aqui" class="raca">Bem-vindo '.strtoupper($item->getjogador()).'  <img height=240px src="../web/imagens/personagens/'.$item->getraca().'/'.$item->getraca().'.png" /></div>';
+                                echo '<div id="aqui" class="raca">Bem-vindo '.strtoupper($item->getjogador()).'  <img height=240px src="../web/imagens/personagens/'.$item->getraca().'/'.$item->getavatar().'.png" /></div>';
                             }elseif($keys > $y){
                                 break;
                             }

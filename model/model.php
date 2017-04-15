@@ -19,6 +19,7 @@
  private $cidade;
  private $motivacao;
  private $breveHistoria;
+ private $avatar;
  private $id_atrib;
  private $FORCA;
  private $AGILIDADE;
@@ -159,6 +160,12 @@
  }
  public function setbreveHistoria($breveHistoria ){
 	$this->breveHistoria=$breveHistoria;
+ }
+ public function getavatar(){
+	return $this->avatar;
+ }
+ public function setavatar($avatar ){
+	$this->avatar=$avatar;
  }
  public function getid_atrib(){
 	return $this->id_atrib;

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Apr 11, 2017 at 04:10 
--- Server version: 10.1.21-MariaDB
--- PHP Version: 7.1.1
+-- Host: 127.0.0.1
+-- Generation Time: 15-Abr-2017 às 17:46
+-- Versão do servidor: 10.1.19-MariaDB
+-- PHP Version: 7.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personagem`
+-- Estrutura da tabela `personagem`
 --
 
 CREATE TABLE `personagem` (
@@ -47,7 +47,8 @@ CREATE TABLE `personagem` (
   `motivacao` text,
   `breveHistoria` text,
   `ARMA` varchar(100) DEFAULT NULL,
-  `figura` longblob
+  `figura` longblob,
+  `avatar` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

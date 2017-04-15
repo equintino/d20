@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width">  
     <link rel="stylesheet" href="css/tempo.css" type="text/css" media='screen'/>   
     <!--<link rel="stylesheet" href="css/mobile.css" media="(max-width: 320px)">-->
-<title>Contagem Regressiva</title>
+<title>Tempo</title>
 <SCRIPT language=JavaScript>
 function getCookie(cname) {
     var name = cname + "=";
@@ -55,8 +55,6 @@ function getMes(mes){
     if(mes==12){mes = "Dezembro";}
     return mes;
 }
-//if(ano < 2000) {ano = 1900 + yearNr;}
-//else {Year = yearNr;}
 
 if(!sHors || sHors == null)var sHors = "00"; 
 if(!sMins || sMins == null)var sMins = "00";
@@ -92,7 +90,7 @@ function getSecs(){
 		document.cookie = "dia="+dia;
 		document.cookie = "mes="+mes;
 		document.cookie = "ano="+ano;
-	}		
+	}
 }
 //-->
 </SCRIPT>
