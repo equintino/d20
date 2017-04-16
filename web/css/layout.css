@@ -195,7 +195,8 @@ body{
 .cadficha{
     width: 900px;
     height: 850px;
-    padding: 5px 40px;
+    #padding: 5px 40px;
+    #border: 1px solid red;
 }
 /*.lista{
     border: 2px solid white;    
@@ -224,6 +225,12 @@ fieldset legend{
     left: 5px;
     color: white;
     text-shadow: 2px 2px black;
+    #border: 1px solid red;
+}
+.saudacao{
+    position: absolute;
+    left: 380px;
+    top: 180px;
     #border: 1px solid red;
 }
 .cadraca{
@@ -310,6 +317,64 @@ fieldset legend{
     color: white;   
     position: absolute;
     top: 505px;
+    box-shadow: none;
+}
+.cad .botao{
+    position: absolute;
+    top: 380px;
+    right: 50px;
+    font-family: arial;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+}
+.cad .botao2{
+    position: absolute;
+    top: 380px;
+    right: 128px;
+    font-family: arial;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+}
+.cad .botao-verde{
+    font-size: 16px;
+    padding: 2px;
+    background-color: #006000;
+    color: white;
+    box-shadow: 0 5px 0 #003f00;
+    border-radius: 15px;
+}
+.cad .botao-verde2{
+    font-size: 16px;
+    paddin: 2px;
+    background-color: #006000;
+    color: white;
+    box-shadow: 0 5px 0 #003f00;
+    border-radius: 15px;
+}
+.cad .botao-verde:hover{
+    background-color: #006000;
+    color: white;
+}
+.cad .botao-verde:active{
+    font-size: 16px;
+    paddin: 2px;
+    background-color: #006000;
+    color: white;   
+    position: absolute;
+    top: 385px;
+    box-shadow: none;
+}
+.botao-verde2:active{
+    font-size: 16px;
+    paddin: 2px;
+    background-color: #006000;
+    color: white;   
+    position: absolute;
+    top: 385px;
     box-shadow: none;
 }
 .rolar{
@@ -426,7 +491,7 @@ fieldset legend{
     font-family: 'Satisfy', cursive;
     #font-family: courier;
     font-size: 22px;
-    top: 350px;
+    top: 370px;
     left: 200px;
     #margin: -10px 80px;
 }
@@ -434,7 +499,7 @@ fieldset legend{
     #clear: both;
     float: right; 
     #position: relative;
-    margin: -50px 20px;
+    margin: 50px 20px;
     width: 360px;
     height: 200px;
     padding: 8px;
@@ -514,6 +579,7 @@ fieldset legend{
     height: 200px;
     width: 200px;
     margin-top: 60px;
+    margin-right: 40px;
 }
 .motivacaoTexto{ 
     text-align: justify;
@@ -521,6 +587,7 @@ fieldset legend{
     font-size: 12px;
     text-indent: 30px; 
     color: gray;
+    #border: 1px solid red;
 }
 .historia{
     font-family: Times New Roman;
@@ -530,7 +597,7 @@ fieldset legend{
     #border: 1px solid yellow;
 }
 .atributo{
-    #margin: 100px 0;
+    margin: 250px 0;
     #border: 1px solid red;
 }
 .motivacaoJogador{
@@ -1106,7 +1173,7 @@ fieldset legend{
     height: 1200px;
     font-family: 'Architects Daughter', cursive;
     #font-size: 15px;
-    #margin: 0 302px;
+    margin: 0 2px;
     text-align: center;
     padding-top: 40px;
 }
@@ -1331,4 +1398,9 @@ fieldset legend{
     top: 220px;
     box-shadow: none;
     text-shadow: none;
+}
+.fichaAvatar{
+    position: absolute;
+    top: 170px;
+    left: 380px;
 }
