@@ -2,8 +2,6 @@
   function myFunction(){
     var x = document.getElementById('mySelect').value;
     racaAvatar = x;
-    //var trocaAvatar = "<button onclick=mudaImagem(x,1,4)><font size=2>Trocar Avatar</font></button>";
-            /*"<a href='index.php?pagina=cadastro&act=avatar&raca="+x+"' onclick=mudaImagem(x,1,4)><font size=2>Trocar Avatar</font></a>";*/
       document.getElementById('aqui').innerHTML='<img height=200px src="../web/imagens/personagens/'+x+'/'+x+'1.png" />';//+trocaAvatar;
     if(x=='humano'){
       var y = 'Humanos uma raça muito comum e muitas vezes escolhida, boa para iniciantes no RPG, é uma raça neutra, sem benefícios ou malefícios, os humanos não tem nenhuma vantagem ou poder melhor que as outras raças, mas também não tem nenhuma desvantagem.Podem ter várias cores de pele, cabelos e olhos e chegar até 2,20m ';
@@ -174,10 +172,6 @@ function mudaImagem(raca,i,max){
                 <form class="font_1" id="cadastro" action="../paginas/add.php?act=cad&personagem=<?php echo $personagem ?>&raca=<?= $raca ?>" method="POST">
                     <table>
                         <?php
-                           /*$dao = new Dao();
-                           $search = new ModelSearchCriteria();
-                           $search->settabela('tb_avatar');
-                           $avatares=$dao->encontre($search);*/
                            foreach($variaveis as $keys => $item){
                             if($item=='raca'){
                                 echo '<tr><td align=right> '.$keys.': </td>';
@@ -226,8 +220,7 @@ function mudaImagem(raca,i,max){
                             }
                         }?>
                         <table><tr><td>
-                            <div id="aqui" class="raca"></div> 
-                            <!--<span class="trocaAvatar">Trocar Avatar</span>-->
+                            <div id="aqui" class="cadraca"></div> 
                             <div id="aqui.texto" align="justify" class="texto"></div>
                             </td></tr>
                         </table>

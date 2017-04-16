@@ -226,6 +226,19 @@ fieldset legend{
     text-shadow: 2px 2px black;
     #border: 1px solid red;
 }
+.cadraca{
+    position: absolute;
+    font-family: 'Architects Daughter', cursive;
+    #float: right;
+    top: 100px;
+    right: 90px;
+    color: white;
+    text-shadow: 2px 2px black;
+    #border: 1px solid red;
+}
+.cadraca img{
+    height: 250px;
+}
 .texto{
     margin: 0px 80px;
 }
