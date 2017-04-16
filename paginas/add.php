@@ -52,7 +52,6 @@
         }
       }else{
          $model->setavatar($avatar);
-         //print_r($model);die;
          $dao->grava($model); 
       }
 	echo '<div class=\'add\'>'.
