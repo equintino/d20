@@ -528,7 +528,7 @@ fieldset legend{
 .escudo{
     position: absolute;
     top: 200px;
-    left: 330px;
+    left: 300px;
     #margin: -160px 200px;
     #margin-top: 20px;
     #border: 1px solid green;
@@ -536,7 +536,7 @@ fieldset legend{
 .defesa{
     position: absolute;
     top: 215px;
-    left: 355px;
+    left: 325px;
     #margin: 90px 225px;
     font-size: 10px;
     #border: 1px solid red;
@@ -556,6 +556,7 @@ fieldset legend{
     font-family: 'Architects Daughter', cursive;
     font-size: 18px;
     width: 100%;
+    margin-top: 30px;
     #border: 1px solid cyan;
 }
 .equipamentos, .equipamentos th, .equipamentos td{
@@ -584,7 +585,7 @@ fieldset legend{
 .motivacaoTexto{ 
     text-align: justify;
     font-family: 'Satisfy', cursive;
-    font-size: 12px;
+    font-size: 15px;
     text-indent: 30px; 
     color: gray;
     #border: 1px solid red;
