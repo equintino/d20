@@ -190,7 +190,7 @@ function mudaImagem(raca,i,max){
                                         echo '<option value=guerreiro>GUERREIRO</option>';
                                         echo '<option value=barbaro>BÁRBARO</option>';
                                         echo '<option value=paladino>PALADINO</option>';
-                                        echo '<option value=arqueiro>ARQUEIRO</option>';
+                                        echo '<option value=ranger>RANGER</option>';
                                         echo '<option value=gatuno>GATUNO</option>';
                                         echo '<option value=mago>MAGO</option>';
                                         echo '<option value=sacerdote>SACERDOTE</option>';
@@ -256,8 +256,8 @@ function mudaImagem(raca,i,max){
                                     $search->settabela('tb_paladino');
                                     $habilidades=$dao->encontre($search);
                                     break;
-                                case 'arqueiro':
-                                    $search->settabela('tb_arqueiro');
+                                case 'ranger':
+                                    $search->settabela('tb_ranger');
                                     $habilidades=$dao->encontre($search);
                                     break;
                                 case 'gatuno':
@@ -425,7 +425,6 @@ function mudaImagem(raca,i,max){
                                         foreach($listaArmas as $item){
                                             $search->setARMA($item);
                                             $armasDistancia=$dao->encontrePorArma($search);
-                                            //print_r($armasDistancia->getARMA());
                                             $desc='Arma: '.$armasDistancia->getARMA()."\r\n".
                                                   'Custo: '.$armasDistancia->getCUSTO()."\r\n".
                                                   'Dano: '.$armasDistancia->getDANO()."\r\n".

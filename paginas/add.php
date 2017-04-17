@@ -305,24 +305,4 @@
              '</div>';
 	die;
   }
-  /*if($act == 'cad5'){
-    if(!$_POST){
-	echo '<div class=\'add\'>'.
-               '<h3>Nenhum item selecionado.</h3>'.
-               '<button onclick=history.go(-1); class=\'continua continua-verde\'>Voltar</button>'.
-             '</div>';
-        die;
-    }
-     $search->settabela('armamentos');
-     $search->setpersonagem($personagem);
-     $armamento=$dao->encontrePorPersonagem($search);
-     $armas=$custo=null;
-     $armamento=$dao->encontrePorPersonagem($search);
-          foreach($_POST as $key => $item){
-            $armas .= $key.'/';
-            $custo = $custo+$item;
-          }
-     print_r($custo);
-     die;
-  }*/
 ?>
