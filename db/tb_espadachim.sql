@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 18-Mar-2017 às 19:23
--- Versão do servidor: 10.1.19-MariaDB
--- PHP Version: 7.0.13
+-- Host: localhost
+-- Tempo de geração: 17/04/2017 às 21:13
+-- Versão do servidor: 10.1.21-MariaDB
+-- Versão do PHP: 7.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,17 +17,17 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `d20`
+-- Banco de dados: `d20`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_espadachim`
+-- Estrutura para tabela `tb_espadachim`
 --
 
 CREATE TABLE `tb_espadachim` (
-  `id` int(2) DEFAULT NULL,
+  `id` int(2) NOT NULL,
   `habilidade` varchar(24) DEFAULT NULL,
   `REQUISITOS` varchar(26) DEFAULT NULL,
   `TIPO` varchar(7) DEFAULT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE `tb_espadachim` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `tb_espadachim`
+-- Fazendo dump de dados para tabela `tb_espadachim`
 --
 
 INSERT INTO `tb_espadachim` (`id`, `habilidade`, `REQUISITOS`, `TIPO`, `MANA`, `DESCRICAO`, `OBS`, `excluido`) VALUES
@@ -64,14 +64,24 @@ INSERT INTO `tb_espadachim` (`id`, `habilidade`, `REQUISITOS`, `TIPO`, `MANA`, `
 (20, 'TIRO CERTEIRO', 'NENHUM', 'AÇÃO', '10', 'Você pode fazer um ataque normal à distância rolando 3d6.', '', 0),
 (21, 'TOUCHE', 'NENHUM', 'AÇÃO', '10', 'Você pode rolar 3d6 em um ataque corporal com uma arma leve (peso 3)', '', 0),
 (22, 'ATAQUE DA HYDRA', 'NENHUM', 'AÇÃO', '30', 'Faça um ataque normal com uma arma de uma mão. Se acertar o ataque role 1d6 e multiplique o dano pelo resultado.', 'HABILIDADE AVANÇADA', 0),
-(23, 'DANÇA DE ESPADAS 2', 'NÍVEL 5;DANÇA DE ESPADAS 1', 'AÇÃO', '40', 'Você começa uma dança que acompanha o fluxo da batalha. Esta dança dura até o final da batalha ou até você se desconcentrar (cair no chão, tontear, etc.). Durante este período você ganha temporariamente Agilidade +4.', '', 0),
-(24, 'CORAÇÃO DA BATALHA', 'NÍVEL 5 ', 'SUPORTE', '', 'Sempre que receber dano, você recupera 5 pontos de mana. Só pode ganhar 5 de mana por turno.', '', 0),
-(25, 'IMPLACÁVEL', 'NÍVEL 5', 'SUPORTE', '', 'Sempre que errar um ataque corporal, você causa dano igual à metade do dano do ataque (arredondando para baixo).', '', 0),
-(26, 'MOVIMENTOS EVASIVOS', 'NÍVEL 5', 'SUPORTE', '', 'Você ganha +1 na sua defesa para cada 2 pontos que tiver em Agilidade. Esta habilidade só funciona se você estiver sem armadura.', '', 0),
-(27, 'NOVE DEMÔNIOS', 'NÍVEL 5', 'AÇÃO', '25', 'Faça um ataque corporal normal com uma arma de uma mão. Se acertar, a vitima deve vencer um teste de Vontade (dificuldade 14) ou ficará paralisada por 2 turnos. A vitima estará vivendo em sua mente um pesadelo horrível e assustador.', 'Esta técnica secreta é proibida por muitos espadachins.', 0),
-(28, 'RETALHAMENTO', 'NÍVEL 5', 'REAÇÃO', '', 'Se você fizer um acerto crítico, role 1d6. Se cair 6 você decapitou a vítima matando-a na hora (exceto se ela for imune a crítico).', '', 0),
-(29, 'SENHOR DAS LAMINAS', 'NÍVEL 10', 'REAÇÃO', '30', 'Sempre que fizer uma ação de ataque com uma arma corporal de corte em um turno, você pode fazer um ataque extra com esta mesma arma.', '', 0),
-(30, 'VALOR DA VITÓRIA', 'NÍVEL 5', 'REAÇÃO', '', 'Cada vez que você derrota um oponente (isso inclui se ele se render ou fugir após a batalha) você recupera 10 pontos de vida e 10 pontos de mana.', '', 0);
+(23, 'DANÇA DE ESPADAS 2', 'Nível 5;DANÇA DE ESPADAS 1', 'AÇÃO', '40', 'Você começa uma dança que acompanha o fluxo da batalha. Esta dança dura até o final da batalha ou até você se desconcentrar (cair no chão, tontear, etc.). Durante este período você ganha temporariamente Agilidade +4.', '', 0),
+(24, 'CORAÇÃO DA BATALHA', 'Nível 5 ', 'SUPORTE', '', 'Sempre que receber dano, você recupera 5 pontos de mana. Só pode ganhar 5 de mana por turno.', '', 0),
+(25, 'IMPLACÁVEL', 'Nível 5', 'SUPORTE', '', 'Sempre que errar um ataque corporal, você causa dano igual à metade do dano do ataque (arredondando para baixo).', '', 0),
+(26, 'MOVIMENTOS EVASIVOS', 'Nível 5', 'SUPORTE', '', 'Você ganha +1 na sua defesa para cada 2 pontos que tiver em Agilidade. Esta habilidade só funciona se você estiver sem armadura.', '', 0),
+(27, 'NOVE DEMÔNIOS', 'Nível 5', 'AÇÃO', '25', 'Faça um ataque corporal normal com uma arma de uma mão. Se acertar, a vitima deve vencer um teste de Vontade (dificuldade 14) ou ficará paralisada por 2 turnos. A vitima estará vivendo em sua mente um pesadelo horrível e assustador.', 'Esta técnica secreta é proibida por muitos espadachins.', 0),
+(28, 'RETALHAMENTO', 'Nível 5', 'REAÇÃO', '', 'Se você fizer um acerto crítico, role 1d6. Se cair 6 você decapitou a vítima matando-a na hora (exceto se ela for imune a crítico).', '', 0),
+(29, 'SENHOR DAS LAMINAS', 'Nível 10', 'REAÇÃO', '30', 'Sempre que fizer uma ação de ataque com uma arma corporal de corte em um turno, você pode fazer um ataque extra com esta mesma arma.', '', 0),
+(30, 'VALOR DA VITÓRIA', 'Nível 5', 'REAÇÃO', '', 'Cada vez que você derrota um oponente (isso inclui se ele se render ou fugir após a batalha) você recupera 10 pontos de vida e 10 pontos de mana.', '', 0);
+
+--
+-- Índices de tabelas apagadas
+--
+
+--
+-- Índices de tabela `tb_espadachim`
+--
+ALTER TABLE `tb_espadachim`
+  ADD PRIMARY KEY (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

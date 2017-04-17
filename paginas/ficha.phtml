@@ -8,6 +8,10 @@
         var x = $def;
         document.getElementById('def').innerHTML = x;
     }
+    function nivel(nivel){
+        var nivel;
+        document.getElementById('nivel').innerHTML=nivel;
+    }
 </script>
 <?php 
     $variaveis=array('JOGADOR'=>'jogador','PERSONAGEM'=>'personagem','RAÇA'=>'raca','CLASSE'=>'classe','TENDÊNCIA1'=>'tendencia1','TENDÊNCIA2'=>'tendencia2','SEXO'=>'sexo');
@@ -24,12 +28,8 @@
             $search->settabela('personagem');
             $search->setpersonagem($personagem);
             $lista=$dao->encontre($search);
-            @$level=$_GET['level'];
-            if(!$level){
-                $level=1; 
-            }
             $titulos=array('PERSONAGEM','RAÇA','CLASSE','TENDÊNCIA1','TENDÊNCIA2');
-            echo '<fieldset class="cadficha"><legend>FICHA DE PERSONAGEM &nbsp&nbsp LEVEL '.$level.'</legend>';
+            echo '<fieldset class="cadficha"><legend>FICHA DE PERSONAGEM &nbsp&nbsp LEVEL <span id=nivel></span></legend>';
                 echo '<div class=tabelaFicha>';
                     echo '<table cellspacing=0 border=1>';
                         if(!$lista){
@@ -43,6 +43,11 @@
                             echo '<tr><td class=nomes>'.$titulos[4].'</td><td class=nomes2>'.$item->gettendencia2().'</td></tr>';
                             $habilidades=$item->gethabilidade();
                             $classe=$item->getclasse();
+                            $level=$item->getnivel();
+                            if(!$level){
+                                $level=1; 
+                            }
+                            echo '<script>nivel('.$level.')</script>';
                         }
                     echo '</table>';
                 echo '</div>';

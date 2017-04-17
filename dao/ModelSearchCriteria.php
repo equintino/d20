@@ -160,6 +160,14 @@
           $this->avatar = $avatar;
           return $this;
       }
+   private $nivel;
+       public function getnivel(){
+        return $this->nivel;
+      }
+      public function setnivel($nivel){
+          $this->nivel = $nivel;
+          return $this;
+      }
    private $id_atrib;
        public function getid_atrib(){
         return $this->id_atrib;

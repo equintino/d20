@@ -20,6 +20,7 @@
  private $motivacao;
  private $breveHistoria;
  private $avatar;
+ private $nivel;
  private $id_atrib;
  private $FORCA;
  private $AGILIDADE;
@@ -166,6 +167,12 @@
  }
  public function setavatar($avatar ){
 	$this->avatar=$avatar;
+ }
+ public function getnivel(){
+	return $this->nivel;
+ }
+ public function setnivel($nivel ){
+	$this->nivel=$nivel;
  }
  public function getid_atrib(){
 	return $this->id_atrib;
