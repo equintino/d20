@@ -251,21 +251,31 @@
             $armas .= $key.'/';
             $custo = $custo+$item;
           }
+     switch($act){
+         case 'cad4':
+             $cad='cad5';
+             break;
+         case 'cad5':
+             $cad='cad6';
+             break;
+         case 'cad6':
+             $cad='cad7';
+             break;
+         case 'cad7':
+             $cad='cad8';
+             break;
+     }
      if($armamento){
         $saldo=$armamento->getCUSTO()-$custo;
         if($act=='cad4'){
            $armamento->setARMA($armamento->getARMA().$armas);
-           $cad='cad5';
         }elseif($act=='cad5'){
            $armamento->setarmadura($armamento->getarmadura().$armas);
            $armamento->setdefesa($defesa+5+$maisAtrib);
-           $cad='cad6';
         }elseif($act=='cad6'){
            $armamento->setARMA($armamento->getARMA().$armas);
-           $cad='cad7';
         }elseif($act=='cad7'){
            $armamento->setequipamento($armamento->getequipamento().$armas);
-           $cad='cad8';
         }
         $armamento->setCUSTO($saldo);
         $armamento->settabela('armamentos');
@@ -277,14 +287,11 @@
         $saldo=400-$custo;
         if($act=='cad4'){
            $model->setARMA($armas);
-           $cad='cad5';
         }elseif($act=='cad5'){
            $model->setarmadura($armas);
            $model->setdefesa($defesa+5+$maisAtrib);
-           $cad='cad6';
         }elseif($act=='cad6'){
            $model->setARMA($armas);
-           $cad='cad7';
         }
         $model->setCUSTO($saldo);
         $model->settabela('armamentos');
