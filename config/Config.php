@@ -1,6 +1,7 @@
 <?php
 final class Config {
     private static $data = null;
+    private static $arquivo = '../config/config.ini';
     public static function getConfig($section = null) {
         if ($section === null) {
             return self::getData();
@@ -15,7 +16,11 @@ final class Config {
         if (self::$data !== null) {
             return self::$data;
         }
-        self::$data = parse_ini_file('../config/config.ini', true);
+        if(file_exists(self::$arquivo)){
+            self::$data = parse_ini_file('../config/config.ini', true);
+        }else{
+            self::$data = parse_ini_file('config/config.ini', true);
+        }
         return self::$data;
     }
 }

@@ -1,9 +1,39 @@
-body {
+.login{
   //background: #dddddd url("http://www.formget.com/app/new-app/css/../images/repeat-bg.png") fixed repeat;
   background-color: #46BEF0;
   font-family: "proxima_nova_rgregular", sans-serif;
   font-size: 16px;
-  line-height: 28px; }
+  line-height: 28px; 
+}
+.cadlogin{
+    background: black url('../imagens/excalibur.jpeg') 100% fixed no-repeat;
+    background-position: center;
+}
+.cadlogin table{
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px gray;
+    color: red;
+    text-shadow: 2px 2px 2px white;
+    font-size: 30px;
+}
+.quadro{
+    width: 400px;
+    margin: 100px auto;
+    #border: 1px solid yellow;
+}
+.quadro div{
+    float: right;
+}
+.quadro div input{
+    margin-top: 5px;
+    border: none;
+    background-color: green;
+    color: white;
+    font-size: 20px;
+    font-weight: 800;
+    font-family: sans-serif;
+    border-radius: 5px;
+}
 #auth_wraper,
 #stripe_wrapper{
     margin: 0 auto;
