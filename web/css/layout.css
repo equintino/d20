@@ -138,6 +138,13 @@ body{
   transition: opacity 1s;
   opacity: 1;*/
 }
+.trs {
+    -webkit-transition:all ease-out 0.5s;
+    -moz-transition:all ease-out 0.5s;
+    -o-transition:all ease-out 0.5s;
+    -ms-transition:all ease-out 0.5s;
+    transition:all ease-out 0.5s;
+}
 /* aplica somente a partir de 320px */
 /*@media screen and (min-width: 320px) {
    body { #font-size: 80%; }
