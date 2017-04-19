@@ -14,77 +14,100 @@
     <!-- Definindo o tamanho da tela --> 
     <meta name="viewport" content="width=device-width">  
     <link rel="stylesheet" href="css/layout.css" type="text/css" media='screen'/>   
-    <link rel="stylesheet" href="css/mobile.css" media="(max-width: 939px)">
+    <link rel="stylesheet" href="css/mobile.css" media="(max-width: 939px)" />
+    <link rel="stylesheet" href="js/slide.js" />
     <!--<link rel="stylesheet" href="css/mobile2.css" media="(max-width: 939px)"> -->
-        
-    <script>
-      function mes(){
-         var d= new Date();
-         var mes= prompt('Quaal o número do mês?',d.getMonth()+1);
-         if(!mes){
-           window.location.assingn('inidex.php');
-         }else{
-           window.location.assign('index.php?pagina=relMensal&mes='+mes+'&act=rel');
-         }
-      }
-    </script>
+    
+    
+        <script type="text/javascript">// <![CDATA[
+    var imageCount = 0;
+    var currentImage = 0;
+    var images = new Array();
+     
+    images[0] = 'imagens/1.jpg';
+    images[1] = 'imagens/2.jpg';
+    images[2] = 'imagens/3.jpg';
+    images[3] = 'imagens/4.jpg';
+    images[4] = 'imagens/5.jpg';
+     
+    var preLoadImages = new Array();
+    for (var i = 0; i < images.length; i++)
+    {
+       if (images[i] == "")
+          break;
+     
+       preLoadImages[i] = new Image();
+       preLoadImages[i].src = images[i];
+       imageCount++;
+    }
+     
+    function startSlideShow()
+    {
+       if (document.body && imageCount > 0)
+       {
+          document.body.style.backgroundImage = "url("+images[currentImage]+")";    
+          document.body.style.backgroundAttachment = "fixed";
+          document.body.style.backgroundRepeat = "repeat";
+          document.body.style.backgroundPosition = "left top";
+     
+          currentImage = currentImage + 1;
+          if (currentImage > (imageCount-1))
+          { 
+             currentImage = 0;
+          }
+          setTimeout('startSlideShow()', 3000);
+       }
+    }
+    // ]]></script>
 </head>
-<body id="page">
-  <div class="SITE_ROOT" id="SITE_ROOT" >
-    <div class="tail-top-right"></div>
-    <div id="main">        
+    <body onload="startSlideShow()">
+   <!--<div class="SITE_ROOT" id="SITE_ROOT" >-->
+      <!--<div class="tail-top-right"></div>-->
+      <!--<div id="main">-->       
         <!-- header -->
-      <div id="cabecalho">
-          <span class="titulo">D20 &nbsp - </span> &nbsp&nbsp <span class="cor_1" id="logo">Jogo de RPG</span>
-          <div class='tempo'>
-              <iframe scrolling="no" frameborder=0 width="220px" height="47px" src="tempo.html"></iframe>
-          </div>
-          <hr size="0.5" class="l1" />
-          <div id="menu" >
-             <!--<button>-->
-                   <?php 
+         <div id="cabecalho">
+            <span class="cor_1" id="logo">Jogo de RPG</span>
+            <div class='tempo'>
+               <iframe scrolling="no" frameborder=0 width="220px" height="47px" src="tempo.html"></iframe>
+            </div>
+            <!--<hr size="0.5" class="l1" />-->
+            <div id="menu" >
+                  <?php 
                      $mes_=  ModelValidador::nomeMes(date('m'));
                      $menu=array('home'=>'Home','cadastro'=>'Cadastro de Personagem','lista'=>'Personagens','ficha'=>'Ficha de Personagem','dado'=>'Rolagem de Dado'); 
                      echo '<ul>';
-                     foreach($menu as $key => $item){
-                       if($item == 'Cadastro de Personagem'){
-                          echo '<li><a href="'.Utils::createLink('cadastro',array('act'=>'cad','pag'=>0)).'" ><button class="bnt">'.$item.'</button></a></li>';
-                       }elseif($item == 'Personagens'){
-                          echo '<li><a href="'.Utils::createLink('cadastro',array('act'=>'lista','pag'=>0)).'" ><button class="bnt">'.$item.'</button></a></li>';
-                       }else{
-                          echo '<li><a href="'.Utils::createLink($key).'" ><button class="bnt">'.$item.'</button></a></li>';
-                       }
-                     }
+                        foreach($menu as $key => $item){
+                           if($item == 'Cadastro de Personagem'){
+                              echo '<li><a href="'.Utils::createLink('cadastro',array('act'=>'cad','pag'=>0)).'" ><span class="bnt">'.$item.'</span></a></li>';
+                           }elseif($item == 'Personagens'){
+                              echo '<li><a href="'.Utils::createLink('cadastro',array('act'=>'lista','pag'=>0)).'" ><span class="bnt">'.$item.'</span></a></li>';
+                           }else{
+                              echo '<li><a href="'.Utils::createLink($key).'" ><span class="bnt">'.$item.'</span></a></li>';
+                           }
+                        }
                      echo '</ul>';
-                   ?>
-             <!--</button>-->
-          </div>
-       </div>
-        <!-- content -->
-       <!--<div id="content">-->
-            <!--<div class="wrapper">-->
-                <div class="col-1">
-                </div>
-                <div class="col-2">
-                    <div class="indent">
-                        <?php if ($flashes): ?>
-                            <ul id="flashes">
-                            <?php foreach ($flashes as $flash): ?>
-                                <li><?php echo $flash; ?></li>
-                            <?php endforeach; ?>
-                            </ul>
-                        <?php endif; ?>
-                        <?php require $template; ?>
-                    </div>
-                </div>
-            <!--</div>-->
-        <!--</div>-->
-     </div>
-   </div>        
-          <div  id="rodape" >
-              <div class="rodape"> D20 - Jogos de RPG
-                      <span style="line-height:1em;"><br>©Copyright, All rights reserved</span>
-              </div> 
-          </div>
+                  ?>
+            </div>
+         </div>
+         <div class="col-1"></div>
+         <div class="col-2">
+            <div class="indent">
+               <?php if ($flashes): ?>
+                  <ul id="flashes">
+                     <?php foreach ($flashes as $flash): ?>
+                        <li><?php echo $flash; ?></li>
+                     <?php endforeach; ?>
+                  </ul>
+               <?php endif; ?>
+               <?php require $template; ?>
+            </div>
+         </div>
+      <!--</div>-->
+   <!--</div>-->      
+   <!--<div  id="rodape" >
+      <div class="rodape"> D20 - Jogos de RPG
+         <span style="line-height:1em;"><br>©Copyright, All rights reserved</span>
+      </div> 
+   </div>-->
 </body>
 </html>
