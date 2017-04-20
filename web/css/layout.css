@@ -1,3 +1,23 @@
+body{
+    margin: 0;
+    padding: 0;
+    #background-image: url('../imagens/Wiki-background.jpg');
+    background-repeat: no-repeat;
+    #background-position-x: 50%;
+    #background-position-y: 25%;
+    background-size: 100%;
+    background-color: black;
+    #backface-visibility: hidden;
+    #background-color: white;   
+    #-webkit-transition: all 5s; /* For Safari 3.1 to 6.0 */
+    #transition: all 5s;  
+  /*-webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  -ms-transition: opacity 1s;       
+  transition: opacity 1s;
+  opacity: 1;*/
+}
 #cabecalho{  
     width: 100%; 
     height: 85px;
@@ -24,6 +44,59 @@
 }
 #logo{
     text-shadow: 4px 4px 4px white;
+}
+.conteudo{
+    #margin-left: 5px;
+    font-family: sans-serif;
+    height: 680px;
+    font-size: 18px;
+    width: 970px;
+    #border: solid 1px red;
+    margin: auto;
+    #overflow: auto;
+}
+.bnt{
+    font-size: 16px;
+    cursor: pointer;
+    font-family: arial;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    color: #d7edff;
+}
+.bnt:hover{
+    background: #04191e;
+    transition-property: all;
+    transition-duration: 1s;
+    color: white;
+}
+.bnt:ative{
+    border: none;
+}
+.home{
+    margin: auto;
+    width: 970px;
+    font-family: sans-serif;
+    font-size: 18px;
+    text-align: justify;
+    background: rgba(0, 0, 0,0.5);
+    border-radius: 5px;
+    color: white;
+    padding: 5px;
+    #height: 700px;
+    #overflow: auto;
+}
+.home h1{
+    text-align: center;
+    color: red;
+}
+.home p { 
+    text-indent: 50px;
+    padding: 0px;
+    width: 90%;
+    margin: auto;
 }
 .titulo{
     float: left;
@@ -64,35 +137,8 @@
     color: white;
     text-shadow: 2px 2px black;    
 }
-.bnt{
-    font-size: 16px;
-    cursor: pointer;
-    font-family: arial;
-    font-weight: 700;
-    text-transform: uppercase;
-    #border: none;
-    padding: 10px;
-    border-radius: 5px;
-    color: #d7edff;
-}
-.bnt:hover{
-    background: #04191e;
-    transition-property: all;
-    transition-duration: 1s;
-    color: white;
-}
 a:link{
     text-decoration: none;
-}
-.conteudo{
-    #margin-left: 5px;
-    font-family: sans-serif;
-    height: 680px;
-    font-size: 18px;
-    width: 970px;
-    #border: solid 1px red;
-    margin: auto;
-    #overflow: auto;
 }
 ul li{
     display: inline;
@@ -117,26 +163,6 @@ ul li{
     position: absolute; 
     top: 164px; 
     height: 5px;
-}
-body{
-    margin: 0;
-    padding: 0;
-    #background-image: url('../imagens/Wiki-background.jpg');
-    background-repeat: no-repeat;
-    #background-position-x: 50%;
-    #background-position-y: 25%;
-    background-size: 100%;
-    color: black;
-    #backface-visibility: hidden;
-    #background-color: white;   
-    #-webkit-transition: all 5s; /* For Safari 3.1 to 6.0 */
-    #transition: all 5s;  
-  /*-webkit-transition: opacity 1s;
-  -moz-transition: opacity 1s;
-  -o-transition: opacity 1s;
-  -ms-transition: opacity 1s;       
-  transition: opacity 1s;
-  opacity: 1;*/
 }
 .trs {
     -webkit-transition:all ease-out 0.5s;
@@ -272,11 +298,12 @@ fieldset legend{
     #border: 1px solid red;
 }
 .cadraca{
-    position: absolute;
+    #position: relative;
     font-family: 'Architects Daughter', cursive;
-    #float: right;
-    top: 100px;
-    right: 90px;
+    clear: both;
+    float: right;
+    #top: -190px;
+    #right: 10px;
     color: white;
     text-shadow: 2px 2px black;
     #border: 1px solid red;
@@ -290,9 +317,10 @@ fieldset legend{
 .texto{
     font-family: 'Satisfy', cursive;
     font-size: 20px;
-    #position: absolute;
-    #top: 380px;
-    width: 600px;
+    position: absolute;
+    top: 390px;
+    margin-left: 180px;
+    width: 500px;
     height: 200px;
     overflow: auto;
     #border: 5px solid green;
@@ -479,29 +507,6 @@ fieldset legend{
     text-shadow: 2px 2px 2px red;
     margin: auto;
     font-size: 30px;
-}
-.home h1{
-    color: red;
-}
-.home{
-    margin: auto;
-    width: 800px;
-    text-align: justify;
-    background: rgba(0, 0, 0,0.5);
-    border-radius: 5px;
-    color: white;
-    padding: 5px;
-    height: 700px;
-    #overflow: auto;
-}
-.home h1{
-    text-align: center;
-}
-.home p { 
-    text-indent: 50px;
-    padding: 0px;
-    width: 90%;
-    margin: auto;
 }
 .nomes{
     background-color: gray;
@@ -1424,8 +1429,8 @@ fieldset legend{
 }
 .racaAvatar{
     position: relative;
-    top: -379px;
-    left: 300px;
+    top: -395px;
+    left: 310px;
     font-family: arial;
     font-weight: 700;
     border: none;
@@ -1435,19 +1440,19 @@ fieldset legend{
     color: red;
     text-shadow: 0 2px 0 black;
 }
+.racaAvatar-red:active{
+    position: relative;
+    top: -390px;
+    left: 310px;
+    box-shadow: none;
+    text-shadow: none;
+}
 .racaAvatar-red{
     #font-size: 16px;
     #padding: 4px;
     #background-color: #a8af98;
     #color: white;
     #box-shadow: 0 5px 0 #6a6d61;
-}
-.racaAvatar-red:active{
-    position: relative;
-    top: -374px;
-    left: 300px;
-    box-shadow: none;
-    text-shadow: none;
 }
 .fichaAvatar{
     position: absolute;

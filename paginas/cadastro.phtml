@@ -96,6 +96,15 @@ function mudaImagem(raca,i,max){
    document.getElementById("aqui").innerHTML=x;
    document.cookie = "avatar="+raca+i+"; path=/";
 }
+function trocaAvatar(x){
+    var x;
+    var estilo = document.querySelector('#trocaAvatar').style;
+    estilo.cursor = 'pointer';
+    estilo.color = 'red';
+    estilo.fontWeight = '700';
+    estilo.textShadow = '0 2px 0 black';
+    document.getElementById('trocaAvatar').innerHTML = x;
+}
 </script>
 <style>
 	#rodape{
@@ -180,7 +189,7 @@ function mudaImagem(raca,i,max){
                                     echo '<option value=anao>ANÃO</option>';
                                     echo '<option value=elfo>ELFO</option>';
                                     echo '<option value=halfling>HALFLING</option>';
-                                echo '</select></td></tr>';
+                                echo '</select><span id=trocaAvatar onclick=mudaImagem(racaAvatar,1,12)></span></td></tr>';
                             }elseif($item=='classe'){
                                 echo '<tr><td align=right> '.$keys.': </td>';
                                     echo '<td><select name=classe>';
@@ -218,6 +227,7 @@ function mudaImagem(raca,i,max){
                                 echo "<tr><td align=\"right\"> $keys: </td><td><input type=\"text\" name=\"".$item."\" size=\"40\" / required></td></tr>";
                             }
                         }?>
+                    </table>
                         <table><tr><td>
                             <div id="aqui" class="cadraca"></div> 
                             <div id="aqui.texto" align="justify" class="texto"></div>
@@ -225,8 +235,9 @@ function mudaImagem(raca,i,max){
                         </table>
                            <input type="reset" value="LIMPA" class='botao2 botao-verde2'>
                            <input type="submit" value="GRAVA" class='botao botao-verde'>
-                </form>               
-                <span class='racaAvatar racaAvatar-red' onclick=mudaImagem(racaAvatar,1,12)>Trocar Avatar</span>
+                </form> 
+                <!--<div class='racaAvatar racaAvatar-red' onclick=mudaImagem(racaAvatar,1,12)>Trocar Avatar</div>-->
+                <script>trocaAvatar('Trocar Avatar')</script>
             </fieldset>
         </div>
     <?php elseif($act=='cad2'): ?>
