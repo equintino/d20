@@ -126,7 +126,7 @@ body{
     #background-position-x: 50%;
     #background-position-y: 25%;
     background-size: 100%;
-    #color: white;
+    color: black;
     #backface-visibility: hidden;
     #background-color: white;   
     #-webkit-transition: all 5s; /* For Safari 3.1 to 6.0 */
@@ -358,28 +358,29 @@ fieldset legend{
     box-shadow: none;
 }
 .cad .botao{
-    position: absolute;
-    top: 380px;
-    right: 50px;
+    position: relative;
+    top: -140px;
+    left: 790px;
     font-family: arial;
     font-weight: 700;
     border: none;
     cursor: pointer;
     border-radius: 15px;
+    padding: 0 8px;
 }
 .cad .botao2{
-    position: absolute;
-    top: 380px;
-    right: 128px;
+    position: relative;
+    top: -140px;
+    left: 790px;
     font-family: arial;
     font-weight: 700;
     border: none;
     cursor: pointer;
     border-radius: 15px;
+    padding: 0 10px;
 }
 .cad .botao-verde{
     font-size: 16px;
-    padding: 2px;
     background-color: #006000;
     color: white;
     box-shadow: 0 5px 0 #003f00;
@@ -387,7 +388,6 @@ fieldset legend{
 }
 .cad .botao-verde2{
     font-size: 16px;
-    paddin: 2px;
     background-color: #006000;
     color: white;
     box-shadow: 0 5px 0 #003f00;
@@ -399,11 +399,20 @@ fieldset legend{
 }
 .cad .botao-verde:active{
     font-size: 16px;
-    paddin: 2px;
     background-color: #006000;
-    color: white;   
-    position: absolute;
-    top: 385px;
+    color: white;  
+    position: relative;
+    top: -135px;
+    left: 790px;
+    box-shadow: none;
+}
+.cad .botao-verde2:active{
+    font-size: 16px;
+    background-color: #006000;
+    color: white;  
+    position: relative;
+    top: -135px;
+    left: 790px;
     box-shadow: none;
 }
 .botao-verde2:active{
@@ -1414,9 +1423,9 @@ fieldset legend{
     left: 840px
 }
 .racaAvatar{
-    position: absolute;
-    top: 195px;
-    left: 430px;
+    position: relative;
+    top: -379px;
+    left: 300px;
     font-family: arial;
     font-weight: 700;
     border: none;
@@ -1434,8 +1443,9 @@ fieldset legend{
     #box-shadow: 0 5px 0 #6a6d61;
 }
 .racaAvatar-red:active{
-    position: absolute;
-    top: 200px;
+    position: relative;
+    top: -374px;
+    left: 300px;
     box-shadow: none;
     text-shadow: none;
 }
