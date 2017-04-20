@@ -238,7 +238,10 @@ ul li{
 }
 .cad fieldset{
     width: 900px;
-    height: 850px;
+    height: 550px;
+}
+.cad legend span{
+    font-size: 18px;
 }
 .cad table{
     margin: 0 80px;
@@ -247,7 +250,79 @@ ul li{
     width: 900px;
     margin: auto;
     height: 690px;
-    #overflow: auto;
+}
+.cad2Hab, .cad4Hab{
+    font-size: 16px;
+    padding: 0 4px;
+    position: relative;
+    font-family: arial;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    font-size: 16px;
+    color: white;
+}
+.cad2Hab{
+    top: 10px;
+    left: 700px;    
+}
+.cad4Hab{
+    top: 10px;
+    left: 600px;    
+}
+.cad2Hab-verde, .cad4Hab-verde{
+    background-color: #007c00;
+    box-shadow: 0 5px 0 #003f00;
+}
+.cad2Hab-verde:hover, .cad4Hab-verde:hover{
+    background-color: #006000;
+    #color: white;
+}
+.cad2Hab-verde:active, .cad4Hab-verde:active{
+    background-color: #006000;
+    color: white;   
+    position: relative;
+    top: 15px;
+    box-shadow: none;
+}
+.fichaTitulo, .cadTitulo{
+    font-family: 'Architects Daughter', cursive;
+    font-size: 25px;
+}
+.cad2 table, .cadHistoria{
+    #border: 1px solid red;
+    margin: auto;
+    background-color: rgba(255,235,205,0.4);
+    box-shadow: 2px 2px 2px gray;
+    padding: 3px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: courier;
+}
+.humanoAtrib{
+    width: 650px;
+    margin: 20%;
+}
+.maisum{
+    #border: 1px solid red;
+    #color: red;
+    width: 650px;
+    #margin: 100px auto;
+    font-size: 25px;
+    #text-shadow: 2px 2px 2px red;
+    background:rgba(255,255,255, 0.8);
+    box-shadow: 4px 4px 4px black;
+    border-radius: 10px;
+    padding: 2px 5px;
+    font-family: courier;
+}
+.maisumbnt{
+    /*position: relative;
+    left: 330px;
+    top: -30px;*/
+    float: right;
+    #border: 1px solid red;
 }
 .cad3 fieldset, .cad4 fieldset, .cad5 fieldset{
     width: 900px;
@@ -327,6 +402,65 @@ fieldset legend{
     #background-color: silver;
     text-justify: auto;
 }
+.cadbnt{
+    border: 1px solid red;
+}
+.cad .bnt_{
+    float: right;
+}
+.cad .botao{
+    font-family: arial;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    padding: 0 8px;
+}
+.cad .botao2{
+    font-family: arial;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    padding: 0 10px;
+}
+.cad .botao-verde{
+    font-size: 16px;
+    background-color: #006000;
+    color: white;
+    box-shadow: 0 5px 0 #003f00;
+    border-radius: 15px;
+}
+.cad .botao-verde2{
+    font-size: 16px;
+    background-color: #006000;
+    color: white;
+    box-shadow: 0 5px 0 #003f00;
+    border-radius: 15px;
+}
+.cad .botao-verde:hover, .cad .botao-verde2:hover{
+    background-color: #003f00;
+    color: white;
+}
+.cad .botao-verde:active{
+    position: relative;
+    top: 5px;
+    box-shadow: none;
+}
+.cad .botao-verde2:active{
+    position: relative;
+    top: 5px;
+    box-shadow: none;
+}
+.add{
+    width: 500px;
+    margin: 100px auto;
+    text-align: right;
+    color: white;
+    text-shadow: 2px 2px 2px red;
+    #background-color: rgba(0,0,255,0.5);
+}
+/*
 .botao{
     position: absolute;
     top: 500px;
@@ -357,7 +491,7 @@ fieldset legend{
 }
 .botao-verde2{
     font-size: 16px;
-    paddin: 2px;
+    padding: 2px;
     background-color: #006000;
     color: white;
     box-shadow: 0 5px 0 #003f00;
@@ -369,7 +503,7 @@ fieldset legend{
 }
 .botao-verde:active{
     font-size: 16px;
-    paddin: 2px;
+    padding: 2px;
     background-color: #006000;
     color: white;   
     position: absolute;
@@ -378,80 +512,13 @@ fieldset legend{
 }
 .botao-verde2:active{
     font-size: 16px;
-    paddin: 2px;
+    padding: 2px;
     background-color: #006000;
     color: white;   
     position: absolute;
     top: 505px;
     box-shadow: none;
-}
-.cad .botao{
-    position: relative;
-    top: -140px;
-    left: 790px;
-    font-family: arial;
-    font-weight: 700;
-    border: none;
-    cursor: pointer;
-    border-radius: 15px;
-    padding: 0 8px;
-}
-.cad .botao2{
-    position: relative;
-    top: -140px;
-    left: 790px;
-    font-family: arial;
-    font-weight: 700;
-    border: none;
-    cursor: pointer;
-    border-radius: 15px;
-    padding: 0 10px;
-}
-.cad .botao-verde{
-    font-size: 16px;
-    background-color: #006000;
-    color: white;
-    box-shadow: 0 5px 0 #003f00;
-    border-radius: 15px;
-}
-.cad .botao-verde2{
-    font-size: 16px;
-    background-color: #006000;
-    color: white;
-    box-shadow: 0 5px 0 #003f00;
-    border-radius: 15px;
-}
-.cad .botao-verde:hover{
-    background-color: #006000;
-    color: white;
-}
-.cad .botao-verde:active{
-    font-size: 16px;
-    background-color: #006000;
-    color: white;  
-    position: relative;
-    top: -135px;
-    left: 790px;
-    box-shadow: none;
-}
-.cad .botao-verde2:active{
-    font-size: 16px;
-    background-color: #006000;
-    color: white;  
-    position: relative;
-    top: -135px;
-    left: 790px;
-    box-shadow: none;
-}
-.botao-verde2:active{
-    font-size: 16px;
-    paddin: 2px;
-    background-color: #006000;
-    color: white;   
-    position: absolute;
-    top: 385px;
-    box-shadow: none;
-}
+}*/
 .rolar{
     border: none;
     border-radius: 40px;
@@ -519,10 +586,6 @@ fieldset legend{
     text-align: center;
     font-family: courier;
     #color: silver;
-}
-.fichaTitulo, .cadTitulo{
-    font-family: 'Architects Daughter', cursive;
-    font-size: 25px;
 }
 .fichaTitulo{
     text-align: center;
@@ -658,16 +721,6 @@ fieldset legend{
     #font-family: Georgia;
     font-family: 'Kaushan Script', cursive;
 }
-.cad legend span{
-    font-size: 18px;
-}
-.bloco, .cadHistoria{
-    #border: 1px solid red;
-    margin: auto;
-    background-color: rgba(255,235,205,0.5);
-    box-shadow: 2px 2px 2px gray;
-    padding: 3px;
-}
 .continua{
     position: relative;
     font-family: arial;
@@ -695,14 +748,6 @@ fieldset legend{
     top: 5px;
     box-shadow: none;
 }
-.add{
-    width: 500px;
-    margin: 100px auto;
-    text-align: right;
-    color: white;
-    text-shadow: 2px 2px 2px black;
-    #background-color: rgba(0,0,255,0.5);
-}
 .addFim{
     width: 500px;
     margin: 100px auto;
@@ -711,50 +756,11 @@ fieldset legend{
     text-shadow: 2px 2px 2px black;
     #background-color: rgba(0,0,255,0.5);
 }
-.habLista{
-    font-size: 13px;
-    font-family: courier;
-}
 .cadHistoria{
     font-size: 15px;
     font-family: courier;
     width: 700px;
     font-style: italic;
-}
-.cad2Hab, .cad4Hab{
-    font-size: 16px;
-    padding: 0 4px;
-    position: relative;
-    font-family: arial;
-    font-weight: 700;
-    border: none;
-    cursor: pointer;
-    border-radius: 15px;
-    font-size: 16px;
-    color: white;
-}
-.cad2Hab{
-    top: 10px;
-    left: 700px;    
-}
-.cad4Hab{
-    top: 10px;
-    left: 600px;    
-}
-.cad2Hab-verde, .cad4Hab-verde{
-    background-color: #007c00;
-    box-shadow: 0 5px 0 #003f00;
-}
-.cad2Hab-verde:hover, .cad4Hab-verde:hover{
-    background-color: #006000;
-    #color: white;
-}
-.cad2Hab-verde:active, .cad4Hab-verde:active{
-    background-color: #006000;
-    color: white;   
-    position: relative;
-    top: 15px;
-    box-shadow: none;
 }
 .moeda{
 	position: relative;
@@ -841,21 +847,6 @@ fieldset legend{
 }
 .armabnt{
     margin-top: 50px;
-}
-.maisum{
-    #border: 1px solid red;
-    #color: red;
-    width: 550px;
-    margin: 100px auto;
-    font-size: 25px;
-    #text-shadow: 2px 2px 2px red;
-    background:rgba(255,255,255, 0.8);
-    box-shadow: 4px 4px 4px black;
-}
-.maisumbnt{
-    position: absolute;
-    left: 700px;
-    top: 170px;
 }
 .armascorporais{
     #border: 1px solid red;

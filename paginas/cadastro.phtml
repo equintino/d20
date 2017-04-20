@@ -228,13 +228,15 @@ function trocaAvatar(x){
                             }
                         }?>
                     </table>
-                        <table><tr><td>
-                            <div id="aqui" class="cadraca"></div> 
-                            <div id="aqui.texto" align="justify" class="texto"></div>
-                            </td></tr>
-                        </table>
-                           <input type="reset" value="LIMPA" class='botao2 botao-verde2'>
-                           <input type="submit" value="GRAVA" class='botao botao-verde'>
+                    <div class='bnt_'>
+                        <input type="reset" value="LIMPA" class='botao2 botao-verde2'>
+                        <input type="submit" value="GRAVA" class='botao botao-verde'>
+                    </div>
+                    <table><tr><td>
+                        <div id="aqui" class="cadraca"></div> 
+                        <div id="aqui.texto" align="justify" class="texto"></div>
+                        </td></tr>
+                    </table>
                 </form> 
                 <!--<div class='racaAvatar racaAvatar-red' onclick=mudaImagem(racaAvatar,1,12)>Trocar Avatar</div>-->
                 <script>trocaAvatar('Trocar Avatar')</script>
@@ -245,48 +247,50 @@ function trocaAvatar(x){
             <fieldset>
                 <legend>CADASTRO DE PERSONAGEM <span>(Continuação)</span></legend>
                 <form class="font_1" id="cadastro2" action="../paginas/add.php?act=cad2&personagem=<?php echo $personagem ?>&raca=<?= $raca ?>" method="POST">
-                    <table class="cadCont">
-                        <?php 
-                            $dao=new Dao();
-                            $search=new ModelSearchCriteria();
-                            switch ($classe){
-                                case 'espadachim':
-                                    $search->settabela('tb_espadachim');
-                                    $habilidades=$dao->encontre($search);
-                                    break;
-                                case 'guerreiro':
-                                    $search->settabela('tb_guerreiro');
-                                    $habilidades=$dao->encontre($search);
-                                    break;
-                                case 'barbaro':
-                                    $search->settabela('tb_barbaro');
-                                    $habilidades=$dao->encontre($search);
-                                    break;
-                                case 'paladino':
-                                    $search->settabela('tb_paladino');
-                                    $habilidades=$dao->encontre($search);
-                                    break;
-                                case 'ranger':
-                                    $search->settabela('tb_ranger');
-                                    $habilidades=$dao->encontre($search);
-                                    break;
-                                case 'gatuno':
-                                    $search->settabela('tb_gatuno');
-                                    $habilidades=$dao->encontre($search);
-                                    break;
-                                case 'mago':
-                                    $search->settabela('tb_mago');
-                                    $habilidades=$dao->encontre($search);
-                                    break;
-                                case 'sacerdote':
-                                    $search->settabela('tb_sacerdote');
-                                    $habilidades=$dao->encontre($search);
-                                    break;
-                            }
+                    <?php 
+                        $dao=new Dao();
+                        $search=new ModelSearchCriteria();
+                        switch ($classe){
+                            case 'espadachim':
+                                $search->settabela('tb_espadachim');
+                                $habilidades=$dao->encontre($search);
+                                break;
+                            case 'guerreiro':
+                                $search->settabela('tb_guerreiro');
+                                $habilidades=$dao->encontre($search);
+                                break;
+                            case 'barbaro':
+                                $search->settabela('tb_barbaro');
+                                $habilidades=$dao->encontre($search);
+                                break;
+                            case 'paladino':
+                                $search->settabela('tb_paladino');
+                                $habilidades=$dao->encontre($search);
+                                break;
+                            case 'ranger':
+                                $search->settabela('tb_ranger');
+                                $habilidades=$dao->encontre($search);
+                                break;
+                            case 'gatuno':
+                                $search->settabela('tb_gatuno');
+                                $habilidades=$dao->encontre($search);
+                                break;
+                            case 'mago':
+                                $search->settabela('tb_mago');
+                                $habilidades=$dao->encontre($search);
+                                break;
+                            case 'sacerdote':
+                                $search->settabela('tb_sacerdote');
+                                $habilidades=$dao->encontre($search);
+                                break;
+                        }
+                    ?>
+                    <!--<table>-->
+                        <?php
                             if(@$habilidades){
                                 echo '<div align=left class=cadTitulo>&nbsp&nbspClasse: '.strtoupper($classe).'</div>';
                                 echo '<div align=right class=cadTitulo>Escolha três habilidades para '.strtoupper($personagem).'&nbsp&nbsp</div>';
-                                echo '<table class=bloco>';
+                                echo '<table>';
                                     echo '<tr>';
                                         foreach($habilidades as $key => $item){
                                             $requisitos=explode (';',$item->getREQUISITOS());
@@ -306,7 +310,7 @@ function trocaAvatar(x){
                                                     echo 'MANA: '.($item->getMANA())."\r\n"; 
                                                     echo 'REQUISITOS: '.($item->getREQUISITOS())."\r\n";
                                                     echo 'DESCRIÇÃO: '.($item->getDESCRICAO());
-                                                echo '\' class=habLista><font color='.$cor.'>'.$item->gethabilidade().'</font>';
+                                                echo '\' ><font color='.$cor.'>'.$item->gethabilidade().'</font>';
                                                 echo '</td>';
                                             }
                                                 switch ($item->getid()){
@@ -346,7 +350,7 @@ function trocaAvatar(x){
                             echo '</div>';
                         ?>
                         <input type="submit" value="AVANÇA" class='cad2Hab cad2Hab-verde'>
-                    </table>
+                    <!--</table>-->
                 </form>
             </fieldset>
         </div>

@@ -100,6 +100,7 @@
         if($model->getraca()=='humano'){
          if(!@$_GET['maisum']){
           echo '<form action="../paginas/add.php?act=cad2&maisum=1&personagem='.$model->getpersonagem().'" method=post>';
+          echo '<div class=humanoAtrib>';
           echo '<div class=maisum>';
            echo 'Selecione + 1 a uma das 4 opções abaixo:<br>';
            echo '<lable>Força</lable><input type=radio name=maisum value=F>';
@@ -107,8 +108,9 @@
            echo '<lable>Inteligência</lable><input type=radio name=maisum value=I>';
            echo '<lable>Vontade</lable><input type=radio name=maisum value=V>';
            echo '</div>';
-           echo '<div class=maisumbnt>';
+           echo '<span class=maisumbnt>';
            echo '<button class=\'continua continua-verde\' >Continua...</button>';
+           echo '</span>';
            echo '</div>';
            echo '</form>';
            die;
