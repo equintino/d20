@@ -121,7 +121,7 @@ ul li{
 body{
     margin: 0;
     padding: 0;
-    background-image: url('../imagens/Wiki-background.jpg');
+    #background-image: url('../imagens/Wiki-background.jpg');
     background-repeat: no-repeat;
     #background-position-x: 50%;
     #background-position-y: 25%;
