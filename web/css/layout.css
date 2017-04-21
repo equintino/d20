@@ -251,7 +251,7 @@ ul li{
     margin: auto;
     height: 690px;
 }
-.cad2Hab, .cad4Hab{
+.cad2 .botao, .cad4 .botao, .cad5 .botao, .cad6 .botao{
     font-size: 16px;
     padding: 0 4px;
     position: relative;
@@ -263,28 +263,137 @@ ul li{
     font-size: 16px;
     color: white;
 }
-.cad2Hab{
+.cad2 .botao{
     top: 10px;
     left: 700px;    
 }
-.cad4Hab{
-    top: 10px;
-    left: 600px;    
-}
-.cad2Hab-verde, .cad4Hab-verde{
+.cad2 .botao-verde, .cad4 .botao-verde, .cad5 .botao-verde, .cad6 .botao-verde{
     background-color: #007c00;
     box-shadow: 0 5px 0 #003f00;
 }
-.cad2Hab-verde:hover, .cad4Hab-verde:hover{
+.cad2 .botao-verde:hover, .cad4 .botao-verde:hover, .cad5 .botao-verde:hover, .cad6 .botao-verde:hover{
     background-color: #006000;
     #color: white;
 }
-.cad2Hab-verde:active, .cad4Hab-verde:active{
+.cad2 .botao-verde:active{
     background-color: #006000;
     color: white;   
     position: relative;
     top: 15px;
     box-shadow: none;
+}
+.cad4 .botao{
+    positions: relative;
+    top: -330px;
+    float: right;
+    margin-right: 5px;
+    #left: 600px;    
+}
+.cad4 .botao:active{   
+    position: relative;
+    top: -325px;
+    box-shadow: none;    
+}
+.cad5 .botao{
+    float: right;
+    top: -160px;
+    margin-right: 5px;
+}
+.cad6 .botao{
+    float: right;
+    top: -60px;
+    margin-right: 5px;
+}
+.cad5 .botao:active{   
+    position: relative;
+    top: -155px;
+    box-shadow: none;    
+}
+.cad6 .botao:active{   
+    position: relative;
+    top: -55px;
+    box-shadow: none;    
+}
+.cad3 .botao{
+    font-size: 16px;
+    padding: 0 4px;
+    font-family: arial;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    font-size: 16px;
+    color: white;
+    position: relative;
+    top: -450px;
+    #left: 560px;
+    float: right;
+}
+.cad3 .botao2{
+    font-size: 16px;
+    padding: 0 4px;
+    font-family: arial;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    font-size: 16px;
+    color: white;
+    position: relative;
+    top: -450px;
+    #left: 560px;
+    float: right;
+    margin-right: 5px;
+}
+.cad3 .botao-verde{
+    background-color: #007c00;
+    background-color: green;
+    box-shadow: 0 5px 0 #003f00;
+}
+.cad3 .botao-verde:hover{
+    background-color: #006000;
+    #color: white;
+}
+.cad3 .botao-verde:active{
+    background-color: #006000;
+    color: white;   
+    position: relative;
+    top: -445px;
+    box-shadow: none;
+}
+.cad3 .botao-verde2{
+    background-color: #007c00;
+    background-color: green;
+    box-shadow: 0 5px 0 #003f00;
+}
+.cad3 .botao-verde2:hover{
+    background-color: #006000;
+    #color: white;
+}
+.cad3 .botao-verde2:active{
+    background-color: #006000;
+    color: white;   
+    position: relative;
+    top: -445px;
+    box-shadow: none;
+}
+.cad3Atrib{
+    #border: 1px solid red;
+    margin: 0 25px;
+    font-family: 'Indie Flower', cursive;
+    #width: 500px;
+}
+.cad3 fieldset{
+    width: 900px;
+    height: 830px;
+}
+.cad4 fieldset, .cad5 fieldset{
+    width: 900px;
+    height: 1100px;
+}
+.cad6 fieldset{
+    width: 900px;
+    height: 750px;
 }
 .fichaTitulo, .cadTitulo{
     font-family: 'Architects Daughter', cursive;
@@ -322,13 +431,6 @@ ul li{
     left: 330px;
     top: -30px;*/
     float: right;
-    #border: 1px solid red;
-}
-.cad3 fieldset, .cad4 fieldset, .cad5 fieldset{
-    width: 900px;
-    height: 800px;
-    #padding: 5px 40px;
-    #margin-top: 80px;
     #border: 1px solid red;
 }
 .cadficha{
@@ -788,41 +890,6 @@ fieldset legend{
 .armamento1{
     margin-top: 80px; 
 }
-.cad3Hab{
-    font-size: 16px;
-    padding: 0 4px;
-    position: relative;
-    font-family: arial;
-    font-weight: 700;
-    border: none;
-    cursor: pointer;
-    border-radius: 15px;
-    font-size: 16px;
-    color: white;
-    top: 10px;
-    left: 560px;
-}
-.cad3Hab-verde{
-    background-color: #007c00;
-    box-shadow: 0 5px 0 #003f00;
-}
-.cad3Hab-verde:hover{
-    background-color: #006000;
-    #color: white;
-}
-.cad3Hab-verde:active{
-    background-color: #006000;
-    color: white;   
-    position: relative;
-    top: 15px;
-    box-shadow: none;
-}
-.cad3Atrib{
-    #border: 1px solid red;
-    margin: 0 25px;
-    font-family: 'Indie Flower', cursive;
-    #width: 500px;
-}
 .armas{
     #border: 1px solid red;
     position: relative;
@@ -880,108 +947,108 @@ fieldset legend{
 }
 .Adaga{
     position: relative;
-    top: -455px;
+    top: -470px;
     left: 10px;
 }
 .EspadaCurta{
     position: relative;
-    top: -412px;
+    top: -432px;
     left: 10px;
 }
 .Rapiera{
     position: relative;
-    top: -385px;
+    top: -410px;
     left: 60px;
 }
 .Sabre{
     position: relative;
-    top: -350px;
+    top: -375px;
     left: 60px;
 }
 .EspadaLonga{
     position: relative;
-    top: -320px;
+    top: -345px;
     left: 75px;
 }
 .Cimitarra{
     position: relative;
-    top: -275px;
+    top: -305px;
     left: 55px;
 }
 .Claymore{
     position: relative;
-    top: -235px;
+    top: -265px;
     left: 55px;
 }
 .Bordão{
     position: relative;
-    top: -745px;
+    top: -785px;
     left: 555px;
 }
 .Soqueira{
-    position: absolute;
-    top: 313px;
-    left: 600px;
+    position: relative;
+    top: -755px;
+    left: 450px;
 }
 .Bico-de-Corvo{
-    position: absolute;
-    top: 373px;
-    left: 555px;
+    position: relative;
+    top: -720px;
+    left: 410px;
 }
 .MaçaEstrela{
-    position: absolute;
-    top: 420px;
-    left: 560px;
+    position: relative;
+    top: -695px;
+    left: 410px;
 }
 .MaçaLeve{
-    position: absolute;
-    top: 465px;
-    left: 560px;
+    position: relative;
+    top: -670px;
+    left: 410px;
 }
 .MaçaPesada{
-    position: absolute;
-    top: 510px;
-    left: 560px;
+    position: relative;
+    top: -650px;
+    left: 410px;
 }
 .Clava{
-    position: absolute;
-    top: 568px;
-    left: 590px;
+    position: relative;
+    top: -608px;
+    left: 440px;
 }
 .Mangual{
-    position: absolute;
-    top: 638px;
-    left: 620px;
+    position: relative;
+    top: -558px;
+    left: 410px;
 }
 .MartelodeGuerra{
-    position: absolute;
-    top: 690px;
-    left: 650px;
+    position: relative;
+    top: -530px;
+    left: 500px;
 }
 .Marreta{
-    position: absolute;
-    top: 760px;
-    left: 610px;
+    position: relative;
+    top: -480px;
+    left: 465px;
 }
 .Azagaia{
-    position: absolute;
-    top: 430px;
-    left: 705px;
+    position: relative;
+    top: -870px;
+    left: 555px;
 }
 .Lança{
-    position: absolute;
-    top: 530px;
-    left: 750px;
+    position: relative;
+    top: -790px;
+    left: 605px;
 }
 .Tridente{
-    position: absolute;
-    top: 550px;
-    left: 808px;
+    position: relative;
+    top: -730px;
+    left: 658px;
 }
 .MarteloLucerno{
-    position: absolute;
-    top: 550px;
-    left: 860px;
+    position: relative;
+    top: -750px;
+    left: 705px;
     #border: 1px solid gray;
 }
 /* FIM CAD3 */
@@ -1006,126 +1073,126 @@ fieldset legend{
 }
 /* cad4 */
 .BestaPesada{
-    position: absolute;
-    top: 310px;
-    left: 320px;
+    position: relative;
+    top: -800px;
+    left: 190px;
 }
 .BestaLeve{
-    position: absolute;
-    top: 460px;
-    left: 280px;
+    position: relative;
+    top: -670px;
+    left: 180px;
 }
 .Prodd{
-    position: absolute;
-    top: 305px;
-    left: 602px;
+    position: relative;
+    top: -810px;
+    left: 400px;
 }
 .ViroteComum{
-    position: absolute;
-    top: 410px;
-    left: 512px;
+    position: relative;
+    top: -760px;
+    left: 402px;
 }
 .ViroteGarateia{
-    position: absolute;
-    top: 470px;
-    left: 512px;
+    position: relative;
+    top: -725px;
+    left: 412px;
 }
 .Zarabatana{
-    position: absolute;
-    top: 580px;
-    left: 512px;
+    position: relative;
+    top: -635px;
+    left: 412px;
 }
 .Balas{
-    position: absolute;
-    top: 640px;
-    left: 627px;
+    position: relative;
+    top: -600px;
+    left: 517px;
 }
 .Funda{
-    position: absolute;
-    top: 750px;
-    left: 660px;
+    position: relative;
+    top: -500px;
+    left: 560px;
 }
 .Fustíbalo{
-    position: absolute;
-    top: 745px;
-    left: 755px;
+    position: relative;
+    top: -745px;
+    left: 655px;
 }
 .ArcoRecurvo{
-    position: absolute;
-    top: 875px;
-    left: 225px;
+    position: relative;
+    top: -435px;
+    left: 120px;
 }
 .ArcoComposto{
-    position: absolute;
-    top: 900px;
-    left: 335px;
+    position: relative;
+    top: -430px;
+    left: 235px;
 }
 .ArcoSimples{
-    position: absolute;
-    top: 923px;
-    left: 440px;
+    position: relative;
+    top: -423px;
+    left: 340px;
 }
 .ArcodeGuerra{
-    position: absolute;
-    top: 1055px;
-    left: 540px;
+    position: relative;
+    top: -315px;
+    left: 440px;
 }
 .Plumbata{
-    position: absolute;
-    top: 1055px;
-    left: 720px;
+    position: relative;
+    top: -335px;
+    left: 620px;
 }
 .FlechaComum{
-    position: absolute;
-    top: 978px;
-    left: 320px;
-}
-.FlechaGarateia{
-    position: absolute;
-    top: 1080px;
-    left: 330px;
-}
-.ArmaduraSimples{
-    position: absolute;
-    top: 660px;
+    position: relative;
+    top: -400px;
     left: 280px;
 }
-.ArmaduradeBatalha{
-    position: absolute;
-    top: 660px;
-    left: 530px;
-}
-.ArmaduraCompleta{
-    position: absolute;
-    top: 660px;
-    left: 700px;
+.FlechaGarateia{
+    position: relative;
+    top: -360px;
+    left: 330px;
 }
 /* fim cad4 */
 /* Cad5 */
+.ArmaduraSimples{
+    position: relative;
+    top: -510px;
+    left: 180px;
+}
+.ArmaduradeBatalha{
+    position: relative;
+    top: -530px;
+    left: 430px;
+}
+.ArmaduraCompleta{
+    position: relative;
+    top: -550px;
+    left: 600px;
+}
 .TúnicaPesada{
-    position: absolute;
-    top: 1090px;
-    left: 300px;
+    position: relative;
+    top: -130px;
+    left: 200px;
 }
 .EscudodeCorpo{
-    position: absolute;
-    top: 1080px;
-    left: 435px;
+    position: relative;
+    top: -200px;
+    left: 335px;
 }
 .EscudoMédio{
-    position: absolute;
-    top: 950px;
-    left: 550px;
+    position: relative;
+    top: -345px;
+    left: 450px;
 }
 .EscudoPequeno{
-    position: absolute;
-    top: 1105px;
-    left: 620px;
+    position: relative;
+    top: -220px;
+    left: 520px;
 }
 .ArmaduradeCouro{
-    position: absolute;
-    top: 1100px;
-    left: 780px;
+    position: relative;
+    top: -220px;
+    left: 680px;
 }
 /* fim CAD5 */
 .conj{
@@ -1140,9 +1207,9 @@ fieldset legend{
 }
 /* CAD6 */
 .Grimório{
-    position: absolute;
-    top: 500px;
-    left: 100px;
+    position: relative;
+    top: 220px;
+    right: 760px;
 }
 .Cajado{
     position: absolute;

@@ -47,7 +47,6 @@
           echo '</div>';
           die;
         }else{
-            die;
             $dao->grava($model);
         }
       }else{
