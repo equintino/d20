@@ -296,10 +296,14 @@ function trocaAvatar(x){
                                             $requisitos=explode (';',$item->getREQUISITOS());
                                             //echo $item->getREQUISITOS().'->';
                                             //print_r(substr($item->getREQUISITOS(),-1));
-                                            if(in_array('Nível 5',$requisitos) || in_array('Nível 10',$requisitos)|| is_numeric(substr($item->getREQUISITOS(),-1)) ){
+                                            if(in_array('Nível 5',$requisitos) || in_array('Nível 10',$requisitos)){//|| is_numeric(substr($item->getREQUISITOS(),-1)) ){
                                                 $cor='red';
                                             }else{
-                                                $cor=null;                                           
+                                                if(is_numeric(substr($item->getREQUISITOS(),-1))){
+                                                   $cor='red';
+                                                }else{
+                                                   $cor=null; 
+                                                }
                                                 echo '<td><input type=checkbox name=\''.$item->gethabilidade().'\'title=\'';
                                                     echo 'TIPO: '.($item->getTIPO())."\r\n";
                                                     echo 'MANA: '.($item->getMANA())."\r\n"; 
