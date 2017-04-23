@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 15-Abr-2017 às 17:46
+-- Generation Time: 22-Abr-2017 às 15:39
 -- Versão do servidor: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -43,6 +43,17 @@ CREATE TABLE `atributos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Extraindo dados da tabela `atributos`
+--
+
+INSERT INTO `atributos` (`id_atrib`, `FORCA`, `AGILIDADE`, `INTELIGENCIA`, `VONTADE`, `PV`, `PM`, `PE`, `excluido`, `personagem`, `CLASSE_COMUM`, `HABILIDADE_AUTOMATICA`, `DESCRICAO`) VALUES
+(1, 2, 5, 4, 3, 60, 60, 0, '0', 'Clivina', 'RANGER,ESPADACHIM,LADRAO,FEITICEIRO', 'Sentidos Apurados', 'ROLA 3D6 PARA TESTE DE INTELIGENCIA QUE ENVOLVE PERCEPCAO E OS CINCO SENTIDOS'),
+(2, 3, 5, 3, 3, 60, 60, 0, '0', 'Jack', 'RANGER,ESPADACHIM,LADRAO,FEITICEIRO', 'Sentidos Apurados', 'ROLA 3D6 PARA TESTE DE INTELIGENCIA QUE ENVOLVE PERCEPCAO E OS CINCO SENTIDOS'),
+(3, 3, 3, 5, 4, 60, 60, 0, '0', 'Arathor', 'TODAS', '', '+ UM EM QUALQUER ATRIBUTO'),
+(4, 5, 4, 3, 3, 60, 60, 0, '0', 'Galican', 'TODAS', '', '+ UM EM QUALQUER ATRIBUTO'),
+(5, 2, 5, 4, 3, 60, 60, 0, '0', 'Osvaldo', 'LADRAO', 'Tamanho Pequeno', 'ROLA 3D6 PARA TESTE DE AGILIDADE PARA SE ESCONDER E MOVER EM SILENCIO,GANHA MAIS UM EM DEFESA');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -61,7 +72,7 @@ ALTER TABLE `atributos`
 -- AUTO_INCREMENT for table `atributos`
 --
 ALTER TABLE `atributos`
-  MODIFY `id_atrib` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_atrib` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
