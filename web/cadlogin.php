@@ -16,7 +16,7 @@
     
     $dao->save($user);
     
-    $string="Location: ../index.html";
+    $string="Location: ../index.phtml";
     header($string);
 ?>
 

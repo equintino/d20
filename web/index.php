@@ -115,11 +115,11 @@ final class index{
 $index = new index();
 $index->init();
     // Exigir o login para acesso
-   /* $valida = new valida_cookies();
+    $valida = new valida_cookies();
     @$valida->setLogin($_COOKIE['login']);
     @$valida->setSenha($_COOKIE['senha']);
     @$valida->setIndex($_GET['index']);
-    $valida->fazerLogin();*/
+    $valida->fazerLogin();
     // run application!
 $index->carrega();
 ?>

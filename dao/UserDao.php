@@ -59,10 +59,11 @@ final class UserDao {
         $orderBy = 'login';
         if ($search !== null) {
             if ($search->getLogin() !== null) {
-                $sql .= ' AND login='.$this->getDb()->quote($search->getLogin());
+                $sql .= ' AND login=\''.$search->getLogin().'\'';
             }
         }
         $sql .= ' ORDER BY ' . $orderBy;
+        //print_r($sql);die;
         return $sql;
     }
     private function insert(User $user){
