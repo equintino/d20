@@ -29,7 +29,7 @@ class valida_cookies{
 	echo "<td width=100% colspan=3 valign=center align=center>";
 	echo "<table border=1 bgcolor=#FFFFFF CELLSPACING=3 CELLPADDING=13><tr><td>";
 	echo "<center><br><b><font face=tahoma size=2 color=black>Efetuar o login para obter acesso.<p>";
-	echo "<center><input type=button value=\"Entrar\" onclick=\"location.href='../index.phtml' \">";
+	echo "<center><input type=button value=\"Entrar\" onclick=\"location.href='../index.html' \">";
 	echo "</td></tr></table>";
 	echo "</table>";
 	echo "</td></tr></table>";
