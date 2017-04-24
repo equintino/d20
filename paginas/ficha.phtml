@@ -29,26 +29,47 @@
                   $dao=new Dao();
                   $search=new ModelSearchCriteria();
                   $search->settabela('personagem');
-                  $search->setjogador($_COOKIE['login']);
-                  $lista=$dao->encontrePorJogador($search);
+                  @$login=strtoupper($_COOKIE['login']);
+                    if($login<>'MESTRE'){
+                        $search->setjogador($login);
+                        $lista=$dao->encontrePorJogador($search);
+                    }else{
+                        $search->setpersonagem($personagem);
+                        $lista=$dao->encontre($search);
+                    }
                   $titulos=array('PERSONAGEM','RAÇA','CLASSE','TENDÊNCIA1','TENDÊNCIA2');
                   if(!$lista){
                      die('Personagem Inexistente');
-                  }die;
-                  foreach($lista as $keys => $item){
-                      echo '<h1>'.$item.'</h1>';die;
-                     echo '<tr><td class=nomes>'.$titulos[0].'</td><td class=nomes2>'.$item->getpersonagem().'</td></tr>';
-                     echo '<tr><td class=nomes>'.$titulos[1].'</td><td class=nomes2>'.$item->getraca().'</td></tr>';
-                     echo '<tr><td class=nomes>'.$titulos[2].'</td><td class=nomes2>'.$item->getclasse().'</td></tr>';
-                     echo '<tr><td class=nomes>'.$titulos[3].'</td><td class=nomes2>'.$item->gettendencia1().'</td></tr>';
-                     echo '<tr><td class=nomes>'.$titulos[4].'</td><td class=nomes2>'.$item->gettendencia2().'</td></tr>';
-                     $habilidades=$item->gethabilidade();
-                     $classe=$item->getclasse();
-                     $level=$item->getnivel();
-                     if(!$level){
-                        $level=1; 
-                     }
-                     echo '<script>nivel('.$level.')</script>';
+                  }
+                  if(count($lista)==1 && $login <> 'MESTRE'){
+                      $lista=$item;
+                       echo '<tr><td class=nomes>'.$titulos[0].'</td><td class=nomes2>'.$lista->getpersonagem().'</td></tr>';
+                       echo '<tr><td class=nomes>'.$titulos[1].'</td><td class=nomes2>'.$lista->getraca().'</td></tr>';
+                       echo '<tr><td class=nomes>'.$titulos[2].'</td><td class=nomes2>'.$lista->getclasse().'</td></tr>';
+                       echo '<tr><td class=nomes>'.$titulos[3].'</td><td class=nomes2>'.$lista->gettendencia1().'</td></tr>';
+                       echo '<tr><td class=nomes>'.$titulos[4].'</td><td class=nomes2>'.$lista->gettendencia2().'</td></tr>';
+                       $habilidades=$lista->gethabilidade();
+                       $classe=$lista->getclasse();
+                       $level=$lista->getnivel();
+                       if(!$level){
+                          $level=1; 
+                       }
+                       echo '<script>nivel('.$level.')</script>';
+                  }else{
+                    foreach($lista as $keys => $item){
+                       echo '<tr><td class=nomes>'.$titulos[0].'</td><td class=nomes2>'.$item->getpersonagem().'</td></tr>';
+                       echo '<tr><td class=nomes>'.$titulos[1].'</td><td class=nomes2>'.$item->getraca().'</td></tr>';
+                       echo '<tr><td class=nomes>'.$titulos[2].'</td><td class=nomes2>'.$item->getclasse().'</td></tr>';
+                       echo '<tr><td class=nomes>'.$titulos[3].'</td><td class=nomes2>'.$item->gettendencia1().'</td></tr>';
+                       echo '<tr><td class=nomes>'.$titulos[4].'</td><td class=nomes2>'.$item->gettendencia2().'</td></tr>';
+                       $habilidades=$item->gethabilidade();
+                       $classe=$item->getclasse();
+                       $level=$item->getnivel();
+                       if(!$level){
+                          $level=1; 
+                       }
+                       echo '<script>nivel('.$level.')</script>';
+                    }
                   }
                   ?>
                </table>

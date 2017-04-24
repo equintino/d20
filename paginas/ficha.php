@@ -13,6 +13,6 @@
                   if(!$lista){
                      die('Personagem Inexistente');
                   }*/
-                  echo 'estou aqui';
+                  echo 'estou aqui';die;
 ?>
 
