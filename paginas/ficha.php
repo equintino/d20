@@ -1,5 +1,5 @@
 <?php 
-    $variaveis=array('JOGADOR'=>'jogador','PERSONAGEM'=>'personagem','RAÇA'=>'raca','CLASSE'=>'classe','TENDÊNCIA1'=>'tendencia1','TENDÊNCIA2'=>'tendencia2','SEXO'=>'sexo');
+    /*$variaveis=array('JOGADOR'=>'jogador','PERSONAGEM'=>'personagem','RAÇA'=>'raca','CLASSE'=>'classe','TENDÊNCIA1'=>'tendencia1','TENDÊNCIA2'=>'tendencia2','SEXO'=>'sexo');
     @$personagem=$_GET['personagem'];
     if(!$personagem){
       $personagem='nulo';
@@ -12,7 +12,7 @@
                   $titulos=array('PERSONAGEM','RAÇA','CLASSE','TENDÊNCIA1','TENDÊNCIA2');
                   if(!$lista){
                      die('Personagem Inexistente');
-                  }
-                  print_r($lista);
+                  }*/
+                  echo 'estou aqui';
 ?>
 

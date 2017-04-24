@@ -28,6 +28,15 @@
         modelMapper::map($model, $row);
         return $model;
    }
+   public function encontrePorJogador(ModelSearchCriteria $search=null){
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE excluido = '0' and jogador = '".$search->getjogador()."'")->fetch();
+        if (!$row) {
+            return null;
+        }
+        $model = new Model();
+        modelMapper::map($model, $row);
+        return $model;
+   }
    public function encontrePorPersonagem(ModelSearchCriteria $search=null){
            $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE excluido = '0' and personagem = '".$search->getpersonagem()."'")->fetch();
         if (!$row) {

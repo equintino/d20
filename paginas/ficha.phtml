@@ -26,17 +26,17 @@
             <div class=tabelaFicha>
                <table cellspacing=0 border=1>
                <?php 
-                  /*$dao=new Dao();
+                  $dao=new Dao();
                   $search=new ModelSearchCriteria();
                   $search->settabela('personagem');
-                  $search->setpersonagem($personagem);
-                  $lista=$dao->encontre($search);
+                  $search->setjogador($_COOKIE['login']);
+                  $lista=$dao->encontrePorJogador($search);
                   $titulos=array('PERSONAGEM','RAÇA','CLASSE','TENDÊNCIA1','TENDÊNCIA2');
                   if(!$lista){
                      die('Personagem Inexistente');
-                  }*/
-               print_r($lista);die;
+                  }die;
                   foreach($lista as $keys => $item){
+                      echo '<h1>'.$item.'</h1>';die;
                      echo '<tr><td class=nomes>'.$titulos[0].'</td><td class=nomes2>'.$item->getpersonagem().'</td></tr>';
                      echo '<tr><td class=nomes>'.$titulos[1].'</td><td class=nomes2>'.$item->getraca().'</td></tr>';
                      echo '<tr><td class=nomes>'.$titulos[2].'</td><td class=nomes2>'.$item->getclasse().'</td></tr>';
