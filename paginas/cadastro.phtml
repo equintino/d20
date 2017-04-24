@@ -118,6 +118,7 @@ function trocaAvatar(x){
     @$classe=$_GET['classe'];
     @$personagem=$_GET['personagem'];
     @$raca=$_GET['raca'];
+    @$login=strtoupper($_COOKIE['login']);
     if(!$raca){
         @$raca=$_POST['raca'];
     }
@@ -134,11 +135,16 @@ function trocaAvatar(x){
             $dao=new Dao();
             $search=new ModelSearchCriteria();
             $search->settabela('personagem');
+            if($login<>'MESTRE'){
+                $search->setjogador($login);
+            }
             $lista=$dao->encontre($search);
+            /// Nivel do Jogador ////
             @$level=$_GET['level'];
             if(!$level){
                 $level=1; 
             }
+            ////////
             $titulos=array('PERSONAGEM','RAÇA','CLASSE','TENDÊNCIA1','TENDÊNCIA2');
             echo '<div class=paginacao>';
                 echo '<span class=pag >Páginas ';

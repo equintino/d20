@@ -28,15 +28,6 @@
         modelMapper::map($model, $row);
         return $model;
    }
-   public function encontrePorJogador(ModelSearchCriteria $search=null){
-           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE excluido = '0' and jogador = '".$search->getjogador()."'")->fetch();
-        if (!$row) {
-            return null;
-        }
-        $model = new Model();
-        modelMapper::map($model, $row);
-        return $model;
-   }
    public function encontrePorPersonagem(ModelSearchCriteria $search=null){
            $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE excluido = '0' and personagem = '".$search->getpersonagem()."'")->fetch();
         if (!$row) {
@@ -289,8 +280,10 @@
    }
    private function getEncontreSql(ModelSearchCriteria $search = null) {               
           if ($search->getpersonagem() !== null) {
-                 $sql="SELECT * FROM ".$search->gettabela()." WHERE personagem='".$search->getpersonagem()."' AND excluido = '0' ";
-          }else{
+                $sql="SELECT * FROM ".$search->gettabela()." WHERE personagem='".$search->getpersonagem()."' AND excluido = '0' ";
+            }elseif($search->getjogador() !== null){
+                $sql="SELECT * FROM ".$search->gettabela()." WHERE jogador='".$search->getjogador()."' AND excluido = '0' ";
+            }else{
              $sql = 'SELECT * FROM `'.$search->gettabela().'` WHERE excluido = "0" ';
           }
         return $sql;
