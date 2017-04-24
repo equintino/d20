@@ -13,5 +13,6 @@
                   if(!$lista){
                      die('Personagem Inexistente');
                   }
+                  print_r($lista);
 ?>
 
