@@ -14,11 +14,11 @@
     }
 </script>
 <?php 
-    $variaveis=array('JOGADOR'=>'jogador','PERSONAGEM'=>'personagem','RAÇA'=>'raca','CLASSE'=>'classe','TENDÊNCIA1'=>'tendencia1','TENDÊNCIA2'=>'tendencia2','SEXO'=>'sexo');
+    /*$variaveis=array('JOGADOR'=>'jogador','PERSONAGEM'=>'personagem','RAÇA'=>'raca','CLASSE'=>'classe','TENDÊNCIA1'=>'tendencia1','TENDÊNCIA2'=>'tendencia2','SEXO'=>'sexo');
     @$personagem=$_GET['personagem'];
     if(!$personagem){
       $personagem='nulo';
-    }
+    }*/
 ?>
 <div  class="conteudo" >
    <div class="jogador">
@@ -26,7 +26,7 @@
             <div class=tabelaFicha>
                <table cellspacing=0 border=1>
                <?php 
-                  $dao=new Dao();
+                  /*$dao=new Dao();
                   $search=new ModelSearchCriteria();
                   $search->settabela('personagem');
                   $search->setpersonagem($personagem);
@@ -34,7 +34,7 @@
                   $titulos=array('PERSONAGEM','RAÇA','CLASSE','TENDÊNCIA1','TENDÊNCIA2');
                   if(!$lista){
                      die('Personagem Inexistente');
-                  }
+                  }*/
                   foreach($lista as $keys => $item){
                      echo '<tr><td class=nomes>'.$titulos[0].'</td><td class=nomes2>'.$item->getpersonagem().'</td></tr>';
                      echo '<tr><td class=nomes>'.$titulos[1].'</td><td class=nomes2>'.$item->getraca().'</td></tr>';
