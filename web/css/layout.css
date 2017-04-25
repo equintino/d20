@@ -407,7 +407,7 @@ ul li{
 }
 .cad7 fieldset{
     width: 900px;
-    height: 2750px;
+    height: 2400px;
 }
 .fichaTitulo, .cadTitulo{
     font-family: 'Architects Daughter', cursive;
@@ -494,7 +494,7 @@ fieldset legend{
 }
 .saudacao{
     position: relative;
-    margin-right: 20px;
+    margin-right: 10px;
     top: -130px;
     #left: 380px;
     #top: 180px;
@@ -1368,48 +1368,48 @@ fieldset legend{
 }
 .Cajado_{
     position: relative;
-    top: 160px;
-    right: 670px;
+    top: 250px;
+    right: 675px;
 }
 .Cetro{
     position: relative;
-    top: 365px;
+    top: 385px;
     right: 500px;
 }
 .Cetro_{
     position: relative;
-    top: 210px;
-    right: 515px;
+    top: 310px;
+    right: 520px;
 }
 .Missal{
     position: relative;
-    top: 160px;
-    right: 465px;
+    top: 210px;
+    right: 500px;
 }
 .Varinha{
     position: relative;
-    top: 30px;
-    right: 255px;
+    top: 120px;
+    right: 275px;
 }
 .OrbedeCristal{
     position: relative;
-    top: 240px;
+    top: 290px;
     right: 345px;
 }
 .SímboloSagrado{
     position: relative;
-    top: 220px;
+    top: 290px;
     right: 160px;
 }
 .Punhal{
     position: relative;
-    top: 340px;
-    right: 145px;
+    top: 400px;
+    right: 170px;
 }
 .Punhal_{
     position: relative;
-    top: 232px;
-    right: 200px;
+    top: 362px;
+    right: 220px;
 }
 .tipo{
     font-size: 10px;

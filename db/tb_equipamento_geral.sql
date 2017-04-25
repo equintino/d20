@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 29, 2017 at 08:06 
--- Server version: 10.1.21-MariaDB
--- PHP Version: 7.1.1
+-- Tempo de geração: 25/04/2017 às 19:09
+-- Versão do servidor: 10.1.21-MariaDB
+-- Versão do PHP: 7.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `d20`
+-- Banco de dados: `d20`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_equipamento_geral`
+-- Estrutura para tabela `tb_equipamento_geral`
 --
 
 CREATE TABLE `tb_equipamento_geral` (
@@ -36,7 +36,7 @@ CREATE TABLE `tb_equipamento_geral` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data for table `tb_equipamento_geral`
+-- Fazendo dump de dados para tabela `tb_equipamento_geral`
 --
 
 INSERT INTO `tb_equipamento_geral` (`id`, `item`, `CUSTO`, `peso`, `DESCRICAO`, `excluido`) VALUES
@@ -65,7 +65,7 @@ INSERT INTO `tb_equipamento_geral` (`id`, `item`, `CUSTO`, `peso`, `DESCRICAO`, 
 (23, 'Kit de Arrombamento', 100, '0,4', 'Bainha com varias gazuas. Necessário para arrombar fechaduras.', 0),
 (24, 'Kit de Cura', 50, '2', 'Bandagens, agulha, linha, faca e pastas de ervas medicinais.', 0),
 (25, 'Martelete', 24, '1', 'Pequeno martelo usado para fixar os pinos de escalada, a cabeça do martelo é dividida em uma ponta de martelo e outra de picareta.', 0),
-(26, 'Mochila Pequena/embornal', 20, '1', 'Mochila básica para guardar o essencial. Comporta até 5Kg.', 0),
+(26, 'Mochila Pequena', 20, '1', 'Mochila básica para guardar o essencial. Comporta até 5Kg.', 0),
 (27, 'Mochila Grande', 50, '2', 'Mochila reforçada de viagem. Comporta até 20 quilos.', 0),
 (28, 'Frasco de Cerâmica', 2, '*', 'Frasco de cerâmica para poções. Comporta 100 ml de líquido.', 0),
 (29, 'Frasco de Tinta', 15, '0', 'Suficiente pra dez páginas de texto', 0),
@@ -101,11 +101,11 @@ INSERT INTO `tb_equipamento_geral` (`id`, `item`, `CUSTO`, `peso`, `DESCRICAO`, 
 (59, 'Velino', 10, '0,02', 'Uma folha. Pele de feto de boi ou cordeiro, preparada para receber tinta. Mais lisa e macia do que pergaminho comum, depois de seca a tinta resiste mesmo que a folha seja molhada. Grimórios a prova d’água podem ser feitos desse material.', 0);
 
 --
--- Indexes for dumped tables
+-- Índices de tabelas apagadas
 --
 
 --
--- Indexes for table `tb_equipamento_geral`
+-- Índices de tabela `tb_equipamento_geral`
 --
 ALTER TABLE `tb_equipamento_geral`
   ADD PRIMARY KEY (`id`);

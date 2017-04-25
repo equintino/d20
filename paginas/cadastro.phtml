@@ -245,6 +245,9 @@ function trocaAvatar(x){
                                 echo '<tr><td align=right> '.$keys.': </td>';
                                 echo '<td><input type=radio name=sexo value=M> MASCULINO';
                                 echo ' <input type=radio name=sexo value=F> FEMININO</td></tr>';
+                            }elseif($item=='jogador'){
+                                echo "<tr><td align=\"right\"> $keys: </td><td>$login</td></tr>";
+                                echo "<input type=\"hidden\" name=\"jogador\" value=\"".$login."\" size=\"40\" />";
                             }else{
                                 echo "<tr><td align=\"right\"> $keys: </td><td><input type=\"text\" name=\"".$item."\" size=\"40\" / required></td></tr>";
                             }
@@ -622,22 +625,32 @@ function trocaAvatar(x){
                                 }elseif($act=='cad6'){
                                     $search->setARMA($item);
                                     $armaduras=$dao->encontrePorArma($search);
-                                    $desc='Item: '.$armaduras->getARMA()."\r\n".
-                                          'Custo: '.$armaduras->getCUSTO()."\r\n".
-                                          'FN: '.$armaduras->getFN()."\r\n".
-                                          'Peso: '.$armaduras->getpeso()."\r\n".
-                                          'Descrição: '.$armaduras->getDESCRICAO()."\r\n".
-                                          'Obs: '.$armaduras->getOBS();
-                                    echo '<div class='.str_replace(' ','',$item).' >';
+                                    if($armaduras->getARMA())
+                                        $desc='Item: '.$armaduras->getARMA()."\r\n";
+                                    if($armaduras->getCUSTO())
+                                        $desc .='Custo: '.$armaduras->getCUSTO()."\r\n";
+                                    if($armaduras->getFN())
+                                        $desc .='FN: '.$armaduras->getFN()."\r\n";
+                                    if($armaduras->getpeso())
+                                        $desc .='Peso: '.$armaduras->getpeso()."\r\n";
+                                    if($armaduras->getDESCRICAO())
+                                        $desc .='Descrição: '.$armaduras->getDESCRICAO()."\r\n";
+                                    if($armaduras->getOBS())
+                                        $desc .='Obs: '.$armaduras->getOBS();
+                                    echo '<span class='.str_replace(' ','',$item).' >';
                                         $value=$armaduras->getCUSTO();
                                 }
                                         echo '<input type=checkbox onchange=moeda(\''.$recurso.'\'); value='.$value.' name=\''.$item.'\' title="'.$desc.'" />';
-                                    echo '</div>';
+                                    if($act == 'cad6'){
+                                        echo '</span>';
+                                    }else{
+                                        echo '</div>';
+                                    }
                             }
                             if($act=='cad6'){
-                                echo '<div class=Cajado_ title="Pode ser usado em combate como um Bordão.">*</div>';
-                                echo '<div class=Cetro_ title="Pode ser usado em combate como uma Clava.">*</div>';
-                                echo '<div class=Punhal_ title="Pode ser usado em combate como uma Adaga.">*</div>';
+                                echo '<span class=Cajado_ title="Pode ser usado em combate como um Bordão.">*</span>';
+                                echo '<span class=Cetro_ title="Pode ser usado em combate como uma Clava.">*</span>';
+                                echo '<span class=Punhal_ title="Pode ser usado em combate como uma Adaga.">*</span>';
                             }
                         ?>
                         <script>moeda('<?= $recurso ?>');</script>
