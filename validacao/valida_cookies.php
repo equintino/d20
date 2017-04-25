@@ -76,9 +76,10 @@ class valida_cookies{
         $search = new UserSearchCriteria();
         $search->setLogin($this->login);
         $user = $dao->find($search);
+        $senha = self::criptografia($_COOKIE['senha']);
         foreach($user as $key => $item){
             $senhaDb = @$item->getSenha();
-            if($senhaDb==$_COOKIE['senha']){
+            if($senhaDb== $senha){
                 $this->popup("Bem-Vindo ".$this->getlogin().".",'sim');
                 exit;
             }else{
@@ -89,6 +90,12 @@ class valida_cookies{
         if(!$user){  
             $this->popup('Usuário não cadastrado.','cad'); 
         }
+    }
+    public function criptografia($senha){
+        $cripto1 = md5($senha);
+        $cripto2 = sha1($cripto1);
+        
+        return $cripto2;
     }
     public function maiusculo($string){
 	$string=strtoupper($string);

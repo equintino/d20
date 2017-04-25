@@ -7,6 +7,7 @@ final class User {
     private $id;
     private $login;
     private $senha;
+    private $email;
 
     public function __construct() {
         $this->setDeleted(false);
@@ -31,6 +32,12 @@ final class User {
     }
     public function setSenha($senha){
         $this->senha = $senha;
+    }
+    public function setEmail($email){
+        $this->email = $email;
+    }
+    public function getEmail(){
+        return $this->email;
     }
     public function getDeleted() {
         return $this->deleted;

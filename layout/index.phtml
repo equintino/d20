@@ -76,6 +76,11 @@
     function fadeIn(element,time){
         processa(element,time,0,100);
     }
+    function sair(){
+        document.cookie = "login=; path=/";
+        document.cookie = "senha=; path=/";
+        window.location.replace("../index.html");
+    }
     // ]]></script>
 </head>
     <body onload="startSlideShow()">
@@ -91,8 +96,9 @@
             <!--<hr size="0.5" class="l1" />-->
             <div id="menu" >
                   <?php 
+                    @$login = strtoupper($_COOKIE['login']);
                      $mes_=  ModelValidador::nomeMes(date('m'));
-                     $menu=array('home'=>'Home','cadastro'=>'Cadastro de Personagem','lista'=>'Personagens','ficha'=>'Ficha de Personagem','dado'=>'Rolagem de Dado'); 
+                     $menu=array('home'=>'Home','cadastro'=>'Cadastro de Personagem','lista'=>'Personagens','dado'=>'Rolagem de Dado'); 
                      echo '<ul>';
                         foreach($menu as $key => $item){
                            if($item == 'Cadastro de Personagem'){
@@ -104,6 +110,9 @@
                            }
                         }
                      echo '</ul>';
+                    if(@$login){
+                        echo '<div class=saudacao1>Bem-vindo '.$login.' <img onclick=sair() height=25px title="Sair" src="../web/imagens/sair.png" /></div>';
+                    }
                   ?>
             </div>
          </div>

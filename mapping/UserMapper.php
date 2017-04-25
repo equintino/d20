@@ -35,6 +35,9 @@ final class UserMapper {
         if (array_key_exists('senha', $properties)){
             $user->setSenha($properties['senha']);
         }
+        if (array_key_exists('email', $properties)){
+            $user->setEmail($properties['email']);
+        }
     }
 }
 ?>

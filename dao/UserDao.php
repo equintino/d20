@@ -68,8 +68,8 @@ final class UserDao {
     }
     private function insert(User $user){
         $sql = '
-            INSERT INTO usuario (id, login, senha)
-            VALUES (:id, :login, :senha)';
+            INSERT INTO usuario (id, login, senha, email)
+            VALUES (:id, :login, :senha, :email)';
         return $this->execute($sql, $user);
     }
     private function update(User $user) {
@@ -95,7 +95,8 @@ final class UserDao {
         $params = array(
             ':id' => $user->getId(),
             ':login' => $user->getLogin(),
-            ':senha' => $user->getSenha()
+            ':senha' => $user->getSenha(),
+            ':email' => $user->getEmail()
         );
         if ($user->getId()) {
             // unset created date, this one is never updated
