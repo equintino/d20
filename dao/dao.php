@@ -280,10 +280,10 @@
    }
    private function getEncontreSql(ModelSearchCriteria $search = null) {               
           if ($search->getpersonagem() !== null) {
-                $sql="SELECT * FROM ".$search->gettabela()." WHERE personagem='".$search->getpersonagem()."' AND excluido = '0' ";
-            }elseif($search->getjogador() !== null){
+                 $sql="SELECT * FROM ".$search->gettabela()." WHERE personagem='".$search->getpersonagem()."' AND excluido = '0' ";
+          }elseif($search->getjogador() !== null){
                 $sql="SELECT * FROM ".$search->gettabela()." WHERE jogador='".$search->getjogador()."' AND excluido = '0' ";
-            }else{
+          }else{
              $sql = 'SELECT * FROM `'.$search->gettabela().'` WHERE excluido = "0" ';
           }
         return $sql;

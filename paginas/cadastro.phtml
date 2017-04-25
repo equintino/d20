@@ -128,6 +128,10 @@ function trocaAvatar(x){
         }else{
            $class='title=RECUAR';
         }
+      @$z = $_GET['z'];
+      if(!$z){
+         $z=0;
+      }
 ?>
 <div  class="conteudo" >
     <?php if($act=='lista'):?>
@@ -160,20 +164,28 @@ function trocaAvatar(x){
         <div class=lista>
             <fieldset>
                <?php
-                  echo '<legend><a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x-1)).' '.$class.' ><< </a> FICHA DE PERSONAGEM <a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x+1,'contador'=>count($lista))).' '.$class2.'> >> </a>&nbsp&nbsp LEVEL '.$level.'</legend>';
-                    echo '<table cellspacing=0 border=1>';
+                  echo '<legend><a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x-1,'z'=>$z-1)).' '.$class.' ><< </a> FICHA DE PERSONAGEM <a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x+1,'contador'=>count($lista),'z'=>$z+1)).' '.$class2.'> >> </a>&nbsp&nbsp LEVEL '.$level.'</legend>';
+                     echo '<table cellspacing=0 border=1>';
+                     $ids=array();
+                     foreach($lista as $item){
+                        $ids[]= $item->getid();
+                     }
+                     //$z=1;
                         foreach($lista as $keys => $item){
-                            if($x < $keys && $keys < $y){
-                                echo '<tr><td class=nomes>'.$titulos[0].'</td><td class=nomes2><a href='.Utils::createLink('ficha', array('personagem'=>$item->getpersonagem())).'>'.$item->getpersonagem().'<span class=verFicha><br>(ver ficha)</span></a></td></tr>';
-                                echo '<tr><td class=nomes>'.$titulos[1].'</td><td class=nomes2>'.$item->getraca().'</td></tr>';
-                                echo '<tr><td class=nomes>'.$titulos[2].'</td><td class=nomes2>'.$item->getclasse().'</td></tr>';
-                                echo '<tr><td class=nomes>'.$titulos[3].'</td><td class=nomes2>'.$item->gettendencia1().'</td></tr>';
-                                echo '<tr><td class=nomes>'.$titulos[4].'</td><td class=nomes2>'.$item->gettendencia2().'</td></tr>';
-                                echo '<div id="aqui" class="raca"><span class="saudacao" >Bem-vindo '.strtoupper($item->getjogador()).'</span><img class=foto height=240px src="../web/imagens/personagens/'.$item->getraca().'/'.$item->getavatar().'.png" /></div>';
-                            }elseif($keys > $y){
-                                break;
-                            }
-                        }
+                           //if($x < $keys && $keys < $y){
+                           //echo $ids[0];die;
+                           if($item->getid() == $ids[$z]){
+                              echo '<tr><td class=nomes>'.$titulos[0].'</td><td class=nomes2><a href='.Utils::createLink('ficha', array('personagem'=>$item->getpersonagem())).'>'.$item->getpersonagem().'<span class=verFicha><br>(ver ficha)</span></a></td></tr>';
+                              echo '<tr><td class=nomes>'.$titulos[1].'</td><td class=nomes2>'.$item->getraca().'</td></tr>';
+                              echo '<tr><td class=nomes>'.$titulos[2].'</td><td class=nomes2>'.$item->getclasse().'</td></tr>';
+                              echo '<tr><td class=nomes>'.$titulos[3].'</td><td class=nomes2>'.$item->gettendencia1().'</td></tr>';
+                              echo '<tr><td class=nomes>'.$titulos[4].'</td><td class=nomes2>'.$item->gettendencia2().'</td></tr>';
+                              echo '<div id="aqui" class="raca"><span class="saudacao" >Bem-vindo '.strtoupper($item->getjogador()).'</span><img class=foto height=240px src="../web/imagens/personagens/'.$item->getraca().'/'.$item->getavatar().'.png" /></div>';
+                           //}elseif($keys > $y){
+                              break;
+                           }
+                        }                       
+                           //print_r($ids);
                     echo '</table>';
                ?>
             </fieldset>
