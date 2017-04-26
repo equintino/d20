@@ -520,10 +520,10 @@ function trocaAvatar(x){
                                           if($armasCoporais->getOBS()){ 
                                              $desc.='Obs: '.
                                                    $armasCoporais->getOBS();}
-                                            echo '<div class='.str_replace(' ','',$item).' >';
+                                            echo '<span class='.str_replace(' ','',$item).' >';
                                                 echo '<input type=checkbox onchange=moeda(\''.$recurso.'\'); value='.$armasCoporais->getCUSTO().' name=\''.$item.'\' title="'.
                                                   $desc.'" />';
-                                            echo '</div>';
+                                            echo '</span>';
                                         }
                                         echo '<script>moeda('.$recurso.');</script>';
                                         echo '<input type="button" value="VOLTAR" class=\'botao botao-verde\' onclick=history.go(-1) > ' ;  

@@ -335,7 +335,7 @@ ul li{
     font-size: 16px;
     color: white;
     position: relative;
-    top: -450px;
+    top: -10px;
     #left: 560px;
     float: right;
 }
@@ -350,7 +350,7 @@ ul li{
     font-size: 16px;
     color: white;
     position: relative;
-    top: -450px;
+    top: -10px;
     #left: 560px;
     float: right;
     margin-right: 5px;
@@ -368,7 +368,7 @@ ul li{
     background-color: #006000;
     color: white;   
     position: relative;
-    top: -445px;
+    top: -5px;
     box-shadow: none;
 }
 .cad3 .botao-verde2{
@@ -384,7 +384,7 @@ ul li{
     background-color: #006000;
     color: white;   
     position: relative;
-    top: -445px;
+    top: -5px;
     box-shadow: none;
 }
 .cad3Atrib{
@@ -1087,120 +1087,118 @@ fieldset legend{
 }
 .Glaive{
     position: relative;
-    top: -300px;
-    right: 600px;
-    border: 1px solid red;
+    top: -330px;
+    left: 225px;
 }
 .Alabarda{
     position: relative;
-    top: -360px;
-    left: 290px;
+    top: -300px;
+    left: 270px;
 }
 .Adaga{
     position: relative;
-    top: -470px;
-    left: 10px;
+    top: -365px;
+    left: -30px;
 }
 .EspadaCurta{
     position: relative;
-    top: -432px;
-    left: 10px;
+    top: -302px;
+    left: -50px;
 }
 .Rapiera{
     position: relative;
-    top: -410px;
-    left: 60px;
+    top: -255px;
+    left: -20px;
 }
 .Sabre{
     position: relative;
-    top: -375px;
-    left: 60px;
+    top: -205px;
+    left: -30px;
 }
 .EspadaLonga{
     position: relative;
-    top: -345px;
-    left: 75px;
+    top: -150px;
+    left: -45px;
 }
 .Cimitarra{
     position: relative;
-    top: -305px;
-    left: 55px;
+    top: -85px;
+    left: -50px;
 }
 .Claymore{
     position: relative;
-    top: -265px;
-    left: 55px;
+    top: -30px;
+    left: -80px;
 }
 .Bordão{
     position: relative;
-    top: -785px;
-    left: 555px;
+    top: -520px;
+    left: 300px;
 }
 .Soqueira{
     position: relative;
-    top: -755px;
-    left: 450px;
+    top: -470px;
+    left: 240px;
 }
 .Bico-de-Corvo{
     position: relative;
-    top: -720px;
-    left: 410px;
+    top: -415px;
+    left: 180px;
 }
 .MaçaEstrela{
     position: relative;
-    top: -695px;
-    left: 410px;
+    top: -370px;
+    left: 165px;
 }
 .MaçaLeve{
     position: relative;
-    top: -670px;
-    left: 410px;
+    top: -325px;
+    left: 150px;
 }
 .MaçaPesada{
     position: relative;
-    top: -650px;
-    left: 410px;
+    top: -280px;
+    left: 130px;
 }
 .Clava{
     position: relative;
-    top: -608px;
-    left: 440px;
+    top: -220px;
+    left: 200px;
 }
 .Mangual{
     position: relative;
-    top: -558px;
-    left: 410px;
+    top: -148px;
+    left: 140px;
 }
 .MartelodeGuerra{
     position: relative;
-    top: -530px;
-    left: 500px;
+    top: -100px;
+    left: 150px;
 }
 .Marreta{
     position: relative;
-    top: -480px;
-    left: 465px;
+    top: -30px;
+    left: 155px;
 }
 .Azagaia{
     position: relative;
-    top: -870px;
-    left: 555px;
+    top: -370px;
+    left: 155px;
 }
 .Lança{
     position: relative;
-    top: -790px;
-    left: 605px;
+    top: -290px;
+    left: 180px;
 }
 .Tridente{
     position: relative;
-    top: -730px;
-    left: 658px;
+    top: -250px;
+    left: 215px;
 }
 .MarteloLucerno{
     position: relative;
-    top: -750px;
-    left: 705px;
-    #border: 1px solid gray;
+    top: -200px;
+    left: 240px;
 }
 /* FIM CAD3 */
 .nota{
@@ -1225,43 +1223,44 @@ fieldset legend{
 /* cad4 */
 .BestaPesada{
     position: relative;
-    top: -800px;
-    left: 190px;
+    top: -675px;
+    left: -500px;
 }
 .BestaLeve{
     position: relative;
-    top: -670px;
-    left: 180px;
+    top: -530px;
+    left: -650px;
 }
 .Prodd{
     position: relative;
-    top: -810px;
-    left: 400px;
+    top: -730px;
+    left: 462px;
 }
 .ViroteComum{
     position: relative;
-    top: -760px;
-    left: 402px;
+    top: -660px;
+    left: 342px;
 }
 .ViroteGarateia{
     position: relative;
-    top: -725px;
-    left: 412px;
+    top: -580px;
+    left: 300px;
 }
 .Zarabatana{
     position: relative;
-    top: -635px;
-    left: 412px;
+    top: -525px;
+    left: 352px;
 }
 .Balas{
     position: relative;
-    top: -600px;
-    left: 517px;
+    top: -470px;
+    left: 435px;
 }
 .Funda{
     position: relative;
     top: -500px;
     left: 560px;
+    border: 5px solid red;
 }
 .Fustíbalo{
     position: relative;
