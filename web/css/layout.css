@@ -284,14 +284,14 @@ ul li{
 }
 .cad4 .botao{
     positions: relative;
-    top: -330px;
+    top: -10px;
     float: right;
     margin-right: 5px;
     #left: 600px;    
 }
 .cad4 .botao:active{   
     position: relative;
-    top: -325px;
+    top: -5px;
     box-shadow: none;    
 }
 .cad5 .botao{
@@ -1258,49 +1258,48 @@ fieldset legend{
 }
 .Funda{
     position: relative;
-    top: -500px;
-    left: 560px;
-    border: 5px solid red;
+    top: -380px;
+    left: 455px;
 }
 .Fustíbalo{
     position: relative;
-    top: -745px;
-    left: 655px;
+    top: -485px;
+    left: 525px;
 }
 .ArcoRecurvo{
     position: relative;
-    top: -435px;
-    left: 120px;
+    top: -235px;
+    left: -20px;
 }
 .ArcoComposto{
     position: relative;
-    top: -430px;
-    left: 235px;
+    top: -205px;
+    left: 70px;
 }
 .ArcoSimples{
     position: relative;
-    top: -423px;
-    left: 340px;
+    top: -190px;
+    left: 160px;
 }
 .ArcodeGuerra{
     position: relative;
-    top: -315px;
-    left: 440px;
+    top: -55px;
+    left: 240px;
 }
 .Plumbata{
     position: relative;
-    top: -335px;
-    left: 620px;
+    top: -55px;
+    left: 290px;
 }
 .FlechaComum{
     position: relative;
-    top: -400px;
-    left: 280px;
+    top: -100px;
+    left: 30px;
 }
 .FlechaGarateia{
     position: relative;
-    top: -360px;
-    left: 330px;
+    top: -50px;
+    left: 60px;
 }
 /* fim cad4 */
 /* Cad5 */
