@@ -55,8 +55,9 @@
       }
 	echo '<div class=\'add\'>'.
                '<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.
-               '<a href=\'../web/index.php?pagina=cadastro&act=cad2&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'\' ><button class=\'continua continua-verde\'>Continua...</button></a>'.
-             '</div>';
+               '<a href=\'../web/index.php?pagina=cadastro&act=cad2&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'\' ></a>'.
+             '</div>';  //<button class=\'continua continua-verde\'>Continua...</button>     
+                echo '<meta http-equiv="refresh" content="1;URL=../web/index.php?pagina=cadastro&act=cad2&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'">';
 	die;
   }
   if($act == 'rel'){ 
@@ -112,6 +113,7 @@
            echo '</span>';
            echo '</div>';
            echo '</form>';
+           //echo '<meta http-equiv="refresh" content="2;URL=../paginas/add.php?act=cad2&maisum=1&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'">';
            die;
          }
         }
@@ -170,8 +172,9 @@
         $dao->grava2($dadosRaca);
 	echo '<div class=\'add\'>'.
                '<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.
-               '<a href=\'../web/index.php?pagina=cadastro&act=cad3&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'\' ><button class=\'continua continua-verde\'>Continua...</button></a>'.
-             '</div>';
+               '<a href=\'../web/index.php?pagina=cadastro&act=cad3&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'\' ></a>'.
+             '</div>';//<button class=\'continua continua-verde\'>Continua...</button>
+        echo '<meta http-equiv="refresh" content="1;URL=../web/index.php?pagina=cadastro&act=cad3&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'">';
 	die;
   }
   if($act == 'cad3'){
@@ -206,8 +209,9 @@
         $dao->grava4($model);
 	echo '<div class=\'add\'>'.
                '<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.
-               '<a href=\'../web/index.php?pagina=cadastro&act=cad4&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'\' ><button class=\'continua continua-verde\'>Continua...</button></a>'.
-             '</div>';
+               '<a href=\'../web/index.php?pagina=cadastro&act=cad4&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'\' ></a>'.
+             '</div>';//<button class=\'continua continua-verde\'>Continua...</button>
+        echo '<meta http-equiv="refresh" content="1;URL=../web/index.php?pagina=cadastro&act=cad4&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'">';
 	die;
   } 
   if($act == 'cad4' || $act == 'cad5' || $act == 'cad6' || $act=='cad7'){
@@ -302,8 +306,9 @@
      }
 	echo '<div class=\'add\'>'.
                '<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.
-               '<a href=\'../web/index.php?pagina=cadastro&act='.$cad.'&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $personagem.'\' ><button class=\'continua continua-verde\'>Continua...</button></a>'.
-             '</div>';
+               '<a href=\'../web/index.php?pagina=cadastro&act='.$cad.'&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $personagem.'\' ></a>'.
+             '</div>';//<button class=\'continua continua-verde\'>Continua...</button>
+        echo '<meta http-equiv="refresh" content="1;URL=../web/index.php?pagina=cadastro&act='.$cad.'&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $personagem.'">';
 	die;
   }
 ?>

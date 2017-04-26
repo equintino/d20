@@ -62,17 +62,31 @@ function moeda2(valor){
 function moeda(saldo) {
     var custo = document.forms[0];
     var saldo;
-    var txt = "";
+    var compra = "";
     var i;
+    var novoSaldo;
+    var checadoOk;
+    var checados = new Array();
+    var checado;
     for (i = 0; i < custo.length; i++) {
         if (custo[i].checked) {
-            txt = (txt*1) + (custo[i].value*1);
+            compra = (compra*1) + (custo[i].value*1);
+            checados.push (i);
+            checado = i;
+        } 
+    }
+    if(saldo-compra < 0){
+        alert('Você não tem recursos suficiente.');
+        novoSaldo = saldo;
+        for (i = 0; i < custo.length; i++) {
+            custo[i].checked = false;
         }
+        
+    }else{
+        checadosOk = checados;
+        novoSaldo = saldo-compra;
     }
-    if(saldo-txt < 0){
-      alert('Você não tem recursos suficiente.');
-    }
-    document.getElementById("moeda").innerHTML = saldo-txt;
+    document.getElementById("moeda").innerHTML = novoSaldo;
 }
 function abrir(URL) {
   var width = 150;
@@ -438,10 +452,10 @@ function trocaAvatar(x){
                                           if($armasCoporais->getOBS()){ 
                                              $desc.='Obs: '.
                                                    $armasCoporais->getOBS();}
-                                       echo '<div class='.str_replace(' ','',$item).' >';
+                                        echo '<span class='.str_replace(' ','',$item).' >';
                                             echo '<input type=checkbox onchange=moeda(\''.$recurso.'\'); value='.$armasCoporais->getCUSTO().' name=\''.$item.'\' title="'.
                                             $desc.'" />';
-                                        echo '</div>';
+                                        echo '</span>';
                                     }
                         ?>
                         <div>
@@ -640,7 +654,9 @@ function trocaAvatar(x){
                                     echo '<span class='.str_replace(' ','',$item).' >';
                                         $value=$armaduras->getCUSTO();
                                 }
+                                /// verifica se possui o recurso para compra ///
                                         echo '<input type=checkbox onchange=moeda(\''.$recurso.'\'); value='.$value.' name=\''.$item.'\' title="'.$desc.'" />';
+                                //////////         
                                     if($act == 'cad6'){
                                         echo '</span>';
                                     }else{

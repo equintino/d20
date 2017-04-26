@@ -117,6 +117,7 @@
         return $this->update3($model);
    }
    public function grava4(Model $model){
+       //print_r($model);die;
         if ($model->getid() === null) {
             return $this->insert4($model);
         }

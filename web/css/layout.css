@@ -1072,23 +1072,24 @@ fieldset legend{
 /* CAD3 */
 .Machadinha{
     position: relative;
-    top: -490px;
-    left: 10px;
+    top: -470px;
+    right: 725px;
 }
 .MachadodeBatalha{
     position: relative;
-    top: -460px;
-    left: 85px;
+    top: -430px;
+    right: 680px;
 }
 .MachadoPesado{
     position: relative;
-    top: -440px;
-    left: 155px;
+    top: -390px;
+    right: 625px;
 }
 .Glaive{
     position: relative;
-    top: -400px;
-    left: 220px;
+    top: -300px;
+    right: 600px;
+    border: 1px solid red;
 }
 .Alabarda{
     position: relative;
