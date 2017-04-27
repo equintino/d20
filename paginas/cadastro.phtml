@@ -526,8 +526,8 @@ function trocaAvatar(x){
                                             echo '</span>';
                                         }
                                         echo '<script>moeda('.$recurso.');</script>';
-                                        echo '<input type="button" value="VOLTAR" class=\'botao botao-verde\' onclick=history.go(-1) > ' ;  
                                         echo '<input type="submit" value="AVANÇA" class=\'botao botao-verde\'> ' ;  
+                                        echo '<input type="button" value="VOLTAR" class=\'botao botao-verde\' onclick=history.go(-1) > ' ;  
                                         echo '<a href=\'../web/index.php?pagina=cadastro&act=cad5&classe='.$_GET['classe'].'&raca='.$raca.'&personagem='. $_GET['personagem'].'\'><input type=button class=\'botao botao-verde\' value=PULAR></a>'; 
                         ?>
                         <br><br><br>
@@ -633,7 +633,7 @@ function trocaAvatar(x){
                                        $desc.='Peso: '.$armaduras->getpeso()."\r\n";
                                     if($armaduras->getOBS())
                                        $desc.='Obs: '.$armaduras->getOBS();
-                                    echo '<div class='.str_replace(' ','',$item).' >';
+                                    echo '<span class='.str_replace(' ','',$item).' >';
                                     $item = $item.'/'.$armaduras->getdefesa();
                                     $value=$armaduras->getCUSTO();
                                 }elseif($act=='cad6'){
@@ -657,11 +657,7 @@ function trocaAvatar(x){
                                 /// verifica se possui o recurso para compra ///
                                         echo '<input type=checkbox onchange=moeda(\''.$recurso.'\'); value='.$value.' name=\''.$item.'\' title="'.$desc.'" />';
                                 //////////         
-                                    if($act == 'cad6'){
-                                        echo '</span>';
-                                    }else{
-                                        echo '</div>';
-                                    }
+                                    echo '</span>';
                             }
                             if($act=='cad6'){
                                 echo '<span class=Cajado_ title="Pode ser usado em combate como um Bordão.">*</span>';

@@ -296,7 +296,7 @@ ul li{
 }
 .cad5 .botao{
     float: right;
-    top: -160px;
+    top: 10px;
     margin-right: 5px;
 }
 .cad6 .botao{
@@ -311,7 +311,7 @@ ul li{
 }
 .cad5 .botao:active{   
     position: relative;
-    top: -155px;
+    top: 15px;
     box-shadow: none;    
 }
 .cad6 .botao:active{   
@@ -858,7 +858,7 @@ fieldset legend{
     background-size: 100% 100%;
     #border: 5px solid brown;
     width: 100%;
-    height: 1100px;
+    height: 1500px;
     #display: block;
     #clear: both;
     #float: right;
@@ -1310,38 +1310,38 @@ fieldset legend{
 }
 .ArmaduradeBatalha{
     position: relative;
-    top: -530px;
+    top: -510px;
     left: 430px;
 }
 .ArmaduraCompleta{
     position: relative;
-    top: -550px;
-    left: 600px;
+    top: -510px;
+    left: 580px;
 }
 .TúnicaPesada{
     position: relative;
-    top: -130px;
-    left: 200px;
+    top: -50px;
+    left: 130px;
 }
 .EscudodeCorpo{
     position: relative;
-    top: -200px;
-    left: 335px;
+    top: -110px;
+    left: 255px;
 }
 .EscudoMédio{
     position: relative;
-    top: -345px;
-    left: 450px;
+    top: -275px;
+    left: 350px;
 }
 .EscudoPequeno{
     position: relative;
-    top: -220px;
-    left: 520px;
+    top: -80px;
+    left: 360px;
 }
 .ArmaduradeCouro{
     position: relative;
-    top: -220px;
-    left: 680px;
+    top: -70px;
+    left: 530px;
 }
 /* fim CAD5 */
 .conj{
