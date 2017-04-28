@@ -8,11 +8,6 @@
     $nome=$_POST['nome'];
     $email=$_POST['email'];
     $senha=$_POST['senha'];
-print_r($_POST);
-echo '<br>';
-echo $senha.' - ';
-//$criptografia->criptografia();
-//$senha = valida_cookies::($senha);
     
     $criptografia = new valida_cookies(); 
     $dao = new UserDao();
@@ -26,7 +21,7 @@ echo $senha.' - ';
     
     $dao->save($user);
     
-    $string="Location: ../index.phtml";
+    $string="Location: ../index.html";
     header($string);
 ?>
 
