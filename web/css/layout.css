@@ -494,7 +494,7 @@ fieldset legend{
 }
 .saudacao{
     position: relative;
-    margin-right: 10px;
+    #margin-right: -25px;
     top: -130px;
     #left: 380px;
     #top: 180px;
@@ -856,15 +856,17 @@ fieldset legend{
 .tudo{
     background-image: url('../imagens/fundo.png');
     background-size: 100% 100%;
+    border-radius: 20px;
     #border: 5px solid brown;
-    width: 100%;
+    width: 103%;
     height: 1500px;
     #display: block;
     #clear: both;
     #float: right;
-    margin-top: 290px;
+    margin-top: 310px;
     pisition: relative;
     top: 200px;
+    margin-left: -10px;
 }
 .equipamento .cont{
     #margin: 140px 120px;
@@ -898,13 +900,14 @@ fieldset legend{
     margin-left: 110px;
     float: left;
     position: relative;
-    #top: -50px;
+    top: 50px;
     width: 380px;
     #border: 1px solid red;
 }
 .armadura1{
     #margin: 40px 50px;
     float: right;
+    margin-top: 50px;
     #border: 5px solid darkorange;
     width: 390px;
 }
