@@ -924,6 +924,7 @@ fieldset legend{
 }
 .equipamento table{
     #border: 1px solid red;
+    margin-top: 40px;
     float: left;
     width: 760px;
     margin-left: 120px;
