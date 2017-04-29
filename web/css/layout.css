@@ -133,10 +133,6 @@ body{
     font-size: 30px;
     color: brown;    
 }
-.pag{
-    color: white;
-    text-shadow: 2px 2px black;    
-}
 a:link{
     text-decoration: none;
 }
@@ -483,13 +479,19 @@ fieldset legend{
     text-shadow: 2px 2px black;
     #border: 1px solid green;
 }
+iframe{
+    border-left: 2px solid white;
+    border-radius: 0 0 0 100px;
+    width: 230px; 
+    height: 83px;
+}
 .saudacao1{
     position: absolute;
-    top: 60px;
+    top: 73px;
     right: 10px;
     color: white;
     font-style: italic;
-    font-size: 15px;
+    font-size: 18px;
     text-shadow: 4px -4px 0.5px  green;
 }
 .saudacao{
@@ -692,12 +694,19 @@ fieldset legend{
     color: red;
 }
 .paginacao{
-    position: absolute;
-    right: 30px;
-    #float: right;
+    position: relative;
+    right: 40px;
+    top: 30px;
+    float: right;
     #border: 1px solid red;
     #width: 200px;
     text-align: center;
+}
+.pag{
+    color: white;
+    text-shadow: 2px 2px black; 
+    font-size: 13px;
+    font-style: italic;
 }
 .resultado{
     width: 200px;
