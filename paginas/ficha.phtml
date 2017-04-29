@@ -23,6 +23,7 @@
 <div  class="conteudo" >
     <div class="jogador">
         <fieldset class="cadficha"><legend>FICHA DE PERSONAGEM &nbsp&nbsp LEVEL <span id=nivel></span></legend>
+            <div class="tabEscAvaMot" >
             <div class=tabelaFicha>
                 <table cellspacing=0 border=1>
                     <?php 
@@ -36,20 +37,6 @@
                         if(!$lista){
                             die('Personagem Inexistente');
                         }
-                        /*if(count($lista)==1 && $login <> 'MESTRE'){
-                            echo '<tr><td class=nomes>'.$titulos[0].'</td><td class=nomes2>'.$item->getpersonagem().'</td></tr>';
-                            echo '<tr><td class=nomes>'.$titulos[1].'</td><td class=nomes2>'.$item->getraca().'</td></tr>';
-                            echo '<tr><td class=nomes>'.$titulos[2].'</td><td class=nomes2>'.$item->getclasse().'</td></tr>';
-                            echo '<tr><td class=nomes>'.$titulos[3].'</td><td class=nomes2>'.$item->gettendencia1().'</td></tr>';
-                            echo '<tr><td class=nomes>'.$titulos[4].'</td><td class=nomes2>'.$item->gettendencia2().'</td></tr>';
-                            $habilidades=$item->gethabilidade();
-                            $classe=$item->getclasse();
-                            $level=$item->getnivel();
-                            if(!$level){
-                               $level=1; 
-                            }
-                            echo '<script>nivel('.$level.')</script>';
-                        }else{*/
                             foreach($lista as $keys => $item){
                                 echo '<tr><td class=nomes>'.$titulos[0].'</td><td class=nomes2>'.$item->getpersonagem().'</td></tr>';
                                 echo '<tr><td class=nomes>'.$titulos[1].'</td><td class=nomes2>'.$item->getraca().'</td></tr>';
@@ -70,20 +57,23 @@
                 </table>
             </div>
             <?php
-            echo '<div id="aqui">Bem-vindo <span class=motivacaoJogador>'.strtoupper($item->getpersonagem()).'</span></div>';
-            echo '<div class=fichaAvatar><img height=200px src="../web/imagens/personagens/'.$item->getraca().'/'.$item->getavatar().'.png" />';
+            echo '<span id="aqui">Bem-vindo <span class=motivacaoJogador>'.strtoupper($item->getpersonagem()).'</span></span>';
+            echo '<span class=fichaAvatar><img height=230px src="../web/imagens/personagens/'.$item->getraca().'/'.$item->getavatar().'.png" />';
                echo '<div class=escudo><img height=80px src=../web/imagens/escudo.png />';
                   echo '<div class=defesa>Defesa<br><span id=def></span></div>';
                echo '</div>';
-               echo '<div class=motivacao>';
+               echo '<span class=motivacao>';
                   echo '<span class=fichaTitulo>Motivação</span>';
                   echo '<p class=motivacaoTexto>'.$item->getmotivacao().'</p>';
-               echo '</div>';
-            echo '</div>';
+               echo '</span>';
+            echo '</span>';
+            ?>
+            </div>    
+            <?php
             echo '<div class=historia>';                    
                echo '<span class=hTitulo>Uma breve história</span>'; 
-               echo '<span class=hTexto >
-                    <p>Tenho '.$item->getidade().' anos, '.$item->getaltura().'m de altura, peso '.$item->getpeso().'Kg, nasci na cidade de '.$item->getcidade().'.</p><p>'.$item->getbreveHistoria().'</p></span>';
+               echo '<div class=hTexto >
+                    <p>Tenho '.$item->getidade().' anos, '.$item->getaltura().'m de altura, peso '.$item->getpeso().'Kg, nasci na cidade de '.$item->getcidade().'.</p><p>'.$item->getbreveHistoria().'</p></div>';
             echo '</div>';
             echo '<div class=atributo>';
                echo '<table>';
