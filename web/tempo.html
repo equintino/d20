@@ -68,27 +68,33 @@ function getSecs(){
                 if(sHors >= 06 && sHors < 10){
                     document.body.style.background = "#f3f3f3 url('imagens/tempo/dia.jpg') no-repeat right top";
                     document.body.style.backgroundSize = "100%";
-                    //alert('dia');
+                    document.querySelector('.tempo').style.color = 'red';
+                    document.querySelector('.tempo').style.textShadow = '2px 2px 2px black';
                 }else if(sHors >= 10 && sHors < 13){
                     document.body.style.background = "#f3f3f3 url('imagens/tempo/10.jpg') no-repeat right top";
                     document.body.style.backgroundSize = "100%";
                     document.querySelector('.tempo').style.color = 'blue';
+                    document.querySelector('.tempo').style.textShadow = '2px 2px 2px white';
                 }else if(sHors >= 13 && sHors < 15){
                     document.body.style.background = "#f3f3f3 url('imagens/tempo/15.jpg') no-repeat right top";
                     document.body.style.backgroundSize = "100%";
                     document.querySelector('.tempo').style.color = 'white';
+                    document.querySelector('.tempo').style.textShadow = '2px 2px 2px black';
                 }else if(sHors >= 15 && sHors < 18){
                     document.body.style.background = "#f3f3f3 url('imagens/tempo/18.jpg') no-repeat right top";
                     document.body.style.backgroundSize = "100%";
                     document.querySelector('.tempo').style.color = 'white';
+                    document.querySelector('.tempo').style.textShadow = '2px 2px 2px black';
                 }else if(sHors >= 18 && sHors < 23){
                     document.body.style.background = "#f3f3f3 url('imagens/tempo/noite.jpg') no-repeat right top";
                     document.body.style.backgroundSize = "100%";
                     document.querySelector('.tempo').style.color = 'white';
+                    document.querySelector('.tempo').style.textShadow = '2px 2px 2px red';
                 }else if(sHors < 06){
                     document.body.style.background = "#f3f3f3 url('imagens/tempo/00.jpg') no-repeat right top";
                     document.body.style.backgroundSize = "100%";
                     document.querySelector('.tempo').style.color = 'white';
+                    document.querySelector('.tempo').style.textShadow = '2px 2px 2px red';
                 }
 	if(sSecs<=9)sSecs="0"+sSecs;
 	if(sSecs>59)

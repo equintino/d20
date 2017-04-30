@@ -856,7 +856,7 @@ iframe{
 .historia{
     font-family: Times New Roman;
     font-size: 25px;
-    margin-top: -60px;
+    margin: -60px 50px;
     float: left;
     #border: 1px solid yellow;
     height: 200px;
@@ -898,7 +898,8 @@ iframe{
     #border: 1px solid red;
     #clear: both;
     float: right;
-    width: 500px;
+    margin-right: 40px;
+    width: 350px;
     #position: relative;
     #top: -150px;
 }
