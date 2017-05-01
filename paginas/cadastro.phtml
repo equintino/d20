@@ -1,8 +1,39 @@
 <script>
+   function functionSexo(){
+      raca = document.getElementById('mySelect').value;
+      classe = document.getElementById('myClasse').value;
+      sexo = document.getElementsByName('sexo');
+      for(i=0;i<sexo.length;i++){
+         if(sexo[0].checked==true){
+            sexo = 'M';
+         }else if(sexo[1].checked==true){
+            sexo = 'F';
+         }
+      }
+      if(raca != false && classe != false && sexo != false){
+         document.getElementById('aqui').innerHTML='<img height=200px src="../web/imagens/personagens/'+raca+'/'+classe+'/'+sexo+'/1.png" />';
+      }
+      //alert('/web/imagens/personagens/'+raca+'/'+classe+'/'+sexo+'/1.png');
+      //alert(classe);
+   }
   function myFunction(){
     var x = document.getElementById('mySelect').value;
+      classe = document.getElementById('myClasse').value;
+      sexo = document.getElementsByName('sexo');
+      raca = x;
+      for(i=0;i<sexo.length;i++){
+         if(sexo[0].checked==true){
+            sexo = 'M';
+         }else if(sexo[1].checked==true){
+            sexo = 'F';
+         }
+      }
     racaAvatar = x;
-      document.getElementById('aqui').innerHTML='<img height=200px src="../web/imagens/personagens/'+x+'/'+x+'1.png" />';//+trocaAvatar;
+    //alert(x);
+    //alert(classe);
+    if(classe != false && x != false && sexo != false){
+         document.getElementById('aqui').innerHTML='<img height=200px src="../web/imagens/personagens/'+x+'/'+classe+'/'+sexo+'/1.png" />';
+    }
     if(x=='humano'){
       var y = 'Humanos uma raça muito comum e muitas vezes escolhida, boa para iniciantes no RPG, é uma raça neutra, sem benefícios ou malefícios, os humanos não tem nenhuma vantagem ou poder melhor que as outras raças, mas também não tem nenhuma desvantagem.Podem ter várias cores de pele, cabelos e olhos e chegar até 2,20m ';
      document.cookie = "avatar=humano1; path=/";
@@ -102,13 +133,14 @@ function abrir(URL) {
 acrescimoGlobal=0;
 function mudaImagem(raca,i,max){
    var i = i+acrescimoGlobal;
-   var max;
+   var max = 5;
    if(acrescimoGlobal == max-1){
       acrescimoGlobal=0;
    }else{
       acrescimoGlobal++;
    }
-   var x = '<img height=200px src=\'../web/imagens/personagens/'+raca+'/'+raca+i+'.png\' \>';
+   var x = '<img height=200px src=\'../web/imagens/personagens/'+raca+'/'+classe+'/'+sexo+'/'+i+'.png\' \>';
+         //document.getElementById('aqui').innerHTML='<img height=200px src="../web/imagens/personagens/'+x+'/'+classe+'/'+sexo+'/1.png" />';
    raca;
    var trocaAvatar = "<a href='index.php?pagina=cadastro&act=avatar&raca="+x+"' onclick='submit'><font size=2>Trocar Avatar</font></a>";
    document.getElementById("aqui").innerHTML=x;
@@ -221,7 +253,11 @@ function trocaAvatar(x){
                     <table>
                         <?php
                            foreach($variaveis as $keys => $item){
-                            if($item=='raca'){
+                              if($item=='sexo'){
+                                echo '<tr><td align=right> '.$keys.': </td>';
+                                echo '<td><input onchange="functionSexo()" type=radio name=sexo value=M> MASCULINO';
+                                echo ' <input onchange="functionSexo()" type=radio name=sexo value=F> FEMININO</td></tr>';
+                              }elseif($item=='raca'){
                                 echo '<tr><td align=right> '.$keys.': </td>';
                                 echo '<td><select id="mySelect" name=raca onchange="myFunction()">';
                                     echo '<option>&nbsp</option>';
@@ -232,7 +268,7 @@ function trocaAvatar(x){
                                 echo '</select><span id=trocaAvatar onclick=mudaImagem(racaAvatar,1,12)></span></td></tr>';
                             }elseif($item=='classe'){
                                 echo '<tr><td align=right> '.$keys.': </td>';
-                                    echo '<td><select name=classe>';
+                                    echo '<td><select name=classe id="myClasse" onchange="myFunction()" >';
                                         echo '<option>&nbsp</option>';
                                         echo '<option value=espadachim>ESPADACHIM</option>';
                                         echo '<option value=guerreiro>GUERREIRO</option>';
@@ -259,10 +295,6 @@ function trocaAvatar(x){
                                         echo '<option value=neutro>NEUTRO</option>';
                                         echo '<option value=caótico>CAÓTICO</option>';
                                     echo '</select></td></tr>';
-                            }elseif($item=='sexo'){
-                                echo '<tr><td align=right> '.$keys.': </td>';
-                                echo '<td><input type=radio name=sexo value=M> MASCULINO';
-                                echo ' <input type=radio name=sexo value=F> FEMININO</td></tr>';
                             }elseif($item=='jogador'){
                                 echo "<tr><td align=\"right\"> $keys: </td><td>$login</td></tr>";
                                 echo "<input type=\"hidden\" name=\"jogador\" value=\"".$login."\" size=\"40\" />";
