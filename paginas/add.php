@@ -6,8 +6,8 @@
   include_once '../mapping/modelMapper.php';
   include_once '../dao/ModelSearchCriteria.php';
   include_once '../validacao/ModelValidador.php';
-  //setcookie('nome','edmilson');
   $avatar=$_COOKIE['avatar'];
+   print_r($_COOKIE);die;
   $act=$_GET['act'];
   $personagem = $_GET['personagem'];
   @$classe = $_GET['classe'];
