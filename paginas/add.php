@@ -7,7 +7,6 @@
   include_once '../dao/ModelSearchCriteria.php';
   include_once '../validacao/ModelValidador.php';
   $avatar=$_COOKIE['avatar'];
-   print_r($_COOKIE);die;
   $act=$_GET['act'];
   $personagem = $_GET['personagem'];
   @$classe = $_GET['classe'];
@@ -51,6 +50,7 @@
         }
       }else{
          $model->setavatar($avatar);
+         //print_r($model->getavatar());die;
          $dao->grava($model); 
       }
 	echo '<div class=\'add\'>'.
