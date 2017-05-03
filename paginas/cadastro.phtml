@@ -155,7 +155,7 @@ function mudaImagem(raca,i,max){
    raca;
    var trocaAvatar = "<a href='index.php?pagina=cadastro&act=avatar&raca="+x+"' onclick='submit'><font size=2>Trocar Avatar</font></a>";
    document.getElementById("aqui").innerHTML=x;
-   //document.cookie = "avatar="+raca+"/"+classe+"/"+sexo+"/"+i+"; path=/";
+   document.cookie = "avatar="+raca+"/"+classe+"/"+sexo+"/"+i+"; path=/";
 }
 function trocaAvatar(x){
     var x;
