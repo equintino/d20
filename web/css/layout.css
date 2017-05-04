@@ -24,8 +24,8 @@ body{
     #margin: 0 20px;
     #border: 1px solid red;
     #background: rgba(108,167,229,1);
-    background: rgba(255,255,229,1);
-    background: 90% url('../imagens/245452.jpg');
+    background: rgba(255,255,0,0.1);
+    background: 10% url('../imagens/5.jpg');
 }
 #menu{
     /*
