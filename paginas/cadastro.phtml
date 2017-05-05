@@ -1,67 +1,52 @@
 <script>
-   function functionSexo(){
-      raca = document.getElementById('mySelect').value;
-      classe = document.getElementById('myClasse').value;
-      sexo = document.getElementsByName('sexo');
-      for(i=0;i<sexo.length;i++){
-         if(sexo[0].checked==true){
-            sexo = 'M';
-         }else if(sexo[1].checked==true){
-            sexo = 'F';
-         }
-      }
-      if(raca != false && classe != false && sexo != false){
-         document.getElementById('aqui').innerHTML='<img height=200px src="../web/imagens/personagens/'+raca+'/'+classe+'/'+sexo+'/1.png" />';
-      }
-   }
-   function functionClasse(){
-      raca = document.getElementById('mySelect').value;
-      classe = document.getElementById('myClasse').value;
-      sexo = document.getElementsByName('sexo');
-      for(i=0;i<sexo.length;i++){
-         if(sexo[0].checked==true){
-            sexo = 'M';
-         }else if(sexo[1].checked==true){
-            sexo = 'F';
-         }
-      }
-      if(raca != false && classe != false && sexo != false){
-         document.getElementById('aqui').innerHTML='<img height=200px src="../web/imagens/personagens/'+raca+'/'+classe+'/'+sexo+'/1.png" />';
-      }
-   }
+    function functionSexoClasse(){
+        raca = document.getElementById('mySelect').value;
+        classe = document.getElementById('myClasse').value;
+        sexo = document.getElementsByName('sexo');
+        for(i=0;i<sexo.length;i++){
+            if(sexo[0].checked==true){
+                sexo = 'M';
+            }else if(sexo[1].checked==true){
+                sexo = 'F';
+            }else{
+                sexo = false;
+            }
+        }
+        link = '../web/imagens/personagens/'+raca+'/'+classe+'/'+sexo+'/1.png';
+        if(raca != false && classe != false && sexo != false){
+            document.getElementById('aqui').innerHTML='<img height=200px src='+link+' />';
+        }
+        document.cookie = "avatar="+link+"; path=/";
+    }
   function myFunction(){
-    var x = document.getElementById('mySelect').value;
-      classe = document.getElementById('myClasse').value;
-      sexo = document.getElementsByName('sexo');
-      raca = x;
-      for(i=0;i<sexo.length;i++){
-         if(sexo[0].checked==true){
-            sexo = 'M';
-         }else if(sexo[1].checked==true){
-            sexo = 'F';
-         }
-      }
-    racaAvatar = x;
+        raca = document.getElementById('mySelect').value;
+        classe = document.getElementById('myClasse').value;
+        sexo = document.getElementsByName('sexo');
+        for(i=0;i<sexo.length;i++){
+            if(sexo[0].checked==true){
+               sexo = 'M';
+            }else if(sexo[1].checked==true){
+               sexo = 'F';
+            }
+        }
+        link = '../web/imagens/personagens/'+raca+'/'+classe+'/'+sexo+'/1.png';
     if(classe != false && raca != false && sexo != false){
-         document.getElementById('aqui').innerHTML='<img height=200px src="../web/imagens/personagens/'+raca+'/'+classe+'/'+sexo+'/1.png" />';
+         document.getElementById('aqui').innerHTML='<img height=200px src='+link+' />';
     }
-    if(x=='humano'){
+    if(raca=='humano'){
       var y = 'Humanos uma raça muito comum e muitas vezes escolhida, boa para iniciantes no RPG, é uma raça neutra, sem benefícios ou malefícios, os humanos não tem nenhuma vantagem ou poder melhor que as outras raças, mas também não tem nenhuma desvantagem.Podem ter várias cores de pele, cabelos e olhos e chegar até 2,20m ';
-     //document.cookie = "avatar=1; path=/";
     }
-    if(x=='elfo'){
+    if(raca=='elfo'){
       var y = 'Elfos  são pessoas de uma raça mística com aparência humanóide geralmente belos e loiros. São mais baixos e menos fortes, porém mais rápidos e habilidosos que os humanos. Há quem diga que são Semi-Deuses e Imortais.São seres mágicos, ligados à natureza, o que os diferencia de Magos e Feiticeiros, que advém do estudo das artes arcanas por outras raças.São excelentes arqueiros e possuem natural aptidão para as magias da Natureza.';
-     //document.cookie = "avatar=1; path=/";
     }
-    if(x=='anao'){
+    if(raca=='anao'){
       var y = 'Os anões demoram a sorrir, ou a brincar e suspeitam muito de estranhos, mas são generosos com os poucos que ganham sua confiança. Eles valorizam o ouro, as gemas, as jóias e os objetos de arte feitos com esses materiais preciosos e muitos já sucumbiram ao poder da ambição. Eles não combatem nem tímida, nem temerariamente, mas com coragem e tenacidade cuidadosas. Seu senso de justiça é forte, mas pode se transformar em uma sede de vingança. Entre os gnomos, que são conhecidos por se darem bem com os anões, é comum dizerem o seguinte juramento: “Se estou mentindo, que eu enraiveça um anão”.';
-     //document.cookie = "avatar=1; path=/";
     }
-    if(x=='halfling'){
+    if(raca=='halfling'){
       var y = 'Como raça amigável, tentam se dar bem com todas as outras raças, mesmo assim, não que dizer que considerem todos amigos, no geral consideram amigos verdadeiros apenas os de sua própria raça; porém quando fazem amigos sem ser de sua espécie, são extremamente leais, mostrando ferocidade quando esse amigo está em perigo. Vivem no geral em comunidades pacificas, com grandes fazendas e bosques, nunca construíram um reino próprio, nem reconhecem qualquer tipo de nobreza dos de sua espécie, procurando sempre os anciões de sua família em busca de orientação, essa base construída em cima da família ajudou os halflings a mantes suas tradições por milhares de anos, independente do que estivesse ocorrendo no reino. Criaturas que querem se dar bem com todos, possuem no geral alinhamento leal e bom, não gostando de ver os outros sofrerem ou passar por opressão, mantendo sempre um forte as suas tradições, assim como os velhos hábitos e conforto. A divindade dos Halflings é Yondalla O Abençoado, o protetor dos halflings, a língua usada por ele é um idioma próprio. Como dito anteriormente, eles se aventuram mais com propósitos de proteger a comunidade, família e amigos, porém em uma batalha, por seu tamanho reduzido, usam mais de astúcia e furtividade do que força bruta ou mágia.';
-     //document.cookie = "avatar=1; path=/";
     }
     document.getElementById('aqui.texto').innerHTML=y;
+    document.cookie = "avatar="+link+"; path=/";
   }
   function dica(){
     var x = "DICA... \r\n     Use sua imaginação. A primeira coisa a fazer é escolher um conceito, uma idéia básica. O que seu personagem vai ser? Um guerreiro bárbaro com um machado mágico e uma pele de pantera jogada sobre os ombros? Um feiticeiro caçador de monstros? Um lutador de rua em busca de vingança? Um elfo caçador de recompensas? Você pode ser tudo isso e qualquer outra coisa que imaginar.";
@@ -272,8 +257,8 @@ function trocaAvatar(x){
                            foreach($variaveis as $keys => $item){
                               if($item=='sexo'){
                                 echo '<tr><td align=right> '.$keys.': </td>';
-                                echo '<td><input onchange="functionSexo()" type=radio name=sexo value=M> MASCULINO';
-                                echo ' <input onchange="functionSexo()" type=radio name=sexo value=F> FEMININO</td></tr>';
+                                echo '<td><input onchange="functionSexoClasse()" type=radio name=sexo value=M> MASCULINO';
+                                echo ' <input onchange="functionSexoClasse()" type=radio name=sexo value=F> FEMININO</td></tr>';
                               }elseif($item=='raca'){
                                 echo '<tr><td align=right> '.$keys.': </td>';
                                 echo '<td><select id="mySelect" name=raca onchange="myFunction()">';
@@ -285,7 +270,7 @@ function trocaAvatar(x){
                                 echo '</select><span id=trocaAvatar onclick=mudaImagem('.$max.')></span></td></tr>';
                             }elseif($item=='classe'){
                                 echo '<tr><td align=right> '.$keys.': </td>';
-                                    echo '<td><select name=classe id="myClasse" onchange="functionClasse()" >';
+                                    echo '<td><select name=classe id="myClasse" onchange="functionSexoClasse()" >';
                                         echo '<option>&nbsp</option>';
                                         echo '<option value=espadachim>ESPADACHIM</option>';
                                         echo '<option value=guerreiro>GUERREIRO</option>';
