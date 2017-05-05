@@ -1,5 +1,5 @@
 .login{
-  //background: #dddddd url("http://www.formget.com/app/new-app/css/../images/repeat-bg.png") fixed repeat;
+  /*background: #dddddd url("http://www.formget.com/app/new-app/css/../images/repeat-bg.png") fixed repeat;*/
   background-color: #46BEF0;
   font-family: "proxima_nova_rgregular", sans-serif;
   font-size: 16px;
@@ -19,7 +19,6 @@
 .quadro{
     width: 400px;
     margin: 100px auto;
-    #border: 1px solid yellow;
 }
 .quadro div{
     float: right;

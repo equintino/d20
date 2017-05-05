@@ -230,7 +230,6 @@ function trocaAvatar(x){
             <fieldset>
                <?php
                   echo '<legend><a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x-1,'z'=>$z-1)).' '.$class.' ><< </a> FICHA DE PERSONAGEM <a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x+1,'contador'=>count($lista),'z'=>$z+1)).' '.$class2.'> >> </a>&nbsp&nbsp LEVEL '.$level.'</legend>';
-                     echo '<table cellspacing=0 border=1>';
                      $ids=array();
                      foreach($lista as $item){
                         $ids[]= $item->getid();
@@ -239,23 +238,26 @@ function trocaAvatar(x){
                         echo '<span class=semPersonagem>Não existe nenhum personagem para este jogador</span>';
                      } 
                      //$z=1;
-                        foreach($lista as $keys => $item){
-                           //if($x < $keys && $keys < $y){
-                           //echo $ids[0];die;
-                           if($item->getid() == $ids[$z]){
-                              echo '<tr><td class=nomes>'.$titulos[0].'</td><td class=nomes2><a href='.Utils::createLink('ficha', array('personagem'=>$item->getpersonagem())).'>'.$item->getpersonagem().'<span class=verFicha><br>(ver ficha)</span></a></td></tr>';
-                              echo '<tr><td class=nomes>'.$titulos[1].'</td><td class=nomes2>'.$item->getraca().'</td></tr>';
-                              echo '<tr><td class=nomes>'.$titulos[2].'</td><td class=nomes2>'.$item->getclasse().'</td></tr>';
-                              echo '<tr><td class=nomes>'.$titulos[3].'</td><td class=nomes2>'.$item->gettendencia1().'</td></tr>';
-                              echo '<tr><td class=nomes>'.$titulos[4].'</td><td class=nomes2>'.$item->gettendencia2().'</td></tr>';
-                              echo '<div id="aqui" class="raca"><span class="saudacao" >Personagem de '.strtoupper($item->getjogador());
-                              echo '</span><img class=foto height=220px src="'.$item->getavatar().'" /></div>';
-                           //}elseif($keys > $y){
-                              break;
-                           }
-                        }                     
-                           //print_r($ids);
-                    echo '</table>';
+                    echo '<div class="raca">';
+                        echo '<table cellspacing=0 border=1>';
+                            foreach($lista as $keys => $item){
+                               //if($x < $keys && $keys < $y){
+                               //echo $ids[0];die;
+                               if($item->getid() == $ids[$z]){
+                                  echo '<tr><td class=nomes>'.$titulos[0].'</td><td class=nomes2><a href='.Utils::createLink('ficha', array('personagem'=>$item->getpersonagem())).'>'.$item->getpersonagem().'<span class=verFicha><br>(ver ficha)</span></a></td></tr>';
+                                  echo '<tr><td class=nomes>'.$titulos[1].'</td><td class=nomes2>'.$item->getraca().'</td></tr>';
+                                  echo '<tr><td class=nomes>'.$titulos[2].'</td><td class=nomes2>'.$item->getclasse().'</td></tr>';
+                                  echo '<tr><td class=nomes>'.$titulos[3].'</td><td class=nomes2>'.$item->gettendencia1().'</td></tr>';
+                                  echo '<tr><td class=nomes>'.$titulos[4].'</td><td class=nomes2>'.$item->gettendencia2().'</td></tr>';
+                                  echo '<span class=foto><img height=220px src="'.$item->getavatar().'" /></span>';
+                        echo '</table>';
+                    echo '</div>';
+                                  echo '<div class=saudacao>Personagem de '.strtoupper($item->getjogador()).'</div>';
+                               //}elseif($keys > $y){
+                                  break;
+                               }
+                            }                     
+                               //print_r($ids);
                ?>
             </fieldset>
         </div>

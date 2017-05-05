@@ -5,28 +5,17 @@
     font-size: 26px;
 }
 .conteudo{
-    #margin-left: 5px;
     font-family: sans-serif;
     height: 1400px;
     width: 320px;
     border: solid 1px blue;
-    #margin: 20px auto;
-    #overflow: auto;
 }
 body{
-    #font-size: 40px;
     border: 2px solid yellow;
     margin: 0;
     padding: 0;
-    #font-size: 20px;
     background-image: url('../imagens/Wiki-background.jpg');
     background-repeat: no-repeat;
-    #background-position-x: 100%;
-    #background-position-y: 100%;
-    #background-size: 98%;
-    #backface-visibility: hidden;
-    #background-color: black;
-    #text-align: center;
 }
 #cabecalho{  
     width: 50%; 
@@ -36,7 +25,6 @@ body{
       visibility: hidden;
 }
 .titulo{
-    #font-size: 48px;
 }
 .painel {
   width: auto;
