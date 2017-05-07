@@ -113,7 +113,7 @@ body{
 }
 .saudacao{
     clear: left;
-    margin-left: 250px;
+    margin-left: 265px;
     font-family: 'Architects Daughter', cursive;
     color: white;
     text-shadow: 2px 2px black;
@@ -408,11 +408,6 @@ ul li{
 .maisumbnt{
     float: right;
 }
-.cadficha{
-    width: 900px;
-    height: 540px;
-    border-radius: 10px;
-}
 .disabled {
    pointer-events: none;
    cursor: default;
@@ -638,6 +633,11 @@ iframe{
     font-size: 18px;
     width: 100%;
     float: left;
+}
+.cadficha{
+    width: 900px;
+    height: 540px;
+    border-radius: 10px;
 }
 .tabEscAvaMot{
     width: 100%;
