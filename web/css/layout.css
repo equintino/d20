@@ -113,7 +113,7 @@ body{
 }
 .saudacao{
     clear: left;
-    margin-left: 265px;
+    text-align: center;
     font-family: 'Architects Daughter', cursive;
     color: white;
     text-shadow: 2px 2px black;
