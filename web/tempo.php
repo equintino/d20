@@ -155,9 +155,9 @@ function getSecs(){
             $search->setid(1);
             //print_r(get_class_methods($dao));
             //foreach($dao->encontre($search) as $item){
-                echo '<img height=40px src=gera.php?id=1&tabela=tb_tempo />';
-                echo '<img height=40px src=gera.php?id=1&tabela=tb_tempo&numero=2 />';
-                echo '<img height=40px src=gera.php?id=1&tabela=tb_tempo&numero=3 />';
+                echo '<img height=30px src=gera.php?id=1&tabela=tb_tempo />';
+                echo '<img height=30px src=gera.php?id=1&tabela=tb_tempo&numero=2 />';
+                echo '<img height=30px src=gera.php?id=1&tabela=tb_tempo&numero=3 />';
             //}
             
         ?>
