@@ -1,8 +1,9 @@
 <?php
 
 //RECEBE PAR�METRO  
-$id = $_GET["id"]; 
-$tabela=$_GET['tabela'];
+@$id = $_GET["id"]; 
+@$tabela=$_GET['tabela'];
+@$numero = $_GET['numero'];
 //CONECTA AO MYSQL                                               
 $conn = mysqli_connect("localhost", "root", "", "d20"); 
 
@@ -10,10 +11,14 @@ $conn = mysqli_connect("localhost", "root", "", "d20");
 $sql = mysqli_query($conn, "SELECT * FROM ".$tabela." WHERE id = ".$id."");         
 //print_r($sql);die;
 $row = mysqli_fetch_array($sql, MYSQLI_ASSOC); 
-//print_r($row);
-   //$tipo   = $row["tipo"];                        
-   $bytes  = $row["figura"];                        
+//print_r($row);die;
+   //$tipo   = $row["tipo"]; 
+    if(@$numero){
+        $bytes = $row["figura".$numero.""]; 
+    }else{
+        $bytes = $row["figura"];
+    }
    //EXIBE IMAGEM                                 
    header("Content-type: image/png");             
-   echo $bytes;                                   
+   echo $bytes;                                      
 ?>

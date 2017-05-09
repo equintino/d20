@@ -1,0 +1,32 @@
+id;DIA;TEMPMAX;TEMPMIN;DESCRICAO;ESTACAO;LUAS
+1;01;17°;6°;Sol com algumas nuvens. Céu limpo e estrelado durante a noite. ;Outono;Minguante
+2;02;18°;7°;Céu com mais nuvens pela manhã e chuva forte a tarde.  ;Outono;Minguante
+3;03;18°;6°;Chuva fraca durante a manhã, restante do dia nublado. ;Outono;Nova
+4;04;16°;5°;Céu parcialmente nublado o dia inteiro. ;Outono;Crescente
+5;05;12°;2°;Céu nublado com geada pela manhã.  ;Inverno;Crescente
+6;06;8°;1°;Geada pela manhã, dia nublado com chuva fraca ao anoitecer.  ;Inverno;Cheia
+7;07;4°;-3°;Neve pela manhã, sol entre nuvens a tarde, neve forte  a noite.  ;Inverno;Cheia
+8;08;2°;-7°;Neve pela manhã e a tarde. Céu aberto ao anoitecer.  ;Inverno;Minguante
+9;09;1°;-6°;Nevasca. Rápidas aparições do sol à tarde.  ;Inverno;Minguante
+10;10;2°;-5°;Neve durante a manhã e tarde.  ;Inverno;Nova
+11;11;2°;-3°;Vento forte com chuva fraca o dia inteiro. ;Inverno;Crescente
+12;12;4°;-2°;Chuva fraca o dia inteiro.  ;Inverno;Crescente
+13;13;7°;1° ;Vento forte e céu limpo.  ;Inverno;Cheia
+14;14;10°;    3°     ;Céu sem nuvens. ;Inverno;Cheia
+15;15;14°;4° ;Céu parcialmente nublado.  ;Inverno;Minguante
+16;16;12°;3° ;Sol entre nuvens.  ;Primavera;Minguante
+17;17;13°;5° ;Céu aberto e noite estrelada.  ;Primavera;Nova
+18;18;18°;7° ;Chuva fraca pela manhã. Restante do dia ensolarado.  ;Primavera;Crescente
+19;19;19°;8° ;Céu aberto com poucas nuvens. ;Primavera;Crescente
+20;20;20°;8° ;Céu parcialmente nublado pela manhã, sol entre nuvens a tarde. ;Primavera;Cheia
+21;21;21°;9° ;Sol entre nuvens pela manhã, céu aberto a tarde e a noite.  ;Primavera;Cheia
+22;22;21°;10° ;Céu aberto.  ;Primavera;Minguante
+23;23;20°;9° ;Céu aberto e noite estrelada.  ;Primavera;Minguante
+24;24;19°;7° ;Céu aberto e chuva fraca ao anoitecer. ;Primavera;Nova
+25;25;22°;6° ;Céu com poucas nuvens a maior parte do dia. ;Primavera;Crescente
+26;26;22°;16° ;Céu com poucas nuvens e chuva fraca ao fim da tarde.   ;Verão;Crescente
+27;27;21°;10° ;Nublado pela manhã, céu limpo durante o restante do dia.  ;Verão;Cheia
+28;28;24°;12° ;Céu aberto e sem nuvens durante o dia inteiro. Noite estrelada.  ;Verão;Cheia
+29;29;20°;10° ;Céu aberto durante o dia, noite com nuvens.  ;Verão;Minguante
+30;30;23°;15° ;Céu aberto durante o dia, chuva forte a noite. ;Verão;Minguante
+31;31;25°;13° ;Céu aberto sem nuvens, noite estrelada.  ;Verão;Nova
