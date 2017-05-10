@@ -3,10 +3,11 @@
 }
 .fases{
     background: rgba(0,0,0,0.2);
-    width: 30px;
+    width: 28px;
     position: absolute;
     top: 5px;
     right: 5px;
+    border-radius: 5px;
 }
 .temperatura{
     margin-top: 5px;
@@ -15,6 +16,7 @@
     font-size: 15px;
     width: 100px;
     background: rgba(0,0,0,0.2);
+    border-radius: 5px;
 }
 .seta{
     font-size: 17px;

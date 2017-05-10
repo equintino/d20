@@ -168,6 +168,14 @@
           $this->nivel = $nivel;
           return $this;
       }
+   private $emMissao;
+       public function getemMissao(){
+        return $this->emMissao;
+      }
+      public function setemMissao($emMissao){
+          $this->emMissao = $emMissao;
+          return $this;
+      }
    private $id_atrib;
        public function getid_atrib(){
         return $this->id_atrib;
@@ -358,6 +366,22 @@
       }
       public function setequipamento($equipamento){
           $this->equipamento = $equipamento;
+          return $this;
+      }
+   private $DATA;
+       public function getDATA(){
+        return $this->DATA;
+      }
+      public function setDATA($DATA){
+          $this->DATA = $DATA;
+          return $this;
+      }
+   private $MISSAO;
+       public function getMISSAO(){
+        return $this->MISSAO;
+      }
+      public function setMISSAO($MISSAO){
+          $this->MISSAO = $MISSAO;
           return $this;
       }
 }

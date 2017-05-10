@@ -64,6 +64,9 @@
 	if (array_key_exists('nivel', $properties)){
 	  $model->setnivel($properties['nivel']);
 	}
+	if (array_key_exists('emMissao', $properties)){
+	  $model->setemMissao($properties['emMissao']);
+	}
 	if (array_key_exists('id_atrib', $properties)){
 	  $model->setid_atrib($properties['id_atrib']);
 	}
@@ -165,6 +168,12 @@
 	}
 	if (array_key_exists('figura3', $properties)){
 	  $model->setfigura3($properties['figura3']);
+	}
+	if (array_key_exists('DATA', $properties)){
+	  $model->setDATA($properties['DATA']);
+	}
+	if (array_key_exists('MISSAO', $properties)){
+	  $model->setMISSAO($properties['MISSAO']);
 	}
   } 
  }

@@ -85,23 +85,37 @@
     }
     // ]]></script>
 </head>
-    <body onload="startSlideShow()">
-   <!--<div class="SITE_ROOT" id="SITE_ROOT" >-->
-      <!--<div class="tail-top-right"></div>-->
-      <!--<div id="main">-->       
+    <body onload="startSlideShow()">     
         <!-- header -->
          <div id="cabecalho">
             <span class="cor_1" id="logo">Jogo de RPG</span>
-            <div class='tempo'>
-               <iframe scrolling="no" frameborder=0 src="tempo.php"></iframe>
-            </div>
-            <!--<hr size="0.5" class="l1" />-->
-            <div id="menu" >
                   <?php 
+                    include '../dao/dao.php';
+                    include '../dao/ModelSearchCriteria.php';
                     @$login = strtoupper($_COOKIE['login']);
-                     $mes_=  ModelValidador::nomeMes(date('m'));
-                     $menu=array('home'=>'Home','cadastro'=>'Cadastro de Personagem','lista'=>'Personagens','dado'=>'Rolagem de Dado'); 
-                     echo '<ul>';
+                    if($login<>'MESTRE'){
+                        $menu=array('home'=>'Home','cadastro'=>'Cadastro de Personagem','lista'=>'Personagens','missao'=>'Missão'); 
+                    }else{
+                        $menu=array('home'=>'Home','cadastro'=>'Cadastro de Personagem','lista'=>'Personagens','dado'=>'Rolagem de Dado');                        
+                    }
+                    $dao = new dao();
+                    $search = new ModelSearchCriteria();
+                    $search->settabela('personagem');
+                    $search->setjogador($login);
+                    $dados = $dao->encontre($search);
+                    foreach($dados as $item){
+                        if($item->getemMissao()==1){
+                            //echo 'Personagem '.$item->getpersonagem().' está em missão.';
+                            echo "<div class='tempo'>";
+                                echo '<iframe scrolling="no" frameborder=0 src="tempo.php"></iframe>';
+                            echo '</div>';
+                        }
+                    }
+                    
+                    //$mes_=  ModelValidador::nomeMes(date('m'));
+                    
+            echo '<div id="menu" >';
+                    echo '<ul>';                                             
                         foreach($menu as $key => $item){
                            if($item == 'Cadastro de Personagem'){
                               echo '<li><a href="'.Utils::createLink('cadastro',array('act'=>'cad','pag'=>0)).'" ><span class="bnt">'.$item.'</span></a></li>';
@@ -131,12 +145,5 @@
                <?php require $template; ?>
             </div>
          </div>
-      <!--</div>-->
-   <!--</div>-->      
-   <!--<div  id="rodape" >
-      <div class="rodape"> D20 - Jogos de RPG
-         <span style="line-height:1em;"><br>©Copyright, All rights reserved</span>
-      </div> 
-   </div>-->
 </body>
 </html>

@@ -62,8 +62,15 @@ if(!sSecs || sSecs == null)var sSecs = "00";
 if(!dia || dia == null)var dia = "01";
 if(!mes || mes == null)var mes = "01";
 if(!ano || ano == null)var ano = "1800";
-function getSecs(){
-	sSecs++;
+function getSecs(pausa){
+    var pausa;
+    var pausado='';
+    //alert(pausa);
+    if(pausa == 0){
+        sSecs++;
+    }else{
+        var pausado=' (Pausado)';
+    }
                     //alert(sHors);
                 if(sHors >= 06 && sHors < 10){
                     document.body.style.background = "#f3f3f3 url('imagens/tempo/dia.jpg') no-repeat right top";
@@ -103,16 +110,16 @@ function getSecs(){
                 }
 	if(sSecs<=9)sSecs="0"+sSecs;
 	if(sSecs>59)
-            {sSecs=00;sMins++;if(sMins<=9)sMins="0"+sMins;}
+            {sSecs=00;sMins++;if(sMins<=09)sMins="0"+sMins;}
 	if(sMins>59)
-            {sMins=00;sHors++;if(sHors<=9)sHors="0"+sHors;}
+            {sMins=00;sHors++;if(sHors<=09)sHors="0"+sHors;}
 	if(dia>30)
-            {dia=01;mes++;if(dia<=9)dia="0"+dia;}
+            {dia=01;mes++;if(dia<=09)dia="0"+dia;}
 	if(mes>12)
-            {mes=01;ano++;if(mes<=9)mes="0"+mes;}
+            {mes=01;ano++;if(mes<=09)mes="0"+mes;}
 	if(sHors>23){
 		dia++;sHors="00";sMins="00";sSecs="00";
-		clock1.innerHTML=dia+" de "+getMes(mes)+" de "+ano+"<br>"+sHors+"<font color=#000000>:</font>"+sMins+"<font color=#000000>:</font>"+sSecs;setTimeout('getSecs()',1);	
+		clock1.innerHTML=dia+" de "+getMes(mes)+" de "+ano+"<br>"+sHors+"<font color=#000000>:</font>"+sMins+"<font color=#000000>:</font>"+sSecs+pausado;setTimeout('getSecs('+pausa+')',1);	
 		document.cookie = "hora="+sHors;
 		document.cookie = "min="+sMins;
 		document.cookie = "seg="+sSecs;
@@ -120,7 +127,7 @@ function getSecs(){
 		document.cookie = "mes="+mes;
 		document.cookie = "ano="+ano;
 	}else{
-		clock1.innerHTML=dia+" de "+getMes(mes)+" de "+ano+"<br>"+sHors+":"+sMins+":"+sSecs;setTimeout('getSecs()',1);		
+		clock1.innerHTML=dia+" de "+getMes(mes)+" de "+ano+"<br>"+sHors+":"+sMins+":"+sSecs+pausado;setTimeout('getSecs('+pausa+')',1);		
 		document.cookie = "hora="+sHors;
 		document.cookie = "min="+sMins;
 		document.cookie = "seg="+sSecs;
@@ -129,17 +136,11 @@ function getSecs(){
 		document.cookie = "ano="+ano;
 	}
 }
-//-->
 </SCRIPT>
-
 </head>
-<!-- Aqui come�a o corpo da p�gina -->
 <body>
-
-<!--<h2 align="center"><font color="#065ca5" face="tahoma">Contagem Progressiva</font></h2>-->
-<!--<hr color="#065ca5" width="100">-->
     <div class=tempo align="center"> 
-        <b><span id="clock1"></span><script>setTimeout('getSecs()',1);</script></b>
+        <b><span id="clock1"></span></b>
         <div>
         <?php
             include '../dao/dao.php';
@@ -149,13 +150,53 @@ function getSecs(){
             include '../mapping/modelMapper.php';
     
             date_default_timezone_set('America/Sao_Paulo');
-            
+                        
             $dao = new dao();
             $search = new ModelSearchCriteria();
+            
+            $search->settabela('missao');
+            $missao=$dao->encontre($search);
+            foreach($missao as $ativa){
+                if($ativa->getemMissao()==0){
+                    $ano = substr($ativa->getDATA(),0,4);
+                    $mes = substr($ativa->getDATA(),5,2);
+                    $dia = substr($ativa->getDATA(),8,2);
+                    $hora = substr($ativa->getDATA(),11,2);
+                    $min = substr($ativa->getDATA(),14,2);
+                    $seg = substr($ativa->getDATA(),17,2);
+                    
+                    //print_r($_COOKIE);die;
+                    
+                    
+                    //$dia = date('d');
+                    $search->settabela('tb_tempo');
+                    $search->setid($dia);
+                    $tempo=$dao->encontrePorId($search);
+
+                    echo "<script>getSecs(1);</script>";
+
+                    echo '<div class=fases>';
+                        echo '<span><img title=\'Estação do '.$tempo->getESTACAO().'\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo&numero=2 /></span>';
+                        echo '<img title=\''.$tempo->getDESCRICAO().'\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo&numero=3 />';
+                        echo '<img title=\'Fase da Lua ('.$tempo->getLUAS().')\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo />';
+                    echo '</div>';
+                    echo '<div class=temperatura>';
+                        echo '<span class=seta>↑</span>';
+                        echo $tempo->getTEMPMAX();
+                        echo '<span class=graus>C</span>';
+                        echo '<span class=seta>  ↓</span>';
+                        echo $tempo->getTEMPMIN();
+                        echo '<span class=graus>C</span>';
+                    echo '</div>';die;
+                }else{
+            
             $dia = date('d');
             $search->settabela('tb_tempo');
             $search->setid($dia);
             $tempo=$dao->encontrePorId($search);
+            
+            echo "<script>setTimeout('getSecs(0)',1);</script>";
+            
             echo '<div class=fases>';
                 echo '<span><img title=\'Estação do '.$tempo->getESTACAO().'\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo&numero=2 /></span>';
                 echo '<img title=\''.$tempo->getDESCRICAO().'\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo&numero=3 />';
@@ -168,7 +209,9 @@ function getSecs(){
                 echo '<span class=seta>  ↓</span>';
                 echo $tempo->getTEMPMIN();
                 echo '<span class=graus>C</span>';
-            echo '</div>';
+            echo '</div>';die;
+            }
+            }
         ?>
         </div>
     </div>

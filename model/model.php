@@ -21,6 +21,7 @@
  private $breveHistoria;
  private $avatar;
  private $nivel;
+ private $emMissao;
  private $id_atrib;
  private $FORCA;
  private $AGILIDADE;
@@ -55,6 +56,8 @@
  private $LUAS;
  private $figura2;
  private $figura3;
+ private $DATA;
+ private $MISSAO;
  public function getid(){
 	return $this->id;
  }
@@ -180,6 +183,12 @@
  }
  public function setnivel($nivel ){
 	$this->nivel=$nivel;
+ }
+ public function getemMissao(){
+	return $this->emMissao;
+ }
+ public function setemMissao($emMissao ){
+	$this->emMissao=$emMissao;
  }
  public function getid_atrib(){
 	return $this->id_atrib;
@@ -384,5 +393,17 @@
  }
  public function setfigura3($figura3 ){
 	$this->figura3=$figura3;
+ }
+ public function getDATA(){
+	return $this->DATA;
+ }
+ public function setDATA($DATA ){
+	$this->DATA=$DATA;
+ }
+ public function getMISSAO(){
+	return $this->MISSAO;
+ }
+ public function setMISSAO($MISSAO ){
+	$this->MISSAO=$MISSAO;
  }
  }

@@ -3,11 +3,12 @@
     $mode='w+';
     $handle=fopen($filename, $mode);
     $banco='d20';
-    $variaveis=array('id','jogador','personagem','raca','classe','tendencia1','tendencia2','idade','tabela','sexo','criado','modificado','excluido','habilidade','altura','peso','cidade','motivacao','breveHistoria','avatar','nivel');
+    $variaveis=array('id','jogador','personagem','raca','classe','tendencia1','tendencia2','idade','tabela','sexo','criado','modificado','excluido','habilidade','altura','peso','cidade','motivacao','breveHistoria','avatar','nivel','emMissao');
     $tabela='`\'.$model->gettabela().\'`';
     $variaveis2=array('id_atrib','FORCA','AGILIDADE','INTELIGENCIA','VONTADE','PV','PM','PE','CLASSE_COMUM','HABILIDADE_AUTOMATICA','personagem','DESCRICAO');
     $variaveis3=array('id','ARMA','CUSTO','DANO','TIPO','FN','GRUPO','OBS','figura');
     $variaveis4=array('id','ARMA','CUSTO','personagem','armadura','equipamento','defesa');
+    $variaveis5=array('id','DATA','MISSAO','FORCA','AGILIDADE','INTELIGENCIA','VONTADE','PV','PM','PE','personagem','emMissao');
     $texto="<?php \r\n class dao{\r\n";
     $texto .= '   '."private ".'$db'." = null;\r\n".
               '   public function __destruct(){'."\r\n".
@@ -339,6 +340,52 @@
              $texto .= ' WHERE id = :id \';
         return $this->execute4($sql, $model);
    }'."\r\n";
+    $texto .= '   private function insert5(Model $model){
+        date_default_timezone_set("Brazil/East");
+        $now = mktime (date(\'H\'), date(\'i\'), date(\'s\'), date("m")  , date("d"), date("Y"));
+        $model->setid(null);
+        $model->setexcluido(0);
+        $model->setcriado($now);
+        $model->setmodificado($now); 
+        $this->execute4($this->criaTabela($model->gettabela()), $model);       
+        $sql = \'INSERT INTO `\'.$model->gettabela().\'` (';
+          $x = 1;
+          foreach($variaveis5 as $item){
+            $texto .= '`'.$item.'`';
+            if(count($variaveis5)>$x){
+             $texto .= ',';
+            }else{
+             $texto .=  ') ';
+            }
+            $x++;
+          }
+        $texto .= 'VALUES (';
+          $x = 1;
+          foreach($variaveis5 as $item){
+            $texto .= ':'.$item;
+            if(count($variaveis5)>$x){
+             $texto .= ',';
+            }else{
+             $texto .=  ')\';'."\r\n";
+            }
+            $x++;
+          }
+        $texto .= "\t".'return $this->execute5($sql, $model);
+   }'."\r\n";
+    $texto .= '   private function update5(Model $model){
+        $model->setmodificado(new DateTime(), new DateTimeZone(\'America/Sao_Paulo\'));
+        $sql = \'UPDATE `\'.$model->gettabela().\'` SET';
+           $x=1;
+           foreach($variaveis5 as $item){
+              $texto .= " $item = :$item";
+              if(count($variaveis5)>$x){
+                $texto .= ',';
+              }
+              $x++;
+          }
+             $texto .= ' WHERE id = :id \';
+        return $this->execute4($sql, $model);
+   }'."\r\n";
     $texto .= '   public function execute($sql,$model){
         $statement = $this->getDb()->prepare($sql);
         $this->executeStatement($statement, $this->getParams($model));
@@ -376,6 +423,15 @@
         }
         return $model;
    }'."\r\n";
+    $texto .= '   public function execute5($sql,$model){
+        $statement = $this->getDb()->prepare($sql);
+        $this->executeStatement($statement, $this->getParams5($model));
+        $search=new ModelSearchCriteria();
+        if (!$model->getpersonagem()) {
+             return $this->encontrePorId($search->setid($this->getDb()->lastInsertId()));
+        }
+        return $model;
+   }'."\r\n";
     $texto .= '   private function getParams(Model $model){
         $params = array(';
         foreach($variaveis as $item){
@@ -400,6 +456,13 @@
     $texto .= '   private function getParams4(Model $model){
         $params = array(';
         foreach($variaveis4 as $item){
+            $texto .= "':".$item."'".'=> $model->get'.$item.'(),';
+        }
+    $texto .= ");\r\n\t return".' $params;
+   }'."\r\n";
+    $texto .= '   private function getParams5(Model $model){
+        $params = array(';
+        foreach($variaveis5 as $item){
             $texto .= "':".$item."'".'=> $model->get'.$item.'(),';
         }
     $texto .= ");\r\n\t return".' $params;
