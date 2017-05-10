@@ -8,3 +8,15 @@
     top: 5px;
     right: 5px;
 }
+.temperatura{
+    margin-top: 5px;
+    font-family: cursive;
+    font-weight: 900;
+    font-size: 15px;
+    width: 100px;
+    background: rgba(0,0,0,0.2);
+}
+.seta{
+    font-size: 17px;
+    color: blue;
+}

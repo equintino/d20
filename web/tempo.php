@@ -161,7 +161,14 @@ function getSecs(){
                 echo '<img title=\''.$tempo->getDESCRICAO().'\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo&numero=3 />';
                 echo '<img title=\'Fase da Lua ('.$tempo->getLUAS().')\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo />';
             echo '</div>';
-            
+            echo '<div class=temperatura>';
+                echo '<span class=seta>↑</span>';
+                echo $tempo->getTEMPMAX();
+                echo '<span class=graus>C</span>';
+                echo '<span class=seta>  ↓</span>';
+                echo $tempo->getTEMPMIN();
+                echo '<span class=graus>C</span>';
+            echo '</div>';
         ?>
         </div>
     </div>
