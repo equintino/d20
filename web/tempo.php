@@ -147,18 +147,20 @@ function getSecs(){
             include '../config/Config.php';
             include '../model/model.php';
             include '../mapping/modelMapper.php';
+    
+            date_default_timezone_set('America/Sao_Paulo');
             
             $dao = new dao();
             $search = new ModelSearchCriteria();
-            
+            $dia = date('d');
             $search->settabela('tb_tempo');
-            $search->setid(1);
-            //print_r(get_class_methods($dao));
-            //foreach($dao->encontre($search) as $item){
-                echo '<img height=30px src=gera.php?id=1&tabela=tb_tempo />';
-                echo '<img height=30px src=gera.php?id=1&tabela=tb_tempo&numero=2 />';
-                echo '<img height=30px src=gera.php?id=1&tabela=tb_tempo&numero=3 />';
-            //}
+            $search->setid($dia);
+            $tempo=$dao->encontrePorId($search);
+            echo '<div class=fases>';
+                echo '<span><img title=\'Estação do '.$tempo->getESTACAO().'\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo&numero=2 /></span>';
+                echo '<img title=\''.$tempo->getDESCRICAO().'\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo&numero=3 />';
+                echo '<img title=\'Fase da Lua ('.$tempo->getLUAS().')\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo />';
+            echo '</div>';
             
         ?>
         </div>

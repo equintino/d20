@@ -8,6 +8,8 @@
     $variaveis4=array('BONUS_ATRIBUTO','PROFICIENCIA');
     $variaveis5=array('REQUISITOS','MANA','DESCRICAO');
     $variaveis6=array('armadura','defesa','item','equipamento');
+    $variaveis7=array('DIA','TEMPMAX','TEMPMIN','ESTACAO','LUAS','figura2','figura3');
+    
     $texto="<?php \r\n class Model{\r\n";
     foreach($variaveis as $item){
       $texto .=' private $'.$item.';'."\r\n";
@@ -25,6 +27,9 @@
       $texto .=' private $'.$item.';'."\r\n";
     }
     foreach($variaveis6 as $item){
+      $texto .=' private $'.$item.';'."\r\n";
+    }
+    foreach($variaveis7 as $item){
       $texto .=' private $'.$item.';'."\r\n";
     }
           //fwrite($handle, $texto);  
@@ -59,6 +64,12 @@
                "\t".'$this->'.$item.'=$'.$item.";\r\n }\r\n";     
         }
         foreach($variaveis6 as $item){
+          $texto .=  ' public function get'.$item."(){\r\n".
+               "\t".'return $this->'.$item.";\r\n"." }\r\n".
+               ' public function set'.$item.'($'.$item." ){\r\n".
+               "\t".'$this->'.$item.'=$'.$item.";\r\n }\r\n";     
+        }
+        foreach($variaveis7 as $item){
           $texto .=  ' public function get'.$item."(){\r\n".
                "\t".'return $this->'.$item.";\r\n"." }\r\n".
                ' public function set'.$item.'($'.$item." ){\r\n".

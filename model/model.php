@@ -48,6 +48,13 @@
  private $defesa;
  private $item;
  private $equipamento;
+ private $DIA;
+ private $TEMPMAX;
+ private $TEMPMIN;
+ private $ESTACAO;
+ private $LUAS;
+ private $figura2;
+ private $figura3;
  public function getid(){
 	return $this->id;
  }
@@ -335,5 +342,47 @@
  }
  public function setequipamento($equipamento ){
 	$this->equipamento=$equipamento;
+ }
+ public function getDIA(){
+	return $this->DIA;
+ }
+ public function setDIA($DIA ){
+	$this->DIA=$DIA;
+ }
+ public function getTEMPMAX(){
+	return $this->TEMPMAX;
+ }
+ public function setTEMPMAX($TEMPMAX ){
+	$this->TEMPMAX=$TEMPMAX;
+ }
+ public function getTEMPMIN(){
+	return $this->TEMPMIN;
+ }
+ public function setTEMPMIN($TEMPMIN ){
+	$this->TEMPMIN=$TEMPMIN;
+ }
+ public function getESTACAO(){
+	return $this->ESTACAO;
+ }
+ public function setESTACAO($ESTACAO ){
+	$this->ESTACAO=$ESTACAO;
+ }
+ public function getLUAS(){
+	return $this->LUAS;
+ }
+ public function setLUAS($LUAS ){
+	$this->LUAS=$LUAS;
+ }
+ public function getfigura2(){
+	return $this->figura2;
+ }
+ public function setfigura2($figura2 ){
+	$this->figura2=$figura2;
+ }
+ public function getfigura3(){
+	return $this->figura3;
+ }
+ public function setfigura3($figura3 ){
+	$this->figura3=$figura3;
  }
  }

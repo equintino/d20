@@ -1,3 +1,10 @@
 .tempo{
     color: black;
 }
+.fases{
+    background: rgba(0,0,0,0.2);
+    width: 30px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}

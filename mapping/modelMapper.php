@@ -145,5 +145,26 @@
 	if (array_key_exists('equipamento', $properties)){
 	  $model->setequipamento($properties['equipamento']);
 	}
+	if (array_key_exists('DIA', $properties)){
+	  $model->setDIA($properties['DIA']);
+	}
+	if (array_key_exists('TEMPMAX', $properties)){
+	  $model->setTEMPMAX($properties['TEMPMAX']);
+	}
+	if (array_key_exists('TEMPMIN', $properties)){
+	  $model->setTEMPMIN($properties['TEMPMIN']);
+	}
+	if (array_key_exists('ESTACAO', $properties)){
+	  $model->setESTACAO($properties['ESTACAO']);
+	}
+	if (array_key_exists('LUAS', $properties)){
+	  $model->setLUAS($properties['LUAS']);
+	}
+	if (array_key_exists('figura2', $properties)){
+	  $model->setfigura2($properties['figura2']);
+	}
+	if (array_key_exists('figura3', $properties)){
+	  $model->setfigura3($properties['figura3']);
+	}
   } 
  }
