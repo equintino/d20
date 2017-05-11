@@ -156,6 +156,7 @@
         $now = mktime (date(\'H\'), date(\'i\'), date(\'s\'), date("m")  , date("d"), date("Y"));
         $model->setid(null);
         $model->setexcluido(0);
+        $model->setemMissao(0);
         $model->setcriado($now);
         $model->setmodificado($now);        
         $sql = \'INSERT INTO '.$tabela.' (';
@@ -207,6 +208,7 @@
         $now = mktime (date(\'H\'), date(\'i\'), date(\'s\'), date("m")  , date("d"), date("Y"));
         $model->setid_atrib(null);
         $model->setexcluido(0);
+        $model->setemMissao(0);
         $model->setcriado($now);
         $model->setmodificado($now); 
         $this->execute2($this->criaTabela($model->gettabela()), $model);       
@@ -253,6 +255,7 @@
         $now = mktime (date(\'H\'), date(\'i\'), date(\'s\'), date("m")  , date("d"), date("Y"));
         $model->setid(null);
         $model->setexcluido(0);
+        $model->setemMissao(0);
         $model->setcriado($now);
         $model->setmodificado($now); 
         $this->execute3($this->criaTabela($model->gettabela()), $model);       
@@ -299,6 +302,7 @@
         $now = mktime (date(\'H\'), date(\'i\'), date(\'s\'), date("m")  , date("d"), date("Y"));
         $model->setid(null);
         $model->setexcluido(0);
+        $model->setemMissao(0);
         $model->setcriado($now);
         $model->setmodificado($now); 
         $this->execute4($this->criaTabela($model->gettabela()), $model);       
@@ -345,6 +349,7 @@
         $now = mktime (date(\'H\'), date(\'i\'), date(\'s\'), date("m")  , date("d"), date("Y"));
         $model->setid(null);
         $model->setexcluido(0);
+        $model->setemMissao(0);
         $model->setcriado($now);
         $model->setmodificado($now); 
         $this->execute4($this->criaTabela($model->gettabela()), $model);       

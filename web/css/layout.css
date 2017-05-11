@@ -230,7 +230,7 @@ ul li{
     margin: auto;
     height: 690px;
 }
-.cad2 .botao, .cad4 .botao, .cad5 .botao, .cad6 .botao, .cad7 .botao{
+.cad2 .botao, .cad4 .botao, .cad5 .botao, .cad6 .botao, .cad7 .botao, .zera{
     font-size: 16px;
     padding: 0 4px;
     position: relative;
@@ -246,11 +246,14 @@ ul li{
     top: 10px;
     left: 700px;    
 }
+.zera{
+    background-color: #007c00;
+}
 .cad2 .botao-verde, .cad4 .botao-verde, .cad5 .botao-verde, .cad6 .botao-verde, .cad7 .botao-verde{
     background-color: #007c00;
     box-shadow: 0 5px 0 #003f00;
 }
-.cad2 .botao-verde:hover, .cad4 .botao-verde:hover, .cad5 .botao-verde:hover, .cad6 .botao-verde:hover, .cad7 .botao-verde:hover{
+.cad2 .botao-verde:hover, .cad4 .botao-verde:hover, .cad5 .botao-verde:hover, .cad6 .botao-verde:hover, .cad7 .botao-verde:hover, .zera:hover{
     background-color: #006000;
 }
 .cad2 .botao-verde:active{
@@ -259,6 +262,15 @@ ul li{
     position: relative;
     top: 15px;
     box-shadow: none;
+}
+.zera{
+    position: relative;
+    top: 10px;
+}
+.zera:active{   
+    position: relative;
+    top: 25px;
+    box-shadow: none;    
 }
 .cad4 .botao{
     position: relative;
@@ -1370,4 +1382,15 @@ fieldset legend{
     text-shadow: none;
 }
 .racaAvatar-red{
+}
+.missao{
+    font-style: italic;
+    font-family: 'Architects Daughter', cursive;
+    color: red;
+}
+.atributoMissao{
+    float: right;
+    margin-right: 40px;
+    #width: 350px;
+    #border: 1px solid red;
 }

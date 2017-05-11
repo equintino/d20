@@ -163,7 +163,7 @@ function trocaAvatar(x){
 </style>
 <?php 
     $variaveis=array('JOGADOR'=>'jogador','PERSONAGEM'=>'personagem','RAÇA'=>'raca','CLASSE'=>'classe','TENDÊNCIA1'=>'tendencia1','TENDÊNCIA2'=>'tendencia2','SEXO'=>'sexo');
-    $act=$_GET['act'];
+    @$act=$_GET['act'];
     @$x=$_GET['pag'];
     @$classe=$_GET['classe'];
     @$personagem=$_GET['personagem'];
@@ -234,7 +234,11 @@ function trocaAvatar(x){
                                   echo '<tr><td class=nomes>'.$titulos[2].'</td><td class=nomes2>'.$item->getclasse().'</td></tr>';
                                   echo '<tr><td class=nomes>'.$titulos[3].'</td><td class=nomes2>'.$item->gettendencia1().'</td></tr>';
                                   echo '<tr><td class=nomes>'.$titulos[4].'</td><td class=nomes2>'.$item->gettendencia2().'</td></tr>';
-                                  echo '<span class=foto><img height=220px src="'.$item->getavatar().'" /></span>';
+                                  echo '<span class=foto><img height=220px src="'.$item->getavatar().'" />'; 
+                                  if($item->getemMissao()==1){
+                                    echo '<br><span class=missao> <img title="Em missão" height=15px src="../web/imagens/sirene.gif" /> Em missão</span>';
+                                  }
+                                  echo '</span>';
                         echo '</table>';
                     echo '</div>';
                                   echo '<div class=saudacao>Personagem de '.strtoupper($item->getjogador()).'</div>';

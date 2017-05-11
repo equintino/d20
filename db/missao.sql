@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 10/05/2017 às 21:31
+-- Tempo de geração: 11/05/2017 às 20:41
 -- Versão do servidor: 10.1.21-MariaDB
 -- Versão do PHP: 7.1.1
 
@@ -47,8 +47,8 @@ CREATE TABLE `missao` (
 --
 
 INSERT INTO `missao` (`id`, `DATA`, `MISSAO`, `FORCA`, `AGILIDADE`, `INTELIGENCIA`, `VONTADE`, `PV`, `PM`, `PE`, `personagem`, `excluido`, `emMissao`) VALUES
-('1', '1816-05-10 12:59:00', 'Parada dura', 4, 3, 2, 2, 60, 60, 0, 'March', '0', '0'),
-('2', '1816-05-10 12:59:00', 'Parada dura', 4, 3, 2, 2, 60, 60, 0, 'March2', '0', '1');
+('1', '1816-05-10 12:59:00', 'Parada dura', 4, 3, 2, 2, 60, 60, 0, 'Jorge', '0', '0'),
+('2', '1816-05-10 12:59:00', 'Parada dura', 4, 3, 2, 2, 60, 60, 0, 'Galya', '0', '1');
 
 --
 -- Índices de tabelas apagadas
@@ -59,6 +59,7 @@ INSERT INTO `missao` (`id`, `DATA`, `MISSAO`, `FORCA`, `AGILIDADE`, `INTELIGENCI
 --
 ALTER TABLE `missao`
   ADD PRIMARY KEY (`id`);
+ALTER TABLE `missao` ADD FULLTEXT KEY `MISSAO` (`MISSAO`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

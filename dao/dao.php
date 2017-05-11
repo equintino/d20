@@ -91,6 +91,15 @@
         modelMapper::map($model, $row);
         return $model;
    }
+   public function encontreEmMissao(ModelSearchCriteria $search=null){
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE excluido = '0' and emMissao = '1' and personagem = '".$search->getpersonagem()."'")->fetch();
+        if (!$row) {
+            return null;
+        }
+        $model = new Model();
+        modelMapper::map($model, $row);
+        return $model;
+   }
    public function totalLinhas(ModelSearchCriteria $search=null){
            $row = $this->query("SELECT id FROM `".$search->gettabela()."` WHERE `excluido` =  '0' ORDER BY id DESC ")->fetch();
         if (!$row) {
@@ -146,6 +155,7 @@
         $now = mktime (date('H'), date('i'), date('s'), date("m")  , date("d"), date("Y"));
         $model->setid(null);
         $model->setexcluido(0);
+        $model->setemMissao(0);
         $model->setcriado($now);
         $model->setmodificado($now);        
         $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`jogador`,`personagem`,`raca`,`classe`,`tendencia1`,`tendencia2`,`idade`,`tabela`,`sexo`,`criado`,`modificado`,`excluido`,`habilidade`,`altura`,`peso`,`cidade`,`motivacao`,`breveHistoria`,`avatar`,`nivel`,`emMissao`) VALUES (:id,:jogador,:personagem,:raca,:classe,:tendencia1,:tendencia2,:idade,:tabela,:sexo,:criado,:modificado,:excluido,:habilidade,:altura,:peso,:cidade,:motivacao,:breveHistoria,:avatar,:nivel,:emMissao)';
@@ -165,6 +175,7 @@
         $now = mktime (date('H'), date('i'), date('s'), date("m")  , date("d"), date("Y"));
         $model->setid_atrib(null);
         $model->setexcluido(0);
+        $model->setemMissao(0);
         $model->setcriado($now);
         $model->setmodificado($now); 
         $this->execute2($this->criaTabela($model->gettabela()), $model);       
@@ -181,6 +192,7 @@
         $now = mktime (date('H'), date('i'), date('s'), date("m")  , date("d"), date("Y"));
         $model->setid(null);
         $model->setexcluido(0);
+        $model->setemMissao(0);
         $model->setcriado($now);
         $model->setmodificado($now); 
         $this->execute3($this->criaTabela($model->gettabela()), $model);       
@@ -197,6 +209,7 @@
         $now = mktime (date('H'), date('i'), date('s'), date("m")  , date("d"), date("Y"));
         $model->setid(null);
         $model->setexcluido(0);
+        $model->setemMissao(0);
         $model->setcriado($now);
         $model->setmodificado($now); 
         $this->execute4($this->criaTabela($model->gettabela()), $model);       
@@ -213,6 +226,7 @@
         $now = mktime (date('H'), date('i'), date('s'), date("m")  , date("d"), date("Y"));
         $model->setid(null);
         $model->setexcluido(0);
+        $model->setemMissao(0);
         $model->setcriado($now);
         $model->setmodificado($now); 
         $this->execute4($this->criaTabela($model->gettabela()), $model);       
@@ -226,6 +240,7 @@
    }
    public function execute($sql,$model){
         $statement = $this->getDb()->prepare($sql);
+        //print_r($this->executeStatement($statement, $this->getParams($model)));die;
         $this->executeStatement($statement, $this->getParams($model));
         $search=new ModelSearchCriteria();        
         $search->settabela($model->gettabela());
@@ -271,7 +286,7 @@
         return $model;
    }
    private function getParams(Model $model){
-        $params = array(':id'=> $model->getid(),':jogador'=> $model->getjogador(),':personagem'=> $model->getpersonagem(),':raca'=> $model->getraca(),':classe'=> $model->getclasse(),':tendencia1'=> $model->gettendencia1(),':tendencia2'=> $model->gettendencia2(),':idade'=> $model->getidade(),':tabela'=> $model->gettabela(),':sexo'=> $model->getsexo(),':criado'=> $model->getcriado(),':modificado'=> $model->getmodificado(),':excluido'=> $model->getexcluido(),':habilidade'=> $model->gethabilidade(),':altura'=> $model->getaltura(),':peso'=> $model->getpeso(),':cidade'=> $model->getcidade(),':motivacao'=> $model->getmotivacao(),':breveHistoria'=> $model->getbreveHistoria(),':avatar'=> $model->getavatar(),':nivel'=> $model->getnivel(),':emMissao'=> $model->getemMissao(),);
+        $params = array(':id'=> $model->getid(),':jogador'=> $model->getjogador(),':personagem'=> $model->getpersonagem(),':raca'=> $model->getraca(),':classe'=> $model->getclasse(),':tendencia1'=> $model->gettendencia1(),':tendencia2'=> $model->gettendencia2(),':idade'=> $model->getidade(),':tabela'=> $model->gettabela(),':sexo'=> $model->getsexo(),':criado'=> $model->getcriado(),':modificado'=> $model->getmodificado(),':excluido'=> $model->getexcluido(),':habilidade'=> $model->gethabilidade(),':altura'=> $model->getaltura(),':peso'=> $model->getpeso(),':cidade'=> $model->getcidade(),':motivacao'=> $model->getmotivacao(),':breveHistoria'=> $model->getbreveHistoria(),':avatar'=> $model->getavatar(),':nivel'=> $model->getnivel(),':emMissao'=> $model->getemMissao());
 	 return $params;
    }
    private function getParams2(Model $model){

@@ -103,16 +103,18 @@
                     $search->settabela('personagem');
                     $search->setjogador($login);
                     $dados = $dao->encontre($search);
-                    foreach($dados as $item){
-                        if($item->getemMissao()==1){
+                    foreach($dados as $dado){
+                        if($dado->getemMissao()==1){
                             //echo 'Personagem '.$item->getpersonagem().' está em missão.';
                             echo "<div class='tempo'>";
                                 echo '<iframe scrolling="no" frameborder=0 src="tempo.php"></iframe>';
                             echo '</div>';
+                            $personagem = $dado->getpersonagem();
                         }
                     }
-                    
-                    //$mes_=  ModelValidador::nomeMes(date('m'));
+                    if(@!$personagem){
+                        $personagem = null;
+                    }
                     
             echo '<div id="menu" >';
                     echo '<ul>';                                             
@@ -121,6 +123,8 @@
                               echo '<li><a href="'.Utils::createLink('cadastro',array('act'=>'cad','pag'=>0)).'" ><span class="bnt">'.$item.'</span></a></li>';
                            }elseif($item == 'Personagens'){
                               echo '<li><a href="'.Utils::createLink('cadastro',array('act'=>'lista','pag'=>0)).'" ><span class="bnt">'.$item.'</span></a></li>';
+                           }elseif($item == 'Missão'){
+                              echo '<li><a href="'.Utils::createLink($key,array('personagem'=>$personagem)).'" ><span class="bnt">'.$item.'</span></a></li>';
                            }else{
                               echo '<li><a href="'.Utils::createLink($key).'" ><span class="bnt">'.$item.'</span></a></li>';
                            }
