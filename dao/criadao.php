@@ -8,7 +8,7 @@
     $variaveis2=array('id_atrib','FORCA','AGILIDADE','INTELIGENCIA','VONTADE','PV','PM','PE','CLASSE_COMUM','HABILIDADE_AUTOMATICA','personagem','DESCRICAO');
     $variaveis3=array('id','ARMA','CUSTO','DANO','TIPO','FN','GRUPO','OBS','figura');
     $variaveis4=array('id','ARMA','CUSTO','personagem','armadura','equipamento','defesa');
-    $variaveis5=array('id','DATA','MISSAO','FORCA','AGILIDADE','INTELIGENCIA','VONTADE','PV','PM','PE','personagem','emMissao');
+    $variaveis5=array('id','DATA','MISSAO','personagem','excluido','emMissao');
     $texto="<?php \r\n class dao{\r\n";
     $texto .= '   '."private ".'$db'." = null;\r\n".
               '   public function __destruct(){'."\r\n".
@@ -100,7 +100,16 @@
         $model = new Model();
         modelMapper::map($model, $row);
         return $model;
-   }'."\r\n";                
+   }'."\r\n";  
+     $texto .= '   public function encontreEmMissao(ModelSearchCriteria $search=null){
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` = \'0\' and `emMissao` = \'1\' and personagem = \'".$search->getpersonagem()."\'")->fetch();
+        if (!$row) {
+            return null;
+        }
+        $model = new Model();
+        modelMapper::map($model, $row);
+        return $model;
+   }'."\r\n";               
      $texto .= '   public function totalLinhas(ModelSearchCriteria $search=null){
            $row = $this->query("SELECT id FROM `".$search->gettabela()."` WHERE `excluido` =  \'0\' ORDER BY id DESC ")->fetch();
         if (!$row) {
@@ -131,6 +140,12 @@
             return $this->insert4($model);
         }
         return $this->update4($model);
+   }'."\r\n";
+    $texto .= '   public function grava5(Model $model){
+        if ($model->getid() === null) {
+            return $this->insert5($model);
+        }
+        return $this->update5($model);
    }'."\r\n";
     $texto .= '   public function exclui($id) {
         $sql = \'delete from '.$tabela.' WHERE id = :id\';
@@ -352,7 +367,7 @@
         $model->setemMissao(0);
         $model->setcriado($now);
         $model->setmodificado($now); 
-        $this->execute4($this->criaTabela($model->gettabela()), $model);       
+        $this->execute5($this->criaTabela($model->gettabela()), $model);       
         $sql = \'INSERT INTO `\'.$model->gettabela().\'` (';
           $x = 1;
           foreach($variaveis5 as $item){
@@ -389,7 +404,7 @@
               $x++;
           }
              $texto .= ' WHERE id = :id \';
-        return $this->execute4($sql, $model);
+        return $this->execute5($sql, $model);
    }'."\r\n";
     $texto .= '   public function execute($sql,$model){
         $statement = $this->getDb()->prepare($sql);

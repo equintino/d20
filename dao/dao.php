@@ -92,7 +92,7 @@
         return $model;
    }
    public function encontreEmMissao(ModelSearchCriteria $search=null){
-           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE excluido = '0' and emMissao = '1' and personagem = '".$search->getpersonagem()."'")->fetch();
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` = '0' and `emMissao` = '1' and personagem = '".$search->getpersonagem()."'")->fetch();
         if (!$row) {
             return null;
         }
@@ -130,6 +130,12 @@
             return $this->insert4($model);
         }
         return $this->update4($model);
+   }
+   public function grava5(Model $model){
+        if ($model->getid() === null) {
+            return $this->insert5($model);
+        }
+        return $this->update5($model);
    }
    public function exclui($id) {
         $sql = 'delete from `'.$model->gettabela().'` WHERE id = :id';
@@ -229,18 +235,17 @@
         $model->setemMissao(0);
         $model->setcriado($now);
         $model->setmodificado($now); 
-        $this->execute4($this->criaTabela($model->gettabela()), $model);       
-        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`DATA`,`MISSAO`,`FORCA`,`AGILIDADE`,`INTELIGENCIA`,`VONTADE`,`PV`,`PM`,`PE`,`personagem`,`emMissao`) VALUES (:id,:DATA,:MISSAO,:FORCA,:AGILIDADE,:INTELIGENCIA,:VONTADE,:PV,:PM,:PE,:personagem,:emMissao)';
+        $this->execute5($this->criaTabela($model->gettabela()), $model);       
+        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`DATA`,`MISSAO`,`personagem`,`excluido`,`emMissao`) VALUES (:id,:DATA,:MISSAO,:personagem,:excluido,:emMissao)';
 	return $this->execute5($sql, $model);
    }
    private function update5(Model $model){
         $model->setmodificado(new DateTime(), new DateTimeZone('America/Sao_Paulo'));
-        $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, DATA = :DATA, MISSAO = :MISSAO, FORCA = :FORCA, AGILIDADE = :AGILIDADE, INTELIGENCIA = :INTELIGENCIA, VONTADE = :VONTADE, PV = :PV, PM = :PM, PE = :PE, personagem = :personagem, emMissao = :emMissao WHERE id = :id ';
-        return $this->execute4($sql, $model);
+        $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, DATA = :DATA, MISSAO = :MISSAO, personagem = :personagem, excluido = :excluido, emMissao = :emMissao WHERE id = :id ';
+        return $this->execute5($sql, $model);
    }
    public function execute($sql,$model){
         $statement = $this->getDb()->prepare($sql);
-        //print_r($this->executeStatement($statement, $this->getParams($model)));die;
         $this->executeStatement($statement, $this->getParams($model));
         $search=new ModelSearchCriteria();        
         $search->settabela($model->gettabela());
@@ -286,7 +291,7 @@
         return $model;
    }
    private function getParams(Model $model){
-        $params = array(':id'=> $model->getid(),':jogador'=> $model->getjogador(),':personagem'=> $model->getpersonagem(),':raca'=> $model->getraca(),':classe'=> $model->getclasse(),':tendencia1'=> $model->gettendencia1(),':tendencia2'=> $model->gettendencia2(),':idade'=> $model->getidade(),':tabela'=> $model->gettabela(),':sexo'=> $model->getsexo(),':criado'=> $model->getcriado(),':modificado'=> $model->getmodificado(),':excluido'=> $model->getexcluido(),':habilidade'=> $model->gethabilidade(),':altura'=> $model->getaltura(),':peso'=> $model->getpeso(),':cidade'=> $model->getcidade(),':motivacao'=> $model->getmotivacao(),':breveHistoria'=> $model->getbreveHistoria(),':avatar'=> $model->getavatar(),':nivel'=> $model->getnivel(),':emMissao'=> $model->getemMissao());
+        $params = array(':id'=> $model->getid(),':jogador'=> $model->getjogador(),':personagem'=> $model->getpersonagem(),':raca'=> $model->getraca(),':classe'=> $model->getclasse(),':tendencia1'=> $model->gettendencia1(),':tendencia2'=> $model->gettendencia2(),':idade'=> $model->getidade(),':tabela'=> $model->gettabela(),':sexo'=> $model->getsexo(),':criado'=> $model->getcriado(),':modificado'=> $model->getmodificado(),':excluido'=> $model->getexcluido(),':habilidade'=> $model->gethabilidade(),':altura'=> $model->getaltura(),':peso'=> $model->getpeso(),':cidade'=> $model->getcidade(),':motivacao'=> $model->getmotivacao(),':breveHistoria'=> $model->getbreveHistoria(),':avatar'=> $model->getavatar(),':nivel'=> $model->getnivel(),':emMissao'=> $model->getemMissao(),);
 	 return $params;
    }
    private function getParams2(Model $model){
@@ -302,7 +307,7 @@
 	 return $params;
    }
    private function getParams5(Model $model){
-        $params = array(':id'=> $model->getid(),':DATA'=> $model->getDATA(),':MISSAO'=> $model->getMISSAO(),':FORCA'=> $model->getFORCA(),':AGILIDADE'=> $model->getAGILIDADE(),':INTELIGENCIA'=> $model->getINTELIGENCIA(),':VONTADE'=> $model->getVONTADE(),':PV'=> $model->getPV(),':PM'=> $model->getPM(),':PE'=> $model->getPE(),':personagem'=> $model->getpersonagem(),':emMissao'=> $model->getemMissao(),);
+        $params = array(':id'=> $model->getid(),':DATA'=> $model->getDATA(),':MISSAO'=> $model->getMISSAO(),':personagem'=> $model->getpersonagem(),':excluido'=> $model->getexcluido(),':emMissao'=> $model->getemMissao(),);
 	 return $params;
    }
    private function executeStatement(PDOStatement $statement, array $params){

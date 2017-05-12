@@ -104,12 +104,13 @@
                     $search->setjogador($login);
                     $dados = $dao->encontre($search);
                     foreach($dados as $dado){
+                        $personagem = $dado->getpersonagem();
                         if($dado->getemMissao()==1){
                             //echo 'Personagem '.$item->getpersonagem().' está em missão.';
                             echo "<div class='tempo'>";
                                 echo '<iframe scrolling="no" frameborder=0 src="tempo.php"></iframe>';
                             echo '</div>';
-                            $personagem = $dado->getpersonagem();
+                            //$personagem = $dado->getpersonagem();
                         }
                     }
                     if(@!$personagem){

@@ -11,6 +11,8 @@
   @$personagem = $_GET['personagem'];
   @$classe = $_GET['classe'];
   @$raca = $_GET['raca'];
+  @$comecando = $_GET['comecando'];
+  @$missao = $_POST['missao'];
   if($raca){
      $raca=$_POST;
   }
@@ -312,6 +314,17 @@
   }
   if($act=='missao'){
      echo '<font color=white>'; 
+     if($comecando==1){
+         $dao = new dao();
+         $model->settabela('missao');
+         $model->setMISSAO($missao);
+         $model->setpersonagem($personagem);
+         $model->setemMissao(1);
+         $model->setDATA('1850-10-02 18:10:00');
+         
+         $dao->grava5($model);
+         die;
+     }
      print_r($_POST);
      print_r($search);
      //print_r(get_class_methods($dao));

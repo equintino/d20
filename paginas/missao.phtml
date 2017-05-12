@@ -19,30 +19,101 @@
         document.getElementById(id).innerHTML=menos;
     }
 </script>
-<?php
+<?php  
     @$personagem = $_GET['personagem'];
     $dao = new dao();
     $search = new ModelSearchCriteria();
-    $search->settabela('missao');
+    $search->settabela('personagem');
     $search->setpersonagem($personagem);
-    $dados = $dao->encontre($search);
+    $conferirMissao = $dao->encontrePorPersonagem($search);
+    $emMissao=$conferirMissao->getemMissao();
     
-    $search->settabela('tb_missao');
-    $missoes = $dao->encontre($search);
-    if(!$dados){
-       echo '<form action=../paginas/add.php?act=missao method=POST>';
-       echo '<div class=quadro>';
-         echo 'Selecione uma das misões:<br>';
-         echo '<select name=missao>';
-           echo '<option></option>';
-           echo '<option value=1>Missão Um</options>';
-         echo '</select>';
-         echo '<br>';
-         echo '<button class="zera ok">OK</button>';
-       echo '</div>';
-       echo '</form>';
-       die;
+    if($emMissao==1){
+        $search->settabela('missao');
+        $dados = $dao->encontreEmMissao($search); 
+        if(!$dados){ 
+            $dados_ = $dao->encontre($search);
+                foreach($dados_ as $dado){
+                    $missoesde[$personagem][]=$dado->getMISSAO();
+                }
+                echo '<form action=../paginas/add.php?act=missao&personagem='.$personagem.' method=POST>';
+                echo '<div class=quadro>';
+                  echo 'Selecione uma das misões:<br>';
+                  echo '<select required name=missao>';
+                    echo '<option value=""></option>';
+                    for($x=0;$x<count($dados_);$x++){
+                        if(count($dados_)==1){
+                            echo '<option selected value=\''.$missoesde[$personagem][$x].'\'>'.$missoesde[$personagem][$x].'</options>'; 
+                        }else{
+                            echo '<option value=\''.$missoesde[$personagem][$x].'\'>'.$missoesde[$personagem][$x].'</options>';
+                        }
+                    }
+                  echo '</select>';
+                  echo '<br>';
+                  echo '<button class="zera ok">OK</button>';
+                echo '</div>';
+                echo '</form>';
+                die;
+        }elseif($dados->getemMissao()==1){
+                echo '<form action=../paginas/add.php?act=missao&personagem='.$personagem.' method=POST>';
+                echo '<div class=quadro>';
+                  echo 'Selecione uma das misões:<br>';
+                  echo '<select required name=missao>';
+                    echo '<option value=""></option>';
+                       echo '<option selected value='.$dados->getid().'>'.$dados->getMISSAO().'</options>';
+                  echo '</select>';
+                  echo '<br>';
+                  echo '<button class="zera ok">OK</button>';
+                echo '</div>';
+                echo '</form>';
+                die;
+        }
+
+        if(@!$missoesde){ 
+            $search->settabela('tb_missao');
+            $search->setpersonagem(null);
+            $missoes = $dao->encontre($search);
+            foreach($missoes as $lista){
+                $listaMissoes[]=$lista->getMISSAO();
+            }
+            echo '<form action=../paginas/add.php?act=missao&personagem='.$personagem.' method=POST>';
+            echo '<div class=quadro>';
+              echo 'Selecione uma das misões:<br>';
+              echo '<select required name=missao>';
+                echo '<option value=""></option>';
+                for($x=0;$x<count($listaMissoes);$x++){
+                    echo '<option value=\''.$listaMissoes[$x].'\'>'.$listaMissoes[$x].'</options>';
+                }
+              echo '</select>';
+              echo '<br>';
+              echo '<button class="zera ok">OK</button>';
+            echo '</div>';
+            echo '</form>';
+            die;
+        }
+    }else{
+        $search->settabela('tb_missao');
+        $search->setpersonagem(null);
+        $missoes = $dao->encontre($search);
+        foreach($missoes as $lista){
+            $listaMissoes[]=$lista->getMISSAO();
+        }
+        echo '<form action=../paginas/add.php?act=missao&comecando=1&personagem='.$personagem.' method=POST>';
+            echo '<div class=quadro>';
+                echo 'Selecione uma das misões:<br>';
+                echo '<select required name=missao>';
+                    echo '<option value=""></option>';
+                    for($x=0;$x<count($listaMissoes);$x++){
+                        echo '<option value=\''.$listaMissoes[$x].'\'>'.$listaMissoes[$x].'</options>';
+                    }
+                echo '</select>';
+                echo '<br>';
+                echo '<button class="zera ok">OK</button>';
+            echo '</div>';
+        echo '</form>';
+        die;
     }
+    print_r($dados);die;
     if(!$dados){
         $missao = 'Nenhuma missão no momento';
     }else{
