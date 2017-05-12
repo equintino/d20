@@ -184,7 +184,7 @@
         $model->setemMissao(0);
         $model->setcriado($now);
         $model->setmodificado($now); 
-        $this->execute2($this->criaTabela($model->gettabela()), $model);       
+        //$this->execute2($this->criaTabela($model->gettabela()), $model);       
         $sql = 'INSERT INTO `'.$model->gettabela().'` (`id_atrib`,`FORCA`,`AGILIDADE`,`INTELIGENCIA`,`VONTADE`,`PV`,`PM`,`PE`,`CLASSE_COMUM`,`HABILIDADE_AUTOMATICA`,`personagem`,`DESCRICAO`) VALUES (:id_atrib,:FORCA,:AGILIDADE,:INTELIGENCIA,:VONTADE,:PV,:PM,:PE,:CLASSE_COMUM,:HABILIDADE_AUTOMATICA,:personagem,:DESCRICAO)';
 	return $this->execute2($sql, $model);
    }
@@ -201,7 +201,7 @@
         $model->setemMissao(0);
         $model->setcriado($now);
         $model->setmodificado($now); 
-        $this->execute3($this->criaTabela($model->gettabela()), $model);       
+        //$this->execute3($this->criaTabela($model->gettabela()), $model);       
         $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`ARMA`,`CUSTO`,`DANO`,`TIPO`,`FN`,`GRUPO`,`OBS`,`figura`) VALUES (:id,:ARMA,:CUSTO,:DANO,:TIPO,:FN,:GRUPO,:OBS,:figura)';
 	return $this->execute3($sql, $model);
    }
@@ -218,7 +218,7 @@
         $model->setemMissao(0);
         $model->setcriado($now);
         $model->setmodificado($now); 
-        $this->execute4($this->criaTabela($model->gettabela()), $model);       
+        //$this->execute4($this->criaTabela($model->gettabela()), $model);       
         $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`ARMA`,`CUSTO`,`personagem`,`armadura`,`equipamento`,`defesa`) VALUES (:id,:ARMA,:CUSTO,:personagem,:armadura,:equipamento,:defesa)';
 	return $this->execute4($sql, $model);
    }
@@ -235,7 +235,7 @@
         $model->setemMissao(0);
         $model->setcriado($now);
         $model->setmodificado($now); 
-        $this->execute5($this->criaTabela($model->gettabela()), $model);       
+        //$this->execute5($this->criaTabela($model->gettabela()), $model);       
         $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`DATA`,`MISSAO`,`personagem`,`excluido`,`emMissao`) VALUES (:id,:DATA,:MISSAO,:personagem,:excluido,:emMissao)';
 	return $this->execute5($sql, $model);
    }
