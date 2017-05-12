@@ -311,8 +311,10 @@
 	die;
   }
   if($act=='missao'){
+     echo '<font color=white>'; 
      print_r($_POST);
      print_r($search);
-     print_r(get_class_methods($dao));
+     //print_r(get_class_methods($dao));
+     echo '</font>';
   }
 ?>
