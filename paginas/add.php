@@ -8,7 +8,7 @@
   include_once '../validacao/ModelValidador.php';
   $avatar=$_COOKIE['avatar'];
   $act=$_GET['act'];
-  $personagem = $_GET['personagem'];
+  @$personagem = $_GET['personagem'];
   @$classe = $_GET['classe'];
   @$raca = $_GET['raca'];
   if($raca){
@@ -309,5 +309,10 @@
              '</div>';//<button class=\'continua continua-verde\'>Continua...</button>
         echo '<meta http-equiv="refresh" content="1;URL=../web/index.php?pagina=cadastro&act='.$cad.'&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $personagem.'">';
 	die;
+  }
+  if($act=='missao'){
+     print_r($_POST);
+     print_r($search);
+     print_r(get_class_methods($dao));
   }
 ?>

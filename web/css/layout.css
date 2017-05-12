@@ -248,6 +248,11 @@ ul li{
 }
 .zera{
     background-color: #007c00;
+    padding: 5px;
+}
+.ok{
+    margin-top: 5px;
+    font-size: 10px;
 }
 .cad2 .botao-verde, .cad4 .botao-verde, .cad5 .botao-verde, .cad6 .botao-verde, .cad7 .botao-verde{
     background-color: #007c00;
@@ -265,11 +270,11 @@ ul li{
 }
 .zera{
     position: relative;
-    top: 10px;
+    box-shadow: 0 5px 0 #003f00;
 }
 .zera:active{   
     position: relative;
-    top: 25px;
+    top: 5px;
     box-shadow: none;    
 }
 .cad4 .botao{
@@ -1391,6 +1396,15 @@ fieldset legend{
 .atributoMissao{
     float: right;
     margin-right: 40px;
-    #width: 350px;
-    #border: 1px solid red;
+}
+.quadro{
+    margin: 30px auto;
+    width: 400px;
+    height: 100px;
+    text-align: center;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border-radius: 5px;
+    font-size: 30px;
+    border: 1px solid gray; 
 }

@@ -21,13 +21,28 @@
 </script>
 <?php
     @$personagem = $_GET['personagem'];
-
     $dao = new dao();
     $search = new ModelSearchCriteria();
     $search->settabela('missao');
     $search->setpersonagem($personagem);
-    //print_r($search);die;
-    $dados = $dao->encontreEmMissao($search);
+    $dados = $dao->encontre($search);
+    
+    $search->settabela('tb_missao');
+    $missoes = $dao->encontre($search);
+    if(!$dados){
+       echo '<form action=../paginas/add.php?act=missao method=POST>';
+       echo '<div class=quadro>';
+         echo 'Selecione uma das misões:<br>';
+         echo '<select name=missao>';
+           echo '<option></option>';
+           echo '<option value=1>Missão Um</options>';
+         echo '</select>';
+         echo '<br>';
+         echo '<button class="zera ok">OK</button>';
+       echo '</div>';
+       echo '</form>';
+       die;
+    }
     if(!$dados){
         $missao = 'Nenhuma missão no momento';
     }else{
@@ -75,7 +90,7 @@
                     ?>
                 </table>
             </div>
-            <?php
+            <?php 
             echo '<span id="aqui">Bem-vindo <span class=motivacaoJogador>'.strtoupper($item->getpersonagem()).'</span></span>';
             echo '<div class=fichaAvatar><img height=230px src="'.$item->getavatar().'" />';
                echo '<div class=escudo><img height=80px src=../web/imagens/escudo.png />';
@@ -141,7 +156,7 @@
             ?>
             <div class=equipamento>
             <div class='tudo'>
-            <?php
+            <?php 
                $search->settabela('armamentos');
                $equipamentos=$dao->encontre($search);
                foreach($equipamentos as $item){
@@ -225,7 +240,7 @@
                ?>
                <div class=habilidades>
                   <div class=fichaTitulo>Habilidades</div>
-               <?php
+               <?php 
                   $hab=explode('/',$habilidades);
                   $search->settabela('tb_'.$classe);
                   $search->gettabela();
