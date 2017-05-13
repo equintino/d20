@@ -8,7 +8,7 @@
     $variaveis2=array('id_atrib','FORCA','AGILIDADE','INTELIGENCIA','VONTADE','PV','PM','PE','CLASSE_COMUM','HABILIDADE_AUTOMATICA','personagem','DESCRICAO');
     $variaveis3=array('id','ARMA','CUSTO','DANO','TIPO','FN','GRUPO','OBS','figura');
     $variaveis4=array('id','ARMA','CUSTO','personagem','armadura','equipamento','defesa');
-    $variaveis5=array('id','DATA','MISSAO','personagem','excluido','emMissao');
+    $variaveis5=array('id','DATA','MISSAO','personagem','emMissao','excluido');
     $texto="<?php \r\n class dao{\r\n";
     $texto .= '   '."private ".'$db'." = null;\r\n".
               '   public function __destruct(){'."\r\n".
@@ -171,7 +171,9 @@
         $now = mktime (date(\'H\'), date(\'i\'), date(\'s\'), date("m")  , date("d"), date("Y"));
         $model->setid(null);
         $model->setexcluido(0);
-        $model->setemMissao(0);
+        if(!$model->getemMissao()){
+            $model->setemMissao(0);
+        }
         $model->setcriado($now);
         $model->setmodificado($now);        
         $sql = \'INSERT INTO '.$tabela.' (';
@@ -364,7 +366,7 @@
         $now = mktime (date(\'H\'), date(\'i\'), date(\'s\'), date("m")  , date("d"), date("Y"));
         $model->setid(null);
         $model->setexcluido(0);
-        $model->setemMissao(0);
+        $model->setemMissao(1);
         $model->setcriado($now);
         $model->setmodificado($now); 
         $this->execute5($this->criaTabela($model->gettabela()), $model);       
@@ -390,7 +392,8 @@
             }
             $x++;
           }
-        $texto .= "\t".'return $this->execute5($sql, $model);
+        $texto .= "\t".'$this->setaMissao($model);
+           return $this->execute5($sql, $model);
    }'."\r\n";
     $texto .= '   private function update5(Model $model){
         $model->setmodificado(new DateTime(), new DateTimeZone(\'America/Sao_Paulo\'));
@@ -405,6 +408,11 @@
           }
              $texto .= ' WHERE id = :id \';
         return $this->execute5($sql, $model);
+   }'."\r\n";
+    $texto .= '   private function setaMissao(Model $model){ 
+         $model->settabela(\'personagem\');
+         $sql = \'UPDATE `personagem` SET emMissao = \'1\' WHERE personagem = \'\'.$model->getpersonagem().\'\';
+        return $this->execute($sql, $model);
    }'."\r\n";
     $texto .= '   public function execute($sql,$model){
         $statement = $this->getDb()->prepare($sql);

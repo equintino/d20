@@ -27,7 +27,6 @@
     $search->setpersonagem($personagem);
     $conferirMissao = $dao->encontrePorPersonagem($search);
     $emMissao=$conferirMissao->getemMissao();
-    
     if($emMissao==1){
         $search->settabela('missao');
         $dados = $dao->encontreEmMissao($search); 

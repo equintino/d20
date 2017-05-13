@@ -323,6 +323,7 @@
          $model->setDATA('1850-10-02 18:10:00');
          
          $dao->grava5($model);
+         echo '<meta http-equiv="refresh" content="1;URL=../web/index.php?pagina=missao&personagem='. $personagem.'">';
          die;
      }
      print_r($_POST);

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Tempo de geração: 12/05/2017 às 21:40
--- Versão do servidor: 10.1.21-MariaDB
--- Versão do PHP: 7.1.1
+-- Host: 127.0.0.1
+-- Generation Time: 13-Maio-2017 às 00:37
+-- Versão do servidor: 10.1.19-MariaDB
+-- PHP Version: 7.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,17 +17,17 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `d20`
+-- Database: `d20`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `missao`
+-- Estrutura da tabela `missao`
 --
 
 CREATE TABLE `missao` (
-  `id` varchar(10) NOT NULL,
+  `id` int(5) NOT NULL,
   `DATA` text,
   `MISSAO` text,
   `personagem` varchar(100) DEFAULT NULL,
@@ -36,16 +36,25 @@ CREATE TABLE `missao` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
--- Índices de tabelas apagadas
+-- Indexes for dumped tables
 --
 
 --
--- Índices de tabela `missao`
+-- Indexes for table `missao`
 --
 ALTER TABLE `missao`
   ADD PRIMARY KEY (`id`);
 ALTER TABLE `missao` ADD FULLTEXT KEY `MISSAO` (`MISSAO`);
 
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `missao`
+--
+ALTER TABLE `missao`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

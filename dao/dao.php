@@ -161,7 +161,9 @@
         $now = mktime (date('H'), date('i'), date('s'), date("m")  , date("d"), date("Y"));
         $model->setid(null);
         $model->setexcluido(0);
-        $model->setemMissao(0);
+        if(!$model->getemMissao()){
+            $model->setemMissao(0);
+        }
         $model->setcriado($now);
         $model->setmodificado($now);        
         $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`jogador`,`personagem`,`raca`,`classe`,`tendencia1`,`tendencia2`,`idade`,`tabela`,`sexo`,`criado`,`modificado`,`excluido`,`habilidade`,`altura`,`peso`,`cidade`,`motivacao`,`breveHistoria`,`avatar`,`nivel`,`emMissao`) VALUES (:id,:jogador,:personagem,:raca,:classe,:tendencia1,:tendencia2,:idade,:tabela,:sexo,:criado,:modificado,:excluido,:habilidade,:altura,:peso,:cidade,:motivacao,:breveHistoria,:avatar,:nivel,:emMissao)';
@@ -184,7 +186,7 @@
         $model->setemMissao(0);
         $model->setcriado($now);
         $model->setmodificado($now); 
-        //$this->execute2($this->criaTabela($model->gettabela()), $model);       
+        $this->execute2($this->criaTabela($model->gettabela()), $model);       
         $sql = 'INSERT INTO `'.$model->gettabela().'` (`id_atrib`,`FORCA`,`AGILIDADE`,`INTELIGENCIA`,`VONTADE`,`PV`,`PM`,`PE`,`CLASSE_COMUM`,`HABILIDADE_AUTOMATICA`,`personagem`,`DESCRICAO`) VALUES (:id_atrib,:FORCA,:AGILIDADE,:INTELIGENCIA,:VONTADE,:PV,:PM,:PE,:CLASSE_COMUM,:HABILIDADE_AUTOMATICA,:personagem,:DESCRICAO)';
 	return $this->execute2($sql, $model);
    }
@@ -201,7 +203,7 @@
         $model->setemMissao(0);
         $model->setcriado($now);
         $model->setmodificado($now); 
-        //$this->execute3($this->criaTabela($model->gettabela()), $model);       
+        $this->execute3($this->criaTabela($model->gettabela()), $model);       
         $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`ARMA`,`CUSTO`,`DANO`,`TIPO`,`FN`,`GRUPO`,`OBS`,`figura`) VALUES (:id,:ARMA,:CUSTO,:DANO,:TIPO,:FN,:GRUPO,:OBS,:figura)';
 	return $this->execute3($sql, $model);
    }
@@ -218,7 +220,7 @@
         $model->setemMissao(0);
         $model->setcriado($now);
         $model->setmodificado($now); 
-        //$this->execute4($this->criaTabela($model->gettabela()), $model);       
+        $this->execute4($this->criaTabela($model->gettabela()), $model);       
         $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`ARMA`,`CUSTO`,`personagem`,`armadura`,`equipamento`,`defesa`) VALUES (:id,:ARMA,:CUSTO,:personagem,:armadura,:equipamento,:defesa)';
 	return $this->execute4($sql, $model);
    }
@@ -232,17 +234,23 @@
         $now = mktime (date('H'), date('i'), date('s'), date("m")  , date("d"), date("Y"));
         $model->setid(null);
         $model->setexcluido(0);
-        $model->setemMissao(0);
+        $model->setemMissao(1);
         $model->setcriado($now);
         $model->setmodificado($now); 
-        //$this->execute5($this->criaTabela($model->gettabela()), $model);       
-        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`DATA`,`MISSAO`,`personagem`,`excluido`,`emMissao`) VALUES (:id,:DATA,:MISSAO,:personagem,:excluido,:emMissao)';
+        $this->execute5($this->criaTabela($model->gettabela()), $model);       
+        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`DATA`,`MISSAO`,`personagem`,`emMissao`,`excluido`) VALUES (:id,:DATA,:MISSAO,:personagem,:emMissao,:excluido)';
+        $this->setaMissao($model);
 	return $this->execute5($sql, $model);
    }
    private function update5(Model $model){
         $model->setmodificado(new DateTime(), new DateTimeZone('America/Sao_Paulo'));
-        $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, DATA = :DATA, MISSAO = :MISSAO, personagem = :personagem, excluido = :excluido, emMissao = :emMissao WHERE id = :id ';
+        $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, DATA = :DATA, MISSAO = :MISSAO, personagem = :personagem, emMissao = :emMissao, excluido = :excluido WHERE id = :id ';
         return $this->execute5($sql, $model);
+   }
+   private function setaMissao(Model $model){ 
+         $model->settabela('personagem');
+         $sql = 'UPDATE `personagem` SET emMissao = \'1\' WHERE personagem = \''.$model->getpersonagem().'\'';
+        return $this->execute($sql, $model);
    }
    public function execute($sql,$model){
         $statement = $this->getDb()->prepare($sql);
@@ -307,7 +315,7 @@
 	 return $params;
    }
    private function getParams5(Model $model){
-        $params = array(':id'=> $model->getid(),':DATA'=> $model->getDATA(),':MISSAO'=> $model->getMISSAO(),':personagem'=> $model->getpersonagem(),':excluido'=> $model->getexcluido(),':emMissao'=> $model->getemMissao(),);
+        $params = array(':id'=> $model->getid(),':DATA'=> $model->getDATA(),':MISSAO'=> $model->getMISSAO(),':personagem'=> $model->getpersonagem(),':emMissao'=> $model->getemMissao(),':excluido'=> $model->getexcluido(),);
 	 return $params;
    }
    private function executeStatement(PDOStatement $statement, array $params){
