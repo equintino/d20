@@ -314,20 +314,31 @@
   }
   if($act=='missao'){
      echo '<font color=white>'; 
+     $search->settabela('missao');
+     $search->setMISSAO($missao);
+     $search->setpersonagem($personagem);
+     //print_r($search);
+     $dadoPersonagem=$dao->encontrePorMissao($search);
+         //print_r($dadoPersonagem->getid());die;
+         //print_r($dao->encontrePorMissao($model));die;
      if($comecando==1){
-         $dao = new dao();
+         //$dao = new dao();
          $model->settabela('missao');
          $model->setMISSAO($missao);
-         $model->setpersonagem($personagem);
+         $model->setpersonagem($personagem);         
          $model->setemMissao(1);
+         if($dadoPersonagem){
+            $model->setexcluido(0);
+            $model->setid($dadoPersonagem->getid());
+         }
          $model->setDATA('1850-10-02 18:10:00');
-         
+         //print_r($model);die;   
          $dao->grava5($model);
          echo '<meta http-equiv="refresh" content="1;URL=../web/index.php?pagina=missao&personagem='. $personagem.'">';
          die;
      }
-     print_r($_POST);
-     print_r($search);
+     //print_r($_POST);
+     //print_r($search);
      //print_r(get_class_methods($dao));
      echo '</font>';
   }

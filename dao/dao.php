@@ -100,6 +100,15 @@
         modelMapper::map($model, $row);
         return $model;
    }
+  public function encontrePorMissao(ModelSearchCriteria $search=null){
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` = '0' and `MISSAO` = '".$search->getMISSAO()."' and personagem = '".$search->getpersonagem()."'")->fetch();
+        if (!$row) {
+            return null;
+        }
+        $model = new Model();
+        modelMapper::map($model, $row);
+        return $model;
+   }
    public function totalLinhas(ModelSearchCriteria $search=null){
            $row = $this->query("SELECT id FROM `".$search->gettabela()."` WHERE `excluido` =  '0' ORDER BY id DESC ")->fetch();
         if (!$row) {
@@ -239,8 +248,8 @@
         $model->setmodificado($now); 
         $this->execute5($this->criaTabela($model->gettabela()), $model);       
         $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`DATA`,`MISSAO`,`personagem`,`emMissao`,`excluido`) VALUES (:id,:DATA,:MISSAO,:personagem,:emMissao,:excluido)';
-        $this->setaMissao($model);
-	return $this->execute5($sql, $model);
+	$this->setaMissao($model);
+           return $this->execute5($sql, $model);
    }
    private function update5(Model $model){
         $model->setmodificado(new DateTime(), new DateTimeZone('America/Sao_Paulo'));
@@ -249,7 +258,7 @@
    }
    private function setaMissao(Model $model){ 
          $model->settabela('personagem');
-         $sql = 'UPDATE `personagem` SET emMissao = \'1\' WHERE personagem = \''.$model->getpersonagem().'\'';
+         $sql = "UPDATE `personagem` SET emMissao = '1' WHERE personagem = '".$model->getpersonagem()."'";
         return $this->execute($sql, $model);
    }
    public function execute($sql,$model){

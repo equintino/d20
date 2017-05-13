@@ -109,7 +109,16 @@
         $model = new Model();
         modelMapper::map($model, $row);
         return $model;
-   }'."\r\n";               
+   }'."\r\n"; 
+     $texto .= '  public function encontrePorMissao(ModelSearchCriteria $search=null){
+           $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` = \'0\' and `MISSAO` = \'".$search->getMISSAO()."\' and personagem = \'".$search->getpersonagem()."\'")->fetch();
+        if (!$row) {
+            return null;
+        }
+        $model = new Model();
+        modelMapper::map($model, $row);
+        return $model;
+   }'."\r\n"; 
      $texto .= '   public function totalLinhas(ModelSearchCriteria $search=null){
            $row = $this->query("SELECT id FROM `".$search->gettabela()."` WHERE `excluido` =  \'0\' ORDER BY id DESC ")->fetch();
         if (!$row) {
@@ -411,7 +420,7 @@
    }'."\r\n";
     $texto .= '   private function setaMissao(Model $model){ 
          $model->settabela(\'personagem\');
-         $sql = \'UPDATE `personagem` SET emMissao = \'1\' WHERE personagem = \'\'.$model->getpersonagem().\'\';
+         $sql = "UPDATE `personagem` SET emMissao = \'1\' WHERE personagem = \'".$model->getpersonagem()."\'";
         return $this->execute($sql, $model);
    }'."\r\n";
     $texto .= '   public function execute($sql,$model){
