@@ -88,7 +88,10 @@ body{
     font-size: 30px;
 }
 .tempo{
-    float: right;
+    position: absolute;
+    /*float: right;*/
+    top: 0px;
+    right: 0px;
     color: yellow;
     overflow: hidden;
 }
