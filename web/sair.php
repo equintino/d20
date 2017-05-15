@@ -2,7 +2,7 @@
    include '../dao/dao.php';
    include '../dao/ModelSearchCriteria.php';
    include '../config/Config.php';
-   include '../model/Model.php';
+   include '../model/model.php';
    include '../mapping/modelMapper.php';
    
    $personagem = $_GET['personagem'];
@@ -15,10 +15,15 @@
    $search->setpersonagem($personagem);
    $emMissao=$dao->encontreEmMissao($search);
    
-   $model->setid($emMissao->getid());
-   $model->setpersonagem($personagem);
-   $model->setemMissao(0);
-   $dao->grava5($model);
-   print_r($emMissao);die;
+   if($emMissao){
+        $model->settabela('missao');
+        $model->setid($emMissao->getid());
+        $model->setpersonagem($personagem);
+        $model->setemMissao(0);
+        $dao->setaMissao($model);
+   }
+   
+   header("Location:../index.html");
+   //print_r($emMissao);die;
 ?>
 

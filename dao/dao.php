@@ -256,9 +256,8 @@
         $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, DATA = :DATA, MISSAO = :MISSAO, personagem = :personagem, emMissao = :emMissao, excluido = :excluido WHERE id = :id ';
         return $this->execute5($sql, $model);
    }
-   private function setaMissao(Model $model){ 
-         $model->settabela('personagem');
-         $sql = "UPDATE `personagem` SET emMissao = '1' WHERE personagem = '".$model->getpersonagem()."'";
+   public function setaMissao(Model $model){ 
+         $sql = "UPDATE `".$model->gettabela()."` SET emMissao = '".$model->getemMissao()."' WHERE personagem = '".$model->getpersonagem()."'";
         return $this->execute($sql, $model);
    }
    public function execute($sql,$model){

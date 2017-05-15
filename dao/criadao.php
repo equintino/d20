@@ -418,9 +418,8 @@
              $texto .= ' WHERE id = :id \';
         return $this->execute5($sql, $model);
    }'."\r\n";
-    $texto .= '   private function setaMissao(Model $model){ 
-         $model->settabela(\'personagem\');
-         $sql = "UPDATE `personagem` SET emMissao = \'1\' WHERE personagem = \'".$model->getpersonagem()."\'";
+    $texto .= '   public function setaMissao(Model $model){ 
+         $sql = "UPDATE `".$model->gettabela()."` SET emMissao = \'".$model->getemMissao()."\' WHERE personagem = \'".$model->getpersonagem()."\'";
         return $this->execute($sql, $model);
    }'."\r\n";
     $texto .= '   public function execute($sql,$model){
