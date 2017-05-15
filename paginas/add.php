@@ -8,6 +8,7 @@
   include_once '../validacao/ModelValidador.php';
   $avatar=$_COOKIE['avatar'];
   $act=$_GET['act'];
+  @$login=strtoupper($_COOKIE['login']);
   @$personagem = $_GET['personagem'];
   @$classe = $_GET['classe'];
   @$raca = $_GET['raca'];
@@ -327,6 +328,8 @@
          $model->setMISSAO($missao);
          $model->setpersonagem($personagem);         
          $model->setemMissao(1);
+         //print_r($_COOKIE);die;
+         $model->setjogador($login);
          if($dadoPersonagem){
             $model->setexcluido(0);
             $model->setid($dadoPersonagem->getid());

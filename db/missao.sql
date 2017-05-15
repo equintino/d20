@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 13-Maio-2017 às 00:37
--- Versão do servidor: 10.1.19-MariaDB
--- PHP Version: 7.0.13
+-- Host: localhost
+-- Tempo de geração: 15/05/2017 às 20:22
+-- Versão do servidor: 10.1.21-MariaDB
+-- Versão do PHP: 7.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `d20`
+-- Banco de dados: `d20`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `missao`
+-- Estrutura para tabela `missao`
 --
 
 CREATE TABLE `missao` (
@@ -32,26 +32,27 @@ CREATE TABLE `missao` (
   `MISSAO` text,
   `personagem` varchar(100) DEFAULT NULL,
   `excluido` enum('0','1') DEFAULT '0',
-  `emMissao` enum('0','1') DEFAULT '0'
+  `emMissao` enum('0','1') DEFAULT '0',
+  `jogador` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
--- Indexes for dumped tables
+-- Índices de tabelas apagadas
 --
 
 --
--- Indexes for table `missao`
+-- Índices de tabela `missao`
 --
 ALTER TABLE `missao`
   ADD PRIMARY KEY (`id`);
 ALTER TABLE `missao` ADD FULLTEXT KEY `MISSAO` (`MISSAO`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de tabelas apagadas
 --
 
 --
--- AUTO_INCREMENT for table `missao`
+-- AUTO_INCREMENT de tabela `missao`
 --
 ALTER TABLE `missao`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;

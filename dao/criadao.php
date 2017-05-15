@@ -8,7 +8,7 @@
     $variaveis2=array('id_atrib','FORCA','AGILIDADE','INTELIGENCIA','VONTADE','PV','PM','PE','CLASSE_COMUM','HABILIDADE_AUTOMATICA','personagem','DESCRICAO');
     $variaveis3=array('id','ARMA','CUSTO','DANO','TIPO','FN','GRUPO','OBS','figura');
     $variaveis4=array('id','ARMA','CUSTO','personagem','armadura','equipamento','defesa');
-    $variaveis5=array('id','DATA','MISSAO','personagem','emMissao','excluido');
+    $variaveis5=array('id','DATA','MISSAO','personagem','emMissao','excluido','jogador');
     $texto="<?php \r\n class dao{\r\n";
     $texto .= '   '."private ".'$db'." = null;\r\n".
               '   public function __destruct(){'."\r\n".
@@ -420,7 +420,7 @@
         return $this->execute5($sql, $model);
    }'."\r\n";
     $texto .= '   public function setaMissao(Model $model){ 
-         $sql = "UPDATE `".$model->gettabela()."` SET emMissao = \'".$model->getemMissao()."\' WHERE personagem = \'".$model->getpersonagem()."\'";
+         $sql = "UPDATE `".$model->gettabela()."` SET emMissao = \'".$model->getemMissao()."\' WHERE jogador = \'".$model->getjogador()."\'";
         return $this->execute($sql, $model);
    }'."\r\n";
     $texto .= '   public function execute($sql,$model){

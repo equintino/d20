@@ -247,18 +247,18 @@
         $model->setcriado($now);
         $model->setmodificado($now); 
         $this->execute5($this->criaTabela($model->gettabela()), $model);       
-        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`DATA`,`MISSAO`,`personagem`,`emMissao`,`excluido`) VALUES (:id,:DATA,:MISSAO,:personagem,:emMissao,:excluido)';
+        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`DATA`,`MISSAO`,`personagem`,`emMissao`,`excluido`,`jogador`) VALUES (:id,:DATA,:MISSAO,:personagem,:emMissao,:excluido,:jogador)';
 	$model->settabela('personagem');
         $this->setaMissao($model);
         return $this->execute5($sql, $model);
    }
    private function update5(Model $model){
         $model->setmodificado(new DateTime(), new DateTimeZone('America/Sao_Paulo'));
-        $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, DATA = :DATA, MISSAO = :MISSAO, personagem = :personagem, emMissao = :emMissao, excluido = :excluido WHERE id = :id ';
+        $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, DATA = :DATA, MISSAO = :MISSAO, personagem = :personagem, emMissao = :emMissao, excluido = :excluido, jogador = :jogador WHERE id = :id ';
         return $this->execute5($sql, $model);
    }
    public function setaMissao(Model $model){ 
-         $sql = "UPDATE `".$model->gettabela()."` SET emMissao = '".$model->getemMissao()."' WHERE personagem = '".$model->getpersonagem()."'";
+         $sql = "UPDATE `".$model->gettabela()."` SET emMissao = '".$model->getemMissao()."' WHERE jogador = '".$model->getjogador()."'";
         return $this->execute($sql, $model);
    }
    public function execute($sql,$model){
@@ -324,7 +324,7 @@
 	 return $params;
    }
    private function getParams5(Model $model){
-        $params = array(':id'=> $model->getid(),':DATA'=> $model->getDATA(),':MISSAO'=> $model->getMISSAO(),':personagem'=> $model->getpersonagem(),':emMissao'=> $model->getemMissao(),':excluido'=> $model->getexcluido(),);
+        $params = array(':id'=> $model->getid(),':DATA'=> $model->getDATA(),':MISSAO'=> $model->getMISSAO(),':personagem'=> $model->getpersonagem(),':emMissao'=> $model->getemMissao(),':excluido'=> $model->getexcluido(),':jogador'=> $model->getjogador(),);
 	 return $params;
    }
    private function executeStatement(PDOStatement $statement, array $params){
