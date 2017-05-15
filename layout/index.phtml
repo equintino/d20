@@ -79,10 +79,12 @@
     function fadeIn(element,time){
         processa(element,time,0,100);
     }
-    function sair(){
+    function sair(personagem){
+        var personagem;
+       alert(personagem);
         document.cookie = "login=; path=/";
         document.cookie = "senha=; path=/";
-        window.location.replace("../index.html");
+        window.location.replace('../web/sair.php?personagem='+personagem+'');
     }
     // ]]></script>
 </head>
@@ -107,17 +109,16 @@
                     }else{
                         $menu=array('home'=>'Home','cadastro'=>'Cadastro de Personagem','lista'=>'Personagens','dado'=>'Rolagem de Dado');                        
                     }
-                    //print_r($dados);
                     
                     foreach($dados as $dado){
                         $personagem = $dado->getpersonagem();
-                        /*if($dado->getemMissao()==1){
+                        if($dado->getemMissao()==1){
                             //echo 'Personagem '.$item->getpersonagem().' está em missão.';
                             echo "<div class='tempo'>";
                                 echo '<iframe scrolling="no" frameborder=0 src="tempo.php"></iframe>';
                             echo '</div>';
                             //$personagem = $dado->getpersonagem();
-                        }*/
+                        }
                     } 
                     if(@!$personagem){
                         $personagem = null;
@@ -138,7 +139,7 @@
                         }
                      echo '</ul>';
                     if(@$login){
-                        echo '<div class=saudacao1>Jogador '.$login.' <img onclick=sair() height=25px title="Sair" src="../web/imagens/sair.png" /></div>';
+                        echo '<div class=saudacao1>Jogador '.$login.' <img onclick=sair("'.$personagem.'") height=25px title="Sair" src="../web/imagens/sair.png" /></div>';
                     }
                   ?>
             </div>
