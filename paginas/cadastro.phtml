@@ -228,8 +228,13 @@ function trocaAvatar(x){
                             foreach($lista as $keys => $item){
                                //if($x < $keys && $keys < $y){
                                //echo $ids[0];die;
+                                if($login != 'MESTRE'){
+                                    $pagina = 'missao';
+                                }else{
+                                    $pagina = 'ficha';
+                                }
                                if($item->getid() == $ids[$z]){
-                                  echo '<tr><td class=nomes>'.$titulos[0].'</td><td class=nomes2><a href='.Utils::createLink('ficha', array('personagem'=>$item->getpersonagem())).'>'.$item->getpersonagem().'<span class=verFicha><br>(ver ficha)</span></a></td></tr>';
+                                  echo '<tr><td class=nomes>'.$titulos[0].'</td><td class=nomes2><a href='.Utils::createLink($pagina, array('personagem'=>$item->getpersonagem())).'>'.$item->getpersonagem().'<span class=verFicha><br>(ver ficha)</span></a></td></tr>';
                                   echo '<tr><td class=nomes>'.$titulos[1].'</td><td class=nomes2>'.$item->getraca().'</td></tr>';
                                   echo '<tr><td class=nomes>'.$titulos[2].'</td><td class=nomes2>'.$item->getclasse().'</td></tr>';
                                   echo '<tr><td class=nomes>'.$titulos[3].'</td><td class=nomes2>'.$item->gettendencia1().'</td></tr>';

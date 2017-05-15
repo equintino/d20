@@ -38,8 +38,7 @@
     images[10] = 'imagens/11.jpg';
      
     var preLoadImages = new Array();
-    for (var i = 0; i < images.length; i++)
-    {
+    for (var i = 0; i < images.length; i++){
        if (images[i] == "")
           break;
      
@@ -94,14 +93,17 @@
                   <?php 
                     include '../dao/dao.php';
                     include '../dao/ModelSearchCriteria.php';
+                    
                     @$login = strtoupper($_COOKIE['login']);
                     $dao = new dao();
                     $search = new ModelSearchCriteria();
                     $search->settabela('personagem');
                     $search->setjogador($login);
                     $dados = $dao->encontre($search);
+                    
                     if($login<>'MESTRE'){
-                        $menu=array('home'=>'Home','cadastro'=>'Cadastro de Personagem','lista'=>'Personagens','missao'=>'Missão'); 
+                        //$menu=array('home'=>'Home','cadastro'=>'Cadastro de Personagem','lista'=>'Personagens','missao'=>'Missão'); 
+                        $menu=array('home'=>'Home','cadastro'=>'Cadastro de Personagem','lista'=>'Personagens'); 
                         if(@!$dados){
                            $menu=array('home'=>'Home','cadastro'=>'Cadastro de Personagem');
                         }
