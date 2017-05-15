@@ -402,7 +402,7 @@
             $x++;
           }
         $texto .= "\t".'$model->settabela(\'personagem\');
-        $this->seraMissao($model);
+        $this->setaMissao($model);
         return $this->execute5($sql, $model);
    }'."\r\n";
     $texto .= '   private function update5(Model $model){
