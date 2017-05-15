@@ -401,8 +401,9 @@
             }
             $x++;
           }
-        $texto .= "\t".'$this->setaMissao($model);
-           return $this->execute5($sql, $model);
+        $texto .= "\t".'$model->settabela(\'personagem\');
+        $this->seraMissao($model);
+        return $this->execute5($sql, $model);
    }'."\r\n";
     $texto .= '   private function update5(Model $model){
         $model->setmodificado(new DateTime(), new DateTimeZone(\'America/Sao_Paulo\'));

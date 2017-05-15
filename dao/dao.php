@@ -248,8 +248,9 @@
         $model->setmodificado($now); 
         $this->execute5($this->criaTabela($model->gettabela()), $model);       
         $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`DATA`,`MISSAO`,`personagem`,`emMissao`,`excluido`) VALUES (:id,:DATA,:MISSAO,:personagem,:emMissao,:excluido)';
-	$this->setaMissao($model);
-           return $this->execute5($sql, $model);
+	$model->settabela('personagem');
+        $this->seraMissao($model);
+        return $this->execute5($sql, $model);
    }
    private function update5(Model $model){
         $model->setmodificado(new DateTime(), new DateTimeZone('America/Sao_Paulo'));
