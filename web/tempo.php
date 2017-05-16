@@ -154,8 +154,12 @@ function getSecs(pausa){
             $dao = new dao();
             $search = new ModelSearchCriteria();
             
+            $personagem = $_GET['personagem'];
+            
             $search->settabela('missao');
+            $search->setpersonagem($personagem);
             $missao=$dao->encontre($search);
+            //print_r($missao);die;
             foreach($missao as $ativa){
                 if($ativa->getemMissao()==0){
                     $ano = substr($ativa->getDATA(),0,4);
@@ -188,29 +192,28 @@ function getSecs(pausa){
                         echo $tempo->getTEMPMIN();
                         echo '<span class=graus>C</span>';
                     echo '</div>';die;
-                }else{
-            
-            $dia = date('d');
-            $search->settabela('tb_tempo');
-            $search->setid($dia);
-            $tempo=$dao->encontrePorId($search);
-            
-            echo "<script>setTimeout('getSecs(0)',1);</script>";
-            
-            echo '<div class=fases>';
-                echo '<span><img title=\'Estação do '.$tempo->getESTACAO().'\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo&numero=2 /></span>';
-                echo '<img title=\''.$tempo->getDESCRICAO().'\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo&numero=3 />';
-                echo '<img title=\'Fase da Lua ('.$tempo->getLUAS().')\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo />';
-            echo '</div>';
-            echo '<div class=temperatura>';
-                echo '<span class=seta>↑</span>';
-                echo $tempo->getTEMPMAX();
-                echo '<span class=graus>C</span>';
-                echo '<span class=seta>  ↓</span>';
-                echo $tempo->getTEMPMIN();
-                echo '<span class=graus>C</span>';
-            echo '</div>';die;
-            }
+                }else{           
+                    $dia = date('d');
+                    $search->settabela('tb_tempo');
+                    $search->setid($dia);
+                    $tempo=$dao->encontrePorId($search);
+
+                    echo "<script>setTimeout('getSecs(0)',1);</script>";
+
+                    echo '<div class=fases>';
+                        echo '<span><img title=\'Estação do '.$tempo->getESTACAO().'\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo&numero=2 /></span>';
+                        echo '<img title=\''.$tempo->getDESCRICAO().'\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo&numero=3 />';
+                        echo '<img title=\'Fase da Lua ('.$tempo->getLUAS().')\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo />';
+                    echo '</div>';
+                    echo '<div class=temperatura>';
+                        echo '<span class=seta>↑</span>';
+                        echo $tempo->getTEMPMAX();
+                        echo '<span class=graus>C</span>';
+                        echo '<span class=seta>  ↓</span>';
+                        echo $tempo->getTEMPMIN();
+                        echo '<span class=graus>C</span>';
+                    echo '</div>';die;
+                }
             }
         ?>
         </div>

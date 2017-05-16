@@ -84,7 +84,8 @@
         //document.cookie = "senha=; path=/";
         window.location.replace('../web/sair.php?personagem='+personagem+'');
     }
-    // ]]></script>
+    // ]]>
+</script>
 </head>
     <body onload="startSlideShow()">     
         <!-- header -->
@@ -115,9 +116,9 @@
                         $personagem = $dado->getpersonagem();
                         if($dado->getemMissao()==1){
                             //echo 'Personagem '.$item->getpersonagem().' está em missão.';
-                            echo "<div class='tempo'>";
+                            /*echo "<div class='tempo'>";
                                 echo '<iframe scrolling="no" frameborder=0 src="tempo.php"></iframe>';
-                            echo '</div>';
+                            echo '</div>';*/
                             //$personagem = $dado->getpersonagem();
                         }
                     } 

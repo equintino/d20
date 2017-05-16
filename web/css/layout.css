@@ -18,6 +18,11 @@ body{
     background: 10% url('../imagens/5.jpg');
 }
 #menu{
+    width: 930px;
+    margin: auto;
+}
+#menu ul li{
+    display: inline;
 }
 #rodape{
       width: 100%; 
@@ -28,7 +33,7 @@ body{
       text-align: center;
 }
 #logo{
-    text-shadow: 4px 4px 4px white;
+    text-shadow: -1px -1px white, 1px 1px #333;
 }
 .conteudo{
     font-family: sans-serif;
@@ -55,7 +60,7 @@ body{
     color: white;
 }
 .bnt:ative{
-    border: none;
+    /*border: none;*/
 }
 .home{
     margin: auto;
@@ -93,7 +98,38 @@ body{
     top: 0px;
     right: 0px;
     color: yellow;
-    overflow: hidden;
+    #overflow: hidden;
+}
+.sairMissao{
+    margin-top: 5px;
+    float: right;
+    color: white;
+    font-weight: 700;
+    #text-shadow: 1px 1px black, -1px -1px white;
+}
+.sairMissao{
+    #font-size: 16px;
+    padding: 0 4px;
+    position: relative;
+    #font-family: arial;
+    #font-weight: 700;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    #font-size: 16px;
+    #color: white;
+}
+.sairMissao-verde{
+    background-color: #007c00;
+    box-shadow: 0 5px 0 #003f00;
+}
+.sairMissao:hover{
+    background-color: #006000;
+}
+.sairMissao-verde:active{
+    position: relative;
+    top: 5px;
+    box-shadow: none;
 }
 .lista{
 }
@@ -127,9 +163,6 @@ body{
 }
 a:link{
     text-decoration: none;
-}
-ul li{
-    display: inline;
 }
 .ref{
     margin-left: 510px;
@@ -278,7 +311,7 @@ ul li{
 .zera:active{   
     position: relative;
     top: 5px;
-    box-shadow: none;    
+    box-shadow: none;  
 }
 .cad4 .botao{
     position: relative;
@@ -451,12 +484,15 @@ fieldset legend{
 }
 .saudacao1{
     position: absolute;
-    top: 73px;
+    top: 3px;
     right: 10px;
-    color: white;
+    #color: white;
+    font-weight: 900;
     font-style: italic;
     font-size: 18px;
-    text-shadow: 4px -4px 0.5px  green;
+    /*text-shadow: 2px -2px 0.5px white, 2px -2px 0.5px black;*/
+    #text-shadow: 1px 1px white, -1px -1px #333;
+    text-shadow: -1px -1px white, 1px 1px #333;
 }
 .semPersonagem{
     position: relative;
@@ -488,7 +524,7 @@ fieldset legend{
     text-justify: auto;
 }
 .cadbnt{
-    border: 1px solid red;
+    /*border: 1px solid red;*/
 }
 .cad .bnt_{
     float: right;
@@ -552,10 +588,10 @@ fieldset legend{
     font-weight: 700;
     font-size: 16px;
     text-transform: uppercase;
-    background-color: red;
     color: white;
 }
 .rolar-red{
+    background-color: red;
     box-shadow: 0 5px 0 #bd0000;
 }
 .rolar:hover{
@@ -1398,7 +1434,15 @@ fieldset legend{
 }
 .atributoMissao{
     float: right;
-    margin-right: 40px;
+    margin-right: 100px;
+}
+.bntMenos{
+    position: relative;
+    top:  -90px;
+    right: -290px;
+}
+.bntMenos .segundo{
+    margin-top: 15px;
 }
 .quadro{
     margin: 30px auto;

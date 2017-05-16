@@ -1,5 +1,7 @@
 <script>
     menos=0;
+    PVResta=0;
+    PMResta=0;
     function calcDefesa($def){
         var x = $def;
         document.getElementById('def').innerHTML = x;
@@ -10,15 +12,36 @@
     }
     function mais(id){
         var id;
-        menos++;
-        document.getElementById(id).innerHTML=menos;
+        if(id == 'PVResta'){
+            PVResta++;
+            menos=PVResta;
+        }else if(id == 'PMResta'){
+            PMResta++;
+            menos=PMResta; 
+        }
+            document.getElementById(id).innerHTML=menos;
     }
     function zera(id){
-        var id
-        menos=0;
+        var id;
+        if(id == 'PVResta'){
+            PVResta=0;
+            menos=PVResta;
+        }else if(id == 'PMResta'){
+            PMResta=0;
+            menos=PMResta; 
+        }
         document.getElementById(id).innerHTML=menos;
     }
+    function sairMissao(){
+        confirm('Deseja realmente sair?');
+        window.location.assign('index.php');
+    }
 </script>
+<style>
+	#cabecalho{
+		visibility: hidden;
+	}
+</style>
 <?php  
     @$personagem = $_GET['personagem'];
     $dao = new dao();
@@ -49,17 +72,16 @@
                     }
                   echo '</select>';
                   echo '<br>';
+                  echo '<span class="zera ok" onclick=history.go(-1) >VOLTAR</span>';
                   echo '<button class="zera ok">OK</button>';
                 echo '</div>';
                 echo '</form>';
                 die;
         }else{
-           /*
             echo "<div class='tempo'>";
-               echo '<iframe scrolling="no" frameborder=0 src="../web/tempo.php"></iframe>';
+               echo '<iframe scrolling="no" frameborder=0 src="../web/tempo.php?personagem='.$personagem.'"></iframe>';
+               echo '<br><span onclick=sairMissao() class="sairMissao sairMissao-verde" >Sair da Missão</span>';
             echo '</div>';
-            * 
-            */
            goto missao;
         }
     }else{
@@ -79,6 +101,7 @@
                     }
                 echo '</select>';
                 echo '<br>';
+                echo '<span class="zera ok" onclick=history.go(-1) >VOLTAR</span>';
                 echo '<button class="zera ok">OK</button>';
             echo '</div>';
         echo '</form>';
@@ -165,14 +188,14 @@
                         if($item_[2][0]=='V'){                 
                             echo $atrib->getPV();
                             if($dados){
-                                echo' -</td><td><span id="PVResta">0</span></td><td class=zera onclick=mais("PVResta")>-1</td><td class=zera onclick=zera("PVResta")>zerar</td></tr>';
+                                echo' -</td><td><span id="PVResta">0</span></td></tr>';
                             }else{
                                 echo '</td></tr>';
                             }
                         }elseif($item_[2][0]=='M'){                
                            echo $atrib->getPM();
                             if($dados){
-                                echo ' -</td><td><span id="PMResta">0</span></td><td class=zera onclick=mais("PMResta")>-1</td><td class=zera onclick=zera("PMResta")>zerar</td></tr>';
+                                echo ' -</td><td><span id="PMResta">0</span></td></tr>';
                             }else{
                                 echo '</td></tr>';
                             }
@@ -194,6 +217,10 @@
                      }
                   }
                echo '</table>';
+               echo '<div class=bntMenos >';
+                    echo '<div><span class=zera onclick=mais("PVResta")>-1</span><span class=zera onclick=zera("PVResta")>zerar</span></div>';
+                    echo '<div class=segundo ><span class=zera onclick=mais("PMResta")>-1</span><span class=zera onclick=zera("PMResta")>zerar</span></div>';
+               echo '</div>';
             echo '</div>';
             ?>
             <div class=equipamento>
