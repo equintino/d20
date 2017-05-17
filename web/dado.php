@@ -56,7 +56,7 @@ if(@!$dado){
 <div class="conteudo">
 <br><br><br>
 <center>
-    <form action="index.php?pagina=dado&act=1" method="post">
+    <form action="dado.php?act=1" method="post">
         <legenda class="t_dado">Escolha o dado abaixo</legenda>
         <div class="dados"> 
         <span id='dado6'><img height=56px title='Dado de 6 lados' src='../web/imagens/d6.png'></span>

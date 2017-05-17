@@ -15,3 +15,11 @@ body{
 .tudo{
     border: 1px solid red;
 }
+.t_dado{
+    font-size: 20px;
+    text-shadow: 2px 2px 2px white;
+    color: red;
+}
+.dados{
+    margin: 20px;   
+}
