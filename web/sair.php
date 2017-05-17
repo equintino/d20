@@ -5,8 +5,9 @@
    include '../model/model.php';
    include '../mapping/modelMapper.php';
    
-   $personagem = $_GET['personagem'];
+   @$personagem = $_GET['personagem'];
    @$login = strtoupper($_COOKIE['login']);
+   @$act = $_GET['act'];
    //print_r($login);die;
    
    $dao = new dao();
@@ -27,7 +28,10 @@
         $model->setemMissao(0);
         $dao->setaMissao($model);
    //}
-   
+   if(@$act=='missao'){
+      header("Location:index.php");
+      die;
+   }
    header("Location:../index.html");
    //print_r($emMissao);die;
 ?>

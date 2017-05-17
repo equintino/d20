@@ -704,6 +704,11 @@ fieldset legend{
     margin: 20px 50px;
     padding-right: 30px;
 }
+.tabelaMissao{
+    float: left;
+    margin: 20px 50px;
+    #padding-right: 30px;
+}
 .motivacaoJogador{
     color: red;
     font-family: 'Kaushan Script', cursive;
