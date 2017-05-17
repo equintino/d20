@@ -67,7 +67,7 @@ if(@!$dado){
         <input type='radio' id="dadox3" name='dado' value='6x3'>
         <input type="hidden" name="rolar" value="1">
         </div>
-        <button title="Aperte e segure para girar o dado." class='rolar rolar-red' onmousedown="mostrarDado()"; >Segure para girar</button>       
+        <button title="Aperte e segure para girar o dado." class='rolar rolar-red' onmousedown="mostrarDado()">Segure para girar</button>       
     </form>
 </center>
 <br><br>
