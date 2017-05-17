@@ -1,0 +1,17 @@
+body{
+    #background: green;
+}
+/*
+.tudo{
+    background-image: url('../imagens/fundo.png');
+    background-size: 100% 100%;
+    border-radius: 20px;
+    width: 103%;
+    height: 1500px;
+    margin-top: 330px;
+    margin-left: -12px;
+    padding-top: 160px;
+}*/
+.tudo{
+    border: 1px solid red;
+}

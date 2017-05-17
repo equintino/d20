@@ -11,7 +11,3 @@ function ChangeImg(){
     document["img_apoio"].src = "dir_img/" + imagens[img_atual];
    var x = setTimeout ("ChangeImg()", 5000);
 }
-
-<body style="padding:0; margin:0" Onload="ChangeImg()">
-
-<img width="268" height="68" name="img_apoio" src="dir_img/sabesp.gif" border="0" alt="" />
