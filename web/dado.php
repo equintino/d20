@@ -4,25 +4,29 @@
     <meta name="viewport" content="width=device-width">  
     <link rel="stylesheet" href="css/dado.css" type="text/css" media='screen'/>   
     <!--<link rel="stylesheet" href="css/mobile.css" media="(max-width: 320px)">-->
+    <?php    
+      $height='height=30px';
+      $tamanho='33px';
+    ?>
 <title>Rola o dado</title>
 <SCRIPT language=JavaScript>
   function rolaDado($rdado,y){
     var x = $rdado;
     mostrarDado();
-    document.getElementById('dado'+y).innerHTML = '<img height=60px src='+x+' />';
+    document.getElementById('dado'+y).innerHTML = '<img height=<?= $tamanho ?> src='+x+' />';
   }
    function mostrarDado(){
-    var dado = getRadioValor('dado');
+    dado = getRadioValor('dado');
     document.getElementById('resultado').innerHTML = '';
     if(dado == '6x2'){
-       document.getElementById('dado'+dado).innerHTML = '<img height=60px src="imagens/dado/rd'+dado+'.gif" />';
-       document.getElementById('dado2'+dado).innerHTML = '<img height=60px src="imagens/dado/rd'+dado+'.gif" />';
+       document.getElementById('dado'+dado).innerHTML = '<img height=<?= $tamanho ?> src="imagens/dado/rd'+dado+'.gif" />';
+       document.getElementById('dado2'+dado).innerHTML = '<img height=<?= $tamanho ?> src="imagens/dado/rd'+dado+'.gif" />';
     }else if(dado == '6x3'){
-       document.getElementById('dado'+dado).innerHTML = '<img height=60px src="imagens/dado/rd6.gif" />';
-       document.getElementById('dado2'+dado).innerHTML = '<img height=60px src="imagens/dado/rd6.gif" />';
-       document.getElementById('dado3'+dado).innerHTML = '<img height=60px src="imagens/dado/rd6.gif" />';
+       document.getElementById('dado'+dado).innerHTML = '<img height=<?= $tamanho ?> src="imagens/dado/rd6.gif" />';
+       document.getElementById('dado2'+dado).innerHTML = '<img height=<?= $tamanho ?> src="imagens/dado/rd6.gif" />';
+       document.getElementById('dado3'+dado).innerHTML = '<img height=<?= $tamanho ?> src="imagens/dado/rd6.gif" />';
    }else{
-      document.getElementById('dado'+dado).innerHTML = '<img height=60px src="imagens/dado/rd'+dado+'.gif" />';    
+      document.getElementById('dado'+dado).innerHTML = '<img height=<?= $tamanho ?> src="imagens/dado/rd'+dado+'.gif" />';    
     }
  }
   
@@ -36,6 +40,28 @@
   }  
   return null;
  }
+function valor() {
+    var x;
+    if(dado == '6x2'){
+       document.getElementById('dado'+dado).innerHTML = '<img height=<?= $tamanho ?> src="../web/imagens/d6.png" />';
+       document.getElementById('dado2'+dado).innerHTML = '<img height=<?= $tamanho ?> src="../web/imagens/d6.png" />';
+    x1 = Math.floor((Math.random() * 6) + 1); 
+    x2 = Math.floor((Math.random() * 6) + 1); 
+    x = x1+x2;
+    }else if(dado == '6x3'){
+       document.getElementById('dado'+dado).innerHTML = '<img height=<?= $tamanho ?> src="../web/imagens/d6.png" />';
+       document.getElementById('dado2'+dado).innerHTML = '<img height=<?= $tamanho ?> src="../web/imagens/d6.png" />';
+       document.getElementById('dado3'+dado).innerHTML = '<img height=<?= $tamanho ?> src="../web/imagens/d6.png" />';
+    x1 = Math.floor((Math.random() * 6) + 1); 
+    x2 = Math.floor((Math.random() * 6) + 1); 
+    x3 = Math.floor((Math.random() * 6) + 1); 
+    x = x1+x2+x3;
+   }else{
+      document.getElementById('dado'+dado).innerHTML = '<img height=<?= $tamanho ?> src="../web/imagens/d6.png" />'; 
+    x = Math.floor((Math.random() * 6) + 1);   
+    }
+    document.getElementById("resultado").innerHTML = x;
+}
 </script>
 <?php
 @$act=$_GET['act'];
@@ -54,21 +80,21 @@ if(@!$dado){
 </head>
 <body>
 <div class="conteudo">
-<br><br><br>
 <center>
     <form action="dado.php?act=1" method="post">
-        <legenda class="t_dado">Escolha o dado abaixo</legenda>
+        <!--<legenda class="t_dado">Escolha o dado abaixo</legenda>-->
         <div class="dados"> 
-        <span id='dado6'><img height=56px title='Dado de 6 lados' src='../web/imagens/d6.png'></span>
+        <span id='dado6'><img <?= $height ?> title='Dado de 6 lados' src='../web/imagens/d6.png'></span>
         <input type='radio' id="dado" name='dado' value='6' required="">  
-        <span id="dado6x2"><img height=56px title='Dado de 6 lados' src='../web/imagens/d6.png'></span><span id='dado26x2'><img height=56px title='Dado de 6 lados' src='../web/imagens/d6.png'></span>
+        <span id="dado6x2"><img onmousedown="mostrarDado()" onmouseup="valor()" <?= $height ?> title='Dado de 6 lados' src='../web/imagens/d6.png'></span><span id='dado26x2'><img onmousedown="mostrarDado()" onmouseup="valor()" <?= $height ?> title='Dado de 6 lados' src='../web/imagens/d6.png'></span>
         <input type='radio' id="dadox2" name='dado' value='6x2' checked="checked" required="">
-        <span id='dado6x3'><img height=56px title='Dado de 6 lados' src='../web/imagens/d6.png'></span><span id='dado26x3'><img height=56px title='Dado de 6 lados' src='../web/imagens/d6.png'></span><span id='dado36x3'><img height=56px title='Dado de 6 lados' src='../web/imagens/d6.png'></span>
+        <span id='dado6x3'><img onmousedown="mostrarDado()" onmouseup="valor()" <?= $height ?> title='Dado de 6 lados' src='../web/imagens/d6.png'></span><span id='dado26x3'><img onmousedown="mostrarDado()" onmouseup="valor()" <?= $height ?> title='Dado de 6 lados' src='../web/imagens/d6.png'></span><span id='dado36x3'><img onmousedown="mostrarDado()" onmouseup="valor()" <?= $height ?> title='Dado de 6 lados' src='../web/imagens/d6.png'></span>
         <input type='radio' id="dadox3" name='dado' value='6x3'>
         <input type="hidden" name="rolar" value="1">
-        </div>
-        <button title="Aperte e segure para girar o dado." class='rolar rolar-red' onmousedown="mostrarDado()">Segure para girar</button>       
+        </div>  
     </form>
+        <button title="Aperte e segure para girar o dado." class='rolar rolar-red' onmousedown="mostrarDado()" onmouseup="valor()">Segure para girar</button>     
+    <div id="resultado"></div>
 </center>
 <br><br>
  <?php

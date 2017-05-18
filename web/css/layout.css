@@ -605,12 +605,13 @@ fieldset legend{
 }
 .dado{
     position: absolute;
-    top: 200px;
-    right: 0px;
+    top: 0px;
+    #right: 0px;
     border: 1px solid red;
 }
 .dado iframe{
-    height: 400px;
+    width: 600px; 
+    height: 100px;
 }
 #cadastro table tr td{
     padding: 2px;
