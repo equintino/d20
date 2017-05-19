@@ -260,7 +260,7 @@ a:link{
     margin: auto;
     height: 690px;
 }
-.cad2 .botao, .cad4 .botao, .cad5 .botao, .cad6 .botao, .cad7 .botao, .zera{
+.cad2 .botao, .cad4 .botao, .cad5 .botao, .cad6 .botao, .cad7 .botao, .zera, .ouro{
     font-size: 16px;
     padding: 0 4px;
     position: relative;
@@ -276,7 +276,7 @@ a:link{
     top: 10px;
     left: 700px;    
 }
-.zera{
+.zera, .ouro{
     background-color: #007c00;
     padding: 5px;
 }
@@ -288,7 +288,7 @@ a:link{
     background-color: #007c00;
     box-shadow: 0 5px 0 #003f00;
 }
-.cad2 .botao-verde:hover, .cad4 .botao-verde:hover, .cad5 .botao-verde:hover, .cad6 .botao-verde:hover, .cad7 .botao-verde:hover, .zera:hover{
+.cad2 .botao-verde:hover, .cad4 .botao-verde:hover, .cad5 .botao-verde:hover, .cad6 .botao-verde:hover, .cad7 .botao-verde:hover, .zera:hover, .ouro:hover{
     background-color: #006000;
 }
 .cad2 .botao-verde:active{
@@ -298,11 +298,11 @@ a:link{
     top: 15px;
     box-shadow: none;
 }
-.zera{
+.zera, .ouro{
     position: relative;
     box-shadow: 0 5px 0 #003f00;
 }
-.zera:active{   
+.zera:active, .ouro:active{   
     position: relative;
     top: 5px;
     box-shadow: none;  

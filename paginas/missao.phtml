@@ -3,6 +3,11 @@
     menos=0;
     PVResta=0;
     PMResta=0;
+    ouro=0;
+    function setaVariaveis($variaveis){
+        missao=$variaveis;
+        return missao;
+    }
     function calcDefesa($def){
         var x = $def;
         document.getElementById('def').innerHTML = x;
@@ -20,6 +25,9 @@
         }else if(id == 'PMResta'){
             PMResta++;
             menos=PMResta; 
+        }else if(id == 'ouro'){
+            ouro++;
+            menos=ouro; 
         }
         if(menos < 10){
            zero='0';
@@ -36,13 +44,19 @@
         }else if(id == 'PMResta'){
             PMResta='00';
             menos=PMResta; 
+        }else if(id == 'ouro'){
+            ouro='00';
+            menos=ouro; 
         }
         document.getElementById(id).innerHTML=menos;
     }
-    function sairMissao(){
+    function sairMissao($personagem,id){
+        var id;
+        var personagem = $personagem;
+        var anotacoes = document.getElementById('anotacoes').value;
         var x=confirm('Deseja realmente sair?');
         if(x){
-            window.location.assign('sair.php?act=missao');
+            window.location.assign('sair.php?act=missao&PVResta='+PVResta+'&PMResta='+PMResta+'&ouro='+ouro+'&anotacoes='+anotacoes+'&personagem='+personagem+'&id='+id+'&missao='+missao+'');
         }
     }
     
@@ -74,6 +88,7 @@
     $search->settabela('personagem');
     $search->setpersonagem($personagem);
     $conferirMissao = $dao->encontrePorPersonagem($search);
+    
     $emMissao=$conferirMissao->getemMissao();
     if($emMissao==1){
         $search->settabela('missao');
@@ -83,7 +98,7 @@
                 foreach($dados_ as $dado){
                     $missoesde[$personagem][]=$dado->getMISSAO();
                 }
-                echo '<form action=../paginas/add.php?act=missao&comecando=1&personagem='.$personagem.' method=POST>';
+                echo '<form action=../paginas/add.php?act=missao&personagem='.$personagem.' method=POST>';
                 echo '<div class=quadro>';
                   echo 'Selecione uma das misões:<br>';
                   echo '<select required name=missao>';
@@ -103,9 +118,21 @@
                 echo '</form>';
                 die;
         }else{
+                        $dao=new Dao();
+                        $search=new ModelSearchCriteria();
+                        $search->settabela('personagem');
+                        @$login=strtoupper($_COOKIE['login']);
+                        $search->setpersonagem($personagem);
+                        $lista=$dao->encontre($search);
+                        foreach($lista as $z);
+                        $id=$z->getid();
+                        $titulos=array('PERSONAGEM','RAÇA','CLASSE','TENDÊNCIA1','TENDÊNCIA2');
+                        if(!$lista){
+                            die;
+                        }
             echo "<div class='tempo'>";
                echo '<iframe scrolling="no" frameborder=0 src="../web/tempo.php?personagem='.$personagem.'"></iframe>';
-               echo '<br><span onclick=sairMissao() class="sairMissao sairMissao-verde" >Sair da Missão</span>';
+               echo '<br><span onclick=sairMissao("'.$personagem.'","'.$id.'") class="sairMissao sairMissao-verde" >Sair da Missão</span>';
             echo '</div>';
            goto missao;
         }
@@ -136,7 +163,9 @@
     if(!$dados){
         $missao = 'Nenhuma missão no momento';
     }else{
-        $missao = strtoupper($dados->getMISSAO());
+        $missao = $dados->getMISSAO();
+        $x='<script>setaVariaveis(\''.$missao.'\')</script>';
+        echo $x;
     }   
     
     $variaveis=array('JOGADOR'=>'jogador','PERSONAGEM'=>'personagem','RAÇA'=>'raca','CLASSE'=>'classe','TENDÊNCIA1'=>'tendencia1','TENDÊNCIA2'=>'tendencia2','SEXO'=>'sexo');
@@ -151,21 +180,11 @@
             </div>
         <span id=anotacao>ANOTAÇÕES</span>
     <div class="jogador">
-        <fieldset class="cadficha"><legend>Missão: <?= $missao; ?> &nbsp&nbsp LEVEL <span id=nivel></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</legend><div class="anotacao2"><textarea type="text" rows="15" cols="22"></textarea></div>
+        <fieldset class="cadficha"><legend>Missão: <?= $missao; ?> &nbsp&nbsp LEVEL <span id=nivel></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</legend><div class="anotacao2"><textarea id="anotacoes" placeholder="Faça aqui suas anotações" name="anotacoes" autofocus type="text" rows="15" cols="22"></textarea></div>
             <div class="tabEscAvaMot" >
             <div class=tabelaMissao>
                 <table cellspacing=0 border=1>
                     <?php 
-                        $dao=new Dao();
-                        $search=new ModelSearchCriteria();
-                        $search->settabela('personagem');
-                        @$login=strtoupper($_COOKIE['login']);
-                        $search->setpersonagem($personagem);
-                        $lista=$dao->encontre($search);
-                        $titulos=array('PERSONAGEM','RAÇA','CLASSE','TENDÊNCIA1','TENDÊNCIA2');
-                        if(!$lista){
-                            die;
-                        }
                             foreach($lista as $keys => $item){
                                 echo '<tr><td class=nomes>'.$titulos[0].'</td><td class=nomes2>'.$item->getpersonagem().'</td></tr>';
                                 echo '<tr><td class=nomes>'.$titulos[1].'</td><td class=nomes2>'.$item->getraca().'</td></tr>';
@@ -332,7 +351,9 @@
                   echo '</table>';
                   echo '<div class=bau>';
                      echo '<img src=imagens/bau.png />';
-                     echo $item->getCUSTO();
+                     echo $item->getouro();
+                     echo ' + <span id=ouro >00</span>';
+                     echo '<br><span class=ouro onclick=mais("ouro")>+1</span><span class=ouro onclick=zera("ouro")>zerar</span>';
                   echo '</div>';
                }
                ?>

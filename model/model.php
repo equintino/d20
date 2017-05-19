@@ -33,7 +33,7 @@
  private $CLASSE_COMUM;
  private $HABILIDADE_AUTOMATICA;
  private $ARMA;
- private $CUSTO;
+ private $ouro;
  private $DANO;
  private $TIPO;
  private $FN;
@@ -58,6 +58,7 @@
  private $figura3;
  private $DATA;
  private $MISSAO;
+ private $anotacoes;
  public function getid(){
 	return $this->id;
  }
@@ -256,11 +257,11 @@
  public function setARMA($ARMA ){
 	$this->ARMA=$ARMA;
  }
- public function getCUSTO(){
-	return $this->CUSTO;
+ public function getouro(){
+	return $this->ouro;
  }
- public function setCUSTO($CUSTO ){
-	$this->CUSTO=$CUSTO;
+ public function setouro($ouro ){
+	$this->ouro=$ouro;
  }
  public function getDANO(){
 	return $this->DANO;
@@ -405,5 +406,11 @@
  }
  public function setMISSAO($MISSAO ){
 	$this->MISSAO=$MISSAO;
+ }
+ public function getanotacoes(){
+	return $this->anotacoes;
+ }
+ public function setanotacoes($anotacoes ){
+	$this->anotacoes=$anotacoes;
  }
  }

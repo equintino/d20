@@ -264,12 +264,12 @@
           $this->ARMA = $ARMA;
           return $this;
       }
-   private $CUSTO;
-       public function getCUSTO(){
-        return $this->CUSTO;
+   private $ouro;
+       public function getouro(){
+        return $this->ouro;
       }
-      public function setCUSTO($CUSTO){
-          $this->CUSTO = $CUSTO;
+      public function setouro($ouro){
+          $this->ouro = $ouro;
           return $this;
       }
    private $DANO;
@@ -382,6 +382,14 @@
       }
       public function setMISSAO($MISSAO){
           $this->MISSAO = $MISSAO;
+          return $this;
+      }
+   private $anotacoes;
+       public function getanotacoes(){
+        return $this->anotacoes;
+      }
+      public function setanotacoes($anotacoes){
+          $this->anotacoes = $anotacoes;
           return $this;
       }
 }

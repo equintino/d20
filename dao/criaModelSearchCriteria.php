@@ -4,10 +4,10 @@
     $handle=fopen($filename, $mode);
     $variaveis=array('id','jogador','personagem','raca','classe','tendencia1','tendencia2','idade','tabela','sexo','criado','modificado','excluido','habilidade','altura','peso','cidade','motivacao','breveHistoria','avatar','nivel','emMissao');
     $variaveis2=array('id_atrib','FORCA','AGILIDADE','INTELIGENCIA','VONTADE','PV','PM','PE','CLASSE_COMUM','HABILIDADE_AUTOMATICA');
-    $variaveis3=array('ARMA','CUSTO','DANO','TIPO','FN','GRUPO','OBS','figura');
+    $variaveis3=array('ARMA','ouro','DANO','TIPO','FN','GRUPO','OBS','figura');
     $variaveis4=array('BONUS_ATRIBUTO','PROFICIENCIA');
     $variaveis5=array('armadura','defesa','item','equipamento');
-    $variaveis6=array('DATA','MISSAO');
+    $variaveis6=array('DATA','MISSAO','anotacoes');
     
     $texto="<?php \r\n class ModelSearchCriteria{\r\n";
     foreach($variaveis as $item){

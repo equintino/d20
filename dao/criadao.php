@@ -6,9 +6,9 @@
     $variaveis=array('id','jogador','personagem','raca','classe','tendencia1','tendencia2','idade','tabela','sexo','criado','modificado','excluido','habilidade','altura','peso','cidade','motivacao','breveHistoria','avatar','nivel','emMissao');
     $tabela='`\'.$model->gettabela().\'`';
     $variaveis2=array('id_atrib','FORCA','AGILIDADE','INTELIGENCIA','VONTADE','PV','PM','PE','CLASSE_COMUM','HABILIDADE_AUTOMATICA','personagem','DESCRICAO');
-    $variaveis3=array('id','ARMA','CUSTO','DANO','TIPO','FN','GRUPO','OBS','figura');
+    $variaveis3=array('id','ARMA','ouro','DANO','TIPO','FN','GRUPO','OBS','figura');
     $variaveis4=array('id','ARMA','CUSTO','personagem','armadura','equipamento','defesa');
-    $variaveis5=array('id','DATA','MISSAO','personagem','emMissao','excluido','jogador');
+    $variaveis5=array('id','DATA','MISSAO','personagem','emMissao','excluido','jogador','ouro','anotacoes','PV','PM');
     $texto="<?php \r\n class dao{\r\n";
     $texto .= '   '."private ".'$db'." = null;\r\n".
               '   public function __destruct(){'."\r\n".
@@ -262,9 +262,9 @@
           }
         $texto .= "\t".'return $this->execute2($sql, $model);
    }'."\r\n";
-    $texto .= '   private function update2(Model $model,$tabela){
+    $texto .= '   private function update2(Model $model){
         $model->setmodificado(new DateTime(), new DateTimeZone(\'America/Sao_Paulo\'));
-        $sql = \'UPDATE `\'.$tabela.\'` SET';
+        $sql = \'UPDATE `\'.$model->gettabela().\'` SET';
            $x=1;
            foreach($variaveis2 as $item){
               $texto .= " $item = :$item";
@@ -420,7 +420,11 @@
         return $this->execute5($sql, $model);
    }'."\r\n";
     $texto .= '   public function setaMissao(Model $model){ 
+        if($model->getjogador()){
          $sql = "UPDATE `".$model->gettabela()."` SET emMissao = \'".$model->getemMissao()."\' WHERE jogador = \'".$model->getjogador()."\'";
+       }elseif($model->getpersonagem()){
+          $sql = "UPDATE `".$model->gettabela()."` SET emMissao = \'".$model->getemMissao()."\' WHERE personagem = \'".$model->getpersonagem()."\'"; 
+       }
         return $this->execute($sql, $model);
    }'."\r\n";
     $texto .= '   public function execute($sql,$model){

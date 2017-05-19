@@ -100,8 +100,8 @@
 	if (array_key_exists('ARMA', $properties)){
 	  $model->setARMA($properties['ARMA']);
 	}
-	if (array_key_exists('CUSTO', $properties)){
-	  $model->setCUSTO($properties['CUSTO']);
+	if (array_key_exists('ouro', $properties)){
+	  $model->setouro($properties['ouro']);
 	}
 	if (array_key_exists('DANO', $properties)){
 	  $model->setDANO($properties['DANO']);
@@ -174,6 +174,9 @@
 	}
 	if (array_key_exists('MISSAO', $properties)){
 	  $model->setMISSAO($properties['MISSAO']);
+	}
+	if (array_key_exists('anotacoes', $properties)){
+	  $model->setanotacoes($properties['anotacoes']);
 	}
   } 
  }
