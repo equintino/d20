@@ -1465,3 +1465,23 @@ fieldset legend{
     font-size: 30px;
     border: 1px solid gray; 
 }
+#anotacao{
+    #border: 1px solid red;
+    border-radius: 10px;
+    background: rgba(255,255,0,0.5);
+    color: black;
+    text-shadow: -1px -1px white, 1px 1px #333;
+    font-size: 13px;
+    padding: 2px 6px 0 ;
+    text-align: right;
+    cursor: pointer;
+}
+.anotacao2{
+    position: absolute;
+    #border: 1px solid red;
+    top: 120px;
+    right: 0;
+    width: 200px;
+    height: 250px;
+    z-index: 7px; 
+}

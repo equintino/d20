@@ -1,3 +1,4 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script>
     menos=0;
     PVResta=0;
@@ -44,6 +45,22 @@
             window.location.assign('sair.php?act=missao');
         }
     }
+    
+   $(document).ready(function(){
+    $('.anotacao2').hide();
+
+    $('#anotacao').click(function(event){
+        event.preventDefault();
+        $(".anotacao2").show("slow");
+        //$(".ocultar").show("slower");
+    });
+
+    $('.anotacao2').dblclick(function(event){
+        event.preventDefault();
+        $(".anotacao2").hide("slow");
+        //$(".ocultar").hide("slower")
+    });
+ });
 </script>
 <style>
 	#cabecalho{
@@ -132,8 +149,9 @@
             <div class="dado">    
                 <iframe scrolling="no" frameborder=0 src="../web/dado.php"></iframe>
             </div>
+        <span id=anotacao>ANOTAÇÕES</span>
     <div class="jogador">
-        <fieldset class="cadficha"><legend>Missão: <?= $missao; ?> &nbsp&nbsp LEVEL <span id=nivel></span></legend>
+        <fieldset class="cadficha"><legend>Missão: <?= $missao; ?> &nbsp&nbsp LEVEL <span id=nivel></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</legend><div class="anotacao2"><textarea type="text" rows="15" cols="22"></textarea></div>
             <div class="tabEscAvaMot" >
             <div class=tabelaMissao>
                 <table cellspacing=0 border=1>
