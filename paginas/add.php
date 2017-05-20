@@ -207,7 +207,7 @@
         die;
           }
           $model->setARMA($armas);
-          $model->setCUSTO($recurso-$custo);
+          $model->setouro($recurso-$custo);
         $dao->grava4($model);
 	echo '<div class=\'add\'>'.
                '<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.
@@ -273,7 +273,7 @@
              break;
      }
      if($armamento){
-        $saldo=$armamento->getCUSTO()-$custo;
+        $saldo=$armamento->getouro()-$custo;
         if($act=='cad4'){
            $armamento->setARMA($armamento->getARMA().$armas);
         }elseif($act=='cad5'){
@@ -284,7 +284,7 @@
         }elseif($act=='cad7'){
            $armamento->setequipamento($armamento->getequipamento().$armas);
         }
-        $armamento->setCUSTO($saldo);
+        $armamento->setouro($saldo);
         $armamento->settabela('armamentos');
         if(!$armamento->getdefesa()){
             $armamento->setdefesa(5+$maisAtrib);
@@ -300,7 +300,7 @@
         }elseif($act=='cad6'){
            $model->setARMA($armas);
         }
-        $model->setCUSTO($saldo);
+        $model->setouro($saldo);
         $model->settabela('armamentos');
         $model->setpersonagem($personagem);
         $model->setid(null);
@@ -322,9 +322,10 @@
      $dadoPersonagem=$dao->encontrePorMissao($search);
          //print_r($dadoPersonagem->getid());die;
          //print_r($dao->encontrePorMissao($model));die;
-     if($comecando==1){
+     if($comecando==1){ 
          //$dao = new dao();       
          $model->setemMissao(1);
+         $model->settabela('missao');
          //print_r($_COOKIE);die;
          $model->setjogador($login);
          if($dadoPersonagem){
@@ -332,7 +333,6 @@
             $model->setid($dadoPersonagem->getid());
          }
          $model->setDATA('1850-10-02 18:10:00');
-         //print_r($model);die;   
          $dao->grava5($model);
          echo '<meta http-equiv="refresh" content="1;URL=../web/index.php?pagina=missao&personagem='. $personagem.'">';
          die;

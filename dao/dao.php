@@ -200,7 +200,6 @@
 	return $this->execute2($sql, $model);
    }
    private function update2(Model $model){
-       
         $model->setmodificado(new DateTime(), new DateTimeZone('America/Sao_Paulo'));
         $sql = 'UPDATE `'.$model->gettabela().'` SET id_atrib = :id_atrib, FORCA = :FORCA, AGILIDADE = :AGILIDADE, INTELIGENCIA = :INTELIGENCIA, VONTADE = :VONTADE, PV = :PV, PM = :PM, PE = :PE, CLASSE_COMUM = :CLASSE_COMUM, HABILIDADE_AUTOMATICA = :HABILIDADE_AUTOMATICA, personagem = :personagem, DESCRICAO = :DESCRICAO WHERE id = :id ';
         return $this->execute2($sql, $model);
@@ -231,12 +230,12 @@
         $model->setcriado($now);
         $model->setmodificado($now); 
         $this->execute4($this->criaTabela($model->gettabela()), $model);       
-        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`ARMA`,`CUSTO`,`personagem`,`armadura`,`equipamento`,`defesa`) VALUES (:id,:ARMA,:CUSTO,:personagem,:armadura,:equipamento,:defesa)';
+        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`ARMA`,`ouro`,`personagem`,`armadura`,`equipamento`,`defesa`) VALUES (:id,:ARMA,:ouro,:personagem,:armadura,:equipamento,:defesa)';
 	return $this->execute4($sql, $model);
    }
    private function update4(Model $model){
         $model->setmodificado(new DateTime(), new DateTimeZone('America/Sao_Paulo'));
-        $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, ARMA = :ARMA, CUSTO = :CUSTO, personagem = :personagem, armadura = :armadura, equipamento = :equipamento, defesa = :defesa WHERE id = :id ';
+        $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, ARMA = :ARMA, ouro = :ouro, personagem = :personagem, armadura = :armadura, equipamento = :equipamento, defesa = :defesa WHERE id = :id ';
         return $this->execute4($sql, $model);
    }
    private function insert5(Model $model){
@@ -247,7 +246,7 @@
         $model->setemMissao(1);
         $model->setcriado($now);
         $model->setmodificado($now); 
-        $this->execute5($this->criaTabela($model->gettabela()), $model);       
+        //$this->execute5($sql, $model);       
         $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`DATA`,`MISSAO`,`personagem`,`emMissao`,`excluido`,`jogador`,`ouro`,`anotacoes`,`PV`,`PM`) VALUES (:id,:DATA,:MISSAO,:personagem,:emMissao,:excluido,:jogador,:ouro,:anotacoes,:PV,:PM)';
 	$model->settabela('personagem');
         $this->setaMissao($model);
@@ -325,7 +324,7 @@
 	 return $params;
    }
    private function getParams4(Model $model){
-        $params = array(':id'=> $model->getid(),':ARMA'=> $model->getARMA(),':CUSTO'=> $model->getCUSTO(),':personagem'=> $model->getpersonagem(),':armadura'=> $model->getarmadura(),':equipamento'=> $model->getequipamento(),':defesa'=> $model->getdefesa(),);
+        $params = array(':id'=> $model->getid(),':ARMA'=> $model->getARMA(),':ouro'=> $model->getouro(),':personagem'=> $model->getpersonagem(),':armadura'=> $model->getarmadura(),':equipamento'=> $model->getequipamento(),':defesa'=> $model->getdefesa(),);
 	 return $params;
    }
    private function getParams5(Model $model){

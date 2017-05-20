@@ -452,7 +452,7 @@ function trocaAvatar(x){
         if(!$atrib){
             $recurso=400;
         }else{
-            $recurso=$atrib->getCUSTO();
+            $recurso=$atrib->getouro();
         }
     ?>
         <div class='cad3'>
@@ -480,9 +480,9 @@ function trocaAvatar(x){
                                           if($armasCoporais->getARMA()){
                                              $desc='Arma: '.
                                                    $armasCoporais->getARMA()."\r\n";}
-                                          if($armasCoporais->getCUSTO()){
+                                          if($armasCoporais->getouro()){
                                              $desc.='Custo: '.
-                                                   $armasCoporais->getCUSTO()."\r\n";}
+                                                   $armasCoporais->getouro()."\r\n";}
                                           if($armasCoporais->getDANO()){
                                              $desc.='Dano: '.
                                                    $armasCoporais->getDANO()."\r\n";}
@@ -499,7 +499,7 @@ function trocaAvatar(x){
                                              $desc.='Obs: '.
                                                    $armasCoporais->getOBS();}
                                         echo '<span class='.str_replace(' ','',$item).' >';
-                                            echo '<input type=checkbox onchange=moeda(\''.$recurso.'\'); value='.$armasCoporais->getCUSTO().' name=\''.$item.'\' title="'.
+                                            echo '<input type=checkbox onchange=moeda(\''.$recurso.'\'); value='.$armasCoporais->getouro().' name=\''.$item.'\' title="'.
                                             $desc.'" />';
                                         echo '</span>';
                                     }
@@ -519,7 +519,7 @@ function trocaAvatar(x){
         $search->setpersonagem($_GET['personagem']);
         $atrib=$dao->encontrePorPersonagem($search);
         if($atrib){
-            $recurso=$atrib->getCUSTO();
+            $recurso=$atrib->getouro();
         }else{
             $recurso=400;
         }
@@ -548,9 +548,9 @@ function trocaAvatar(x){
                                           if($armasCoporais->getARMA()){
                                              $desc='Arma: '.
                                                    $armasCoporais->getARMA()."\r\n";}
-                                          if($armasCoporais->getCUSTO()){
+                                          if($armasCoporais->getouro()){
                                              $desc.='Custo: '.
-                                                   $armasCoporais->getCUSTO()."\r\n";}
+                                                   $armasCoporais->getouro()."\r\n";}
                                           if($armasCoporais->getDANO()){
                                              $desc.='Dano: '.
                                                    $armasCoporais->getDANO()."\r\n";}
@@ -567,7 +567,7 @@ function trocaAvatar(x){
                                              $desc.='Obs: '.
                                                    $armasCoporais->getOBS();}
                                             echo '<span class='.str_replace(' ','',$item).' >';
-                                                echo '<input type=checkbox onchange=moeda(\''.$recurso.'\'); value='.$armasCoporais->getCUSTO().' name=\''.$item.'\' title="'.
+                                                echo '<input type=checkbox onchange=moeda(\''.$recurso.'\'); value='.$armasCoporais->getouro().' name=\''.$item.'\' title="'.
                                                   $desc.'" />';
                                             echo '</span>';
                                         }
@@ -588,7 +588,7 @@ function trocaAvatar(x){
         $search->setpersonagem($_GET['personagem']);
         $atrib=$dao->encontrePorPersonagem($search);
         if($atrib){
-            $recurso=$atrib->getCUSTO();
+            $recurso=$atrib->getouro();
         }else{
             $recurso=400;
         }            
@@ -641,10 +641,10 @@ function trocaAvatar(x){
                                 foreach($equipamentos as $item){
                                     echo '<tr>';
                                         echo '<td>'.$item->getitem().'</td>';
-                                        echo '<td align=center>'.$item->getCUSTO().'</td>';
+                                        echo '<td align=center>'.$item->getouro().'</td>';
                                         echo '<td align=center>'.$item->getpeso().'</td>';
                                         echo '<td>'.$item->getDESCRICAO().'</td>';
-                                        echo '<td align=center><input type=checkbox onchange=moeda(\''.$recurso.'\') value='.$item->getCUSTO().' name=\''.$item->getitem().'\'  /></td>';
+                                        echo '<td align=center><input type=checkbox onchange=moeda(\''.$recurso.'\') value='.$item->getouro().' name=\''.$item->getitem().'\'  /></td>';
                                     echo '</tr>';
                                 }
                                 echo '</table>';
@@ -669,8 +669,8 @@ function trocaAvatar(x){
                                     $armaduras=$dao->encontrePorArmadura($search);
                                     if($armaduras->getarmadura())
                                        $desc='Armadura: '.$armaduras->getarmadura()."\r\n";
-                                    if($armaduras->getCUSTO())
-                                       $desc.='Custo: '.$armaduras->getCUSTO()."\r\n";
+                                    if($armaduras->getouro())
+                                       $desc.='Custo: '.$armaduras->getouro()."\r\n";
                                     if($armaduras->getdefesa())
                                        $desc.='Defesa: '.$armaduras->getdefesa()."\r\n";
                                     if($armaduras->getFN())
@@ -681,14 +681,14 @@ function trocaAvatar(x){
                                        $desc.='Obs: '.$armaduras->getOBS();
                                     echo '<span class='.str_replace(' ','',$item).' >';
                                     $item = $item.'/'.$armaduras->getdefesa();
-                                    $value=$armaduras->getCUSTO();
+                                    $value=$armaduras->getouro();
                                 }elseif($act=='cad6'){
                                     $search->setARMA($item);
                                     $armaduras=$dao->encontrePorArma($search);
                                     if($armaduras->getARMA())
                                         $desc='Item: '.$armaduras->getARMA()."\r\n";
-                                    if($armaduras->getCUSTO())
-                                        $desc .='Custo: '.$armaduras->getCUSTO()."\r\n";
+                                    if($armaduras->getouro())
+                                        $desc .='Custo: '.$armaduras->getouro()."\r\n";
                                     if($armaduras->getFN())
                                         $desc .='FN: '.$armaduras->getFN()."\r\n";
                                     if($armaduras->getpeso())
@@ -698,7 +698,7 @@ function trocaAvatar(x){
                                     if($armaduras->getOBS())
                                         $desc .='Obs: '.$armaduras->getOBS();
                                     echo '<span class='.str_replace(' ','',$item).' >';
-                                        $value=$armaduras->getCUSTO();
+                                        $value=$armaduras->getouro();
                                 }
                                 /// verifica se possui o recurso para compra ///
                                         echo '<input type=checkbox onchange=moeda(\''.$recurso.'\'); value='.$value.' name=\''.$item.'\' title="'.$desc.'" />';

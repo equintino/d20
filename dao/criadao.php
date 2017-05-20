@@ -7,7 +7,7 @@
     $tabela='`\'.$model->gettabela().\'`';
     $variaveis2=array('id_atrib','FORCA','AGILIDADE','INTELIGENCIA','VONTADE','PV','PM','PE','CLASSE_COMUM','HABILIDADE_AUTOMATICA','personagem','DESCRICAO');
     $variaveis3=array('id','ARMA','ouro','DANO','TIPO','FN','GRUPO','OBS','figura');
-    $variaveis4=array('id','ARMA','CUSTO','personagem','armadura','equipamento','defesa');
+    $variaveis4=array('id','ARMA','ouro','personagem','armadura','equipamento','defesa');
     $variaveis5=array('id','DATA','MISSAO','personagem','emMissao','excluido','jogador','ouro','anotacoes','PV','PM');
     $texto="<?php \r\n class dao{\r\n";
     $texto .= '   '."private ".'$db'." = null;\r\n".
