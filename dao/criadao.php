@@ -273,7 +273,7 @@
               }
               $x++;
           }
-             $texto .= ' WHERE id = :id \';
+             $texto .= ' WHERE id_atrib = :id_atrib \';
         return $this->execute2($sql, $model);
    }'."\r\n";
     $texto .= '   private function insert3(Model $model){
@@ -406,7 +406,8 @@
         return $this->execute5($sql, $model);
    }'."\r\n";
     $texto .= '   private function update5(Model $model){
-        $model->setmodificado(new DateTime(), new DateTimeZone(\'America/Sao_Paulo\'));
+        date_default_timezone_set("Brazil/East");
+        $now = mktime (date(\'H\'), date(\'i\'), date(\'s\'), date("m")  , date("d"), date("Y"));
         $sql = \'UPDATE `\'.$model->gettabela().\'` SET';
            $x=1;
            foreach($variaveis5 as $item){
@@ -426,6 +427,10 @@
           $sql = "UPDATE `".$model->gettabela()."` SET emMissao = \'".$model->getemMissao()."\' WHERE personagem = \'".$model->getpersonagem()."\'"; 
        }
         return $this->execute($sql, $model);
+   }'."\r\n";
+    $texto .= '   public function setaOuro(Model $model){
+      $sql = "UPDATE `".$model->gettabela()."` SET ouro = \'".$model->getouro()."\' WHERE personagem = \'".$model->getpersonagem()."\'";
+      return $this->execute($sql, $model);
    }'."\r\n";
     $texto .= '   public function execute($sql,$model){
         $statement = $this->getDb()->prepare($sql);

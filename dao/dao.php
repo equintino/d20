@@ -201,7 +201,7 @@
    }
    private function update2(Model $model){
         $model->setmodificado(new DateTime(), new DateTimeZone('America/Sao_Paulo'));
-        $sql = 'UPDATE `'.$model->gettabela().'` SET id_atrib = :id_atrib, FORCA = :FORCA, AGILIDADE = :AGILIDADE, INTELIGENCIA = :INTELIGENCIA, VONTADE = :VONTADE, PV = :PV, PM = :PM, PE = :PE, CLASSE_COMUM = :CLASSE_COMUM, HABILIDADE_AUTOMATICA = :HABILIDADE_AUTOMATICA, personagem = :personagem, DESCRICAO = :DESCRICAO WHERE id = :id ';
+        $sql = 'UPDATE `'.$model->gettabela().'` SET id_atrib = :id_atrib, FORCA = :FORCA, AGILIDADE = :AGILIDADE, INTELIGENCIA = :INTELIGENCIA, VONTADE = :VONTADE, PV = :PV, PM = :PM, PE = :PE, CLASSE_COMUM = :CLASSE_COMUM, HABILIDADE_AUTOMATICA = :HABILIDADE_AUTOMATICA, personagem = :personagem, DESCRICAO = :DESCRICAO WHERE id_atrib = :id_atrib ';
         return $this->execute2($sql, $model);
    }
    private function insert3(Model $model){
@@ -249,21 +249,23 @@
         //$this->execute5($sql, $model);       
         $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`DATA`,`MISSAO`,`personagem`,`emMissao`,`excluido`,`jogador`,`ouro`,`anotacoes`,`PV`,`PM`) VALUES (:id,:DATA,:MISSAO,:personagem,:emMissao,:excluido,:jogador,:ouro,:anotacoes,:PV,:PM)';
 	$model->settabela('personagem');
-        $this->setaMissao($model);
+        $this->setaMissao($model);       
         return $this->execute5($sql, $model);
    }
    private function update5(Model $model){
-        $model->setmodificado(new DateTime(), new DateTimeZone('America/Sao_Paulo'));
+        date_default_timezone_set("Brazil/East");
+        $now = mktime (date('H'), date('i'), date('s'), date("m")  , date("d"), date("Y"));
         $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, DATA = :DATA, MISSAO = :MISSAO, personagem = :personagem, emMissao = :emMissao, excluido = :excluido, jogador = :jogador, ouro = :ouro, anotacoes = :anotacoes, PV = :PV, PM = :PM WHERE id = :id ';
+        //print_r([$sql,$model]);die;
         return $this->execute5($sql, $model);
    }
-   public function setaMissao(Model $model){ 
-        if($model->getjogador()){
-         $sql = "UPDATE `".$model->gettabela()."` SET emMissao = '".$model->getemMissao()."' WHERE jogador = '".$model->getjogador()."'";
-       }elseif($model->getpersonagem()){
-          $sql = "UPDATE `".$model->gettabela()."` SET emMissao = '".$model->getemMissao()."' WHERE personagem = '".$model->getpersonagem()."'"; 
-       }
+   public function setaMissao(Model $model){
+          $sql = "UPDATE `".$model->gettabela()."` SET emMissao = '".$model->getemMissao()."' WHERE personagem = '".$model->getpersonagem()."'";
         return $this->execute($sql, $model);
+   }
+   public function setaOuro(Model $model){
+      $sql = "UPDATE `".$model->gettabela()."` SET ouro = '".$model->getouro()."' WHERE personagem = '".$model->getpersonagem()."'";
+      return $this->execute($sql, $model);
    }
    public function execute($sql,$model){
         $statement = $this->getDb()->prepare($sql);

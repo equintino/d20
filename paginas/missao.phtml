@@ -167,12 +167,14 @@
         $x='<script>setaVariaveis(\''.$missao.'\')</script>';
         echo $x;
     }   
-    
     $variaveis=array('JOGADOR'=>'jogador','PERSONAGEM'=>'personagem','RAÇA'=>'raca','CLASSE'=>'classe','TENDÊNCIA1'=>'tendencia1','TENDÊNCIA2'=>'tendencia2','SEXO'=>'sexo');
     @$personagem=$_GET['personagem'];
     if(!$personagem){
       $personagem='nulo';
     }
+    $search->settabela('missao');
+    $search->setpersonagem($personagem);
+    $dadosMissao=$dao->encontrePorPersonagem($search);
 ?>
 <div  class="conteudo" >
             <div class="dado">    
@@ -180,7 +182,7 @@
             </div>
         <span id=anotacao>ANOTAÇÕES</span>
     <div class="jogador">
-        <fieldset class="cadficha"><legend>Missão: <?= $missao; ?> &nbsp&nbsp LEVEL <span id=nivel></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</legend><div class="anotacao2"><textarea id="anotacoes" placeholder="Faça aqui suas anotações" name="anotacoes" autofocus type="text" rows="15" cols="22"></textarea></div>
+        <fieldset class="cadficha"><legend>Missão: <?= $missao; ?> &nbsp&nbsp LEVEL <span id=nivel></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</legend><div class="anotacao2"><textarea id="anotacoes" placeholder="Faça aqui suas anotações" name="anotacoes" autofocus type="text" rows="15" cols="22"><?php echo $dadosMissao->getanotacoes().' '; ?></textarea></div>
             <div class="tabEscAvaMot" >
             <div class=tabelaMissao>
                 <table cellspacing=0 border=1>
