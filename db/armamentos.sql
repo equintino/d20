@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Tempo de geração: 19/05/2017 às 16:32
--- Versão do servidor: 10.1.21-MariaDB
--- Versão do PHP: 7.1.1
+-- Host: 127.0.0.1
+-- Generation Time: 21-Maio-2017 às 19:28
+-- Versão do servidor: 10.1.19-MariaDB
+-- PHP Version: 7.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `d20`
+-- Database: `d20`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `armamentos`
+-- Estrutura da tabela `armamentos`
 --
 
 CREATE TABLE `armamentos` (
@@ -38,33 +38,25 @@ CREATE TABLE `armamentos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Fazendo dump de dados para tabela `armamentos`
---
-
-INSERT INTO `armamentos` (`id`, `ARMA`, `excluido`, `ouro`, `personagem`, `armadura`, `equipamento`, `defesa`) VALUES
-(1, 'Claymore/', '0', 50, 'Elle', NULL, 'Alforge___/', 10),
-(2, 'Glaive/', '0', 50, 'pepe', 'Armadura_de_Couro/', 'Alforge___/', 12);
-
---
--- Índices de tabelas apagadas
+-- Indexes for dumped tables
 --
 
 --
--- Índices de tabela `armamentos`
+-- Indexes for table `armamentos`
 --
 ALTER TABLE `armamentos`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personagem` (`personagem`);
 
 --
--- AUTO_INCREMENT de tabelas apagadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de tabela `armamentos`
+-- AUTO_INCREMENT for table `armamentos`
 --
 ALTER TABLE `armamentos`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

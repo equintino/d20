@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 18-Abr-2017 às 06:04
+-- Generation Time: 21-Maio-2017 às 19:34
 -- Versão do servidor: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -30,15 +30,16 @@ CREATE TABLE `usuario` (
   `id` int(5) NOT NULL,
   `login` varchar(100) DEFAULT NULL,
   `senha` varchar(100) DEFAULT NULL,
-  `deleted` enum('0','1') NOT NULL DEFAULT '0'
+  `deleted` enum('0','1') NOT NULL DEFAULT '0',
+  `email` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `login`, `senha`, `deleted`) VALUES
-(1, 'ADMIN', 'admin', '0');
+INSERT INTO `usuario` (`id`, `login`, `senha`, `deleted`, `email`) VALUES
+(1, 'mestre', '27d06cdbc87d4f5efa7b1ec651a8cbf822a28905', '0', 'master@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -48,7 +49,8 @@ INSERT INTO `usuario` (`id`, `login`, `senha`, `deleted`) VALUES
 -- Indexes for table `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `login` (`login`);
 
 --
 -- AUTO_INCREMENT for dumped tables

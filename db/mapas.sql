@@ -23,23 +23,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `atributos`
+-- Estrutura da tabela `mapas`
 --
 
-CREATE TABLE `atributos` (
-  `id_atrib` int(5) NOT NULL,
-  `FORCA` int(5) DEFAULT NULL,
-  `AGILIDADE` int(5) DEFAULT NULL,
-  `INTELIGENCIA` int(5) DEFAULT NULL,
-  `VONTADE` int(5) DEFAULT NULL,
-  `PV` int(5) DEFAULT NULL,
-  `PM` int(5) DEFAULT NULL,
-  `PE` int(5) DEFAULT NULL,
-  `excluido` enum('0','1') NOT NULL DEFAULT '0',
-  `personagem` varchar(50) NOT NULL,
-  `CLASSE_COMUM` varchar(100) DEFAULT NULL,
-  `HABILIDADE_AUTOMATICA` varchar(100) DEFAULT NULL,
-  `DESCRICAO` text
+CREATE TABLE `mapas` (
+  `id` int(5) NOT NULL,
+  `mes` int(2) DEFAULT NULL,
+  `dt` date DEFAULT NULL,
+  `descricao` text,
+  `entrada` decimal(12,2) DEFAULT NULL,
+  `saida` decimal(12,2) DEFAULT NULL,
+  `diz_ofe` enum('diz','ofe') DEFAULT NULL,
+  `criado` varchar(50) DEFAULT NULL,
+  `modificado` varchar(50) DEFAULT NULL,
+  `excluido` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -47,21 +44,20 @@ CREATE TABLE `atributos` (
 --
 
 --
--- Indexes for table `atributos`
+-- Indexes for table `mapas`
 --
-ALTER TABLE `atributos`
-  ADD PRIMARY KEY (`id_atrib`),
-  ADD UNIQUE KEY `personagem` (`personagem`);
+ALTER TABLE `mapas`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `atributos`
+-- AUTO_INCREMENT for table `mapas`
 --
-ALTER TABLE `atributos`
-  MODIFY `id_atrib` int(5) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `mapas`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

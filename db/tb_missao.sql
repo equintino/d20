@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Tempo de geração: 15/05/2017 às 15:18
--- Versão do servidor: 10.1.21-MariaDB
--- Versão do PHP: 7.1.1
+-- Host: 127.0.0.1
+-- Generation Time: 21-Maio-2017 às 19:32
+-- Versão do servidor: 10.1.19-MariaDB
+-- PHP Version: 7.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,51 +17,50 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `d20`
+-- Database: `d20`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tb_missao`
+-- Estrutura da tabela `tb_missao`
 --
 
 CREATE TABLE `tb_missao` (
-  `id` int(5) NOT NULL,
+  `id` int(4) NOT NULL,
   `MISSAO` text,
   `DESCRICAO` text,
-  `excluido` enum('0','1') NOT NULL DEFAULT '0'
+  `excluido` enum('0','1') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Fazendo dump de dados para tabela `tb_missao`
+-- Extraindo dados da tabela `tb_missao`
 --
 
 INSERT INTO `tb_missao` (`id`, `MISSAO`, `DESCRICAO`, `excluido`) VALUES
-(1, 'Parada Dura', 'Tempo de dureza', '0'),
-(2, 'Parada Dura2', 'Tempo de dureza', '0'),
-(3, 'Parada Dura3', 'Tempo de dureza', '0'),
-(4, 'Parada Dura4', 'Tempo de dureza', '0');
+(1, 'Pé de cabra', 'Um alfaiate comeu um verme', '0'),
+(2, 'Pé de cabra 2', 'Um alfaiate comeu um verme', '0'),
+(3, 'Pé de cabra 3', 'Um alfaiate comeu um verme', '0');
 
 --
--- Índices de tabelas apagadas
+-- Indexes for dumped tables
 --
 
 --
--- Índices de tabela `tb_missao`
+-- Indexes for table `tb_missao`
 --
 ALTER TABLE `tb_missao`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de tabelas apagadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de tabela `tb_missao`
+-- AUTO_INCREMENT for table `tb_missao`
 --
 ALTER TABLE `tb_missao`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

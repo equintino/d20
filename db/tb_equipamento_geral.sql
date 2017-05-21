@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Tempo de geração: 25/04/2017 às 19:09
--- Versão do servidor: 10.1.21-MariaDB
--- Versão do PHP: 7.1.1
+-- Host: 127.0.0.1
+-- Generation Time: 21-Maio-2017 às 19:31
+-- Versão do servidor: 10.1.19-MariaDB
+-- PHP Version: 7.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,29 +17,29 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `d20`
+-- Database: `d20`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tb_equipamento_geral`
+-- Estrutura da tabela `tb_equipamento_geral`
 --
 
 CREATE TABLE `tb_equipamento_geral` (
   `id` int(2) NOT NULL,
   `item` varchar(31) DEFAULT NULL,
-  `CUSTO` int(4) DEFAULT NULL,
+  `ouro` int(4) DEFAULT NULL,
   `peso` varchar(4) DEFAULT NULL,
   `DESCRICAO` varchar(237) DEFAULT NULL,
   `excluido` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
--- Fazendo dump de dados para tabela `tb_equipamento_geral`
+-- Extraindo dados da tabela `tb_equipamento_geral`
 --
 
-INSERT INTO `tb_equipamento_geral` (`id`, `item`, `CUSTO`, `peso`, `DESCRICAO`, `excluido`) VALUES
+INSERT INTO `tb_equipamento_geral` (`id`, `item`, `ouro`, `peso`, `DESCRICAO`, `excluido`) VALUES
 (1, 'Alforge   ', 50, '1', 'Mochila acoplada na parte de traz na sela da montaria.Comporta até 40 quilos de equipamento.', 0),
 (2, 'Aljava Comum', 10, '1,6', 'Utensilio usado normalmente nas costas para carregar flechas. Comporta até 20 flechas (compradas separadamente). ', 0),
 (3, 'Anzol e Linha', 1, '0', 'Para pescar', 0),
@@ -101,11 +101,11 @@ INSERT INTO `tb_equipamento_geral` (`id`, `item`, `CUSTO`, `peso`, `DESCRICAO`, 
 (59, 'Velino', 10, '0,02', 'Uma folha. Pele de feto de boi ou cordeiro, preparada para receber tinta. Mais lisa e macia do que pergaminho comum, depois de seca a tinta resiste mesmo que a folha seja molhada. Grimórios a prova d’água podem ser feitos desse material.', 0);
 
 --
--- Índices de tabelas apagadas
+-- Indexes for dumped tables
 --
 
 --
--- Índices de tabela `tb_equipamento_geral`
+-- Indexes for table `tb_equipamento_geral`
 --
 ALTER TABLE `tb_equipamento_geral`
   ADD PRIMARY KEY (`id`);
