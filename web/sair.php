@@ -8,6 +8,10 @@
    @$personagem = $_GET['personagem'];
    @$login = strtoupper($_COOKIE['login']);
    @$act = $_GET['act'];
+   
+   if(@$login=='MESTRE'){
+      goto sair;
+   }
    //print_r($login);die;
    
    $dao = new dao();
@@ -23,8 +27,11 @@
    if(key_exists('PMResta',$_GET)){
        $model->setPM($_GET['PMResta']);
    }
-   if(key_exists('ouro',$_GET)){
-       $ouro=$_GET['ouro'];
+   if(key_exists('ouro1',$_GET)){
+       $ouro1=$_GET['ouro1'];
+   }
+   if(key_exists('ouro2',$_GET)){
+       $ouro2=$_GET['ouro2'];
    }
    if(key_exists('anotacoes',$_GET)){
        $anotacoes=$_GET['anotacoes'];
@@ -44,7 +51,7 @@
    $search->settabela('armamentos');
    $recurso=$dao->encontrePorPersonagem($search);
    $model->settabela($search->gettabela());
-   $model->setouro($recurso->getouro()+$ouro);
+   $model->setouro($recurso->getouro()+$ouro1-$ouro2);
    $dao->setaOuro($model);
       
    $search->settabela('atributos');
@@ -114,6 +121,7 @@
       header("Location:index.php");
       die;
    }
+   sair:
    header("Location:../index.html");
    //print_r($emMissao);die;
 ?>

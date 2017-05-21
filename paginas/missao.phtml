@@ -3,7 +3,8 @@
     menos=0;
     PVResta=0;
     PMResta=0;
-    ouro=0;
+    ouro1=0;
+    ouro2=0;
     function setaVariaveis($variaveis){
         missao=$variaveis;
         return missao;
@@ -25,9 +26,12 @@
         }else if(id == 'PMResta'){
             PMResta++;
             menos=PMResta; 
-        }else if(id == 'ouro'){
-            ouro++;
-            menos=ouro; 
+        }else if(id == 'ouro1'){
+            ouro1++;
+            menos=ouro1; 
+        }else if(id == 'ouro2'){
+            ouro2++;
+            menos=ouro2; 
         }
         if(menos < 10){
            zero='0';
@@ -44,11 +48,15 @@
         }else if(id == 'PMResta'){
             PMResta='00';
             menos=PMResta; 
-        }else if(id == 'ouro'){
-            ouro='00';
-            menos=ouro; 
         }
-        document.getElementById(id).innerHTML=menos;
+        if(id == 'ouro'){
+            ouro1='00'; 
+            document.getElementById('ouro1').innerHTML=ouro1;
+            ouro2='00';
+            document.getElementById('ouro2').innerHTML=ouro2;
+        }else{
+            document.getElementById(id).innerHTML=menos;
+         }
     }
     function sairMissao($personagem,id){
         var id;
@@ -56,7 +64,7 @@
         var anotacoes = document.getElementById('anotacoes').value;
         var x=confirm('Deseja realmente sair?');
         if(x){
-            window.location.assign('sair.php?act=missao&PVResta='+PVResta+'&PMResta='+PMResta+'&ouro='+ouro+'&anotacoes='+anotacoes+'&personagem='+personagem+'&id='+id+'&missao='+missao+'');
+            window.location.assign('sair.php?act=missao&PVResta='+PVResta+'&PMResta='+PMResta+'&ouro1='+ouro1+'&ouro2='+ouro2+'&anotacoes='+anotacoes+'&personagem='+personagem+'&id='+id+'&missao='+missao+'');
         }
     }
     
@@ -354,8 +362,9 @@
                   echo '<div class=bau>';
                      echo '<img src=imagens/bau.png />';
                      echo $item->getouro();
-                     echo ' + <span id=ouro >00</span>';
-                     echo '<br><span class=ouro onclick=mais("ouro")>+1</span><span class=ouro onclick=zera("ouro")>zerar</span>';
+                     echo ' + <span id=ouro1 >00</span>';
+                     echo ' - <span id=ouro2 >00</span>';
+                     echo '<br><span class=ouro onclick=mais("ouro1")>+1</span><span class=ouro onclick=mais("ouro2")>-1</span><span class=ouro onclick=zera("ouro")>zerar</span>';
                   echo '</div>';
                }
                ?>
