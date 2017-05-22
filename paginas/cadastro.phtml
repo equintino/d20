@@ -119,6 +119,26 @@ function moeda(saldo) {
     }
     document.getElementById("moeda").innerHTML = novoSaldo;
 }
+function isNumber(val){
+  return typeof val === "number";
+}
+function habilidades(){  
+    var x = document.forms[0];
+    var txt = "";
+    var i;
+    for (i = 0; i < x.length; i++) {
+        if(x[i].checked){
+            txt = txt + x.elements[i].name;
+            if(txt.slice(-1) > 1){
+                for(z=i; txt.slice(-1) > 1; z--){
+                        x.elements[z].checked=true;
+                        txt = txt + x.elements[z].name;
+                }
+            }
+        }       
+    }
+            //alert(txt.slice(-1));
+}
 function abrir(URL) {
   var width = 150;
   var height = 250;
@@ -385,13 +405,13 @@ function trocaAvatar(x){
                                             }else{
                                                 $numero=substr($item->getREQUISITOS(),-1);
                                                 if(is_numeric($numero)){
-                                                   echo $item->getREQUISITOS().' - ';
-                                                   print_r($numero);
+                                                   //echo $item->getREQUISITOS().' - ';
+                                                   //print_r($numero);
                                                    $cor='red';
                                                 }else{
                                                    $cor=null; 
                                                 }
-                                                echo '<td><input type=checkbox name=\''.$item->gethabilidade().'\'title=\'';
+                                                echo '<td><input type=checkbox onclick=habilidades() name=\''.$item->gethabilidade().'\'title=\'';
                                                     echo 'TIPO: '.($item->getTIPO())."\r\n";
                                                     echo 'MANA: '.($item->getMANA())."\r\n"; 
                                                     echo 'REQUISITOS: '.($item->getREQUISITOS())."\r\n";
