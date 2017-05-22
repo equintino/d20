@@ -379,12 +379,14 @@ function trocaAvatar(x){
                                     echo '<tr>';
                                         foreach($habilidades as $key => $item){
                                             $requisitos=explode (';',$item->getREQUISITOS());
-                                            //echo $item->getREQUISITOS().'->';
-                                            //print_r(substr($item->getREQUISITOS(),-1));
+                       
                                             if(in_array('Nível 5',$requisitos) || in_array('Nível 10',$requisitos)){//|| is_numeric(substr($item->getREQUISITOS(),-1)) ){
                                                 $cor='red';
                                             }else{
-                                                if(is_numeric(substr($item->getREQUISITOS(),-1))){
+                                                $numero=substr($item->getREQUISITOS(),-1);
+                                                if(is_numeric($numero)){
+                                                   echo $item->getREQUISITOS().' - ';
+                                                   print_r($numero);
                                                    $cor='red';
                                                 }else{
                                                    $cor=null; 
