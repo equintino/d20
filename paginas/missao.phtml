@@ -139,7 +139,7 @@
                             die;
                         }
             echo "<div class='tempo'>";
-               echo '<iframe scrolling="no" frameborder=0 src="../web/tempo.php?personagem='.$personagem.'"></iframe>';
+               echo '<iframe scrolling="no" frameborder=0 src="../web/tempo.php?personagem='.$personagem.'&missao="'.$dados->getMISSAO().'></iframe>';
                echo '<br><span onclick=sairMissao("'.$personagem.'","'.$id.'") class="sairMissao sairMissao-verde" >Sair da Missão</span>';
             echo '</div>';
            goto missao;

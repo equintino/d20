@@ -5,6 +5,45 @@
     <link rel="stylesheet" href="css/tempo.css" type="text/css" media='screen'/>   
     <!--<link rel="stylesheet" href="css/mobile.css" media="(max-width: 320px)">-->
 <title>Tempo</title>
+<?php
+            include '../dao/dao.php';
+            include '../dao/ModelSearchCriteria.php';
+            include '../config/Config.php';
+            include '../model/model.php';
+            include '../mapping/modelMapper.php';
+    
+            date_default_timezone_set('America/Sao_Paulo');
+            
+            @$personagem = $_GET['personagem'];
+            @$missao = $_GET['missao'];
+            @$sinc = $_GET['sinc'];
+                        
+            $dao = new dao();
+            $search = new ModelSearchCriteria();
+            
+            $search->settabela('tempo');
+            $search->setpersonagem($personagem);
+            $search->setMISSAO($missao);
+                  //print_r($search->getMISSAO());die;
+               
+               if(@$sinc == 1){ 
+                  $tempo=$dao->encontrePorMissao($search);
+                  
+                  $ano=(substr($tempo->getDATA(),0,4));
+                  $mes=(substr($tempo->getDATA(),5,2));
+                  $dia=(substr($tempo->getDATA(),8,2));
+                  $hora=(substr($tempo->getDATA(),11,2));
+                  $min=(substr($tempo->getDATA(),14,2));
+                  $seg=(substr($tempo->getDATA(),17,2));
+                    
+                  setcookie("ano",$ano);
+                  setcookie("mes",$mes);
+                  setcookie("dia",$dia);
+                  setcookie("hora",$hora);
+                  setcookie("min",$min);
+                  setcookie("seg",$seg);
+               }
+?>
 <SCRIPT language=JavaScript>
 function getCookie(cname) {
     var name = cname + "=";
@@ -120,22 +159,33 @@ function getSecs(pausa){
 	if(sHors>23){
 		dia++;sHors="00";sMins="00";sSecs="00";
 		clock1.innerHTML=dia+" de "+getMes(mes)+" de "+ano+"<br>"+sHors+"<font color=#000000>:</font>"+sMins+"<font color=#000000>:</font>"+sSecs+pausado;setTimeout('getSecs('+pausa+')',1);	
-		document.cookie = "hora="+sHors;
-		document.cookie = "min="+sMins;
-		document.cookie = "seg="+sSecs;
-		document.cookie = "dia="+dia;
-		document.cookie = "mes="+mes;
-		document.cookie = "ano="+ano;
+		document.cookie = "hora="+sHors+";path=/";
+		document.cookie = "min="+sMins+";path=/";
+		document.cookie = "seg="+sSecs+";path=/";
+		document.cookie = "dia="+dia+";path=/";
+		document.cookie = "mes="+mes+";path=/";
+		document.cookie = "ano="+ano+";path=/";
 	}else{
 		clock1.innerHTML=dia+" de "+getMes(mes)+" de "+ano+"<br>"+sHors+":"+sMins+":"+sSecs+pausado;setTimeout('getSecs('+pausa+')',1);		
-		document.cookie = "hora="+sHors;
-		document.cookie = "min="+sMins;
-		document.cookie = "seg="+sSecs;
-		document.cookie = "dia="+dia;
-		document.cookie = "mes="+mes;
-		document.cookie = "ano="+ano;
+		document.cookie = "hora="+sHors+";path=/";
+		document.cookie = "min="+sMins+";path=/";
+		document.cookie = "seg="+sSecs+";path=/";
+		document.cookie = "dia="+dia+";path=/";
+		document.cookie = "mes="+mes+";path=/";
+		document.cookie = "ano="+ano+";path=/";
 	}
 }
+/*
+function sinc(){
+   window.location.assign('tempo.php?sinc=1');
+}
+function gravaCookie(x){
+   //var x;
+   alert(x);
+   alert(document.cookie);
+   document.cookie = x+";path=/";
+   //alert(document.cookie);
+}*/
 </SCRIPT>
 </head>
 <body>
@@ -143,24 +193,14 @@ function getSecs(pausa){
         <b><span id="clock1"></span></b>
         <div>
         <?php
-            include '../dao/dao.php';
-            include '../dao/ModelSearchCriteria.php';
-            include '../config/Config.php';
-            include '../model/model.php';
-            include '../mapping/modelMapper.php';
-    
-            date_default_timezone_set('America/Sao_Paulo');
-                        
-            $dao = new dao();
-            $search = new ModelSearchCriteria();
-            
-            $personagem = $_GET['personagem'];
+                     
+  
             
             $search->settabela('missao');
             $search->setpersonagem($personagem);
-            $missao=$dao->encontre($search);
+            $missao_=$dao->encontre($search);
             //print_r($missao);die;
-            foreach($missao as $ativa){
+            foreach($missao_ as $ativa){
                 if($ativa->getemMissao()==0){
                     $ano = substr($ativa->getDATA(),0,4);
                     $mes = substr($ativa->getDATA(),5,2);
@@ -204,6 +244,7 @@ function getSecs(pausa){
                         echo '<span><img title=\'Estação do '.$tempo->getESTACAO().'\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo&numero=2 /></span>';
                         echo '<img title=\''.$tempo->getDESCRICAO().'\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo&numero=3 />';
                         echo '<img title=\'Fase da Lua ('.$tempo->getLUAS().')\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo />';
+                        echo '<a href="tempo.php?missao='.$missao.'&personagem='.$personagem.'"><span class=sinc >SINC</span></a>';
                     echo '</div>';
                     echo '<div class=temperatura>';
                         echo '<span class=seta>↑</span>';

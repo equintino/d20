@@ -104,7 +104,7 @@ $(document).ready(function(){
         //$(".ocultar").show("slower");
     });
 
-    $('.ocultar').click(function(event){
+    $('.conteudo').dblclick(function(event){
         event.preventDefault();
         $(".conteudo").hide("slow");
         //$(".ocultar").hide("slower")
