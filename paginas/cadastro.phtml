@@ -1,4 +1,7 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script>
+    //acrescimoGlobal=0;
+    idavatar=1;
     function functionSexoClasse(){
         raca = document.getElementById('mySelect').value;
         classe = document.getElementById('myClasse').value;
@@ -12,7 +15,7 @@
                 sexo = false;
             }
         }
-        link = '../web/imagens/personagens/'+raca+'/'+classe+'/'+sexo+'/1.png';
+        link = '../web/imagens/personagens/'+raca+'/'+classe+'/'+sexo+'/'+idavatar+'.png';
         if(raca != false && classe != false && sexo != false){
             document.getElementById('aqui').innerHTML='<img height=200px src='+link+' />';
         }
@@ -29,7 +32,7 @@
                sexo = 'F';
             }
         }
-        link = '../web/imagens/personagens/'+raca+'/'+classe+'/'+sexo+'/1.png';
+        link = '../web/imagens/personagens/'+raca+'/'+classe+'/'+sexo+'/'+idavatar+'.png';
     if(classe != false && raca != false && sexo != false){
          document.getElementById('aqui').innerHTML='<img height=200px src='+link+' />';
     }
@@ -146,26 +149,93 @@ function abrir(URL) {
   var top = 99;
   window.open(URL,'janela', 'width='+width+', height='+height+', top='+top+', left='+left+', scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
 }
-acrescimoGlobal=0;
 function mudaImagem(max){
-    if(i==null){
-        i=1;
+    //alert([raca,classe,sexo]);
+    
+     switch (raca){
+        case 'humano':
+            alert(raca);
+            switch (classe){
+                case 'espadachim':
+                    alert(classe);
+                    switch (sexo){
+                        case 'F':
+                            alert(sexo);
+                            break;
+                        case 'M':
+                            alert(sexo);
+                            break;
+                    }
+                    break;
+                case 'guerreiro':
+                    alert(classe);
+                    break;
+                case 'paladino':
+                    alert(classe);
+                    break;
+                case 'ranger':
+                    alert(classe);
+                    break;
+                case 'gatuno':
+                    alert(classe);
+                    break;
+                case 'mago':
+                    alert(classe);
+                    break;
+                case 'sacerdote':
+                    alert(classe);
+                    break;
+            }
+            break;
+        case 'anao':
+            alert(raca);
+            break;
+        case 'elfo':
+            alert(raca);
+            break;
+        case 'halfling':
+            alert(raca);
+            break;
     }
-   var i = i+acrescimoGlobal;
-   var max = 5;
-   var link = 'imagens/personagens/'+raca+'/'+classe+'/'+sexo+'/'+i+'.png';
-   if(acrescimoGlobal == max-1){
-      acrescimoGlobal=0;
-   }else{
-      acrescimoGlobal++;
+    //idavatar;
+    //alert(idavatar);
+    if(idavatar==null){
+        idavatar=1;
+    }
+   //idavatar = idavatar++;
+   var max;
+   if(max==null){
+       max = 5;
    }
-   var x = '<img height=200px src=\'imagens/personagens/'+raca+'/'+classe+'/'+sexo+'/'+i+'.png\' \>';
+   var link = 'imagens/personagens/'+raca+'/'+classe+'/'+sexo+'/'+idavatar+'.png';
+   if(idavatar > max-1){
+      idavatar=1;
+   }else{
+      idavatar++;
+   }
+   var x = '<img height=200px src=\'imagens/personagens/'+raca+'/'+classe+'/'+sexo+'/'+idavatar+'.png\' \>';
          //document.getElementById('aqui').innerHTML='<img height=200px src="../web/imagens/personagens/'+x+'/'+classe+'/'+sexo+'/1.png" />';
    raca;
    //var trocaAvatar = "<a href='index.php?pagina=cadastro&act=avatar&raca="+x+"' onclick='submit'><font size=2>Trocar Avatar</font></a>";
    document.getElementById("aqui").innerHTML=x;
    document.cookie = "avatar="+link+"; path=/";
 }
+   $(document).ready(function(){
+        $("#aqui").fadeIn("slow");
+
+    
+    $('#trocaAvatar').click(function(event){
+        event.preventDefault();
+        $("#aqui").hide();
+        //$(".ocultar").hide("slower")
+    });
+    
+    $('#trocaAvatar').click(function(event){
+        event.preventDefault();
+        $("#aqui").fadeIn("slow");
+        //$(".ocultar").show("slower");
+    });
+ });
 function trocaAvatar(x){
     var x;
     var estilo = document.querySelector('#trocaAvatar').style;
