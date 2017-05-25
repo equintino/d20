@@ -24,7 +24,6 @@
             $search->settabela('tempo');
             $search->setpersonagem($personagem);
             $search->setMISSAO($missao);
-                  //print_r($search->getMISSAO());die;
                
                if(@$sinc == 1){ 
                   $tempo=$dao->encontrePorMissao($search);
@@ -45,6 +44,7 @@
                }
 ?>
 <SCRIPT language=JavaScript>
+//var relogio = 3000;
 function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
@@ -101,16 +101,20 @@ if(!sSecs || sSecs == null)var sSecs = "00";
 if(!dia || dia == null)var dia = "01";
 if(!mes || mes == null)var mes = "01";
 if(!ano || ano == null)var ano = "1800";
-function getSecs(pausa){
-    var pausa;
-    var pausado='';
-    //alert(pausa);
+pausa=0;
+var relogio;
+function getSecs(){
+    //alert(relogio);
+    inicio=setTimeout(getSecs,relogio);
+    //pausa;
+    //alert(inicio);
     if(pausa == 0){
+        var pausado='';
         sSecs++;
+        //sleep 1;
     }else{
-        var pausado=' (Pausado)';
+        var pausado=' ';//(Pausado)';
     }
-                    //alert(sHors);
                 if(sHors >= 06 && sHors < 10){
                     document.body.style.background = "#f3f3f3 url('imagens/tempo/dia.jpg') no-repeat right top";
                     document.body.style.backgroundSize = "100%";
@@ -158,7 +162,8 @@ function getSecs(pausa){
             {mes=01;ano++;if(mes<=09)mes="0"+mes;}
 	if(sHors>23){
 		dia++;sHors="00";sMins="00";sSecs="00";
-		clock1.innerHTML=dia+" de "+getMes(mes)+" de "+ano+"<br>"+sHors+"<font color=#000000>:</font>"+sMins+"<font color=#000000>:</font>"+sSecs+pausado;setTimeout('getSecs('+pausa+')',1);	
+		clock1.innerHTML=dia+" de "+getMes(mes)+" de "+ano+"<br>"+sHors+"<font color=#000000>:</font>"+sMins+"<font color=#000000>:</font>"+sSecs+pausado;inicio;
+                setTimeout(clock1.innerHTML,3000);
 		document.cookie = "hora="+sHors+";path=/";
 		document.cookie = "min="+sMins+";path=/";
 		document.cookie = "seg="+sSecs+";path=/";
@@ -166,7 +171,7 @@ function getSecs(pausa){
 		document.cookie = "mes="+mes+";path=/";
 		document.cookie = "ano="+ano+";path=/";
 	}else{
-		clock1.innerHTML=dia+" de "+getMes(mes)+" de "+ano+"<br>"+sHors+":"+sMins+":"+sSecs+pausado;setTimeout('getSecs('+pausa+')',1);		
+		clock1.innerHTML=dia+" de "+getMes(mes)+" de "+ano+"<br>"+sHors+":"+sMins+":"+sSecs+pausado;	
 		document.cookie = "hora="+sHors+";path=/";
 		document.cookie = "min="+sMins+";path=/";
 		document.cookie = "seg="+sSecs+";path=/";
@@ -174,6 +179,35 @@ function getSecs(pausa){
 		document.cookie = "mes="+mes+";path=/";
 		document.cookie = "ano="+ano+";path=/";
 	}
+}
+function relVelMenos(){
+    if(relogio==null){
+        relogio=1;
+    }
+    relogio=relogio+20;    
+}
+function relVelMais(){
+    if(relogio==null){
+        relogio=1;
+    }
+        relogio=relogio-20;
+    if(relogio < 0){
+        relogio=0;
+    }
+}
+cont=0;
+function relPausa(){
+    //var inicio;
+    cont=cont+1;
+    pause = cont % 2;
+    //var cont;
+    
+    if(pause==1){
+        clearTimeout(inicio);
+    }else{
+        inicio=setTimeout(getSecs);
+        //alert([pause,inicio]);
+    }
 }
 /*
 function sinc(){
@@ -217,7 +251,7 @@ function gravaCookie(x){
                     $search->setid($dia);
                     $tempo=$dao->encontrePorId($search);
 
-                    echo "<script>getSecs(1);</script>";
+                    //echo "<script>getSecs(1,1000);</script>";
 
                     echo '<div class=fases>';
                         echo '<span><img title=\'Estação do '.$tempo->getESTACAO().'\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo&numero=2 /></span>';
@@ -238,7 +272,6 @@ function gravaCookie(x){
                     $search->setid($dia);
                     $tempo=$dao->encontrePorId($search);
 
-                    echo "<script>setTimeout('getSecs(0)',1);</script>";
 
                     echo '<div class=fases>';
                         echo '<span><img title=\'Estação do '.$tempo->getESTACAO().'\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo&numero=2 /></span>';
@@ -253,7 +286,14 @@ function gravaCookie(x){
                         echo '<span class=seta>  ↓</span>';
                         echo $tempo->getTEMPMIN();
                         echo '<span class=graus>C</span>';
-                    echo '</div>';die;
+                    echo '</div>';
+                    echo '<script>
+                            getSecs(3000);
+                        </script>';
+                        echo '<span onclick=relVelMenos()> << </span>';
+                        echo '<span onclick=relPausa()> [] </span>';
+                        echo '<span onclick=relVelMais()> >> </span>';
+                    die;
                 }
             }
         ?>
