@@ -104,16 +104,10 @@ if(!ano || ano == null)var ano = "1800";
 pausa=0;
 var relogio;
 function getSecs(){
-    //alert(relogio);
     inicio=setTimeout(getSecs,relogio);
-    //pausa;
-    //alert(inicio);
     if(pausa == 0){
         var pausado='';
         sSecs++;
-        //sleep 1;
-    }else{
-        var pausado=' ';//(Pausado)';
     }
                 if(sHors >= 06 && sHors < 10){
                     document.body.style.background = "#f3f3f3 url('imagens/tempo/dia.jpg') no-repeat right top";
@@ -153,13 +147,13 @@ function getSecs(){
                 }
 	if(sSecs<=9)sSecs="0"+sSecs;
 	if(sSecs>59)
-            {sSecs=00;sMins++;if(sMins<=09)sMins="0"+sMins;}
+            {sSecs='00';sMins++;if(sMins<=09)sMins="0"+sMins;}
 	if(sMins>59)
-            {sMins=00;sHors++;if(sHors<=09)sHors="0"+sHors;}
+            {sMins='00';sHors++;if(sHors<=09)sHors="0"+sHors;}
 	if(dia>30)
-            {dia=01;mes++;if(dia<=09)dia="0"+dia;}
+            {dia='01';mes++;if(dia<=09)dia="0"+dia;}
 	if(mes>12)
-            {mes=01;ano++;if(mes<=09)mes="0"+mes;}
+            {mes='01';ano++;if(mes<=09)mes="0"+mes;}
 	if(sHors>23){
 		dia++;sHors="00";sMins="00";sSecs="00";
 		clock1.innerHTML=dia+" de "+getMes(mes)+" de "+ano+"<br>"+sHors+"<font color=#000000>:</font>"+sMins+"<font color=#000000>:</font>"+sSecs+pausado;inicio;
@@ -197,17 +191,17 @@ function relVelMais(){
 }
 cont=0;
 function relPausa(){
-    //var inicio;
     cont=cont+1;
     pause = cont % 2;
-    //var cont;
     
     if(pause==1){
         clearTimeout(inicio);
+        var botoes = ' <img height=14px; src=imagens/segue.png /> ';
     }else{
         inicio=setTimeout(getSecs);
-        //alert([pause,inicio]);
+        var botoes = ' <img height=14px; src=imagens/pausa.png /> ';
     }
+    document.getElementById('segue').innerHTML=botoes;
 }
 /*
 function sinc(){
@@ -225,11 +219,11 @@ function gravaCookie(x){
 <body>
     <div class=tempo align="center"> 
         <b><span id="clock1"></span></b>
+        <span class="bntTempo recua" onclick=relVelMenos()><img height=14px; src=imagens/recuar.png /></span>
+        <span class="bntTempo segue" id="segue" onclick=relPausa()> <img height=14px; src=imagens/pausa.png /> </span>
+        <span class="bntTempo avanca" onclick=relVelMais()><img height=14px; src=imagens/avanca.png /></span>
         <div>
-        <?php
-                     
-  
-            
+        <?php           
             $search->settabela('missao');
             $search->setpersonagem($personagem);
             $missao_=$dao->encontre($search);
@@ -277,22 +271,17 @@ function gravaCookie(x){
                         echo '<span><img title=\'Estação do '.$tempo->getESTACAO().'\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo&numero=2 /></span>';
                         echo '<img title=\''.$tempo->getDESCRICAO().'\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo&numero=3 />';
                         echo '<img title=\'Fase da Lua ('.$tempo->getLUAS().')\' height=20px src=gera.php?id='.$dia.'&tabela=tb_tempo />';
-                        echo '<a href="tempo.php?missao='.$missao.'&personagem='.$personagem.'"><span class=sinc >SINC</span></a>';
+                        //echo '<a href="tempo.php?missao='.$missao.'&personagem='.$personagem.'"><span class=sinc >SINC</span></a>';
                     echo '</div>';
-                    echo '<div class=temperatura>';
+                    echo '<span class=temperatura>';
                         echo '<span class=seta>↑</span>';
                         echo $tempo->getTEMPMAX();
                         echo '<span class=graus>C</span>';
                         echo '<span class=seta>  ↓</span>';
                         echo $tempo->getTEMPMIN();
                         echo '<span class=graus>C</span>';
-                    echo '</div>';
-                    echo '<script>
-                            getSecs(3000);
-                        </script>';
-                        echo '<span onclick=relVelMenos()> << </span>';
-                        echo '<span onclick=relPausa()> [] </span>';
-                        echo '<span onclick=relVelMais()> >> </span>';
+                    echo '</span>';
+                    echo '<script>getSecs(1);</script>';
                     die;
                 }
             }

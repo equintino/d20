@@ -126,20 +126,20 @@
                 echo '</form>';
                 die;
         }else{
-                        $dao=new Dao();
-                        $search=new ModelSearchCriteria();
-                        $search->settabela('personagem');
-                        @$login=strtoupper($_COOKIE['login']);
-                        $search->setpersonagem($personagem);
-                        $lista=$dao->encontre($search);
-                        foreach($lista as $z);
-                        $id=$z->getid();
-                        $titulos=array('PERSONAGEM','RAÇA','CLASSE','TENDÊNCIA1','TENDÊNCIA2');
-                        if(!$lista){
-                            die;
-                        }
+            $dao=new Dao();
+            $search=new ModelSearchCriteria();
+            $search->settabela('personagem');
+            @$login=strtoupper($_COOKIE['login']);
+            $search->setpersonagem($personagem);
+            $lista=$dao->encontre($search);
+            foreach($lista as $z);
+               $id=$z->getid();
+               $titulos=array('PERSONAGEM','RAÇA','CLASSE','TENDÊNCIA1','TENDÊNCIA2');
+               if(!$lista){
+                  die;
+               }
             echo "<div class='tempo'>";
-               echo '<iframe scrolling="no" frameborder=0 src="../web/tempo.php?personagem='.$personagem.'&missao="'.$dados->getMISSAO().'></iframe>';
+               //echo '<iframe scrolling="no" frameborder=0 src="../web/tempo.php?personagem='.$personagem.'&missao="'.$dados->getMISSAO().'></iframe>';
                echo '<br><span onclick=sairMissao("'.$personagem.'","'.$id.'") class="sairMissao sairMissao-verde" >Sair da Missão</span>';
             echo '</div>';
            goto missao;

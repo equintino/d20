@@ -14,7 +14,9 @@
     font-family: cursive;
     font-weight: 900;
     font-size: 13px;
-    width: 100px;
+    #width: 2030px;
+    padding: 0 5px 2px 0;
+    #height: 40px;
     background: rgba(0,0,0,0.2);
     border-radius: 5px;
 }
@@ -24,4 +26,16 @@
 }
 .sinc{
     font-size: 10px;
+}
+.bntTempo{
+    border: none;
+    cursor: pointer;
+    position: relative;
+    top: 5px;
+    left: 8px;
+    margin-top: 20px;
+}
+.recua:active, .segue:active, .avanca:active{
+    position: relative;
+    top: 7px;
 }

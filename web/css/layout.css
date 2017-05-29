@@ -4,25 +4,12 @@ body{
     background-repeat: no-repeat;
     background-size: 100%;
     background-color: black;
-  /*-webkit-transition: opacity 1s;
-  -moz-transition: opacity 1s;
-  -o-transition: opacity 1s;
-  -ms-transition: opacity 1s;       
-  transition: opacity 1s;
-  opacity: 1;*/
 }
 #cabecalho{  
     width: 100%; 
     height: 85px;
     background: rgba(255,255,0,0.1);
     background: 10% url('../imagens/5.jpg');
-}
-#menu{
-    width: 930px;
-    margin: auto;
-}
-#menu ul li{
-    display: inline;
 }
 #rodape{
       width: 100%; 
@@ -41,26 +28,6 @@ body{
     font-size: 18px;
     width: 970px;
     margin: auto;
-}
-.bnt{
-    font-size: 16px;
-    cursor: pointer;
-    font-family: arial;
-    font-weight: 700;
-    text-transform: uppercase;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    color: #d7edff;
-}
-.bnt:hover{
-    background: #04191e;
-    transition-property: all;
-    transition-duration: 1s;
-    color: white;
-}
-.bnt:ative{
-    /*border: none;*/
 }
 .home{
     margin: auto;
@@ -478,7 +445,7 @@ fieldset legend{
 }
 .saudacao1{
     position: absolute;
-    top: 3px;
+    top: 73px;
     right: 10px;
     font-weight: 900;
     font-style: italic;

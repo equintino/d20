@@ -13,7 +13,8 @@
 
     <!-- Definindo o tamanho da tela --> 
     <meta name="viewport" content="width=device-width">  
-    <link rel="stylesheet" href="css/layout.css" type="text/css" media='screen'/>   
+    <link rel="stylesheet" href="css/layout.css" type="text/css" media='screen'/>    
+    <link rel="stylesheet" href="css/menu.css" type="text/css" />   
     <link rel="stylesheet" href="css/tempo.css" type="text/css" media='screen'/>   
     <!--<link rel="stylesheet" href="css/mobile.css" media="(max-width: 939px)" />-->
     <link rel="stylesheet" href="js/slide.js" />
@@ -109,7 +110,10 @@
                            $menu=array('home'=>'Home','cadastro'=>'Cadastro de Personagem');
                         }
                     }else{
-                        $menu=array('home'=>'Home','cadastro'=>'Cadastro de Personagem','lista'=>'Personagens','dado'=>'Rolagem de Dado');                        
+                        $menu=array('home'=>'Home','cadastro'=>'Cadastro de Personagem','lista'=>'Personagens','dado'=>'Rolagem de Dado','missao'=>'Missão');  
+                        /*echo "<div class='tempo'>";
+                           echo '<iframe scrolling="no" frameborder=0 src="tempo.php"></iframe>';
+                        echo '</div>';*/                      
                     }
                     
                     foreach($dados as $dado){
@@ -127,16 +131,21 @@
                     }
                     
             echo '<div id="menu" >';
-                    echo '<ul>';                                             
+                    echo '<ul class="menu">';                                             
                         foreach($menu as $key => $item){
                            if($item == 'Cadastro de Personagem'){
-                              echo '<li><a href="'.Utils::createLink('cadastro',array('act'=>'cad','pag'=>0)).'" ><span class="bnt">'.$item.'</span></a></li>';
+                              echo '<li><a href="'.Utils::createLink('cadastro',array('act'=>'cad','pag'=>0)).'" >'.$item.'</a></li>';
                            }elseif($item == 'Personagens'){
-                              echo '<li><a href="'.Utils::createLink('cadastro',array('act'=>'lista','pag'=>0)).'" ><span class="bnt">'.$item.'</span></a></li>';
+                              echo '<li><a href="'.Utils::createLink('cadastro',array('act'=>'lista','pag'=>0)).'" >'.$item.'</a>';
+                                 echo '<ul class="sub-menu">';
+                                    echo '<li>Jogadores</li>';
+                                    echo '<li>Mestre</li>';
+                                 echo '</ul>';
+                              echo '</li>';
                            }elseif($item == 'Missão'){
-                              echo '<li><a href="'.Utils::createLink($key,array('personagem'=>$personagem)).'" ><span class="bnt">'.$item.'</span></a></li>';
+                              echo '<li><a href="'.Utils::createLink($key,array('personagem'=>$personagem)).'" >'.$item.'</a></li>';
                            }else{
-                              echo '<li><a href="'.Utils::createLink($key).'" ><span class="bnt">'.$item.'</span></a></li>';
+                              echo '<li><a href="'.Utils::createLink($key).'" >'.$item.'</a></li>';
                            }
                         }
                      echo '</ul>';
