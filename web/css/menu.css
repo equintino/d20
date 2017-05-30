@@ -6,36 +6,29 @@
 .menu > li {
     list-style: none;
 }
-.menu li a{   
+.menu li a, .menu li{   
     color: #d7edff;
 }
-.sub-menu {
+.sub-menu li{
     background: #04191e;
-    display: none;
+    min-width: 200px;
+    color: #d7edff;
+    margin-left: -10px;
+    padding-left: 7px;
+}
+.sub-menu {
     position: absolute;
+    display: none;
     margin: 0;
     padding: 0;
     list-style: none;
 }
-.sub-menu li{
-    #text-align: center;
-    min-width: 134px;
-    color: #d7edff;
-    margin-left: -5px;
-    #background: #555;
-    padding-left: 5px;
+.sub-menu li:hover{
+    #background: white;
+    color: gold;
 }
 .menu li:hover > .sub-menu {
     display: block;
-}
-.sub-menu:hover {
-    background: white;
-    #padding: 0;
-    #margin-left: -5;px
-}
-.sub-menu .sub-menu {
-    #top: 0;
-    #left: 100%;
 }
 .menu a {
     #text-decoration: none;
@@ -49,9 +42,6 @@
 }
 .menu li {
     position: relative;
-}
-.bnt {
-    #padding: 10px;
 }
 .menu > li {
     padding: 10px;

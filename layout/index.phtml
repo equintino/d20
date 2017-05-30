@@ -136,12 +136,16 @@
                            if($item == 'Cadastro de Personagem'){
                               echo '<li><a href="'.Utils::createLink('cadastro',array('act'=>'cad','pag'=>0)).'" >'.$item.'</a></li>';
                            }elseif($item == 'Personagens'){
-                              echo '<li><a href="'.Utils::createLink('cadastro',array('act'=>'lista','pag'=>0)).'" >'.$item.'</a>';
-                                 echo '<ul class="sub-menu">';
-                                    echo '<li>Jogadores</li>';
-                                    echo '<li>Mestre</li>';
-                                 echo '</ul>';
-                              echo '</li>';
+                               if($login<>'MESTRE'){
+                                    echo '<li><a href="'.Utils::createLink('cadastro',array('act'=>'lista','pag'=>0)).'" >'.$item.'</a>';
+                               }else{
+                                    echo '<li>'.$item;
+                                        echo '<ul class="sub-menu">';
+                                           echo '<a href="'.Utils::createLink('cadastro',array('act'=>'lista','jogador'=>''.$dado->getjogador().'','pag'=>0)).'" ><li>Jogadores</li></a>';
+                                           echo '<a href="'.Utils::createLink('cadastro',array('act'=>'lista','jogador'=>'DOMESTRE','pag'=>0)).'" ><li>do Mestre</li></a>';
+                                        echo '</ul>';
+                               }
+                                echo '</li>';
                            }elseif($item == 'Missão'){
                               echo '<li><a href="'.Utils::createLink($key,array('personagem'=>$personagem)).'" >'.$item.'</a></li>';
                            }else{

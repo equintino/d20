@@ -208,13 +208,18 @@ a:link{
     top: 30%;
   }
 }
-.lista, .ficha{
+.lista, 
+.cad, .cad2,
+.cad3, .cad4, .cad5,
+.cad6, .cad7, .jogador{
     width: 900px;
     height: 850px;
+    clear: left;
+    #border: 0.1px solid black;
 }
 .cad fieldset{
-    width: 900px;
-    height: 550px;
+    margin: auto;
+    height: 500px;
 }
 .cad legend span{
     font-size: 18px;
@@ -1433,7 +1438,8 @@ fieldset legend{
     border: 1px solid gray; 
 }
 #anotacao{
-    #border: 1px solid red;
+    position: relative;
+    left: -550px;
     border-radius: 10px;
     background: rgba(255,255,0,0.5);
     color: black;
@@ -1445,7 +1451,6 @@ fieldset legend{
 }
 .anotacao2{
     position: absolute;
-    #border: 1px solid red;
     top: 120px;
     right: 0;
     width: 200px;
