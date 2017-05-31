@@ -26,13 +26,13 @@ final class index{
             $this->carregaPagina('404', $extra);
         } else {
             // log exception
-            if($_GET['act']=='rel'){
-              echo 'estou aqui';
-              echo Utils::redirect('relMensal',array('mes'=>$_GET['mes'],'act'=>'cad'));die;
-            }else{
+            //if($_GET['act']=='rel'){
+              //echo 'estou aqui';
+              //echo Utils::redirect('relMensal',array('mes'=>$_GET['mes'],'act'=>'cad'));die;
+            //}else{
               header('HTTP/1.1 500 Internal Server Error');
               $this->carregaPagina('500', $extra);
-            }
+            //}
         }
   }
   

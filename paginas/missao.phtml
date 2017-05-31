@@ -91,11 +91,13 @@
 </style>
 <?php  
     @$personagem = $_GET['personagem'];
+    @$login=strtoupper($_COOKIE['login']);
     $dao = new dao();
     $search = new ModelSearchCriteria();
     $search->settabela('personagem');
     $search->setpersonagem($personagem);
     $conferirMissao = $dao->encontrePorPersonagem($search);
+    //print_r($conferirMissao);die;
     
     $emMissao=$conferirMissao->getemMissao();
     if($emMissao==1){
@@ -129,7 +131,6 @@
             $dao=new Dao();
             $search=new ModelSearchCriteria();
             $search->settabela('personagem');
-            @$login=strtoupper($_COOKIE['login']);
             $search->setpersonagem($personagem);
             $lista=$dao->encontre($search);
             foreach($lista as $z);
@@ -139,7 +140,9 @@
                   die;
                }
             echo "<div class='tempo'>";
-               //echo '<iframe scrolling="no" frameborder=0 src="../web/tempo.php?personagem='.$personagem.'&missao="'.$dados->getMISSAO().'></iframe>';
+            if($login=='MESTRE'){
+               echo '<iframe scrolling="no" frameborder=0 src="../web/tempo.php?personagem='.$personagem.'&missao="'.$dados->getMISSAO().'></iframe>';
+            }
                echo '<br><span onclick=sairMissao("'.$personagem.'","'.$id.'") class="sairMissao sairMissao-verde" >Sair da Missão</span>';
             echo '</div>';
            goto missao;
@@ -147,6 +150,7 @@
     }else{
         $search->settabela('tb_missao');
         $search->setpersonagem(null);
+        //print_r($search);die;
         $missoes = $dao->encontre($search);
         foreach($missoes as $lista){
             $listaMissoes[]=$lista->getMISSAO();

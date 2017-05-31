@@ -586,7 +586,7 @@ function trocaAvatar(x){
                             foreach($lista as $keys => $item){
                                //if($x < $keys && $keys < $y){
                                //echo $ids[0];die;
-                                if($login != 'MESTRE'){
+                                if($login != 'MESTRE' || $jogador_ == 'DOMESTRE'){
                                     $pagina = 'missao';
                                 }else{
                                     $pagina = 'ficha';

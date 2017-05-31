@@ -540,7 +540,11 @@
           }elseif($search->getjogador() !== null){
                 $sql="SELECT * FROM ".$search->gettabela()." WHERE jogador=\'".$search->getjogador()."\' AND excluido = \'0\' ";
           }else{
-             $sql = \'SELECT * FROM `\'.$search->gettabela().\'` WHERE excluido = "0" \';
+              if($search->gettabela()==\'personagem\'){
+                $sql = \'SELECT * FROM `\'.$search->gettabela().\'` WHERE jogador != "MESTRE" AND excluido = "0" \';
+              }else{
+                $sql = \'SELECT * FROM `\'.$search->gettabela().\'` WHERE excluido = "0" \';
+              }    
           }
         return $sql;
   }'."\r\n";

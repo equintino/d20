@@ -1439,7 +1439,7 @@ fieldset legend{
 }
 #anotacao{
     position: relative;
-    left: -550px;
+    right: 750px;
     border-radius: 10px;
     background: rgba(255,255,0,0.5);
     color: black;

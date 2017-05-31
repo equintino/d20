@@ -147,7 +147,13 @@
                                }
                                 echo '</li>';
                            }elseif($item == 'Missão'){
-                              echo '<li><a href="'.Utils::createLink($key,array('personagem'=>$personagem)).'" >'.$item.'</a></li>';
+                              echo '<li>'.$item.'';
+                                echo '<ul class="sub-menu">';
+                                    echo '<a href="'.Utils::createLink($key,array('personagem'=>$personagem,'act'=>'nova')).'" ><li>Nova</li></a>';
+                                    echo '<a href="'.Utils::createLink($key,array('personagem'=>$personagem,'act'=>'inicia')).'" ><li>Iniciar</li></a>';
+                                    echo '<a href="'.Utils::createLink($key,array('personagem'=>$personagem,'act'=>'continua')).'" ><li>Continuar</li></a>';
+                                echo '</ul>';
+                              echo '</li>';
                            }else{
                               echo '<li><a href="'.Utils::createLink($key).'" >'.$item.'</a></li>';
                            }
