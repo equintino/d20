@@ -524,7 +524,7 @@ function trocaAvatar(x){
     @$personagem=$_GET['personagem'];
     @$raca=$_GET['raca'];
     @$login=strtoupper($_COOKIE['login']);
-    @$jogador=$_GET['jogador'];
+    @$jogador_=$_GET['jogador'];
     if(!$raca){
         @$raca=$_POST['raca'];
     }
@@ -545,10 +545,11 @@ function trocaAvatar(x){
             $dao=new Dao();
             $search=new ModelSearchCriteria();
             $search->settabela('personagem');
-            if($login<>'MESTRE' || $jogador == 'DOMESTRE'){
+            if($login<>'MESTRE' || $jogador_ == 'DOMESTRE'){
                 $search->setjogador($login);
             }
             $lista=$dao->encontre($search);
+            //print_r($lista);die;
             /// Nivel do Jogador ////
             @$level=$_GET['level'];
             if(!$level){
@@ -570,8 +571,9 @@ function trocaAvatar(x){
         <div class=lista>
             <fieldset>
                <?php
-                  echo '<legend><a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x-1,'z'=>$z-1)).' '.$class.' ><< </a> FICHA DE PERSONAGEM <a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x+1,'contador'=>count($lista),'z'=>$z+1)).' '.$class2.'> >> </a>&nbsp&nbsp LEVEL '.$level.'</legend>';
+                  echo '<legend><a href='.Utils::createLink('cadastro',array('act'=>'lista','jogador'=>''.$jogador_.'','pag'=>$x-1,'z'=>$z-1)).' '.$class.' ><< </a> FICHA DE PERSONAGEM <a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x+1,'jogador'=>''.$jogador_.'','contador'=>count($lista),'z'=>$z+1)).' '.$class2.'> >> </a>&nbsp&nbsp LEVEL '.$level.'</legend>';
                      $ids=array();
+                     //print_r(count($lista));
                      foreach($lista as $item){
                         $ids[]= $item->getid();
                      }
@@ -589,7 +591,7 @@ function trocaAvatar(x){
                                 }else{
                                     $pagina = 'ficha';
                                 }
-                                if($login != 'MESTRE'){
+                                //if($login != 'MESTRE'){
                                     if($item->getid() == $ids[$z]){
                                        echo '<tr><td class=nomes>'.$titulos[0].'</td><td class=nomes2><a href='.Utils::createLink($pagina, array('personagem'=>$item->getpersonagem())).'>'.$item->getpersonagem().'<span class=verFicha><br>(ver ficha)</span></a></td></tr>';
                                        echo '<tr><td class=nomes>'.$titulos[1].'</td><td class=nomes2>'.$item->getraca().'</td></tr>';
@@ -606,7 +608,7 @@ function trocaAvatar(x){
                                        echo '<div class=saudacao>Personagem de '.strtoupper($item->getjogador()).'</div>';
                                        break;
                                     }
-                                }else{
+                                /*}else{
                                     if($item->getjogador() != 'MESTRE'){
                                        echo '<tr><td class=nomes>'.$titulos[0].'</td><td class=nomes2><a href='.Utils::createLink($pagina, array('personagem'=>$item->getpersonagem())).'>'.$item->getpersonagem().'<span class=verFicha><br>(ver ficha)</span></a></td></tr>';
                                        echo '<tr><td class=nomes>'.$titulos[1].'</td><td class=nomes2>'.$item->getraca().'</td></tr>';
@@ -638,7 +640,7 @@ function trocaAvatar(x){
                                        echo '<div class=saudacao>Personagem de '.strtoupper($item->getjogador()).'</div>';
                                        break; 
                                     }
-                                }
+                                }*/
                             }                     
                ?>
             </fieldset>
