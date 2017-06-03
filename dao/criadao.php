@@ -9,6 +9,7 @@
     $variaveis3=array('id','ARMA','ouro','DANO','TIPO','FN','GRUPO','OBS','figura');
     $variaveis4=array('id','ARMA','ouro','personagem','armadura','equipamento','defesa');
     $variaveis5=array('id','DATA','MISSAO','personagem','emMissao','excluido','jogador','ouro','anotacoes','PV','PM');
+    $variaveis6=array('id','vilao','raca','classe','idade','excluido','sexo','avatar','DESCRICAO','FORCA','AGILIDADE','INTELIGENCIA','VONTADE','PV','PM');
     $texto="<?php \r\n class dao{\r\n";
     $texto .= '   '."private ".'$db'." = null;\r\n".
               '   public function __destruct(){'."\r\n".
@@ -110,6 +111,29 @@
         modelMapper::map($model, $row);
         return $model;
    }'."\r\n"; 
+     $texto .= '   public function encontrePorVilao(ModelSearchCriteria $search=null){
+         $result = array();
+         if($search->getvilao()){
+            $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` = \'0\' and `vilao` = \'".$search->getvilao()."\'")->fetch();
+            if (!$row) {
+                return null;
+            }
+            $model = new Model();
+            modelMapper::map($model, $row);
+            $result[$model->getvilao()] = $model;
+         }else{
+            $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` = \'0\' ")->fetchAll();
+            if (!$row) {
+                return null;
+            }
+            foreach($row as $row_){
+                $model = new Model();
+                modelMapper::map($model, $row_);
+                $result[$model->getvilao()] = $model;
+            }
+         }
+        return $model;
+   }'."\r\n"; 
      $texto .= '  public function encontrePorMissao(ModelSearchCriteria $search=null){
            if($search->getpersonagem()){
            $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` = \'0\' and `MISSAO` = \'".$search->getMISSAO()."\' and personagem = \'".$search->getpersonagem()."\'")->fetch();
@@ -159,6 +183,12 @@
             return $this->insert5($model);
         }
         return $this->update5($model);
+   }'."\r\n";
+    $texto .= '   public function grava6(Model $model){
+        if ($model->getid() === null) {
+            return $this->insert6($model);
+        }
+        return $this->update6($model);
    }'."\r\n";
     $texto .= '   public function exclui($id) {
         $sql = \'delete from '.$tabela.' WHERE id = :id\';
@@ -424,6 +454,56 @@
              $texto .= ' WHERE id = :id \';
         return $this->execute5($sql, $model);
    }'."\r\n";
+    $texto .= '   private function insert6(Model $model){
+        date_default_timezone_set("Brazil/East");
+        $now = mktime (date(\'H\'), date(\'i\'), date(\'s\'), date("m")  , date("d"), date("Y"));
+        $model->setid(null);
+        $model->setexcluido(0);
+        /*$model->setemMissao(1);
+        $model->setcriado($now);
+        $model->setmodificado($now); 
+        $this->execute6($this->criaTabela($model->gettabela()), $model); */      
+        $sql = \'INSERT INTO `\'.$model->gettabela().\'` (';
+          $x = 1;
+          foreach($variaveis6 as $item){
+            $texto .= '`'.$item.'`';
+            if(count($variaveis6)>$x){
+             $texto .= ',';
+            }else{
+             $texto .=  ') ';
+            }
+            $x++;
+          }
+        $texto .= 'VALUES (';
+          $x = 1;
+          foreach($variaveis6 as $item){
+            $texto .= ':'.$item;
+            if(count($variaveis6)>$x){
+             $texto .= ',';
+            }else{
+             $texto .=  ')\';'."\r\n";
+            }
+            $x++;
+          }
+        $texto .= "\t".'$model->settabela(\'personagem\');
+        $this->setaMissao($model);
+        return $this->execute6($sql, $model);
+   }'."\r\n";
+    $texto .= '   private function update6(Model $model){
+        date_default_timezone_set("Brazil/East");
+        $now = mktime (date(\'H\'), date(\'i\'), date(\'s\'), date("m")  , date("d"), date("Y"));
+        $sql = \'UPDATE `\'.$model->gettabela().\'` SET';
+           $x=1;
+           foreach($variaveis6 as $item){
+              $texto .= " $item = :$item";
+              if(count($variaveis6)>$x){
+                $texto .= ',';
+              }
+              $x++;
+          }
+             $texto .= ' WHERE id = :id \';
+        return $this->execute6($sql, $model);
+   }'."\r\n";
     $texto .= '   public function setaMissao(Model $model){ 
         if($model->getjogador()){
          $sql = "UPDATE `".$model->gettabela()."` SET emMissao = \'".$model->getemMissao()."\' WHERE jogador = \'".$model->getjogador()."\'";
@@ -482,6 +562,11 @@
         }
         return $model;
    }'."\r\n";
+    $texto .= '   public function execute6($sql,$model){
+        $statement = $this->getDb()->prepare($sql);
+        $this->executeStatement($statement, $this->getParams6($model));
+        return $model;
+   }'."\r\n";
     $texto .= '   private function getParams(Model $model){
         $params = array(';
         foreach($variaveis as $item){
@@ -513,6 +598,13 @@
     $texto .= '   private function getParams5(Model $model){
         $params = array(';
         foreach($variaveis5 as $item){
+            $texto .= "':".$item."'".'=> $model->get'.$item.'(),';
+        }
+    $texto .= ");\r\n\t return".' $params;
+   }'."\r\n";
+    $texto .= '   private function getParams6(Model $model){
+        $params = array(';
+        foreach($variaveis6 as $item){
             $texto .= "':".$item."'".'=> $model->get'.$item.'(),';
         }
     $texto .= ");\r\n\t return".' $params;

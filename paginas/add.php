@@ -348,9 +348,36 @@
          echo '<meta http-equiv="refresh" content="1;URL=../web/index.php?pagina=missao&personagem='. $personagem.'">';
          die;
      }
-     //print_r($_POST);
-     //print_r($search);
-     //print_r(get_class_methods($dao));
-     echo '</font>';
+  }
+  if($act=='cadVilao'){
+     $model->setvilao($_POST['vilao']);
+     $model->setidade($_POST['idade']);
+     $model->setsexo($_POST['sexo']);
+     $model->setDESCRICAO($_POST['descricao']);
+     $model->setraca($_POST['raca']);
+     $model->setclasse($_POST['classe']);
+     $model->setavatar($avatar);
+     $model->settabela('viloes');
+     
+     $dao->grava6($model);
+     header('Location:../web/index.php?pagina=viloes&act=cad2Vilao&vilao='.$model->getvilao().'');
+  }
+  if($act=='cad2Vilao'){
+     @$vilao=$_GET['vilao'];
+     $search->settabela('viloes');
+     $search->setvilao($vilao);
+     $model=$dao->encontrePorVilao($search);
+     
+     $model->setvilao($vilao);
+     $model->setFORCA($_POST['F']);
+     $model->setAGILIDADE($_POST['A']);
+     $model->setINTELIGENCIA($_POST['I']);
+     $model->setVONTADE($_POST['V']);
+     $model->setPV($_POST['PV']);
+     $model->setPM($_POST['PM']);
+     $model->settabela('viloes');
+     
+     $dao->grava6($model);
+     header('Location:../web/index.php?pagina=viloes&act=cad3Vilao&vilao='.$model->getvilao().'');
   }
 ?>

@@ -88,7 +88,7 @@
             echo '<div class=atributo>';
                echo '<table>';
                   echo '<caption class=fichaTitulo>Atributos</caption>';
-                  $tCaracteristicas=array('F'=>'Força','A'=>'Agilidade','I'=>'Inteligência','V'=>'Vontade','PV'=>'Pontos de Vida','PM'=>'Pontos de Magia','PE'=>'Pontos de Experiência');
+                  $tCaracteristicas=array('F'=>'Força','A'=>'Agilidade','I'=>'Inteligência','V'=>'Vontade','PV'=>'Pontos de Vida','PM'=>'Pontos de Maná','PE'=>'Pontos de Experiência');
                   $search->settabela('atributos');
                   $atrib=$dao->encontrePorPersonagem($search);
                   foreach($tCaracteristicas as $key => $item_){

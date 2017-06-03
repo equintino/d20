@@ -67,6 +67,9 @@
 	if (array_key_exists('emMissao', $properties)){
 	  $model->setemMissao($properties['emMissao']);
 	}
+	if (array_key_exists('vilao', $properties)){
+	  $model->setvilao($properties['vilao']);
+	}
 	if (array_key_exists('id_atrib', $properties)){
 	  $model->setid_atrib($properties['id_atrib']);
 	}

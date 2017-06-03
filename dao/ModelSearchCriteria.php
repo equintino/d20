@@ -176,6 +176,14 @@
           $this->emMissao = $emMissao;
           return $this;
       }
+   private $vilao;
+       public function getvilao(){
+        return $this->vilao;
+      }
+      public function setvilao($vilao){
+          $this->vilao = $vilao;
+          return $this;
+      }
    private $id_atrib;
        public function getid_atrib(){
         return $this->id_atrib;

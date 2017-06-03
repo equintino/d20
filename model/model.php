@@ -22,6 +22,7 @@
  private $avatar;
  private $nivel;
  private $emMissao;
+ private $vilao;
  private $id_atrib;
  private $FORCA;
  private $AGILIDADE;
@@ -190,6 +191,12 @@
  }
  public function setemMissao($emMissao ){
 	$this->emMissao=$emMissao;
+ }
+ public function getvilao(){
+	return $this->vilao;
+ }
+ public function setvilao($vilao ){
+	$this->vilao=$vilao;
  }
  public function getid_atrib(){
 	return $this->id_atrib;

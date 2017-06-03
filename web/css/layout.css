@@ -29,6 +29,9 @@ body{
     width: 970px;
     margin: auto;
 }
+.conteudo fieldset{
+    margin: auto;
+}
 .home{
     margin: auto;
     width: 970px;
@@ -68,17 +71,17 @@ body{
     /*overflow: hidden;*/ 
 }
 .sairMissao{
-    margin-top: 5px;
-    float: right;
-    color: white;
-    font-weight: 700;
-}
-.sairMissao{
     padding: 0 4px;
-    position: relative;
+    position: absolute;
+    top: 90px;
+    right: 5px;
     border: none;
     cursor: pointer;
     border-radius: 15px;
+    color: white;
+    font-weight: 700;
+    width: 110px;
+    text-align: center;
 }
 .sairMissao-verde{
     background-color: #007c00;
@@ -88,11 +91,11 @@ body{
     background-color: #006000;
 }
 .sairMissao-verde:active{
-    position: relative;
-    top: 5px;
+    top: 95px;
     box-shadow: none;
 }
-.lista{
+fieldset{
+    border-radius: 5px;
 }
 .lista fieldset{
     height: 300px;
@@ -232,7 +235,7 @@ a:link{
     margin: auto;
     height: 690px;
 }
-.cad2 .botao, .cad4 .botao, .cad5 .botao, .cad6 .botao, .cad7 .botao, .zera, .ouro{
+.cad2 .botao, .cad4 .botao, .cad5 .botao, .cad6 .botao, .cad7 .botao, .zera, .ouro, .vilao .botao{
     font-size: 16px;
     padding: 0 4px;
     position: relative;
@@ -256,11 +259,11 @@ a:link{
     margin-top: 5px;
     font-size: 10px;
 }
-.cad2 .botao-verde, .cad4 .botao-verde, .cad5 .botao-verde, .cad6 .botao-verde, .cad7 .botao-verde{
+.cad2 .botao-verde, .cad4 .botao-verde, .cad5 .botao-verde, .cad6 .botao-verde, .cad7 .botao-verde, .vilao .botao-verde{
     background-color: #007c00;
     box-shadow: 0 5px 0 #003f00;
 }
-.cad2 .botao-verde:hover, .cad4 .botao-verde:hover, .cad5 .botao-verde:hover, .cad6 .botao-verde:hover, .cad7 .botao-verde:hover, .zera:hover, .ouro:hover{
+.cad2 .botao-verde:hover, .cad4 .botao-verde:hover, .cad5 .botao-verde:hover, .cad6 .botao-verde:hover, .cad7 .botao-verde:hover, .zera:hover, .ouro:hover, .vilao .botao-verde:hover{
     background-color: #006000;
 }
 .cad2 .botao-verde:active{
@@ -274,7 +277,7 @@ a:link{
     position: relative;
     box-shadow: 0 5px 0 #003f00;
 }
-.zera:active, .ouro:active{   
+.zera:active, .ouro:active, .vilao .botao:active{   
     position: relative;
     top: 5px;
     box-shadow: none;  
@@ -1456,4 +1459,42 @@ fieldset legend{
     width: 200px;
     height: 250px;
     z-index: 7px; 
+}
+.cadVilao{
+    position: relative;
+    right: 20px;
+    top: -300px;
+    clear: both;
+    float: right;
+}
+.vilao label{
+    font-size: 10px;
+}
+.vilao .vilao1{
+    margin: 0 40px;
+}
+.vilao table{
+    margin: 30px 40px;
+}
+.figVilao{
+    float: right;
+    top: -20px;
+    position: relative;
+    margin-right: 20px;
+}
+.atributo label{
+    font-size: 20px;
+}
+.descricaoVilao{
+}
+.textoVilao{
+    font-family: 'Satisfy', cursive;
+    font-size: 20px;
+    text-justify: auto;
+    height: 130px;
+    width: 280px;
+    overflow-y: auto;
+}
+.vilao th{   
+    font-family: 'Indie Flower', cursive;
 }

@@ -1,89 +1,3 @@
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<script>
-    menos=0;
-    PVResta=0;
-    PMResta=0;
-    ouro1=0;
-    ouro2=0;
-    function setaVariaveis($variaveis){
-        missao=$variaveis;
-        return missao;
-    }
-    function calcDefesa($def){
-        var x = $def;
-        document.getElementById('def').innerHTML = x;
-    }
-    function nivel(nivel){
-        var nivel;
-        document.getElementById('nivel').innerHTML=nivel;
-    }
-    function mais(id){
-        var id;
-        var zero;
-        if(id == 'PVResta'){
-            PVResta++;
-            menos=PVResta;
-        }else if(id == 'PMResta'){
-            PMResta++;
-            menos=PMResta; 
-        }else if(id == 'ouro1'){
-            ouro1++;
-            menos=ouro1; 
-        }else if(id == 'ouro2'){
-            ouro2++;
-            menos=ouro2; 
-        }
-        if(menos < 10){
-           zero='0';
-        }else{
-           zero=null;
-        }
-            document.getElementById(id).innerHTML=zero+menos;
-    }
-    function zera(id){
-        var id;
-        if(id == 'PVResta'){
-            PVResta='00';
-            menos=PVResta;
-        }else if(id == 'PMResta'){
-            PMResta='00';
-            menos=PMResta; 
-        }
-        if(id == 'ouro'){
-            ouro1='00'; 
-            document.getElementById('ouro1').innerHTML=ouro1;
-            ouro2='00';
-            document.getElementById('ouro2').innerHTML=ouro2;
-        }else{
-            document.getElementById(id).innerHTML=menos;
-         }
-    }
-    function sairMissao($personagem,id){
-        var id;
-        var personagem = $personagem;
-        var anotacoes = document.getElementById('anotacoes').value;
-        var x=confirm('Deseja realmente sair?');
-        if(x){
-            window.location.assign('sair.php?act=missao&PVResta='+PVResta+'&PMResta='+PMResta+'&ouro1='+ouro1+'&ouro2='+ouro2+'&anotacoes='+anotacoes+'&personagem='+personagem+'&id='+id+'&missao='+missao+'');
-        }
-    }
-    
-   $(document).ready(function(){
-    $('.anotacao2').hide();
-
-    $('#anotacao').click(function(event){
-        event.preventDefault();
-        $(".anotacao2").show("slow");
-        //$(".ocultar").show("slower");
-    });
-
-    $('.anotacao2').dblclick(function(event){
-        event.preventDefault();
-        $(".anotacao2").hide("slow");
-        //$(".ocultar").hide("slower")
-    });
- });
-</script>
 <style>
 	#cabecalho{
 		visibility: hidden;
@@ -97,7 +11,6 @@
     $search->settabela('personagem');
     $search->setpersonagem($personagem);
     $conferirMissao = $dao->encontrePorPersonagem($search);
-    //print_r($conferirMissao);die;
     
     $emMissao=$conferirMissao->getemMissao();
     if($emMissao==1){
@@ -143,7 +56,7 @@
             if($login=='MESTRE'){
                echo '<iframe scrolling="no" frameborder=0 src="../web/tempo.php?personagem='.$personagem.'&missao="'.$dados->getMISSAO().'></iframe>';
             }
-               echo '<br><span onclick=sairMissao("'.$personagem.'","'.$id.'") class="sairMissao sairMissao-verde" >Sair da Missão</span>';
+               echo '<span onclick=sairMissao("'.$personagem.'","'.$id.'") class="sairMissao sairMissao-verde" >Sair da Missão</span>';
             echo '</div>';
            goto missao;
         }
@@ -189,12 +102,12 @@
     $dadosMissao=$dao->encontrePorPersonagem($search);
 ?>
 <div  class="conteudo" >
-            <div class="dado">    
-                <iframe scrolling="no" frameborder=0 src="../web/dado.php"></iframe>
-            </div>
-        <span id=anotacao>ANOTAÇÕES</span>
-    <div class="jogador">
-        <fieldset class="cadficha"><legend>Missão: <?= $missao; ?> &nbsp&nbsp LEVEL <span id=nivel></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</legend><div class="anotacao2"><textarea id="anotacoes" placeholder="Faça aqui suas anotações" name="anotacoes" autofocus type="text" rows="15" cols="22"><?php echo $dadosMissao->getanotacoes().' '; ?></textarea></div>
+   <div class="dado">    
+      <iframe scrolling="no" frameborder=0 src="../web/dado.php"></iframe>
+   </div>
+   <span id=anotacao>ANOTAÇÕES</span>
+   <div class="jogador">
+      <fieldset class="cadficha"><legend>Missão: <?= $missao; ?> &nbsp&nbsp LEVEL <span id=nivel></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</legend><div class="anotacao2"><textarea id="anotacoes" placeholder="Faça aqui suas anotações" name="anotacoes" autofocus type="text" rows="15" cols="22"><?php echo $dadosMissao->getanotacoes().' '; ?></textarea></div>
             <div class="tabEscAvaMot" >
             <div class=tabelaMissao>
                 <table cellspacing=0 border=1>
