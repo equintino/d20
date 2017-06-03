@@ -515,7 +515,7 @@ function mudaImagem2(){
    document.getElementById("aqui").innerHTML=x;
    document.cookie = "avatar="+link+"; path=/";
    nome++;
-   if(nome > 18){
+   if(nome > 26){
        nome=1
    }
 }

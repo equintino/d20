@@ -58,7 +58,7 @@
         <div class=lista>
             <fieldset>
                <?php
-                  echo '<legend><a href='.Utils::createLink('cadastro',array('act'=>'lista','jogador'=>''.$jogador_.'','pag'=>$x-1,'z'=>$z-1)).' '.$class.' ><< </a> FICHA DE PERSONAGEM <a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x+1,'jogador'=>''.$jogador_.'','contador'=>count($lista),'z'=>$z+1)).' '.$class2.'> >> </a>&nbsp&nbsp LEVEL '.$level.'</legend>';
+                  echo '<legend><a href='.Utils::createLink('cadastro',array('act'=>'lista','jogador'=>''.$jogador_.'','pag'=>$x-1,'z'=>$z-1)).' '.$class.' ><img class=seta height=25px src=imagens/esquerda.png /> </a> FICHA DE PERSONAGEM <a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x+1,'jogador'=>''.$jogador_.'','contador'=>count($lista),'z'=>$z+1)).' '.$class2.'> <img class=seta height=25px src=imagens/direita.png /> </a>&nbsp&nbsp LEVEL '.$level.'</legend>';
                      $ids=array();
                      //print_r(count($lista));
                      foreach($lista as $item){

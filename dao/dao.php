@@ -109,7 +109,7 @@
             }
             $model = new Model();
             modelMapper::map($model, $row);
-            $result[$model->getvilao()] = $model;
+            return $model;
          }else{
             $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` = '0' ")->fetchAll();
             if (!$row) {
@@ -118,10 +118,10 @@
             foreach($row as $row_){
                 $model = new Model();
                 modelMapper::map($model, $row_);
-                $result[$model->getvilao()] = $model;
+                $result[$model->getid()] = $model;
             }
          }
-        return $model;
+         return $result;
    }
   public function encontrePorMissao(ModelSearchCriteria $search=null){
            if($search->getpersonagem()){

@@ -1473,8 +1473,15 @@ fieldset legend{
 .vilao .vilao1{
     margin: 0 40px;
 }
-.vilao table{
-    margin: 30px 40px;
+.vilao .atributo{
+    margin: 20px 40px;
+    float: left;
+    top: -10px;
+    width: 300px;
+}
+.vilao .bnt{
+    clear: both;
+    float: left;
 }
 .figVilao{
     float: right;
@@ -1497,4 +1504,8 @@ fieldset legend{
 }
 .vilao th{   
     font-family: 'Indie Flower', cursive;
+}
+.seta:hover{
+    position: relative;
+    top: 2px;
 }
