@@ -111,7 +111,7 @@
                               if($item=='sexo'){
                                 echo '<tr><td align=right> '.$keys.': </td>';
                                 echo '<td><input onchange="functionSexoClasse()" type=radio name=sexo value=M> MASCULINO';
-                                echo ' <input onchange="functionSexoClasse()" type=radio name=sexo value=F> FEMININO</td></tr>';
+                                echo ' <input onchange="functionSexoClasse()" type=radio name=sexo value=F> FEMININO</td>';
                               }elseif($item=='raca'){
                                 echo '<tr><td align=right> '.$keys.': </td>';
                                 echo '<td><select id="mySelect" name=raca onchange="myFunction()">';
@@ -120,7 +120,7 @@
                                     echo '<option value=anao>ANÃO</option>';
                                     echo '<option value=elfo>ELFO</option>';
                                     echo '<option value=halfling>HALFLING</option>';
-                                echo '</select><span id=trocaAvatar onclick=mudaImagem('.$max.')></span></td></tr>';
+                                echo '</select>';
                             }elseif($item=='classe'){
                                 echo '<tr><td align=right> '.$keys.': </td>';
                                     echo '<td><select name=classe id="myClasse" onchange="functionSexoClasse()" >';
@@ -155,8 +155,12 @@
                             }else{
                                 echo "<tr><td align=\"right\"> $keys: </td><td><input type=\"text\" name=\"".$item."\" size=\"40\" / required></td></tr>";
                             }
-                        }?>
+                        }
+                        ?>
                     </table>
+                     <div class="avatarPersonagem">
+                         <label>Tocar Avatar </label><span id=trocaAvatar class=trocaAvatar onclick=mudaImagem('.$max.')>&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+                     </div>
                     <div class='bnt_'>
                         <input type="reset" value="LIMPA" class='botao2 botao-verde2'>
                         <input type="submit" value="GRAVA" class='botao botao-verde'>

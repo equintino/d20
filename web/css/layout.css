@@ -218,7 +218,7 @@ a:link{
     width: 900px;
     height: 850px;
     clear: left;
-    #border: 0.1px solid black;
+    #border: 1px solid black;
 }
 .cad fieldset{
     margin: auto;
@@ -235,7 +235,7 @@ a:link{
     margin: auto;
     height: 690px;
 }
-.cad2 .botao, .cad4 .botao, .cad5 .botao, .cad6 .botao, .cad7 .botao, .zera, .ouro, .vilao .botao{
+.cad2 .botao, .cad4 .botao, .cad5 .botao, .cad6 .botao, .cad7 .botao, .zera, .ouro, .vilao .botao, .missao .botao{
     font-size: 16px;
     padding: 0 4px;
     position: relative;
@@ -259,11 +259,11 @@ a:link{
     margin-top: 5px;
     font-size: 10px;
 }
-.cad2 .botao-verde, .cad4 .botao-verde, .cad5 .botao-verde, .cad6 .botao-verde, .cad7 .botao-verde, .vilao .botao-verde{
+.cad2 .botao-verde, .cad4 .botao-verde, .cad5 .botao-verde, .cad6 .botao-verde, .cad7 .botao-verde, .vilao .botao-verde, .missao .botao-verde{
     background-color: #007c00;
     box-shadow: 0 5px 0 #003f00;
 }
-.cad2 .botao-verde:hover, .cad4 .botao-verde:hover, .cad5 .botao-verde:hover, .cad6 .botao-verde:hover, .cad7 .botao-verde:hover, .zera:hover, .ouro:hover, .vilao .botao-verde:hover{
+.cad2 .botao-verde:hover, .cad4 .botao-verde:hover, .cad5 .botao-verde:hover, .cad6 .botao-verde:hover, .cad7 .botao-verde:hover, .zera:hover, .ouro:hover, .vilao .botao-verde:hover, .missao .botao-verde:hover{
     background-color: #006000;
 }
 .cad2 .botao-verde:active{
@@ -277,7 +277,7 @@ a:link{
     position: relative;
     box-shadow: 0 5px 0 #003f00;
 }
-.zera:active, .ouro:active, .vilao .botao:active{   
+.zera:active, .ouro:active, .vilao .botao:active, .missao .botao:active{   
     position: relative;
     top: 5px;
     box-shadow: none;  
@@ -1508,4 +1508,53 @@ fieldset legend{
 .seta:hover{
     position: relative;
     top: 2px;
+}
+.cadMissao fieldset{
+    margin: auto;
+}
+.botaoVilao, .trocaAvatar{
+    background: url('../imagens/botaoVermelho.png');
+    background-size: 100% 100%;
+}
+.botaoVilao:hover, .trocaAvatar:hover{
+    cursor: pointer;
+}
+.botaoVilao:active, .trocaAvatar:active{
+    background: url('../imagens/botaoVermelho3.png');
+    background-size: 100% 100%;
+}
+#avatarVilao{
+    position: relative;
+    float: right;
+    right: -10px;
+    margin-top: -280px;
+    z-index: 1px;
+}
+#seletor {
+   -webkit-touch-callout: none;
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+.avatarPersonagem{
+    text-align: center;
+    display: none;
+}
+.avatarPersonagem label{
+    font-size: 15px;
+    font-family: 'Architects Daughter', cursive;
+    font-weight: 100;
+}
+.missaoMestre{
+    width: 980px;
+    margin: auto;
+}
+.missaoMestre table th{
+    background: green;
+    color: white;
+}
+.avatarVilaoMestre{
+    float: right;
 }

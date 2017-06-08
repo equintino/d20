@@ -8,7 +8,7 @@
    $dados=$dao->encontrePorVilao($search);
 ?>  
 <div class="conteudo vilao">
-   <fieldset>
+   <fieldset id=seletor>
       <?php if($act == 'novo'): ?>
       <legend>CADASTRO DE VILÕES</legend>     
          <form class="font_1" id="cadastro" action="../paginas/add.php?act=cadVilao" method="POST">
@@ -36,7 +36,7 @@
                      echo "<tr><td align=\"right\"> $keys: </td><td><input type=\"text\" name=\"".$item."\" size=\"20\" / required></td></tr>";
                   }
                }
-               echo "<tr><td><span id=trocaAvatar onclick=mudaImagem2()></span></td></tr>";
+               echo "<tr><td>Avatar <span class=trocaAvatar onclick=mudaImagem2()>&nbsp&nbsp&nbsp&nbsp&nbsp</span></td></tr>";
             ?>
             </table>
             <div>

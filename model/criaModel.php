@@ -9,7 +9,7 @@
     $variaveis5=array('REQUISITOS','MANA','DESCRICAO');
     $variaveis6=array('armadura','defesa','item','equipamento');
     $variaveis7=array('DIA','TEMPMAX','TEMPMIN','ESTACAO','LUAS','figura2','figura3');
-    $variaveis8=array('DATA','MISSAO','anotacoes');
+    $variaveis8=array('DATA','MISSAO','anotacoes','objetivo','local','recompensa','falha','como');
     
     $texto="<?php \r\n class Model{\r\n";
     foreach($variaveis as $item){

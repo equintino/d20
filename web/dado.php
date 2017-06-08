@@ -197,7 +197,7 @@ if(@!$dado){
  ?>
 </head>
 <body>
-<div class="conteudo">
+<div class="conteudo" id=seletor>
    <button title="Aperte e segure para girar o dado." onmousedown="mostrarDado()" onmouseup="valor()">Segure para girar</button>
 <center>
     <form action="dado.php?act=1" method="post">

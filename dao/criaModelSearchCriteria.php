@@ -7,7 +7,7 @@
     $variaveis3=array('ARMA','ouro','DANO','TIPO','FN','GRUPO','OBS','figura');
     $variaveis4=array('BONUS_ATRIBUTO','PROFICIENCIA');
     $variaveis5=array('armadura','defesa','item','equipamento');
-    $variaveis6=array('DATA','MISSAO','anotacoes');
+    $variaveis6=array('DATA','MISSAO','anotacoes','objetivo','local','recompensa','falha','como');
     
     $texto="<?php \r\n class ModelSearchCriteria{\r\n";
     foreach($variaveis as $item){

@@ -65,6 +65,14 @@
             window.location.assign('sair.php?act=missao&PVResta='+PVResta+'&PMResta='+PMResta+'&ouro1='+ouro1+'&ouro2='+ouro2+'&anotacoes='+anotacoes+'&personagem='+personagem+'&id='+id+'&missao='+missao+'');
         }
     }
+    function sairMissaoMestre(missaoMestre){
+        //alert(missaoMestre);
+        //var anotacoes = document.getElementById('anotacoes').value;
+        var x=confirm('Deseja realmente sair?');
+        if(x){
+            window.location.assign('sair.php?act=missao&&missao='+missaoMestre+'');
+        }
+    }
     
    $(document).ready(function(){
     $('.anotacao2').hide();
@@ -80,6 +88,5 @@
         $(".anotacao2").hide("slow");
         //$(".ocultar").hide("slower")
     });
- });
-
+ }); 
 

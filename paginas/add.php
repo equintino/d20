@@ -314,6 +314,9 @@
 	die;
   }
   if($act=='missao'){
+     if($login=='MESTRE'){
+         goto missaoMestre;
+     }
      echo '<font color=white>'; 
      $search->settabela('missao');
      $search->setMISSAO($missao);
@@ -380,4 +383,52 @@
      $dao->grava6($model);
      header('Location:../web/index.php?pagina=viloes&act=cad3Vilao&vilao='.$model->getvilao().'');
   }
+  if($act == 'cadMissao'){
+     $avatar=($_COOKIE['avatar']);
+     $data=$_POST['ano'].'-'.$_POST['mes'].'-'.$_POST['dia'].' '.$_POST['hora'].':'.$_POST['min'].':'.'00';
+     $missao=$_POST['missao'];
+     $descricao=$_POST['descricao'];
+     $objetivo=$_POST['objetivo'];
+     $local=$_POST['local'];
+     $vilao=$_POST['vilao'];
+     $recompensa=$_POST['recompensa'];
+     $falha=$_POST['falha'];
+     $como=$_POST['como'];
+     
+     $search->setMISSAO($missao);
+     $search->settabela('tb_missao');
+     $verificar=$dao->encontrePorMissao($search);
+        if($verificar){
+          echo '<div class=add>';
+          echo '<h3>MISSÃO <font color=red size=15px>'.$search->getMISSAO().'<br></font> JÁ EXISTE!</h3>';
+          echo '<button class=\'continua continua-verde\' onclick=history.go(-1);>Voltar</button>';
+          echo '</div>';
+          die;
+        }else{
+     
+     $model->setMISSAO($missao);
+     $model->settabela('tb_missao');
+     $model->setDESCRICAO($descricao);
+     $model->setDATA($data);
+     $model->setobjetivo($objetivo);
+     $model->setlocal($local);
+     $model->setvilao($vilao);
+     $model->setrecompensa($recompensa);
+     $model->setfalha($falha);
+     $model->setcomo($como);
+     $model->setavatar($avatar);
+     
+     $dao->grava7($model);
+     
+     header('Location:../web/index.php');
+     die;
+     }
+  }
+  missaoMestre:
+     $model->settabela('tb_missao');
+     $model->setMISSAO($missao);
+     $model->setemMissao(1);
+     
+     $dao->setaMissao($model);
+   header('Location:../web/index.php?pagina=missao&missao='.$missao.'');
 ?>

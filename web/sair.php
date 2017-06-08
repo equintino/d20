@@ -8,17 +8,10 @@
    @$personagem = $_GET['personagem'];
    @$login = strtoupper($_COOKIE['login']);
    @$act = $_GET['act'];
-   
-   if(@$login=='MESTRE'){
-      goto sair;
-   }
-   //print_r($login);die;
-   
    $dao = new dao();
    $search = new ModelSearchCriteria();
    $model = new model();
-      
-   //print_r($model);die;
+   
    $data = $_COOKIE['ano'].'-'.$_COOKIE['mes'].'-'.$_COOKIE['dia'].' '.$_COOKIE['hora'].':'.$_COOKIE['min'].':'.$_COOKIE['seg'];
    
    if(key_exists('PVResta',$_GET)){
@@ -40,7 +33,11 @@
        $model->setDATA($data);
    }
    if(key_exists('missao', $_GET)){
-       $model->setMISSAO($_GET['missao']);
+      $missao = $_GET['missao'];
+      $model->setMISSAO($missao);
+   }
+   if(@$login=='MESTRE'){
+      goto sair;
    }
    
    $model->setjogador($login);
@@ -117,11 +114,22 @@
         $dao->grava5($model);
         //print_r($model);die;
    //}*/
+   sair:
+      //print_r([$missao,$data]);
+      //print_r([$_GET,$_POST]);
    if(@$act=='missao'){
+      $search->setMISSAO($missao);
+      $search->settabela('tb_missao');
+      $model=$dao->encontrePorMissao($search);
+      $model->setDATA($data);
+      $model->setemMissao(0);
+      $model->settabela('tb_missao');
+      //print_r($model);die;
+      $dao->grava7($model);
+      //print_r([$model]);die;
       header("Location:index.php");
       die;
    }
-   sair:
    header("Location:../index.html");
    //print_r($emMissao);die;
 ?>

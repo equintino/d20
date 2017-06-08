@@ -1,13 +1,50 @@
 <style>
-	#cabecalho{
-		visibility: hidden;
-	}
+   #cabecalho{
+      visibility: hidden;
+   }
 </style>
+<script>
+   i=0;
+function botaoVilao(avatares){
+    var avatares;
+    if(!avatares[i]){
+       i=0;
+    }
+    x='<img height=200px src=\'../web/'+avatares[i]+'\' />';
+    document.getElementById('avatarVilao').innerHTML=x;
+    i++; 
+    document.cookie="avatar="+avatares[i]+";path=/";
+}
+</script>
+<body id=seletor>
 <?php  
     @$personagem = $_GET['personagem'];
     @$login=strtoupper($_COOKIE['login']);
+    @$act=$_GET['act'];
+    @$missaoMestre=$_GET['missao'];
     $dao = new dao();
     $search = new ModelSearchCriteria();
+    
+    if($act=='nova'){
+       echo '<style>
+               #cabecalho{
+                       visibility: visible;
+               }
+            </style>';
+       goto nova;
+    }
+    if($act=='inicia'){
+       echo '<style>
+               #cabecalho{
+                       visibility: visible;
+               }
+            </style>';
+       goto inicia;
+    }
+    if($missaoMestre){
+       goto missaoMestre;
+    }
+    
     $search->settabela('personagem');
     $search->setpersonagem($personagem);
     $conferirMissao = $dao->encontrePorPersonagem($search);
@@ -46,6 +83,7 @@
             $search->settabela('personagem');
             $search->setpersonagem($personagem);
             $lista=$dao->encontre($search);
+            //print_r($dados->getMISSAO());die;
             foreach($lista as $z);
                $id=$z->getid();
                $titulos=array('PERSONAGEM','RAÇA','CLASSE','TENDÊNCIA1','TENDÊNCIA2');
@@ -54,7 +92,7 @@
                }
             echo "<div class='tempo'>";
             if($login=='MESTRE'){
-               echo '<iframe scrolling="no" frameborder=0 src="../web/tempo.php?personagem='.$personagem.'&missao="'.$dados->getMISSAO().'></iframe>';
+               echo '<iframe scrolling="no" frameborder=0 src="../web/tempo.php?personagem='.$personagem.'&missao='.$dados->getMISSAO().'"></iframe>';
             }
                echo '<span onclick=sairMissao("'.$personagem.'","'.$id.'") class="sairMissao sairMissao-verde" >Sair da Missão</span>';
             echo '</div>';
@@ -333,5 +371,109 @@
             </div>
             </div>
         </fieldset>
+      <?php 
+      nova: 
+      $search->settabela('viloes');
+      $viloes=$dao->encontre($search);
+      $avatares=null;
+      foreach($viloes as $vilao){
+         $avatares .='\''.$vilao->getavatar().'\','; 
+      }
+      echo '<script> avatares = new Array('.$avatares.');</script>';
+      ?>
+      <div class="cadMissao">
+      <fieldset>
+         <legend class="cadMissao">Cadastro de Missões</legend>
+         <form action="../paginas/add.php?act=cadMissao" method="POST" id="cadMissao" >
+            <table>
+                <tr><td align="right"><label>Dia: </label></td><td width="1"><input required type="text" maxlength="2" size="1" name="dia"/></td><td align="right" width="1"><label>Mês: </label></td><td width="1"><input required maxlength="2" type="text" size="1" name="mes"/></td><td align="right" width="1"><label>Ano: </label></td><td><input required type="text" maxlength="4" size="2" name="ano"/><td align="right" width="1"></td><td><input required type="text" maxlength="2" size="1" name="hora"/> :<td align="right" width="1"></td><td><input required type="text" maxlength="2" size="1" name="min"/>hs</td></tr>
+                <tr><td align="right"><label>Missão: </label></td><td colspan="6"><input required type="text" name="missao" size="50"/></td></tr>
+                <tr><td align="right"><label>Objetivo: </label></td><td colspan="6"><input required type="text" name="objetivo" size="50"/></td></tr>
+                <tr><td align="right"><label>Local: </label></td><td colspan="6"><input required type="text" name="local" size="50"/></td></tr>
+                <tr><td align="right"><label>Vilão: </label></td><td colspan="4"><input required type="text" name="vilao" /></td><td id=seletor>Escolher Vilão <span class="botaoVilao" id=seletor onclick="botaoVilao(avatares)">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span></td></tr>
+                <tr><td align="right"><label>Recompensa: </label></td><td colspan="5"><input required type="text" name="recompensa" size="50"/></td></tr>
+                <tr><td align="right"><label>Falha: </label></td><td colspan="5"><input required type="text" name="falha" size="50"/></td></tr>
+                <tr><td align="right"><label>Como completar a missão: </label></td><td colspan="5"><input required type="text" name="como" size="50"/></td></tr>
+                <tr><td align="right"><label>Detalhes: </label></td><td colspan="5"><textarea name="descricao" placeholder="detalhe aqui a missão" cols="39" rows="5"></textarea></td></tr>
+            </table>
+            <div class="missao">
+               <input type="reset" value="LIMPA" class='botao botao-verde'>
+               <input type="submit" value="GRAVA" class='botao botao-verde'>
+            </div>
+             <span id="avatarVilao"></span>
+         </form>
+      </fieldset>
+      </div>
+       <?php 
+         die;
+         inicia: 
+       ?>
+      <div class="iniciaMissao">
+         <?php
+         $search->settabela('tb_missao');
+         $dados = $dao->encontre($search); 
+         if($dados){ 
+            foreach($dados as $dado){
+               $missoes[]=$dado->getMISSAO();
+            }
+            echo '<form action=\'../paginas/add.php?act=missao\' method=POST>';
+               echo '<div class=quadro>';
+                  echo 'Selecione uma das misões:<br>';
+                  echo '<select required name=missao>';
+                     echo '<option value=""></option>';
+                     for($x=0;$x<count($dados);$x++){
+                        if(count($dados)==1){
+                           echo '<option selected value=\''.$missoes[$x].'\'>'.$missoes[$x].'</options>'; 
+                           }else{
+                              echo '<option value=\''.$missoes[$x].'\'>'.$missoes[$x].'</options>';
+                           }
+                     }
+                     echo '</select>';
+                     echo '<br>';
+                     echo '<span class="zera ok" onclick=history.go(-1) >VOLTAR</span>';
+                     echo '<button class="zera ok">OK</button>';
+               echo '</div>';
+            echo '</form>';
+            die;
+         }else{
+            echo 'Nenhuma missão cadastrada.';
+            echo '<span class="zera ok" onclick=history.go(-1) >VOLTAR</span>';
+         }
+        ?>
+      </div>
+       <?php missaoMestre: ?>
+      <div class="missaoMestre">
+          <?php
+          $search->settabela('tb_missao');
+          $search->setMISSAO($missaoMestre);
+          $dadosMissao=$dao->encontrePorMissao($search);
+          echo '<script>var missaoMestre=\''.$missaoMestre.'\';</script>';
+            echo "<div class='tempo'>";
+               echo '<iframe scrolling="no" frameborder=0 src="../web/tempo.php?&missao='.$missaoMestre.'"></iframe>';
+               echo '<span onclick=sairMissaoMestre(missaoMestre); class="sairMissao sairMissao-verde" >Sair da Missão</span>';
+            echo '</div>';
+          ?>
+         <div class="dado">    
+            <iframe scrolling="no" frameborder=0 src="../web/dado.php"></iframe>
+         </div>
+         <span id=anotacao>ANOTAÇÕES</span>
+      <fieldset class="cadficha"><legend>Missão: <?= $missaoMestre; ?> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</legend><div class="anotacao2"><textarea id="anotacoes" placeholder="Faça aqui suas anotações" name="anotacoes" autofocus type="text" rows="15" cols="22"><?php echo $dadosMissao->getanotacoes().' '; ?></textarea></div>
+          <?php
+            echo '<table cellspacing=0 border=1>';
+            echo '<tr><th>Descrição:</th><th>Objetivo</th><th>Local</th><th>Vilão</th><th>Recompensa</th><th>Falha</th><th>Dica</th></tr>';
+            echo '<tr><td>'.$dadosMissao->getDESCRICAO().'</td><td>'.$dadosMissao->getobjetivo().'</td><td>'.$dadosMissao->getlocal().'</td><td>'.$dadosMissao->getvilao().'</td><td>'.$dadosMissao->getrecompensa().'</td><td>'.$dadosMissao->getfalha().'</td><td>'.$dadosMissao->getcomo().'</td></tr>';
+            echo '</table>';
+            echo '<div class=avatarVilaoMestre><img height=180 src=\''.$dadosMissao->getavatar().'\'/></div>';
+            echo '<div class=personagensMestre>Personagens do mestre: ';
+            $search->settabela('missao');
+            $search->setjogador('MESTRE');
+            $personagensMestre=$dao->encontre2($search);
+            print_r($personagensMestre);
+            echo '</div>';
+            
+          ?>
+      </fieldset>
+      </div>
    </div>
 </div>
+</body>

@@ -55,6 +55,7 @@
             document.getElementById('aqui').innerHTML='<img height=200px src='+link+' />';
             document.cookie = "avatar="+link+"; path=/";
         }
+        document.querySelector('.avatarPersonagem').style.display='block';
     }
   function myFunction(){
         idavatar=1;
@@ -501,12 +502,12 @@ function mudaImagem(max){
 }
 function trocaAvatar(x){
     var x;
-    var estilo = document.querySelector('#trocaAvatar').style;
+    //var estilo = document.querySelector('#trocaAvatar').style;
     estilo.cursor = 'pointer';
     estilo.color = 'red';
     estilo.fontWeight = '700';
     estilo.textShadow = '0 2px 0 black';
-    document.getElementById('trocaAvatar').innerHTML = x;
+    //document.getElementById('trocaAvatar').innerHTML = x;
 }
 nome=1;
 function mudaImagem2(){

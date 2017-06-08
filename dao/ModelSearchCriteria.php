@@ -400,4 +400,44 @@
           $this->anotacoes = $anotacoes;
           return $this;
       }
+   private $objetivo;
+       public function getobjetivo(){
+        return $this->objetivo;
+      }
+      public function setobjetivo($objetivo){
+          $this->objetivo = $objetivo;
+          return $this;
+      }
+   private $local;
+       public function getlocal(){
+        return $this->local;
+      }
+      public function setlocal($local){
+          $this->local = $local;
+          return $this;
+      }
+   private $recompensa;
+       public function getrecompensa(){
+        return $this->recompensa;
+      }
+      public function setrecompensa($recompensa){
+          $this->recompensa = $recompensa;
+          return $this;
+      }
+   private $falha;
+       public function getfalha(){
+        return $this->falha;
+      }
+      public function setfalha($falha){
+          $this->falha = $falha;
+          return $this;
+      }
+   private $como;
+       public function getcomo(){
+        return $this->como;
+      }
+      public function setcomo($como){
+          $this->como = $como;
+          return $this;
+      }
 }

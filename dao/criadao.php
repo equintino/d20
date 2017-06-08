@@ -10,6 +10,7 @@
     $variaveis4=array('id','ARMA','ouro','personagem','armadura','equipamento','defesa');
     $variaveis5=array('id','DATA','MISSAO','personagem','emMissao','excluido','jogador','ouro','anotacoes','PV','PM');
     $variaveis6=array('id','vilao','raca','classe','idade','excluido','sexo','avatar','DESCRICAO','FORCA','AGILIDADE','INTELIGENCIA','VONTADE','PV','PM');
+    $variaveis7=array('id','MISSAO','DESCRICAO','excluido','DATA','emMissao','objetivo','local','vilao','recompensa','falha','como','avatar','anotacoes');
     $texto="<?php \r\n class dao{\r\n";
     $texto .= '   '."private ".'$db'." = null;\r\n".
               '   public function __destruct(){'."\r\n".
@@ -189,6 +190,12 @@
             return $this->insert6($model);
         }
         return $this->update6($model);
+   }'."\r\n";
+    $texto .= '   public function grava7(Model $model){
+        if ($model->getid() === null) {
+            return $this->insert7($model);
+        }
+        return $this->update7($model);
    }'."\r\n";
     $texto .= '   public function exclui($id) {
         $sql = \'delete from '.$tabela.' WHERE id = :id\';
@@ -504,11 +511,63 @@
              $texto .= ' WHERE id = :id \';
         return $this->execute6($sql, $model);
    }'."\r\n";
+    $texto .= '   private function insert7(Model $model){
+        date_default_timezone_set("Brazil/East");
+        $now = mktime (date(\'H\'), date(\'i\'), date(\'s\'), date("m")  , date("d"), date("Y"));
+        $model->setid(null);
+        $model->setexcluido(0);
+        $model->setemMissao(0);
+        /*$model->setcriado($now);
+        $model->setmodificado($now); 
+        $this->execute6($this->criaTabela($model->gettabela()), $model); */      
+        $sql = \'INSERT INTO `\'.$model->gettabela().\'` (';
+          $x = 1;
+          foreach($variaveis7 as $item){
+            $texto .= '`'.$item.'`';
+            if(count($variaveis7)>$x){
+             $texto .= ',';
+            }else{
+             $texto .=  ') ';
+            }
+            $x++;
+          }
+        $texto .= 'VALUES (';
+          $x = 1;
+          foreach($variaveis7 as $item){
+            $texto .= ':'.$item;
+            if(count($variaveis7)>$x){
+             $texto .= ',';
+            }else{
+             $texto .=  ')\';'."\r\n";
+            }
+            $x++;
+          }
+        $texto .= "\t".'$model->settabela(\'personagem\');
+        //$this->setaMissao($model);
+        return $this->execute7($sql, $model);
+   }'."\r\n";
+    $texto .= '   private function update7(Model $model){
+        date_default_timezone_set("Brazil/East");
+        $now = mktime (date(\'H\'), date(\'i\'), date(\'s\'), date("m")  , date("d"), date("Y"));
+        $sql = \'UPDATE `\'.$model->gettabela().\'` SET';
+           $x=1;
+           foreach($variaveis7 as $item){
+              $texto .= " $item = :$item";
+              if(count($variaveis7)>$x){
+                $texto .= ',';
+              }
+              $x++;
+          }
+             $texto .= ' WHERE id = :id \';
+        return $this->execute7($sql, $model);
+   }'."\r\n";
     $texto .= '   public function setaMissao(Model $model){ 
         if($model->getjogador()){
          $sql = "UPDATE `".$model->gettabela()."` SET emMissao = \'".$model->getemMissao()."\' WHERE jogador = \'".$model->getjogador()."\'";
        }elseif($model->getpersonagem()){
           $sql = "UPDATE `".$model->gettabela()."` SET emMissao = \'".$model->getemMissao()."\' WHERE personagem = \'".$model->getpersonagem()."\'"; 
+       }elseif($model->getMISSAO()){
+          $sql = "UPDATE `".$model->gettabela()."` SET emMissao = \'".$model->getemMissao()."\' WHERE MISSAO = \'".$model->getMISSAO()."\'"; 
        }
         return $this->execute($sql, $model);
    }'."\r\n";
@@ -567,6 +626,11 @@
         $this->executeStatement($statement, $this->getParams6($model));
         return $model;
    }'."\r\n";
+    $texto .= '   public function execute7($sql,$model){
+        $statement = $this->getDb()->prepare($sql);
+        $this->executeStatement($statement, $this->getParams7($model));
+        return $model;
+   }'."\r\n";
     $texto .= '   private function getParams(Model $model){
         $params = array(';
         foreach($variaveis as $item){
@@ -605,6 +669,13 @@
     $texto .= '   private function getParams6(Model $model){
         $params = array(';
         foreach($variaveis6 as $item){
+            $texto .= "':".$item."'".'=> $model->get'.$item.'(),';
+        }
+    $texto .= ");\r\n\t return".' $params;
+   }'."\r\n";
+    $texto .= '   private function getParams7(Model $model){
+        $params = array(';
+        foreach($variaveis7 as $item){
             $texto .= "':".$item."'".'=> $model->get'.$item.'(),';
         }
     $texto .= ");\r\n\t return".' $params;

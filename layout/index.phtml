@@ -24,7 +24,7 @@
    <script type="text/javascript" src="../web/js/missao.js"></script>
    <script type="text/javascript" src="../web/js/cadastro.js"></script>
 </head>
-    <body onload="startSlideShow()">     
+    <body onload="startSlideShow()" id=seletor>     
         <!-- header -->
          <div id="cabecalho">
             <span class="cor_1" id="logo">Jogo de RPG</span>
@@ -47,9 +47,9 @@
                         }
                     }else{
                         $menu=array('home'=>'Home','cadastro'=>'Cadastro de Personagem','lista'=>'Personagens','viloes'=>'Vilões','missao'=>'Missão');  
-                        /*echo "<div class='tempo'>";
+                        echo "<div class='tempo'>";
                            echo '<iframe scrolling="no" frameborder=0 src="tempo.php"></iframe>';
-                        echo '</div>';*/                      
+                        echo '</div>';                     
                     }
                     
                     foreach($dados as $dado){

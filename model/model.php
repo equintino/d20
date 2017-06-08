@@ -60,6 +60,11 @@
  private $DATA;
  private $MISSAO;
  private $anotacoes;
+ private $objetivo;
+ private $local;
+ private $recompensa;
+ private $falha;
+ private $como;
  public function getid(){
 	return $this->id;
  }
@@ -419,5 +424,35 @@
  }
  public function setanotacoes($anotacoes ){
 	$this->anotacoes=$anotacoes;
+ }
+ public function getobjetivo(){
+	return $this->objetivo;
+ }
+ public function setobjetivo($objetivo ){
+	$this->objetivo=$objetivo;
+ }
+ public function getlocal(){
+	return $this->local;
+ }
+ public function setlocal($local ){
+	$this->local=$local;
+ }
+ public function getrecompensa(){
+	return $this->recompensa;
+ }
+ public function setrecompensa($recompensa ){
+	$this->recompensa=$recompensa;
+ }
+ public function getfalha(){
+	return $this->falha;
+ }
+ public function setfalha($falha ){
+	$this->falha=$falha;
+ }
+ public function getcomo(){
+	return $this->como;
+ }
+ public function setcomo($como ){
+	$this->como=$como;
  }
  }

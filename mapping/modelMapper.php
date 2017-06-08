@@ -181,5 +181,20 @@
 	if (array_key_exists('anotacoes', $properties)){
 	  $model->setanotacoes($properties['anotacoes']);
 	}
+	if (array_key_exists('objetivo', $properties)){
+	  $model->setobjetivo($properties['objetivo']);
+	}
+	if (array_key_exists('local', $properties)){
+	  $model->setlocal($properties['local']);
+	}
+	if (array_key_exists('recompensa', $properties)){
+	  $model->setrecompensa($properties['recompensa']);
+	}
+	if (array_key_exists('falha', $properties)){
+	  $model->setfalha($properties['falha']);
+	}
+	if (array_key_exists('como', $properties)){
+	  $model->setcomo($properties['como']);
+	}
   } 
  }
