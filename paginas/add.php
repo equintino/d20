@@ -38,6 +38,7 @@
      }
   }
   if($act == 'cad'){
+      print_r($_POST);die;
      $search->setpersonagem($model->getpersonagem());
      $busca=$dao->encontre($search);
      if($busca){

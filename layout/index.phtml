@@ -38,6 +38,8 @@
                     $search->settabela('personagem');
                     $search->setjogador($login);
                     $dados = $dao->encontre($search);
+                    //echo '<font color=white>';
+                    //print_r([$dados,$_COOKIE]);die;
                     
                     if($login<>'MESTRE'){
                         //$menu=array('home'=>'Home','cadastro'=>'Cadastro de Personagem','lista'=>'Personagens','missao'=>'Missão'); 
