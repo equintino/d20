@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 10-Jun-2017 às 16:42
+-- Generation Time: 10-Jun-2017 às 16:44
 -- Versão do servidor: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -23,24 +23,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_missao`
+-- Estrutura da tabela `viloes`
 --
 
-CREATE TABLE `tb_missao` (
-  `id` int(4) NOT NULL,
-  `MISSAO` varchar(50) NOT NULL,
-  `DESCRICAO` text,
-  `excluido` enum('0','1') DEFAULT NULL,
-  `DATA` datetime DEFAULT NULL,
-  `emMissao` enum('0','1') DEFAULT '0',
-  `objetivo` varchar(100) DEFAULT NULL,
-  `local` text,
-  `vilao` text,
-  `recompensa` varchar(100) DEFAULT NULL,
-  `falha` text,
-  `como` text,
+CREATE TABLE `viloes` (
+  `id` int(5) NOT NULL,
+  `vilao` varchar(100) DEFAULT NULL,
+  `raca` varchar(100) DEFAULT NULL,
+  `classe` varchar(100) DEFAULT NULL,
+  `idade` int(4) DEFAULT NULL,
+  `sexo` enum('F','M') DEFAULT NULL,
+  `excluido` enum('0','1') DEFAULT '0',
   `avatar` text,
-  `anotacoes` text
+  `DESCRICAO` text,
+  `FORCA` int(5) DEFAULT NULL,
+  `AGILIDADE` int(5) DEFAULT NULL,
+  `INTELIGENCIA` int(5) DEFAULT NULL,
+  `VONTADE` int(5) DEFAULT NULL,
+  `PV` int(5) DEFAULT NULL,
+  `PM` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -48,22 +49,21 @@ CREATE TABLE `tb_missao` (
 --
 
 --
--- Indexes for table `tb_missao`
+-- Indexes for table `viloes`
 --
-ALTER TABLE `tb_missao`
+ALTER TABLE `viloes`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `MISSAO` (`MISSAO`),
-  ADD KEY `MISSAO_2` (`MISSAO`);
+  ADD UNIQUE KEY `vilao` (`vilao`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `tb_missao`
+-- AUTO_INCREMENT for table `viloes`
 --
-ALTER TABLE `tb_missao`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `viloes`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

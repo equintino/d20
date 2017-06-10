@@ -1557,4 +1557,16 @@ fieldset legend{
 }
 .avatarVilaoMestre{
     float: right;
+    font-family: 'Indie Flower', cursive;
+    text-align: center;
+}
+.personagensMestre{
+    float: right;
+    margin: 60px 100px;
+    font-family: 'Indie Flower', cursive;
+}
+.personagensJogadores{
+    #clear: both;
+    float: left;
+    margin: -100px 40px;
 }

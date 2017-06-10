@@ -102,46 +102,50 @@
            if(!$z){
               $z=0;
            } 
-           //echo $z;
-         //$search=new ModelSearchCriteria();
          $search->settabela('viloes');
-         //$search->setvilao('Dragon');
          $dados=$dao->encontrePorVilao($search);
-         //print_r(count($lista));die;
-         $ids=array();
-         foreach($dados as $item){
-            $ids[]= $item->getid();
+         if(isset($dados)){
+            $ids=array();
+            foreach($dados as $item){
+               $ids[]= $item->getid();
+            }      
+            echo '<div class=paginacaoVilao>';
+               echo '<span class=pag >Páginas ';
+               echo ($x)+1 .' de ';
+               echo ceil(count($dados)).'</span>';
+            echo '</div>';
+            if(($x)+1 == ceil(count($dados)) || count($dados) == 0){
+               $class2='class=disabled';
+            }else{
+               $class2='title="AVANÇAR"';
+            }
          }
-      
-         echo '<div class=paginacaoVilao>';
-            echo '<span class=pag >Páginas ';
-            echo ($x)+1 .' de ';
-            echo ceil(count($dados)).'</span>';
-         echo '</div>';
-         if(($x)+1 == ceil(count($dados)) || count($dados) == 0){
-            $class2='class=disabled';
-         }else{
-            $class2='title="AVANÇAR"';
+         if(!isset($class2)){
+            $class2=null;
          }
          echo '<legend class=listaVilao><a href='.Utils::createLink('viloes',array('act'=>'lista','jogador'=>''.$jogador.'','pag'=>$x-1,'z'=>$z-1)).' '.$class.' ><img class=seta height=25px src=imagens/esquerda.png /> </a> LISTA DE VILÕES <a href='.Utils::createLink('viloes',array('act'=>'lista','pag'=>$x+1,'jogador'=>''.$jogador.'','contador'=>count($dados),'z'=>$z+1)).' '.$class2.'> <img class=seta height=25px src=imagens/direita.png /> </a></legend>';
       ?>
          <table>
              <?php
                $atributos=array('Força'=>'FORCA','Agilidade'=>'AGILIDADE','Inteligência'=>'INTELIGENCIA','Vontade'=>'VONTADE','Pontos de Vida'=>'PV','Pontos de Maná'=>'PM');
-             foreach($dados as $dado){
-                if($dado->getid() == $ids[$z]){
-               echo '<tr><td align=right><label>NOME: </label></td><td class=nomes2>'.$dado->getvilao().'</td><td align=right><label>IDADE: </label></td><td class=nomes2>'.$dado->getidade().'<label>anos</label></td><td align=right><label>SEXO: </label></td><td class=nomes2>'.$dado->getsexo().'</td></tr>';
-               echo '<tr><td align=right><label>RAÇA: </label></td><td class=nomes2>'.$dado->getraca().'</td><td align=right><label>CLASSE: </label></td><td class=nomes2>'.$dado->getclasse().'</td></tr>'; 
-               echo '<tr><th>Atributos</th></tr>';
-               foreach($atributos as $key => $item){
-                  $get='get'.$item;
-                  echo '<tr><td align=right><label>'.strtoupper($key).': </label></td><td class=nomes2>'.$dado->$get().'</td></tr>';
-               } 
-               echo '<div class=figVilao><img height=200ppx src="../web/'.$dado->getavatar().'" /><br>';                 
-                  echo '<div class=textoVilao>'.$dado->getDESCRICAO().'</div>';
-               echo '</div>';
-               break;
-                }
+             if(isset($dados)){
+               foreach($dados as $dado){
+                  if($dado->getid() == $ids[$z]){
+                 echo '<tr><td align=right><label>NOME: </label></td><td class=nomes2>'.$dado->getvilao().'</td><td align=right><label>IDADE: </label></td><td class=nomes2>'.$dado->getidade().'<label>anos</label></td><td align=right><label>SEXO: </label></td><td class=nomes2>'.$dado->getsexo().'</td></tr>';
+                 echo '<tr><td align=right><label>RAÇA: </label></td><td class=nomes2>'.$dado->getraca().'</td><td align=right><label>CLASSE: </label></td><td class=nomes2>'.$dado->getclasse().'</td></tr>'; 
+                 echo '<tr><th>Atributos</th></tr>';
+                 foreach($atributos as $key => $item){
+                    $get='get'.$item;
+                    echo '<tr><td align=right><label>'.strtoupper($key).': </label></td><td class=nomes2>'.$dado->$get().'</td></tr>';
+                 } 
+                 echo '<div class=figVilao><img height=200ppx src="../web/'.$dado->getavatar().'" /><br>';                 
+                    echo '<div class=textoVilao>'.$dado->getDESCRICAO().'</div>';
+                 echo '</div>';
+                 break;
+                  }
+               }
+             }else{
+                echo 'Não existe nenhum vilão cadastrado';
              }
              ?>
          </table>

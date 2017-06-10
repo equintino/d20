@@ -412,7 +412,7 @@ function botaoVilao(avatares){
          <?php
          $search->settabela('tb_missao');
          $dados = $dao->encontre($search); 
-         if($dados){ 
+         if(isset($dados)){ 
             foreach($dados as $dado){
                $missoes[]=$dado->getMISSAO();
             }
@@ -461,14 +461,24 @@ function botaoVilao(avatares){
           <?php
             echo '<table cellspacing=0 border=1>';
             echo '<tr><th>Descrição:</th><th>Objetivo</th><th>Local</th><th>Vilão</th><th>Recompensa</th><th>Falha</th><th>Dica</th></tr>';
-            echo '<tr><td>'.$dadosMissao->getDESCRICAO().'</td><td>'.$dadosMissao->getobjetivo().'</td><td>'.$dadosMissao->getlocal().'</td><td>'.$dadosMissao->getvilao().'</td><td>'.$dadosMissao->getrecompensa().'</td><td>'.$dadosMissao->getfalha().'</td><td>'.$dadosMissao->getcomo().'</td></tr>';
+            echo '<tr><td>'.$dadosMissao->getDESCRICAO().'</td><td align=center>'.$dadosMissao->getobjetivo().'</td><td align=center>'.$dadosMissao->getlocal().'</td><td align=center>'.$dadosMissao->getvilao().'</td><td align=center>'.$dadosMissao->getrecompensa().'</td><td align=center>'.$dadosMissao->getfalha().'</td><td align=center>'.$dadosMissao->getcomo().'</td></tr>';
             echo '</table>';
-            echo '<div class=avatarVilaoMestre><img height=180 src=\''.$dadosMissao->getavatar().'\'/></div>';
-            echo '<div class=personagensMestre>Personagens do mestre: ';
+            echo '<div class=avatarVilaoMestre><img height=180 src=\''.$dadosMissao->getavatar().'\'/><br>Vilao</div>';
+            echo '<div class=personagensMestre>Personagens do mestre: <br>';
             $search->settabela('missao');
             $search->setjogador('MESTRE');
             $personagensMestre=$dao->encontre2($search);
-            print_r($personagensMestre);
+            foreach($personagensMestre as $personagemMestre){
+               echo '<img height=100px src=\''.$personagemMestre->getavatar().'\' \>';
+            }
+            echo '</div>';
+            $search->setjogador(null);
+            $personagensMestre=$dao->encontre2($search);
+            echo '<div class=personagensJogadores>';
+            echo '<div class=personagensMestre>Personagens dos jogadores: <br>';
+            foreach($personagensMestre as $personagemMestre){
+               echo '<img height=100px src=\''.$personagemMestre->getavatar().'\' \>';
+            }
             echo '</div>';
             
           ?>

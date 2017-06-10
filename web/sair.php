@@ -48,7 +48,7 @@
    $search->settabela('armamentos');
    $recurso=$dao->encontrePorPersonagem($search);
    $model->settabela($search->gettabela());
-   $model->setouro($recurso->getouro()+$ouro1-$ouro2);
+   @$model->setouro($recurso->getouro()+$ouro1-$ouro2);
    $dao->setaOuro($model);
       
    $search->settabela('atributos');
@@ -70,53 +70,15 @@
    $dao->grava2($model);
    
    
-   
-   
-   /*$search->settabela('missao');
-   $search->setpersonagem($personagem);
-   $search->setjogador($login);
-   $emMissao=$dao->encontreEmMissao($search);
-   print_r($search);die;
-   
-   if($emMissao){*/
-   
-   /*
-        $search->settabela('atributos');
-        $search->setpersonagem($personagem);
-        $atributo = $dao->encontrePorPersonagem($search);
-        
-        $model->setCLASSE_COMUM($atributo->getCLASSE_COMUM());
-        $model->setHABILIDADE_AUTOMATICA($atributo->getHABILIDADE_AUTOMATICA());
-        $model->setDESCRICAO($atributo->getDESCRICAO());
-        
-        
-        print_r($model);die;
-        
-   */
-   
-   
-        $search->settabela('missao');
-        $model=$dao->encontrePorPersonagem($search);
-        $model->setemMissao(0);
-        $model->settabela('missao');
-        $model->setanotacoes($anotacoes);
-        $dao->grava5($model);
-        /*
-        
-        //$model->setpersonagem($personagem);
-        //$model->setid($emMissao->getid());
-        $model->setemMissao(0);
-        $model->setexcluido(0);
-        if(key_exists('id', $_GET)){
-            $model->setid($_GET['id']);
-        }
-        $dao->setaMissao($model);
-        $dao->grava5($model);
-        //print_r($model);die;
-   //}*/
+      $search->settabela('missao');
+      $model=$dao->encontrePorPersonagem($search);
+      if($model){
+         $model->setemMissao(0);
+         $model->settabela('missao');
+         $model->setanotacoes($anotacoes);
+         $dao->grava5($model);
+      }
    sair:
-      //print_r([$missao,$data]);
-      //print_r([$_GET,$_POST]);
    if(@$act=='missao'){
       $search->setMISSAO($missao);
       $search->settabela('tb_missao');
@@ -124,9 +86,7 @@
       $model->setDATA($data);
       $model->setemMissao(0);
       $model->settabela('tb_missao');
-      //print_r($model);die;
       $dao->grava7($model);
-      //print_r([$model]);die;
       header("Location:index.php");
       die;
    }

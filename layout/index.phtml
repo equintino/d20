@@ -56,6 +56,7 @@
                     
                     foreach($dados as $dado){
                         $personagem = $dado->getpersonagem();
+                        $jogador = $dado->getjogador();
                         if($dado->getemMissao()==1){
                             //echo 'Personagem '.$item->getpersonagem().' está em missão.';
                             /*echo "<div class='tempo'>";
@@ -69,7 +70,10 @@
                     }
                     
             echo '<div id="menu" >';
-                    echo '<ul class="menu">';                                             
+                    echo '<ul class="menu">';  
+                    if(!isset($jogador)){
+                       $jogador=null;
+                    }
                         foreach($menu as $key => $item){
                            if($item == 'Cadastro de Personagem'){
                               echo '<li><a href="'.Utils::createLink('cadastro',array('act'=>'cad','pag'=>0)).'" >'.$item.'</a></li>';
@@ -79,7 +83,7 @@
                                }else{
                                     echo '<li>'.$item;
                                         echo '<ul class="sub-menu">';
-                                           echo '<a href="'.Utils::createLink('cadastro',array('act'=>'lista','jogador'=>''.$dado->getjogador().'','pag'=>0)).'" ><li>Jogadores</li></a>';
+                                           echo '<a href="'.Utils::createLink('cadastro',array('act'=>'lista','jogador'=>''.$jogador.'','pag'=>0)).'" ><li>Jogadores</li></a>';
                                            echo '<a href="'.Utils::createLink('cadastro',array('act'=>'lista','jogador'=>'DOMESTRE','pag'=>0)).'" ><li>do Mestre</li></a>';
                                         echo '</ul>';
                                }
@@ -89,7 +93,7 @@
                                 echo '<ul class="sub-menu">';
                                     echo '<a href="'.Utils::createLink($key,array('personagem'=>$personagem,'act'=>'nova')).'" ><li>Nova</li></a>';
                                     echo '<a href="'.Utils::createLink($key,array('personagem'=>$personagem,'act'=>'inicia')).'" ><li>Iniciar</li></a>';
-                                    echo '<a href="'.Utils::createLink($key,array('personagem'=>$personagem,'act'=>'continua')).'" ><li>Continuar</li></a>';
+                                    //echo '<a href="'.Utils::createLink($key,array('personagem'=>$personagem,'act'=>'continua')).'" ><li>Continuar</li></a>';
                                 echo '</ul>';
                               echo '</li>';
                            }elseif($item == 'Vilões'){

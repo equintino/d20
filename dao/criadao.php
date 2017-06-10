@@ -27,6 +27,16 @@
         }
         return $result;
    }'."\r\n";
+   $texto .= '   public function encontre2(ModelSearchCriteria $search = null){
+            set_time_limit(3600);
+        $result = array();
+        foreach ($this->query($this->getEncontreSql2($search)) as $row){
+            $model = new Model();
+            modelMapper::map($model, $row);
+            $result[$model->getid()] = $model;
+        }
+        return $result;
+   }'."\r\n";
     $texto .= '   public function encontrePorId(ModelSearchCriteria $search=null){
         if($search->getid() != null){
            $row = $this->query(\'SELECT * FROM `\'.$search->gettabela().\'` WHERE excluido = "0" and id = \' . (int) $search->getid())->fetch();
@@ -702,6 +712,20 @@
                  $sql="SELECT * FROM ".$search->gettabela()." WHERE personagem=\'".$search->getpersonagem()."\' AND excluido = \'0\' ";
           }elseif($search->getjogador() !== null){
                 $sql="SELECT * FROM ".$search->gettabela()." WHERE jogador=\'".$search->getjogador()."\' AND excluido = \'0\' ";
+          }else{
+              if($search->gettabela()==\'personagem\'){
+                $sql = \'SELECT * FROM `\'.$search->gettabela().\'` WHERE jogador != "MESTRE" AND excluido = "0" \';
+              }else{
+                $sql = \'SELECT * FROM `\'.$search->gettabela().\'` WHERE excluido = "0" \';
+              }    
+          }
+        return $sql;
+  }'."\r\n";
+   $texto .= '   private function getEncontreSql2(ModelSearchCriteria $search = null) {               
+          if ($search->getpersonagem() !== null) {
+                 $sql="SELECT * FROM ".$search->gettabela()." WHERE personagem=\'".$search->getpersonagem()."\' AND excluido = \'0\' ";
+          }elseif($search->getjogador() !== null){
+                $sql = "SELECT * FROM `".$search->gettabela()."` LEFT JOIN `personagem` on ".$search->gettabela().".personagem = personagem.personagem WHERE ".$search->gettabela().".MISSAO = \'".$search->getMISSAO()."\' AND missao.excluido = \'0\'";
           }else{
               if($search->gettabela()==\'personagem\'){
                 $sql = \'SELECT * FROM `\'.$search->gettabela().\'` WHERE jogador != "MESTRE" AND excluido = "0" \';

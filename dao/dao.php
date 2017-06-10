@@ -478,18 +478,13 @@
         return $sql;
   }
    private function getEncontreSql2(ModelSearchCriteria $search = null) {               
-          if ($search->getpersonagem() !== null) {
+          if ($search->getpersonagem() !== null) { 
                  $sql="SELECT * FROM ".$search->gettabela()." WHERE personagem='".$search->getpersonagem()."' AND excluido = '0' ";
-          }elseif($search->getjogador() !== null){
-                $sql = "SELECT * FROM `".$search->gettabela()."` LEFT JOIN `personagem` on '".$search->gettabela().".personagem' = 'personagem.personagem' WHERE '".$search->gettabela().".MISSAO' = '".$search->getMISSAO()."' AND 'excluido' = '0'";
-          }else{
-              if($search->gettabela()=='personagem'){
-                $sql = 'SELECT * FROM `'.$search->gettabela().'` WHERE jogador != "MESTRE" AND excluido = "0" ';
-              }else{
-                $sql = 'SELECT * FROM `'.$search->gettabela().'` WHERE excluido = "0" ';
-              }    
+          }elseif($search->getjogador()){ 
+                $sql = "SELECT * FROM `".$search->gettabela()."` LEFT JOIN `personagem` on ".$search->gettabela().".personagem = personagem.personagem WHERE ".$search->gettabela().".MISSAO = '".$search->getMISSAO()."' AND missao.excluido = '0' AND missao.jogador = '".$search->getjogador()."'";
+          }elseif($search->getjogador() == null){ 
+                $sql = "SELECT * FROM `".$search->gettabela()."` LEFT JOIN `personagem` on ".$search->gettabela().".personagem = personagem.personagem WHERE ".$search->gettabela().".MISSAO = '".$search->getMISSAO()."' AND missao.excluido = '0' AND missao.jogador != 'MESTRE'";
           }
-          print_r($sql);die;
         return $sql;
   }
     private function criaTabela($tabela){

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 10-Jun-2017 às 16:42
+-- Generation Time: 23-Maio-2017 às 00:53
 -- Versão do servidor: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -23,24 +23,13 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_missao`
+-- Estrutura da tabela `tempo`
 --
 
-CREATE TABLE `tb_missao` (
-  `id` int(4) NOT NULL,
-  `MISSAO` varchar(50) NOT NULL,
-  `DESCRICAO` text,
-  `excluido` enum('0','1') DEFAULT NULL,
+CREATE TABLE `tempo` (
+  `id` int(11) NOT NULL,
   `DATA` datetime DEFAULT NULL,
-  `emMissao` enum('0','1') DEFAULT '0',
-  `objetivo` varchar(100) DEFAULT NULL,
-  `local` text,
-  `vilao` text,
-  `recompensa` varchar(100) DEFAULT NULL,
-  `falha` text,
-  `como` text,
-  `avatar` text,
-  `anotacoes` text
+  `MISSAO` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -48,22 +37,20 @@ CREATE TABLE `tb_missao` (
 --
 
 --
--- Indexes for table `tb_missao`
+-- Indexes for table `tempo`
 --
-ALTER TABLE `tb_missao`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `MISSAO` (`MISSAO`),
-  ADD KEY `MISSAO_2` (`MISSAO`);
+ALTER TABLE `tempo`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `tb_missao`
+-- AUTO_INCREMENT for table `tempo`
 --
-ALTER TABLE `tb_missao`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tempo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
