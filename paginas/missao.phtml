@@ -412,7 +412,7 @@ function botaoVilao(avatares){
          <?php
          $search->settabela('tb_missao');
          $dados = $dao->encontre($search); 
-         if(isset($dados)){ 
+         if(!isset($dados)){ 
             foreach($dados as $dado){
                $missoes[]=$dado->getMISSAO();
             }
@@ -436,8 +436,12 @@ function botaoVilao(avatares){
             echo '</form>';
             die;
          }else{
-            echo 'Nenhuma missão cadastrada.';
-            echo '<span class="zera ok" onclick=history.go(-1) >VOLTAR</span>';
+            echo '<div class=quadro>';
+               echo 'Nenhuma missão cadastrada.';
+                     //echo '<br>';
+                     //echo '<span class="zera ok" onclick=history.go(-1) >VOLTAR</span>';
+            echo '</div>';
+            die;
          }
         ?>
       </div>
