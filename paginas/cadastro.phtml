@@ -166,7 +166,13 @@
                         <input type="submit" value="GRAVA" class='botao botao-verde'>
                     </div>
                     <table><tr><td>
-                        <div id="aqui" class="cadraca"></div> 
+                        <?php 
+                           if($login == 'MESTRE'){
+                              echo '<input type=file name=avatar />';    
+                           }else{
+                              echo '<div id="aqui" class="cadraca"></div>';
+                           }
+                        ?>
                         <div id="aqui.texto" align="justify" class="texto"></div>
                         </td></tr>
                     </table>
