@@ -5,15 +5,20 @@
 </style>
 <script>
    i=0;
-function botaoVilao(avatares){
+function botaoVilao(avatares,nomes){
     var avatares;
+    var nomes;
     if(!avatares[i]){
        i=0;
     }
     x='<img height=200px src=\'../web/'+avatares[i]+'\' />';
+    //alert([avatares[i],nomes[i]]);
+    y=nomes[i];
     document.getElementById('avatarVilao').innerHTML=x;
+    document.getElementById('vilao').innerHTML=y;
     i++; 
     document.cookie="avatar="+avatares[i]+";path=/";
+    document.cookie="vilao="+nomes[i]+";path=/";
 }
 </script>
 <body id=seletor>
@@ -286,7 +291,7 @@ function botaoVilao(avatares){
                         $figarmadura=$dao->encontrePorArmadura($search);
                         echo '<div class=ver id=ver>';
                            echo '<img class=foto src=../web/gera.php?id='.$figarmadura->getid().'&tabela=tb_armaduras /><br>';
-                           $lista2=array('Ítem: '=>$figarmadura->getarmadura(),'Defesa: '=>$figarmadura->getdefesa(),'FN: '=>$figarmadura->getFN(),'Peso: '=>$figarmadura->getpeso(),'Descrição: '=>$figarmadura->getDESCRICAO(), 'Obs.: '=>$figarmadura->getOBS());
+                           $lista2=array('�?tem: '=>$figarmadura->getarmadura(),'Defesa: '=>$figarmadura->getdefesa(),'FN: '=>$figarmadura->getFN(),'Peso: '=>$figarmadura->getpeso(),'Descrição: '=>$figarmadura->getDESCRICAO(), 'Obs.: '=>$figarmadura->getOBS());
                            foreach($lista2 as $key => $item_){
                               if($item_){
                                  echo '<span class=nomesArma>'.$key.'</span>'.$item_.'<br>';
@@ -301,7 +306,7 @@ function botaoVilao(avatares){
                   $search->settabela('tb_equipamento_geral');
                   $equipamentos=explode('/',$item->getequipamento());
                   echo '<table  cellspacing=0 border=1 class=equi2>';
-                     echo '<tr><th>ÍTEM</th><th>PESO</th><th>DESCRIÇÃO</th></tr>';
+                     echo '<tr><th>�?TEM</th><th>PESO</th><th>DESCRIÇÃO</th></tr>';
                      foreach(str_replace('_',' ',$equipamentos) as $item3){
                         $search->setitem($item3);
                         if($item3){
@@ -376,10 +381,15 @@ function botaoVilao(avatares){
       $search->settabela('viloes');
       $viloes=$dao->encontre($search);
       $avatares=null;
+      $nomes=null;
       foreach($viloes as $vilao){
          $avatares .='\''.$vilao->getavatar().'\','; 
+	 $nomes .='\''.$vilao->getvilao().'\',';
       }
-      echo '<script> avatares = new Array('.$avatares.');</script>';
+      echo '<script> 
+	avatares = new Array('.$avatares.');
+	nomes = new Array('.$nomes.');
+	    </script>';
       ?>
       <div class="cadMissao">
       <fieldset>
@@ -390,7 +400,7 @@ function botaoVilao(avatares){
                 <tr><td align="right"><label>Missão: </label></td><td colspan="6"><input required type="text" name="missao" size="50"/></td></tr>
                 <tr><td align="right"><label>Objetivo: </label></td><td colspan="6"><input required type="text" name="objetivo" size="50"/></td></tr>
                 <tr><td align="right"><label>Local: </label></td><td colspan="6"><input required type="text" name="local" size="50"/></td></tr>
-                <tr><td align="right"><label>Vilão: </label></td><td colspan="4"><input required type="text" name="vilao" /></td><td id=seletor>Escolher Vilão <span class="botaoVilao" id=seletor onclick="botaoVilao(avatares)">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span></td></tr>
+                <tr><td align="right"><label>Vilão: </label></td><td colspan="4">&nbsp&nbsp<span id=vilao></span></td><td id=seletor>Escolher Vilão <span class="botaoVilao" id=seletor onclick="botaoVilao(avatares,nomes)">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span></td></tr>
                 <tr><td align="right"><label>Recompensa: </label></td><td colspan="5"><input required type="text" name="recompensa" size="50"/></td></tr>
                 <tr><td align="right"><label>Falha: </label></td><td colspan="5"><input required type="text" name="falha" size="50"/></td></tr>
                 <tr><td align="right"><label>Como completar a missão: </label></td><td colspan="5"><input required type="text" name="como" size="50"/></td></tr>
@@ -411,11 +421,12 @@ function botaoVilao(avatares){
       <div class="iniciaMissao">
          <?php
          $search->settabela('tb_missao');
-         $dados = $dao->encontre($search); 
-         if(!isset($dados)){ 
+         $dados = $dao->encontre($search);
+         if(isset($dados)){ 
             foreach($dados as $dado){
                $missoes[]=$dado->getMISSAO();
             }
+         //print_r($missoes);die;
             echo '<form action=\'../paginas/add.php?act=missao\' method=POST>';
                echo '<div class=quadro>';
                   echo 'Selecione uma das misões:<br>';
@@ -447,7 +458,7 @@ function botaoVilao(avatares){
       </div>
        <?php missaoMestre: ?>
       <div class="missaoMestre">
-          <?php
+          <?php 
           $search->settabela('tb_missao');
           $search->setMISSAO($missaoMestre);
           $dadosMissao=$dao->encontrePorMissao($search);
@@ -472,12 +483,14 @@ function botaoVilao(avatares){
             $search->settabela('missao');
             $search->setjogador('MESTRE');
             $personagensMestre=$dao->encontre2($search);
+            //print_r($personagensMestre);die;
             foreach($personagensMestre as $personagemMestre){
                echo '<img height=100px src=\''.$personagemMestre->getavatar().'\' \>';
             }
             echo '</div>';
             $search->setjogador(null);
             $personagensMestre=$dao->encontre2($search);
+            //print_r($personagensMestre);die;
             echo '<div class=personagensJogadores>';
             echo '<div class=personagensMestre>Personagens dos jogadores: <br>';
             foreach($personagensMestre as $personagemMestre){

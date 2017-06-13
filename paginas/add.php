@@ -44,7 +44,7 @@
         foreach($busca as $dados);
         if($dados->getpersonagem()){
           echo '<div class=add>';
-          echo '<h3>PERSONAGEM <font color=red size=15px>'.$dados->getpersonagem().'</font> J√Å EXISTE!</h3>';
+          echo '<h3>PERSONAGEM <font color=red size=15px>'.$dados->getpersonagem().'</font> J√? EXISTE!</h3>';
           echo '<button class=\'continua continua-verde\' onclick=history.go(-1);>Voltar</button>';
           echo '</div>';
           die;
@@ -52,9 +52,56 @@
             $dao->grava($model);
         }
       }else{
-         $model->setavatar($avatar);
-         $dao->grava($model); 
-      }
+    ////// enviando arquivo /////////
+    $target_dir = "../web/imagens/personagens/mestre/";
+    $target_file = $target_dir . basename($_FILES["avatarMestre"]["name"]);
+    $uploadOk = 1;
+    
+    $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+    // Check if image file is a actual image or fake image
+    if(isset($_POST["submit"])) {
+	$check = getimagesize($_FILES["avatarMestre"]["tmp_name"]);
+	if($check !== false) {
+	    echo "O arquivo È uma imagem - " . $check["mime"] . ".";
+	    $uploadOk = 1;
+	} else {
+	    echo "O arquivo n„o È uma imagem.";
+	    $uploadOk = 0;
+	}
+    }
+    // Check if file already exists
+    if (file_exists($target_file)) {
+	echo "Sorry, file already exists.";
+	$uploadOk = 0;
+    }
+    // Check file size
+    if ($_FILES["avatarMestre"]["size"] > 500000) {
+	echo "Sorry, your file is too large.";
+	$uploadOk = 0;
+    }
+    // Allow certain file formats
+    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+    && $imageFileType != "gif" ) {
+	echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+	$uploadOk = 0;
+    }
+    // Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+	echo "Sorry, your file was not uploaded.";
+    // if everything is ok, try to upload file
+    } else {
+	if (move_uploaded_file($_FILES["avatarMestre"]["tmp_name"], $target_file)) {
+	    echo "The file ". basename( $_FILES["avatarMestre"]["name"]). " has been uploaded.";
+	} else {
+	    echo "Sorry, there was an error uploading your file.";
+	}
+    }
+
+    ///// /////// //////// //////
+	$avatar = str_replace('../web/','',$target_file);
+        $model->setavatar($avatar);
+        $dao->grava($model); 
+     }
 	echo '<div class=\'add\'>'.
                '<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.
                '<a href=\'../web/index.php?pagina=cadastro&act=cad2&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'\' ></a>'.
@@ -400,7 +447,7 @@
      $verificar=$dao->encontrePorMissao($search);
         if($verificar){
           echo '<div class=add>';
-          echo '<h3>MISS√ÉO <font color=red size=15px>'.$search->getMISSAO().'<br></font> J√Å EXISTE!</h3>';
+          echo '<h3>MISS√ÉO <font color=red size=15px>'.$search->getMISSAO().'<br></font> J√? EXISTE!</h3>';
           echo '<button class=\'continua continua-verde\' onclick=history.go(-1);>Voltar</button>';
           echo '</div>';
           die;

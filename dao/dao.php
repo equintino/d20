@@ -477,10 +477,8 @@
           }
         return $sql;
   }
-   private function getEncontreSql2(ModelSearchCriteria $search = null) {               
-          if ($search->getpersonagem() !== null) { 
-                 $sql="SELECT * FROM ".$search->gettabela()." WHERE personagem='".$search->getpersonagem()."' AND excluido = '0' ";
-          }elseif($search->getjogador()){ 
+   private function getEncontreSql2(ModelSearchCriteria $search = null) {
+          if($search->getjogador()){ 
                 $sql = "SELECT * FROM `".$search->gettabela()."` LEFT JOIN `personagem` on ".$search->gettabela().".personagem = personagem.personagem WHERE ".$search->gettabela().".MISSAO = '".$search->getMISSAO()."' AND missao.excluido = '0' AND missao.jogador = '".$search->getjogador()."'";
           }elseif($search->getjogador() == null){ 
                 $sql = "SELECT * FROM `".$search->gettabela()."` LEFT JOIN `personagem` on ".$search->gettabela().".personagem = personagem.personagem WHERE ".$search->gettabela().".MISSAO = '".$search->getMISSAO()."' AND missao.excluido = '0' AND missao.jogador != 'MESTRE'";

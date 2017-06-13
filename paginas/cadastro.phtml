@@ -104,7 +104,7 @@
         <div class='cad'>
             <fieldset>
                 <legend>CADASTRO DE PERSONAGEM</legend>
-                <form class="font_1" id="cadastro" action="../paginas/add.php?act=cad&personagem=<?php echo $personagem ?>&raca=<?= $raca ?>" method="POST">
+                <form enctype="multipart/form-data" class="font_1" id="cadastro" action="../paginas/add.php?act=cad&personagem=<?php echo $personagem ?>&raca=<?= $raca ?>" method="POST">
                     <table>
                         <?php
                            foreach($variaveis as $keys => $item){
@@ -168,7 +168,8 @@
                     <table><tr><td>
                         <?php 
                            if($login == 'MESTRE'){
-                              echo '<input type=file name=avatar />';    
+			      echo '<input type="hidden" name="MAX_FILE_SIZE" value="300000000" />';
+                              echo '<input type=file name="avatarMestre" />';    
                            }else{
                               echo '<div id="aqui" class="cadraca"></div>';
                            }
@@ -472,7 +473,7 @@
                                 echo '<div align=right class=cadTitulo>Armaduras para '.strtoupper($_GET['personagem']).'&nbsp&nbsp</div>';
                                 echo '<span class=nota>Coloque o mouse em cima dos quadradinhos para ver a descrição das armas.</span>';
                             }elseif($act=='cad7'){
-                                echo '<div align=right class=cadTitulo>Ítens para '.strtoupper($_GET['personagem']).'&nbsp&nbsp</div>';
+                                echo '<div align=right class=cadTitulo>�?tens para '.strtoupper($_GET['personagem']).'&nbsp&nbsp</div>';
                             }
                             echo '<div class=armascorporais>';
                             echo '<fieldsel>';
@@ -579,7 +580,7 @@
         </div>
     <?php elseif($act=='cad8'): 
         echo '<div class=\'addFim\'>'.
-             '<h3>PARABENS!<br>SUA FICHA ESTÁ COMPLETA.<br>BOM JOGO!</h3>';
+             '<h3>PARABENS!<br>SUA FICHA EST�? COMPLETA.<br>BOM JOGO!</h3>';
              '</div>';
         die;
     ?> 
