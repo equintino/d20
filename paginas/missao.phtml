@@ -426,7 +426,7 @@ function botaoVilao(avatares,nomes){
             foreach($dados as $dado){
                $missoes[]=$dado->getMISSAO();
 		if($dado->getemMissao()==1){
-		    header('Location:../paginas/add.php?act=missao');
+		    //echo '<script> location.assign("../paginas/add.php?act=missao&missao='.$dado->getMISSAO().'")</script>';
 		}
             }
             echo '<form action=\'../paginas/add.php?act=missao\' method=POST>';
