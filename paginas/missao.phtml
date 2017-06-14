@@ -425,8 +425,10 @@ function botaoVilao(avatares,nomes){
          if(isset($dados)){ 
             foreach($dados as $dado){
                $missoes[]=$dado->getMISSAO();
+		if($dado->getemMissao()==1){
+		    header('Location:../paginas/add.php?act=missao');
+		}
             }
-         //print_r($missoes);die;
             echo '<form action=\'../paginas/add.php?act=missao\' method=POST>';
                echo '<div class=quadro>';
                   echo 'Selecione uma das misões:<br>';

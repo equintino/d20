@@ -124,16 +124,7 @@
 	  }
 	$search->settabela('personagem');
         $search->setpersonagem($_GET['personagem']);	
-	$dados=$dao->encontrePorPersonagem($search);
-	$model->setid($dados->getid());
-	$model->setjogador($dados->getjogador());
-	$model->setpersonagem($dados->getpersonagem());
-	$model->setraca($dados->getraca());
-	$model->setclasse($dados->getclasse());
-	$model->settendencia1($dados->gettendencia1());
-	$model->settendencia2($dados->gettendencia2());
-	$model->setsexo($dados->getsexo());
-        $model->setavatar($dados->getavatar());
+	$model=$dados=$dao->encontrePorPersonagem($search);
         $search->setraca($model->getraca());
         $search->settabela('tb_racas');
         $dadosRaca=$dao->encontrePorRaca($search);
@@ -144,7 +135,7 @@
 
         if(!@$_GET['maisum']){
            $dao->grava($model);
-        }
+        } 
         
         if($model->getraca()=='humano'){
          if(!@$_GET['maisum']){
@@ -165,7 +156,7 @@
            //echo '<meta http-equiv="refresh" content="2;URL=../paginas/add.php?act=cad2&maisum=1&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'">';
            die;
          }
-        }
+        } 
         $dadosRaca->settabela('atributos');
         $dadosRaca->setpersonagem($model->getpersonagem());
         $dadosRaca->setPV(60);
@@ -361,7 +352,7 @@
 	die;
   }
   if($act=='missao'){
-     if($login=='MESTRE'){
+     if($login=='MESTRE' && !$personagem){
          goto missaoMestre;
      }
      echo '<font color=white>'; 
