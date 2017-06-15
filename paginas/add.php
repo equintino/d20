@@ -6,7 +6,7 @@
   include_once '../mapping/modelMapper.php';
   include_once '../dao/ModelSearchCriteria.php';
   include_once '../validacao/ModelValidador.php';
-  $avatar=$_COOKIE['avatar'];
+  @$avatar=$_COOKIE['avatar'];
   $act=$_GET['act'];
   @$login=strtoupper($_COOKIE['login']);
   @$personagem = $_GET['personagem'];
@@ -52,53 +52,55 @@
             $dao->grava($model);
         }
       }else{
-    ////// enviando arquivo /////////
-    $target_dir = "../web/imagens/personagens/mestre/";
-    $target_file = $target_dir . basename($_FILES["avatarMestre"]["name"]);
-    $uploadOk = 1;
-    
-    $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-    // Check if image file is a actual image or fake image
-    if(isset($_POST["submit"])) {
-	$check = getimagesize($_FILES["avatarMestre"]["tmp_name"]);
-	if($check !== false) {
-	    echo "O arquivo é uma imagem - " . $check["mime"] . ".";
-	    $uploadOk = 1;
-	} else {
-	    echo "O arquivo não é uma imagem.";
+      if($login=='MESTRE'){
+	////// enviando arquivo /////////
+	$target_dir = "../web/imagens/personagens/mestre/";
+	$target_file = $target_dir . basename($_FILES["avatarMestre"]["name"]);
+	$uploadOk = 1;
+
+	$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+	// Check if image file is a actual image or fake image
+	if(isset($_POST["submit"])) {
+	    $check = getimagesize($_FILES["avatarMestre"]["tmp_name"]);
+	    if($check !== false) {
+		echo "O arquivo é uma imagem - " . $check["mime"] . ".";
+		$uploadOk = 1;
+	    } else {
+		echo "O arquivo não é uma imagem.";
+		$uploadOk = 0;
+	    }
+	}
+	// Check if file already exists
+	if (file_exists($target_file)) {
+	    echo "Sorry, file already exists.";
 	    $uploadOk = 0;
 	}
-    }
-    // Check if file already exists
-    if (file_exists($target_file)) {
-	echo "Sorry, file already exists.";
-	$uploadOk = 0;
-    }
-    // Check file size
-    if ($_FILES["avatarMestre"]["size"] > 500000) {
-	echo "Sorry, your file is too large.";
-	$uploadOk = 0;
-    }
-    // Allow certain file formats
-    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-    && $imageFileType != "gif" ) {
-	echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-	$uploadOk = 0;
-    }
-    // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
-	echo "Sorry, your file was not uploaded.";
-    // if everything is ok, try to upload file
-    } else {
-	if (move_uploaded_file($_FILES["avatarMestre"]["tmp_name"], $target_file)) {
-	    echo "The file ". basename( $_FILES["avatarMestre"]["name"]). " has been uploaded.";
-	} else {
-	    echo "Sorry, there was an error uploading your file.";
+	// Check file size
+	if ($_FILES["avatarMestre"]["size"] > 500000) {
+	    echo "Sorry, your file is too large.";
+	    $uploadOk = 0;
 	}
-    }
+	// Allow certain file formats
+	if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+	&& $imageFileType != "gif" ) {
+	    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+	    $uploadOk = 0;
+	}
+	// Check if $uploadOk is set to 0 by an error
+	if ($uploadOk == 0) {
+	    echo "Sorry, your file was not uploaded.";
+	// if everything is ok, try to upload file
+	} else {
+	    if (move_uploaded_file($_FILES["avatarMestre"]["tmp_name"], $target_file)) {
+		echo "The file ". basename( $_FILES["avatarMestre"]["name"]). " has been uploaded.";
+	    } else {
+		echo "Sorry, there was an error uploading your file.";
+	    }
+	}
 
-    ///// /////// //////// //////
+	///// /////// //////// //////
 	$avatar = str_replace('../web/','',$target_file);
+    }
         $model->setavatar($avatar);
         $dao->grava($model); 
      }

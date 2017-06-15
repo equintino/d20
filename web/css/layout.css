@@ -461,6 +461,11 @@ fieldset legend{
     /*text-shadow: 2px -2px 0.5px white, 2px -2px 0.5px black;
     text-shadow: 1px 1px white, -1px -1px #333;*/ 
     text-shadow: -1px -1px white, 1px 1px #333;
+    #pointer-events: none;
+    cursor: default;
+}
+.saudacao1 span:hover{
+    cursor: pointer;
 }
 .semPersonagem{
     position: relative;
