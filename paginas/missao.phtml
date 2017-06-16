@@ -106,12 +106,11 @@ function botaoVilao(avatares,nomes){
     }else{
         $search->settabela('tb_missao');
         $search->setpersonagem(null);
-        //print_r($search);die;
         $missoes = $dao->encontre($search);
         foreach($missoes as $lista){
             $listaMissoes[]=$lista->getMISSAO();
         }
-        echo '<form action=../paginas/add.php?act=missao&comecando=1&personagem='.$personagem.' method=POST>';
+        echo '<form action=../paginas/add.php?act=missao&comecando=1 method=POST>';
             echo '<div class=quadro>';
                 echo 'Selecione uma das misões:<br>';
                 echo '<select required name=missao>';
@@ -124,6 +123,7 @@ function botaoVilao(avatares,nomes){
                 echo '<span class="zera ok" onclick=history.go(-1) >VOLTAR</span>';
                 echo '<button class="zera ok">OK</button>';
             echo '</div>';
+	    echo '<input type=hidden name=personagem value=\''.$personagem.'\' />';
         echo '</form>';
         die;
     } 

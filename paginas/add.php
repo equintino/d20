@@ -10,6 +10,9 @@
   $act=$_GET['act'];
   @$login=strtoupper($_COOKIE['login']);
   @$personagem = $_GET['personagem'];
+    if(!isset($personagem)){
+	$personagem=$_POST['personagem'];
+    }
   @$classe = $_GET['classe'];
   @$raca = $_GET['raca'];
   @$comecando = $_GET['comecando'];
@@ -106,7 +109,7 @@
      }
 	echo '<div class=\'add\'>'.
                '<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.
-               '<a href=\'../web/index.php?pagina=cadastro&act=cad2&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'\' ></a>'.
+               '<a href=\'../web/index.php?pagina=cadastro&act=cad2&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().' \' ></a>'.
              '</div>';  //<button class=\'continua continua-verde\'>Continua...</button>     
                 echo '<meta http-equiv="refresh" content="1;URL=../web/index.php?pagina=cadastro&act=cad2&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'">';
 	die;
@@ -121,12 +124,19 @@
 		echo '<button class=\'continua continua-verde\' onclick=history.go(-1);>Voltar</button>';
 		echo '</div>';
 		die;
-	  }else{
-		$model->sethabilidade($habilidade);
 	  }
+
 	$search->settabela('personagem');
-        $search->setpersonagem($_GET['personagem']);	
-	$model=$dados=$dao->encontrePorPersonagem($search);
+        $search->setpersonagem($_GET['personagem']);
+	$modelNew=$model;
+	$model=$dao->encontrePorPersonagem($search);
+	$model->sethabilidade($habilidade);
+	$model->setidade($modelNew->getidade());
+	$model->setaltura($modelNew->getaltura());
+	$model->setpeso($modelNew->getpeso());
+	$model->setcidade($modelNew->getcidade());
+	$model->setmotivacao($modelNew->getmotivacao());
+	$model->setbreveHistoria($modelNew->getbreveHistoria());
         $search->setraca($model->getraca());
         $search->settabela('tb_racas');
         $dadosRaca=$dao->encontrePorRaca($search);
@@ -361,10 +371,7 @@
      $search->settabela('missao');
      $search->setMISSAO($missao);
      $search->setpersonagem($personagem);
-     //print_r($search);
      $dadoPersonagem=$dao->encontrePorMissao($search);
-         //print_r($dadoPersonagem->getid());die;
-         //print_r($dao->encontrePorMissao($model));die;
      if($comecando==1){  
          //$dao = new dao();       
          $model->setemMissao(1);
@@ -372,14 +379,12 @@
          $model->settabela('missao');
          $model->setMISSAO($missao);
          //$search->settabela($model->gettabela());
-         //print_r($_COOKIE);die;
          $model->setjogador($login);
          if($dadoPersonagem){
             $model->setexcluido(0);
             $model->setid($dadoPersonagem->getid());
          }
          $model->setDATA('1850-10-02 18:10:00'); 
-         //print_r($model);die;
          $dao->grava5($model); 
          echo '<meta http-equiv="refresh" content="1;URL=../web/index.php?pagina=missao&personagem='. $personagem.'">';
          die;
