@@ -104,6 +104,7 @@
 	///// /////// //////// //////
 	$avatar = str_replace('../web/','',$target_file);
     }
+//print_r($_FILES["avatarMestre"]["tmp_name"]);die;
         $model->setavatar($avatar);
         $dao->grava($model); 
      }

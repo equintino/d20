@@ -12,13 +12,13 @@ function botaoVilao(avatares,nomes){
        i=0;
     }
     x='<img height=200px src=\'../web/'+avatares[i]+'\' />';
-    //alert([avatares[i],nomes[i]]);
     y=nomes[i];
     document.getElementById('avatarVilao').innerHTML=x;
     document.getElementById('vilao').innerHTML=y;
-    i++; 
     document.cookie="avatar="+avatares[i]+";path=/";
     document.cookie="vilao="+nomes[i]+";path=/";
+    i++; 
+    //alert(document.cookie);
 }
 </script>
 <body id=seletor>
@@ -96,10 +96,11 @@ function botaoVilao(avatares,nomes){
                   die;
                }
             echo "<div class='tempo'>";
+	    echo '<script>var personagem=\''.$personagem.'\';</script>';
             if($login=='MESTRE'){
                echo '<iframe scrolling="no" frameborder=0 src="../web/tempo.php?personagem='.$personagem.'&missao='.$dados->getMISSAO().'"></iframe>';
             }
-               echo '<span onclick=sairMissao("'.$personagem.'","'.$id.'") class="sairMissao sairMissao-verde" >Sair da Missão</span>';
+               echo '<span onclick=sairMissao(personagem,"'.$id.'") class="sairMissao sairMissao-verde" >Sair da Missão</span>';
             echo '</div>';
            goto missao;
         }

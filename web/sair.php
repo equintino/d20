@@ -54,24 +54,18 @@
     }
       
    $search->settabela('atributos');
-   $atributo=$dao->encontrePorPersonagem($search);
+   $jogador=$model->getjogador();
+   $PV=$model->getPV();
+   $PM=$model->getPM();
+   $model=$dao->encontrePorPersonagem($search);
    
-    if($atributo){
+    if($model){
 	$model->settabela($search->gettabela());
-	$model->setid_atrib($atributo->getid_atrib());
-	$model->setFORCA($atributo->getFORCA());
-	$model->setAGILIDADE($atributo->getAGILIDADE());
-	$model->setINTELIGENCIA($atributo->getINTELIGENCIA());
-	$model->setVONTADE($atributo->getVONTADE());
-	$model->setPV($atributo->getPV()-$model->getPV());
-	$model->setPM($atributo->getPM()-$model->getPM());
-	$model->setPE($atributo->getPE());
-	$model->setCLASSE_COMUM($atributo->getCLASSE_COMUM());
-	$model->setHABILIDADE_AUTOMATICA($atributo->getHABILIDADE_AUTOMATICA());
-	$model->setDESCRICAO($atributo->getDESCRICAO());
+	$model->setPV($model->getPV()-$PV);
+	$model->setPM($model->getPM()-$PM);
 
 	$dao->grava2($model);
-   }
+    }
    
       $search->settabela('missao');
       $model=$dao->encontrePorPersonagem($search);
@@ -85,6 +79,7 @@
    if(@$act=='missao'){
       $search->setMISSAO($missao);
       $search->settabela('tb_missao');
+      $search->setpersonagem(null);
       $model=$dao->encontrePorMissao($search);
       $model->setDATA($data);
       $model->setemMissao(0);

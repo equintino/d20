@@ -158,9 +158,11 @@
                         }
                         ?>
                     </table>
+		    <?php if($login!='MESTRE'): ?>
                      <div class="avatarPersonagem">
                          <label>Tocar Avatar </label><span id=trocaAvatar class=trocaAvatar onclick=mudaImagem('.$max.')>&nbsp&nbsp&nbsp&nbsp&nbsp</span>
                      </div>
+		    <?php endif; ?>
                     <div class='bnt_'>
                         <input type="reset" value="LIMPA" class='botao2 botao-verde2'>
                         <input type="submit" value="GRAVA" class='botao botao-verde'>

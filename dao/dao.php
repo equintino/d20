@@ -135,7 +135,7 @@
          return $result;
    }
   public function encontrePorMissao(ModelSearchCriteria $search=null){
-           if($search->getpersonagem()){
+         if($search->getpersonagem()){
            $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` = '0' and `MISSAO` = '".$search->getMISSAO()."' and personagem = '".$search->getpersonagem()."'")->fetch();
          }else{
            $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` = '0' and `MISSAO` = '".$search->getMISSAO()."'")->fetch();
