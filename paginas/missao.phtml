@@ -111,7 +111,7 @@ function botaoVilao(avatares,nomes){
         foreach($missoes as $lista){
             $listaMissoes[]=$lista->getMISSAO();
         }
-        echo '<form action=../paginas/add.php?act=missao&comecando=1 method=POST>';
+        echo '<form action=../paginas/add.php?act=missao&comecando=1&personagem='.$personagem.' method=POST>';
             echo '<div class=quadro>';
                 echo 'Selecione uma das misões:<br>';
                 echo '<select required name=missao>';
@@ -430,7 +430,7 @@ function botaoVilao(avatares,nomes){
 		    //echo '<script> location.assign("../paginas/add.php?act=missao&missao='.$dado->getMISSAO().'")</script>';
 		}
             }
-            echo '<form action=\'../paginas/add.php?act=missao\' method=POST>';
+            echo '<form action=\'../paginas/add.php?personagem=\'.$personagem.\'&act=missao\' method=POST>';
                echo '<div class=quadro>';
                   echo 'Selecione uma das misões:<br>';
                   echo '<select required name=missao>';

@@ -373,8 +373,7 @@
      $search->setMISSAO($missao);
      $search->setpersonagem($personagem);
      $dadoPersonagem=$dao->encontrePorMissao($search);
-     if($comecando==1){  
-         //$dao = new dao();       
+     if($comecando==1){        
          $model->setemMissao(1);
          $model->setpersonagem($personagem);
          $model->settabela('missao');
@@ -387,7 +386,7 @@
          }
          $model->setDATA('1850-10-02 18:10:00'); 
          $dao->grava5($model); 
-         echo '<meta http-equiv="refresh" content="1;URL=../web/index.php?pagina=missao&personagem='. $personagem.'">';
+         echo '<meta http-equiv="refresh" content="1;URL=../web/index.php?pagina=missao&personagem='.$personagem.'">';
          die;
      }else{ 
          $model->setemMissao(1);

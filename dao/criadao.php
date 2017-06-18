@@ -572,10 +572,10 @@
         return $this->execute7($sql, $model);
    }'."\r\n";
     $texto .= '   public function setaMissao(Model $model){ 
-        if($model->getjogador()){
-         $sql = "UPDATE `".$model->gettabela()."` SET emMissao = \'".$model->getemMissao()."\' WHERE jogador = \'".$model->getjogador()."\'";
-       }elseif($model->getpersonagem()){
+        if($model->getpersonagem()){
           $sql = "UPDATE `".$model->gettabela()."` SET emMissao = \'".$model->getemMissao()."\' WHERE personagem = \'".$model->getpersonagem()."\'"; 
+       }elseif($model->getjogador()){
+         $sql = "UPDATE `".$model->gettabela()."` SET emMissao = \'".$model->getemMissao()."\' WHERE jogador = \'".$model->getjogador()."\'";
        }elseif($model->getMISSAO()){
           $sql = "UPDATE `".$model->gettabela()."` SET emMissao = \'".$model->getemMissao()."\' WHERE MISSAO = \'".$model->getMISSAO()."\'"; 
        }
