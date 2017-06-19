@@ -56,8 +56,8 @@
     function sair(personagem){
         var personagem;
 	//alert(personagem);
-        document.cookie = "login=;path=/d20/d20/";
-        document.cookie = "senha=;path=/d20/d20/";
+        //document.cookie = "login=;path=/d20/d20/";
+        //document.cookie = "senha=;path=/d20/d20/";
         window.location.replace('../web/sair.php?personagem='+personagem+'');
     }
 

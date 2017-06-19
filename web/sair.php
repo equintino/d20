@@ -1,7 +1,8 @@
 <?php
    include '../dao/dao.php';
    include '../dao/ModelSearchCriteria.php';
-   include '../config/Config.php';
+   include '../validacao/valida_cookies.php';
+   //include '../config/Config.php';
    include '../model/model.php';
    include '../mapping/modelMapper.php';
    
@@ -76,6 +77,8 @@
          $dao->grava5($model);
       }
    sair:
+    valida_cookies::limpaCookies();
+    //print_r($_COOKIE);die;
    if(@$act=='missao'){
       $search->setMISSAO($missao);
       $search->settabela('tb_missao');

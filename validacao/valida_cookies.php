@@ -101,7 +101,7 @@ class valida_cookies{
 	$string=strtoupper($string);
 	$string=str_replace("б", "Б", $string);
 	$string=str_replace("й", "Й", $string);
-	$string=str_replace("н", "Н", $string);
+	$string=str_replace("н", "�?", $string);
 	$string=str_replace("у", "У", $string);
 	$string=str_replace("ъ", "Ъ", $string);
 	$string=str_replace("в", "В", $string);
