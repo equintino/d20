@@ -77,8 +77,6 @@
          $dao->grava5($model);
       }
    sair:
-    valida_cookies::limpaCookies();
-    //print_r($_COOKIE);die;
    if(@$act=='missao'){
       $search->setMISSAO($missao);
       $search->settabela('tb_missao');
@@ -91,6 +89,8 @@
       header("Location:index.php");
       die;
    }
+      $cookies=new valida_cookies();
+      $cookies->limpaCookies();
    header("Location:../index.html");
 ?>
 

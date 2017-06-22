@@ -292,7 +292,7 @@ function botaoVilao(avatares,nomes){
                         $figarmadura=$dao->encontrePorArmadura($search);
                         echo '<div class=ver id=ver>';
                            echo '<img class=foto src=../web/gera.php?id='.$figarmadura->getid().'&tabela=tb_armaduras /><br>';
-                           $lista2=array('�?tem: '=>$figarmadura->getarmadura(),'Defesa: '=>$figarmadura->getdefesa(),'FN: '=>$figarmadura->getFN(),'Peso: '=>$figarmadura->getpeso(),'Descrição: '=>$figarmadura->getDESCRICAO(), 'Obs.: '=>$figarmadura->getOBS());
+                           $lista2=array('Ítem: '=>$figarmadura->getarmadura(),'Defesa: '=>$figarmadura->getdefesa(),'FN: '=>$figarmadura->getFN(),'Peso: '=>$figarmadura->getpeso(),'Descrição: '=>$figarmadura->getDESCRICAO(), 'Obs.: '=>$figarmadura->getOBS());
                            foreach($lista2 as $key => $item_){
                               if($item_){
                                  echo '<span class=nomesArma>'.$key.'</span>'.$item_.'<br>';
@@ -307,7 +307,7 @@ function botaoVilao(avatares,nomes){
                   $search->settabela('tb_equipamento_geral');
                   $equipamentos=explode('/',$item->getequipamento());
                   echo '<table  cellspacing=0 border=1 class=equi2>';
-                     echo '<tr><th>�?TEM</th><th>PESO</th><th>DESCRIÇÃO</th></tr>';
+                     echo '<tr><th>�?TEM</th><th>PESO</th><th>DESCRIÇÃO</th></tr>';
                      foreach(str_replace('_',' ',$equipamentos) as $item3){
                         $search->setitem($item3);
                         if($item3){

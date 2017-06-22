@@ -23,7 +23,7 @@ class valida_cookies{
     function __construct(){
     }
     public function fazerLogin(){
-        if(empty($this->login)){
+        if(empty(trim($this->login))){
 	echo "<table width=100% height=80% border=0>";
 	echo "<tr height=100%>";
 	echo "<td width=100% colspan=3 valign=center align=center>";
@@ -62,11 +62,14 @@ class valida_cookies{
         return $this->index;
     }
     public static function limpaCookies(){
-	setcookie("login");
-	setcookie("senha");
-        unset ($_COOKIE['login'],$login);
+       //print_r($_COOKIE);
+       //echo '<br><br>';
+	setcookie("login"," ", time() + (86400 * 30), "/");
+	setcookie("senha"," ", time() + (86400 * 30), "/");
+        /*unset ($_COOKIE['login'],$login);
         unset ($_COOKIE['senha'],$senha);
-        unset ($_COOKIE['setor'],$setor);
+        unset ($_COOKIE['setor'],$setor);*/
+       //print_r($_COOKIE);die;
     }
     public function semLogin(){
         $this->popup('Você deve entrar com o usuário.',null);
@@ -101,7 +104,7 @@ class valida_cookies{
 	$string=strtoupper($string);
 	$string=str_replace("б", "Б", $string);
 	$string=str_replace("й", "Й", $string);
-	$string=str_replace("н", "�?", $string);
+	$string=str_replace("н", "�?", $string);
 	$string=str_replace("у", "У", $string);
 	$string=str_replace("ъ", "Ъ", $string);
 	$string=str_replace("в", "В", $string);
