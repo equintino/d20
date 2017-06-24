@@ -9,6 +9,7 @@
    @$personagem = $_GET['personagem'];
    @$login = strtoupper($_COOKIE['login']);
    @$act = $_GET['act'];
+   @$missaoMestre = $_GET['missaoMestre'];
    $dao = new dao();
    $search = new ModelSearchCriteria();
    $model = new model();
@@ -37,7 +38,7 @@
       $missao = $_GET['missao'];
       $model->setMISSAO($missao);
    }
-   if(@$login=='MESTRE'){
+   if(@$missaoMestre==1){
       goto sair;
    }
    
@@ -85,6 +86,7 @@
       $model->setDATA($data);
       $model->setemMissao(0);
       $model->settabela('tb_missao');
+      $model->setanotacoes($anotacoes);
       $dao->grava7($model);
       header("Location:index.php");
       die;

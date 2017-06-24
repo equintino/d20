@@ -307,7 +307,7 @@ function botaoVilao(avatares,nomes){
                   $search->settabela('tb_equipamento_geral');
                   $equipamentos=explode('/',$item->getequipamento());
                   echo '<table  cellspacing=0 border=1 class=equi2>';
-                     echo '<tr><th>�?TEM</th><th>PESO</th><th>DESCRIÇÃO</th></tr>';
+                     echo '<tr><th>ÍTEM</th><th>PESO</th><th>DESCRIÇÃO</th></tr>';
                      foreach(str_replace('_',' ',$equipamentos) as $item3){
                         $search->setitem($item3);
                         if($item3){

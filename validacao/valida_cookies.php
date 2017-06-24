@@ -1,5 +1,6 @@
 <html>
-    <head></head>
+    <head>
+    </head>
     <body bgcolor=#4cb1f1>
 <?php
     $userdao='dao/UserDao.php';
@@ -29,7 +30,7 @@ class valida_cookies{
 	echo "<td width=100% colspan=3 valign=center align=center>";
 	echo "<table border=1 bgcolor=#FFFFFF CELLSPACING=3 CELLPADDING=13><tr><td>";
 	echo "<center><br><b><font face=tahoma size=2 color=black>Efetuar o login para obter acesso.<p>";
-	echo "<center><input type=button value=\"Entrar\" onclick=\"location.href='../index.html' \">";
+	echo "<center><input type=button autofocus value=\"Entrar\" onclick=\"location.href='../index.html' \">";
 	echo "</td></tr></table>";
 	echo "</table>";
 	echo "</td></tr></table>";
@@ -119,24 +120,26 @@ class valida_cookies{
 	return $string;
     }
     public function popup($msg,$ok=null){
+       echo "<form action='web/index.php?index=sim' method=POST>";
         echo "<table width=100% height=80% border=0>";
         echo "<tr height=100%>";
         echo "<td width=100% colspan=3 valign=center align=center>";
         echo "<table border=1 bgcolor=#FFFFFF CELLSPACING=3 CELLPADDING=13><tr><td>";
         echo "<center><br><b><font face=tahoma size=2 color=black>$msg<p>";
             if(!$ok){
-                echo "<center><input type=button value=\"Voltar\" onclick=history.back()>";
+                echo "<center><input autofocus type=button value=\"Voltar\" onclick=history.back()>";
             }elseif($ok=='cad'){
                 echo "<center><input type=button value=\"Fazer Cadastro\" onclick=\"location.href='web/cadlogin.html'\">";
                 echo '<br>';
                 echo "<center><input type=button value=\"Cancelar\" onclick=history.back()>";
             }else{
-                echo "<center><input type=button value=\"Entrar\" onclick=\"location.href='web/index.php?index=sim'\">";
+                echo "<center><input autofocus type=button value=\"Entrar\" onclick=\"location.href='web/index.php?index=sim'\">";
             }
         echo "</td></tr></table>";
         echo "</td></tr>";
         echo "</table>";
         echo "</td></tr></table>";
+        echo "</form>";
         echo "</html></body>";
         exit;
     }

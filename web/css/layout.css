@@ -114,6 +114,10 @@ fieldset{
     height: 200px;
     float: right;
 }
+.foto > img{
+    height: 220px;
+    max-width: 220px;
+}
 .saudacao{
     clear: left;
     text-align: center;
@@ -482,6 +486,7 @@ fieldset legend{
 }
 .cadraca img{
     height: 250px;
+    max-width: 240px;
 }
 .texto{
     margin: 0px 80px;
@@ -717,7 +722,8 @@ fieldset legend{
     position: relative;
     z-index: 1;
 }
-.fichaAvatar img{
+.fichaAvatar > img{
+    max-width: 240px;
 }
 .escudo{
     float: left;
@@ -1472,6 +1478,8 @@ fieldset legend{
     top: -300px;
     clear: both;
     float: right;
+    height: 200px;
+    width: 320px;
 }
 .vilao label{
     font-size: 10px;

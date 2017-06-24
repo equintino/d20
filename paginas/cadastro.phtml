@@ -36,7 +36,6 @@
                 $search->setjogador($login);
             }
             $lista=$dao->encontre($search);
-            //print_r($lista);die;
             /// Nivel do Jogador ////
             @$level=$_GET['level'];
             if(!$level){
@@ -60,32 +59,27 @@
                <?php
                   echo '<legend><a href='.Utils::createLink('cadastro',array('act'=>'lista','jogador'=>''.$jogador_.'','pag'=>$x-1,'z'=>$z-1)).' '.$class.' ><img class=seta height=25px src=imagens/esquerda.png /> </a> FICHA DE PERSONAGEM <a href='.Utils::createLink('cadastro',array('act'=>'lista','pag'=>$x+1,'jogador'=>''.$jogador_.'','contador'=>count($lista),'z'=>$z+1)).' '.$class2.'> <img class=seta height=25px src=imagens/direita.png /> </a>&nbsp&nbsp LEVEL '.$level.'</legend>';
                      $ids=array();
-                     //print_r(count($lista));
                      foreach($lista as $item){
                         $ids[]= $item->getid();
                      }
                      if(!$ids){
                         echo '<span class=semPersonagem>Não existe nenhum personagem para este jogador</span>';
                      } 
-                     //$z=1;
                     echo '<div class="raca">';
                         echo '<table cellspacing=0 border=1>';
                             foreach($lista as $keys => $item){
-                               //if($x < $keys && $keys < $y){
-                               //echo $ids[0];die;
                                 if($login != 'MESTRE' || $jogador_ == 'DOMESTRE'){
                                     $pagina = 'missao';
                                 }else{
                                     $pagina = 'ficha';
                                 }
-                                //if($login != 'MESTRE'){
                                     if($item->getid() == $ids[$z]){
                                        echo '<tr><td class=nomes>'.$titulos[0].'</td><td class=nomes2><a href='.Utils::createLink($pagina, array('personagem'=>$item->getpersonagem())).'>'.$item->getpersonagem().'<span class=verFicha><br>(ver ficha)</span></a></td></tr>';
                                        echo '<tr><td class=nomes>'.$titulos[1].'</td><td class=nomes2>'.$item->getraca().'</td></tr>';
                                        echo '<tr><td class=nomes>'.$titulos[2].'</td><td class=nomes2>'.$item->getclasse().'</td></tr>';
                                        echo '<tr><td class=nomes>'.$titulos[3].'</td><td class=nomes2>'.$item->gettendencia1().'</td></tr>';
                                        echo '<tr><td class=nomes>'.$titulos[4].'</td><td class=nomes2>'.$item->gettendencia2().'</td></tr>';
-                                       echo '<span class=foto><img height=220px src="'.$item->getavatar().'" />'; 
+                                       echo '<span class=foto><img src="'.$item->getavatar().'" />'; 
                                        if($item->getemMissao()==1){
                                          echo '<br><span class=missao> <img title="Em missão" height=11px src="../web/imagens/sirene.gif" /> Em missão</span>';
                                        }
@@ -180,7 +174,6 @@
                         </td></tr>
                     </table>
                 </form> 
-                <!--<div class='racaAvatar racaAvatar-red' onclick=mudaImagem(racaAvatar,1,12)>Trocar Avatar</div>-->
                 <script>trocaAvatar('Trocar Avatar')</script>
             </fieldset>
         </div>

@@ -66,11 +66,10 @@
         }
     }
     function sairMissaoMestre(missaoMestre){
-        //alert(missaoMestre);
-        //var anotacoes = document.getElementById('anotacoes').value;
+        var anotacoes = document.getElementById('anotacoes').value;
         var x=confirm('Deseja realmente sair?');
         if(x){
-            window.location.assign('sair.php?act=missao&&missao='+missaoMestre+'');
+            window.location.assign('sair.php?act=missao&&missao='+missaoMestre+'&anotacoes='+anotacoes+'&missaoMestre=1');
         }
     }
     

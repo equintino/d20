@@ -11,7 +11,7 @@
   @$login=strtoupper($_COOKIE['login']);
   @$personagem = $_GET['personagem'];
     if(!isset($personagem)){
-	$personagem=$_POST['personagem'];
+	@$personagem=$_POST['personagem'];
     }
   @$classe = $_GET['classe'];
   @$raca = $_GET['raca'];
@@ -47,7 +47,7 @@
         foreach($busca as $dados);
         if($dados->getpersonagem()){
           echo '<div class=add>';
-          echo '<h3>PERSONAGEM <font color=red size=15px>'.$dados->getpersonagem().'</font> JÃ? EXISTE!</h3>';
+          echo '<h3>PERSONAGEM <font color=red size=15px>'.$dados->getpersonagem().'</font> Jï¿½? EXISTE!</h3>';
           echo '<button class=\'continua continua-verde\' onclick=history.go(-1);>Voltar</button>';
           echo '</div>';
           die;
@@ -66,10 +66,10 @@
 	if(isset($_POST["submit"])) {
 	    $check = getimagesize($_FILES["avatarMestre"]["tmp_name"]);
 	    if($check !== false) {
-		echo "O arquivo é uma imagem - " . $check["mime"] . ".";
+		echo "O arquivo ï¿½ uma imagem - " . $check["mime"] . ".";
 		$uploadOk = 1;
 	    } else {
-		echo "O arquivo não é uma imagem.";
+		echo "O arquivo nï¿½o ï¿½ uma imagem.";
 		$uploadOk = 0;
 	    }
 	}
@@ -435,7 +435,7 @@
      $descricao=$_POST['descricao'];
      $objetivo=$_POST['objetivo'];
      $local=$_POST['local'];
-     $vilao=$_POST['vilao'];
+     $vilao=$_COOKIE['vilao'];
      $recompensa=$_POST['recompensa'];
      $falha=$_POST['falha'];
      $como=$_POST['como'];
@@ -445,7 +445,7 @@
      $verificar=$dao->encontrePorMissao($search);
         if($verificar){
           echo '<div class=add>';
-          echo '<h3>MISSÃƒO <font color=red size=15px>'.$search->getMISSAO().'<br></font> JÃ? EXISTE!</h3>';
+          echo '<h3>MISSÃƒO <font color=red size=15px>'.$search->getMISSAO().'<br></font> Jï¿½? EXISTE!</h3>';
           echo '<button class=\'continua continua-verde\' onclick=history.go(-1);>Voltar</button>';
           echo '</div>';
           die;
@@ -462,7 +462,6 @@
      $model->setfalha($falha);
      $model->setcomo($como);
      $model->setavatar($avatar);
-     
      $dao->grava7($model);
      
      header('Location:../web/index.php');
