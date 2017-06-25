@@ -60,5 +60,9 @@
         //document.cookie = "senha=;path=/d20/d20/";
         window.location.replace('../web/sair.php?personagem='+personagem+'');
     }
+   function esconde(){
+      document.querySelector('.ocultar').style.display='none';
+      document.querySelector('.some').style.display='none';
+   }
 
 

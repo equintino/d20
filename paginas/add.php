@@ -2,10 +2,12 @@
 <?php
   include_once '../dao/dao.php';
   include_once '../model/model.php';
-  include_once '../config/Config.php';
+  include_once '../validacao/valida_cookies.php';
+  //include_once '../config/Config.php';
   include_once '../mapping/modelMapper.php';
   include_once '../dao/ModelSearchCriteria.php';
   include_once '../validacao/ModelValidador.php';
+  
   @$avatar=$_COOKIE['avatar'];
   $act=$_GET['act'];
   @$login=strtoupper($_COOKIE['login']);
@@ -47,7 +49,7 @@
         foreach($busca as $dados);
         if($dados->getpersonagem()){
           echo '<div class=add>';
-          echo '<h3>PERSONAGEM <font color=red size=15px>'.$dados->getpersonagem().'</font> J�? EXISTE!</h3>';
+          echo '<h3>PERSONAGEM <font color=red size=15px>'.$dados->getpersonagem().'</font> JÁ EXISTE!</h3>';
           echo '<button class=\'continua continua-verde\' onclick=history.go(-1);>Voltar</button>';
           echo '</div>';
           die;
@@ -66,38 +68,37 @@
 	if(isset($_POST["submit"])) {
 	    $check = getimagesize($_FILES["avatarMestre"]["tmp_name"]);
 	    if($check !== false) {
-		echo "O arquivo � uma imagem - " . $check["mime"] . ".";
+		echo "O arquivo é uma imagem - " . $check["mime"] . ".";
 		$uploadOk = 1;
 	    } else {
-		echo "O arquivo n�o � uma imagem.";
+		echo "O arquivo não é uma imagem.";
 		$uploadOk = 0;
 	    }
 	}
 	// Check if file already exists
 	if (file_exists($target_file)) {
-	    echo "Sorry, file already exists.";
+	    valida_cookies::popup("Arquivo já existe.");
 	    $uploadOk = 0;
 	}
 	// Check file size
-	if ($_FILES["avatarMestre"]["size"] > 500000) {
-	    echo "Sorry, your file is too large.";
+	if ($_FILES["avatarMestre"]["size"] > 3000000 || $_FILES["avatarMestre"]["size"] == 0) {
+	    valida_cookies::popup("Tamanho do arquivo maior que 3Mb.");
 	    $uploadOk = 0;
 	}
 	// Allow certain file formats
-	if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-	&& $imageFileType != "gif" ) {
-	    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+	if($imageFileType != "png" ) {
+            valida_cookies::popup('Favor inserir imagem do formato png.');
 	    $uploadOk = 0;
 	}
 	// Check if $uploadOk is set to 0 by an error
 	if ($uploadOk == 0) {
-	    echo "Sorry, your file was not uploaded.";
+	    valida_cookies::popup("O arquivo não pode ser salvo.");
 	// if everything is ok, try to upload file
 	} else {
 	    if (move_uploaded_file($_FILES["avatarMestre"]["tmp_name"], $target_file)) {
 		echo "The file ". basename( $_FILES["avatarMestre"]["name"]). " has been uploaded.";
 	    } else {
-		echo "Sorry, there was an error uploading your file.";
+		valida_cookies::popup("Erro no envio do arquivo.");
 	    }
 	}
 
@@ -445,7 +446,7 @@
      $verificar=$dao->encontrePorMissao($search);
         if($verificar){
           echo '<div class=add>';
-          echo '<h3>MISSÃO <font color=red size=15px>'.$search->getMISSAO().'<br></font> J�? EXISTE!</h3>';
+          echo '<h3>MISSÃO <font color=red size=15px>'.$search->getMISSAO().'<br></font> JÁ EXISTE!</h3>';
           echo '<button class=\'continua continua-verde\' onclick=history.go(-1);>Voltar</button>';
           echo '</div>';
           die;

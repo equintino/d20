@@ -63,14 +63,8 @@ class valida_cookies{
         return $this->index;
     }
     public static function limpaCookies(){
-       //print_r($_COOKIE);
-       //echo '<br><br>';
-	setcookie("login"," ", time() + (86400 * 30), "/");
-	setcookie("senha"," ", time() + (86400 * 30), "/");
-        /*unset ($_COOKIE['login'],$login);
-        unset ($_COOKIE['senha'],$senha);
-        unset ($_COOKIE['setor'],$setor);*/
-       //print_r($_COOKIE);die;
+	setcookie("login"," ", time() + (86400 * 30),"/");
+	setcookie("senha"," ", time() + (86400 * 30),"/");
     }
     public function semLogin(){
         $this->popup('Você deve entrar com o usuário.',null);

@@ -63,7 +63,6 @@ final class index{
     if(array_key_exists('pagina', $_GET)){
       $pagina = $_GET['pagina'];
     }
-    //print_r($this->checaPagina($pagina));die;
     return $this->checaPagina($pagina);
   }
   

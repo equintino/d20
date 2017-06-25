@@ -75,6 +75,7 @@
     
    $(document).ready(function(){
     $('.anotacao2').hide();
+    //$('.trocaAvatar').hide();
 
     $('#anotacao').click(function(event){
         event.preventDefault();
@@ -86,6 +87,10 @@
         event.preventDefault();
         $(".anotacao2").hide("slow");
         //$(".ocultar").hide("slower")
+    });
+    $('#ocultar').click(function(event){
+        event.preventDefault();
+        $(".tocaAvatar").hide("slow");
     });
  }); 
 
