@@ -11,9 +11,9 @@
    <fieldset id=seletor>
       <?php if($act == 'novo'): ?>
       <legend>CADASTRO DE VILÕES</legend>     
-         <form name="formUpload" id="formUpload" class="font_1" action="../paginas/add.php?act=cadVilao" method="POST">
+         <form name="formUpload"  enctype="multipart/form-data" id="formUpload" class="font_1" action="../paginas/add.php?act=cadVilao" method="POST">
             <table class="vilao1">
-            <?php
+            <?php 
                foreach($variaveis as $keys => $item){
                   if($item=='sexo'){
                      echo '<tr><td align=right> '.$keys.': </td>';
@@ -38,7 +38,7 @@
                }
                //echo "<tr><td>Avatar <span class=trocaAvatar onclick=mudaImagem2()>&nbsp&nbsp&nbsp&nbsp&nbsp</span></td><td onclick=ocultar() >Noava Imagem</td>";
                echo '<input type="hidden" name="MAX_FILE_SIZE" value="3000000" />';
-               echo '<tr><td></td><td onclick=esconde();><input type="file" name="arquivo" size="45" /></td></tr>'; 
+               echo '<tr><td></td><td onclick=esconde();><input type="file" name="arquivoVilao" /></td></tr>'; 
             ?>
             </table>
              <span class=ocultar>Avatar <span class=trocaAvatar onclick=mudaImagem2()>&nbsp&nbsp&nbsp&nbsp&nbsp</span></span>
@@ -57,7 +57,7 @@
                echo '<tr><td align=right><label>RAÇA: </label></td><td class=nomes2>'.$dados->getraca().'</td><td align=right><label>CLASSE: </label></td><td class=nomes2>'.$dados->getclasse().'</td></tr>';
                echo '<div class=figVilao><img height=200ppx src="../web/'.$dados->getavatar().'" /><br>';                 
                   echo '<div class=descricaoVilao>'.$dados->getDESCRICAO().'</div>';
-               echo '</div>';
+               echo '</div>'; 
              ?>
          </table>
       <?php $atributos=array('Força'=>'F','Agilidade'=>'A','Inteligência'=>'I','Vontade'=>'V','Pontos de Vida'=>'PV','Pontos de Maná'=>'PM',); ?>

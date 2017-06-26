@@ -88,7 +88,6 @@ function botaoVilao(avatares,nomes){
             $search->settabela('personagem');
             $search->setpersonagem($personagem);
             $lista=$dao->encontre($search);
-            //print_r($dados->getMISSAO());die;
             foreach($lista as $z);
                $id=$z->getid();
                $titulos=array('PERSONAGEM','RAÇA','CLASSE','TENDÊNCIA1','TENDÊNCIA2');

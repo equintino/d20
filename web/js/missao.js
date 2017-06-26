@@ -9,6 +9,9 @@
     }
     function calcDefesa($def){
         var x = $def;
+        if(!x){
+            x = 0;
+        }
         document.getElementById('def').innerHTML = x;
     }
     function nivel(nivel){

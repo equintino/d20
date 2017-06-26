@@ -399,6 +399,54 @@
      }
   }
   if($act=='cadVilao'){
+     if($_FILES['arquivoVilao']['name']){
+     ////// enviando arquivo /////////
+	$target_dir = "../web/imagens/personagens/viloes/";
+	$target_file = $target_dir . basename($_FILES["arquivoVilao"]["name"]);
+	$uploadOk = 1;
+
+	$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+	// Check if image file is a actual image or fake image
+	if(isset($_POST["submit"])) {
+	    $check = getimagesize($_FILES["arquivoVilao"]["tmp_name"]);
+	    if($check !== false) {
+		echo "O arquivo é uma imagem - " . $check["mime"] . ".";
+		$uploadOk = 1;
+	    } else {
+		echo "O arquivo não é uma imagem.";
+		$uploadOk = 0;
+	    }
+	}
+	// Check if file already exists
+	if (file_exists($target_file)) {
+	    valida_cookies::popup("Arquivo já existe.");
+	    $uploadOk = 0;
+	}
+	// Check file size
+	if ($_FILES["arquivoVilao"]["size"] > 3000000 || $_FILES["arquivoVilao"]["size"] == 0) {
+	    valida_cookies::popup("Tamanho do arquivo maior que 3Mb.");
+	    $uploadOk = 0;
+	}
+	// Allow certain file formats
+	if($imageFileType != "png" ) {
+            valida_cookies::popup('Favor inserir imagem do formato png.');
+	    $uploadOk = 0;
+	}
+	// Check if $uploadOk is set to 0 by an error
+	if ($uploadOk == 0) {
+	    valida_cookies::popup("O arquivo não pode ser salvo.");
+	// if everything is ok, try to upload file
+	} else {
+	    if (move_uploaded_file($_FILES["arquivoVilao"]["tmp_name"], $target_file)) {
+		echo "The file ". basename( $_FILES["arquivoVilao"]["name"]). " has been uploaded.";
+	    } else {
+		valida_cookies::popup("Erro no envio do arquivo.");
+	    }
+	}
+
+	///// /////// //////// //////
+	$avatar = str_replace('../web/','',$target_file);
+    }
      $model->setvilao($_POST['vilao']);
      $model->setidade($_POST['idade']);
      $model->setsexo($_POST['sexo']);
@@ -407,7 +455,6 @@
      $model->setclasse($_POST['classe']);
      $model->setavatar($avatar);
      $model->settabela('viloes');
-     
      $dao->grava6($model);
      header('Location:../web/index.php?pagina=viloes&act=cad2Vilao&vilao='.$model->getvilao().'');
   }

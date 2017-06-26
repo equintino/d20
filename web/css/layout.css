@@ -718,12 +718,17 @@ fieldset legend{
 }
 .fichaAvatar{
     float: left;
-    height: 220px;
+    //height: 220px;
     position: relative;
     z-index: 1;
 }
 .fichaAvatar > img{
+    position: relative;
+    min-height: 250px;
+    //max-height: 250px;
+    min-width: 160px;
     max-width: 240px;
+    //border: 1px solid red;
 }
 .escudo{
     float: left;
@@ -1432,6 +1437,7 @@ fieldset legend{
 .atributoMissao{
     float: right;
     margin-right: 100px;
+    margin-top: -30px;
 }
 .bntMenos{
     position: relative;
