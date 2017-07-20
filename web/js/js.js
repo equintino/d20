@@ -53,16 +53,321 @@
     function fadeIn(element,time){
         processa(element,time,0,100);
     }
-    function sair(personagem){
-        var personagem;
-	//alert(personagem);
-        //document.cookie = "login=;path=/d20/d20/";
-        //document.cookie = "senha=;path=/d20/d20/";
-        window.location.replace('../web/sair.php?personagem='+personagem+'');
-    }
    function esconde(){
       document.querySelector('.ocultar').style.display='none';
       document.querySelector('.some').style.display='none';
-   }
+   }    
+      function mudaImagem(max){    
+           switch (raca){
+              case 'humano':
+                  switch (classe){
+                      case 'espadachim':
+                          switch (sexo){
+                              case 'F':
+                                  max = 6;
+                                  break;
+                              case 'M':
+                                  max = 6;
+                                  break;
+                          }
+                          break;
+                      case 'guerreiro':
+                          switch (sexo){
+                              case 'F':
+                                  max = 5;
+                                  break;
+                              case 'M':
+                                  max = 6;
+                                  break;
+                          }
+                          break;
+                      case 'paladino':
+                          switch (sexo){
+                              case 'F':
+                                  max = 5;
+                                  break;
+                              case 'M':
+                                  max = 9;
+                                  break;
+                          }
+                          break;
+                      case 'ranger':
+                          switch (sexo){
+                              case 'F':
+                                  max = 9;
+                                  break;
+                              case 'M':
+                                  max = 5;
+                                  break;
+                          }
+                          break;
+                      case 'gatuno':
+                          switch (sexo){
+                              case 'F':
+                                  max = 6;
+                                  break;
+                              case 'M':
+                                  max = 5;
+                                  break;
+                          }
+                          break;
+                      case 'mago':
+                          switch (sexo){
+                              case 'F':
+                                  max = 5;
+                                  break;
+                              case 'M':
+                                  max = 6;
+                                  break;
+                          }
+                          break;
+                      case 'sacerdote':
+                          switch (sexo){
+                              case 'F':
+                                  max = 5;
+                                  break;
+                              case 'M':
+                                  max = 5;
+                                  break;
+                          }
+                          break;
+                  }
+                  break;
+              case 'anao':
+                  switch (classe){
+                      case 'espadachim':
+                          switch (sexo){
+                              case 'F':
+                                  max = 1;
+                                  break;
+                              case 'M':
+                                  max = 2;
+                                  break;
+                          }
+                          break;
+                      case 'guerreiro':
+                          switch (sexo){
+                              case 'F':
+                                  max = 2;
+                                  break;
+                              case 'M':
+                                  max = 7;
+                                  break;
+                          }
+                          break;
+                      case 'paladino':
+                          switch (sexo){
+                              case 'F':
+                                  max = 2;
+                                  break;
+                              case 'M':
+                                  max = 4;
+                                  break;
+                          }
+                          break;
+                      case 'ranger':
+                          switch (sexo){
+                              case 'F':
+                                  max = 1;
+                                  break;
+                              case 'M':
+                                  max = 7;
+                                  break;
+                          }
+                          break;
+                      case 'gatuno':
+                          switch (sexo){
+                              case 'F':
+                                  max = 1;
+                                  break;
+                              case 'M':
+                                  max = 4;
+                                  break;
+                          }
+                          break;
+                      case 'mago':
+                          switch (sexo){
+                              case 'F':
+                                  max = 2;
+                                  break;
+                              case 'M':
+                                  max = 6;
+                                  break;
+                          }
+                          break;
+                      case 'sacerdote':
+                          switch (sexo){
+                              case 'F':
+                                  max = 1;
+                                  break;
+                              case 'M':
+                                  max = 1;
+                                  break;
+                          }
+                          break;
+                  }
+                  break;
+              case 'elfo':
+                  switch (classe){
+                      case 'espadachim':
+                          switch (sexo){
+                              case 'F':
+                                  max = 1;
+                                  break;
+                              case 'M':
+                                  max = 3;
+                                  break;
+                          }
+                          break;
+                      case 'guerreiro':
+                          switch (sexo){
+                              case 'F':
+                                  max = 1;
+                                  break;
+                              case 'M':
+                                  max = 2;
+                                  break;
+                          }
+                          break;
+                      case 'paladino':
+                          switch (sexo){
+                              case 'F':
+                                  max = 2;
+                                  break;
+                              case 'M':
+                                  max = 1;
+                                  break;
+                          }
+                          break;
+                      case 'ranger':
+                          switch (sexo){
+                              case 'F':
+                                  max = 7;
+                                  break;
+                              case 'M':
+                                  max = 5;
+                                  break;
+                          }
+                          break;
+                      case 'gatuno':
+                          switch (sexo){
+                              case 'F':
+                                  max = 1;
+                                  break;
+                              case 'M':
+                                  max = 1;
+                                  break;
+                          }
+                          break;
+                      case 'mago':
+                          switch (sexo){
+                              case 'F':
+                                  max = 2;
+                                  break;
+                              case 'M':
+                                  max = 4;
+                                  break;
+                          }
+                          break;
+                      case 'sacerdote':
+                          switch (sexo){
+                              case 'F':
+                                  max = 1;
+                                  break;
+                              case 'M':
+                                  max = 1;
+                                  break;
+                          }
+                          break;
+                  }
+                  break;
+              case 'halfling':
+                  switch (classe){
+                      case 'espadachim':
+                          switch (sexo){
+                              case 'F':
+                                  max = 1;
+                                  break;
+                              case 'M':
+                                  max = 1;
+                                  break;
+                          }
+                          break;
+                      case 'guerreiro':
+                          switch (sexo){
+                              case 'F':
+                                  max = 2;
+                                  break;
+                              case 'M':
+                                  max = 1;
+                                  break;
+                          }
+                          break;
+                      case 'paladino':
+                          switch (sexo){
+                              case 'F':
+                                  max = 2;
+                                  break;
+                              case 'M':
+                                  max = 1;
+                                  break;
+                          }
+                          break;
+                      case 'ranger':
+                          switch (sexo){
+                              case 'F':
+                                  max = 2;
+                                  break;
+                              case 'M':
+                                  max = 1;
+                                  break;
+                          }
+                          break;
+                      case 'gatuno':
+                          switch (sexo){
+                              case 'F':
+                                  max = 3;
+                                  break;
+                              case 'M':
+                                  max = 6;
+                                  break;
+                          }
+                          break;
+                      case 'mago':
+                          switch (sexo){
+                              case 'F':
+                                  max = 2;
+                                  break;
+                              case 'M':
+                                  max = 1;
+                                  break;
+                          }
+                          break;
+                      case 'sacerdote':
+                          switch (sexo){
+                              case 'F':
+                                  max = 1;
+                                  break;
+                              case 'M':
+                                  max = 1;
+                                  break;
+                          }
+                          break;
+                  }
+                  break;
+          }
+          if(idavatar > max-1){
+             idavatar=1;
+          }else{
+             idavatar++;
+          }
+         var max;
+         if(max==null){
+             max = 5;
+         }
+         link = '../web/imagens/personagens/'+raca+'/'+classe+'/'+sexo+'/'+idavatar+'.png';
+         document.cookie = "avatar="+link+"; path=/";
+         return link;
+      }
 
 

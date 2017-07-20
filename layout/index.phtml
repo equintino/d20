@@ -19,11 +19,13 @@
     <!--<link rel="stylesheet" href="css/mobile.css" media="(max-width: 939px)" />-->
    <link rel="stylesheet" href="js/slide.js" />
     <!--<link rel="stylesheet" href="css/mobile2.css" media="(max-width: 939px)"> -->
-   <script type="text/javascript" src="../web/js/jquery.js"></script>
    <script type="text/javascript" src="../web/js/js.js"></script>
    <script type="text/javascript" src="../web/js/missao.js"></script>
    <script type="text/javascript" src="../web/js/cadastro.js"></script>
    <script src="../web/js/upload.js" type="text/javascript"></script>
+   <script src='../web/js/jquery-3.2.1.min.js' type='text/javascript'></script>
+   <script type="text/javascript" src="../web/js/jquery.js"></script>
+   
 </head>
     <body onload="startSlideShow()" id=seletor>     
         <!-- header -->
@@ -39,11 +41,8 @@
                     $search->settabela('personagem');
                     $search->setjogador($login);
                     $dados = $dao->encontre($search);
-                    //echo '<font color=white>';
-                    //print_r([$dados,$_COOKIE]);die;
                     
-                    if($login<>'MESTRE'){
-                        //$menu=array('home'=>'Home','cadastro'=>'Cadastro de Personagem','lista'=>'Personagens','missao'=>'Missão'); 
+                    if($login<>'MESTRE'){ 
                         $menu=array('home'=>'Home','cadastro'=>'Cadastro de Personagem','lista'=>'Personagens'); 
                         if(@!$dados){
                            $menu=array('home'=>'Home','cadastro'=>'Cadastro de Personagem');
@@ -58,13 +57,6 @@
                     foreach($dados as $dado){
                         $personagem = $dado->getpersonagem();
                         $jogador = $dado->getjogador();
-                        if($dado->getemMissao()==1){
-                            //echo 'Personagem '.$item->getpersonagem().' está em missão.';
-                            /*echo "<div class='tempo'>";
-                                echo '<iframe scrolling="no" frameborder=0 src="tempo.php"></iframe>';
-                            echo '</div>';*/
-                            //$personagem = $dado->getpersonagem();
-                        }
                     } 
                     if(@!$personagem){
                         $personagem = null;
@@ -94,7 +86,6 @@
                                 echo '<ul class="sub-menu">';
                                     echo '<a href="'.Utils::createLink($key,array('personagem'=>$personagem,'act'=>'nova')).'" ><li>Nova</li></a>';
                                     echo '<a href="'.Utils::createLink($key,array('personagem'=>$personagem,'act'=>'inicia')).'" ><li>Iniciar</li></a>';
-                                    //echo '<a href="'.Utils::createLink($key,array('personagem'=>$personagem,'act'=>'continua')).'" ><li>Continuar</li></a>';
                                 echo '</ul>';
                               echo '</li>';
                            }elseif($item == 'Vilões'){
@@ -110,7 +101,7 @@
                         }
                      echo '</ul>';
                     if(@$login){
-                        echo '<span class=saudacao1 onclick=sair() >Jogador '.$login.' <img height=25px title="Sair" src="../web/imagens/sair.png" /></span>';
+                        echo '<span id=sair>Jogador '.$login.' <img height=25px title="Sair" src="../web/imagens/sair.png" /></span>';
                     }
                   ?>
             </div>

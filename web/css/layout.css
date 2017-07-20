@@ -19,7 +19,7 @@ body{
       color: white;
       text-align: center;
 }
-#logo{
+.logo{
     text-shadow: -1px -1px white, 1px 1px #333;
 }
 .conteudo{
@@ -497,7 +497,7 @@ fieldset legend{
     position: absolute;
     top: 390px;
     margin-left: 180px;
-    width: 500px;
+    width: 480px;
     height: 200px;
     overflow: auto;
     text-justify: auto;
@@ -774,7 +774,9 @@ fieldset legend{
 .atributo{
     float: right;
     margin-right: 40px;
-    width: 350px;
+    width: 380px;
+    margin-top: -30px;
+    //border: 1px solid red;
 }
 .equipamento{
     width: 100%;
@@ -1436,8 +1438,8 @@ fieldset legend{
 }
 .atributoMissao{
     float: right;
-    margin-right: 100px;
-    margin-top: -30px;
+    margin-right: 10px;
+    margin-top: -90px;
 }
 .bntMenos{
     position: relative;
@@ -1560,7 +1562,7 @@ fieldset legend{
 }
 .avatarPersonagem{
     text-align: center;
-    display: none;
+    //display: none;
 }
 .avatarPersonagem label{
     font-size: 15px;
@@ -1594,4 +1596,7 @@ fieldset legend{
     top: 380px;
     font-weight: 500;
     font-family: 'Architects Daughter', cursive;
+}
+.thumb-image{
+    height: 300px;
 }

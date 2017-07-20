@@ -3,6 +3,27 @@
 		visibility: hidden;
 	}
 </style>
+<script>
+  $(document).ready(function(){    
+  }) 
+ /* 
+function habilidades(){ 
+    var x = document.forms[0];
+    var txt = "";
+    var i;
+    for (i = 0; i < x.length; i++) {
+        if(x[i].checked){
+            txt = txt + x.elements[i].name;
+            if(txt.slice(-1) > 1){
+                for(z=i; txt.slice(-1) > 1; z--){
+                        x.elements[z].checked=true;
+                        txt = txt + x.elements[z].name;
+                }
+            }
+        }       
+    }
+}*/
+</script>
 <?php 
     $variaveis=array('JOGADOR'=>'jogador','PERSONAGEM'=>'personagem','RAÇA'=>'raca','CLASSE'=>'classe','TENDÊNCIA1'=>'tendencia1','TENDÊNCIA2'=>'tendencia2','SEXO'=>'sexo');
     @$act=$_GET['act'];
@@ -94,7 +115,7 @@
             </fieldset>
         </div>
     <?php elseif($act=='cad'): ?>
-        <script>dica();</script>
+        <script>var act='cad';</script>
         <div class='cad'>
             <fieldset>
                 <legend>CADASTRO DE PERSONAGEM</legend>
@@ -104,11 +125,11 @@
                            foreach($variaveis as $keys => $item){
                               if($item=='sexo'){
                                 echo '<tr><td align=right> '.$keys.': </td>';
-                                echo '<td><input onchange="functionSexoClasse()" type=radio name=sexo value=M> MASCULINO';
-                                echo ' <input onchange="functionSexoClasse()" type=radio name=sexo value=F> FEMININO</td>';
+                                echo '<td><input type=radio name=sexo value=M> MASCULINO';
+                                echo ' <input type=radio name=sexo value=F> FEMININO</td>';
                               }elseif($item=='raca'){
                                 echo '<tr><td align=right> '.$keys.': </td>';
-                                echo '<td><select id="mySelect" name=raca onchange="myFunction()">';
+                                echo '<td><select id="mySelect" name=raca >';
                                     echo '<option>&nbsp</option>';
                                     echo '<option value=humano>HUMANO</option>';
                                     echo '<option value=anao>ANÃO</option>';
@@ -117,7 +138,7 @@
                                 echo '</select>';
                             }elseif($item=='classe'){
                                 echo '<tr><td align=right> '.$keys.': </td>';
-                                    echo '<td><select name=classe id="myClasse" onchange="functionSexoClasse()" >';
+                                    echo '<td><select name=classe id="myClasse" >';
                                         echo '<option>&nbsp</option>';
                                         echo '<option value=espadachim>ESPADACHIM</option>';
                                         echo '<option value=guerreiro>GUERREIRO</option>';
@@ -153,8 +174,8 @@
                         ?>
                     </table>
 		    <?php if($login!='MESTRE'): ?>
-                     <div class="avatarPersonagem">
-                         <label>Tocar Avatar </label><span id=trocaAvatar class=trocaAvatar onclick=mudaImagem('.$max.')>&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+                     <div id="avatarPersonagem" class='avatarPersonagem'>
+                         <label>Tocar Avatar </label><span id=trocaAvatar class=trocaAvatar>&nbsp&nbsp&nbsp&nbsp&nbsp</span>
                      </div>
 		    <?php endif; ?>
                     <div class='bnt_'>
@@ -165,16 +186,16 @@
                         <?php 
                            if($login == 'MESTRE'){
 			      echo '<input type="hidden" name="MAX_FILE_SIZE" value="3000000" />';
-                              echo '<input type=file name="avatarMestre" />';  
+                              echo '<input type=file name="avatarMestre" /><br>';
+                              echo '<div id="aqui" class="cadraca"><img height=200px src="" /></div>';
                            }else{
-                              echo '<div id="aqui" class="cadraca"></div>';
+                              echo '<div id="aqui" class="cadraca"><img height=200px src="" /></div>';
                            }
                         ?>
-                        <div id="aqui.texto" align="justify" class="texto"></div>
+                        <div id="aquiTexto" align="justify" ></div>
                         </td></tr>
                     </table>
                 </form> 
-                <script>trocaAvatar('Trocar Avatar')</script>
             </fieldset>
         </div>
     <?php elseif($act=='cad2'): ?>
@@ -220,7 +241,6 @@
                                 break;
                         }
                     ?>
-                    <!--<table>-->
                         <?php
                             if(@$habilidades){
                                 echo '<div align=left class=cadTitulo>&nbsp&nbspClasse: '.strtoupper($classe).'</div>';
@@ -236,12 +256,11 @@
                                                 $numero=substr($item->getREQUISITOS(),-1);
                                                 if(is_numeric($numero)){
                                                    //echo $item->getREQUISITOS().' - ';
-                                                   //print_r($numero);
                                                    $cor='red';
                                                 }else{
                                                    $cor=null; 
                                                 }
-                                                echo '<td><input type=checkbox onclick=habilidades() name=\''.$item->gethabilidade().'\'title=\'';
+                                                echo '<td id=habilidade><input type="checkbox" name=\''.$item->gethabilidade().'\'title=\'';
                                                     echo 'TIPO: '.($item->getTIPO())."\r\n";
                                                     echo 'MANA: '.($item->getMANA())."\r\n"; 
                                                     echo 'REQUISITOS: '.($item->getREQUISITOS())."\r\n";
@@ -291,7 +310,6 @@
                             echo '</div>';
                         ?>
                         <input type="submit" value="AVANÇA" class='botao botao-verde'>
-                    <!--</table>-->
                 </form>
             </fieldset>
         </div>
@@ -307,6 +325,7 @@
             $recurso=$atrib->getouro();
         }
     ?>
+        <script>var recurso = <?= $recurso ?> </script>
         <div class='cad3'>
             <fieldset>
                 <legend>CADASTRO DE PERSONAGEM <span>(Continuação)</span></legend>
@@ -351,8 +370,7 @@
                                              $desc.='Obs: '.
                                                    $armasCoporais->getOBS();}
                                         echo '<span class='.str_replace(' ','',$item).' >';
-                                            echo '<input type=checkbox onchange=moeda(\''.$recurso.'\'); value='.$armasCoporais->getouro().' name=\''.$item.'\' title="'.
-                                            $desc.'" />';
+                                            echo '<input class=armasCorp type=checkbox value='.$armasCoporais->getouro().' name=\''.$item.'\' title="'.$desc.'" />';
                                         echo '</span>';
                                     }
                         ?>
@@ -377,6 +395,7 @@
             $recurso=400;
         }
     ?>
+        <script>var recurso = <?= $recurso ?></script>
         <div class="cad4">
             <fieldset>
                 <legend>CADASTRO DE PERSONAGEM <span>(Continuação)</span></legend>
@@ -420,8 +439,7 @@
                                              $desc.='Obs: '.
                                                    $armasCoporais->getOBS();}
                                             echo '<span class='.str_replace(' ','',$item).' >';
-                                                echo '<input type=checkbox onchange=moeda(\''.$recurso.'\'); value='.$armasCoporais->getouro().' name=\''.$item.'\' title="'.
-                                                  $desc.'" />';
+                                                echo '<input class=armasCorp type=checkbox value='.$armasCoporais->getouro().' name=\''.$item.'\' title="'.$desc.'" />';
                                             echo '</span>';
                                         }
                                         echo '<script>moeda('.$recurso.');</script>';
@@ -456,6 +474,7 @@
             $class='cad7';
         }
     ?>
+        <script>var recurso = <?= $recurso ?></script>
         <div class="<?= $class ?>">
             <fieldset>
                 <legend>CADASTRO DE PERSONAGEM <span>(Continuação)</span></legend>
@@ -497,7 +516,7 @@
                                         echo '<td align=center>'.$item->getouro().'</td>';
                                         echo '<td align=center>'.$item->getpeso().'</td>';
                                         echo '<td>'.$item->getDESCRICAO().'</td>';
-                                        echo '<td align=center><input type=checkbox onchange=moeda(\''.$recurso.'\') value='.$item->getouro().' name=\''.$item->getitem().'\'  /></td>';
+                                        echo '<td align=center><input type=checkbox class=armasCorp value='.$item->getouro().' name=\''.$item->getitem().'\'  /></td>';// onchange=moeda(\''.$recurso.'\')
                                     echo '</tr>';
                                 }
                                 echo '</table>';
@@ -554,7 +573,7 @@
                                         $value=$armaduras->getouro();
                                 }
                                 /// verifica se possui o recurso para compra ///
-                                        echo '<input type=checkbox onchange=moeda(\''.$recurso.'\'); value='.$value.' name=\''.$item.'\' title="'.$desc.'" />';
+                                        echo '<input class=armasCorp type=checkbox value='.$value.' name=\''.$item.'\' title="'.$desc.'" />';//onchange=moeda(\''.$recurso.'\'); 
                                 //////////         
                                     echo '</span>';
                             }
@@ -564,7 +583,7 @@
                                 echo '<span class=Punhal_ title="Pode ser usado em combate como uma Adaga.">*</span>';
                             }
                         ?>
-                        <script>moeda('<?= $recurso ?>');</script>
+                        <!--<script>moeda('<?= $recurso ?>');</script>-->
                         <input type="submit" value="AVANÇA" class='botao botao-verde'>&nbsp
                         <input type=button value="VOLTAR" onclick=history.go(-2) class='botao botao-verde'>&nbsp
                         <a href="../web/index.php?pagina=cadastro&act=<?= $cad ?>&classe=<?= $_GET['classe'] ?>&raca=<?= $raca ?>&personagem=<?= $_GET['personagem'] ?>"><input type=button class='botao botao-verde' value=PULAR></a> 
@@ -577,10 +596,9 @@
         echo '<div class=\'addFim\'>'.
              '<h3>PARABENS!<br>SUA FICHA ESTÁ COMPLETA.<br>BOM JOGO!</h3>';
              '</div>';
-        die;
+        //die;
     ?> 
     <?php elseif($act=='avatar'):
-        //print_r($_POST);die;
         $dao = new Dao();
         $search = new ModelSearchCriteria();
         $search->settabela('tb_avatar');
@@ -604,8 +622,7 @@
                 echo '</span>';
             }
         echo '</div>';
-        die;
+        //die;
     ?>           
     <?php endif; ?>
-</div>
 </div>

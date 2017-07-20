@@ -202,7 +202,7 @@ function botaoVilao(avatares,nomes){
                   foreach($tCaracteristicas as $key => $item_){
                      if($item_[0] == 'P'){
                         $item_=(explode(' ',$item_));
-                        echo '<tr><td><span class="destaque atr">'.$item_[0][0].'</span>'.substr($item_[0], 1).' '.$item_[1].'<span class="destaque atr"> '.$item_[2][0].'</span>'.substr($item_[2], 1).'</td><td>';//<input type=text name='.$key.' maxlength = "4" size=2 value=';
+                        echo '<tr><td><span class="destaque atr">'.$item_[0][0].'</span>'.substr($item_[0], 1).' '.$item_[1].'<span class="destaque atr"> '.$item_[2][0].'</span>'.substr($item_[2], 1).'</td><td align=right>';//<input type=text name='.$key.' maxlength = "4" size=2 value=';
                         if($item_[2][0]=='V'){                 
                             echo $atrib->getPV();
                             if($dados){
@@ -217,8 +217,15 @@ function botaoVilao(avatares,nomes){
                             }else{
                                 echo '</td></tr>';
                             }
-                        }elseif($item_[2][0]=='E'){                
-                           echo $atrib->getPE().'</td></tr>';
+                        }elseif($item_[2][0]=='E'){
+                           $x=0;
+                           while($x<10){
+                              echo '<span id=exp'.$x.'>';
+                                 echo '<img height=20px src="../web/imagens/experiencia2.png" alt='.$x.' title="'.$atrib->getPE().'"/>';
+                              $x++;
+                              echo '</span>';
+                           }
+                           echo '</td></tr>';
                         }
                      }else{
                         echo '<tr><td width=220px><span class="destaque atr">'.$item_[0].'</span>'. substr($item_, 1).'</td><td align=right>';//<input type=text name='.$key.' maxlength = "4" size=2 value=';

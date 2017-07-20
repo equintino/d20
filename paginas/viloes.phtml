@@ -38,17 +38,21 @@
                }
                //echo "<tr><td>Avatar <span class=trocaAvatar onclick=mudaImagem2()>&nbsp&nbsp&nbsp&nbsp&nbsp</span></td><td onclick=ocultar() >Noava Imagem</td>";
                echo '<input type="hidden" name="MAX_FILE_SIZE" value="3000000" />';
-               echo '<tr><td></td><td onclick=esconde();><input type="file" name="arquivoVilao" /></td></tr>'; 
+               echo '<tr><td></td><td><span id=avaVilao ><input type="file" name="arquivoVilao" /></span></td></tr>'; // onclick=esconde();
+               
+        $pasta = 'imagens/personagens/viloes/';
+        $arquivos = glob("$pasta{*.jpg,*.JPG,*.png,*.gif,*.bmp}", GLOB_BRACE);
+        //echo "Total de Imagens" . count($arquivos);
             ?>
             </table>
-             <span class=ocultar>Avatar <span class=trocaAvatar onclick=mudaImagem2()>&nbsp&nbsp&nbsp&nbsp&nbsp</span></span>
+             <script>var totalViloes=26</script>
+             <span class=ocultar>Avatar <span class=trocaAvatar>&nbsp&nbsp&nbsp&nbsp&nbsp</span></span><!-- onclick=mudaImagem2()-->
             <div>
                <input type="reset" value="LIMPA" class='botao botao-verde'>
                <input type="submit" value="GRAVA" class='botao botao-verde'>
             </div>
-             <div class="some"><div id="aqui" class="cadVilao"></div></div>
+             <div class="some"><div id="aqui" class="cadVilao"><img src="" /></div></div>
          </form>
-         <script>trocaAvatar('Trocar Avatar')</script>
       <?php elseif($act=='cad2Vilao'): ?>
       <legend>CADASTRO DE VILÕES</legend>  
          <table>
