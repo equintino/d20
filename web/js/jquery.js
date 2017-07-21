@@ -38,7 +38,7 @@ $(document).ready(function(){
                var texto = 'Como raça amigável, tentam se dar bem com todas as outras raças, mesmo assim, não que dizer que considerem todos amigos, no geral consideram amigos verdadeiros apenas os de sua própria raça; porém quando fazem amigos sem ser de sua espécie, são extremamente leais, mostrando ferocidade quando esse amigo está em perigo. Vivem no geral em comunidades pacificas, com grandes fazendas e bosques, nunca construíram um reino próprio, nem reconhecem qualquer tipo de nobreza dos de sua espécie, procurando sempre os anciões de sua família em busca de orientação, essa base construída em cima da família ajudou os halflings a mantes suas tradições por milhares de anos, independente do que estivesse ocorrendo no reino. Criaturas que querem se dar bem com todos, possuem no geral alinhamento leal e bom, não gostando de ver os outros sofrerem ou passar por opressão, mantendo sempre um forte as suas tradições, assim como os velhos hábitos e conforto. A divindade dos Halflings é Yondalla O Abençoado, o protetor dos halflings, a língua usada por ele é um idioma próprio. Como dito anteriormente, eles se aventuram mais com propósitos de proteger a comunidade, família e amigos, porém em uma batalha, por seu tamanho reduzido, usam mais de astúcia e furtividade do que força bruta ou mágia.';
                break;
          }
-         $('#aquiTexto').text(texto);  
+         $('#aquiTexto').html(texto);  
          verAvatar();  
      });
      $('select[name=classe]').change(function(){
