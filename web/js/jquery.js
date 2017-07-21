@@ -105,8 +105,8 @@ $(document).ready(function(){
       })
       
       $(":file").on('change', function() {
-      var countFiles = $(this)[0].files.length;
-      var imgPath = $(this)[0].value;
+      var countFiles = $(this).length;
+      var imgPath = $(this).val();
       var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
       var image_holder = $("#aqui");
       image_holder.empty();
@@ -129,6 +129,7 @@ $(document).ready(function(){
          }
       } else {
          alert("Selecione somente imagem png ou gif");
+         $(':file').val('');
       }
    }); 
       var z=0;
