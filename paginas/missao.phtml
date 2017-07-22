@@ -20,8 +20,26 @@ function botaoVilao(avatares,nomes){
     i++; 
     //alert(document.cookie);
 }
+$(document).ready(function(){
+   i=0;
+   $('#seletor').click(function(){
+      $('#avatarVilao').html($('<img />').attr({
+         src: avatares[i],
+         height: '250px'
+      }));
+      $('#vilao').text(nomes[i]);
+      document.cookie="avatar="+avatares[i]+";path=/";
+      document.cookie="vilao="+nomes[i]+";path=/";
+      
+      if(i == avatares.length-1){
+         i=0;
+      }else{
+         i++;
+      }
+   })
+})
 </script>
-<body id=seletor>
+<body>
 <?php  
     @$personagem = $_GET['personagem'];
     @$login=strtoupper($_COOKIE['login']);
@@ -407,7 +425,8 @@ function botaoVilao(avatares,nomes){
                 <tr><td align="right"><label>Missão: </label></td><td colspan="6"><input required type="text" name="missao" size="50"/></td></tr>
                 <tr><td align="right"><label>Objetivo: </label></td><td colspan="6"><input required type="text" name="objetivo" size="50"/></td></tr>
                 <tr><td align="right"><label>Local: </label></td><td colspan="6"><input required type="text" name="local" size="50"/></td></tr>
-                <tr><td align="right"><label>Vilão: </label></td><td colspan="4">&nbsp&nbsp<span id=vilao></span></td><td id=seletor>Escolher Vilão <span class="botaoVilao" id=seletor onclick="botaoVilao(avatares,nomes)">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span></td></tr>
+                <tr><td align="right"><label>Vilão: </label></td><td colspan="4">&nbsp&nbsp<span id=vilao></span></td><td>Escolher Vilão <span class="botaoVilao" id=seletor ">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span></td></tr>
+                <!--onclick="botaoVilao(avatares,nomes)-->
                 <tr><td align="right"><label>Recompensa: </label></td><td colspan="5"><input required type="text" name="recompensa" size="50"/></td></tr>
                 <tr><td align="right"><label>Falha: </label></td><td colspan="5"><input required type="text" name="falha" size="50"/></td></tr>
                 <tr><td align="right"><label>Como completar a missão: </label></td><td colspan="5"><input required type="text" name="como" size="50"/></td></tr>
