@@ -97,7 +97,31 @@
                ?>
             </fieldset>
         </div>
-    <?php elseif($act=='cad'): ?>
+    <?php elseif($act=='cad'): 
+         $pastas=null;
+         $racas=array('humano','elfo','anao','halfling');
+         $classes=array('espadachim','guerreiro','paladino','ranger','gatuno','mago','sacerdote');
+         //echo '<pre><font color=white>';
+         $pastaJs = '{';
+         foreach($racas as $individual){
+            foreach($classes as $cadaUma){
+               $pasta = $individual.'/'.$cadaUma.'/M/';
+               $arquivos = glob("imagens/personagens/$pasta{*.png}", GLOB_BRACE);
+               $pastas[$pasta] = count($arquivos);
+               $pastaJs .= '\''.$pasta.'\':'.count($arquivos).',';
+               $pasta = $individual.'/'.$cadaUma.'/F/';
+               $arquivos = glob("imagens/personagens/$pasta{*.png}", GLOB_BRACE);
+               $pastas[$pasta] = count($arquivos); 
+               $pastaJs .= '\''.$pasta.'\':'.count($arquivos).',';              
+            }
+         }
+         $pastaJs = substr($pastaJs,0,-1);
+         $pastaJs .= '}';
+         //$pastaJs = "{'imagens/personagens/humano/espadachim/M/':6,'imagens/personagens/humano/espadachim/F/':6}";
+         //echo '<pre><font color=white>';
+         //print_r($pastaJs);
+         echo '<script>var quantAvatar='.$pastaJs.';</script>';
+    ?>
         <script>var act='cad';</script>
         <div class='cad'>
             <fieldset>
@@ -158,7 +182,7 @@
                     </table>
 		    <?php if($login!='MESTRE'): ?>
                      <div id="avatarPersonagem" class='avatarPersonagem'>
-                         <label>Tocar Avatar </label><span id=trocaAvatar class=trocaAvatar>&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+                         <label>Tocar Avatar </label><span id=trocaAvatarPersonagem class=trocaAvatarPersonagem>&nbsp&nbsp&nbsp&nbsp&nbsp</span>
                      </div>
 		    <?php endif; ?>
                     <div class='bnt_'>

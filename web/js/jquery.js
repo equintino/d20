@@ -49,10 +49,16 @@ $(document).ready(function(){
          sexo = ($(this).on(':selected').val()); 
          verAvatar();      
      })
-    $('#trocaAvatar').click(function(){
-         link = mudaImagem();
-         bnt = 1;
-         verAvatar(bnt); 
+        //var teste='humano/espadachim/M/';
+        //alert(quantAvatar.indexOf('humano/espadachim/M/'));
+        
+    $('#trocaAvatarPersonagem').click(function(){
+        //alert(link);
+        //alert(quantAvatar);
+        link = mudaImagem();
+        //alert(link);
+        bnt = 1;
+        verAvatar(bnt); 
     })
      function verAvatar(bnt){
          if(bnt!=1){
