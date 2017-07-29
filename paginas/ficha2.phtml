@@ -1,0 +1,358 @@
+<style>
+    #ficha{      
+       background: no-repeat url('imagens/borda.png');
+       background-position-x: center;
+       background-size: auto;
+       height: 1600px;
+    }
+    #ficha .tituloPersonagem{
+       position: relative;
+       top: 100px;
+       left: -420px;
+       font-size: 33px;
+       color: white;
+       text-shadow: 2px 2px 2px yellow;
+    }
+    #div1 .atribFicha {
+      clear: left;
+      float: left;
+      font-size: 40px;
+      margin-left: 20px;
+      text-shadow: 1px 1px white, -1px -1px #333;
+      //background-color: #ddd;
+      color: #ddd;
+      padding: 10px;
+    }
+    #div1{
+       //border: 1px solid red;
+       margin: 100px auto;
+       background: #ccc;
+       border-radius: 5px 5px 100px 100px;
+       height: 1100px;
+       width: 900px;
+    }
+    #div1 div, .equipamentoFicha{
+       border-radius: 8px;
+       box-shadow: 4px 4px 4px gray;
+       background: white;
+       color: black;
+       padding: 0 10px;
+       width: 300px;
+       font-size: 30px;
+       border: 2px solid black;
+       height: 80px;
+    }
+    #div1 .campo1, #div1 .campo2, 
+    #div1 .campo3, #div1 .campo4,
+    #div1 .campo5, #div1 .campo6,
+    #div1 .campo7, #div1 .campo9,
+    #div1 .campo10, #div1 .campo11, 
+    #div1 .campo12, #div1 .campo13,
+    #div1 .campo14{
+       float: left;
+       margin: 4px 4px;
+    }
+    #div1 .campo3{
+       clear: left;
+       width: 190px;
+    }
+    #div1 .campo6{
+       clear: left;
+       width: 630px;
+       overflow: auto;
+    }
+    #div1 .campo7{
+      clear: left;
+      width: 100px;
+      text-align: center;
+    }
+    #div1 .campo8{
+      float: left;
+      margin: 4px 4px;
+      width: 140px; 
+      text-align: center;
+    }
+    #div1 .campo5{
+       width: 78px;
+    }
+    #div1 .campo9, #div1 .campo10{
+       width: 220px; 
+       text-align: center;
+    }
+    #div1 .campo9, #div1 .campo11{
+       clear: left;
+    }
+    #div1 .campo11, #div1 .campo12, 
+    #div1 .campo13, #div1 .campo14{
+        width: 96%;
+        text-align: center;
+        height: 100px;
+    }
+    .persoFoto_ > img{
+       top: 230px;
+       position: absolute;
+       z-index: 2;
+    }
+    .persoFoto_ > img{
+       max-height: 256px;
+       max-width: 225px;
+       border: 5px solid white;
+       background-color: black;
+    }
+    .escudoFicha > img{
+      position: relative;
+      margin-top: 320px;
+      z-index: 2;
+    }
+    .defTitulo{
+        font-size: 30px;
+    }
+    .defesaFicha{
+       position: relative;
+       left: 210px;
+       top: -145px;
+       z-index: 3;
+       font-size: 40px;
+       font-weight: 700;
+    }
+    .defVal{
+        position: relative;
+        left: 290px;
+    }
+    .experiencia img, .xp{
+      float: right;
+      position: relative;
+      top: -270px;
+      left: -10px;
+      //border: 1px solid red;
+       z-index: 2;
+    }
+    .xp{
+       font-size: 26px;
+       margin-top: -5px;
+       margin-right: 5px;
+    }
+    .tabelaFicha{
+       border-radius: 8px;
+       box-shadow: 4px 4px 4px gray;
+       background: white;
+       color: black;
+       padding: 0 10px;
+       width: 886px;
+       font-size: 30px;
+       border: 2px solid black;
+       //height: 100px;
+       margin: 5px;
+    }
+    .tabelaFicha td{
+        text-align: center;
+    }
+    .arm {
+        padding-bottom: 3px;
+    }
+    .tab1{
+       //clear: left;
+       //margin-top: 50px;
+       //float: left;
+    }
+    .lin2, .col2{
+        border-left: solid gray;
+        border-right: solid gray;
+    }
+    .lin3{
+        //border-top: solid gray;
+        border-left: solid gray;
+        border-right: solid gray;
+    }
+    .lin2Col4{
+        border-left: solid gray;
+    }
+    .col1, .col2, .col3, .col4{
+        border-bottom: solid gray;
+    }
+    .col4{
+        border-left: solid gray;
+    }
+    .descricaoFicha{
+        font-size: 20px;
+    }
+    .equipamentoFicha{
+        clear: left;
+        float: left;
+         margin: 4px 4px;
+         width: 887px;
+         text-align: center;
+    }
+    .equipamentoFicha tr{
+        border: solid gray;
+    }
+    .equiTitulo td{
+        border-bottom: solid gray;
+    }
+    .equiCol2{
+        border-left: solid gray;
+        border-right: solid gray;
+    }
+    .menos{        
+         float: left;
+         margin: 0 420px;
+    }
+</style>
+<script>
+   $(document).ready(function(){
+      $('#div2').css({
+         float: 'left',
+         height: '500px',
+         width: '100%'
+      }).hide();
+      $('.mais').css({
+         float: 'left',
+         margin: '0 420px'
+      });
+      $('.mais').click(function(){
+            $('#div1').height('1400px');
+         $('#div2').show('slower',function(){
+            $('.mais img').attr({
+               'src':'../web/imagens/menos.png',
+               'title':'duplo clique para ocultar'
+            }); 
+            $('.mais img').dblclick(function(){
+               $('#div2').hide('slower');
+               $('.mais img').attr({
+                  'src':'../web/imagens/mais.png',
+                  'title':'mais informações'
+               });
+               $('#div1').height('1100px');
+            });          
+         });
+         $('.equip td').css({
+            borderTop: 'solid gray'
+         })
+      });
+   })
+</script>
+<?php
+   $personagem=$_GET['personagem'];
+   $search->setpersonagem($personagem);
+   $dados=$dao->encontrePorPersonagem($search);
+   $classe=$dados->getclasse();
+   $nivel=$dados->getnivel();
+   if(!$nivel){
+      $nivel=1;
+   }
+   
+   $search->settabela('atributos');
+   $atributos=$dao->encontrePorPersonagem($search);
+   
+   $search->settabela('armamentos');
+   $armamento=$dao->encontrePorPersonagem($search);
+?>
+
+<script>var nivelValue = <?= $nivel; ?></script>
+
+<div id="ficha" class="ficha">
+   <span class=tituloPersonagem>.</span>
+    <div id="div1">
+        <div class="campo1">Personagem<br><?= $dados->getpersonagem(); ?></div><div class="campo2">Jogador<br><?= $dados->getjogador() ?></div>
+        <span class="persoFoto_"><img src="<?= $dados->getfoto() ?>" /></span>
+        <div class="campo3">Raça<br><?= $dados->getraca() ?></div><div class="campo4">Classe<br><?= $dados->getclasse() ?></div><div class="campo5"></div>
+      <div class="campo6">Motivação<br><?= $dados->getmotivacao() ?></div>
+      <span class='atribFicha'>Atributos</span><br>
+      <div class='campo7'>Força<br><?= $atributos->getFORCA() ?></div>
+      <div class='campo8'>Agilidade<br><?= $atributos->getAGILIDADE() ?></div>
+      <div class='campo8'>Inteligência<br><?= $atributos->getINTELIGENCIA() ?></div>
+      <div class='campo8'>Vontade<br><?= $atributos->getVONTADE() ?></div>
+      <div class='campo9'>Pontos de Vida<br><?= $atributos->getPV() ?></div>
+      <div class='campo10'>Pontos de Maná<br><?= $atributos->getPM() ?></div>
+      <span class='escudoFicha'><img src='imagens/escudo.png'><span class='defesaFicha'><span class=defTitulo>Defesa</span><br><span class="defVal"><?= $armamento->getdefesa() ?></span></span></span>
+      <span class='experiencia'>
+         <?php
+            $x=0;
+            while($x<10){
+               echo '<span id=exp'.$x.'>';
+                  echo '<img height=20px src="imagens/experiencia.png" alt='.$x.' title="'.$atributos->getPE().'"/>';
+                   $x++;
+               echo '</span>';
+            }
+         ?>
+         <span class='xp'>XP</span>
+      </span>
+      <span class='atribFicha'>Habilidades</span>
+      <?php
+      $habilidades=explode('/',str_replace('_',' ',$dados->gethabilidade()));
+      $x=0;
+      $search->settabela('tb_'.$classe);
+      foreach($habilidades as $habilidade){
+         $x++;
+         $search->sethabilidade($habilidade);
+         $habilidade=$dao->encontrePorHabilidade($search);
+         if($habilidade){
+            echo '<table class="tabelaFicha tab'.$x.'">';
+               echo '<tr><td class=col1>'.$habilidade->gethabilidade().
+                    "</td><td class=col2>Tipo</td><td class=col3>Maná Necessário</td></tr>".
+                    '<tr>'.
+                    "<tr><td class=descricaoFicha>".$habilidade->getDESCRICAO()."</td>".
+                    '<td class="descricaoFicha lin2">'.$habilidade->gettipo().'</td><td class=descricaoFicha>'.$habilidade->getmana().'</td></tr>';
+            echo '</table>';
+         }
+       }
+      ?>
+      <span class="mais atribFicha"><img title="Mais Informações" height=30px src="../web/imagens/mais.png" /></span>
+      <span id="div2">
+         <span class='atribFicha'>Armas & Ítens</span>
+         <table class="tabelaFicha arm">
+         <?php
+         $armas=explode('/',str_replace('_',' ',$armamento->getARMA()));
+         $x=0;
+                  echo '<tr><td class=col1>Arma'.
+                       "</td><td class=col2>Dano</td><td class=col3>FN</td>";
+                     echo '<td class=col4>OBS</td><tr>';
+         foreach($armas as $arma){
+            $x++;
+            $y=$x+1;
+            $search->setARMA($arma);
+            $search->settabela('tb_armas_distancia');
+            $descArma=$dao->encontrePorArma($search);
+            if(!$descArma){
+               $search->settabela('tb_armas_corporais'); 
+               $descArma=$dao->encontrePorArma($search);           
+               if(!$descArma){
+                  $search->settabela('tb_conjuracao');
+                  $descArma=$dao->encontrePorArma($search);             
+               }
+            }
+            if($descArma){
+               echo "<tr><td class='descricaoFicha'>".$descArma->getARMA()."</td>".
+                 '<td class="descricaoFicha lin'.$y.'">'.$descArma->getDANO().'</td><td class=descricaoFicha>'.$descArma->getFN().'</td>'; 
+                 echo '<td class=lin2Col4>'.$descArma->getOBS();
+               echo '</td></tr>';
+            }
+          }
+         ?>
+         </table>
+         <span class='atribFicha' >Equipamentos </span>
+         <table class="equipamentoFicha">
+            <?php
+               $search->settabela('tb_equipamento_geral');
+               echo '<pre><font color=white>';
+               $equipamentos=(explode('/',str_replace('_',' ',$armamento->getequipamento())));
+                     echo '<tr class=equiTitulo><td>Item</td><td class=equiCol2>Peso</td><td>Descrição</td></tr>';
+               foreach($equipamentos as $equipamento){
+                     if($equipamento){
+                     $search->getARMA($equipamento);
+                     $search->setitem($equipamento);
+                     $descEquipamento=$dao->encontrePorItem($search);
+                     echo '<tr class=equip><td>'.$descEquipamento->getitem().'</td><td class=equiCol2>'.$descEquipamento->getpeso().'</td><td>'.$descEquipamento->getDESCRICAO().'</td></tr>';
+                     }
+               }
+            ?>
+         </table>
+      </span>
+    </div>
+</div>
+<?php 
+
+?>
+
+
+

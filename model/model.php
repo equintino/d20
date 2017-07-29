@@ -23,6 +23,7 @@
  private $nivel;
  private $emMissao;
  private $vilao;
+ private $foto;
  private $id_atrib;
  private $FORCA;
  private $AGILIDADE;
@@ -202,6 +203,12 @@
  }
  public function setvilao($vilao ){
 	$this->vilao=$vilao;
+ }
+ public function getfoto(){
+	return $this->foto;
+ }
+ public function setfoto($foto ){
+	$this->foto=$foto;
  }
  public function getid_atrib(){
 	return $this->id_atrib;

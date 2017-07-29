@@ -57,27 +57,8 @@
       document.querySelector('.ocultar').style.display='none';
       document.querySelector('.some').style.display='none';
    }    
-      function mudaImagem(max){
-        if(!max){
-            for(var key in quantAvatar){
-                if(key==raca+'/'+classe+'/'+sexo+'/'){
-                    max=quantAvatar[key];
-                    break;
-                }
-            }
-        }
-          if(idavatar > max-1){
-             idavatar=1;
-          }else{
-             idavatar++;
-          }
-         var max;
-         if(max==null){
-             max = 5;
-         }
-         link = '../web/imagens/personagens/'+raca+'/'+classe+'/'+sexo+'/'+idavatar+'.png';
-         document.cookie = "avatar="+link+"; path=/";
+    /*  function mudaImagem(max){
          return link;
-      }
+      }*/
 
 

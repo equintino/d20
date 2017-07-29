@@ -4,7 +4,19 @@
 	}
 </style>
 <script>
-  $(document).ready(function(){    
+  $(document).ready(function(){ 
+     $('.raca .verFicha_').mouseover(function(){
+        $(this).css('cursor','pointer'),
+        $(this).click(function(){
+           $('.escolha').html('\
+               <a href="index.php?pagina=missao&personagem='+personagem+'"><button>Missão</button></a>\n\
+               <a href="index.php?pagina=ficha2&personagem='+personagem+'"><button>Ficha</button></a>\n\
+            ').css({
+               top: '55px',
+               position: 'relative'
+            })
+        })
+     })
   }) 
 </script>
 <?php 
@@ -30,6 +42,7 @@
          $z=0;
       }
 ?>
+<script>var act='<?= $act ?>'</script>
 <div class="conteudo" >
     <?php if($act=='lista'):?>
         <?php 
@@ -78,7 +91,8 @@
                                     $pagina = 'ficha';
                                 }
                                     if($item->getid() == $ids[$z]){
-                                       echo '<tr><td class=nomes>'.$titulos[0].'</td><td class=nomes2><a href='.Utils::createLink($pagina, array('personagem'=>$item->getpersonagem())).'>'.$item->getpersonagem().'<span class=verFicha><br>(ver ficha)</span></a></td></tr>';
+                                       echo '<tr><td class=nomes>'.$titulos[0].'</td><td class="nomes2 verFicha_">'.$item->getpersonagem().'<span class=verFicha><br>(ver ficha)</span></td></tr>';
+                                       echo '<script>var personagem="'.$item->getpersonagem().'"</script>';
                                        echo '<tr><td class=nomes>'.$titulos[1].'</td><td class=nomes2>'.$item->getraca().'</td></tr>';
                                        echo '<tr><td class=nomes>'.$titulos[2].'</td><td class=nomes2>'.$item->getclasse().'</td></tr>';
                                        echo '<tr><td class=nomes>'.$titulos[3].'</td><td class=nomes2>'.$item->gettendencia1().'</td></tr>';
@@ -89,6 +103,7 @@
                                        }
                                        echo '</span>';
                              echo '</table>';
+                             echo '<span class=escolha></span>';
                          echo '</div>';
                                        echo '<div class=saudacao>Personagem de '.strtoupper($item->getjogador()).'</div>';
                                        break;
@@ -98,10 +113,10 @@
             </fieldset>
         </div>
     <?php elseif($act=='cad'): 
+       //echo
          $pastas=null;
          $racas=array('humano','elfo','anao','halfling');
          $classes=array('espadachim','guerreiro','paladino','ranger','gatuno','mago','sacerdote');
-         //echo '<pre><font color=white>';
          $pastaJs = '{';
          foreach($racas as $individual){
             foreach($classes as $cadaUma){
@@ -179,6 +194,7 @@
                             }
                         }
                         ?>
+                     <script>var jogador='<?= $login ?>';</script>
                     </table>
 		    <?php if($login!='MESTRE'): ?>
                      <div id="avatarPersonagem" class='avatarPersonagem'>

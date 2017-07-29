@@ -70,6 +70,9 @@
 	if (array_key_exists('vilao', $properties)){
 	  $model->setvilao($properties['vilao']);
 	}
+	if (array_key_exists('foto', $properties)){
+	  $model->setfoto($properties['foto']);
+	}
 	if (array_key_exists('id_atrib', $properties)){
 	  $model->setid_atrib($properties['id_atrib']);
 	}

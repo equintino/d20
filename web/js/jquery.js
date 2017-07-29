@@ -1,5 +1,6 @@
 $(document).ready(function(){
     var personagem;
+    var numero=0;
     $('#cabecalho > span').addClass('logo');
     $('#sair')
         .addClass('saudacao1')
@@ -17,7 +18,7 @@ $(document).ready(function(){
          }
       }
      var x = "DICA... \r\n     Use sua imaginação. A primeira coisa a fazer é escolher um conceito, uma idéia básica. O que seu personagem vai ser? Um guerreiro bárbaro com um machado mágico e uma pele de pantera jogada sobre os ombros? Um feiticeiro caçador de monstros? Um lutador de rua em busca de vingança? Um elfo caçador de recompensas? Você pode ser tudo isso e qualquer outra coisa que imaginar.";
-     var descricao = 'Humanos uma raça muito comum e muitas vezes escolhida, boa para iniciantes no RPG, é uma raça neutra, sem benefícios ou malefícios, os humanos não tem nenhuma vantagem ou poder melhor que as outras raças, mas também não tem nenhuma desvantagem.Podem ter várias cores de pele, cabelos e olhos e chegar até 2,20m ';
+     //var descricao = 'Humanos uma raça muito comum e muitas vezes escolhida, boa para iniciantes no RPG, é uma raça neutra, sem benefícios ou malefícios, os humanos não tem nenhuma vantagem ou poder melhor que as outras raças, mas também não tem nenhuma desvantagem.Podem ter várias cores de pele, cabelos e olhos e chegar até 2,20m ';
      if(act=='cad'){
       alert(x);
      }
@@ -38,25 +39,38 @@ $(document).ready(function(){
                var texto = 'Como raça amigável, tentam se dar bem com todas as outras raças, mesmo assim, não que dizer que considerem todos amigos, no geral consideram amigos verdadeiros apenas os de sua própria raça; porém quando fazem amigos sem ser de sua espécie, são extremamente leais, mostrando ferocidade quando esse amigo está em perigo. Vivem no geral em comunidades pacificas, com grandes fazendas e bosques, nunca construíram um reino próprio, nem reconhecem qualquer tipo de nobreza dos de sua espécie, procurando sempre os anciões de sua família em busca de orientação, essa base construída em cima da família ajudou os halflings a mantes suas tradições por milhares de anos, independente do que estivesse ocorrendo no reino. Criaturas que querem se dar bem com todos, possuem no geral alinhamento leal e bom, não gostando de ver os outros sofrerem ou passar por opressão, mantendo sempre um forte as suas tradições, assim como os velhos hábitos e conforto. A divindade dos Halflings é Yondalla O Abençoado, o protetor dos halflings, a língua usada por ele é um idioma próprio. Como dito anteriormente, eles se aventuram mais com propósitos de proteger a comunidade, família e amigos, porém em uma batalha, por seu tamanho reduzido, usam mais de astúcia e furtividade do que força bruta ou mágia.';
                break;
          }
-         $('#aquiTexto').html(texto);  
-         verAvatar();  
+         $('#aquiTexto').html(texto); 
+         if(jogador != 'MESTRE'){
+            verAvatar(); 
+        }
      });
      $('select[name=classe]').change(function(){
          classe = $('select[name=classe]').on(':selected').val(); 
-         verAvatar(); 
+         if(jogador != 'MESTRE'){
+            verAvatar(); 
+        }
      }); 
      $(':radio').change(function(){
          sexo = ($(this).on(':selected').val()); 
-         verAvatar();      
+         if(jogador != 'MESTRE'){
+            verAvatar(); 
+        }
      })
-        //var teste='humano/espadachim/M/';
-        //alert(quantAvatar.indexOf('humano/espadachim/M/'));
         
-    $('#trocaAvatarPersonagem').click(function(){
-        //alert(link);
-        //alert(quantAvatar);
-        link = mudaImagem();
-        //alert(link);
+    $('#trocaAvatarPersonagem').click(function(){  
+            for(var key in quantAvatar){
+                if(key==raca+'/'+classe+'/'+sexo+'/'){
+                    max=quantAvatar[key];
+                    break;
+                }
+            }
+          if(idavatar > max-1){
+             idavatar=1;
+          }else{
+             idavatar++;
+          }
+         link = '../web/imagens/personagens/'+raca+'/'+classe+'/'+sexo+'/'+idavatar+'.png';
+         document.cookie = "avatar="+link+"; path=/";
         bnt = 1;
         verAvatar(bnt); 
     })
@@ -108,8 +122,7 @@ $(document).ready(function(){
                 recurso = parseInt(recurso) + parseInt($(this).val());
             }
             $('#moeda').text(recurso);
-      })
-      
+      })    
       $(":file").on('change', function() {
       var countFiles = $(this).length;
       var imgPath = $(this).val();
@@ -137,29 +150,7 @@ $(document).ready(function(){
          alert("Selecione somente imagem png ou gif");
          $(':file').val('');
       }
-   }); 
-      var z=0;
-      var i=($('#exp0 img').attr('title'));
-      while(z < i){
-         $('#exp'+z+' img').attr({
-              src:'../web/imagens/experiencia.png',
-            title:''
-         })
-         z++;
-      }
-    var numero=0;
-    $('.trocaAvatar').click(function(){
-        numero++;
-        var link='imagens/personagens/viloes/'+numero+'.png'
-        $('#aqui img').attr({
-            src:link,
-            height:'300px'
-        });
-        if(numero == totalViloes){
-            numero=0;
-        }
-        document.cookie = "avatar="+link+"; path=/";
-    })
+   })
    $('#avaVilao').on('change', function() {  
       $('.ocultar').hide();     
       var countFiles = $(this)[0].files.length;
@@ -187,11 +178,54 @@ $(document).ready(function(){
       } else {
          alert("Selecione somente imagem png ou gif");
       }
-   }); 
-    
+   })  
+    $('.trocaAvatar').click(function(){
+        numero++;
+        var link='imagens/personagens/viloes/'+numero+'.png'
+        $('#aqui img').attr({
+            src:link,
+            height:'300px'
+        });
+        if(numero == totalViloes){
+            numero=0;
+        }
+        document.cookie = "avatar="+link+"; path=/";
+    }) 
+      var z=0;
+      var i=($('#exp0 img').attr('title'));    
+      $(".campo5").html('Nível<br>'+nivelValue);
       
+      if (i == 10){
+          i = 0;
+          var novoNivel=nivelValue+parseInt(1);
+          alert("Parabéns! Você subiu de nível!")
+          $(".campo5").html('Nível<br>'+novoNivel);
+      }
+      
+      while(z < 10-i){
+         $('#exp'+z+' img').attr({
+               src:'../web/imagens/experiencia2.png',
+             title:i
+         })
+         z++;
+      }        
+        
+   $('.arm td:empty').css('background','#ccc');
+   
+   
+   //$('#ficha').css('color','white');
+    /*$('#ficha').append($('<img />').attr({
+        src: 'imagens/borda.png',
+        width: '100%'
+    }))*/
+    //alert('ok');
+    
            $('.armasCorp').prop('checked',false); 
            $('#moeda').text(recurso);
+           
+           //////
+    //$('#ficha').css('background','url(../imagens/borda.png)');
+    //$('#ficha').css('color','white');
            
 })
 

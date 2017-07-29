@@ -17,7 +17,6 @@
    }
    public function encontre2(ModelSearchCriteria $search = null){
             set_time_limit(3600);
-            ini_set('memory_limit', '-1');
         $result = array();
         foreach ($this->query($this->getEncontreSql2($search)) as $row){
             $model = new Model();
@@ -135,7 +134,7 @@
          return $result;
    }
   public function encontrePorMissao(ModelSearchCriteria $search=null){
-         if($search->getpersonagem()){
+           if($search->getpersonagem()){
            $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` = '0' and `MISSAO` = '".$search->getMISSAO()."' and personagem = '".$search->getpersonagem()."'")->fetch();
          }else{
            $row = $this->query("SELECT * FROM `".$search->gettabela()."` WHERE `excluido` = '0' and `MISSAO` = '".$search->getMISSAO()."'")->fetch();
@@ -225,7 +224,7 @@
         }
         $model->setcriado($now);
         $model->setmodificado($now);        
-        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`jogador`,`personagem`,`raca`,`classe`,`tendencia1`,`tendencia2`,`idade`,`tabela`,`sexo`,`criado`,`modificado`,`excluido`,`habilidade`,`altura`,`peso`,`cidade`,`motivacao`,`breveHistoria`,`avatar`,`nivel`,`emMissao`) VALUES (:id,:jogador,:personagem,:raca,:classe,:tendencia1,:tendencia2,:idade,:tabela,:sexo,:criado,:modificado,:excluido,:habilidade,:altura,:peso,:cidade,:motivacao,:breveHistoria,:avatar,:nivel,:emMissao)';
+        $sql = 'INSERT INTO `'.$model->gettabela().'` (`id`,`jogador`,`personagem`,`raca`,`classe`,`tendencia1`,`tendencia2`,`idade`,`tabela`,`sexo`,`criado`,`modificado`,`excluido`,`habilidade`,`altura`,`peso`,`cidade`,`motivacao`,`breveHistoria`,`avatar`,`nivel`,`emMissao`,`foto`) VALUES (:id,:jogador,:personagem,:raca,:classe,:tendencia1,:tendencia2,:idade,:tabela,:sexo,:criado,:modificado,:excluido,:habilidade,:altura,:peso,:cidade,:motivacao,:breveHistoria,:avatar,:nivel,:emMissao,:foto)';
 	$search = new ModelSearchCriteria();
         $search->settabela($model->gettabela());
         return $this->execute($sql, $model);
@@ -234,7 +233,7 @@
         date_default_timezone_set("Brazil/East");
         $now = mktime (date("H"), date("i"), date("s"), date("m")  , date("d"), date("Y"));
         $model->setmodificado($now);
-        $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, jogador = :jogador, personagem = :personagem, raca = :raca, classe = :classe, tendencia1 = :tendencia1, tendencia2 = :tendencia2, idade = :idade, tabela = :tabela, sexo = :sexo, modificado = :modificado, excluido = :excluido, habilidade = :habilidade, altura = :altura, peso = :peso, cidade = :cidade, motivacao = :motivacao, breveHistoria = :breveHistoria, avatar = :avatar, nivel = :nivel, emMissao = :emMissao WHERE personagem = :personagem ';
+        $sql = 'UPDATE `'.$model->gettabela().'` SET id = :id, jogador = :jogador, personagem = :personagem, raca = :raca, classe = :classe, tendencia1 = :tendencia1, tendencia2 = :tendencia2, idade = :idade, tabela = :tabela, sexo = :sexo, modificado = :modificado, excluido = :excluido, habilidade = :habilidade, altura = :altura, peso = :peso, cidade = :cidade, motivacao = :motivacao, breveHistoria = :breveHistoria, avatar = :avatar, nivel = :nivel, emMissao = :emMissao, foto = :foto WHERE personagem = :personagem ';
         return $this->execute($sql, $model);
    }
    private function insert2(Model $model){
@@ -349,7 +348,7 @@
         return $this->execute7($sql, $model);
    }
    public function setaMissao(Model $model){ 
-	if($model->getpersonagem()){
+        if($model->getpersonagem()){
           $sql = "UPDATE `".$model->gettabela()."` SET emMissao = '".$model->getemMissao()."' WHERE personagem = '".$model->getpersonagem()."'"; 
        }elseif($model->getjogador()){
          $sql = "UPDATE `".$model->gettabela()."` SET emMissao = '".$model->getemMissao()."' WHERE jogador = '".$model->getjogador()."'";
@@ -419,7 +418,7 @@
         return $model;
    }
    private function getParams(Model $model){
-        $params = array(':id'=> $model->getid(),':jogador'=> $model->getjogador(),':personagem'=> $model->getpersonagem(),':raca'=> $model->getraca(),':classe'=> $model->getclasse(),':tendencia1'=> $model->gettendencia1(),':tendencia2'=> $model->gettendencia2(),':idade'=> $model->getidade(),':tabela'=> $model->gettabela(),':sexo'=> $model->getsexo(),':criado'=> $model->getcriado(),':modificado'=> $model->getmodificado(),':excluido'=> $model->getexcluido(),':habilidade'=> $model->gethabilidade(),':altura'=> $model->getaltura(),':peso'=> $model->getpeso(),':cidade'=> $model->getcidade(),':motivacao'=> $model->getmotivacao(),':breveHistoria'=> $model->getbreveHistoria(),':avatar'=> $model->getavatar(),':nivel'=> $model->getnivel(),':emMissao'=> $model->getemMissao(),);
+        $params = array(':id'=> $model->getid(),':jogador'=> $model->getjogador(),':personagem'=> $model->getpersonagem(),':raca'=> $model->getraca(),':classe'=> $model->getclasse(),':tendencia1'=> $model->gettendencia1(),':tendencia2'=> $model->gettendencia2(),':idade'=> $model->getidade(),':tabela'=> $model->gettabela(),':sexo'=> $model->getsexo(),':criado'=> $model->getcriado(),':modificado'=> $model->getmodificado(),':excluido'=> $model->getexcluido(),':habilidade'=> $model->gethabilidade(),':altura'=> $model->getaltura(),':peso'=> $model->getpeso(),':cidade'=> $model->getcidade(),':motivacao'=> $model->getmotivacao(),':breveHistoria'=> $model->getbreveHistoria(),':avatar'=> $model->getavatar(),':nivel'=> $model->getnivel(),':emMissao'=> $model->getemMissao(),':foto'=> $model->getfoto(),);
 	 return $params;
    }
    private function getParams2(Model $model){
@@ -477,11 +476,17 @@
           }
         return $sql;
   }
-   private function getEncontreSql2(ModelSearchCriteria $search = null) {
-          if($search->getjogador()){ 
-                $sql = "SELECT * FROM `".$search->gettabela()."` LEFT JOIN `personagem` on ".$search->gettabela().".personagem = personagem.personagem WHERE ".$search->gettabela().".MISSAO = '".$search->getMISSAO()."' AND missao.excluido = '0' AND missao.jogador = '".$search->getjogador()."'";
-          }elseif($search->getjogador() == null){ 
-                $sql = "SELECT * FROM `".$search->gettabela()."` LEFT JOIN `personagem` on ".$search->gettabela().".personagem = personagem.personagem WHERE ".$search->gettabela().".MISSAO = '".$search->getMISSAO()."' AND missao.excluido = '0' AND missao.jogador != 'MESTRE'";
+   private function getEncontreSql2(ModelSearchCriteria $search = null) {               
+          if ($search->getpersonagem() !== null) {
+                 $sql="SELECT * FROM ".$search->gettabela()." WHERE personagem='".$search->getpersonagem()."' AND excluido = '0' ";
+          }elseif($search->getjogador() !== null){
+                $sql = "SELECT * FROM `".$search->gettabela()."` LEFT JOIN `personagem` on ".$search->gettabela().".personagem = personagem.personagem WHERE ".$search->gettabela().".MISSAO = '".$search->getMISSAO()."' AND missao.excluido = '0'";
+          }else{
+              if($search->gettabela()=='personagem'){
+                $sql = 'SELECT * FROM `'.$search->gettabela().'` WHERE jogador != "MESTRE" AND excluido = "0" ';
+              }else{
+                $sql = 'SELECT * FROM `'.$search->gettabela().'` WHERE excluido = "0" ';
+              }    
           }
         return $sql;
   }
