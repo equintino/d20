@@ -3,7 +3,6 @@
   include_once '../dao/dao.php';
   include_once '../model/model.php';
   include_once '../validacao/valida_cookies.php';
-  //include_once '../config/Config.php';
   include_once '../mapping/modelMapper.php';
   include_once '../dao/ModelSearchCriteria.php';
   include_once '../validacao/ModelValidador.php';
@@ -53,7 +52,7 @@
           echo '<button class=\'continua continua-verde\' onclick=history.go(-1);>Voltar</button>';
           echo '</div>';
           die;
-        }else{
+        }else{        
             $dao->grava($model);
         }
       }else{
@@ -86,7 +85,7 @@
 	    $uploadOk = 0;
 	}
 	// Allow certain file formats
-	if($imageFileType != "png" ) {
+	if($imageFileType != "png" && $imageFileType != "jpg") {
             valida_cookies::popup('Favor inserir imagem do formato png.');
 	    $uploadOk = 0;
 	}
@@ -95,19 +94,22 @@
 	    valida_cookies::popup("O arquivo não pode ser salvo.");
 	// if everything is ok, try to upload file
 	} else {
-	    if (move_uploaded_file($_FILES["avatarMestre"]["tmp_name"], $target_file)) {
+	    /*if (move_uploaded_file($_FILES["avatarMestre"]["tmp_name"], $target_file)) {
 		echo "The file ". basename( $_FILES["avatarMestre"]["name"]). " has been uploaded.";
 	    } else {
 		valida_cookies::popup("Erro no envio do arquivo.");
-	    }
+	    }*/
 	}
 
 	///// /////// //////// //////
 	$avatar = str_replace('../web/','',$target_file);
-    }
-//print_r($_FILES["avatarMestre"]["tmp_name"]);die;
+    }    
         $model->setavatar($avatar);
-        $dao->grava($model); 
+        //$dao->grava($model);
+         include 'uploadcrop.php';
+         //echo 'estou aqui';die; 
+        //header('Location:uploadcrop.php?act=cad&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem());
+        die;
      }
 	echo '<div class=\'add\'>'.
                '<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.

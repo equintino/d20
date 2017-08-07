@@ -7,17 +7,18 @@
   $(document).ready(function(){ 
      $('.raca .verFicha_').mouseover(function(){
         $(this).css('cursor','pointer'),
-        $(this).click(function(){
+        $(this).click(function(e){
            $('.escolha').html('\
                <a href="index.php?pagina=missao&personagem='+personagem+'"><button>Missão</button></a>\n\
-               <a href="index.php?pagina=ficha2&personagem='+personagem+'"><button>Ficha</button></a>\n\
+               <a href="index.php?pagina=ficha2&personagem='+personagem+'"><button class=bntFicha>Ficha</button></a>\n\
             ').css({
                top: '55px',
                position: 'relative'
             })
-        })
+         })
      })
-  }) 
+  })
+    
 </script>
 <?php 
     $variaveis=array('JOGADOR'=>'jogador','PERSONAGEM'=>'personagem','RAÇA'=>'raca','CLASSE'=>'classe','TENDÊNCIA1'=>'tendencia1','TENDÊNCIA2'=>'tendencia2','SEXO'=>'sexo');
@@ -28,6 +29,8 @@
     @$raca=$_GET['raca'];
     @$login=strtoupper($_COOKIE['login']);
     @$jogador_=$_GET['jogador'];
+    
+   
     if(!$raca){
         @$raca=$_POST['raca'];
     }
@@ -115,7 +118,7 @@
     <?php elseif($act=='cad'): 
        //echo
          $pastas=null;
-         $racas=array('humano','elfo','anao','halfling');
+         $racas=array('humano','elfo','anao','halfling','aarakocras','thri-kreen');
          $classes=array('espadachim','guerreiro','paladino','ranger','gatuno','mago','sacerdote');
          $pastaJs = '{';
          foreach($racas as $individual){
@@ -132,9 +135,6 @@
          }
          $pastaJs = substr($pastaJs,0,-1);
          $pastaJs .= '}';
-         //$pastaJs = "{'imagens/personagens/humano/espadachim/M/':6,'imagens/personagens/humano/espadachim/F/':6}";
-         //echo '<pre><font color=white>';
-         //print_r($pastaJs);
          echo '<script>var quantAvatar='.$pastaJs.';</script>';
     ?>
         <script>var act='cad';</script>
@@ -157,6 +157,8 @@
                                     echo '<option value=anao>ANÃO</option>';
                                     echo '<option value=elfo>ELFO</option>';
                                     echo '<option value=halfling>HALFLING</option>';
+                                    echo '<option value=aarakocras>AARAKOCRAS</option>';
+                                    echo '<option value=thri-kreen>THRI-KREEN</option>';
                                 echo '</select>';
                             }elseif($item=='classe'){
                                 echo '<tr><td align=right> '.$keys.': </td>';
@@ -203,7 +205,7 @@
 		    <?php endif; ?>
                     <div class='bnt_'>
                         <input type="reset" value="LIMPA" class='botao2 botao-verde2'>
-                        <input type="submit" value="GRAVA" class='botao botao-verde'>
+                        <input name="upload" type="submit" value="GRAVA" class='botao botao-verde'>
                     </div>
                     <table><tr><td>
                         <?php 
