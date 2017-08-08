@@ -33,13 +33,18 @@ if($_GET['raca']==null){
    $raca=$model->getraca();
    $classe=$model->getclasse();
    $sexo=$model->getsexo();
+   $personagem=$model->getpersonagem();
 }else{
    $raca=$_GET['raca'];
    $classe=$_GET['classe'];
    $sexo=$_GET['sexo'];
+   $personagem=$_GET['personagem'];
 }
-//echo "<pre>";
-//print_r([$_FILES,$_POST,$model,$_GET]);die;
+/*print_r([$_FILES,$_POST,$model,$_GET,$large_photo_exists]);die;
+if (isset($_POST["upload_thumbnail"])){ // && strlen($large_photo_exists)>0
+echo "<pre>";
+print_r([$_FILES,$_POST,$model,$_GET]);die;
+}*/
 $upload_dir = "../web/imagens/personagens/$raca/$classe/$sexo";
 $upload_path = $upload_dir."/";
 $quantArquivos = glob("$upload_path*.*", GLOB_BRACE);
@@ -47,11 +52,12 @@ $large_image_prefix = "resize_";
 $thumb_image_prefix = "thumbnail_";
 $large_image_name = count($quantArquivos)+1;//$large_image_prefix.$_FILES['avatarMestre']['name'];//$_SESSION['random_key'];
 $thumb_image_name = count($quantArquivos)+1;//$thumb_image_prefix.$_FILES['avatarMestre']['name'];//$_SESSION['random_key'];
-if(isset($act)){
-   //$large_image_name=$large_image_name+1;
-   //$thumb_image_name=count($quantArquivos)+1;
+if(!isset($act)){
+//print_r([$large_image_name-1,$thumb_image_name-1,$act]);
+   //echo 'act é -> '.$act;die;
+   $large_image_name=$large_image_name-1;
+   $thumb_image_name=$thumb_image_name-1;
 }
-//print_r($large_image_name);die;
 $max_file = "3";// Maximum file size in MB
 $max_width = "400";// Max width allowed for the large image
 $thumb_width = "230";// Width of thumbnail image
@@ -158,9 +164,9 @@ function getWidth($image) {
 
 //Image Locations
 $large_image_location = $upload_path.$large_image_name.$_SESSION['user_file_ext'];
-$thumb_image_location = $upload_path.$thumb_image_name.$_SESSION['user_file_ext'];
+$thumb_image_location = $upload_path.'/foto/'.$thumb_image_name.$_SESSION['user_file_ext'];
 //Create the upload directory with the right permissions if it doesn't exist
-//print_r($upload_dir);die;
+//print_r([$large_image_location,$thumb_image_location]);die;
 if(!is_dir($upload_dir)){
    mkdir($upload_dir, 0777);
    chmod($upload_dir, 0777);
@@ -169,10 +175,10 @@ if(!is_dir($upload_dir.'/foto')){
    mkdir($upload_dir.'/foto', 0777);
    chmod($upload_dir.'/foto', 0777);
 }
-//print_r($large_image_location);die;
+//print_r([$large_image_location,$thumb_image_location,$_POST]);die;
 if (isset($_POST["upload"])) {
    //Get the file information
-   $userfile_name = count($quantArquivos)+1;//$_FILES['avatarMestre']['name'];
+   $userfile_name = $_FILES['avatarMestre']['name'];
    $userfile_tmp = $_FILES['avatarMestre']['tmp_name'];
    $userfile_size = $_FILES['avatarMestre']['size'];
    $userfile_type = $_FILES['avatarMestre']['type'];
@@ -212,7 +218,7 @@ if (isset($_POST["upload"])) {
 
          move_uploaded_file($userfile_tmp, $large_image_location);
          chmod($large_image_location, 0777);
-         //print_r($large_image_location);die;
+         //print_r($large_image_location);
 
          $width = getWidth($large_image_location);
          $height = getHeight($large_image_location);
@@ -223,35 +229,36 @@ if (isset($_POST["upload"])) {
          }else{
             $scale = 1;
             $uploaded = resizeImage($large_image_location,$width,$height,$scale);
-         }
+         } 
         //Delete the thumbnail file so the user can create a new one
          if (file_exists($thumb_image_location)) {
-            unlink($thumb_image_location);
+            //unlink($thumb_image_location);
          }
-      }
+      } 
          //Refresh the page to show the new uploaded image
          //header("location:".$_SERVER["PHP_SELF"]);
          //exit();
-   }
-}
+   } 
+} 
 //Check to see if any images with the same name already exist
-//print_r($large_image_location);die;
+//print_r([$large_image_location,$thumb_image_location]);
 if (file_exists($large_image_location)){
    if(file_exists($thumb_image_location)){
-      $thumb_photo_exists = "<img src=\"".$upload_path.$thumb_image_name.'.'.$file_ext."\" alt=\"Thumbnail Image\"/>";
+      $thumb_photo_exists = "<img src=\"".$thumb_image_location."\" alt=\"Thumbnail Image\"/>";
    }else{
       $thumb_photo_exists = "";
    }
    $large_photo_exists = "<img src=\"".$large_image_location."\" alt=\"Large Image\"/>";
       //print_r([$large_photo_exists,$large_image_location,$thumb_photo_exists]);die;
+   //print_r($thumb_image_location);die;
 } else {
    $large_photo_exists = "";
    $thumb_photo_exists = "";
 }
 //print_r($large_photo_exists);die;
-print_r([$large_image_location,$_POST,$large_photo_exists,$_FILES]);die;
+//print_r([$large_image_location,$_POST,$large_photo_exists,$thumb_photo_exists,$_FILES]);
 
-if (isset($_POST["upload_thumbnail"]) && strlen($large_photo_exists)>0) {
+if (isset($_POST["upload_thumbnail"])) {// && strlen($large_photo_exists)>0
    //Get the new coordinates to crop the image.
    $x1 = $_POST["x1"];
    $y1 = $_POST["y1"];
@@ -262,9 +269,8 @@ if (isset($_POST["upload_thumbnail"]) && strlen($large_photo_exists)>0) {
    //Scale the image to the thumb_width set above
    $scale = $thumb_width/$w;
    $cropped = resizeThumbnailImage($thumb_image_location, $large_image_location,$w,$h,$x1,$y1,$scale);
-print_r($large_image_location);die;
    //Reload the page again to view the thumbnail
-   header("location:".$_SERVER["PHP_SELF"]);
+   header("location:../web/index.php?pagina=cadastro&act=cad2&raca=$raca&classe=$classe&personagem=$personagem");
    exit();
 }
 
@@ -282,6 +288,8 @@ if ($_GET['a']=="delete" && strlen($_GET['t'])>0){
    header("location:".$_SERVER["PHP_SELF"]);
    exit(); 
 }
+$model->setavatar($large_image_location);
+$model->setfoto($thumb_image_location);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -387,9 +395,9 @@ $(window).load(function () {
       </div>
       <hr />
       <?php 	} ?>
-         <form name="photo" enctype="multipart/form-data" action="<?php echo $_SERVER["PHP_SELF"];?>" method="post">
+         <!--<form name="photo" enctype="multipart/form-data" action="<?php echo $_SERVER["PHP_SELF"];?>" method="post">
             Foto <input type="file" name="image" size="30" /> <input type="submit" name="upload" value="Enviar" />
-         </form>
+         </form>-->
 <?php } ?>
 </body>
 </html>

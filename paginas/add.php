@@ -86,7 +86,7 @@
 	}
 	// Allow certain file formats
 	if($imageFileType != "png" && $imageFileType != "jpg") {
-            valida_cookies::popup('Favor inserir imagem do formato png.');
+            valida_cookies::popup('Favor inserir imagem do formato png ou jpg.');
 	    $uploadOk = 0;
 	}
 	// Check if $uploadOk is set to 0 by an error
@@ -105,8 +105,10 @@
 	$avatar = str_replace('../web/','',$target_file);
     }    
         $model->setavatar($avatar);
-        //$dao->grava($model);
          include 'uploadcrop.php';
+         //print_r($model);
+         //die;
+        $dao->grava($model);
          //echo 'estou aqui';die; 
         //header('Location:uploadcrop.php?act=cad&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem());
         die;
