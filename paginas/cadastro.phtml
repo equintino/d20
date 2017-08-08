@@ -17,6 +17,9 @@
             })
          })
      })
+     $(':file').change(function(){
+        $('#avatarPersonagem').hide();
+     })
   })
     
 </script>
@@ -214,6 +217,8 @@
                               echo '<input type=file name="avatarMestre" /><br>';
                               echo '<div id="aqui" class="cadraca"><img height=200px src="" /></div>';
                            }else{
+			      echo '<input type="hidden" name="MAX_FILE_SIZE" value="3000000" />';
+                              echo '<input type=file name="avatarMestre" /><br>';
                               echo '<div id="aqui" class="cadraca"><img height=200px src="" /></div>';
                            }
                         ?>
