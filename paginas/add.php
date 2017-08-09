@@ -105,19 +105,20 @@
 	$avatar = str_replace('../web/','',$target_file);
     }    
         $model->setavatar($avatar);
-         include 'uploadcrop.php';
-         //print_r($model);
-         //die;
+        if($_FILES['avatarMestre']['error']==0){
+            include 'uploadcrop.php';
+            $dao->grava($model);
+            die;
+        }
+        $posicao=strrpos($avatar,'/')+1;
+        $model->setfoto(substr($avatar,0,$posicao).'/foto/'.substr($avatar,$posicao));
         $dao->grava($model);
-         //echo 'estou aqui';die; 
-        //header('Location:uploadcrop.php?act=cad&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem());
-        die;
      }
 	echo '<div class=\'add\'>'.
-               '<h3>REGISTRO GRAVADO COM SUCESSO</h3>'.
-               '<a href=\'../web/index.php?pagina=cadastro&act=cad2&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().' \' ></a>'.
-             '</div>';  //<button class=\'continua continua-verde\'>Continua...</button>     
-                echo '<meta http-equiv="refresh" content="1;URL=../web/index.php?pagina=cadastro&act=cad2&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'">';
+               '<h3>REGISTRO GRAVADO COM SUCESSO</h3>';
+               //'<a href=\'../web/index.php?pagina=cadastro&act=cad2&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().' \' ></a>'.
+         echo '</div>';  //<button class=\'continua continua-verde\'>Continua...</button>     
+         echo '<meta http-equiv="refresh" content="1;URL=../web/index.php?pagina=cadastro&act=cad2&raca='.$model->getraca().'&classe='.$model->getclasse().'&personagem='. $model->getpersonagem().'">';
 	die;
   }
   if($act == 'rel'){ 
