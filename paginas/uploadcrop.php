@@ -75,6 +75,10 @@ function resizeImage($image,$width,$height,$scale) {
    $newImageWidth = ceil($width * $scale);
    $newImageHeight = ceil($height * $scale);
    $newImage = imagecreatetruecolor($newImageWidth,$newImageHeight);
+      imagealphablending($newImage, false);
+      imagesavealpha($newImage,true);
+      $transparent = imagecolorallocatealpha($newImage, 255, 255, 255, 127);
+      imagefilledrectangle($newImage, 0, 0, $newImageWidth, $newImageHeight, $transparent);
    switch($imageType) {
       case "image/gif":
          $source=imagecreatefromgif($image); 
@@ -117,6 +121,13 @@ function resizeThumbnailImage($thumb_image_name, $image, $width, $height, $start
    $newImageWidth = ceil($width * $scale);
    $newImageHeight = ceil($height * $scale);
    $newImage = imagecreatetruecolor($newImageWidth,$newImageHeight);
+   
+      imagealphablending($newImage, false);
+      imagesavealpha($newImage,true);
+      $transparent = imagecolorallocatealpha($newImage, 255, 255, 255, 127);
+      imagefilledrectangle($newImage, 0, 0, $newImageWidth, $newImageHeight, $transparent);
+   
+   
    switch($imageType) {
       case "image/gif":
          $source=imagecreatefromgif($image); 
@@ -131,6 +142,14 @@ function resizeThumbnailImage($thumb_image_name, $image, $width, $height, $start
          $source=imagecreatefrompng($image); 
          break;
    }
+   
+   
+   
+//imagefilledrectangle($newImage, 0, 0, $nWidth, $nHeight, $transparent);
+//imagecopyresampled($newImage, $im, 0, 0, 0, 0, $nWidth, $nHeight, $imgInfo[0], $imgInfo[1]);
+//imagecopyresampled($newImage, $source, 0, 0, 0, 0, $start_width, $start_height, $newImageWidth, $newImageHeight);
+   
+   
    imagecopyresampled($newImage,$source,0,0,$start_width,$start_height,$newImageWidth,$newImageHeight,$width,$height);
    switch($imageType) {
       case "image/gif":
