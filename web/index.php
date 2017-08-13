@@ -98,7 +98,7 @@ final class index{
     }
   }  
   private function getScript($pagina){
-    return self::PAGINA_DIR . $pagina .'php';
+    return self::PAGINA_DIR . $pagina .'.php';
   }
   private function getTemplate($pagina){  
     return self::PAGINA_DIR . $pagina .'.phtml';
