@@ -77,23 +77,5 @@
     }
     
    $(document).ready(function(){
-    $('.anotacao2').hide();
-    //$('.trocaAvatar').hide();
-
-    $('#anotacao').click(function(event){
-        event.preventDefault();
-        $(".anotacao2").show("slow");
-        //$(".ocultar").show("slower");
-    });
-
-    $('.anotacao2').dblclick(function(event){
-        event.preventDefault();
-        $(".anotacao2").hide("slow");
-        //$(".ocultar").hide("slower")
-    });
-    $('#ocultar').click(function(event){
-        event.preventDefault();
-        $(".tocaAvatar").hide("slow");
-    });
  }); 
 

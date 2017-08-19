@@ -18,7 +18,6 @@ function botaoVilao(avatares,nomes){
     document.cookie="avatar="+avatares[i]+";path=/";
     document.cookie="vilao="+nomes[i]+";path=/";
     i++; 
-    //alert(document.cookie);
 }
 $(document).ready(function(){
    i=0;
@@ -37,6 +36,25 @@ $(document).ready(function(){
          i++;
       }
    })
+   
+   
+    $('.anotacao2').hide();
+    $('#anotacao').click(function(event){
+        event.preventDefault();
+         if(!$(".anotacao2").is(':visible')){
+            $(".anotacao2").show("3000");
+         }else{
+            $(".anotacao2").hide("3000");
+         }
+    });
+    $('#anotacao').mouseover(function(event){
+        event.preventDefault();
+        $(this).attr("title","clique aqui para mostras anotações ou ocultar anotações.");
+    });
+    $('#ocultar').click(function(event){
+        event.preventDefault();
+        $(".tocaAvatar").hide("slow");
+    });   
 })
 </script>
 <body>
