@@ -313,9 +313,15 @@
       });
       $('#aba1').click(function(){
          if(!$('#frame').is(':visible')){
-            $('#frame').slideDown('3000');               
+            $('#frame').slideDown('3000');
+            $(this)
+               .text('Ocultar Dados')
+               .css('margin-right','-6px');              
          }else{              
             $('#frame').slideUp('3000');
+            $(this)
+               .text('Rolar Dados')
+               .css('margin-right','1px');
          }
       })
       var todosDados = '#dado6 > img, #dado6x2 img, #dado26x2 img, #dado6x3 img, #dado26x3 img,#dado36x3 img';
