@@ -361,6 +361,22 @@
             $('#resultado').text(x);
          })
       })
+      if($('.persoFoto_ img').attr('src') == ''){
+         $('.persoFoto_ img').attr({
+            src:'imagens/suaFoto.jpg',
+            height:'265px',
+            title:'Clique aqui para inserir a foto.'
+         });
+      }
+      $('.persoFoto_ img').bind('click',function(e){
+         var str = $('.campo1').text();
+         var personagem = str.replace('Personagem','');
+         var url ='../paginas/uploadcrop.php?edicao=1&personagem='+personagem+'&avatar='+avatar+'';
+         $(window.document.location).attr('href',url);
+      })
+      $('.persoFoto_ img').bind('mouseover',function(){
+         $(this).css('cursor','pointer');
+      })
    })
 </script>
 <?php   
@@ -394,6 +410,9 @@
         <span class="persoFoto_"><img src="<?= $dados->getfoto() ?>" /></span>
         <div class="campo3">Raça<br><?= $dados->getraca() ?></div><div class="campo4">Classe<br><?= $dados->getclasse() ?></div><div class="campo5"></div>
       <div class="campo6">Motivação<br><?= $dados->getmotivacao() ?></div>
+      
+      <script>var avatar='<?= $dados->getavatar() ?>';</script>
+      
       <span class='atribFicha'>Atributos</span><br>
       <div class='campo7'>Força<br><?= $atributos->getFORCA() ?></div>
       <div class='campo8'>Agilidade<br><?= $atributos->getAGILIDADE() ?></div>
