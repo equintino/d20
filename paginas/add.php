@@ -19,7 +19,7 @@
   @$comecando = $_GET['comecando'];
   @$missao = $_POST['missao'];
   if($raca){
-     $raca=$_POST;
+     $raca=$_POST['raca'];
   }
   @$atribamais=$_POST['maisum'];
   $humanoF=$humanoA=$humanoI=$humanoV=0;
@@ -92,27 +92,26 @@
 	// Check if $uploadOk is set to 0 by an error
 	if ($uploadOk == 0) {
 	    valida_cookies::popup("O arquivo não pode ser salvo.");
-	// if everything is ok, try to upload file
-	} else {
-	    /*if (move_uploaded_file($_FILES["avatarMestre"]["tmp_name"], $target_file)) {
-		echo "The file ". basename( $_FILES["avatarMestre"]["name"]). " has been uploaded.";
-	    } else {
-		valida_cookies::popup("Erro no envio do arquivo.");
-	    }*/
 	}
 
 	///// /////// //////// //////
 	$avatar = str_replace('../web/','',$target_file);
     }    
         $model->setavatar($avatar);
+        
         if($_FILES['avatarMestre']['error']==0){
+           //print_r($_FILES);die;
             include 'uploadcrop.php';
+            //print_r($model);die;
             $dao->grava($model);
             die;
+        }else{
+            include 'uploadcrop.php';           
         }
         $posicao=strrpos($avatar,'/')+1;
         $model->setfoto(substr($avatar,0,$posicao).'/foto/'.substr($avatar,$posicao));
         $dao->grava($model);
+        die;
      }
 	echo '<div class=\'add\'>'.
                '<h3>REGISTRO GRAVADO COM SUCESSO</h3>';

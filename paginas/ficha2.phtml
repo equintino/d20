@@ -172,7 +172,7 @@
        max-height: 256px;
        max-width: 225px;
        border: 5px solid white;
-       background-color: black;
+       background-color: #e2e2e2;
     }
     .escudoFicha > img{
       position: relative;
@@ -367,16 +367,18 @@
             height:'265px',
             title:'Clique aqui para inserir a foto.'
          });
+         if(($.cookie('login')=='mestre' && $('.campo2').text().indexOf('MESTRE') > 0) || $.cookie('login')!='mestre'){
+            $('.persoFoto_ img').bind('click',function(e){
+               var str = $('.campo1').text();
+               var personagem = str.replace('Personagem','');
+               var url ='../paginas/uploadcrop.php?edicao=1&personagem='+personagem+'&avatar='+avatar+'';
+               $(window.document.location).attr('href',url);
+            })
+            $('.persoFoto_ img').bind('mouseover',function(){
+               $(this).css('cursor','pointer');
+            })
+         }
       }
-      $('.persoFoto_ img').bind('click',function(e){
-         var str = $('.campo1').text();
-         var personagem = str.replace('Personagem','');
-         var url ='../paginas/uploadcrop.php?edicao=1&personagem='+personagem+'&avatar='+avatar+'';
-         $(window.document.location).attr('href',url);
-      })
-      $('.persoFoto_ img').bind('mouseover',function(){
-         $(this).css('cursor','pointer');
-      })
    })
 </script>
 <?php   
