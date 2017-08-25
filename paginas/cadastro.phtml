@@ -20,6 +20,49 @@
      $(':file').change(function(){
         $('#avatarPersonagem').hide();
      })
+      $('.armasCorp').change(function(){
+            if(this.checked){
+                recurso = recurso - $(this).val();
+                if(recurso < 0){
+                    alert('Você não tem o valor necessário.');
+                    this.checked=false;
+                    recurso = parseInt(recurso) + parseInt($(this).val());
+                }
+            }else{
+                recurso = parseInt(recurso) + parseInt($(this).val());
+            }
+            $('#moeda').text(recurso);
+      })
+      $('#aqui').css({
+         position: 'relative',
+         left: '-80px'
+      }); 
+      $('#habilidade input').click(function(){
+         if($.isNumeric($(this).attr('name').slice(-2))){
+            var posicao = ($(this).attr('numPosicao'));
+            var requisito = $(this).attr('name').slice(-2);
+            if(requisito==1){
+               if($(':checkbox')[posicao].checked==true){
+                  $(':checkbox')[posicao-1].checked=true;
+                  alert('Requisito necessário');
+               }
+            }else if(requisito==2){
+               $(':checkbox')[posicao-2].checked=true;
+               if($(':checkbox')[posicao].checked==true){
+                 $(':checkbox')[posicao-1].checked=true;
+                 alert('Requisito necessário');
+               }
+            }else if(requisito==3){
+               $(':checkbox')[posicao-2].checked=true;
+               $(':checkbox')[posicao-3].checked=true;
+            }
+         }
+         if($(':checked').on(':checked').length > 3){
+            alert('Só são permitido marcar três habilidades');
+            $(this).prop('checked',false);
+         }
+      })
+      $('#moeda').text(recurso);
   })
     
 </script>
@@ -277,9 +320,10 @@
                                 echo '<div align=right class=cadTitulo>Escolha três habilidades para '.strtoupper($personagem).'&nbsp&nbsp</div>';
                                 echo '<table>';
                                     echo '<tr>';
+                                    //print_r($habilidades);
+                                    $contador=0;
                                         foreach($habilidades as $key => $item){
-                                            $requisitos=explode (';',$item->getREQUISITOS());
-                       
+                                            $requisitos=explode(';',$item->getREQUISITOS());   
                                             if(in_array('Nível 5',$requisitos) || in_array('Nível 10',$requisitos)){//|| is_numeric(substr($item->getREQUISITOS(),-1)) ){
                                                 $cor='red';
                                             }else{
@@ -290,7 +334,8 @@
                                                 }else{
                                                    $cor=null; 
                                                 }
-                                                echo '<td id=habilidade><input type="checkbox" name=\''.$item->gethabilidade().'\'title=\'';
+                                                $contador++;
+                                                echo '<td id=habilidade><input type="checkbox" name=\''.$item->gethabilidade().'\' numPosicao='.$contador.' title=\'';
                                                     echo 'TIPO: '.($item->getTIPO())."\r\n";
                                                     echo 'MANA: '.($item->getMANA())."\r\n"; 
                                                     echo 'REQUISITOS: '.($item->getREQUISITOS())."\r\n";
@@ -303,7 +348,7 @@
                                                 echo '\' ><font color='.$cor.'>'.$item->gethabilidade().'</font>';
                                                 echo '</td>';
                                             }
-                                                switch ($item->getid()){
+                                                switch ($contador){
                                                     case 4:
                                                     case 8:
                                                     case 12:
@@ -312,6 +357,7 @@
                                                     case 24:
                                                     case 28:
                                                     case 32:
+                                                    case 36:
                                                     echo '</tr><tr>';
                                                     break;
                                                 }

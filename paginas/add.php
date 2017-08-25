@@ -432,8 +432,8 @@
 	    $uploadOk = 0;
 	}
 	// Allow certain file formats
-	if($imageFileType != "png" ) {
-            valida_cookies::popup('Favor inserir imagem do formato png.');
+	if($imageFileType != "png" && $imageFileType != "jpg") {
+            valida_cookies::popup('Favor inserir imagem do formato png ou jpg.');
 	    $uploadOk = 0;
 	}
 	// Check if $uploadOk is set to 0 by an error

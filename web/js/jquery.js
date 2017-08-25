@@ -84,45 +84,7 @@ $(document).ready(function(){
              .hide()
              .fadeIn('slow'); 
          document.cookie = "avatar="+link+"; path=/";       
-     } 
-      $('#habilidade input').click(function(){
-         if($.isNumeric($(this).attr('name').slice(-2))){
-            var posicao = ($(this).val());
-            var requisito = $(this).attr('name').slice(-2);
-            if(requisito==1){
-               if($(':checkbox')[posicao].checked==true){
-                  $(':checkbox')[posicao-1].checked=true;
-                  alert('Requisito necessário');
-               }
-            }else if(requisito==2){
-               $(':checkbox')[posicao-2].checked=true;
-               if($(':checkbox')[posicao].checked==true){
-                 $(':checkbox')[posicao-1].checked=true;
-                 alert('Requisito necessário');
-               }
-            }else if(requisito==3){
-               $(':checkbox')[posicao-2].checked=true;
-               $(':checkbox')[posicao-3].checked=true;
-            }
-         }
-         if($(':checked').on(':checked').length > 3){
-            alert('Só são permitido marcar três habilidades');
-            $(this).prop('checked',false);
-         }
-      }) 
-      $('.armasCorp').change(function(){
-            if(this.checked){
-                recurso = recurso - $(this).val();
-                if(recurso < 0){
-                    alert('Você não tem o valor necessário.');
-                    this.checked=false;
-                    recurso = parseInt(recurso) + parseInt($(this).val());
-                }
-            }else{
-                recurso = parseInt(recurso) + parseInt($(this).val());
-            }
-            $('#moeda').text(recurso);
-      })    
+     }     
       $(":file").on('change', function() {
       var countFiles = $(this).length;
       var imgPath = $(this).val();
@@ -211,22 +173,8 @@ $(document).ready(function(){
       }        
         
    $('.arm td:empty').css('background','#ccc');
-   
-   
-   //$('#ficha').css('color','white');
-    /*$('#ficha').append($('<img />').attr({
-        src: 'imagens/borda.png',
-        width: '100%'
-    }))*/
-    //alert('ok');
-    
            $('.armasCorp').prop('checked',false); 
-           $('#moeda').text(recurso);
-           
-           //////
-    //$('#ficha').css('background','url(../imagens/borda.png)');
-    //$('#ficha').css('color','white');
-           
+           //$('#moeda').text(recurso);           
 })
 
 

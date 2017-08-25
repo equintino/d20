@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 10-Jun-2017 às 16:40
+-- Generation Time: 24-Ago-2017 às 17:02
 -- Versão do servidor: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -50,7 +50,8 @@ CREATE TABLE `personagem` (
   `figura` longblob,
   `avatar` text,
   `nivel` int(5) DEFAULT NULL,
-  `emMissao` enum('0','1') NOT NULL DEFAULT '0'
+  `emMissao` enum('0','1') NOT NULL DEFAULT '0',
+  `foto` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

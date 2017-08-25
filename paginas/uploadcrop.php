@@ -2,25 +2,24 @@
    body{
       background-color: #e2e2e2;
       text-align: center;
-      //color: blue;
    }
    #tudo{
       margin: auto;
       width: 1000px;
-      //border: 1px solid white;
    }
    #thumbnail{
       float: left; 
       margin-left: 200px; 
       margin-right: 10px; 
-      //height: 400px;
    }
    #preview{
-      //height: 100px;
       position: relative;
    }
 </style>
-<?php  
+<?php 
+if(@!$act){
+   $act=$_POST['act'];
+}
 error_reporting (E_ALL ^ E_NOTICE);
 session_start(); //Do not remove this
 //only assign a new timestamp if the session variable is empty
@@ -34,7 +33,6 @@ if($_GET['raca']==null && $_GET['edicao']==null){
    $classe=$model->getclasse();
    $sexo=$model->getsexo();
    $personagem=$model->getpersonagem();
-   //die('estou aqui');
 }elseif($_GET['raca']){
    $raca=$_GET['raca'];
    $classe=$_GET['classe'];
@@ -52,7 +50,6 @@ if($_GET['raca']==null && $_GET['edicao']==null){
    $search = new ModelSearchCriteria();
    $search->settabela('personagem');
    $search->setpersonagem($_GET['personagem']);
-   //$model=$dao->encontre($search);
    foreach($dao->encontre($search) as $model);
    $raca=$model->getraca();
    $classe=$model->getclasse();
@@ -63,28 +60,19 @@ if($_GET['raca']==null && $_GET['edicao']==null){
    
    $dao->grava($model);
 }
-//print_r([$model,$_FILES]);die;
-/*print_r([$_FILES,$_POST,$model,$_GET,$large_photo_exists]);die;
-if (isset($_POST["upload_thumbnail"])){ // && strlen($large_photo_exists)>0
-echo "<pre>";
-print_r([$_FILES,$_POST,$model,$_GET]);die;
-}*/
 if($login=='MESTRE'){
    $upload_dir = "../web/imagens/personagens/mestre";
 }else{
    $upload_dir = "../web/imagens/personagens/$raca/$classe/$sexo";
 }
-//print_r($upload_dir);die;
 $upload_path = $upload_dir."/";
 $quantArquivos = glob("$upload_path*.*", GLOB_BRACE);
 $large_image_prefix = "resize_";
 $thumb_image_prefix = "thumbnail_";
-  //print_r([$_GET,$_POST,$_FILES,$upload_path,$login]);die;
-//print_r($model->getavatar());die;
+
 
 if($_GET['edicao']){
    $thumb_image_name=$large_image_name = substr($model->getavatar(),strripos($model->getavatar(),'/')+1);
-   //echo $thumb_image_name;die;
 }elseif($login=='MESTRE'){
    $large_image_name=$thumb_image_name=strstr($_FILES['avatarMestre']['name'],'.',true);
    if(!$large_image_name){
@@ -93,15 +81,13 @@ if($_GET['edicao']){
 }elseif($_FILES['avatarMestre']['name']==null){
    $large_image_name=$thumb_image_name=strstr(substr($avatar,strripos($avatar,'/')+1),'.',true);
 }else{
-   $large_image_name = count($quantArquivos)+1;//$large_image_prefix.$_FILES['avatarMestre']['name'];//$_SESSION['random_key'];
-   $thumb_image_name = count($quantArquivos)+1;//$thumb_image_prefix.$_FILES['avatarMestre']['name'];//$_SESSION['random_key'];
+   $large_image_name = count($quantArquivos)+1;
+   $thumb_image_name = count($quantArquivos)+1;
 } 
-//print_r($thumb_image_name);
 if(!isset($act) && !$_GET['edicao'] && $login != 'MESTRE' && $_FILES['avatarMestre']['name'] != null){
    $large_image_name=$large_image_name-1;
    $thumb_image_name=$thumb_image_name-1;
 }
-//print_r([$large_image_name,$thumb_image_name,$login]);die;
 $max_file = "3";// Maximum file size in MB
 $max_width = "400";// Max width allowed for the large image
 $thumb_width = "230";// Width of thumbnail image
@@ -138,7 +124,6 @@ function resizeImage($image,$width,$height,$scale) {
          break;
    }
    imagecopyresampled($newImage,$source,0,0,0,0,$newImageWidth,$newImageHeight,$width,$height);
-
    switch($imageType) {
       case "image/gif":
          imagegif($newImage,$image); 
@@ -153,7 +138,6 @@ function resizeImage($image,$width,$height,$scale) {
          imagepng($newImage,$image);  
          break;
    }
-
    chmod($image, 0777);
    return $image;
 }
@@ -170,8 +154,7 @@ function resizeThumbnailImage($thumb_image_name, $image, $width, $height, $start
       imagesavealpha($newImage,true);
       $transparent = imagecolorallocatealpha($newImage, 255, 255, 255, 127);
       imagefilledrectangle($newImage, 0, 0, $newImageWidth, $newImageHeight, $transparent);
-   
-   
+  
    switch($imageType) {
       case "image/gif":
          $source=imagecreatefromgif($image); 
@@ -185,9 +168,7 @@ function resizeThumbnailImage($thumb_image_name, $image, $width, $height, $start
       case "image/x-png":
          $source=imagecreatefrompng($image); 
          break;
-   }
-    
-   
+   } 
    imagecopyresampled($newImage,$source,0,0,$start_width,$start_height,$newImageWidth,$newImageHeight,$width,$height);
    switch($imageType) {
       case "image/gif":
@@ -218,12 +199,15 @@ function getWidth($image) {
    $width = $size[0];
    return $width;
 }
-
+if(!$_SESSION['user_file_ext'] || $_SESSION['user_file_ext'] == '.'){
+   if($avatar){
+      $_SESSION['user_file_ext'] = substr($avatar,-4);
+   }
+}
 //Image Locations
 $large_image_location = $upload_path.$large_image_name.$_SESSION['user_file_ext'];
 $thumb_image_location = $upload_path.'foto/'.$thumb_image_name.$_SESSION['user_file_ext'];
 //Create the upload directory with the right permissions if it doesn't exist
-//print_r([$_SESSION,$large_image_location,$thumb_image_location]);die;
 if(!is_dir($upload_dir)){
    mkdir($upload_dir, 0777);
    chmod($upload_dir, 0777);
@@ -232,7 +216,6 @@ if(!is_dir($upload_dir.'/foto')){
    mkdir($upload_dir.'/foto', 0777);
    chmod($upload_dir.'/foto', 0777);
 }
-//print_r([$_POST,$large_image_location,$thumb_image_location,$_FILES]);die;
 if (isset($_POST["upload"])) {
    //Get the file information
    $userfile_name = $_FILES['avatarMestre']['name'];
@@ -241,10 +224,8 @@ if (isset($_POST["upload"])) {
    $userfile_type = $_FILES['avatarMestre']['type'];
    $filename = basename($_FILES['avatarMestre']['name']);
    $file_ext = strtolower(substr($filename, strrpos($filename, '.') + 1));
-//echo 'entrei';die;
    //Only process if the file is a JPG, PNG or GIF and below the allowed limit
    if((!empty($_FILES["avatarMestre"])) && ($_FILES['avatarMestre']['error'] == 0)) {
-
       foreach ($allowed_image_types as $mime_type => $ext) {
          //loop through the specified image types and if they match the extension then break out
          //everything is ok so go and check file size
@@ -259,62 +240,44 @@ if (isset($_POST["upload"])) {
       if ($userfile_size > ($max_file*1048576)) {
          $error.= "Tamanho de imagem acima de ".$max_file."MB";
       }
-
    }else{
       $error= "Selecione uma imagem";
    }
    //Everything is ok, so we can upload the image.
-   //print_r([$_SESSION,$model]);die;
-   //if (strlen($error)==0){
-      //if (isset($_FILES['avatarMestre']['name'])){
-         $_SESSION['user_file_ext']=".".$file_ext;
-
-         if($_GET['edicao']!=1 && !file_exists($large_image_location)){
-            move_uploaded_file($userfile_tmp, $large_image_location);
-            chmod($large_image_location, 0777);
-         }elseif($_GET['avatar']){
-            $large_image_location=$_GET['avatar'];
-         }else{
-            $large_image_location=$model->getavatar();
-         }
-         //print_r($large_image_location);die;
-
-         $width = getWidth($large_image_location);
-         $height = getHeight($large_image_location);
-         //Scale the image if it is greater than the width set above
-         if ($width > $max_width){
-            $scale = $max_width/$width;
-            $uploaded = resizeImage($large_image_location,$width,$height,$scale);
-         }else{
-            $scale = 1;
-            $uploaded = resizeImage($large_image_location,$width,$height,$scale);
-         } 
-        //Delete the thumbnail file so the user can create a new one
-         if (file_exists($thumb_image_location)) {
-            //unlink($thumb_image_location);
-         }
-      //} 
-         //Refresh the page to show the new uploaded image
-         //header("location:".$_SERVER["PHP_SELF"]);
-         //exit();
-   //} 
+   $_SESSION['user_file_ext']=".".$file_ext;
+   if($_GET['edicao']!=1 && !file_exists($large_image_location)){
+      move_uploaded_file($userfile_tmp, $large_image_location);
+      chmod($large_image_location, 0777);
+   }elseif($_GET['avatar']){
+      $large_image_location=$_GET['avatar'];
+   }else{
+      $large_image_location=$model->getavatar();
+   }
+   $width = getWidth($large_image_location);
+   $height = getHeight($large_image_location);
+   //Scale the image if it is greater than the width set above
+   if ($width > $max_width){
+      $scale = $max_width/$width;
+      $uploaded = resizeImage($large_image_location,$width,$height,$scale);
+   }else{
+      $scale = 1;
+      $uploaded = resizeImage($large_image_location,$width,$height,$scale);
+   } 
+  //Delete the thumbnail file so the user can create a new one
+   if (file_exists($thumb_image_location)) {
+      //unlink($thumb_image_location);
+   }
 } 
 
 //Check to see if any images with the same name already exist
-//echo $large_image_location;
-//if($_GET['edicao']==1){
-   //$large_image_location=$_GET['avatar'];
-//}
-//print_r($large_image_location);die;
 if (file_exists($large_image_location)){ 
-   //echo $act;die;
    if(file_exists($thumb_image_location)){
       $thumb_photo_exists = "<img src=\"".$thumb_image_location."\" alt=\"Thumbnail Image\"/>";
-      if($act != 'cad'){
+      if($act == 'cad'){
+         header("location:../web/index.php?pagina=cadastro&act=cad2&raca=$raca&classe=$classe&personagem=$personagem");
+      }else{
          $url='../web/index.php?pagina=ficha2&personagem='.$personagem;
          header("location:$url");
-      }else{
-         header("location:../web/index.php?pagina=cadastro&act=cad2&raca=$raca&classe=$classe&personagem=$personagem");
       }
    }else{
       $thumb_photo_exists = "";
@@ -324,8 +287,6 @@ if (file_exists($large_image_location)){
    $large_photo_exists = "";
    $thumb_photo_exists = "";
 }
-//print_r($large_photo_exists);die;
-   //print_r([$_POST,$thumb_image_location,$_GET['foto'],$_FILES]);die;
 if (isset($_POST["upload_thumbnail"]) && $_POST["x1"]) {// && strlen($large_photo_exists)>0
    //Get the new coordinates to crop the image.
    $x1 = $_POST["x1"];
@@ -341,15 +302,15 @@ if (isset($_POST["upload_thumbnail"]) && $_POST["x1"]) {// && strlen($large_phot
    }elseif($_POST['upload_thumbnail']){
       $thumb_image_location = substr($_GET['foto'],0,strripos($_GET['foto'],'/')+1).'/foto/'.substr($_GET['foto'],strripos($_GET['foto'],'/')+1);
    }
-   //print_r([$_POST,$thumb_image_location]);die;
    $cropped = resizeThumbnailImage($thumb_image_location, $_GET['foto'],$w,$h,$x1,$y1,$scale);
    if($_POST['edicao']==1){
       $url='../web/index.php?pagina=ficha2&personagem='.$personagem;
       header("location:$url");
    }
-   //print_r($_POST);die;
-   header("location:../web/index.php?pagina=cadastro&act=cad2&raca=$raca&classe=$classe&personagem=$personagem");
-   exit();
+   if($act=='cad'){
+      header("location:../web/index.php?pagina=cadastro&act=cad2&raca=$raca&classe=$classe&personagem=$personagem");
+      exit();
+   }
 }
 
 
@@ -366,14 +327,12 @@ if ($_GET['a']=="delete" && strlen($_GET['t'])>0){
    header("location:".$_SERVER["PHP_SELF"]);
    exit(); 
 }
-//print_r([$large_image_location,$thumb_image_location]);die;
 if($_GET['edicao']==1){
    //$large_image_location=$_GET['avatar'];
 }else{
    $model->setavatar($large_image_location);
    $model->setfoto($thumb_image_location);   
 }
-//print_r([$large_image_location,$thumb_image_location]);die;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -461,14 +420,11 @@ $(window).load(function () {
       <h2>Selecione área para foto da ficha</h2>
       <div id="tudo" >
           <?php
-          //print_r([$file_ext,$_SESSION[user_file_ext]]);die;
             if(!$file_ext && $_SESSION[user_file_ext] != '.'){
                $file_ext=substr($_SESSION[user_file_ext],-3);
             }else{
                $file_ext=substr($model->getavatar(),-3); 
-            //print_r($file_ext);die;             
             }
-            //echo $file_ext;die;
           ?>
          <img src="<?php echo $upload_path.$large_image_name.'.'.$file_ext;?>" id="thumbnail" alt="Create Thumbnail" />
          <div style="border:1px #e5e5e5 solid; float:left; position:relative; overflow:hidden; width:<?php echo $thumb_width;?>px; height:<?php echo $thumb_height;?>px;">
@@ -488,7 +444,9 @@ $(window).load(function () {
             <?php 
                if($_GET['edicao']==1){
                   echo '<input type=hidden name=edicao value=1 />';
-               } 
+               }elseif($act=='cad'){
+                  echo '<input type=hidden name=act value=cad />';
+               }
             ?>
             <input type="submit" name="upload_thumbnail" value="Salvar Foto" id="save_thumb" />
          </form>
