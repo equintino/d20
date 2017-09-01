@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 24-Ago-2017 às 17:03
+-- Generation Time: 01-Set-2017 às 21:37
 -- Versão do servidor: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -45,6 +45,13 @@ CREATE TABLE `viloes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Extraindo dados da tabela `viloes`
+--
+
+INSERT INTO `viloes` (`id`, `vilao`, `raca`, `classe`, `idade`, `sexo`, `excluido`, `avatar`, `DESCRICAO`, `FORCA`, `AGILIDADE`, `INTELIGENCIA`, `VONTADE`, `PV`, `PM`) VALUES
+(1, 'kalak', 'humano', 'Feiticeiro', 0, 'M', '0', 'imagens/personagens/viloes/kalak.jpg', 'O cruel e tenebroso Kalak é o rei feiticeiro governante de Thyr. Detentor de magia arcana é um dos que corromperam e continuam corrompendo o mundo de Athas com magia negra.', 20, 20, 50, 50, 200, 200);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -63,7 +70,7 @@ ALTER TABLE `viloes`
 -- AUTO_INCREMENT for table `viloes`
 --
 ALTER TABLE `viloes`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

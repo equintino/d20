@@ -321,10 +321,7 @@ if (isset($_POST["upload_thumbnail"]) && $_POST["x1"]) {// && strlen($large_phot
    //print_r([$_GET,$_POST]);die;
    if($_POST['edicao']==1){
       $thumb_image_location = substr($_GET['foto'],0,strripos($_GET['foto'],'/')+1).'/foto/'.substr($_GET['foto'],strripos($_GET['foto'],'/')+1);
-   }/*elseif($_POST['upload_thumbnail']){
-      $thumb_image_location = substr($_GET['foto'],0,strripos($_GET['foto'],'/')+1).'/foto/'.substr($_GET['foto'],strripos($_GET['foto'],'/')+1);
-   }*/
-   //print_r($thumb_image_location);die;
+   }
    if(substr($thumb_image_location,-1) == '.'){
       $thumb_image_location = substr($thumb_image_location,0,-1);
    }
