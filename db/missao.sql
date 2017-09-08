@@ -1,33 +1,33 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 3.5.8.2
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: 24-Ago-2017 às 17:02
--- Versão do servidor: 10.1.19-MariaDB
--- PHP Version: 7.0.13
+-- Host: sql113.byethost7.com
+-- Generation Time: Sep 08, 2017 at 01:43 PM
+-- Server version: 5.6.35-81.0
+-- PHP Version: 5.3.3
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- Database: `d20`
+-- Database: `b7_16656868_d20`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `missao`
+-- Table structure for table `missao`
 --
 
-CREATE TABLE `missao` (
-  `id` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `missao` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `DATA` text,
   `MISSAO` text,
   `personagem` varchar(100) DEFAULT NULL,
@@ -37,29 +37,22 @@ CREATE TABLE `missao` (
   `ouro` int(5) DEFAULT NULL,
   `anotacoes` text,
   `PV` int(5) DEFAULT NULL,
-  `PM` int(5) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  `PM` int(5) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  FULLTEXT KEY `MISSAO` (`MISSAO`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=6 ;
 
 --
--- Indexes for dumped tables
+-- Dumping data for table `missao`
 --
 
---
--- Indexes for table `missao`
---
-ALTER TABLE `missao`
-  ADD PRIMARY KEY (`id`);
-ALTER TABLE `missao` ADD FULLTEXT KEY `MISSAO` (`MISSAO`);
+INSERT INTO `missao` (`id`, `DATA`, `MISSAO`, `personagem`, `excluido`, `emMissao`, `jogador`, `ouro`, `anotacoes`, `PV`, `PM`) VALUES
+(1, '1850-10-02 18:10:00', 'Terras de Athas', 'Osvaldo', '0', '1', 'RUBEN JUNIOR', NULL, NULL, NULL, NULL),
+(2, '1850-10-02 18:10:00', 'Terras de Athas', 'Leraf', '0', '0', 'MESTRE', NULL, ' ', NULL, NULL),
+(3, '1850-10-02 18:10:00', 'Terras de Athas', 'Avenger', '0', '0', 'AGNALDO', NULL, ' ', NULL, NULL),
+(4, '1850-10-02 18:10:00', 'Terras de Athas', 'Jack', '0', '0', 'MESTRE', NULL, ' ', NULL, NULL),
+(5, '1850-10-02 18:10:00', 'Terras de Athas', 'Galican', '0', '0', 'MESTRE', NULL, ' ', NULL, NULL);
 
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `missao`
---
-ALTER TABLE `missao`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

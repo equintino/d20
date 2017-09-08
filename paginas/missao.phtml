@@ -55,6 +55,16 @@ $(document).ready(function(){
         event.preventDefault();
         $(".tocaAvatar").hide("slow");
     });   
+    $('#personagensJogadores img').click(function(){
+        var personagem=($(this).attr('personagem'));
+        var url = "index.php?pagina=ficha2&personagem="+personagem;
+        $(location).attr('href',url);
+    })  
+    $('#personagensMestre img').click(function(){
+        var personagem=($(this).attr('personagem'));
+        var url = "index.php?pagina=ficha2&personagem="+personagem;
+        $(location).attr('href',url);
+    })
 })
 </script>
 <body>
@@ -88,9 +98,10 @@ $(document).ready(function(){
     
     $search->settabela('personagem');
     $search->setpersonagem($personagem);
-    $conferirMissao = $dao->encontrePorPersonagem($search);
-    
+    $conferirMissao=$dao->encontrePorPersonagem($search);
     $emMissao=$conferirMissao->getemMissao();
+    //echo '<font color=white><pre>';
+    //print_r([$conferirMissao,$emMissao]);
     if($emMissao==1){
         $search->settabela('missao');
         $dados = $dao->encontreEmMissao($search); 
@@ -525,22 +536,92 @@ $(document).ready(function(){
             echo '<tr><td>'.$dadosMissao->getDESCRICAO().'</td><td align=center>'.$dadosMissao->getobjetivo().'</td><td align=center>'.$dadosMissao->getlocal().'</td><td align=center>'.$dadosMissao->getvilao().'</td><td align=center>'.$dadosMissao->getrecompensa().'</td><td align=center>'.$dadosMissao->getfalha().'</td><td align=center>'.$dadosMissao->getcomo().'</td></tr>';
             echo '</table>';
             echo '<div class=avatarVilaoMestre><img height=180 src=\''.$dadosMissao->getavatar().'\'/><br>Vilao</div>';
-            echo '<div class=personagensMestre>Personagens do mestre: <br>';
+            echo '<div id=personagensMestre class=personagensMestre>Personagens do mestre: <br>';
             $search->settabela('missao');
             $search->setjogador('MESTRE');
             $personagensMestre=$dao->encontre2($search);
-            //print_r($personagensMestre);die;
             foreach($personagensMestre as $personagemMestre){
-               echo '<img height=100px src=\''.$personagemMestre->getavatar().'\' \>';
+                if($personagemMestre->getjogador()=='MESTRE'){
+                    echo "<img height=100px personagem='".$personagemMestre->getpersonagem()."' title='Jogador: ".$personagemMestre->getjogador().
+                         "\r\nPersonagem: ".$personagemMestre->getpersonagem();
+                            if($personagemMestre->getidade()){
+                                echo "\r\nIdade: ".$personagemMestre->getidade();
+                            }
+                            if($personagemMestre->getsexo()){
+                                echo "\r\nSexo: ".$personagemMestre->getsexo();
+                            }
+                            if($personagemMestre->gettendencia1()){
+                                echo "\r\nTendência1: ".$personagemMestre->gettendencia1();
+                            }
+                            if($personagemMestre->gettendencia2()){
+                                echo "\r\nTendência2: ".$personagemMestre->gettendencia2();
+                            }
+                            if($personagemMestre->getraca()){
+                                echo "\r\nRaça: ".$personagemMestre->getraca();
+                            }
+                            if($personagemMestre->getclasse()){
+                                echo "\r\nClasse: ".$personagemMestre->getclasse();
+                            }
+                            if($personagemMestre->getaltura()){
+                                echo "\r\nAltura: ".$personagemMestre->getaltura();
+                            }
+                            if($personagemMestre->getpeso()){
+                                echo "\r\nPeso: ".$personagemMestre->getpeso();
+                            }
+                            if($personagemMestre->getcidade()){
+                                echo "\r\nCidade Natal:".$personagemMestre->getcidade();
+                            }
+                            if($personagemMestre->getmotivacao()){
+                                echo "\r\nMotivação: ".$personagemMestre->getmotivacao();
+                            }
+                            if($personagemMestre->getbreveHistoria()){
+                                echo "\r\nBreve História: ".$personagemMestre->getbreveHistoria();
+                            }
+                            echo "'src='".$personagemMestre->getavatar()."' \>";
+                }
             }
             echo '</div>';
-            $search->setjogador(null);
-            $personagensMestre=$dao->encontre2($search);
-            //print_r($personagensMestre);die;
             echo '<div class=personagensJogadores>';
-            echo '<div class=personagensMestre>Personagens dos jogadores: <br>';
+            echo '<div id=personagensJogadores class=personagensMestre>Personagens dos jogadores: <br>';
             foreach($personagensMestre as $personagemMestre){
-               echo '<img height=100px src=\''.$personagemMestre->getavatar().'\' \>';
+                if($personagemMestre->getjogador()!='MESTRE'){
+                    echo "<img height=100px personagem='".$personagemMestre->getpersonagem()."' title='Jogador: ".$personagemMestre->getjogador().
+                         "\r\nPersonagem: ".$personagemMestre->getpersonagem();
+                            if($personagemMestre->getidade()){
+                                echo "\r\nIdade: ".$personagemMestre->getidade();
+                            }
+                            if($personagemMestre->getsexo()){
+                                echo "\r\nSexo: ".$personagemMestre->getsexo();
+                            }
+                            if($personagemMestre->gettendencia1()){
+                                echo "\r\nTendência1: ".$personagemMestre->gettendencia1();
+                            }
+                            if($personagemMestre->gettendencia2()){
+                                echo "\r\nTendência2: ".$personagemMestre->gettendencia2();
+                            }
+                            if($personagemMestre->getraca()){
+                                echo "\r\nRaça: ".$personagemMestre->getraca();
+                            }
+                            if($personagemMestre->getclasse()){
+                                echo "\r\nClasse: ".$personagemMestre->getclasse();
+                            }
+                            if($personagemMestre->getaltura()){
+                                echo "\r\nAltura: ".$personagemMestre->getaltura();
+                            }
+                            if($personagemMestre->getpeso()){
+                                echo "\r\nPeso: ".$personagemMestre->getpeso();
+                            }
+                            if($personagemMestre->getcidade()){
+                                echo "\r\nCidade Natal:".$personagemMestre->getcidade();
+                            }
+                            if($personagemMestre->getmotivacao()){
+                                echo "\r\nMotivação: ".$personagemMestre->getmotivacao();
+                            }
+                            if($personagemMestre->getbreveHistoria()){
+                                echo "\r\nBreve História: ".$personagemMestre->getbreveHistoria();
+                            }
+                            echo "'src='".$personagemMestre->getavatar()."' \>";
+                }
             }
             echo '</div>';
             

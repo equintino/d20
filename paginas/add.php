@@ -378,6 +378,8 @@
      $search->setMISSAO($missao);
      $search->setpersonagem($personagem);
      $dadoPersonagem=$dao->encontrePorMissao($search);
+     //echo '<font color=white><pre>';
+     //print_r([$dadoPersonagem,$comecando]);die;
      if($comecando==1){        
          $model->setemMissao(1);
          $model->setpersonagem($personagem);
@@ -389,8 +391,9 @@
             $model->setexcluido(0);
             $model->setid($dadoPersonagem->getid());
          }
-         $model->setDATA('1850-10-02 18:10:00'); 
-         $dao->grava5($model); 
+         $model->setDATA('1850-10-02 18:10:00');
+         $dao->grava5($model);  
+         //print_r($model);die;
          echo '<meta http-equiv="refresh" content="1;URL=../web/index.php?pagina=missao&personagem='.$personagem.'">';
          die;
      }else{ 
