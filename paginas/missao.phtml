@@ -55,15 +55,14 @@ $(document).ready(function(){
         event.preventDefault();
         $(".tocaAvatar").hide("slow");
     });   
-    $('#personagensJogadores img').click(function(){
+    $('#personagensJogadores img, #personagensMestre img').click(function(){
         var personagem=($(this).attr('personagem'));
         var url = "index.php?pagina=ficha2&personagem="+personagem;
         $(location).attr('href',url);
     })  
-    $('#personagensMestre img').click(function(){
-        var personagem=($(this).attr('personagem'));
-        var url = "index.php?pagina=ficha2&personagem="+personagem;
-        $(location).attr('href',url);
+    $('#personagensMestre img,#personagensJogadores img').mouseover(function(){
+        $(this).css('cursor','pointer');
+        //alert('parou em cima');
     })
 })
 </script>
