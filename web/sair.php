@@ -2,7 +2,7 @@
    include '../dao/dao.php';
    include '../dao/ModelSearchCriteria.php';
    include '../validacao/valida_cookies.php';
-   //include '../config/Config.php';
+   include '../web/backup.php';
    include '../model/model.php';
    include '../mapping/modelMapper.php';
    

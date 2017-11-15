@@ -63,7 +63,6 @@ final class UserDao {
             }
         }
         $sql .= ' ORDER BY ' . $orderBy;
-        //print_r($sql);die;
         return $sql;
     }
     private function insert(User $user){
