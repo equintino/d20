@@ -68,7 +68,6 @@ $(document).ready(function(){
 </script>
 <body>
 <?php  
-    //session_start();
     @$personagem = $_GET['personagem'];
     @$login=strtoupper($_SESSION['login']);
     @$act=$_GET['act'];
@@ -100,8 +99,6 @@ $(document).ready(function(){
     $search->setpersonagem($personagem);
     $conferirMissao=$dao->encontrePorPersonagem($search);
     $emMissao=$conferirMissao->getemMissao();
-    //echo '<font color=white><pre>';
-    //print_r([$conferirMissao,$emMissao]);
     if($emMissao==1){
         $search->settabela('missao');
         $dados = $dao->encontreEmMissao($search); 

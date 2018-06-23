@@ -120,13 +120,7 @@ $index->init();
     session_start();
     if(!isset($_SESSION['senha']) && !isset($_SESSION['login'])){
         $valida->semLogin();
-    }else{
-        //$valida->setIndex($_GET['index']);
     }
-    /*@$valida->setLogin($_COOKIE['login']);
-    @$valida->setSenha($_COOKIE['senha']);
-    @$valida->setIndex($_GET['index']);
-    $valida->fazerLogin();*/
     // run application!
 $index->carrega();
 
