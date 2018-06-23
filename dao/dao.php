@@ -4,9 +4,10 @@
    public function __destruct(){
       $this->db = null;
    }
-   public function encontre(ModelSearchCriteria $search = null){
-            set_time_limit(3600);
-            ini_set('memory_limit', '-1');
+   public function encontre(ModelSearchCriteria $search = null,$col = null){
+       //print_r($col);die;
+            //set_time_limit(3600);
+            //ini_set('memory_limit', '-1');
         $result = array();
         foreach ($this->query($this->getEncontreSql($search)) as $row){
             $model = new Model();
@@ -16,7 +17,7 @@
         return $result;
    }
    public function encontre2(ModelSearchCriteria $search = null){
-            set_time_limit(3600);
+            //set_time_limit(3600);
         $result = array();
         foreach ($this->query($this->getEncontreSql2($search)) as $row){
             $model = new Model();
@@ -477,8 +478,6 @@
         return $sql;
   }
    private function getEncontreSql2(ModelSearchCriteria $search = null) { 
-       //echo '<font color=white><pre>';
-       //print_r($search);die;
           if ($search->getpersonagem() !== null) {
                  $sql="SELECT * FROM ".$search->gettabela()." WHERE personagem='".$search->getpersonagem()."' AND excluido = '0' ";
           }elseif($search->getjogador() !== null){
@@ -490,7 +489,6 @@
                 $sql = 'SELECT * FROM `'.$search->gettabela().'` WHERE excluido = "0" ';
               }    
           }
-          //print_r($sql);die;
         return $sql;
   }
     private function criaTabela($tabela){
