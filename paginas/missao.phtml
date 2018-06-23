@@ -68,8 +68,9 @@ $(document).ready(function(){
 </script>
 <body>
 <?php  
+    //session_start();
     @$personagem = $_GET['personagem'];
-    @$login=strtoupper($_COOKIE['login']);
+    @$login=strtoupper($_SESSION['login']);
     @$act=$_GET['act'];
     @$missaoMestre=$_GET['missao'];
     $dao = new dao();

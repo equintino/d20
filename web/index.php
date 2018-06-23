@@ -1,4 +1,6 @@
+<meta charset="utf-8" />
 <?php
+require_once '../validacao/valida_cookies.php';
 // classe mae - aplicação //
 final class index{
   const PAGINA_PADRAO = 'home';
@@ -115,10 +117,17 @@ $index = new index();
 $index->init();
     // Exigir o login para acesso
     $valida = new valida_cookies();
-    @$valida->setLogin($_COOKIE['login']);
+    session_start();
+    if(!isset($_SESSION['senha']) && !isset($_SESSION['login'])){
+        $valida->semLogin();
+    }else{
+        //$valida->setIndex($_GET['index']);
+    }
+    /*@$valida->setLogin($_COOKIE['login']);
     @$valida->setSenha($_COOKIE['senha']);
     @$valida->setIndex($_GET['index']);
-    $valida->fazerLogin();
+    $valida->fazerLogin();*/
     // run application!
 $index->carrega();
+
 ?>

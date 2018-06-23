@@ -13,7 +13,7 @@
         if(!file_exists($diretorio)){
             $diretorio='../'.$diretorio;
         }
-        include $diretorio;
+        require_once $diretorio;
     }
 class valida_cookies{
     public $login;
@@ -70,16 +70,18 @@ class valida_cookies{
         $this->popup('Você deve entrar com o usuário.',null);
     }
     public function loginDb(){
+        session_start();
+        $_SESSION['login']=$this->login;
+        $senha=$_SESSION['senha']=self::criptografia($this->senha);
         $dao = new UserDao();
         $search = new UserSearchCriteria();
         $search->setLogin($this->login);
         $user = $dao->find($search);
-        $senha = self::criptografia($_COOKIE['senha']);
+        //$senha = self::criptografia($_SESSION['senha']);
         foreach($user as $key => $item){
             $senhaDb = @$item->getSenha();
-            if($senhaDb== $senha){
+            if($senhaDb == $senha){
                 $this->popup("Bem-Vindo ".$this->getlogin().".",'sim');
-                exit;
             }else{
                 $this->popup('A senha não confere.',null);
                 exit;
@@ -89,7 +91,7 @@ class valida_cookies{
             $this->popup('Usuário não cadastrado.','cad'); 
         }
     }
-    public function criptografia($senha){
+    public static function criptografia($senha){
         $cripto1 = md5($senha);
         $cripto2 = sha1($cripto1);
         

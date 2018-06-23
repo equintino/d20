@@ -4,7 +4,8 @@
 </head>
 <body>
 <?php 
-include 'validacao/valida_cookies.php';
+require_once 'validacao/valida_cookies.php';
+
 $acesso = new valida_cookies();
 @$acesso->setLogin($_POST['login']);
 @$acesso->setSenha($_POST['senha']);

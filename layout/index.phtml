@@ -38,8 +38,8 @@
                   <?php 
                     include '../dao/dao.php';
                     include '../dao/ModelSearchCriteria.php';
-                    
-                    @$login = strtoupper($_COOKIE['login']);
+                    //session_start();
+                    @$login = strtoupper($_SESSION['login']);
                     $dao = new dao();
                     $search = new ModelSearchCriteria();
                     $search->settabela('personagem');

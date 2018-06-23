@@ -1,10 +1,10 @@
 <?php
-   include '../dao/dao.php';
-   include '../dao/ModelSearchCriteria.php';
-   include '../validacao/valida_cookies.php';
-   include '../web/backup.php';
-   include '../model/model.php';
-   include '../mapping/modelMapper.php';
+   include_once '../dao/dao.php';
+   include_once '../dao/ModelSearchCriteria.php';
+   include_once '../validacao/valida_cookies.php';
+   include_once '../web/backup.php';
+   include_once '../model/model.php';
+   include_once '../mapping/modelMapper.php';
    
    @$personagem = $_GET['personagem'];
    @$login = strtoupper($_COOKIE['login']);
@@ -91,8 +91,10 @@
       header("Location:index.php");
       die;
    }
-      $cookies=new valida_cookies();
-      $cookies->limpaCookies();
-   header("Location:../index.html");
+    $cookies=new valida_cookies();
+    $cookies->limpaCookies();
+    session_start();
+    session_destroy();
+    header("Location:../index.html");
 ?>
 
