@@ -86,7 +86,7 @@
         ?>
         <div class=lista>
             <fieldset>
-               <?php
+                <?php
                     $chave=array_keys($lista);
                     $pers=$lista[$chave[$z]];
                     $personagem=new Personagem($pers);
@@ -123,30 +123,29 @@
                         echo '</div>';
                         echo '<div class=saudacao>Personagem de '.strtoupper($personagem->getJogador()).'</div>';
                     }          
-               ?>
+                ?>
             </fieldset>
         </div>
-    <?php elseif($act=='cad'): 
-       //echo
-         $pastas=null;
-         $racas=array('humano','elfo','anao','halfling','aarakocras','thri-kreen');
-         $classes=array('espadachim','guerreiro','paladino','ranger','gatuno','mago','sacerdote');
-         $pastaJs = '{';
-         foreach($racas as $individual){
+    <?php elseif($act=='cad'):
+        $pastas=null;
+        $racas=array('humano','elfo','anao','halfling','aarakocras','thri-kreen');
+        $classes=array('espadachim','guerreiro','paladino','ranger','gatuno','mago','sacerdote');
+        $pastaJs = '{';
+        foreach($racas as $individual){
             foreach($classes as $cadaUma){
-               $pasta = $individual.'/'.$cadaUma.'/M/';
-               $arquivos = glob("imagens/personagens/$pasta{*.png}", GLOB_BRACE);
-               $pastas[$pasta] = count($arquivos);
-               $pastaJs .= '\''.$pasta.'\':'.count($arquivos).',';
-               $pasta = $individual.'/'.$cadaUma.'/F/';
-               $arquivos = glob("imagens/personagens/$pasta{*.png}", GLOB_BRACE);
-               $pastas[$pasta] = count($arquivos); 
-               $pastaJs .= '\''.$pasta.'\':'.count($arquivos).',';              
+                $pasta = $individual.'/'.$cadaUma.'/M/';
+                $arquivos = glob("imagens/personagens/$pasta{*.png}", GLOB_BRACE);
+                $pastas[$pasta] = count($arquivos);
+                $pastaJs .= '\''.$pasta.'\':'.count($arquivos).',';
+                $pasta = $individual.'/'.$cadaUma.'/F/';
+                $arquivos = glob("imagens/personagens/$pasta{*.png}", GLOB_BRACE);
+                $pastas[$pasta] = count($arquivos); 
+                $pastaJs .= '\''.$pasta.'\':'.count($arquivos).',';              
             }
-         }
-         $pastaJs = substr($pastaJs,0,-1);
-         $pastaJs .= '}';
-         echo '<script>var quantAvatar='.$pastaJs.';</script>';
+        }
+        $pastaJs = substr($pastaJs,0,-1);
+        $pastaJs .= '}';
+        echo '<script>var quantAvatar='.$pastaJs.';</script>';
     ?>
         <script>var act='cad';</script>
         <div class='cad'>
@@ -155,7 +154,7 @@
                 <form enctype="multipart/form-data" class="font_1" id="cadastro" action="../paginas/add.php?act=cad&personagem=<?php echo $personagem ?>&raca=<?= $raca ?>" method="POST">
                     <table>
                         <?php
-                           foreach($variaveis as $keys => $item){
+                            foreach($variaveis as $keys => $item){
                               if($item=='sexo'){
                                 echo '<tr><td align=right> '.$keys.': </td>';
                                 echo '<td><input type=radio name=sexo value=M> MASCULINO';
@@ -164,40 +163,33 @@
                                 echo '<tr><td align=right> '.$keys.': </td>';
                                 echo '<td><select id="mySelect" name=raca >';
                                     echo '<option>&nbsp</option>';
-                                    echo '<option value=humano>HUMANO</option>';
-                                    echo '<option value=anao>ANÃO</option>';
-                                    echo '<option value=elfo>ELFO</option>';
-                                    echo '<option value=halfling>HALFLING</option>';
-                                    echo '<option value=aarakocras>AARAKOCRAS</option>';
-                                    echo '<option value=thri-kreen>THRI-KREEN</option>';
+                                    foreach($nRacas as $item2):
+                                        echo '<option value='.strtolower($item2).'>'.$item2.'</option>';
+                                    endforeach;
                                 echo '</select>';
                             }elseif($item=='classe'){
                                 echo '<tr><td align=right> '.$keys.': </td>';
                                     echo '<td><select name=classe id="myClasse" >';
                                         echo '<option>&nbsp</option>';
-                                        echo '<option value=espadachim>ESPADACHIM</option>';
-                                        echo '<option value=guerreiro>GUERREIRO</option>';
-                                        echo '<option value=paladino>PALADINO</option>';
-                                        echo '<option value=ranger>RANGER</option>';
-                                        echo '<option value=gatuno>GATUNO</option>';
-                                        echo '<option value=mago>MAGO</option>';
-                                        echo '<option value=sacerdote>SACERDOTE</option>';
+                                        foreach($nClasses as $item2):
+                                            echo '<option value='.strtolower($item2).'>'.$item2.'</option>';
+                                    endforeach;
                                     echo '</select></td></tr>';
                             }elseif($item=='tendencia1'){
                                 echo '<tr><td align=right> '.$keys.': </td>';
                                     echo '<td><select name=tendencia1>';
                                         echo '<option>&nbsp</option>';
-                                        echo '<option value=bom>BOM</option>';
-                                        echo '<option value=neutro>NEUTRO</option>';
-                                        echo '<option value=mau>MAU</option>';
+                                        foreach($nTen1 as $item2):
+                                            echo '<option value='.strtolower($item2).'>'.$item2.'</option>';
+                                    endforeach;
                                     echo '</select></td></tr>';
                             }elseif($item=='tendencia2'){
                                 echo '<tr><td align=right> '.$keys.': </td>';
                                     echo '<td><select name=tendencia2>';
                                         echo '<option>&nbsp</option>';
-                                        echo '<option value=leal>LEAL</option>';
-                                        echo '<option value=neutro>NEUTRO</option>';
-                                        echo '<option value=caótico>CAÓTICO</option>';
+                                        foreach($nTen2 as $item2):
+                                            echo '<option value='.strtolower($item2).'>'.$item2.'</option>';
+                                    endforeach;
                                     echo '</select></td></tr>';
                             }elseif($item=='jogador'){
                                 echo "<tr><td align=\"right\"> $keys: </td><td>$login</td></tr>";

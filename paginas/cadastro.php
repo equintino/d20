@@ -4,6 +4,11 @@
     require_once '../personagem/Personalidade.php';
     require_once '../personagem/Atividade.php';
     $variaveis=array('JOGADOR'=>'jogador','PERSONAGEM'=>'personagem','RAÇA'=>'raca','CLASSE'=>'classe','TENDÊNCIA1'=>'tendencia1','TENDÊNCIA2'=>'tendencia2','SEXO'=>'sexo');
+    $nRacas=array('HUMANO','ANÃO','ELFO','HALFLING','AARAKOCRAS','THRI-KREEN');
+    $nClasses=array('ESPADACHIM','GUERREIRO','PALADINO','RANGER','GATUNO','MAGO','SACERDOTE');
+    $nTen1=array('BOM','NEUTRO','MAU');
+    $nTen2=array('LEAL','NEUTRO','CAOTICO');
+    
     array_key_exists('act',$_GET)?$act=$_GET['act']:$act=null;
     array_key_exists('pag',$_GET)?$x=$_GET['pag']:$x=null;
     array_key_exists('classe',$_GET)?$classe=$_GET['classe']:$classe=null;
