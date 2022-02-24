@@ -1,0 +1,23 @@
+.home {
+    margin: auto;
+    width: 970px;
+    font-family: sans-serif;
+    font-size: 18px;
+    text-align: justify;
+    background: rgba(0, 0, 0,0.5);
+    border-radius: 5px;
+    color: white;
+    padding: 5px;
+}
+
+.home h1 {
+    text-align: center;
+    color: red;
+}
+
+.home p {
+    text-indent: 50px;
+    padding: 0px;
+    width: 90%;
+    margin: auto;
+}

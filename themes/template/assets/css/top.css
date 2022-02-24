@@ -1,0 +1,21 @@
+#topHeader {
+    position: fixed;
+    top: 0;
+    background: var(--cor-primary);
+    width: 100%;
+}
+
+.identification {
+    position: fixed;
+    /* top: 78px; */
+    z-index: -1;
+    background: black;
+    padding: 5spx;
+    color: var(--cor-primary);
+    right: 30px;
+    font-weight: 700;
+    font-size: .9em;
+    /* text-shadow: 1px 1px 1px moccasin; */
+    text-shadow: 1px 1px 1px darksalmon;
+    letter-spacing: .03em;
+}

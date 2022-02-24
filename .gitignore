@@ -1,2 +1,5 @@
 /d20/nbproject/private/
 /nbproject/private/
+/vendor/
+/src/Config/.config.ini
+/src/ses

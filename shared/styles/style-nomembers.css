@@ -1,0 +1,37 @@
+#nomembers {
+    display: flex;
+    justify-content: center;
+}
+
+#nomembers button {
+    margin-bottom: 4px;
+    border-radius: 10px;
+}
+
+#nomembers #tab-nomembers {
+    height: 490px;
+    overflow: scroll;
+    width: 800px;
+}
+
+#nomembers table td {
+    font-size: .8em;
+}
+
+#nomembers table td, #nomembers table th {
+    padding: 5px;
+}
+
+#nomembers table :not(td.data, button, .division) {
+    background: #f1f1f1;
+}
+
+#nomembers table td.data {
+    background: #fff;
+    color: #504d4d;
+    text-transform: uppercase;
+}
+
+#nomembers .division {
+    background: #0b0b0ba8;
+}
