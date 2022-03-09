@@ -29,57 +29,32 @@ class Breed extends Controller
         $this->view->render($this->page, compact("act", "breeds"));
     }
 
-    public function getBreeds(array $data): string
-    {
-        $search = [
-            "breed_id" => $data["breed_id"],
-            "category_id" => $data["category_id"]
-        ];
-        $avatars = (new \Models\Avatar())->search($search);
-        foreach($avatars as $avatar) {
-            $response[] = [
-                "id" => $avatar->id,
-                "image_id" => $avatar->image_id
-            ];
-        }
-        return print(json_encode($response ?? "This breed has no definite image"));
-    }
-
     public function edit(array $data): void
     {
         $id = $data["id"];
         $breed = (new \Models\Breed())->load($id);
-        $act = "edit";
-        $this->view->setPath("Modals")->render($this->page, compact("act", "breed"));
+        $this->view->setPath("Modals")->render($this->page, compact("breed"));
     }
 
-    public function avatar(): void
+    public function load(array $data)
     {
-        $act = "avatar";
-        $breeds = (new \Models\Breed())->activeAll();
-        $categories = (new \Models\Category())->activeAll();
-        $this->view->render($this->page, compact("act", "breeds", "categories"));
+        $id = $data["id"];
+        $breed = (new \Models\Breed())->load($id);
+
+        return print(json_encode([
+            "name" => $breed->name,
+            "description" => $breed->description,
+            "image_id" => $breed->image_id
+        ]));
     }
 
-    // public function edit(array $data): void
+    // public function avatar(): void
     // {
+    //     $act = "avatar";
     //     $breeds = (new \Models\Breed())->activeAll();
-    //     $act = "edit";
-    //     foreach($breeds as $breed) {
-    //         $list[] = [
-    //             "id" => $breed->id,
-    //             "image_id" => $breed->image_id
-    //         ];
-    //     }
-    //     $this->view->setPath("Modals")->render($this->page, compact("list", "act", "breeds"));
+    //     $categories = (new \Models\Category())->activeAll();
+    //     $this->view->render($this->page, compact("act", "breeds", "categories"));
     // }
-
-    public function show(array $data): void
-    {
-        $list = $data["response"];
-        $act = "list";
-        $this->view->setPath("Modals")->render($this->page, compact("list", "act"));
-    }
 
     public function showImage(array $data): void
     {
@@ -92,15 +67,23 @@ class Breed extends Controller
 
     public function save(array $data)
     {
-        $breeds = new \Models\Breed();
-        if(count($breeds->find($data["name"])) > 0) {
-            return print(json_encode("This breed already exists"));
-        }
+        $breed = ((new \Models\Breed())->find($data["name"])[0] ?? new \Models\Breed());
         if($_FILES["image"]["error"] === 0) {
-            $data["image_id"] = (new \Models\Image())->fileSave($_FILES["image"]);
+            if(empty($breed->image_id)) {
+                $data["image_id"] = (new \Models\Image())->fileSave($_FILES["image"]);
+            } else {
+                $image = (new \Models\Image())->load($breed->image_id);
+                $image->fileSave($_FILES["image"]);
+            }
         }
-        $breeds->bootstrap($data);
-        $breeds->save();
-        return print(json_encode($breeds->message()));
+        $breed->bootstrap($data);
+        $breed->save();
+        return print(json_encode($breed->message()));
+    }
+
+    public function delete(array $data)
+    {
+        $breed = (new \Models\Breed())->find($data["name"])[0];
+        return print(json_encode($breed->destroy()));
     }
 }

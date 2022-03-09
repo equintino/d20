@@ -105,6 +105,7 @@ class Avatar extends Model implements Models
             $this->message = "<span class='danger'>Error updating, check the data</span>";
             return null;
         }
+        $this->message = "<span class='success'>Successful update file</span>";
         return $this->id;
     }
 

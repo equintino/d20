@@ -276,6 +276,10 @@ main .form-signin {
     margin: 5px;
 }
 
+.label-rpg {
+    color: white;
+}
+
 .button-style {
     font-size: 1.2em;
     font-weight: 600;
@@ -513,7 +517,7 @@ main .form-signin {
     pointer-events: auto;
     background-clip: padding-box;
     outline: 0;
-    background: #ffffff;
+    /* background: #ffffff; */
     box-shadow: var(--box-shadow);
     z-index: 3;
     -webkit-transition: opacity 400ms ease-in;
@@ -521,6 +525,7 @@ main .form-signin {
     transition: opacity 400ms ease-in;
     border-radius: 5px;
     display: none;
+    background: #626262 none repeat scroll 0% 0%;
 }
 
 #boxe2_main {
@@ -585,7 +590,9 @@ main .form-signin {
 
 #boxe_main #content {
     padding: 10px 20px;
-    font-size: .9rem;
+    /* font-size: .9rem; */
+    height: 500px;
+    background: #626262 none repeat scroll 0% 0%;
 }
 
 #boxe_main > #content {
@@ -594,9 +601,9 @@ main .form-signin {
 
 #boxe_main input, #boxe_main select {
     height: 25px;
-    width: 100%;
+    /* width: 100%; */
     font-size: .9rem;
-    color: var(--text-secondary);
+    /* color: var(--text-secondary); */
     outline: none;
     border: 0;
     border-bottom: 2px solid #CED4DA;
@@ -806,10 +813,16 @@ main .form-signin {
 .btn-oval {
     border-radius: 100%;
     margin: 10px;
-    /* padding: 10px 54px; */
     font-size: 1.2em;
     font-family: 'Bebas Neue', cursive;
     font-weight: bolder;
+}
+
+.btn-oval:focus, .btn-oval:active, .btn-oval.active {
+    background: rgb(141, 2, 2);
+    color: white;
+    border: white;
+    box-shadow: 0 -2px 4px white;
 }
 
 .btn_ {

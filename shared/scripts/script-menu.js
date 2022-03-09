@@ -8,6 +8,8 @@ const identif = (page, logged="Nenhum usuário logado") => {
             return "GERENCIAMENTO DE RAÇAS";
         case "category":
             return "GERENCIAMENTO DE CLASSES";
+        case "avatar":
+            return "GERENCIAMENTO DE AVATARES";
         default:
             return null;
     }

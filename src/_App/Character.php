@@ -24,29 +24,57 @@ class Character extends Controller
         $login = $_SESSION["login"];
         $breeds = (new \Models\Breed())->activeAll();
         $classes = (new \Models\Category())->activeAll();
-        // $classes=array('espadachim','guerreiro','paladino','ranger','gatuno','mago','sacerdote');
-
         $this->view->render($this->page, compact("act", "login", "breeds", "classes"));
+    }
+
+    public function edit(array $data)
+    {
+        $act = "edit";
+        $login = $_SESSION["login"];
+        $id = $data["id"];
+        $breed_id = $data["breed_id"];
+        $category_id = $data["category_id"];
+        $character = (new \Models\Character())->load($id);
+        $breed = (new \Models\Breed())->load($breed_id);
+        $category = (new \Models\Category())->load($category_id);
+        $this->view->setPath("Modals")->render($this->page, compact("act","login","character","breed","category"));
     }
 
     public function list()
     {
-        $character = (new \Models\Character())->activeAll();
-        var_dump($character);die;
-        foreach($membership as $member) {
-            $list[] = $member->name;
-        }
-        return print(json_encode($list));
+        $act = "list";
+        $characters = ((new \Models\Character())->activeAll() ?? []);
+        // foreach($characters as $character) {
+        //     $list[] = $member->name;
+        // }
+        // return print(json_encode($list));
+        $this->view->render($this->page, compact("act","characters"));
     }
 
-    // public function noMember(?array $data): void
-    // {
-    //     $search = [
-    //         "active" => 0
-    //     ];
-    //     $noMembers = ( (new \Models\Membership())->search($search) ?? [] );
-    //     $this->view->setPath("Modals")->render("nomembers", [ compact("noMembers") ]);
-    // }
+    public function save(array $data)
+    {
+        $characters = new \Models\Character();
+        if(empty($characters->find($data["personage"]))) {
+            $characters->bootstrap($data);
+        } else {
+            return print(json_encode("This personage already exists"));
+        }
+        $characters->save();
+        return print(json_encode($characters->message()));
+    }
+
+    public function story(array $data): void
+    {
+        $this->view->setPath("Modals")->render($this->page);
+    }
+
+    public function delete(array $data)
+    {
+        $id = $data["id"];
+        $character = (new \Models\Character())->load($id);
+        $character->destroy();
+        return print(json_encode($character->message()));
+    }
 
     // public function show()
     // {
@@ -58,17 +86,6 @@ class Character extends Controller
     //     } else {
     //         $this->view->setPath("Modals")->render("membership", [ compact("list") ]);
     //     }
-    // }
-
-    // public function register(array $data): void
-    // {
-    //     $id = $data["id"];
-    //     $certificate = $this->certificate;
-    //     $membership = (new \Models\Membership())->load($id);
-    //     $newRegister = $this->newRegister();
-    //     $occupations = (new \Models\Occupation())->activeAll(0);
-    //     $act = "cad";
-    //     $this->view->setPath("Modals")->render("register", [ compact("act","membership","occupations","newRegister","certificate") ]);
     // }
 
     // public function update(array $data): ?string

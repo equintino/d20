@@ -20,9 +20,13 @@ class CreateCharactersTable implements CreateTable
     {
         $schema = Schema::create($entity, $this->type, function(Blueprint $table) {
             $table->increment("id");
-            $table->string("name");
-            $table->text("description");
-            $table->int("image_id");
+            $table->string("name,personage");
+            $table->text("story")->nullable();
+            $table->string("trend1,trend2")->nullable();
+            $table->int("breed_id")->foreign("breed_id","breeds");
+            $table->int("category_id")->foreign("category_id","categories");
+            $table->int("image_id")->foreign("image_id","images");
+            // $table->int("mission_id")->foreign("mission_id","mission");
             $table->timestamps();
             return $table->run();
         });

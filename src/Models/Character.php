@@ -23,10 +23,10 @@ class Character extends Model implements Models
         return $load->fetchObject(__CLASS__);
     }
 
-    public function find(string $name, string $columns = "*")
+    public function find(string $personage, string $columns = "*")
     {
-        if(filter_var($name, FILTER_SANITIZE_STRIPPED)) {
-            $find = $this->read("SELECT {$columns} FROM " . self::$entity . " WHERE name=:name ", "name={$name}");
+        if(filter_var($personage, FILTER_SANITIZE_STRIPPED)) {
+            $find = $this->read("SELECT {$columns} FROM " . self::$entity . " WHERE personage=:personage ", "personage={$personage}");
         }
 
         if($this->fail || empty($find)) {
@@ -130,12 +130,18 @@ class Character extends Model implements Models
 
             foreach($data as $key => $value) {
                 $$key = $value;
-                $params[":{$key}"] = $value;
+                // $params[":{$key}"] = $value;
             }
 
             $stmt->bindParam(':name', $name, \PDO::PARAM_STR);
-            $stmt->bindParam(':description', $description, \PDO::PARAM_STR);
+            $stmt->bindParam(':personage', $personage, \PDO::PARAM_STR);
+            $stmt->bindParam(':story', $story, \PDO::PARAM_STR);
+            $stmt->bindParam(':trend1', $trend1, \PDO::PARAM_STR);
+            $stmt->bindParam(':trend2', $trend2, \PDO::PARAM_STR);
+            $stmt->bindParam(':breed_id', $breed_id, \PDO::PARAM_INT);
+            $stmt->bindParam(':category_id', $category_id, \PDO::PARAM_INT);
             $stmt->bindParam(':image_id', $image_id, \PDO::PARAM_INT);
+            // $stmt->bindParam(':mission_id', $mission_id, \PDO::PARAM_INT);
 
             if($stmt->execute()) {
                 return \Core\Connect::getInstance($msgDb)->lastInsertId();

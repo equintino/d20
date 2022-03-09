@@ -117,12 +117,13 @@
             if(typeof params.buttons !== "undefined") {
                 this.dialogue.find("#buttons").html(params.buttons).show();
             } else {
-                this.dialogue.find("#buttons").html("<div align='right'><button class='button cancel' value='0'>Cancela</button><button class='button error' style='margin-left: 3px' value='1'>Confirma</button></div>").show();
+                this.dialogue.find("#buttons").html("<div align='right'><button class='btn btn-rpg btn-silver' value='0'>Cancela</button><button class='btn btn-rpg btn-danger' style='margin-left: 3px' value='1'>Confirma</button></div>").show();
             }
             this.dialogue.fadeIn().css({
-                display: "flex"
+                display: "flex",
+                height: "85.6px"
             });
-            if(this.mask.css("z-index") === 2) {
+            if(this.mask.css("z-index") == 2) {
                 this.mask.css({
                     "z-index": "4"
                 });
@@ -219,9 +220,9 @@
             });
             return this;
         },
-        on: function() {
-            this.buttons.find("button").on("click", function() {
-                alert("clicou");
+        on: function(event, func) {
+            this.buttons.find("button").on(event, function(e) {
+                func(e)
             });
         },
         complete: function(params) {

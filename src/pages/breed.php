@@ -53,7 +53,6 @@
     <div id="init">
         <button class="btn btn-oval" value="new">Novo</button>
         <button class="btn btn-oval" value="list">Lista</button>
-        <!-- <button class="btn btn-oval" value="avatar">Avatar</button> -->
     </div>
     <?php elseif($act === "add"): ?>
     <fieldset class="fieldset">
@@ -63,16 +62,7 @@
                 <div>
                     <label>Tipo:</label>
                     <input class="input-rpg" type="text" name="name" />
-                    <!-- <label>Classe:</label>
-                    <input class="input-rpg" type="text" name="class" /> -->
                 </div>
-                <!-- <div>
-                    <label>Gênero:</label>
-                    <input class="input-rpg" type="radio" name="sex" value="M"/>
-                    <label>Maculino:</label>
-                    <input class="input-rpg" type="radio" name="sex" value="F"/>
-                    <label>Feminino:</label>
-                </div> -->
                 <div>&nbsp&nbsp&nbsp</div>
                 <div>
                     <label>Imagem:</label>
@@ -84,9 +74,8 @@
                 </div>
             </section>
             <section class="side-right" style="justify-content: center">
-                <img id="thumb_image" src="#" alt="" height="250px"/>
+                <img id="thumb_image" src="#" alt="" height="350px" />
             </section>
-            <!-- <table class="my-table"></table> -->
         </form>
     </fieldset>
     <div style="float: left; margin-left: 40px">
@@ -119,59 +108,6 @@
                 <button class="btn btn-rpg btn-danger" style="margin-top: 20px" value="edit">Editar</button>
             </section>
         </div>
-    <?php //elseif($act === "avatar"): ?>
-        <!-- <fieldset class="fieldset"> -->
-        <!-- <legend>ADICIONAR AVATAR</legend> -->
-        <!-- <form id="form_breed" method="POST" action="avatar/save" enctype="multipart/form-data" > -->
-            <!-- <section class="side-left">
-                <div>
-                    <label>Raça:</label>
-                    <select class="input-rpg" name="breed">
-                        <option value="0"></option>
-                        <?php foreach($breeds as $breed): ?>
-                        <option value="<?= $breed->id ?>"><?= strToUpper($breed->name) ?></option>
-                        <?php endforeach ?>
-                    </select>
-                    <input class="input-rpg" type="text" name="name" />
-                    <label>Classe:</label>
-                    <select class="input-rpg" name="class">
-                        <option value="0"></option>
-                        <?php foreach($categories as $category): ?>
-                        <option valeu="<?= $category->id ?>"><?= $category->name ?></option>
-                        <?php endforeach ?>
-                    </select>
-                    <input class="input-rpg" type="text" name="class" />
-                </div>
-                <div>
-                    <label>Gênero:</label>
-                    <input class="input-rpg" type="radio" name="sex" value="M"/>
-                    <label>Maculino:</label>
-                    <input class="input-rpg" type="radio" name="sex" value="F"/>
-                    <label>Feminino:</label>
-                </div>
-                <div>&nbsp&nbsp&nbsp</div>
-                <div>
-                    <label>Imagem:</label>
-                    <input id="image" class="input-rpg" type="file" name="image" />
-                </div>
-                <div>
-                    <label>Descrição:</label>
-                    <textarea class="input-rpg" rows="5" cols="48" type="text" name="description" style="text-transform: none"></textarea>
-                </div>
-            </section> -->
-            <!-- <section class="side-right" style="justify-content: center">
-                <img id="thumb_image" src="#" alt="" height="250px"/>
-            </section> -->
-            <!-- <table class="my-table"></table> -->
-        <!-- </form> -->
-        <!-- </fieldset> -->
-        <!-- <div style="float: left; margin-left: 40px">
-            <button class="btn-rpg btn-silver" type="button" value="back">Voltar</button>
-        </div> -->
-        <!-- <div style="text-align: right; margin-right: 40px">
-            <button type="reset" class="btn-rpg btn-silver" value="clear">Limpar</button>
-            <button type="submit" class="btn-rpg btn-green" value="save">Salvar</button>
-        </div> -->
     <?php endif ?>
 </main>
 <script>
@@ -223,7 +159,49 @@
                 modal.show({
                     title: "Modo de edição de RAÇAS",
                     content: "breed/edit",
-                    params: { id }
+                    params: { id },
+                    buttons: "<button class='btn btn-rpg btn-silver mr-1' value='delete'>Excluir</button><button class='btn btn-rpg btn-green' value='save'>Salvar</button>"
+                }).on("click", function(e) {
+                    if(e.target.value === "save") {
+                        let formData = new FormData($(e.target.offsetParent).find("form")[0])
+                        if(saveData("breed/save", formData)) {
+                            modal.close();
+                        }
+                    } else if(e.target.value === "delete") {
+                        modal.confirm({
+                            title: "Modo de Exclusão",
+                            message: "Deseja realmente excluir esta RAÇA?"
+                        }).on("click", function(i) {
+                            if(i.target.value === "1") {
+                                let name = modal.content.find("[name=name]").val()
+                                $.ajax({
+                                    url: "breed/delete",
+                                    type: "POST",
+                                    dataType: "JSON",
+                                    data: {
+                                        name
+                                    },
+                                    beforeSend: function() {
+                                        loading.show()
+                                    },
+                                    success: function(response) {
+                                        alertLatch("Breed removed successfully", "var(--cor-success)")
+                                        modal.close()
+                                        $(".content").load("breed/list", function() {
+                                            loading.hide()
+                                        })
+                                    },
+                                    error: function(error) {
+
+                                    },
+                                    complete: function() {
+                                        loading.hide()
+                                    }
+
+                                })
+                            }
+                        })
+                    }
                 })
                 break
             default:
@@ -237,4 +215,10 @@
             loading.hide()
         }
     }
+
+    /** Keep actived the button */
+    $(".btn-oval").on("click", function() {
+        $(".btn-oval").removeClass("active")
+        $(this).addClass("active")
+    })
 </script>

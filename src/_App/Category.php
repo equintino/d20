@@ -29,79 +29,51 @@ class Category extends Controller
         $this->view->render($this->page, compact("act", "categories"));
     }
 
-    // public function getBreeds(array $data): string
-    // {
-    //     $search = [
-    //         "name" => $data["breed"],
-    //         "class" => $data["category"]
-    //     ];
-    //     $breeds = (new \Models\Breed())->search($search);
-    //     foreach($breeds as $breed) {
-    //         $response[] = [
-    //             "id" => $breed->id,
-    //             "image_id" => $breed->image_id
-    //         ];
-    //     }
-    //     return print(json_encode($response ?? "This breed has no definite image"));
-    // }
-
     public function edit(array $data): void
     {
         $id = $data["id"];
         $category = (new \Models\Category())->load($id);
-        $act = "edit";
-        $this->view->setPath("Modals")->render($this->page, compact("act", "category"));
+        $this->view->setPath("Modals")->render($this->page, compact("category"));
     }
 
-    // public function avatar(): void
-    // {
-    //     $act = "avatar";
-    //     $breeds = (new \Models\Breed())->activeAll();
-    //     $categories = (new \Models\Category())->activeAll();
-    //     var_dump($categories);die;
-    //     $this->view->render($this->page, compact("act", "breeds"));
-    // }
-
-    // public function edit(array $data): void
-    // {
-    //     $breeds = (new \Models\Breed())->activeAll();
-    //     $act = "edit";
-    //     foreach($breeds as $breed) {
-    //         $list[] = [
-    //             "id" => $breed->id,
-    //             "image_id" => $breed->image_id
-    //         ];
-    //     }
-    //     $this->view->setPath("Modals")->render($this->page, compact("list", "act", "breeds"));
-    // }
-
-    public function show(array $data): void
+    public function load(array $data)
     {
-        $list = $data["response"];
-        $act = "list";
-        $this->view->setPath("Modals")->render($this->page, compact("list", "act"));
+        $id = $data["id"];
+        $category = (new \Models\Category())->load($id);
+
+        return print(json_encode([
+            "name" => $category->name,
+            "description" => $category->description,
+            "image_id" => $category->image_id
+        ]));
     }
 
-    // public function showImage(array $data): void
+    // public function show(array $data): void
     // {
-    //     $id = $data["id"];
-    //     $breed = (new \Models\Breed())->load($id);
-    //     $type = $breed->type;
-    //     header("Content-Type: {$type}");
-    //     echo $breed->image;
+    //     $list = $data["response"];
+    //     $act = "list";
+    //     $this->view->setPath("Modals")->render($this->page, compact("list", "act"));
     // }
 
     public function save(array $data)
     {
-        $categories = new \Models\Category();
-        if(count($categories->find($data["name"])) > 0){
-            return print(json_encode("This class already exists"));
-        }
+        $category = ((new \Models\Category())->find($data["name"])[0] ?? new \Models\Category());
         if($_FILES["image"]["error"] === 0) {
-            $data["image_id"] = (new \Models\Image())->fileSave($_FILES["image"]);
+            if(empty($category->image_id)) {
+                $data["image_id"] = (new \Models\Image())->fileSave($_FILES["image"]);
+            } else {
+                $image = (new \Models\Image())->load($category->image_id);
+                $image->fileSave($_FILES["image"]);
+            }
         }
-        $categories->bootstrap($data);
-        $categories->save();
-        return print(json_encode($categories->message()));
+        $category->bootstrap($data);
+        $category->save();
+        return print(json_encode($category->message()));
+    }
+
+    public function delete(array $data)
+    {
+        $category = (new \Models\Category())->find($data["name"])[0];
+        return print(json_encode($category->destroy()));
     }
 }

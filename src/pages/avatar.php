@@ -2,15 +2,10 @@
     #thumb_image {
         background: #676767;
         width: 450px;
-        height: 400px;
-        /* text-align: center; */
-        justify-content: center;
         align-items: center;
         display: flex;
-        overflow-x: scroll;
-        border: 1px solid #737070;
+        overflow-x: auto;
         border-radius:  5px;
-        padding-left: 10px;
     }
 
     #init {
@@ -36,8 +31,7 @@
     }
 
     #list .left {
-        width: 30%;
-        text-align: center;
+        width: 40%;
     }
 
     #list .left button {
@@ -49,6 +43,8 @@
     }
 
     #list .left .fieldset {
+        display: flex;
+        flex-direction: row;
         overflow: auto;
     }
 
@@ -67,7 +63,6 @@
     <div id="init">
         <button class="btn btn-oval" value="new">Novo</button>
         <button class="btn btn-oval" value="list">Lista</button>
-        <!-- <button class="btn btn-oval" value="avatar">Avatar</button> -->
     </div>
     <?php elseif($act === "add"): ?>
     <fieldset class="fieldset">
@@ -108,12 +103,8 @@
                 </div>
             </section>
             <section class="side-right" style="justify-content: center">
-                <div id="thumb_image">
-                    <!-- <img src="src/<?= theme("assets/img/avatar/anao.png") ?>" alt="fig1" height="250px"/>
-                    <img src="src/<?= theme("assets/img/avatar/elfo.png") ?>" alt="fig1" height="250px"/> -->
-                </div>
+                <div id="thumb_image"></div>
             </section>
-            <!-- <table class="my-table"></table> -->
         </form>
     </fieldset>
     <div style="float: left; margin-left: 40px">
@@ -130,83 +121,41 @@
             </section>
             <section class="left">
                 <fieldset class="fieldset">
-                    <legend>Raças</legend>
-                    <?php foreach($avatars as $avatar): ?>
-                        <button class="btn btn-oval" data-id="<?= $avatar->id ?>" data-image_id="<?= $avatar->image_id ?>"><?= $avatar->name ?></button>
+                    <legend>Raças/Classes</legend>
+                    <div id="breeds" style="border-right: 1px solid white; width: 50%">
+                    <?php foreach($breeds as $breed): ?>
+                        <div>
+                            <input type="radio" name="breed" value="<?= $breed->id ?>" />
+                            <label><?= strToUpper($breed->name) ?></label>
+                        </div>
                     <?php endforeach ?>
+                    </div>
+                    <div id="categories" style="margin-left: 30px">
+                    <?php foreach($categories as $category): ?>
+                        <div>
+                        <input type="radio" name="category" value="<?= $category->id ?>" />
+                        <label><?= strToUpper($category->name) ?></label>
+                        </div>
+                    <?php endforeach ?>
+                    </div>
                 </fieldset>
             </section>
             <section class="right">
                 <fieldset class="fieldset">
                     <legend>Avatar</legend>
-                    <div class="avatar"></div>
+                    <div class="avatar" style="width: 100%"></div>
                 </fieldset>
             </section>
             <section>
                 <button class="btn btn-rpg btn-danger" style="margin-top: 20px" value="edit">Editar</button>
             </section>
         </div>
-    <?php //elseif($act === "avatar"): ?>
-        <!-- <fieldset class="fieldset"> -->
-        <!-- <legend>ADICIONAR AVATAR</legend> -->
-        <!-- <form id="form_breed" method="POST" action="avatar/save" enctype="multipart/form-data" > -->
-            <!-- <section class="side-left">
-                <div>
-                    <label>Raça:</label>
-                    <select class="input-rpg" name="breed">
-                        <option value="0"></option>
-                        <?php foreach($breeds as $breed): ?>
-                        <option value="<?= $breed->id ?>"><?= strToUpper($breed->name) ?></option>
-                        <?php endforeach ?>
-                    </select>
-                    <input class="input-rpg" type="text" name="name" />
-                    <label>Classe:</label>
-                    <select class="input-rpg" name="class">
-                        <option value="0"></option>
-                        <?php foreach($categories as $category): ?>
-                        <option valeu="<?= $category->id ?>"><?= $category->name ?></option>
-                        <?php endforeach ?>
-                    </select>
-                    <input class="input-rpg" type="text" name="class" />
-                </div>
-                <div>
-                    <label>Gênero:</label>
-                    <input class="input-rpg" type="radio" name="sex" value="M"/>
-                    <label>Maculino:</label>
-                    <input class="input-rpg" type="radio" name="sex" value="F"/>
-                    <label>Feminino:</label>
-                </div>
-                <div>&nbsp&nbsp&nbsp</div>
-                <div>
-                    <label>Imagem:</label>
-                    <input id="image" class="input-rpg" type="file" name="image" />
-                </div>
-                <div>
-                    <label>Descrição:</label>
-                    <textarea class="input-rpg" rows="5" cols="48" type="text" name="description" style="text-transform: none"></textarea>
-                </div>
-            </section> -->
-            <!-- <section class="side-right" style="justify-content: center">
-                <img id="thumb_image" src="#" alt="" height="250px"/>
-            </section> -->
-            <!-- <table class="my-table"></table> -->
-        <!-- </form> -->
-        <!-- </fieldset> -->
-        <!-- <div style="float: left; margin-left: 40px">
-            <button class="btn-rpg btn-silver" type="button" value="back">Voltar</button>
-        </div> -->
-        <!-- <div style="text-align: right; margin-right: 40px">
-            <button type="reset" class="btn-rpg btn-silver" value="clear">Limpar</button>
-            <button type="submit" class="btn-rpg btn-green" value="save">Salvar</button>
-        </div> -->
     <?php endif ?>
 </main>
 <script>
     if(typeof(image) !== "undefined") {
         image.onchange = evt => {
             let links = thumbImage(image, thumb_image)
-            // let img = thumb_image;
-            // let section = img.parentElement
             $(thumb_image).append(links)
         }
     }
@@ -231,8 +180,10 @@
                 break
             case "clear":
                 for(let i=0; i < form_avatar.length; i++) {
-                    form_avatar[i].value = ""
-                    thumb_image.src = "#"
+                    if(form_avatar[i].attributes.name.textContent !== "sex") {
+                        form_avatar[i].value = ""
+                    }
+                    $(thumb_image).find("*").remove()
                 }
                 loading.hide()
                 break
@@ -242,29 +193,113 @@
                 let link = url[4] + "/" + url[5]
                 if(saveData(link, formData)) {
                     for(let i=0; i < form_avatar.length; i++) {
-                        form_avatar[i].value = ""
+                        if(form_avatar[i].attributes.name.textContent !== "sex") {
+                            form_avatar[i].value = ""
+                        }
                     }
-                    $(thumb_image).find("img").remove()
+                    $(thumb_image).find("*").remove()
                 }
                 loading.hide()
                 break
             case "edit":
-                let id = avatar.children[0].attributes["data-id"].value
+                let id = $(imageAvatar).find(".slick-list img[aria-hidden=false]").attr("id")
                 modal.show({
-                    title: "Modo de edição de RAÇAS",
-                    content: "breed/edit",
-                    params: { id }
+                    title: "Modo de edição de AVATARES",
+                    content: "avatar/edit",
+                    params: { id },
+                    buttons: "<button class='btn btn-rpg btn-silver mr-1' value='delete'>Excluir</button><button class='btn btn-rpg btn-green' value='save'>Salvar</button>"
+                }).on("click", function(e) {
+                    if(e.target.value === "save") {
+                        let formData = new FormData($(e.target.offsetParent).find("form")[0])
+                        if(saveData("avatar/save", formData)) {
+                            modal.close();
+                        }
+                    } else if(e.target.value === "delete") {
+                        modal.confirm({
+                            title: "Modo de Exclusão",
+                            message: "Deseja realmente excluir este AVATAR?"
+                        }).on("click", function(i) {
+                            if(i.target.value === "1") {
+                                let id = modal.content.find("[name=id]").val()
+                                $.ajax({
+                                    url: "avatar/delete",
+                                    type: "POST",
+                                    dataType: "JSON",
+                                    data: {
+                                        id
+                                    },
+                                    beforeSend: function() {
+                                        loading.show()
+                                    },
+                                    success: function(response) {
+                                        alertLatch("Breed removed successfully", "var(--cor-success)")
+                                        modal.close()
+                                        $(".content").load("avatar/list", function() {
+                                            loading.hide()
+                                        })
+                                    },
+                                    error: function(error) {
+
+                                    },
+                                    complete: function() {
+                                        loading.hide()
+                                    }
+
+                                })
+                            }
+                        })
+                    }
                 })
                 break
             default:
                 loading.hide()
         }
-
-        if(typeof(e.target.attributes["data-id"]) !== "undefined") {
-            let id = e.target.attributes["data-id"].value
-            let image_id = e.target.attributes["data-image_id"].value
-            // avatar.innerHTML = "<img data-id='" + id + "' src='image/id/" + image_id + "' alt='' height='350px'/>"
-            loading.hide()
+    }
+    var breedClass = avatar.getElementsByClassName("left")
+    var breed_id;
+    var category_id;
+    if(typeof(breeds) !== "undefined") {
+        document.getElementById("breeds").onclick = (i) => {
+            breed_id = i.target.value
+            avatarsShow()
+        }
+    }
+    if(typeof(categories) !== "undefined") {
+        document.getElementById("categories").onclick = (i) => {
+            category_id = i.target.value
+            avatarsShow()
+        }
+    }
+    var avatarsShow = () => {
+        $(".avatar").find("*").remove()
+        if($(breeds).find(":checked").length > 0 && $(categories).find(":checked").length > 0) {
+            loading.show()
+            $.ajax({
+                url: "avatar",
+                type: "POST",
+                dataType: "JSON",
+                cache: true,
+                data: {
+                    breed_id,
+                    category_id
+                },
+                beforeSend: function() {
+                },
+                success: function(response) {
+                    if(typeof(response) === "string") {
+                        return alertLatch(response, "var(--cor-warning)")
+                    }
+                    $(".avatar").load("avatar/show", { response }, function() {
+                        loading.hide()
+                        $(".avatar").find("[name=class]").closest("section").remove()
+                        $(breed_description).css("margin-top","-80px")
+                    })
+                },
+                error: function(error) {
+                },
+                complete: function() {
+                }
+            })
         }
     }
 </script>

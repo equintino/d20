@@ -39,17 +39,20 @@
         $router->get("/character", "Character:init");
         $router->get("/character/add", "Character:add");
         $router->get("/character/list", "Character:list");
+        $router->post("/character/save", "Character:save");
+        $router->post("/character/edit", "Character:edit");
+        $router->post("/character/delete", "Character:delete");
 
 
         /** The Breed */
         $router->namespace("_App");
         $router->get("/breed", "Breed:init");
-        $router->post("/breed", "Breed:getBreeds");
         $router->get("/breed/add", "Breed:add");
         $router->get("/breed/list", "Breed:list");
         $router->post("/breed/edit", "Breed:edit");
         $router->post("/breed/save", "Breed:save");
-        $router->post("/breed/show", "Breed:show");
+        $router->post("/breed/delete", "Breed:delete");
+        $router->post("/breed/id/{id}", "Breed:load");
 
 
         /** The Class */
@@ -59,13 +62,21 @@
         $router->post("/category/save", "Category:save");
         $router->get("/category/list", "Category:list");
         $router->post("/category/edit", "Category:edit");
+        $router->post("/category/delete", "Category:delete");
+        $router->post("/category/id/{id}", "Category:load");
+        $router->get("/character/story", "Character:story");
 
 
         /** The Avatar */
         $router->namespace("_App");
         $router->get("/avatar", "Avatar:init");
+        $router->post("/avatar", "Avatar:getAvatars");
         $router->get("/avatar/add", "Avatar:add");
+        $router->get("/avatar/list", "Avatar:list");
         $router->post("/avatar/save", "Avatar:save");
+        $router->post("/avatar/show", "Avatar:show");
+        $router->post("/avatar/edit", "Avatar:edit");
+        $router->post("/avatar/delete", "Avatar:delete");
 
 
         /** The Groups' Screens */

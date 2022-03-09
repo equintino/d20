@@ -43,26 +43,69 @@
         color: black;
         text-shadow: 1px 1px 1px black;
     }
+
+    #list {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+    }
+
+    #list .left {
+        width: 30%;
+        text-align: center;
+    }
+
+    #list .left button {
+        width: 130px;
+    }
+
+    #list .left .fieldset, #list .right .fieldset {
+        height: 550px;
+    }
+
+    #list .left .fieldset {
+        overflow: auto;
+    }
+
+    #list .right {
+        width: 70%;
+    }
+
+    #list .right > .fieldset {
+        display: flex;
+    }
+
+    #list .breed_class {
+        position: absolute;
+        right: 130px;
+        top: 160px;
+        cursor: pointer;
+    }
+
+    #list #story {
+        width: 280px;
+    }
 </style>
 <div id="character" >
     <?php if(empty($act)): ?>
         <div id="init">
-            <button class="btn btn-oval">Novo</button>
-            <button class="btn btn-oval">Lista</button>
+            <button class="btn btn-oval" value="new">Novo</button>
+            <button class="btn btn-oval" value="list">Lista</button>
         </div>
     <?php elseif($act=='add'): ?>
         <div class='add'>
-            <fieldset class="fieldset">
+            <fieldset class="fieldset" style="margin-top: 120px">
                 <legend>CADASTRO DE PERSONAGEM</legend>
-                <form enctype="multipart/form-data" id="myCharacter" action="../paginas/add.php?act=cad&personagem=<?= ($personagem ?? null) ?>&raca=<?= ($raca ?? null) ?>" method="POST">
+                <form enctype="multipart/form-data" id="myCharacter" action="avatar/save" method="POST">
                     <section class="side-left">
                         <label>Jogador: </label>
-                        <input class="input-rpg" name="player" value="<?= ( strtoupper($login) ?? null) ?>" disabled />
+                        <input class="input-rpg" name="name" value="<?= ( strtoupper($login) ?? null) ?>" disabled />
+                        <input type="hidden" name="name" value="<?= ( strtoupper($login) ?? null) ?>" />
                         <label>Personagem: </label>
-                        <input class="input-rpg" type="text" name="character" required>
+                        <input class="input-rpg" type="text" name="personage" required>
                         <div style="flex-grow: 2">
-                            <!--<label>Raça: </label>-->
-                            <button id="myBreed" class="btn-rpg" >Raça</button>
+                            <button id="myBreed" class="btn-rpg" value="breed">Raça</button>
                             <span class="breed">&nbsp</span>
                         </div>
                         <div style="flex-grow: 2">
@@ -107,93 +150,268 @@
                     </section>
                 </form>
             </fieldset>
-            <div class='btn_'>
-                <input type="reset" value="LIMPA" class='btn-rpg btn-silver'>
-                <input name="upload" type="submit" value="GRAVA" class='btn-rpg btn-green'>
+            <div style="float: left; margin-left: 40px">
+                <button type="button" class="btn btn-rpg btn-silver" value="back">Voltar</button>
             </div>
+            <div class='btn_'>
+                <button type="reset" class='btn-rpg btn-silver' value="clear" >Limpar</button>
+                <button type="submit" class='btn-rpg btn-green' value="save">Salvar</button>
+            </div>
+        </div>
+    <?php elseif($act === "list"): ?>
+        <div id="list" class="mt-5">
+            <section>
+                <button class="btn btn-rpg btn-info" value="back" style="margin-top: 115px">Voltar</button>
+            </section>
+            <section class="left">
+                <fieldset class="fieldset">
+                    <legend>Personagens</legend>
+                    <?php foreach($characters as $character): ?>
+                        <button class="btn btn-oval" data-id="<?= $character->id ?>" data-image_id="<?= $character->image_id ?>" data-breed_id="<?= $character->breed_id ?>" data-category_id="<?= $character->category_id ?>" data-story="<?= $character->story ?>"><?= $character->personage ?></button>
+                    <?php endforeach ?>
+                </fieldset>
+            </section>
+            <section class="right">
+                <fieldset class="fieldset">
+                    <legend>Avatar</legend>
+                    <div id="story">
+                        Uma breve história
+                        <p></p>
+                    </div>
+                    <div id="avatar" class="mt-4"></div>
+                    <div class="breed_class">
+                        <div id="detail_breed" style="text-align: center"></div>
+                        <div id="detail_class" class="mt-2" style="text-align: center"></div>
+                    </div>
+                </fieldset>
+            </section>
+            <section>
+                <button class="btn btn-rpg btn-danger" value="edit" style="margin-top: 115px">Editar</button>
+            </section>
         </div>
     <?php endif ?>
 </div>
-
-<!-- <script type="text/javascript" src="<?= theme("assets/scripts.js") ?>" ></script> -->
 <script>
 $(function() {
     (slickScript = () => {
         $('.single-item').slick({
             fade: true,
-            // dots: true,
-            // infinite: true,
-            // speed: 300,
-            // slidesToShow: 1,
-            // slidesToScroll: 1,
-            // centerMode: true,
-            // autoplay: true,
-            // variableWidth: true,
-            // adptiveHeight: true
+            infinite: true,
+            dots: false,
+            speed: 300,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            centerMode: false,
+            autoplay: false,
+            variableWidth: false,
+            adptiveHeight: false
         });
-        $(".single-item").on("click keydown", function() {
-            let breed = $(".single-item img[aria-hidden=false]").attr("alt")
-            let detail = $(".single-item img[aria-hidden=false]").attr("data-description")
-            $("#breed, .breed").text(breed.toUpperCase())
-            $("[name=class]").val("")
-            $(description).find("p").text(detail)
-        })
     })()
-        character.onclick = (i) => {
-            loading.show()
-            let btnName = i.target.innerText
-            if(btnName === "Raça") {
+    character.onsubmit = (e) => {
+        e.preventDefault()
+    }
+    /** Buttons */
+    character.onclick = (i) => {
+        loading.show()
+        let btnName = i.target.value
+        switch(btnName) {
+            case "new": case "clear":
+                $(".content").load("character/add", function() {
+                    loading.hide()
+                })
+                break
+            case "list":
+                $(".content").load("character/list", function() {
+                    loading.hide()
+                })
+                break
+            case "breed":
                 $(".galery > div").css("display", "block")
+                $(".single-item").on("click keydown", function() {
+                    let breed = $(".single-item img[aria-hidden=false]").attr("alt")
+                    let breed_id = $(".single-item img[aria-hidden=false]").attr("data-id")
+                    let detail = $(".single-item img[aria-hidden=false]").attr("data-description")
+                    $(".breed").closest("div").append("<input type='hidden' name='breed_id' value='" + breed_id + "' />")
+                    $("#breed, .breed").text(breed.toUpperCase())
+                    $(description).find("p").text(detail)
+                })
                 $(".slick-next").trigger("click")
-            }
-            loading.hide()
-        }
-        character.onsubmit = (e) => {
-            e.preventDefault()
-        }
-        $(character).find("[type=submit]").on("click", (e) => {
-            alert("submeteu")
-        })
-        $(character).find("[type=reset]").on("click", () => {
-            $(character).attr("value", "")
-            let form = document.getElementById("myCharacter")
-            for(let i = 0; i < form.length; i++) {
-                if(i !== 0) {
-                    form[i].value = ""
+                loading.hide()
+                break
+            case "back":
+                $(".content").load("character", function() {
+                    loading.hide()
+                })
+                break
+            case "save":
+                let formData = new FormData(myCharacter)
+                modal.show({
+                    title: "Descreva a história do seu personagem",
+                    content: "character/story",
+                    buttons: "<button class='btn btn-rpg btn-silver' value='0'>Limpar</button><button class='btn btn-rpg btn-danger' value='1'>Salvar</button>"
+                }).on("click", function(i) {
+                    let story = modal.content.children().find("[name=story]").val()
+                    if(i.target.value == "1") {
+                        formData.append("story",story)
+                    }
+                    if(saveData("character/save", formData)) {
+                        modal.close()
+                        $(".content").load("character/add", function() {
+                            loading.hide()
+                        })
+                    }
+                })
+                loading.hide()
+                break
+            case "edit":
+                let btnActive = $(list.querySelector(".left")).find("button.active")
+                let id = btnActive.attr("data-id")
+                let image_id = btnActive.attr("data-image_id")
+                let breed_id = btnActive.attr("data-breed_id")
+                let category_id = btnActive.attr("data-category_id")
+                let story = btnActive.attr("data-story")
+                params = {
+                    id,
+                    image_id,
+                    breed_id,
+                    category_id,
+                    story
                 }
+
+                modal.show({
+                    title: "Modo de edição de PERSONAGEM",
+                    content: "character/edit",
+                    params: params,
+                    buttons: "<button class='btn btn-rpg btn-silver' value='0'>Excluir</button><button class='btn btn-rpg btn-danger' value='1'>Salvar</button>"
+                }).on("click", function(i) {
+                    if(i.target.value == "0") {
+                        modal.confirm({
+                            title: "Modo de Exclusão",
+                            message: "Deseja realmente excluir este PERSONAGEM?"
+                        }).on("click", function(i) {
+                            if(i.target.value === "1") {
+                                let id = modal.content.find("[data-id]").attr("data-id")
+                                $.ajax({
+                                    url: "character/delete",
+                                    type: "POST",
+                                    dataType: "JSON",
+                                    data: {
+                                        id
+                                    },
+                                    beforeSend: function() {
+                                        loading.show()
+                                    },
+                                    success: function(response) {
+                                        console.log(response)
+                                        alertLatch("Personage removed successfully", "var(--cor-success)")
+                                        modal.close()
+                                        $(".content").load("character/list", function() {
+                                            loading.hide()
+                                        })
+                                    },
+                                    error: function(error) {
+
+                                    },
+                                    complete: function() {
+                                        loading.hide()
+                                    }
+
+                                })
+                            }
+                        })
+                    }
+                })
+                break
+            default:
+                loading.hide()
+
+        }
+    }
+    $(character).find("select[name=class]").on("change", function() {
+        let breed_id = $(myCharacter).find(".single-item img[aria-hidden=false]").attr("data-id")
+        let category_id = $(this).val()
+        $.ajax({
+            url: "avatar",
+            type: "POST",
+            dataType: "JSON",
+            data: {
+                breed_id,
+                category_id
+            },
+            beforeSend: function() {
+            },
+            success: function(response) {
+                if(typeof(response) === "string") {
+                    return alertLatch(response, "var(--cor-warning)")
+                }
+                modal.show({
+                    title: "Escolha seu Personagem",
+                    content: "avatar/show",
+                    params: { response }
+                });
+            },
+            error: function(error) {
+            },
+            complete: function() {
             }
         })
-        $(character).find("select[name=class]").on("change", function() {
-            let breed_id = $(myCharacter).find(".single-item img[aria-hidden=false]").attr("data-id")
-            let category_id = $(this).val()
+    })
+    if(typeof(list) !== "undefined") {
+        $(".left button").on("click", (i) => {
+            let id = i.target.attributes["data-id"].value
+            let image_id = i.target.attributes["data-image_id"].value
+            let breed_id = i.target.attributes["data-breed_id"].value
+            let category_id = i.target.attributes["data-category_id"].value
+            let resume = i.target.attributes["data-story"].value
             $.ajax({
-                url: "breed",
+                url: "breed/id/" + breed_id,
                 type: "POST",
                 dataType: "JSON",
                 data: {
-                    breed_id,
-                    category_id
+                    id: breed_id
                 },
-                beforeSend: function() {
-
+                beforSend: function() {
+                    loading.show()
                 },
                 success: function(response) {
-                    if(typeof(response) === "string") {
-                        return alertLatch(response, "var(--cor-warning)")
-                    }
-                    modal.show({
-                        title: "Escolha seu Personagem",
-                        content: "breed/show",
-                        params: { response }
-                    });
+                    detail_breed.innerHTML = "<img src='image/id/" + response.image_id + "' alt='' height='100px' title='" + response.name + "'/>"
                 },
                 error: function(error) {
-
+                    console.log(error)
                 },
                 complete: function() {
-
+                    loading.hide()
                 }
             })
+            $.ajax({
+                url: "category/id/" + category_id,
+                type: "POST",
+                dataType: "JSON",
+                data: {
+                    id: category_id
+                },
+                beforSend: function() {
+                    loading.show()
+                },
+                success: function(response) {
+                    detail_class.innerHTML = "<img src='image/id/" + response.image_id + "' alt='' height='50px' title='" + response.name + "'/>"
+                },
+                error: function(error) {
+                    console.log(error)
+                },
+                complete: function() {
+                    loading.hide()
+                }
+            })
+            avatar.innerHTML = "<img data-id='" + id + "' src='image/id/" + image_id + "' alt='' height='400px'/>"
+            story.children[0].innerHTML = "<textarea rows='20' class='input-rpg' disabled>" + resume + "</textarea>"
         })
+    }
+
+    /** Keep actived button */
+    $(".btn-oval").on("click", function() {
+        $(".btn-oval").removeClass("active")
+        $(this).addClass("active")
     })
+})
 </script>

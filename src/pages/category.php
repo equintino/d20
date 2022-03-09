@@ -216,7 +216,48 @@
                 modal.show({
                     title: "Modo de edição de CLASSES",
                     content: "category/edit",
-                    params: { id }
+                    params: { id },
+                    buttons: "<button class='btn btn-rpg btn-silver mr-1' value='delete'>Excluir</button><button class='btn btn-rpg btn-green' value='save'>Salvar</button>"
+                }).on("click", function(e) {
+                    if(e.target.value === "save") {
+                        let formData = new FormData($(e.target.offsetParent).find("form")[0])
+                        if(saveData("category/save", formData)) {
+                            modal.close();
+                        }
+                    } else if(e.target.value === "delete") {
+                        modal.confirm({
+                            title: "Modo de Exclusão",
+                            message: "Deseja realmente excluir esta CLASSE?"
+                        }).on("click", function(i) {
+                            if(i.target.value === "1") {
+                                let name = modal.content.find("[name=name]").val()
+                                $.ajax({
+                                    url: "category/delete",
+                                    type: "POST",
+                                    dataType: "JSON",
+                                    data: {
+                                        name
+                                    },
+                                    beforeSend: function() {
+                                        loading.show()
+                                    },
+                                    success: function(response) {
+                                        alertLatch("Class removed successfully", "var(--cor-success)")
+                                        modal.close()
+                                        $(".content").load("category/list", function() {
+                                            loading.hide()
+                                        })
+                                    },
+                                    error: function(error) {
+
+                                    },
+                                    complete: function() {
+                                        loading.hide()
+                                    }
+                                })
+                            }
+                        })
+                    }
                 })
                 break;
             default:
@@ -230,4 +271,10 @@
             loading.hide()
         }
     }
+
+    /** Keep actived the button */
+    $(".btn-oval").on("click", function() {
+        $(".btn-oval").removeClass("active")
+        $(this).addClass("active")
+    })
 </script>
