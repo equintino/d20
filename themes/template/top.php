@@ -48,6 +48,7 @@
                         <a class="dropdown-item" href="<?= url("breed") ?>" data-page="breed">Raça</a>
                         <a class="dropdown-item" href="<?= url("category") ?>" data-page="category">Classe</a>
                         <a class="dropdown-item" href="<?= url("avatar") ?>" data-page="avatar">Avatar</a>
+                        <a class="dropdown-item" href="<?= url("mission") ?>" data-page="mission">Missão</a>
                     </div>
                 </li>
                 <?php if(!empty($access) && (in_array("Login de Acesso", $access) || in_array("*", $access))): ?>

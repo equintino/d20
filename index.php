@@ -55,7 +55,7 @@
         $router->post("/breed/id/{id}", "Breed:load");
 
 
-        /** The Class */
+        /** The Category */
         $router->namespace("_App");
         $router->get("/category", "Category:init");
         $router->get("/category/add", "Category:add");
@@ -77,6 +77,28 @@
         $router->post("/avatar/show", "Avatar:show");
         $router->post("/avatar/edit", "Avatar:edit");
         $router->post("/avatar/delete", "Avatar:delete");
+
+
+
+        /** The Mission */
+        $router->namespace("_App");
+        $router->get("/mission", "Mission:init");
+        $router->get("/mission/add", "Mission:add");
+        $router->post("/mission/save", "Mission:save");
+        $router->post("/mission/update", "Mission:update");
+        $router->post("/mission/delete", "Mission:delete");
+        $router->post("/mission/load/{name}", "Mission:load");
+        $router->get("/mission/edit/{id}", "Mission:edit");
+        $router->get("/mission/list", "Mission:list");
+        $router->post("/map/add", "Mission:map");
+        $router->post("/map/save", "Mission:mapSave");
+        $router->post("/map/load", "Mission:mapLoad");
+        $router->post("/map/edit", "Mission:mapEdit");
+
+
+        /** The Maps */
+        // $router->namespace("_App");
+        // $router->get("/map/add", "Map:add");
 
 
         /** The Groups' Screens */
@@ -173,8 +195,8 @@
         $router->namespace("_App");
         // $router->get("/image/id/{id}", "Image:showImage");
         $router->get("/image/id/{id}", "Image:init");
-        $router->delete("/image/delete/id/{id}", "Image:delete");
-        // $router->get("/certificate/id/{id}", "Certificate:showImage");
+        $router->post("/image/delete/id/{id}", "Image:delete");
+        $router->post("/image/save", "Image:save");
 
 
         /** Logout */

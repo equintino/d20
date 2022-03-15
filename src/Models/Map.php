@@ -3,39 +3,39 @@
 namespace Models;
 
 use Core\Model;
-use Database\Migrations\CreateBalancesTable;
+use Database\Migrations\CreateMapsTable;
 
-class Balance extends Model implements Models
+class Map extends Model implements Models
 {
-    protected static $entity = "balances";
+    public static $entity = "maps";
 
     /** @var array */
     private $required = [];
 
-    public function load(int $id, string $columns = "*", bool $msgDb = false)
+    public function load(int $id, string $columns = "*")
     {
-        $load = $this->read("SELECT {$columns} FROM " . self::$entity . " WHERE id=:id", "id={$id}", $msgDb);
+        $load = $this->read("SELECT {$columns} FROM " . self::$entity . " WHERE id=:id", "id={$id}");
 
         if($this->fail || !$load->rowCount()) {
-            $this->message = ($msgDb ? $this->fail->errorInfo[2] : "<span class='warning'>Not Found Informed id</span>");
+            $this->message = "File not found";
             return null;
         }
-
         return $load->fetchObject(__CLASS__);
     }
 
-    public function find(string $search, string $columns = "*")
+    /** @var $name string */
+    public function find(string $name, string $columns = "*")
     {
-        if(filter_var($search, FILTER_SANITIZE_STRIPPED)) {
-            $find = $this->read("SELECT {$columns} FROM " . self::$entity . " WHERE name=:name ", "name={$search}");
+        if(filter_var($name, FILTER_SANITIZE_STRIPPED)) {
+            $find = $this->read("SELECT {$columns} FROM " . self::$entity . " WHERE name=:name ", "name={$name}");
         }
 
-        if($this->fail || !$find->rowCount()) {
-            $this->message = "<span class='warning'>Not found balance</span>";
+        if($this->fail || empty($find)) {
+            $this->message = "File not found";
             return null;
         }
 
-        return $find->fetchObject(__CLASS__);
+        return $find->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
     }
 
     public function search(array $where)
@@ -52,30 +52,31 @@ class Balance extends Model implements Models
         return $data->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
     }
 
-    public function all(int $limit=30, int $offset=0, string $columns = "*", string $order = "id", bool $msg=false)
+    public function activeAll(int $limit=30, int $offset=0, string $columns = "*", string $order = "name"): ?array
     {
-        $all = $this->read("SELECT {$columns} FROM  " . self::$entity . " " . $this->order($order) . $this->limit(), "limit={$limit}&offset={$offset}");
-
-        if($this->fail) {
-            $this->message = "<span class='error'>" . $this->fail->errorInfo[2] . "</span>";
-            return $this->message;
+        $sql = "SELECT {$columns} FROM  " . self::$entity . $this->order($order);
+        if($limit !== 0) {
+            $all = $this->read($sql . $this->limit(), "limit={$limit}&offset={$offset}");
+        } else {
+            $all = $this->read($sql);
         }
 
-        if(!$all->rowCount()) {
-            $this->message = "<span class='warning'>Your inquiry has not returned data</span>";
+        if($this->fail || !$all->rowCount()) {
+            $this->message = "Your query has not returned any registrations";
             return null;
         }
 
         return $all->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
     }
 
-    public function lastMonth(): ?object
+    public function readDataTable(string $sql, ?array $where)
     {
-        $data = $this->read("SELECT * FROM " . self::$entity . " ORDER BY id DESC");
-        return ($data->rowCount() ? $data->fetchObject(__CLASS__) : null);
+        if(empty($where)) {
+            return $this->activeAll();
+        }
     }
 
-    public function save(): ?Balance
+    public function save(): ?Map
     {
         if(!$this->required()) {
             return null;
@@ -87,7 +88,7 @@ class Balance extends Model implements Models
             $balance = $this->read("SELECT id FROM " . self::$entity . " WHERE name = :name AND id != :id",
                 "name={$this->name}&id={$id}");
             if($balance->rowCount()) {
-                $this->message = "<span class='warning'>The Informed Balance is already registered</span>";
+                $this->message = "<span class='warning'>The Informed mission is already registered</span>";
                 return null;
             }
 
@@ -102,10 +103,6 @@ class Balance extends Model implements Models
 
         /** Create */
         if(empty($this->id)) {
-            if($this->search([ "month" => $this->month, "year" => $this->year ])) {
-                $this->message = "<span class='warning'>The Informed Balance is already registered</span>";
-                return null;
-            }
             $id = $this->create(self::$entity, $this->safe());
             if($this->fail()) {
                 $this->message = "<span class='danger'>Error to Register, Check the data</span>";
@@ -125,10 +122,10 @@ class Balance extends Model implements Models
         }
 
         if($this->fail()) {
-            $this->message = "<span class='danger'>Could not remove the balance</span>";
+            $this->message = "<div class=danger>Could not remove file</div>";
             return null;
         }
-        $this->message = "<span class='success'>Balance was successfully removed</span>";
+        $this->message = "<div class=success>File successfully</div>";
         $this->data = null;
 
         return $this;
@@ -138,24 +135,22 @@ class Balance extends Model implements Models
     {
         foreach($this->required as $field) {
             if(empty(trim($this->$field))) {
-                $this->message = "<span class='warning'>The field {$field} is required</span>";
+                $this->message = "The {$field} field is mandatory";
                 return false;
             }
         }
-
         return true;
     }
 
     public function createThisTable()
     {
-        $sql = (new CreateBalancesTable())->up(self::$entity);
+        $sql = (new CreateMapsTable())->up(self::$entity);
         return $this->createTable($sql);
     }
 
     public function dropThisTable()
     {
-        $sql = (new CreateBalancesTable())->down(self::$entity);
+        $sql = (new CreateMapsTable())->down(self::$entity);
         return $this->dropTable($sql);
     }
-
 }

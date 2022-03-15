@@ -61,4 +61,3 @@
     </body>
 </html>
 <script type="text/javascript" src="<?= theme("assets/scripts.js") ?>" ></script>
-<script>scriptLogin()</script>

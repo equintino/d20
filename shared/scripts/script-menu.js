@@ -10,6 +10,8 @@ const identif = (page, logged="Nenhum usuário logado") => {
             return "GERENCIAMENTO DE CLASSES";
         case "avatar":
             return "GERENCIAMENTO DE AVATARES";
+        case "mission":
+            return "GERENCIAMENTO DE MISSÕES";
         default:
             return null;
     }
@@ -33,6 +35,16 @@ const callScript = (name) => {
 }
 
 $(function() {
+    $(document).on("click", function() {
+        $(this).find(".dropdown-menu").css("display","none")
+    })
+    $(".dropdown-toggle").on("mouseover", function() {
+        $(".dropdown-toggle").parent().find(".dropdown-menu").css("display","none")
+        let dropdownMenu = $(this).parent().find(".dropdown-menu")
+        dropdownMenu.css("display","block").on("mouseleave", function() {
+            $(this).parent().find(".dropdown-menu").css("display","none")
+        })
+    })
     $("#topHeader ul li a").on("click", function(e) {
         e.preventDefault();
         let link = $(this).attr("href");
@@ -50,6 +62,12 @@ $(function() {
                 callScript(page);
                 $(".loading, #mask_main").hide();
             });
+        } else {
+            // $(this).parent().find(".dropdown-menu:hover").css("display","block")
+            // $(this).parent().find(".dropdown-menu").addClass("show").css("display", "block")
+            // $(this).parent().find(".dropdown-menu").css("display", "block")
+            // console.log($(this).parent().find(".dropdown-menu").css("display", "block"))
+
         }
     });
     $("#topHeader ul li [data-page=home]").trigger("click");

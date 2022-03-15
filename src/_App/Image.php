@@ -18,6 +18,13 @@ class Image extends Controller
         $this->showImage();
     }
 
+    public function save(array $data)
+    {
+        $image = (new \Models\Image())->load($data["id"]);
+        $image->fileSave($_FILES["image"], $data["id"]);
+        return print(json_encode($image->message()));
+    }
+
     public function showImage()
     {
         if(isset($this->id)) {
@@ -31,8 +38,7 @@ class Image extends Controller
 
     public function delete(array $data)
     {
-        var_dump($data);die;
-        $file = $this->class->image->load($data["id"]);
+        $file = $this->class->load($data["id"]);
         $file->destroy();
         return print(json_encode($file->message()));
     }

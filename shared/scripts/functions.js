@@ -439,7 +439,7 @@ var saveData = function(link, data, msg = "Saving") {
         async: false,
         data: data,
         beforeSend: function() {
-            $("#mask_main").show();
+            // $("#mask_main").show();
             loading.show({
                 text: msg
             });
@@ -455,7 +455,7 @@ var saveData = function(link, data, msg = "Saving") {
                 background = "var(--cor-warning";
             }
             alertLatch(response, background);
-            if(success)$("#mask_main").hide();
+            // if(success)$("#mask_main").hide();
         },
         error: function(error) {
             alertLatch("Could not save change", "var(--cor-danger)");

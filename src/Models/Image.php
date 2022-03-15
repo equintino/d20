@@ -77,6 +77,9 @@ class Image extends Model implements Models
 
     public function fileSave(array $file, int $id = null)
     {
+        if(!empty($id)) {
+            $data["id"] = $id;
+        }
         $data["name"] = $file["name"];
         $data["type"] = $this->indType($file["type"]);
         $data["size"] = $file["size"];
@@ -104,7 +107,6 @@ class Image extends Model implements Models
         if(empty($this->id)) {
             return $this->create_();
         }
-        //return $this;
     }
 
     private function update_()
@@ -115,6 +117,7 @@ class Image extends Model implements Models
             $this->message = "<span class='danger'>Error updating, check the data</span>";
             return null;
         }
+        $this->message = "<span class='success'>File saved succefuly</span>";
         return $this->id;
     }
 

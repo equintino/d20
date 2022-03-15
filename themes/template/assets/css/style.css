@@ -777,7 +777,7 @@ main .form-signin {
     padding: 0 8px;
 }
 
-.btn-green {
+.btn-green, .btn-green:focus {
     background-color: #027702;
     color: white;
     box-shadow: 0 5px 0 #003f00;
@@ -787,17 +787,27 @@ main .form-signin {
     background-color: #025502;
 }
 
-.btn-green:active {
+.btn-green:active, .btn-rpg.btn-info:active, .btn-rpg.btn-danger:active {
     position: relative;
     top: 5px;
     box-shadow: none;
 }
 
-.btn-silver {
+.btn-silver, .btn-silver:focus {
     background-color: #707070;
     color: white;
     box-shadow: 0 5px 0 #343434;
     text-shadow: 2px 0 2px #262626;
+}
+
+.btn-rpg.btn-info {
+    box-shadow: 0 5px 0 #115c68;
+    text-shadow: 1px 0 2px #262626;
+}
+
+.btn-rpg.btn-danger {
+    box-shadow: 0 5px 0 #80252d;
+    text-shadow: 1px 0 2px #262626;
 }
 
 .btn-silver:hover {
