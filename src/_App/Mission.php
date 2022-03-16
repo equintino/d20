@@ -26,7 +26,12 @@ class Mission extends Controller
     {
         $id = $data["id"];
         $mission = (new \Models\Mission())->load($id);
-        $this->view->setPath("Modals")->render($this->page, compact("id","mission"));
+        $characters = (new \Models\Character())->activeAll();
+        $personages = [];
+        foreach((new \Models\Character())->search(["mission_id" => $id]) as $character) {
+            array_push($personages, $character->id);
+        }
+        $this->view->setPath("Modals")->render($this->page, compact("id","mission","characters","personages"));
     }
 
     public function load(array $data): ?string
@@ -46,6 +51,17 @@ class Mission extends Controller
     {
         $mission = $data["mission"];
         $this->view->setPath("Modals")->render("map", compact("mission"));
+    }
+
+    public function personages(array $data)
+    {
+        $name = filter_var($data["name"], FILTER_SANITIZE_STRING);
+        $mission_id = (new \Models\Mission())->find($name)->id;
+        $characters = (new \Models\Character())->search(["mission_id" => $mission_id]);
+        foreach($characters as $character) {
+            $personages[] = $character->personage;
+        }
+        return print(json_encode($personages));
     }
 
     public function mapSave(array $data)
@@ -100,6 +116,29 @@ class Mission extends Controller
         $mission->name = $data["name"];
         $mission->place = $data["place"];
         $mission->story = $data["story"];
+        if(!empty($data["personages"])) {
+            $characters = new \Models\Character();
+            foreach($data["personages"] as $character_id) {
+                $character_ids[] = $character_id;
+                $character = $characters->load($character_id);
+                $character->mission_id = $id;
+                $character->save();
+            }
+            $removePersonages = $characters->search(["mission_id" => $id]);
+            /** Removeing personages */
+            foreach($removePersonages as $removePersonage){
+                if(!in_array($removePersonage->id, $character_ids)) {
+                    $removePersonage->mission_id = "";
+                    $removePersonage->save();
+                }
+            }
+        } else {
+            $characters = (new \Models\Character())->search(["mission_id" => $id]);
+            foreach($characters as $character) {
+                $character->mission_id = "";
+                $character->save();
+            }
+        }
         $mission->save();
         return print(json_encode($mission->message()));
     }

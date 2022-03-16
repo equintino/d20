@@ -64,16 +64,7 @@
                 <div>
                     <label>Tipo:</label>
                     <input class="input-rpg" type="text" name="name" />
-                    <!-- <label>Classe:</label>
-                    <input class="input-rpg" type="text" name="class" /> -->
                 </div>
-                <!-- <div>
-                    <label>Gênero:</label>
-                    <input class="input-rpg" type="radio" name="sex" value="M"/>
-                    <label>Maculino:</label>
-                    <input class="input-rpg" type="radio" name="sex" value="F"/>
-                    <label>Feminino:</label>
-                </div> -->
                 <div>&nbsp&nbsp&nbsp</div>
                 <div>
                     <label>Imagem:</label>
@@ -87,7 +78,6 @@
             <section class="side-right" style="justify-content: center">
                 <img id="thumb_image" src="#" alt="" height="250px"/>
             </section>
-            <!-- <table class="my-table"></table> -->
         </form>
     </fieldset>
     <div style="float: left; margin-left: 40px">
@@ -120,53 +110,6 @@
                 <button class="btn btn-rpg btn-danger" style="margin-top: 20px" value="edit">Editar</button>
             </section>
         </div>
-    <?php elseif($act === "avatar"): ?>
-        <!-- <fieldset class="fieldset">
-        <legend>ADICIONAR AVATAR</legend>
-        <form id="form-breed" method="POST" action="breed/save" enctype="multipart/form-data" >
-            <section class="side-left">
-                <div>
-                    <label>Tipo:</label>
-                    <select class="input-rpg" name="breed">
-                        <option value="0"></option>
-                        <?php foreach($breeds as $breed): ?>
-                        <option value="<?= $breed->id ?>"><?= strToUpper($breed->name) ?></option>
-                        <?php endforeach ?>
-                    </select>
-                    <label>Classe:</label>
-                    <select class="input-rpg" name="class">
-                        <option value="0"></option>
-                        <?php foreach($categories as $category): ?>
-                        <option valeu="<?= $category->id ?>"><?= $category->name ?></option>
-                        <?php endforeach ?>
-                    </select>
-                </div>
-                <div>
-                    <label>Gênero:</label>
-                    <input class="input-rpg" type="radio" name="sex" value="M"/>
-                    <label>Maculino:</label>
-                    <input class="input-rpg" type="radio" name="sex" value="F"/>
-                    <label>Feminino:</label>
-                </div>
-                <div>&nbsp&nbsp&nbsp</div>
-                <div>
-                    <label>Imagem:</label>
-                    <input id="image" class="input-rpg" type="file" name="image" />
-                </div>
-                <div>
-                    <label>Descrição:</label>
-                    <textarea class="input-rpg" rows="5" cols="48" type="text" name="description" style="text-transform: none"></textarea>
-                </div>
-            </section>
-            <section class="side-right" style="justify-content: center">
-                <img id="thumb_image" src="#" alt="" height="250px"/>
-            </section>
-        </form>
-    </fieldset>
-    <div style="text-align: right; margin-right: 40px">
-        <button type="reset" class="btn-rpg btn-silver" >Limpar</button>
-        <button type="submit" class="btn-rpg btn-green" >Salvar</button>
-    </div> -->
     <?php endif ?>
 </main>
 <script>
@@ -212,53 +155,57 @@
                 })
                 break;
             case "edit":
-                let id = symbol.children[0].attributes["data-id"].value
-                modal.show({
-                    title: "Modo de edição de CLASSES",
-                    content: "category/edit",
-                    params: { id },
-                    buttons: "<button class='btn btn-rpg btn-silver mr-1' value='delete'>Excluir</button><button class='btn btn-rpg btn-green' value='save'>Salvar</button>"
-                }).on("click", function(e) {
-                    if(e.target.value === "save") {
-                        let formData = new FormData($(e.target.offsetParent).find("form")[0])
-                        if(saveData("category/save", formData)) {
-                            modal.close();
-                        }
-                    } else if(e.target.value === "delete") {
-                        modal.confirm({
-                            title: "Modo de Exclusão",
-                            message: "Deseja realmente excluir esta CLASSE?"
-                        }).on("click", function(i) {
-                            if(i.target.value === "1") {
-                                let name = modal.content.find("[name=name]").val()
-                                $.ajax({
-                                    url: "category/delete",
-                                    type: "POST",
-                                    dataType: "JSON",
-                                    data: {
-                                        name
-                                    },
-                                    beforeSend: function() {
-                                        loading.show()
-                                    },
-                                    success: function(response) {
-                                        alertLatch("Class removed successfully", "var(--cor-success)")
-                                        modal.close()
-                                        $(".content").load("category/list", function() {
-                                            loading.hide()
-                                        })
-                                    },
-                                    error: function(error) {
-
-                                    },
-                                    complete: function() {
-                                        loading.hide()
-                                    }
-                                })
+                if(typeof(symbol.children[0]) !== "undefined") {
+                    let id = symbol.children[0].attributes["data-id"].value
+                    modal.show({
+                        title: "Modo de edição de CLASSES",
+                        content: "category/edit",
+                        params: { id },
+                        buttons: "<button class='btn btn-rpg btn-silver mr-1' value='delete'>Excluir</button><button class='btn btn-rpg btn-green' value='save'>Salvar</button>"
+                    }).on("click", function(e) {
+                        if(e.target.value === "save") {
+                            let formData = new FormData($(e.target.offsetParent).find("form")[0])
+                            if(saveData("category/save", formData)) {
+                                modal.close();
                             }
-                        })
-                    }
-                })
+                        } else if(e.target.value === "delete") {
+                            modal.confirm({
+                                title: "Modo de Exclusão",
+                                message: "Deseja realmente excluir esta CLASSE?"
+                            }).on("click", function(i) {
+                                if(i.target.value === "1") {
+                                    let name = modal.content.find("[name=name]").val()
+                                    $.ajax({
+                                        url: "category/delete",
+                                        type: "POST",
+                                        dataType: "JSON",
+                                        data: {
+                                            name
+                                        },
+                                        beforeSend: function() {
+                                            loading.show()
+                                        },
+                                        success: function(response) {
+                                            alertLatch("Class removed successfully", "var(--cor-success)")
+                                            modal.close()
+                                            $(".content").load("category/list", function() {
+                                                loading.hide()
+                                            })
+                                        },
+                                        error: function(error) {
+
+                                        },
+                                        complete: function() {
+                                            loading.hide()
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                    })
+                } else {
+                    loading.hide()
+                }
                 break;
             default:
                 loading.hide()

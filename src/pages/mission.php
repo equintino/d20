@@ -28,7 +28,7 @@
         text-align: center;
     }
 
-    #mission #list .right, #mission #list section fieldset {
+    #mission #list .right {
         cursor: pointer;
     }
 
@@ -92,12 +92,12 @@
                     <div id="images"></div>
                 </fieldset>
             </section>
-            <section class="storyPersonage">
-                <fieldset class="fieldset" title="Clique para editar história" style="height: 100%">
+            <section>
+                <fieldset class="fieldset" style="height: 100%">
                     <legend>História</legend>
                     <div id="story"></div>
                 </fieldset>
-                <fieldset class="fieldset" title="Clique para editar personagens" style="height: 100%">
+                <fieldset class="fieldset" style="height: 100%">
                     <legend>Personagens</legend>
                     <div id="personage"></div>
                 </fieldset>
@@ -205,56 +205,61 @@
                 }
                 break
             case "edit":
-                let mission_id = list.querySelector(".left button.active").attributes["data-id"].value
-                modal.show({
-                    title: "Modo de edição de Missão",
-                    content: "mission/edit/" + mission_id,
-                    buttons: "<button class='btn btn-rpg btn-silver mr-1' value='delete'>Excluir</button><button class='btn btn-rpg btn-green' value='save'>Salvar</button>"
-                }).on("click", function(e) {
-                    let formData = new FormData(modal.content.find(form_mission)[0])
-                    if(e.target.value === "save") {
-                        if(saveData("mission/update", formData)) {
-                            modal.close();
-                        }
-                        $(".content").load("mission/list", function() {
-                            loading.hide()
-                        })
-                    } else if(e.target.value === "delete") {
-                        modal.confirm({
-                            title: "Modo de Exclusão",
-                            message: "Deseja realmente excluir esta MISSÂO?"
-                        }).on("click", function(i) {
-                            if(i.target.value === "1") {
-                                let id = modal.content.find("[name=id]").val()
-                                $.ajax({
-                                    url: "mission/delete",
-                                    type: "POST",
-                                    dataType: "JSON",
-                                    data: {
-                                        id
-                                    },
-                                    beforeSend: function() {
-                                        loading.show()
-                                    },
-                                    success: function(response) {
-                                        alertLatch("Mission removed successfully", "var(--cor-success)")
-                                        modal.close()
-                                        $(".content").load("mission/list", function() {
-                                            loading.hide()
-                                        })
-                                    },
-                                    error: function(error) {
-
-                                    },
-                                    complete: function() {
-                                        loading.hide()
-                                    }
-
-                                })
+                if(list.querySelector("button.active") !== null) {
+                    let mission_id = list.querySelector(".left button.active").attributes["data-id"].value
+                    modal.show({
+                        title: "Modo de edição de Missão",
+                        content: "mission/edit/" + mission_id,
+                        buttons: "<button class='btn btn-rpg btn-silver mr-1' value='delete'>Excluir</button><button class='btn btn-rpg btn-green' value='save'>Salvar</button>"
+                    }).on("click", function(e) {
+                        let formData = new FormData(modal.content.find(form_mission)[0])
+                        if(e.target.value === "save") {
+                            if(saveData("mission/update", formData)) {
+                                modal.close();
                             }
-                        })
-                    }
-                })
+                            $(".content").load("mission/list", function() {
+                                loading.hide()
+                            })
+                        } else if(e.target.value === "delete") {
+                            modal.confirm({
+                                title: "Modo de Exclusão",
+                                message: "Deseja realmente excluir esta MISSÂO?"
+                            }).on("click", function(i) {
+                                if(i.target.value === "1") {
+                                    let id = modal.content.find("[name=id]").val()
+                                    $.ajax({
+                                        url: "mission/delete",
+                                        type: "POST",
+                                        dataType: "JSON",
+                                        data: {
+                                            id
+                                        },
+                                        beforeSend: function() {
+                                            loading.show()
+                                        },
+                                        success: function(response) {
+                                            alertLatch("Mission removed successfully", "var(--cor-success)")
+                                            modal.close()
+                                            $(".content").load("mission/list", function() {
+                                                loading.hide()
+                                            })
+                                        },
+                                        error: function(error) {
+
+                                        },
+                                        complete: function() {
+                                            loading.hide()
+                                        }
+
+                                    })
+                                }
+                            })
+                        }
+                    })
+                } else {
+                    loading.hide()
+                    alertLatch("No selected mission", "var(--cor-warning)")
+                }
                 break
             default:
                 loading.hide()
@@ -267,7 +272,14 @@
                 let id = e.target.attributes["data-id"].value
                 let name = e.target.innerText
                 let mission = loadData("mission/load/" + name)
+                let personages = loadData("mission/personages/" + name)
                 story.innerText = mission.story
+
+                let html = ""
+                for(let i in personages) {
+                    html += "<div><i class='fa fa-circle mr-2' style='font-size: .8em'></i>" + personages[i] + "</div>"
+                }
+                personage.innerHTML = html
                 $.ajax({
                     url: "map/load",
                     type: "POST",

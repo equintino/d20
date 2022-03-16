@@ -26,7 +26,7 @@ class CreateCharactersTable implements CreateTable
             $table->int("breed_id")->foreign("breed_id","breeds");
             $table->int("category_id")->foreign("category_id","categories");
             $table->int("image_id")->foreign("image_id","images");
-            // $table->int("mission_id")->foreign("mission_id","mission");
+            $table->int("mission_id")->foreign("mission_id","missions")->nullable();
             $table->timestamps();
             return $table->run();
         });

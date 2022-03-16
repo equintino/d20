@@ -88,12 +88,14 @@
         $router->post("/mission/update", "Mission:update");
         $router->post("/mission/delete", "Mission:delete");
         $router->post("/mission/load/{name}", "Mission:load");
+        $router->post("/mission/personages/{name}", "Mission:personages");
         $router->get("/mission/edit/{id}", "Mission:edit");
         $router->get("/mission/list", "Mission:list");
         $router->post("/map/add", "Mission:map");
         $router->post("/map/save", "Mission:mapSave");
         $router->post("/map/load", "Mission:mapLoad");
         $router->post("/map/edit", "Mission:mapEdit");
+        // $router->post("/mission/personage", "Mission:personage");
 
 
         /** The Maps */

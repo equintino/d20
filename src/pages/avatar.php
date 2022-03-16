@@ -202,54 +202,58 @@
                 loading.hide()
                 break
             case "edit":
-                let id = $(imageAvatar).find(".slick-list img[aria-hidden=false]").attr("id")
-                modal.show({
-                    title: "Modo de edição de AVATARES",
-                    content: "avatar/edit",
-                    params: { id },
-                    buttons: "<button class='btn btn-rpg btn-silver mr-1' value='delete'>Excluir</button><button class='btn btn-rpg btn-green' value='save'>Salvar</button>"
-                }).on("click", function(e) {
-                    if(e.target.value === "save") {
-                        let formData = new FormData($(e.target.offsetParent).find("form")[0])
-                        if(saveData("avatar/save", formData)) {
-                            modal.close();
-                        }
-                    } else if(e.target.value === "delete") {
-                        modal.confirm({
-                            title: "Modo de Exclusão",
-                            message: "Deseja realmente excluir este AVATAR?"
-                        }).on("click", function(i) {
-                            if(i.target.value === "1") {
-                                let id = modal.content.find("[name=id]").val()
-                                $.ajax({
-                                    url: "avatar/delete",
-                                    type: "POST",
-                                    dataType: "JSON",
-                                    data: {
-                                        id
-                                    },
-                                    beforeSend: function() {
-                                        loading.show()
-                                    },
-                                    success: function(response) {
-                                        alertLatch("Breed removed successfully", "var(--cor-success)")
-                                        modal.close()
-                                        $(".content").load("avatar/list", function() {
-                                            loading.hide()
-                                        })
-                                    },
-                                    error: function(error) {
-
-                                    },
-                                    complete: function() {
-                                        loading.hide()
-                                    }
-
-                                })
+                if(typeof(imageAvatar) !== "undefined") {
+                    let id = $(imageAvatar).find(".slick-list img[aria-hidden=false]").attr("id")
+                    modal.show({
+                        title: "Modo de edição de AVATARES",
+                        content: "avatar/edit",
+                        params: { id },
+                        buttons: "<button class='btn btn-rpg btn-silver mr-1' value='delete'>Excluir</button><button class='btn btn-rpg btn-green' value='save'>Salvar</button>"
+                    }).on("click", function(e) {
+                        if(e.target.value === "save") {
+                            let formData = new FormData($(e.target.offsetParent).find("form")[0])
+                            if(saveData("avatar/save", formData)) {
+                                modal.close();
                             }
-                        })
-                    }
-                })
+                        } else if(e.target.value === "delete") {
+                            modal.confirm({
+                                title: "Modo de Exclusão",
+                                message: "Deseja realmente excluir este AVATAR?"
+                            }).on("click", function(i) {
+                                if(i.target.value === "1") {
+                                    let id = modal.content.find("[name=id]").val()
+                                    $.ajax({
+                                        url: "avatar/delete",
+                                        type: "POST",
+                                        dataType: "JSON",
+                                        data: {
+                                            id
+                                        },
+                                        beforeSend: function() {
+                                            loading.show()
+                                        },
+                                        success: function(response) {
+                                            alertLatch("Breed removed successfully", "var(--cor-success)")
+                                            modal.close()
+                                            $(".content").load("avatar/list", function() {
+                                                loading.hide()
+                                            })
+                                        },
+                                        error: function(error) {
+
+                                        },
+                                        complete: function() {
+                                            loading.hide()
+                                        }
+
+                                    })
+                                }
+                            })
+                        }
+                    })
+                } else {
+                    loading.hide()
+                }
                 break
             default:
                 loading.hide()

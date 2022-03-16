@@ -345,7 +345,7 @@ $(function() {
                     return alertLatch(response, "var(--cor-warning)")
                 }
                 modal.show({
-                    title: "Escolha seu Personagem",
+                    title: "Escolha seu Personagem (clique na imagem para selecioná-la)",
                     content: "avatar/show",
                     params: { response }
                 });

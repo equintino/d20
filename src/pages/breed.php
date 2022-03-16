@@ -155,54 +155,58 @@
                 loading.hide()
                 break
             case "edit":
-                let id = avatar.children[0].attributes["data-id"].value
-                modal.show({
-                    title: "Modo de edição de RAÇAS",
-                    content: "breed/edit",
-                    params: { id },
-                    buttons: "<button class='btn btn-rpg btn-silver mr-1' value='delete'>Excluir</button><button class='btn btn-rpg btn-green' value='save'>Salvar</button>"
-                }).on("click", function(e) {
-                    if(e.target.value === "save") {
-                        let formData = new FormData($(e.target.offsetParent).find("form")[0])
-                        if(saveData("breed/save", formData)) {
-                            modal.close();
-                        }
-                    } else if(e.target.value === "delete") {
-                        modal.confirm({
-                            title: "Modo de Exclusão",
-                            message: "Deseja realmente excluir esta RAÇA?"
-                        }).on("click", function(i) {
-                            if(i.target.value === "1") {
-                                let name = modal.content.find("[name=name]").val()
-                                $.ajax({
-                                    url: "breed/delete",
-                                    type: "POST",
-                                    dataType: "JSON",
-                                    data: {
-                                        name
-                                    },
-                                    beforeSend: function() {
-                                        loading.show()
-                                    },
-                                    success: function(response) {
-                                        alertLatch("Breed removed successfully", "var(--cor-success)")
-                                        modal.close()
-                                        $(".content").load("breed/list", function() {
-                                            loading.hide()
-                                        })
-                                    },
-                                    error: function(error) {
-
-                                    },
-                                    complete: function() {
-                                        loading.hide()
-                                    }
-
-                                })
+                if(typeof(avatar.children[0]) !== "undefined") {
+                    let id = avatar.children[0].attributes["data-id"].value
+                    modal.show({
+                        title: "Modo de edição de RAÇAS",
+                        content: "breed/edit",
+                        params: { id },
+                        buttons: "<button class='btn btn-rpg btn-silver mr-1' value='delete'>Excluir</button><button class='btn btn-rpg btn-green' value='save'>Salvar</button>"
+                    }).on("click", function(e) {
+                        if(e.target.value === "save") {
+                            let formData = new FormData($(e.target.offsetParent).find("form")[0])
+                            if(saveData("breed/save", formData)) {
+                                modal.close();
                             }
-                        })
-                    }
-                })
+                        } else if(e.target.value === "delete") {
+                            modal.confirm({
+                                title: "Modo de Exclusão",
+                                message: "Deseja realmente excluir esta RAÇA?"
+                            }).on("click", function(i) {
+                                if(i.target.value === "1") {
+                                    let name = modal.content.find("[name=name]").val()
+                                    $.ajax({
+                                        url: "breed/delete",
+                                        type: "POST",
+                                        dataType: "JSON",
+                                        data: {
+                                            name
+                                        },
+                                        beforeSend: function() {
+                                            loading.show()
+                                        },
+                                        success: function(response) {
+                                            alertLatch("Breed removed successfully", "var(--cor-success)")
+                                            modal.close()
+                                            $(".content").load("breed/list", function() {
+                                                loading.hide()
+                                            })
+                                        },
+                                        error: function(error) {
+
+                                        },
+                                        complete: function() {
+                                            loading.hide()
+                                        }
+
+                                    })
+                                }
+                            })
+                        }
+                    })
+                } else {
+                    loading.hide()
+                }
                 break
             default:
                 loading.hide()
