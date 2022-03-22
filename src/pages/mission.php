@@ -215,7 +215,7 @@
                         let formData = new FormData(modal.content.find(form_mission)[0])
                         if(e.target.value === "save") {
                             if(saveData("mission/update", formData)) {
-                                modal.close();
+                                modal.hideContent();
                             }
                             $(".content").load("mission/list", function() {
                                 loading.hide()
@@ -239,13 +239,13 @@
                                         },
                                         success: function(response) {
                                             alertLatch("Mission removed successfully", "var(--cor-success)")
-                                            modal.close()
+                                            modal.hideContent()
                                             $(".content").load("mission/list", function() {
                                                 loading.hide()
                                             })
                                         },
                                         error: function(error) {
-
+                                            alertLatch(error.responseText)
                                         },
                                         complete: function() {
                                             loading.hide()
@@ -272,7 +272,7 @@
                 let id = e.target.attributes["data-id"].value
                 let name = e.target.innerText
                 let mission = loadData("mission/load/" + name)
-                let personages = loadData("mission/personages/" + name)
+                let personages = loadData("mission/personages/" + name, null, "JSON", "loading...", "This mission no has personages")
                 story.innerText = mission.story
 
                 let html = ""
@@ -348,7 +348,7 @@
                                             },
                                             success: function(response) {
                                                 alertLatch(response, "var(--cor-success)")
-                                                modal.close()
+                                                modal.hideContent()
                                                 $(".content").load("mission/list", function() {
                                                     loading.hide()
                                                 })

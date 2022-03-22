@@ -166,7 +166,7 @@
                         if(e.target.value === "save") {
                             let formData = new FormData($(e.target.offsetParent).find("form")[0])
                             if(saveData("breed/save", formData)) {
-                                modal.close();
+                                modal.hideContent();
                             }
                         } else if(e.target.value === "delete") {
                             modal.confirm({
@@ -187,7 +187,7 @@
                                         },
                                         success: function(response) {
                                             alertLatch("Breed removed successfully", "var(--cor-success)")
-                                            modal.close()
+                                            modal.hideContent()
                                             $(".content").load("breed/list", function() {
                                                 loading.hide()
                                             })

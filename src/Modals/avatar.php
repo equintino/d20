@@ -49,6 +49,14 @@
             <?php endforeach; ?>
         </div>
     </section>
+<?php //elseif($act === "edit"): ?>
+    <!-- <section class="wrapper">
+        <div id="imageAvatar">
+            <?php foreach($list as $avatar): ?>
+            <img id="<?= $avatar["id"] ?>" src="image/id/<?= $avatar["image_id"] ?>" alt="" height="350px"/>
+            <?php endforeach; ?>
+        </div>
+    </section> -->
 <?php else: ?>
     <form id="form_avatar" method="POST" action="avatar/save" enctype="multipart/form-data" >
         <input type="hidden" name="id" value="<?= $avatar->id ?>" />
@@ -104,7 +112,10 @@
             $(thumb_image).append(img)
         }
     }
-    if(act === "list") {
+    if(typeof(imageAvatar) !== "undefined") {
+        if(imageAvatar.classList[0] === "slick-initialized") {
+            imageAvatar.classList = ""
+        }
         $("#imageAvatar").slick({
             infinite: true,
             fade: true,
@@ -118,6 +129,8 @@
             autoplay: false,
             cssEase: "linear"
         });
+    }
+    if(act === "list") {
         $("[name=class]").on("change", function() {
             loading.show()
             let breed_id = $(myCharacter).find(".single-item img[aria-hidden=false]").attr("data-id")
@@ -158,7 +171,7 @@
                 let category_id = modal.content.find("[name=class] :selected").val()
                 $(myClass).closest("div").append("<input type='hidden' name='category_id' value='" + category_id + "' />")
                 $(myClass).parent().text(category)
-                modal.close()
+                modal.hideContent()
             })
         }
     }

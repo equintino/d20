@@ -18,7 +18,7 @@
         title: $("#boxe_main #title"),
         message: $("#boxe_main #message"),
         content: $("#boxe_main #content"),
-        buttons: $("#boxe_main #buttons"),
+        buttons: $("#boxe_main #buttons, #div_dialogue #buttons"),
         dialogue: $("#div_dialogue"),
         closeEnable: function() {
             var that = this;
@@ -60,11 +60,11 @@
             });
             let that = this;
             this.closeEnable();
-            this.escapeEnable();
-            this.clickMaskEnable();
+            // this.escapeEnable();
+            // this.clickMaskEnable();
             if(params.title != null) this.title.html(params.title).show();
             if(params.message != null) this.message.html(params.message).show().css({
-                "overflow-y": "scroll",
+                "overflow-y": "auto",
                 "max-height": "450px"
             });
             if(params.content != null) {
@@ -145,14 +145,12 @@
             if(params.message != null) this.message.html(params.message).show();
             if(params.content != null) this.content.load(params.content, function() {
                 loading.hide();
-                // this.complete();
             }).show();
             this.mask.fadeIn();
             this.nameModal.fadeIn().css({
                 display: "flex",
                 top: 0
             });
-            // this.complete();
             return this;
         },
         modal: function(params) {
@@ -174,22 +172,23 @@
             if(params.callback != null) params.callback();
 
             this.dialogue.fadeIn().css({
-                display: "flex"
+                display: "flex",
+                height: "490px"
             });
             this.dialogue.find("#content").css({
-                "overflow-y": "scroll",
-                "max-height": "490px"
+                "overflow-y": "auto",
+                // "height": "490px"
             });
             $("#mask_main").css({
                 "z-index": "4"
             });
-            this.styles({
-                element: this.dialogue.find("#buttons button"),
-                css: {
-                   "border-radius": "0 0 5px 5px",
-                }
-            });
-            this.complete();
+            // this.styles({
+            //     element: this.dialogue.find("#buttons button"),
+            //     css: {
+            //        "border-radius": "0 0 5px 5px",
+            //     }
+            // });
+            // this.complete();
             return this;
         },
         new: function(params) {
@@ -235,8 +234,8 @@
             }
             return this;
         },
-        callback: function(params) {
-            // params.callback();
+        callback: function(p, func) {
+            func(p);
         },
         close: function(params) {
             $("#mask_main").trigger("click");
@@ -393,7 +392,7 @@ var changeCheck = function(element, optionGreen, optionRed) {
 };
 
 /** @return resp */
-const loadData = function(link, data = null, dataType = "JSON", msg = "Loading...") {
+const loadData = function(link, data = null, dataType = "JSON", msg = "Loading...", rsp = null) {
     var resp = null;
     $.ajax({
         url: link,
@@ -412,7 +411,8 @@ const loadData = function(link, data = null, dataType = "JSON", msg = "Loading..
             resp = response;
         },
         error: function(error) {
-            alertLatch("Could not load data", "var(--cor-danger)");
+            let info = (rsp !== null ? rsp : "Could not load data")
+            alertLatch(info, "var(--cor-danger)");
             setTimeout(function() {
                 loading.hide();
                 $("#mask_main").fadeOut();
@@ -427,7 +427,7 @@ const loadData = function(link, data = null, dataType = "JSON", msg = "Loading..
 };
 
 /** @return bool with file data */
-var saveData = function(link, data, msg = "Saving") {
+var saveData = function(link, data, msg = "Saving", rsp = null) {
     var success = false;
     $.ajax({
         url: link,
@@ -458,7 +458,8 @@ var saveData = function(link, data, msg = "Saving") {
             // if(success)$("#mask_main").hide();
         },
         error: function(error) {
-            alertLatch("Could not save change", "var(--cor-danger)");
+            let info = (rsp !== null ? rsp : "Could not save change")
+            alertLatch(info, "var(--cor-danger)");
         },
         complete: function() {
             if($("#boxe_main").css("display") === "none")$("#mask_main").hide();

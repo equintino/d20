@@ -32,12 +32,23 @@ class Character extends Controller
         $act = "edit";
         $login = $_SESSION["login"];
         $id = $data["id"];
-        $breed_id = $data["breed_id"];
-        $category_id = $data["category_id"];
+        $trends1 = [
+            "good" => "BOM",
+            "neutral" => "NEUTRO",
+            "bad" => "MAU"
+        ];
+        $trends2 = [
+            "leal" => "LEAL",
+            "neutral" => "NEUTRO",
+            "chaotic" => "CAÓTICO"
+        ];
+        // $breed_id = $data["breed_id"];
+        // $category_id = $data["category_id"];
         $character = (new \Models\Character())->load($id);
-        $breed = (new \Models\Breed())->load($breed_id);
-        $category = (new \Models\Category())->load($category_id);
-        $this->view->setPath("Modals")->render($this->page, compact("act","login","character","breed","category"));
+        $breeds = (new \Models\Breed())->activeAll();
+        $categories = (new \Models\Category())->activeAll();
+        $mission = (!empty($character->mission_id) ? (new \Models\Mission())->load($character->mission_id) : null);
+        $this->view->setPath("Modals")->render($this->page, compact("act","login","trends1","trends2","character","breeds","categories","mission"));
     }
 
     public function list()
@@ -57,6 +68,20 @@ class Character extends Controller
         }
         $characters->save();
         return print(json_encode($characters->message()));
+    }
+
+    public function update(array $data): string
+    {
+        $character = (new \Models\Character())->load($data["id"]);
+        $character->personage = $data["personage"];
+        $character->breed_id = $data["breed_id"];
+        $character->image_id = $data["image_id"];
+        $character->category_id = $data["category_id"];
+        $character->trend1 = $data["trend1"];
+        $character->trend2 = $data["trend2"];
+        $character->story = $data["story"];
+        $character->save();
+        return print(json_encode($character->message()));
     }
 
     public function story(array $data): void

@@ -213,7 +213,10 @@
                         if(e.target.value === "save") {
                             let formData = new FormData($(e.target.offsetParent).find("form")[0])
                             if(saveData("avatar/save", formData)) {
-                                modal.close();
+                                $(".content").load("avatar/list", function() {
+                                    loading.hide()
+                                })
+                                modal.hideContent();
                             }
                         } else if(e.target.value === "delete") {
                             modal.confirm({
@@ -234,7 +237,7 @@
                                         },
                                         success: function(response) {
                                             alertLatch("Breed removed successfully", "var(--cor-success)")
-                                            modal.close()
+                                            modal.hideContent()
                                             $(".content").load("avatar/list", function() {
                                                 loading.hide()
                                             })

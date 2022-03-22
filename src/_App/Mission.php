@@ -26,7 +26,15 @@ class Mission extends Controller
     {
         $id = $data["id"];
         $mission = (new \Models\Mission())->load($id);
-        $characters = (new \Models\Character())->activeAll();
+        $characters_ = (new \Models\Character())->activeAll();
+        $characters = $characters_;
+
+        /** removing personage of the another mission */
+        for($x = 0; $x < count($characters_); $x++) {
+            if($characters_[$x]->mission_id !== null && $characters_[$x]->mission_id !== $id) {
+                unset($characters[$x]);
+            }
+        }
         $personages = [];
         foreach((new \Models\Character())->search(["mission_id" => $id]) as $character) {
             array_push($personages, $character->id);
@@ -38,6 +46,19 @@ class Mission extends Controller
     {
         $name = filter_var($data["name"], FILTER_SANITIZE_STRING);
         $mission = (new \Models\Mission())->find($name);
+        $dataMission = [
+            "id" => $mission->id,
+            "name" => $mission->name,
+            "place" => $mission->place,
+            "story" => $mission->story
+        ];
+        return print(json_encode($dataMission));
+    }
+
+    public function loadId(array $data): ?string
+    {
+        $id = filter_var($data["id"], FILTER_SANITIZE_STRING);
+        $mission = (new \Models\Mission())->load($id);
         $dataMission = [
             "id" => $mission->id,
             "name" => $mission->name,
@@ -147,6 +168,10 @@ class Mission extends Controller
     {
         $id = $data["id"];
         $mission = (new \Models\Mission())->load($id);
+        $belongPersonage = (new \Models\Character())->search(["mission_id" => $id]);
+        if(!empty($belongPersonage)) {
+            return alertLatch("This mission belong personages");
+        }
         $maps = (new \Models\Map())->search(["mission_id" => $mission->id]);
         /** deleting images */
         foreach($maps as $map) {

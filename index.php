@@ -40,8 +40,10 @@
         $router->get("/character/add", "Character:add");
         $router->get("/character/list", "Character:list");
         $router->post("/character/save", "Character:save");
+        $router->post("/character/update", "Character:update");
         $router->post("/character/edit", "Character:edit");
         $router->post("/character/delete", "Character:delete");
+        $router->get("/character/story", "Character:story");
 
 
         /** The Breed */
@@ -64,7 +66,6 @@
         $router->post("/category/edit", "Category:edit");
         $router->post("/category/delete", "Category:delete");
         $router->post("/category/id/{id}", "Category:load");
-        $router->get("/character/story", "Character:story");
 
 
         /** The Avatar */
@@ -88,6 +89,7 @@
         $router->post("/mission/update", "Mission:update");
         $router->post("/mission/delete", "Mission:delete");
         $router->post("/mission/load/{name}", "Mission:load");
+        $router->post("/mission/id/{id}", "Mission:loadId");
         $router->post("/mission/personages/{name}", "Mission:personages");
         $router->get("/mission/edit/{id}", "Mission:edit");
         $router->get("/mission/list", "Mission:list");
@@ -199,6 +201,7 @@
         $router->get("/image/id/{id}", "Image:init");
         $router->post("/image/delete/id/{id}", "Image:delete");
         $router->post("/image/save", "Image:save");
+        $router->get("/image/getImage/{file}", "Image:getImage");
 
 
         /** Logout */

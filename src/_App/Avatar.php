@@ -61,45 +61,15 @@ class Avatar extends Controller
         $this->view->setPath("Modals")->render($this->page, compact("act", "avatar", "breeds", "categories"));
     }
 
-    // public function avatar(): void
-    // {
-    //     $act = "avatar";
-    //     $breeds = (new \Models\Breed())->activeAll();
-    //     $categories = (new \Models\Category())->activeAll();
-    //     $this->view->render($this->page, compact("act", "breeds", "categories"));
-    // }
-
-    // public function edit(array $data): void
-    // {
-    //     $breeds = (new \Models\Breed())->activeAll();
-    //     $act = "edit";
-    //     foreach($breeds as $breed) {
-    //         $list[] = [
-    //             "id" => $breed->id,
-    //             "image_id" => $breed->image_id
-    //         ];
-    //     }
-    //     $this->view->setPath("Modals")->render($this->page, compact("list", "act", "breeds"));
-    // }
-
     public function show(array $data): void
     {
         $list = $data["response"];
         $category_id = $list[0]["category_id"];
-        $act = "list";
+        $act = ($data["act"] ?? "list");
         $categories = (new \Models\Category())->activeAll();
         echo "<script>var act='{$act}'</script>";
         $this->view->setPath("Modals")->render($this->page, compact("list", "act", "categories","category_id"));
     }
-
-    // public function showImage(array $data): void
-    // {
-    //     $id = $data["id"];
-    //     $breed = (new \Models\Breed())->load($id);
-    //     $type = $breed->type;
-    //     header("Content-Type: {$type}");
-    //     echo $breed->image;
-    // }
 
     public function save(array $data)
     {

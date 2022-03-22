@@ -588,7 +588,7 @@ main .form-signin {
     padding: 15px 20px;
 }
 
-#boxe_main #content {
+#boxe_main #content, #div_dialogue #content {
     padding: 10px 20px;
     /* font-size: .9rem; */
     height: 500px;
@@ -629,7 +629,7 @@ main .form-signin {
 }
 
 #boxe_main #buttons, #div_dialogue #buttons {
-    margin-bottom: -20px;
+    margin-bottom: -24px;
 }
 
 #boxe_main #button:hover {
@@ -655,7 +655,6 @@ main .form-signin {
     transition: opacity 400ms ease-in;
     border-radius: 5px;
     display: none;
-    /* overflow: scroll; */
 }
 
 /* button stylization */

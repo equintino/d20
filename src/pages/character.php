@@ -74,14 +74,20 @@
 
     #list .right > .fieldset {
         display: flex;
+        justify-content: space-between;
     }
 
     #list .breed_class {
-        position: absolute;
-        right: 130px;
-        top: 160px;
+        /* position: absolute; */
+        /* right: 130px;
+        top: 160px; */
         cursor: pointer;
+        /* z-index: 1; */
     }
+
+    /* #list .breed_class::before {
+        display: flex;
+    } */
 
     #list #story {
         width: 280px;
@@ -167,7 +173,7 @@
                 <fieldset class="fieldset">
                     <legend>Personagens</legend>
                     <?php foreach($characters as $character): ?>
-                        <button class="btn btn-oval" data-id="<?= $character->id ?>" data-image_id="<?= $character->image_id ?>" data-breed_id="<?= $character->breed_id ?>" data-category_id="<?= $character->category_id ?>" data-story="<?= $character->story ?>"><?= $character->personage ?></button>
+                        <button class="btn btn-oval" data-id="<?= $character->id ?>" data-image_id="<?= $character->image_id ?>" data-breed_id="<?= $character->breed_id ?>" data-category_id="<?= $character->category_id ?>" data-story="<?= $character->story ?>" data-mission="<?= $character->mission_id ?>"><?= $character->personage ?></button>
                     <?php endforeach ?>
                 </fieldset>
             </section>
@@ -182,6 +188,8 @@
                     <div class="breed_class">
                         <div id="detail_breed" style="text-align: center"></div>
                         <div id="detail_class" class="mt-2" style="text-align: center"></div>
+                        <label class="label-rpg mt-4">Missão:</label>
+                        <p style="text-align: center"></p>
                     </div>
                 </fieldset>
             </section>
@@ -210,6 +218,7 @@ $(function() {
     character.onsubmit = (e) => {
         e.preventDefault()
     }
+
     /** Buttons */
     character.onclick = (i) => {
         loading.show()
@@ -255,10 +264,10 @@ $(function() {
                         formData.append("story",story)
                     }
                     if(saveData("character/save", formData)) {
-                        modal.close()
                         $(".content").load("character/add", function() {
                             loading.hide()
                         })
+                        modal.hideContent()
                     }
                 })
                 loading.hide()
@@ -302,9 +311,8 @@ $(function() {
                                         loading.show()
                                     },
                                     success: function(response) {
-                                        console.log(response)
                                         alertLatch("Personage removed successfully", "var(--cor-success)")
-                                        modal.close()
+                                        modal.hideContent()
                                         $(".content").load("character/list", function() {
                                             loading.hide()
                                         })
@@ -319,6 +327,14 @@ $(function() {
                                 })
                             }
                         })
+                    } else {
+                        let formData = new FormData(myCharacter)
+                        if(saveData("character/update", formData)) {
+                            $(".content").load("character/list", function() {
+                                loading.hide()
+                            })
+                            modal.hideContent()
+                        }
                     }
                 })
                 break
@@ -327,6 +343,8 @@ $(function() {
 
         }
     }
+
+    /** Selection of the avatar */
     $(character).find("select[name=class]").on("change", function() {
         let breed_id = $(myCharacter).find(".single-item img[aria-hidden=false]").attr("data-id")
         let category_id = $(this).val()
@@ -348,7 +366,7 @@ $(function() {
                     title: "Escolha seu Personagem (clique na imagem para selecioná-la)",
                     content: "avatar/show",
                     params: { response }
-                });
+                })
             },
             error: function(error) {
             },
@@ -363,6 +381,9 @@ $(function() {
             let breed_id = i.target.attributes["data-breed_id"].value
             let category_id = i.target.attributes["data-category_id"].value
             let resume = i.target.attributes["data-story"].value
+            let mission_id = i.target.attributes["data-mission"].value
+
+            /** Loading Breed */
             $.ajax({
                 url: "breed/id/" + breed_id,
                 type: "POST",
@@ -383,6 +404,8 @@ $(function() {
                     loading.hide()
                 }
             })
+
+            /** Loading Class */
             $.ajax({
                 url: "category/id/" + category_id,
                 type: "POST",
@@ -403,6 +426,28 @@ $(function() {
                     loading.hide()
                 }
             })
+
+            if(mission_id !== "") {
+                /** Loading Mission */
+                list.querySelector(".breed_class p").innerHTML = "<img class='schedule' src='themes/template/assets/img/loading.png' alt='' height='30px' />"
+                $.ajax({
+                    url: "mission/id/" + mission_id,
+                    type: "POST",
+                    dataType: "JSON",
+                    beforSend: function() {
+                    },
+                    success: function(response) {
+                        list.querySelector(".breed_class p").innerHTML = "<textarea class='input-rpg' disabled >" + response.name + "</textarea>"
+                    },
+                    error: function(error) {
+                    },
+                    complete: function() {
+                    }
+                })
+            } else {
+                list.querySelector(".breed_class p").innerHTML = "Sem missão"
+            }
+
             avatar.innerHTML = "<img data-id='" + id + "' src='image/id/" + image_id + "' alt='' height='400px'/>"
             story.children[0].innerHTML = "<textarea rows='20' class='input-rpg' disabled>" + resume + "</textarea>"
         })

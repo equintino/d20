@@ -166,7 +166,7 @@
                         if(e.target.value === "save") {
                             let formData = new FormData($(e.target.offsetParent).find("form")[0])
                             if(saveData("category/save", formData)) {
-                                modal.close();
+                                modal.hideContent();
                             }
                         } else if(e.target.value === "delete") {
                             modal.confirm({
@@ -187,7 +187,7 @@
                                         },
                                         success: function(response) {
                                             alertLatch("Class removed successfully", "var(--cor-success)")
-                                            modal.close()
+                                            modal.hideContent()
                                             $(".content").load("category/list", function() {
                                                 loading.hide()
                                             })

@@ -36,6 +36,12 @@ class Image extends Controller
         }
     }
 
+    public function getImage(array $data)
+    {
+        $file = $data["file"];
+        return print(("assets/img/{$file}"));
+    }
+
     public function delete(array $data)
     {
         $file = $this->class->load($data["id"]);
