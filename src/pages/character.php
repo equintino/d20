@@ -12,7 +12,7 @@
     }
 
     .galery {
-        width: 230px;
+        width: 350px;
         float: right;
         text-align: center;
         margin-right: 15%;
@@ -78,16 +78,8 @@
     }
 
     #list .breed_class {
-        /* position: absolute; */
-        /* right: 130px;
-        top: 160px; */
         cursor: pointer;
-        /* z-index: 1; */
     }
-
-    /* #list .breed_class::before {
-        display: flex;
-    } */
 
     #list #story {
         width: 280px;

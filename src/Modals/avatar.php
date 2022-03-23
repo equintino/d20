@@ -1,7 +1,7 @@
 <style>
     #imageAvatar {
         height: 350px;
-        width: 250px;
+        width: 350px;
         margin: auto;
         cursor: pointer;
     }
