@@ -207,7 +207,9 @@
                     modal.show({
                         title: "Modo de edição de AVATARES",
                         content: "avatar/edit",
-                        params: { id },
+                        params: {
+                            id
+                        },
                         buttons: "<button class='btn btn-rpg btn-silver mr-1' value='delete'>Excluir</button><button class='btn btn-rpg btn-green' value='save'>Salvar</button>"
                     }).on("click", function(e) {
                         if(e.target.value === "save") {

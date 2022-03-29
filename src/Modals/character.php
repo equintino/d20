@@ -62,55 +62,60 @@
 </div>
 <?php endif ?>
 <script>
+    let openModalChange = (breed_id, category_id) => {
+        $.ajax({
+            url: "avatar",
+            type: "POST",
+            dataType: "JSON",
+            data: {
+                breed_id,
+                category_id
+            },
+            beforeSend: function() {
+            },
+            success: function(response) {
+                if(typeof(response) === "string") {
+                    return alertLatch(response, "var(--cor-warning)")
+                }
+                modal.modal({
+                    title: "Modo de edição de Personagem",
+                    content: "avatar/show",
+                    params: {
+                        response,
+                        act: "character"
+                    },
+                    buttons: "<button class='btn btn-rpg btn-danger' value='selected'>Selecionar</button>"
+                }).on("click", function(e) {
+                    if(e.target.value === "selected") {
+                        image_id = imageAvatar.querySelector("img[aria-hidden=false]").src.split("/").pop()
+                        avatar.querySelector("[name=image_id]").value = image_id
+                        avatar.querySelector("img").src = "image/id/" + image_id
+                        avatar.querySelector("img").attributes["data-image_id"].value = image_id
+                        modal.hideContent()
+                    }
+                })
+            },
+            error: function(error) {
+            },
+            complete: function() {
+            }
+        })
+    }
     $(function() {
         if(typeof(edit_character) !== "undefined") {
             edit_character.querySelector("[name=breed_id").onchange = (e) => {
                 let breed_id = e.target.value
+                let category_id = edit_character.querySelector("[name=category_id]").value
                 avatar.querySelector("img").src = ""
                 avatar.querySelector("img").attributes["data-image_id"].value = ""
+                openModalChange(breed_id, category_id)
             }
             edit_character.querySelector("[name=category_id").onchange = (e) => {
                 let category_id = e.target.value
                 let breed_id = edit_character.querySelector("[name=breed_id]").value
                 avatar.querySelector("img").src = ""
                 avatar.querySelector("img").attributes["data-image_id"].value = ""
-                $.ajax({
-                    url: "avatar",
-                    type: "POST",
-                    dataType: "JSON",
-                    data: {
-                        breed_id,
-                        category_id
-                    },
-                    beforeSend: function() {
-                    },
-                    success: function(response) {
-                        if(typeof(response) === "string") {
-                            return alertLatch(response, "var(--cor-warning)")
-                        }
-                        modal.modal({
-                            title: "Modo de edição de Personagem",
-                            content: "avatar/show",
-                            params: {
-                                response,
-                                act: "edit"
-                            },
-                            buttons: "<button class='btn btn-rpg btn-danger' value='selected'>Selecionar</button>"
-                        }).on("click", function(e) {
-                            if(e.target.value === "selected") {
-                                image_id = imageAvatar.querySelector("img[aria-hidden=false]").src.split("/").pop()
-                                avatar.querySelector("[name=image_id]").value = image_id
-                                avatar.querySelector("img").src = "image/id/" + image_id
-                                avatar.querySelector("img").attributes["data-image_id"].value = image_id
-                                modal.hideContent()
-                            }
-                        })
-                    },
-                    error: function(error) {
-                    },
-                    complete: function() {
-                    }
-                })
+                openModalChange(breed_id, category_id)
             }
         }
     })

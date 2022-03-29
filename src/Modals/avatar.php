@@ -49,17 +49,17 @@
             <?php endforeach; ?>
         </div>
     </section>
-<?php //elseif($act === "edit"): ?>
-    <!-- <section class="wrapper">
+<?php elseif($act === "character"): ?>
+    <section class="wrapper">
         <div id="imageAvatar">
             <?php foreach($list as $avatar): ?>
             <img id="<?= $avatar["id"] ?>" src="image/id/<?= $avatar["image_id"] ?>" alt="" height="350px"/>
             <?php endforeach; ?>
         </div>
-    </section> -->
+    </section>
 <?php else: ?>
     <form id="form_avatar" method="POST" action="avatar/save" enctype="multipart/form-data" >
-        <input type="hidden" name="id" value="<?= $avatar->id ?>" />
+        <input type="hidden" name="id" value="<?= ($avatar->id ?? null) ?>" />
         <div>
             <section class="side-left">
                 <div>
@@ -80,20 +80,20 @@
                 </div>
                 <div style="display: flex">
                     <label class="mr-2">Gênero:</label>
-                    <input class="input-rpg" type="radio" name="sex" value="M" <?= ($avatar->sex === "M" ? "checked" : null) ?> />
+                    <input class="input-rpg" type="radio" name="sex" value="M" <?= (!empty($avatar) && $avatar->sex === "M" ? "checked" : null) ?> />
                     <label class="mr-2">Maculino</label>
-                    <input class="input-rpg" type="radio" name="sex" value="F" <?= ($avatar->sex === "F" ? "checked" : null) ?> />
+                    <input class="input-rpg" type="radio" name="sex" value="F" <?= (!empty($avatar) && $avatar->sex === "F" ? "checked" : null) ?> />
                     <label>Feminino</label>
                 </div>
                 <div>&nbsp&nbsp&nbsp</div>
                 <div>
                     <label>Descrição:</label>
-                    <textarea class="input-rpg" rows="5" cols="48" type="text" name="description" style="text-transform: none"><?= $avatar->description ?></textarea>
+                    <textarea class="input-rpg" rows="5" cols="40" type="text" name="description" style="text-transform: none"><?= ($avatar->description ?? null) ?></textarea>
                 </div>
             </section>
             <section class="side-right" >
                 <div id="thumb_image" >
-                    <img src="image/id/<?= $avatar->image_id ?>" alt="" height="300px"/>
+                    <img src="image/id/<?= ($avatar->image_id ?? null) ?>" alt="" height="300px"/>
                 </div>
                 <div>
                     <label>Imagem:</label>
@@ -112,10 +112,10 @@
             $(thumb_image).append(img)
         }
     }
-    if(typeof(imageAvatar) !== "undefined") {
-        if(imageAvatar.classList[0] === "slick-initialized") {
-            imageAvatar.classList = ""
-        }
+    if(typeof(imageAvatar) !== "undefined" && act !== "edit") {
+        // if(imageAvatar.classList[0] === "slick-initialized") {
+        //     imageAvatar.classList = ""
+        // }
         $("#imageAvatar").slick({
             infinite: true,
             fade: true,
