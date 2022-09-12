@@ -24,26 +24,26 @@ var setTime = 500;
 $(function($) {
     if(typeof(initializing) !== "undefined") {
         $("#boxe_main").load("config", function() {
-            $("#boxe_main #config-form").append("<button class='button-style mt-3' style='margin-top: 10px' >Save</button>");
+            $("#boxe_main #config-form").append("<button class='button-style mt-3' style='margin-top: 10px' >Save</button>")
         })
         .on("submit", function(e) {
-            e.preventDefault();
-            var url = "src/Support/Ajax/save.php";
+            e.preventDefault()
+            var url = "src/Support/Ajax/save.php"
             var dataSet = $("#config-form").serializeArray();
             dataSet.push({
                 name: "act",
                 value: "config"
             });
-            let msg = saveForm("connection","add", "null", url);
+            let msg = saveForm("connection","add", "null", url)
             if(msg) {
-                window.location.reload();
+                window.location.reload()
             }
         })
         .css({
             top: "0",
-            "padding": "30px"
-        });
-        $("#boxe_main, #mask_main").show();
+            padding: "30px"
+        })
+        $("#boxe_main, #mask_main").show()
     }
     /** authentication */
     $("form.form-signin").on("submit", function(e) {
@@ -98,8 +98,26 @@ $(function($) {
             complete: function(response) {
                 $("button").text("Entrar");
             }
-        });
-    });
+        })
+    })
+    add.onclick = (e) => {
+        e.preventDefault()
+        $("#boxe_main").load("register", () => {
+            $("#boxe_main #edit label").css("text-align", "left")
+        })
+        .on("submit", () => {
+            alert("submeteu")
+        })
+        $("#boxe_main, #mask_main").show();
+        mask_main.onclick = () => {
+            $("#boxe_main, #mask_main").hide()
+        }
+    }
+    document.onkeyup = (e) => {
+        if(e.keyCode === 27) {
+            $("#boxe_main, #mask_main").hide()
+        }
+    }
 
     let registerUser = (modal) => {
         $("#content").on("submit" , function() {

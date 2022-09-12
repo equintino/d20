@@ -6,6 +6,15 @@
         <title>Login</title>
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
         <link rel="stylesheet" href="<?= theme("assets/style.css") ?>" />
+        <style>
+            #login_container {
+                margin-bottom: -8px;
+            }
+
+            a:hover {
+                text-decoration: none;
+            }
+        </style>
     </head>
     <body class="login" >
         <div class="header2">
@@ -55,6 +64,7 @@
                         </ul>
                         </form>
                 </div>
+                <div><a id="add" href="#" >Novo Cadastro</a></div>
                 Revisão <?= ($version ?? null) ?>
             </main>
         </section>

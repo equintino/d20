@@ -7,6 +7,7 @@ use Database\CreationProcess;
 
 class View
 {
+    private $accessPages = ["home", "error", "login"];
     private $path;
     private $access = [];
     public $theme;
@@ -40,15 +41,12 @@ class View
         // }
         if($params) {
             foreach($params as $key => $value) {
-                // if(!empty($param)) {
-                    // foreach($param as $key => $values) {
-                        $$key = $value;
-                    // }
-                // }
+                $$key = $value;
             }
         }
 
-        if(!strpos($this->path, "Modals") && !empty($this->access) && !$this->restrictAccess($page)) {
+        //if(!strpos($this->path, "Modals") && !empty($this->access) && !$this->restrictAccess($page)) {
+        if(!strpos($this->path, "Modals") && empty($this->access) && !$this->restrictAccess($page)) {
             return print("<h5 align='center' style='color: var(--cor-primary)'>Restricted access</h5>");
         }
         require $this->path . "/{$page}.php";
@@ -106,7 +104,8 @@ class View
 
     private function restrictAccess(string $page): bool
     {
-        if(in_array("*", $this->access) || $page === "home" || $page === "error" || in_array(Safety::renameScreen($page), $this->access)) {
+        //if(in_array("*", $this->access) || $page === "home" || $page === "error" || in_array(Safety::renameScreen($page), $this->access)) {
+        if(in_array("*", $this->access) || in_array($page,$this->accessPages) || in_array(Safety::renameScreen($page), $this->access)) {
             return true;
         }
         return false;

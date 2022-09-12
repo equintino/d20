@@ -10,9 +10,9 @@
       //border: 1px solid white;
    }
    #thumbnail{
-      float: left; 
-      margin-left: 200px; 
-      margin-right: 10px; 
+      float: left;
+      margin-left: 200px;
+      margin-right: 10px;
       //height: 400px;
    }
    #preview{
@@ -20,7 +20,7 @@
       position: relative;
    }
 </style>
-<?php  
+<?php
 error_reporting (E_ALL ^ E_NOTICE);
 session_start(); //Do not remove this
 //only assign a new timestamp if the session variable is empty
@@ -28,7 +28,7 @@ if (!isset($_SESSION['random_key']) || strlen($_SESSION['random_key'])==0){
    $_SESSION['random_key'] = strtotime(date('Y-m-d H:i:s')); //assign the timestamp to the session variable
    $_SESSION['user_file_ext']= "";
 }
-if($_GET['raca']==null){
+if(!empty($model) && $_GET['raca']==null){
    //echo 'raca em branco';die;
    $raca=$model->getraca();
    $classe=$model->getclasse();
@@ -45,7 +45,8 @@ if (isset($_POST["upload_thumbnail"])){ // && strlen($large_photo_exists)>0
 echo "<pre>";
 print_r([$_FILES,$_POST,$model,$_GET]);die;
 }*/
-$upload_dir = "../web/imagens/personagens/$raca/$classe/$sexo";
+$upload_dir = "../web/imagens/personagens/anao/gatuno/M";
+// $upload_dir = "../web/imagens/personagens/$raca/$classe/$sexo";
 $upload_path = $upload_dir."/";
 $quantArquivos = glob("$upload_path*.*", GLOB_BRACE);
 $large_image_prefix = "resize_";
@@ -81,32 +82,32 @@ function resizeImage($image,$width,$height,$scale) {
       imagefilledrectangle($newImage, 0, 0, $newImageWidth, $newImageHeight, $transparent);
    switch($imageType) {
       case "image/gif":
-         $source=imagecreatefromgif($image); 
+         $source=imagecreatefromgif($image);
          break;
       case "image/pjpeg":
       case "image/jpeg":
       case "image/jpg":
-         $source=imagecreatefromjpeg($image); 
+         $source=imagecreatefromjpeg($image);
          break;
       case "image/png":
       case "image/x-png":
-         $source=imagecreatefrompng($image); 
+         $source=imagecreatefrompng($image);
          break;
    }
    imagecopyresampled($newImage,$source,0,0,0,0,$newImageWidth,$newImageHeight,$width,$height);
 
    switch($imageType) {
       case "image/gif":
-         imagegif($newImage,$image); 
+         imagegif($newImage,$image);
          break;
       case "image/pjpeg":
       case "image/jpeg":
       case "image/jpg":
-         imagejpeg($newImage,$image,90); 
+         imagejpeg($newImage,$image,90);
          break;
       case "image/png":
       case "image/x-png":
-         imagepng($newImage,$image);  
+         imagepng($newImage,$image);
          break;
    }
 
@@ -121,48 +122,48 @@ function resizeThumbnailImage($thumb_image_name, $image, $width, $height, $start
    $newImageWidth = ceil($width * $scale);
    $newImageHeight = ceil($height * $scale);
    $newImage = imagecreatetruecolor($newImageWidth,$newImageHeight);
-   
+
       imagealphablending($newImage, false);
       imagesavealpha($newImage,true);
       $transparent = imagecolorallocatealpha($newImage, 255, 255, 255, 127);
       imagefilledrectangle($newImage, 0, 0, $newImageWidth, $newImageHeight, $transparent);
-   
-   
+
+
    switch($imageType) {
       case "image/gif":
-         $source=imagecreatefromgif($image); 
+         $source=imagecreatefromgif($image);
          break;
       case "image/pjpeg":
       case "image/jpeg":
       case "image/jpg":
-         $source=imagecreatefromjpeg($image); 
+         $source=imagecreatefromjpeg($image);
          break;
       case "image/png":
       case "image/x-png":
-         $source=imagecreatefrompng($image); 
+         $source=imagecreatefrompng($image);
          break;
    }
-   
-   
-   
+
+
+
 //imagefilledrectangle($newImage, 0, 0, $nWidth, $nHeight, $transparent);
 //imagecopyresampled($newImage, $im, 0, 0, 0, 0, $nWidth, $nHeight, $imgInfo[0], $imgInfo[1]);
 //imagecopyresampled($newImage, $source, 0, 0, 0, 0, $start_width, $start_height, $newImageWidth, $newImageHeight);
-   
-   
+
+
    imagecopyresampled($newImage,$source,0,0,$start_width,$start_height,$newImageWidth,$newImageHeight,$width,$height);
    switch($imageType) {
       case "image/gif":
-         imagegif($newImage,$thumb_image_name); 
+         imagegif($newImage,$thumb_image_name);
          break;
       case "image/pjpeg":
       case "image/jpeg":
       case "image/jpg":
-         imagejpeg($newImage,$thumb_image_name,90); 
+         imagejpeg($newImage,$thumb_image_name,90);
          break;
       case "image/png":
       case "image/x-png":
-         imagepng($newImage,$thumb_image_name);  
+         imagepng($newImage,$thumb_image_name);
          break;
    }
    chmod($thumb_image_name, 0777);
@@ -239,8 +240,8 @@ if (isset($_POST["upload"])) {
          chmod($large_image_location, 0777);
          //print_r($large_image_location);
 
-         $width = getWidth($large_image_location);
-         $height = getHeight($large_image_location);
+         $width = "138px";//getWidth($large_image_location);
+         $height = "152px";//getHeight($large_image_location);
          //Scale the image if it is greater than the width set above
          if ($width > $max_width){
             $scale = $max_width/$width;
@@ -248,17 +249,17 @@ if (isset($_POST["upload"])) {
          }else{
             $scale = 1;
             $uploaded = resizeImage($large_image_location,$width,$height,$scale);
-         } 
+         }
         //Delete the thumbnail file so the user can create a new one
          if (file_exists($thumb_image_location)) {
             //unlink($thumb_image_location);
          }
-      } 
+      }
          //Refresh the page to show the new uploaded image
          //header("location:".$_SERVER["PHP_SELF"]);
          //exit();
-   } 
-} 
+   }
+}
 //Check to see if any images with the same name already exist
 //print_r([$large_image_location,$thumb_image_location]);
 if (file_exists($large_image_location)){
@@ -295,7 +296,7 @@ if (isset($_POST["upload_thumbnail"])) {// && strlen($large_photo_exists)>0
 
 
 if ($_GET['a']=="delete" && strlen($_GET['t'])>0){
-//get the file locations 
+//get the file locations
    $large_image_location = $upload_path.$large_image_prefix.$_GET['t'];
    $thumb_image_location = $upload_path.$thumb_image_prefix.$_GET['t'];
    if (file_exists($large_image_location)) {
@@ -305,10 +306,10 @@ if ($_GET['a']=="delete" && strlen($_GET['t'])>0){
            unlink($thumb_image_location);
    }
    header("location:".$_SERVER["PHP_SELF"]);
-   exit(); 
+   exit();
 }
-$model->setavatar($large_image_location);
-$model->setfoto($thumb_image_location);
+// $model->setavatar($large_image_location);
+// $model->setfoto($thumb_image_location);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -331,20 +332,20 @@ $model->setfoto($thumb_image_location);
 <?php
 //Only display the javacript if an image has been uploaded
 //if(strlen($large_photo_exists)>0){
-	$current_large_image_width = getWidth($large_image_location);
-	$current_large_image_height = getHeight($large_image_location);
+	$current_large_image_width = "138px";//getWidth($large_image_location);
+	$current_large_image_height = "152px";//getHeight($large_image_location);
 //print_r($large_image_location);die;
 ?>
 <script type="text/javascript">
-function preview(img, selection) { 
-   var scaleX = <?php echo $thumb_width;?> / selection.width; 
-   var scaleY = <?php echo $thumb_height;?> / selection.height; 
+function preview(img, selection) {
+   var scaleX = <?php echo $thumb_width;?> / selection.width;
+   var scaleY = <?php echo $thumb_height;?> / selection.height;
 
-   $('#thumbnail + div > img').css({ 
-      width: Math.round(scaleX * <?php echo $current_large_image_width;?>) + 'px', 
+   $('#thumbnail + div > img').css({
+      width: Math.round(scaleX * <?php echo $current_large_image_width;?>) + 'px',
       height: Math.round(scaleY * <?php echo $current_large_image_height;?>) + 'px',
-      marginLeft: '-' + Math.round(scaleX * selection.x1) + 'px', 
-      marginTop: '-' + Math.round(scaleY * selection.y1) + 'px' 
+      marginLeft: '-' + Math.round(scaleX * selection.x1) + 'px',
+      marginTop: '-' + Math.round(scaleY * selection.y1) + 'px'
    });
    $('#x1').val(selection.x1);
    $('#y1').val(selection.y1);
@@ -352,9 +353,9 @@ function preview(img, selection) {
    $('#y2').val(selection.y2);
    $('#w').val(selection.width);
    $('#h').val(selection.height);
-} 
+}
 
-$(document).ready(function () { 
+$(document).ready(function () {
    $('#save_thumb').click(function() {
       var x1 = $('#x1').val();
       var y1 = $('#y1').val();
@@ -369,13 +370,13 @@ $(document).ready(function () {
          return true;
       }
    });
-}); 
+});
 
-$(window).load(function () { 
-   $('#thumbnail').imgAreaSelect({ 
+$(window).load(function () {
+   $('#thumbnail').imgAreaSelect({
       aspectRatio: '1:<?php echo $thumb_height/$thumb_width;?>',
-      onSelectChange: preview 
-   }); 
+      onSelectChange: preview
+   });
 });
 
 </script>
