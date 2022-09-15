@@ -15,7 +15,8 @@
         return print(json_encode("Non-existent"));
     }
     if($user->validate($password, $user->password)) {
-        $access->setLogin($login);
+        // $access->setLogin($login);
+        $access->setLogin($user);
         return print(json_encode("1"));
     } else {
         return print(json_encode("Invalid password"));

@@ -41,8 +41,8 @@
                     <label for="grupo" class="label" >Tipo:</label><br>
                     <select name="group_id" class="form-input" >
                         <option value=""></option>
-                        <option value="master">Mestre</option>
-                        <option value="player">Jogador</option>
+                        <option value="1">Mestre</option>
+                        <option value="2">Jogador</option>
                     </select>
                 </div>
                 <div class="col-md">

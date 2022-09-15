@@ -13,7 +13,6 @@ $remember = filter_input(INPUT_POST, "remember", FILTER_SANITIZE_STRIPPED);
 $connectionName = filter_input(INPUT_POST, "connection-name", FILTER_SANITIZE_STRIPPED);
 
 $confEnv = (new FileTransation(".env"))->setLocal($connectionName);
-
 if($confEnv->getLocal()) {
     $search = ["login" => $login, "active" => 1];
     $user = (new User())->find($search, "*", true);
@@ -25,6 +24,7 @@ if($confEnv->getLocal()) {
         }
         /** password validated */
         if($user->validate($password, $user->password)) {
+            var_dump($user);die;
             $names = [ "user", "login", "connectionName", "remember" ];
             $data = [ "id", "name", "login", "email" ];
             $cookie = (new Cookies($names, $data))->setCookies($remember, $user, $connectionName);

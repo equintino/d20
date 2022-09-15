@@ -30,15 +30,6 @@ class View
         $logged = ($_SESSION["login"]->login ?? null);
 
         /** makes variables available to the page */
-        // if($params) {
-        //     foreach($params as $param) {
-        //         if(!empty($param)) {
-        //             foreach($param as $key => $values) {
-        //                 $$key = $values;
-        //             }
-        //         }
-        //     }
-        // }
         if($params) {
             foreach($params as $key => $value) {
                 $$key = $value;
@@ -63,7 +54,7 @@ class View
         );
         /** makes variables available to the page */
         if($params) {
-            foreach($params as $var => $param) {
+            foreach($params as $param) {
                 if(!empty($param)) {
                     foreach($param as $key => $values) {
                         $$key = $values;
@@ -71,7 +62,6 @@ class View
                 }
             }
         }
-        $access = $this->access;
         require (!empty($path) ? $path : $this->theme . "/_theme.php");
     }
 

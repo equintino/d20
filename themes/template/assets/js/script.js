@@ -45,68 +45,84 @@ $(function($) {
         })
         $("#boxe_main, #mask_main").show()
     }
+
     /** authentication */
-    $("form.form-signin").on("submit", function(e) {
-        e.preventDefault();
-        $("button").html("<i class='fa fa-sync-alt schedule'></i>");
-        var data = $("form.form-signin").serialize();
-        var url = "src/public/main.php";
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: data,
-            dataType: "json",
-            success: function(response) {
-                if(response === 1) {
-                    $(location).attr("href","");
-                } else if(response === 2) {
-                    var link = "src/Support/Ajax/save.php";
-                    var login = $("form [name=login]").val();
-                    var lkToken = "token";
-                    $("#boxe_main, #mask_main").show();
-                    $("#boxe_main").load(lkToken, function() {
-                        $("#form-token").find("[name=password]").focus();
-                    })
-                    .on("submit", function(e) {
-                        e.preventDefault();
-                        var formData = new FormData($("form#form-token")[0]);
-                        formData.append("act","login");
-                        formData.append("action","change");
-                        formData.append("login",login);
-                        if(formData.get("password") !== formData.get("confPassword")) {
-                            alertLatch("The passwords are different", "var(--cor-warning)");
-                        } else if(formData.get("password") === "") {
-                            alertLatch("Invalid blank password", "var(--cor-warning)");
-                        } else {
-                            if(saveData(link, formData, "Saving")) {
-                                $("#boxe_main, #mask_main").hide();
-                                $(location).attr("href","");
-                            }
-                        }
-                    })
-                    .css({
-                        top: "20%",
-                        "padding": "30px"
-                    });
-                } else {
-                    alertLatch(response, "var(--cor-warning)");
-                }
-            },
-            error: function(error) {
-                alertLatch("Please recharge the page", "var(--cor-danger)");
-            },
-            complete: function(response) {
-                $("button").text("Entrar");
-            }
-        })
-    })
+    // $("form.form-signin").on("submit", function(e) {
+    //     e.preventDefault()
+    //     $("button").html("<i class='fa fa-sync-alt schedule'></i>")
+    //     let data = $("form.form-signin").serialize()
+    //     let url = "src/public/main.php"
+    //     $.ajax({
+    //         url: url,
+    //         type: "POST",
+    //         data: data,
+    //         dataType: "json",
+    //         success: function(response) {
+    //             if(response === 1) {
+    //                 $(location).attr("href","");
+    //             } else if(response === 2) {
+    //                 let link = "src/Support/Ajax/save.php";
+    //                 let login = $("form [name=login]").val();
+    //                 let lkToken = "token";
+    //                 $("#boxe_main, #mask_main").show();
+    //                 $("#boxe_main").load(lkToken, function() {
+    //                     $("#form-token").find("[name=password]").focus();
+    //                 })
+    //                 .on("submit", function(e) {
+    //                     e.preventDefault();
+    //                     let formData = new FormData($("form#form-token")[0]);
+    //                     formData.append("act","login");
+    //                     formData.append("action","change");
+    //                     formData.append("login",login);
+    //                     if(formData.get("password") !== formData.get("confPassword")) {
+    //                         alertLatch("The passwords are different", "var(--cor-warning)");
+    //                     } else if(formData.get("password") === "") {
+    //                         alertLatch("Invalid blank password", "var(--cor-warning)");
+    //                     } else {
+    //                         if(saveData(link, formData, "Saving")) {
+    //                             $("#boxe_main, #mask_main").hide();
+    //                             $(location).attr("href","");
+    //                         }
+    //                     }
+    //                 })
+    //                 .css({
+    //                     top: "20%",
+    //                     "padding": "30px"
+    //                 });
+    //             } else {
+    //                 alertLatch(response, "var(--cor-warning)");
+    //             }
+    //         },
+    //         error: function(error) {
+    //             alertLatch("Please recharge the page", "var(--cor-danger)");
+    //         },
+    //         complete: function(response) {
+    //             $("button").text("Entrar");
+    //         }
+    //     })
+    // })
+
     add.onclick = (e) => {
         e.preventDefault()
         $("#boxe_main").load("register", () => {
             $("#boxe_main #edit label").css("text-align", "left")
         })
-        .on("submit", () => {
-            alert("submeteu")
+        .on("submit", (e) => {
+            e.preventDefault()
+            let link = "src/Support/Ajax/save.php";
+            let formData = new FormData($("#boxe_main form")[0])
+            formData.append("act", "login")
+            formData.append("action", "add")
+            if(formData.get("password") !== formData.get("confPassword")) {
+                alertLatch("The passwords are different", "var(--cor-warning)");
+            } else if(formData.get("password") === "") {
+                alertLatch("Invalid blank password", "var(--cor-warning)");
+            } else if(saveData(link, formData, "Saving")) {
+                $("#boxe_main, #mask_main").hide();
+                $(location).attr("href","");
+            } else {
+                alertLatch("unable to save data", "var(--cor-warning)")
+            }
         })
         $("#boxe_main, #mask_main").show();
         mask_main.onclick = () => {

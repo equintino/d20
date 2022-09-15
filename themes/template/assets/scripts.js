@@ -519,9 +519,12 @@ var url="src/Support/Ajax/save.php"
 var dataSet=$("#config-form").serializeArray();dataSet.push({name:"act",value:"config"});let msg=saveForm("connection","add","null",url)
 if(msg){window.location.reload()}}).css({top:"0",padding:"30px"})
 $("#boxe_main, #mask_main").show()}
-$("form.form-signin").on("submit",function(e){e.preventDefault();$("button").html("<i class='fa fa-sync-alt schedule'></i>");var data=$("form.form-signin").serialize();var url="src/public/main.php";$.ajax({url:url,type:"POST",data:data,dataType:"json",success:function(response){if(response===1){$(location).attr("href","")}else if(response===2){var link="src/Support/Ajax/save.php";var login=$("form [name=login]").val();var lkToken="token";$("#boxe_main, #mask_main").show();$("#boxe_main").load(lkToken,function(){$("#form-token").find("[name=password]").focus()}).on("submit",function(e){e.preventDefault();var formData=new FormData($("form#form-token")[0]);formData.append("act","login");formData.append("action","change");formData.append("login",login);if(formData.get("password")!==formData.get("confPassword")){alertLatch("The passwords are different","var(--cor-warning)")}else if(formData.get("password")===""){alertLatch("Invalid blank password","var(--cor-warning)")}else{if(saveData(link,formData,"Saving")){$("#boxe_main, #mask_main").hide();$(location).attr("href","")}}}).css({top:"20%","padding":"30px"})}else{alertLatch(response,"var(--cor-warning)")}},error:function(error){alertLatch("Please recharge the page","var(--cor-danger)")},complete:function(response){$("button").text("Entrar")}})})
 add.onclick=(e)=>{e.preventDefault()
-$("#boxe_main").load("register",()=>{$("#boxe_main #edit label").css("text-align","left")}).on("submit",()=>{alert("submeteu")})
+$("#boxe_main").load("register",()=>{$("#boxe_main #edit label").css("text-align","left")}).on("submit",(e)=>{e.preventDefault()
+let link="src/Support/Ajax/save.php";let formData=new FormData($("#boxe_main form")[0])
+formData.append("act","login")
+formData.append("action","add")
+if(formData.get("password")!==formData.get("confPassword")){alertLatch("The passwords are different","var(--cor-warning)")}else if(formData.get("password")===""){alertLatch("Invalid blank password","var(--cor-warning)")}else if(saveData(link,formData,"Saving")){$("#boxe_main, #mask_main").hide();$(location).attr("href","")}else{alertLatch("unable to save data","var(--cor-warning)")}})
 $("#boxe_main, #mask_main").show();mask_main.onclick=()=>{$("#boxe_main, #mask_main").hide()}}
 document.onkeyup=(e)=>{if(e.keyCode===27){$("#boxe_main, #mask_main").hide()}}
 let registerUser=(modal)=>{$("#content").on("submit",function(){let form=$(this).find(loginRegister)[0];let formData=new FormData(form);if(saveData("user/save",formData)){modal.close()}})}

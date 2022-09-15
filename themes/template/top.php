@@ -51,21 +51,21 @@
                         <a class="dropdown-item" href="<?= url("mission") ?>" data-page="mission">Missão</a>
                     </div>
                 </li>
-                <?php if(!empty($access) && (in_array("Login de Acesso", $access) || in_array("*", $access))): ?>
+                <?php if(!empty($this->access) && (in_array("Login de Acesso", $this->access) || in_array("*", $this->access))): ?>
                     <li>
                         <a data-id="user" class="nav-link icon-login" href="<?= url("user") ?>" >
                             <i class="fa fa-id-card" title="Cadastro de Login"></i>
                         </a>
                     </li>
                 <?php endif; ?>
-                <?php if(!empty($access) && (in_array("Segurança", $access) || in_array("*", $access))): ?>
+                <?php if(!empty($this->access) && (in_array("Segurança", $this->access) || in_array("*", $this->access))): ?>
                     <li>
                         <a data-id="shield" class="nav-link icon-shield" href="<?= url("shield") ?>" >
                             <i class="fa fa-shield" title="Segurança" ></i>
                         </a>
                     </li>
                 <?php endif ?>
-                <?php if(!empty($access) && (in_array("Configuração", $access) || in_array("*", $access))): ?>
+                <?php if(!empty($this->access) && (in_array("Configuração", $this->access) || in_array("*", $this->access))): ?>
                     <li>
                         <a data-id="config" class="nav-link icon-config" href="<?= url("config") ?>">
                             <i class="fa fa-cog" title="Configuração" ></i>
