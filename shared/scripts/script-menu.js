@@ -2,6 +2,8 @@ const identif = (page, logged="Nenhum usuário logado") => {
     switch(page) {
         case "home":
             return "<i>Usuário:</i> " + logged;
+        case "user":
+            return "GERENCIAMENTO DE USUÁRIOS";
         case "character":
             return "GERENCIAMENTO DE PERSONAGENS";
         case "breed":

@@ -102,33 +102,36 @@ $(function($) {
     //     })
     // })
 
-    add.onclick = (e) => {
-        e.preventDefault()
-        $("#boxe_main").load("register", () => {
-            $("#boxe_main #edit label").css("text-align", "left")
-        })
-        .on("submit", (e) => {
+    if(typeof(add) !== "undefined") {
+        add.onclick = (e) => {
             e.preventDefault()
-            let link = "src/Support/Ajax/save.php";
-            let formData = new FormData($("#boxe_main form")[0])
-            formData.append("act", "login")
-            formData.append("action", "add")
-            if(formData.get("password") !== formData.get("confPassword")) {
-                alertLatch("The passwords are different", "var(--cor-warning)");
-            } else if(formData.get("password") === "") {
-                alertLatch("Invalid blank password", "var(--cor-warning)");
-            } else if(saveData(link, formData, "Saving")) {
-                $("#boxe_main, #mask_main").hide();
-                $(location).attr("href","");
-            } else {
-                alertLatch("unable to save data", "var(--cor-warning)")
+            $("#boxe_main").load("register", () => {
+                $("#boxe_main #edit label").css("text-align", "left")
+            })
+            .on("submit", (e) => {
+                e.preventDefault()
+                let link = "src/Support/Ajax/save.php";
+                let formData = new FormData($("#boxe_main form")[0])
+                formData.append("act", "login")
+                formData.append("action", "add")
+                if(formData.get("password") !== formData.get("confPassword")) {
+                    alertLatch("The passwords are different", "var(--cor-warning)");
+                } else if(formData.get("password") === "") {
+                    alertLatch("Invalid blank password", "var(--cor-warning)");
+                } else if(saveData(link, formData, "Saving")) {
+                    $("#boxe_main, #mask_main").hide();
+                    $(location).attr("href","");
+                } else {
+                    alertLatch("unable to save data", "var(--cor-warning)")
+                }
+            })
+            $("#boxe_main, #mask_main").show();
+            mask_main.onclick = () => {
+                $("#boxe_main, #mask_main").hide()
             }
-        })
-        $("#boxe_main, #mask_main").show();
-        mask_main.onclick = () => {
-            $("#boxe_main, #mask_main").hide()
         }
     }
+
     document.onkeyup = (e) => {
         if(e.keyCode === 27) {
             $("#boxe_main, #mask_main").hide()

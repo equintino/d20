@@ -24,7 +24,7 @@
 
         /**  The Users' Screens */
         $router->namespace("_App");
-        // $router->get("/user", "User:init");
+        $router->get("/user", "User:init");
         // $router->get("/user/{user}", "User:edit");
         // $router->post("/user/update", "User:update");
         // $router->post("/user/delete/{user}", "User:delete");

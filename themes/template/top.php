@@ -53,7 +53,7 @@
                 </li>
                 <?php if(!empty($this->access) && (in_array("Login de Acesso", $this->access) || in_array("*", $this->access))): ?>
                     <li>
-                        <a data-id="user" class="nav-link icon-login" href="<?= url("user") ?>" >
+                        <a data-id="user" data-page="user" class="nav-link icon-login" href="<?= url("user") ?>" >
                             <i class="fa fa-id-card" title="Cadastro de Login"></i>
                         </a>
                     </li>

@@ -11,7 +11,7 @@
             </select>
             <?php endif ?>
         </div>
-        <div class="col-2 buttons">
+        <div class="col-2 buttons mt-4">
             <button class="button btnAction" style="float: right">Adicionar</button>
             <button class="button btnAction" style="float: right; margin-right: 5px">Listar</button>
         </div>

@@ -414,7 +414,7 @@ main .form-signin {
     box-shadow: 2px 2px 2px gray;
     border-radius: 5px;
     background: var(--cor-primary-light);
-    height: 500px;
+    max-height: 500px;
     border: 1px solid white;
     padding: 20px 40px;
     margin: 100px 40px 0 40px;

@@ -1,5 +1,5 @@
 <?php if(!empty($act) && $act === "edit"): ?>
-<div id="edit" >
+<div id="edit">
     <form id="loginRegister" action="#" method="POST" class="form-horizontal">
         <fieldset class="fieldset">
             <legend>IDENTIFICAÇÃO</legend>

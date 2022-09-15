@@ -519,13 +519,13 @@ var url="src/Support/Ajax/save.php"
 var dataSet=$("#config-form").serializeArray();dataSet.push({name:"act",value:"config"});let msg=saveForm("connection","add","null",url)
 if(msg){window.location.reload()}}).css({top:"0",padding:"30px"})
 $("#boxe_main, #mask_main").show()}
-add.onclick=(e)=>{e.preventDefault()
+if(typeof(add)!=="undefined"){add.onclick=(e)=>{e.preventDefault()
 $("#boxe_main").load("register",()=>{$("#boxe_main #edit label").css("text-align","left")}).on("submit",(e)=>{e.preventDefault()
 let link="src/Support/Ajax/save.php";let formData=new FormData($("#boxe_main form")[0])
 formData.append("act","login")
 formData.append("action","add")
 if(formData.get("password")!==formData.get("confPassword")){alertLatch("The passwords are different","var(--cor-warning)")}else if(formData.get("password")===""){alertLatch("Invalid blank password","var(--cor-warning)")}else if(saveData(link,formData,"Saving")){$("#boxe_main, #mask_main").hide();$(location).attr("href","")}else{alertLatch("unable to save data","var(--cor-warning)")}})
-$("#boxe_main, #mask_main").show();mask_main.onclick=()=>{$("#boxe_main, #mask_main").hide()}}
+$("#boxe_main, #mask_main").show();mask_main.onclick=()=>{$("#boxe_main, #mask_main").hide()}}}
 document.onkeyup=(e)=>{if(e.keyCode===27){$("#boxe_main, #mask_main").hide()}}
 let registerUser=(modal)=>{$("#content").on("submit",function(){let form=$(this).find(loginRegister)[0];let formData=new FormData(form);if(saveData("user/save",formData)){modal.close()}})}
 if(typeof(signinForm)!=="undefined"){signinForm.onsubmit=(e)=>{e.preventDefault()
@@ -911,7 +911,9 @@ modal.hide()}})}else if(action==="Reseta"){modal.confirm({title:"A senha será e
 $("#mask_main").hide()})}
 $(".loading").hide()})}
 function disabledTableLine(dom){$(dom).each(function(){var that=$(this);var disabledItens=$(this).find("td:eq(4)").text();if(disabledItens!=="SIM"){that.find("td").each(function(){if($(this).index()>0&&$(this).index()<5){var text=$(this).text();$(this).html("<strike>"+text+"</sctrike>").css("color","var(--cor-secondary-light)")}})}})}
-function scriptUser(){};function scriptCharacter(){};function scriptBreed(){};function scriptCategory(){};const identif=(page,logged="Nenhum usuário logado")=>{switch(page){case "home":return"<i>Usuário:</i> "+logged;case "character":return"GERENCIAMENTO DE PERSONAGENS";case "breed":return"GERENCIAMENTO DE RAÇAS";case "category":return"GERENCIAMENTO DE CLASSES";case "avatar":return"GERENCIAMENTO DE AVATARES";case "mission":return"GERENCIAMENTO DE MISSÕES";default:return null}}
+function scriptUser(){if(typeof(company_id)!=="undefined"){disabledTableLine("#exhibition table tbody tr")}
+$("select[name=NomeFantasia]").on("change",function(){var company_id=$(this).val();var url="user/list/company/"+company_id;if(company_id!=""){$("#exhibition").load(url,function(){exhibition("#exhibition table#tabList tbody td");disabledTableLine("#exhibition table tbody tr")})}});$(".header button").on("click",function(){$(".loading").show();var btnAction=$(this).text();var company_id=$("select[name=NomeFantasia]").val();if(company_id==""){alertLatch("Selecione a EMPRESA","var(--cor-warning)");$(this).closest(".header").find("select").focus();return!1}
+if(btnAction==="Adicionar"){let url="user/register";$("#exhibition").load(url,function(){$(this).find("[name=Nome]").focus();$(".loading").hide()}).on("submit",function(e){e.preventDefault();const formData=new FormData($(this).find("form")[0]);formData.append("company_id",company_id);var link="user/save";var result=saveData(link,formData);if(result)$("#exhibition form#login-register").find("button[type=reset]").trigger("click")}).show()}else{let url="user/list/company/"+company_id;$("#exhibition").load(url,function(){exhibition("#exhibition table#tabList tbody td");disabledTableLine("#exhibition table tbody tr");$(".loading").hide()})}});exhibition("#exhibition #tabList tbody td");$(".header button").each(function(){if($(this).text()==="Listar")$(this).trigger("click")})};function scriptCharacter(){};function scriptBreed(){};function scriptCategory(){};const identif=(page,logged="Nenhum usuário logado")=>{switch(page){case "home":return"<i>Usuário:</i> "+logged;case "user":return"GERENCIAMENTO DE USUÁRIOS";case "character":return"GERENCIAMENTO DE PERSONAGENS";case "breed":return"GERENCIAMENTO DE RAÇAS";case "category":return"GERENCIAMENTO DE CLASSES";case "avatar":return"GERENCIAMENTO DE AVATARES";case "mission":return"GERENCIAMENTO DE MISSÕES";default:return null}}
 const callScript=(name)=>{switch(name){case "user":scriptUser();break;case "character":scriptCharacter();break;case "breed/add":scriptBreed();break;case "category":scriptCategory();break}}
 $(function(){$(document).on("click",function(){$(this).find(".dropdown-menu").css("display","none")})
 $(".dropdown-toggle").on("mouseover",function(){$(".dropdown-toggle").parent().find(".dropdown-menu").css("display","none")

@@ -40,11 +40,12 @@ class User extends Controller
 
     public function add(): void
     {
-        $data["act"] = "edit";
-        $groups = (new Group())->all();
-        $params = [ $data, compact("groups") ];
+        // $data["act"] = "edit";
+        $act = "edit";
+        $groups = (new Group())->activeAll();
+        // $params = [ $data, compact("groups") ];
 
-        $this->view->setPath("Modals")->render("user", $params);
+        $this->view->setPath("Modals")->render("user", compact("act", "groups"));
     }
 
     public function edit(array $data): void
