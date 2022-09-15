@@ -110,21 +110,22 @@ function scriptUser() {
                     e.preventDefault();
                     const formData = new FormData($(this).find("form")[0]);
                     formData.append("company_id", company_id);
-                    var link = "user/save";
-                    var result = saveData(link, formData);
+                    let link = "user/save";
+                    let result = saveData(link, formData);
                     if(result) $("#exhibition form#login-register").find("button[type=reset]").trigger("click");
             }).show()
         } else {
-            let url = "user/list/company/" + company_id;
+            // let url = "user/list/company/" + company_id;
+            let url = "user/list"
             $("#exhibition").load(url, function() {
                 exhibition("#exhibition table#tabList tbody td");
                 disabledTableLine("#exhibition table tbody tr");
-                $(".loading").hide();
-            });
+                $(".loading").hide()
+            }).show()
         }
     });
-    exhibition("#exhibition #tabList tbody td");
+    exhibition("#exhibition #tabList tbody td")
     $(".header button").each(function() {
         if($(this).text() === "Listar")$(this).trigger("click");
-    });
+    })
 }

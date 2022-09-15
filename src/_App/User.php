@@ -22,7 +22,8 @@ class User extends Controller
 
     public function list(?array $data): void
     {
-        $data["act"] = "list";
+        // $data["act"] = "list";
+        $act = "list";
         $login = $_SESSION["login"]->login;
         if(!empty($data["company_id"])) {
             $users = (new \Models\User())->find(["company_id" => $data["company_id"]]);
@@ -31,19 +32,17 @@ class User extends Controller
         }
 
         $user = (new \Models\User())->find($login);
-        $groups = (new Group())->all();
-        $params = [ $data, compact("login", "users", "user", "groups") ];
+        $groups = (new Group())->activeAll();
+        // $params = [ $data, compact("login", "users", "user", "groups") ];
 
         // echo "<script>var company_id = '" . ($data["company_id"] ?? 1) . "' </script>";
-        $this->view->setPath("Modals")->render("user", $params);
+        $this->view->setPath("Modals")->render("user", compact("act", "login", "users", "user", "groups"));
     }
 
     public function add(): void
     {
-        // $data["act"] = "edit";
         $act = "edit";
         $groups = (new Group())->activeAll();
-        // $params = [ $data, compact("groups") ];
 
         $this->view->setPath("Modals")->render("user", compact("act", "groups"));
     }
