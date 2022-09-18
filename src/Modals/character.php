@@ -15,8 +15,8 @@
     <form enctype="multipart/form-data" id="myCharacter" action="avatar/save" method="POST">
         <section class="side-left">
             <label class="label-rpg">Jogador: </label>
-            <input class="input-rpg" name="name" value="<?= ( strtoupper($login) ?? null) ?>" disabled />
-            <input type="hidden" name="name" value="<?= ( strtoupper($login) ?? null) ?>" />
+            <input class="input-rpg" name="name" value="<?= ( strtoupper($login->login) ?? null) ?>" disabled />
+            <input type="hidden" name="name" value="<?= ( strtoupper($login->login) ?? null) ?>" />
             <input type="hidden" name="id" value="<?= $character->id ?>" />
             <label class="label-rpg">Personagem: </label>
             <input class="input-rpg" type="text" name="personage" value="<?= ($character->personage ?? null) ?>" data-id="<?= $character->id ?>" required <?= ($mission ? "disabled" : null) ?>>

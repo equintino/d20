@@ -98,8 +98,8 @@
                 <form enctype="multipart/form-data" id="myCharacter" action="avatar/save" method="POST">
                     <section class="side-left">
                         <label>Jogador: </label>
-                        <input class="input-rpg" name="name" value="<?= ( strtoupper($login) ?? null) ?>" disabled />
-                        <input type="hidden" name="name" value="<?= ( strtoupper($login) ?? null) ?>" />
+                        <input class="input-rpg" name="name" value="<?= ( strtoupper($login->login) ?? null) ?>" disabled />
+                        <input type="hidden" name="name" value="<?= ( strtoupper($login->login) ?? null) ?>" />
                         <label>Personagem: </label>
                         <input class="input-rpg" type="text" name="personage" required>
                         <div style="flex-grow: 2">
@@ -136,7 +136,7 @@
                         <div id="description"  style="background: url('d20/<?= theme("assets/img/pergaminho.png") ?>'); background-repeat: round">
                             <p></p>
                         </div>
-                        <script>var jogador='<?= $login ?>';</script>
+                        <script>var jogador='<?= $login->login ?>';</script>
                     </section>
                     <section id="avatar" class="galery .side-right" >
                         <div><span id="breed">&nbsp</span></div>
