@@ -39,7 +39,9 @@
 <main id="mission">
     <?php if(empty($act)): ?>
     <div id="init">
-        <button class="btn btn-oval" value="new">Novo</button>
+        <?php if($login->group_id === "1"): ?>
+            <button class="btn btn-oval" value="new" >Nova</button>
+        <?php endif ?>
         <button class="btn btn-oval" value="list">Lista</button>
     </div>
     <?php elseif($act === "add"): ?>

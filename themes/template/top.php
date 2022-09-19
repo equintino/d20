@@ -31,33 +31,36 @@
                 </li> -->
             <?php //endif ?>
             <?php //if(!empty($access) && (in_array("Lista de Membros", $access) || in_array("*", $access))): ?>
-            <li class="nav-item dropdown">
-                <a class="nav-item nav-link dropdown-toggle" id="nav-membros-tab" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Missões</a>
-                <div class="dropdown-menu">
+            <li>
+                <!-- <a class="nav-item nav-link dropdown-toggle" id="nav-membros-tab" data-toggle="dropdown" href="<?= url("mission") ?>" role="button" aria-haspopup="true" aria-expanded="false">Missões</a> -->
+                <a data-page="mission" class="nav-link" href="<?= url("mission") ?>" >Missões</a>
+                <!-- <div class="dropdown-menu">
                     <a class="dropdown-item" href="<?= url("mission/add") ?>" data-page="mission/add">Nova</a>
                     <a class="dropdown-item" href="<?= url("mission/init") ?>" data-page="mission/init">Iniciar</a>
-                </div>
+                </div> -->
             </li>
             <?php //endif ?>
         </ul>
         <div class="navbar navbar-right">
             <ul class="nav navbar">
+                <?php if(!empty($this->access) && (in_array("mission", $this->access) || in_array("*", $this->access))): ?>
                 <li class="nav-item dropdown">
                     <a class="nav-item nav-link dropdown-toggle menu-right" href="#" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">Mestre</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="<?= url("breed") ?>" data-page="breed">Raça</a>
                         <a class="dropdown-item" href="<?= url("category") ?>" data-page="category">Classe</a>
                         <a class="dropdown-item" href="<?= url("avatar") ?>" data-page="avatar">Avatar</a>
-                        <a class="dropdown-item" href="<?= url("mission") ?>" data-page="mission">Missão</a>
+                        <!-- <a class="dropdown-item" href="<?= url("mission") ?>" data-page="mission">Missão</a> -->
                     </div>
                 </li>
+                <?php endif ?>
                 <?php if(!empty($this->access) && (in_array("Login de Acesso", $this->access) || in_array("*", $this->access))): ?>
                     <li>
                         <a data-id="user" data-page="user" class="nav-link icon-login" href="<?= url("user") ?>" >
                             <i class="fa fa-id-card" title="Cadastro de Login"></i>
                         </a>
                     </li>
-                <?php endif; ?>
+                <?php endif ?>
                 <?php if(!empty($this->access) && (in_array("Segurança", $this->access) || in_array("*", $this->access))): ?>
                     <li>
                         <a data-id="shield" class="nav-link icon-shield" href="<?= url("shield") ?>" >

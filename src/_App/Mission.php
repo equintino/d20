@@ -13,7 +13,8 @@ class Mission extends Controller
 
     public function init(?array $data): void
     {
-        $this->view->render($this->page);
+        $login = $_SESSION["login"];
+        $this->view->render($this->page, compact("login"));
     }
 
     public function add(): void

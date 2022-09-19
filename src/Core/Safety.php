@@ -4,7 +4,7 @@ namespace Core;
 
 abstract class Safety
 {
-    static $exceptions = [ "login", "home", "error", "character" ];
+    static $exceptions = [ "login", "home", "error", "character", "mission" ];
     static $includes = [];
 
     public static function dataConnection(): ?string

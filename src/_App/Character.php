@@ -52,7 +52,8 @@ class Character extends Controller
     public function list()
     {
         $act = "list";
-        $characters = ((new \Models\Character())->activeAll() ?? []);
+        // $characters = ((new \Models\Character())->activeAll() ?? []);
+        $characters = ((new \Models\Character())->search(["name" => $_SESSION["login"]->login]) ?? []);
         $this->view->render($this->page, compact("act","characters"));
     }
 
