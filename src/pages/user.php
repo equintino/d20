@@ -1,6 +1,6 @@
 <div id="user">
     <header class="header row form-inline">
-        <div class="col select-company">
+        <div class="col">
             <?php if(!empty($companys)): ?>
             <span class="color-primary">Empresa:</span>
             <select class="form-input" name="NomeFantasia">
@@ -18,3 +18,15 @@
     </header>
     <main id="exhibition" ></main>
 </div>
+<script>
+    document.querySelector(".dropdown-toggle").onmouseover = (e) => {
+        let dropdownMenu = document.querySelector(".dropdown-menu")
+        let buttons = document.querySelector(".buttons")
+        if(dropdownMenu.style.display === "block") {
+            buttons.style.zIndex = -1
+        }
+        dropdownMenu.onmouseleave = () => {
+            buttons.style.zIndex = 1
+        }
+    }
+</script>

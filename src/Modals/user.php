@@ -1,3 +1,8 @@
+<style>
+    #tabList th {
+        color: white;
+    }
+</style>
 <?php if(!empty($act) && $act === "edit"): ?>
 <div id="edit">
     <form id="loginRegister" action="#" method="POST" class="form-horizontal">

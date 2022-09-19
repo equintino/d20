@@ -46,6 +46,11 @@
         $router->get("/character/story", "Character:story");
 
 
+        /** The Player */
+        $router->namespace("_App");
+        $router->get("/player", "Player:init");
+
+
         /** The Breed */
         $router->namespace("_App");
         $router->get("/breed", "Breed:init");
