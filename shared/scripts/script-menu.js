@@ -14,6 +14,8 @@ const identif = (page, logged="Nenhum usuário logado") => {
             return "GERENCIAMENTO DE AVATARES";
         case "mission":
             return "GERENCIAMENTO DE MISSÕES";
+        case "player":
+            return "GERENCIAMENTO DE JOGADORES";
         default:
             return null;
     }

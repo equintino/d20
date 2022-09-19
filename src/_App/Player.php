@@ -52,7 +52,6 @@ class Player extends Controller
     public function list()
     {
         $act = "list";
-        // $characters = ((new \Models\Character())->activeAll() ?? []);
         $characters = ((new \Models\Character())->search(["name" => $_SESSION["login"]->login]) ?? []);
         $this->view->render($this->page, compact("act","characters"));
     }
@@ -63,7 +62,7 @@ class Player extends Controller
         if(empty($characters->find($data["personage"]))) {
             $characters->bootstrap($data);
         } else {
-            return print(json_encode("This personage already exists"));
+            return print(json_encode("This player already exists"));
         }
         $characters->save();
         return print(json_encode($characters->message()));
