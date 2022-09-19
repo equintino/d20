@@ -7,7 +7,6 @@ use Database\CreationProcess;
 
 class View
 {
-    private $accessPages = ["home", "error", "login"];
     private $path;
     private $access = [];
     public $theme;
@@ -93,7 +92,7 @@ class View
 
     private function restrictAccess(string $page): bool
     {
-        if(in_array("*", $this->access) || in_array($page,$this->accessPages) || in_array(Safety::renameScreen($page), $this->access)) {
+        if(in_array("*", $this->access) || in_array($page, Safety::$exceptions) || in_array(Safety::renameScreen($page), $this->access)) {
             return true;
         }
         return false;

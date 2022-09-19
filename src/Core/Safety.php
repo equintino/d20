@@ -4,7 +4,7 @@ namespace Core;
 
 abstract class Safety
 {
-    static $exceptions = [ "home.php", "error.php" ];
+    static $exceptions = [ "home", "error", "character" ];
     static $includes = [];
 
     public static function dataConnection(): ?string
@@ -17,11 +17,11 @@ abstract class Safety
      * @var $path string
      * @var $exceptions array
      */
-    public static function screens($path): ?array
+    public static function screens($path = "pages"): ?array
     {
         $directory = dir(__DIR__ . "/../{$path}");
         while($file = $directory->read()) {
-            if(!preg_match("/^[.]/", $file) && !in_array($file, self::$exceptions)) {
+            if(!preg_match("/^[.]/", $file) && !in_array(substr($file, 0, -4), self::$exceptions)) {
                 $screens[] = self::renameScreen(substr($file, 0, -4));
             }
         }
@@ -85,7 +85,7 @@ abstract class Safety
             "moviment" => "Movimentação Financeira",
             "documentation" => "Documentação",
             "management" => "Gerenciamento",
-            "occupation" => "Funções"
+            "occupation" => "Funções",
         ];
         $key = trim($key);
         return (array_key_exists($key, $screens) ? $screens[$key] : $key);
