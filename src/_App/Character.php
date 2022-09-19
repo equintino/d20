@@ -42,8 +42,6 @@ class Character extends Controller
             "neutral" => "NEUTRO",
             "chaotic" => "CAÓTICO"
         ];
-        // $breed_id = $data["breed_id"];
-        // $category_id = $data["category_id"];
         $character = (new \Models\Character())->load($id);
         $breeds = (new \Models\Breed())->activeAll();
         $categories = (new \Models\Category())->activeAll();
