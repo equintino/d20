@@ -62,7 +62,7 @@
 </div>
 <?php endif ?>
 <script>
-    let openModalChange = (breed_id, category_id) => {
+    var openModalChange = (breed_id, category_id) => {
         $.ajax({
             url: "avatar",
             type: "POST",

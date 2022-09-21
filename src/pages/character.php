@@ -213,8 +213,9 @@ $(function() {
 
     /** Buttons */
     character.onclick = (i) => {
-        loading.show()
         let btnName = i.target.value
+        if(typeof(btnName) === "undefined")return
+        loading.show()
         switch(btnName) {
             case "new": case "clear":
                 $(".content").load("character/add", function() {
@@ -278,6 +279,10 @@ $(function() {
                     category_id,
                     story
                 }
+                if(btnActive.length === 0) {
+                    loading.hide()
+                    return alertLatch("Select a character","var(--cor-warning)")
+                }
 
                 modal.show({
                     title: "Modo de edição de PERSONAGEM",
@@ -331,7 +336,6 @@ $(function() {
                 })
                 break
             default:
-                loading.hide()
 
         }
     }
@@ -384,7 +388,7 @@ $(function() {
                     id: breed_id
                 },
                 beforSend: function() {
-                    loading.show()
+
                 },
                 success: function(response) {
                     detail_breed.innerHTML = "<img src='image/id/" + response.image_id + "' alt='' height='100px' title='" + response.name + "'/>"
@@ -419,9 +423,11 @@ $(function() {
                 }
             })
 
+            let waiting = "<img class='schedule' src='themes/template/assets/img/loading.png' alt='' height='30px' />"
             if(mission_id !== "") {
                 /** Loading Mission */
-                list.querySelector(".breed_class p").innerHTML = "<img class='schedule' src='themes/template/assets/img/loading.png' alt='' height='30px' />"
+                list.querySelector(".breed_class p").innerHTML = waiting
+                // avatar.innerHTML = waiting
                 $.ajax({
                     url: "mission/id/" + mission_id,
                     type: "POST",
