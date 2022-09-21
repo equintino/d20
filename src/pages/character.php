@@ -272,6 +272,11 @@ $(function() {
                 let breed_id = btnActive.attr("data-breed_id")
                 let category_id = btnActive.attr("data-category_id")
                 let story = btnActive.attr("data-story")
+                let mission = btnActive.attr("data-mission")
+                if(mission !== "") {
+                    loading.hide()
+                    return alertLatch("This character is on a mission", "var(--cor-warning)")
+                }
                 params = {
                     id,
                     image_id,
