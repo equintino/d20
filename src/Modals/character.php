@@ -60,6 +60,11 @@
         </section>
     </form>
 </div>
+<?php elseif($act === "mission_request"): ?>
+    Selecione qual o personagem você quer que engresse nesta missão?
+    <?php foreach($characters as $character): ?>
+        <?= $character->personage ?><br>
+    <?php endforeach ?>
 <?php endif ?>
 <script>
     var openModalChange = (breed_id, category_id) => {

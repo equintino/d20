@@ -214,7 +214,7 @@ $(function() {
     /** Buttons */
     character.onclick = (i) => {
         let btnName = i.target.value
-        if(typeof(btnName) === "undefined")return
+        if(typeof(btnName) === "undefined" || btnName === "")return
         loading.show()
         switch(btnName) {
             case "new": case "clear":
@@ -341,7 +341,7 @@ $(function() {
                 })
                 break
             default:
-
+                loading.hide()
         }
     }
 
@@ -377,6 +377,7 @@ $(function() {
     })
     if(typeof(list) !== "undefined") {
         $(".left button").on("click", (i) => {
+            loading.show()
             let id = i.target.attributes["data-id"].value
             let image_id = i.target.attributes["data-image_id"].value
             let breed_id = i.target.attributes["data-breed_id"].value
@@ -432,7 +433,6 @@ $(function() {
             if(mission_id !== "") {
                 /** Loading Mission */
                 list.querySelector(".breed_class p").innerHTML = waiting
-                // avatar.innerHTML = waiting
                 $.ajax({
                     url: "mission/id/" + mission_id,
                     type: "POST",

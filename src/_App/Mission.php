@@ -116,11 +116,30 @@ class Mission extends Controller
         $this->view->setPath("Modals")->render("map", compact("act","image"));
     }
 
+    public function request(array $data)
+    {
+        $login = $_SESSION["login"];
+        $mission_id = $data["mission_id"];
+        $act = "mission_request";
+        $characters = (new \Models\Character())->search([
+            "name" => $login->login
+        ]);
+        $missionRequest = (new \Models\MissionRequest());
+        $this->view->setPath("Modals")->render("character", compact("act", "mission_id", "characters", "missionRequest"));
+        // var_dump(
+        //     // $mission_id,
+        //     // $login,
+        //     $characters
+        //     // $missionRequest
+        // );
+    }
+
     public function list(): void
     {
         $act = "list";
+        $login = $_SESSION["login"];
         $missions = ((new \Models\Mission())->activeAll() ?? []);
-        $this->view->render($this->page, compact("act", "missions"));
+        $this->view->render($this->page, compact("act", "missions","login"));
     }
 
     public function save(array $data)

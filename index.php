@@ -98,6 +98,8 @@
         $router->post("/mission/personages/{name}", "Mission:personages");
         $router->get("/mission/edit/{id}", "Mission:edit");
         $router->get("/mission/list", "Mission:list");
+        // $router->get("/mission/request", "Mission:request");
+        $router->post("/mission/request", "Mission:request");
         $router->post("/map/add", "Mission:map");
         $router->post("/map/save", "Mission:mapSave");
         $router->post("/map/load", "Mission:mapLoad");

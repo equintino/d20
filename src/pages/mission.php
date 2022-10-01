@@ -32,8 +32,9 @@
         cursor: pointer;
     }
 
-    #images {
-        width: 400px;
+    #mission #images {
+        width: 350px;
+        height: 400px;
     }
 </style>
 <main id="mission">
@@ -105,7 +106,11 @@
                 </fieldset>
             </section>
             <section>
-                <button class="btn btn-rpg btn-danger" style="margin-top: 20px" value="edit">Editar</button>
+                <?php if($login->group_id === "1"): ?>
+                    <button class="btn btn-rpg btn-danger" style="margin-top: 20px" value="edit">Editar</button>
+                <?php else: ?>
+                    <button class="btn btn-rpg btn-danger" style="margin-top: 20px" value="include">SE CANDIDATAR</button>
+                <?php endif ?>
             </section>
         </div>
     <?php endif ?>
@@ -258,6 +263,40 @@
                             })
                         }
                     })
+                } else {
+                    loading.hide()
+                    alertLatch("No selected mission", "var(--cor-warning)")
+                }
+                break
+            case "include":
+                /** Request into a mession */
+                if(list.querySelector("button.active") !== null) {
+                    loading.hide()
+                    let mission_id = list.querySelector(".left button.active").attributes["data-id"].value
+                    modal.show({
+                        title: "Selecione o seu personagem",
+                        content: "mission/request",
+                        params: { mission_id }
+                    })
+                    // $.ajax({
+                    //     url: "mission/request",
+                    //     type: "POST",
+                    //     dataType: "JSON",
+                    //     data: { mission_id },
+                    //     beforeSend: function() {
+
+                    //     },
+                    //     success: function(response) {
+                    //         console.log(response)
+                    //     },
+                    //     error: function(error) {
+
+                    //     },
+                    //     complete: function() {
+
+                    //     }
+                    // })
+                    // alertLatch("Your request is being analyzed", "var(--cor-warning)")
                 } else {
                     loading.hide()
                     alertLatch("No selected mission", "var(--cor-warning)")
