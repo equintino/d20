@@ -10,13 +10,13 @@
         <h3 style="color: white"><?= $mission["name"] ?></h3>
         <div>
             <label class="label-rpg">Nome:</label>
-            <input class="input-rpg" type="text" name="name" />
+            <input class="input-rpg" type="text" name="name" required/>
             <img id="thumb_image" src="#" alt="" height="280px" />
-            <input id="image" class="input-rpg" type="file" name="image" />
+            <input id="image" class="input-rpg" type="file" name="image" required/>
         </div>
         <div>
             <label class="label-rpg">Descrição:</label>
-            <textarea rows="15" cols="30" class="input-rpg" name="description"></textarea>
+            <textarea rows="15" cols="30" class="input-rpg" name="description" required></textarea>
         </div>
         <?php elseif($act === "edit"): ?>
         <section class="mt-5">

@@ -4,10 +4,12 @@ namespace Core;
 
 use Config\Config;
 use Traits\CryptoTrait;
+use Traits\RelationshipTrait;
 
 abstract class Model
 {
     use CryptoTrait;
+    use RelationshipTrait;
 
     /** @var array safe in cretated or updated */
     protected static $safe = [ "id", "created_at", "updated_at" ];
@@ -35,7 +37,7 @@ abstract class Model
 
     public function __set($name, $value)
     {
-        if(empty($this->data)) {
+        if (empty($this->data)) {
             $this->data = new \stdClass();
         }
         $this->data->$name = $value;
@@ -54,8 +56,10 @@ abstract class Model
     /** @var array $data columns names and values */
     public function bootstrap(array $data): ?object
     {
-        foreach($data as $name => $value) {
-            if($name === "password" || $name === "passwd") $value = $this->crypt($value);
+        foreach ($data as $name => $value) {
+            if ($name === "password" || $name === "passwd") {
+                $value = $this->crypt($value);
+            }
             $this->$name = $value;
         }
 
@@ -88,12 +92,12 @@ abstract class Model
 
     public function all(int $limit=30, int $offset=0, string $columns = "*", string $order = "id", bool $msgDb = false)
     {
-        $all = $this->read("SELECT {$columns} FROM  "
-            . static::$entity . " "
-            . $this->order($order)
-            . ($limit !== 0 ? $this->limit() : null), "limit={$limit}&offset={$offset}", $msgDb);
+        $all = $this->read(
+            "SELECT {$columns} FROM  " . static::$entity . " " . $this->order($order)
+            . ($limit !== 0 ? $this->limit() : null), "limit={$limit}&offset={$offset}", $msgDb
+        );
 
-        if($this->fail || !$all->rowCount()) {
+        if ($this->fail || !$all->rowCount()) {
             $this->message = "<span class='warning'>Your query has not returned data</span>";
             return null;
         }
@@ -110,7 +114,7 @@ abstract class Model
             $sql = "INSERT INTO {$entity} (" . $this->getAccentWorlds($columns) . ") VALUES ({$values})";
             $this->execute($sql, removeAccentArray($data));
             return Connect::getInstance($msgDb)->lastInsertId();
-        } catch(\PDOException $exception) {
+        } catch (\PDOException $exception) {
             $this->fail = $exception;
             return null;
         }
@@ -120,19 +124,21 @@ abstract class Model
     {
         try {
             $stmt = Connect::getInstance($msgDb)->prepare($select);
-            if($params) {
+            if ($params) {
                 parse_str($params, $params);
-                foreach($params as $key => $value) {
+                foreach ($params as $key => $value) {
                     $type = \PDO::PARAM_STR;
-                    if(is_numeric($value)) {
+                    if (is_numeric($value)) {
                         $type = \PDO::PARAM_INT;
                         $value = (int) $value;
+                    } elseif ($value == null) {
+                        $type = \PDO::PARAM_NULL;
                     }
                     $stmt->bindValue(":{$key}", $value, $type);
                 }
             }
             $stmt->execute();
-        } catch(\PDOException $exception) {
+        } catch (\PDOException $exception) {
             $this->fail = $exception;
         }
         return $stmt;
@@ -140,9 +146,10 @@ abstract class Model
 
     protected function update(string $entity, array $data, string $terms, string $params, bool $msgDb = false): ?int
     {
-        $data["updated_at"] = ($this->connectionDetails->type() === "sqlsrv" ? (new \DateTime())->format("d/m/Y H:i:s") : (new \DateTime())->format("Y-m-d H:i:s"));
+        $data["updated_at"] = ($this->connectionDetails->type() === "sqlsrv"
+        ? (new \DateTime())->format("d/m/Y H:i:s") : (new \DateTime())->format("Y-m-d H:i:s"));
         parse_str($params, $params);
-        foreach($data as $bind => $value) {
+        foreach ($data as $bind => $value) {
             $dataSet[] = "{$bind} = '{$value}'";
         }
         $dataSet = implode(", ", $dataSet);
@@ -159,7 +166,7 @@ abstract class Model
             parse_str($params, $params);
             $stmt->execute($params);
             return ($stmt->rowCount() ?? 1);
-        } catch(\PDOException $exception) {
+        } catch (\PDOException $exception) {
             $this->fail = $exception;
             return null;
         }
@@ -168,7 +175,7 @@ abstract class Model
     protected function safe(): ?array
     {
         $safe_ = (array) $this->data();
-        foreach(static::$safe as $unset) {
+        foreach (static::$safe as $unset) {
             unset($safe_[$unset]);
         }
         return array_filter($safe_, "filterNull");
@@ -183,8 +190,8 @@ abstract class Model
     {
         $worlds = explode(", ", $columns);
         $arr = [];
-        foreach($worlds as $world) {
-            if(!empty($this->accentWorlds) && array_key_exists($world, $this->accentWorlds)) {
+        foreach ($worlds as $world) {
+            if (!empty($this->accentWorlds) && array_key_exists($world, $this->accentWorlds)) {
                 array_push($arr, $this->accentWorlds[$world]);
             } else {
                 array_push($arr, $world);
@@ -196,8 +203,8 @@ abstract class Model
     private function filter(array $data, array $filtered = []): ?array
     {
         $filter = [];
-        foreach($data as $key => $value) {
-            if(!in_array($key, $filtered)) {
+        foreach ($data as $key => $value) {
+            if (!in_array($key, $filtered)) {
                 $filter[$key] = filter_var($value, FILTER_SANITIZE_SPECIAL_CHARS);
             }
         }
@@ -210,7 +217,7 @@ abstract class Model
     }
 
     /** pagination */
-    protected function limit(): string
+    protected function limit(): ?string
     {
         $type = $this->connectionDetails->type();
         return (new sqlParams())->limitParams($type);
@@ -230,20 +237,20 @@ abstract class Model
     {
         $stmt = Connect::getInstance()->prepare($sql);
         try {
-            if($params) {
+            if ($params) {
                 $params = $this->filter(removeAccentArray($params));
-                foreach($params as $key => $value) {
+                foreach ($params as $key => $value) {
                     $type = \PDO::PARAM_STR;
-                    if(is_numeric($value)) {
+                    if (is_numeric($value)) {
                         $value = (float) $value;
-                    } elseif($value == null) {
+                    } elseif ($value == null) {
                         $type = \PDO::PARAM_NULL;
                     }
                     $stmt->bindValue(":{$key}", $value, $type);
                 }
             }
             $stmt->execute();
-        } catch(PDOException $exception) {
+        } catch (PDOException $exception) {
             $this->fail = $exception;
         }
         return $stmt;

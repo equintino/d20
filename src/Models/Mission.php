@@ -16,8 +16,9 @@ class Mission extends Model implements Models
     {
         $load = $this->read("SELECT {$columns} FROM " . self::$entity . " WHERE id=:id", "id={$id}", $msgDb);
 
-        if($this->fail || !$load->rowCount()) {
-            $this->message = ($msgDb ? $this->fail->errorInfo[2] : "<span class='warning'>Not Found Informed id</span>");
+        if ($this->fail || !$load->rowCount()) {
+            $this->message = ($msgDb ? $this->fail->errorInfo[2]
+            : "<span class='warning'>Not Found Informed id</span>");
             return null;
         }
 
@@ -26,11 +27,11 @@ class Mission extends Model implements Models
 
     public function find(string $search, string $columns = "*")
     {
-        if(filter_var($search, FILTER_SANITIZE_STRIPPED)) {
+        if (filter_var($search, FILTER_UNSAFE_RAW)) {
             $find = $this->read("SELECT {$columns} FROM " . self::$entity . " WHERE name=:name ", "name={$search}");
         }
 
-        if($this->fail || !$find->rowCount()) {
+        if ($this->fail || !$find->rowCount()) {
             $this->message = "<span class='warning'>Not found mission</span>";
             return null;
         }
@@ -42,7 +43,7 @@ class Mission extends Model implements Models
     {
         $terms = "";
         $params = "";
-        foreach($where as $k => $v) {
+        foreach ($where as $k => $v) {
             $terms .= " {$k}=:{$k} AND";
             $params .= "{$k}={$v}&";
         }
@@ -52,33 +53,16 @@ class Mission extends Model implements Models
         return $data->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
     }
 
-    // public function all(int $limit=30, int $offset=0, string $columns = "*", string $order = "id", bool $msg=false)
-    // {
-    //     $all = $this->read("SELECT {$columns} FROM  " . self::$entity . " " . $this->order($order) . $this->limit(), "limit={$limit}&offset={$offset}");
-
-    //     if($this->fail) {
-    //         $this->message = "<span class='error'>" . $this->fail->errorInfo[2] . "</span>";
-    //         return $this->message;
-    //     }
-
-    //     if(!$all->rowCount()) {
-    //         $this->message = "<span class='warning'>Your inquiry has not returned data</span>";
-    //         return null;
-    //     }
-
-    //     return $all->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
-    // }
-
     public function activeAll(int $limit=30, int $offset=0, string $columns = "*", string $order = "name"): ?array
     {
         $sql = "SELECT {$columns} FROM  " . self::$entity . $this->order($order);
-        if($limit !== 0) {
+        if ($limit !== 0) {
             $all = $this->read($sql . $this->limit(), "limit={$limit}&offset={$offset}");
         } else {
             $all = $this->read($sql);
         }
 
-        if($this->fail || !$all->rowCount()) {
+        if ($this->fail || !$all->rowCount()) {
             $this->message = "Your query has not returned any registrations";
             return null;
         }
@@ -88,22 +72,24 @@ class Mission extends Model implements Models
 
     public function save(): ?Mission
     {
-        if(!$this->required()) {
+        if (!$this->required()) {
             return null;
         }
 
         /** Update */
-        if(!empty($this->id)) {
+        if (!empty($this->id)) {
             $id = $this->id;
-            $mission = $this->read("SELECT id FROM " . self::$entity . " WHERE name = :name AND id != :id",
-                "name={$this->name}&id={$id}");
-            if($mission->rowCount()) {
+            $mission = $this->read(
+                "SELECT id FROM " . self::$entity . " WHERE name = :name AND id != :id",
+                "name={$this->name}&id={$id}"
+            );
+            if ($mission->rowCount()) {
                 $this->message = "<span class='warning'>The Informed mission is already registered</span>";
                 return null;
             }
 
             $this->update(self::$entity, $this->safe(), "id = :id", "id={$id}");
-            if($this->fail()) {
+            if ($this->fail()) {
                 $this->message = "<span class='danger'>Error updating, verify the data</span>";
                 return null;
             }
@@ -112,13 +98,13 @@ class Mission extends Model implements Models
         }
 
         /** Create */
-        if(empty($this->id)) {
-            if($this->search([ "name" => $this->name ])) {
+        if (empty($this->id)) {
+            if ($this->search([ "name" => $this->name ])) {
                 $this->message = "<span class='warning'>The Informed mission is already registered</span>";
                 return null;
             }
             $id = $this->create(self::$entity, $this->safe());
-            if($this->fail()) {
+            if ($this->fail()) {
                 $this->message = "<span class='danger'>Error to Register, Check the data</span>";
                 return null;
             }
@@ -131,11 +117,11 @@ class Mission extends Model implements Models
 
     public function destroy()
     {
-        if(!empty($this->id)) {
+        if (!empty($this->id)) {
             $this->delete(self::$entity, "id=:id", "id={$this->id}");
         }
 
-        if($this->fail()) {
+        if ($this->fail()) {
             $this->message = "<span class='danger'>Could not remove the mission</span>";
             return null;
         }
@@ -147,8 +133,8 @@ class Mission extends Model implements Models
 
     public function required(): bool
     {
-        foreach($this->required as $field) {
-            if(empty(trim($this->$field))) {
+        foreach ($this->required as $field) {
+            if (empty(trim($this->$field))) {
                 $this->message = "<span class='warning'>The field {$field} is required</span>";
                 return false;
             }

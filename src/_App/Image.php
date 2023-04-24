@@ -4,6 +4,7 @@ namespace _App;
 
 class Image extends Controller
 {
+    private \Models\Image $class;
     private $id;
 
     public function __construct()
@@ -27,7 +28,7 @@ class Image extends Controller
 
     public function showImage()
     {
-        if(isset($this->id)) {
+        if (isset($this->id)) {
             $image = $this->class->load($this->id);
             header("Content-Type: {$image->type}");
             echo $image->image;

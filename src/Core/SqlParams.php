@@ -11,7 +11,7 @@ class SqlParams extends Model
     }
 
     /** pagination */
-    public function limitParams(string $type): string
+    public function limitParams(?string $type): ?string
     {
         switch($type) {
             case "sqlsrv":

@@ -15,7 +15,7 @@ class Player extends Model implements Models
     public static $entity = "players";
 
     /** @var array filds required */
-    private $required = [ "login", "password", "user", "name", "email" ];
+    private $required = [ "name", "character_id", "user_id" ];
 
     public function getEntity()
     {
@@ -32,11 +32,11 @@ class Player extends Model implements Models
         return $this->password;
     }
 
-    public function load(int $id, string $columns = "*", bool $msgDb = false): ?User
+    public function load(int $id, string $columns = "*", bool $msgDb = false): ?Player
     {
         $load = $this->read("SELECT {$columns} FROM " . self::$entity . " WHERE id=:id", "id={$id}", $msgDb);
 
-        if($this->fail || !$load->rowCount()) {
+        if ($this->fail || !$load->rowCount()) {
             $this->message = "<span class='warning'>Unscribed ID Player</span>";
             return null;
         }
@@ -47,39 +47,41 @@ class Player extends Model implements Models
     /** @var $busca array|string */
     public function find($search, string $columns = "*", bool $msgDb = false)
     {
-        $login = &$search;
-        if(is_array($search)) {
-            foreach($search as $columnName => $value) {
+        $userId = &$search;
+        if (is_array($search)) {
+            foreach ($search as $columnName => $value) {
                 $params[] = "{$columnName}=:{$columnName}";
                 $terms[] = "{$columnName}={$value}";
             }
             $params = implode(" AND ", $params);
             $terms = implode("&", $terms);
             $find = $this->read("SELECT {$columns} FROM " . self::$entity . " WHERE {$params} ", $terms, $msgDb);
-        } elseif(filter_var($search, FILTER_VALIDATE_EMAIL)) {
-            $find = $this->read("SELECT {$columns} FROM " . self::$entity . " WHERE email=:email", "email={$search}", $msgDb);
-        } elseif(filter_var($login, FILTER_SANITIZE_STRIPPED)) {
-            $find = $this->read("SELECT {$columns} FROM " . self::$entity . " WHERE login=:login", "login={$login}", $msgDb);
         } else {
-            $find = $this->read("SELECT {$columns} FROM " . self::$entity . " WHERE name=:name", "name={$login}", $msgDb);
+            $find = $this->read(
+                "SELECT {$columns} FROM "
+                . self::$entity
+                . " WHERE user_id=:user_id", "user_id={$userId}", $msgDb
+            );
         }
 
-        if($this->fail || $find->rowCount() === 0) {
-            $this->message = (empty($this->fail()) ? "<span class='warning'>Unscribed email player informed</span>" : $this->fail()->errorInfo[2]);
+        if ($this->fail || $find->rowCount() === 0) {
+            $this->message = (empty($this->fail())
+                ? "<span class='warning'>Unscribed email player informed</span>"
+                : $this->fail()->errorInfo[2]);
             return null;
         }
 
         return (is_array($search) ? $find->fetchAll(\PDO::FETCH_CLASS, __CLASS__) : $find->fetchObject(__CLASS__));
     }
 
-    public function all(int $limit=30, int $offset=0, string $columns = "*", string $order = "id", bool $msgDb = false): ?array
+    public function all(int $limit=30, int $offset=0, string $columns = "*", string $order = "id", bool $msgDb = false ): ?array
     {
         $all = $this->read("SELECT {$columns} FROM  "
             . self::$entity . " "
             . $this->order($order)
             . $this->limit(), "limit={$limit}&offset={$offset}", $msgDb);
 
-        if($this->fail || !$all->rowCount()) {
+        if ($this->fail || !$all->rowCount()) {
             $this->message = "<span class='warning'>Your query has not returned data</span>";
             return null;
         }
@@ -87,19 +89,19 @@ class Player extends Model implements Models
         return $all->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
     }
 
-    public function save(bool $msgDb = false): ?User
+    public function save(bool $msgDb = false): ?Player
     {
-        if(!$this->required()) {
+        if (!$this->required()) {
             return null;
         }
 
         /** Update */
-        if(!empty($this->id)) {
+        if (!empty($this->id)) {
             $this->update_($msgDb);
         }
 
         /** Create */
-        if(empty($this->id)) {
+        if (empty($this->id)) {
             $this->create_($msgDb);
         }
         $this->data = $this->read("SELECT * FROM " . self::$entity . " WHERE id=:id", "id={$this->id}")->fetch();
@@ -109,16 +111,11 @@ class Player extends Model implements Models
 
     private function update_(bool $msgDb)
     {
-        $email = $this->read("SELECT id FROM " . self::$entity . " WHERE email = :email AND id != :id",
-            "email={$this->Email}&id={$this->id}");
-        if($email->rowCount()) {
-            $this->message = "<span class='warning'>The informed e-mail is already registered</span>";
-            return null;
-        }
-
         $this->update(self::$entity, $this->safe(), "id = :id", "id={$this->id}");
-        if($this->fail()) {
-            $this->message = (!$msgDb ? "<span class='danger'>Error updating, verify the data</span>" : $this->fail()->errorInfo[2]);
+        if ($this->fail()) {
+            $this->message = (!$msgDb
+                ? "<span class='danger'>Error updating, verify the data</span>"
+                : $this->fail()->errorInfo[2]);
             return null;
         }
         $this->message = "<span class='success'>Data updated successfully</span>";
@@ -126,29 +123,23 @@ class Player extends Model implements Models
 
     private function create_(bool $msgDb)
     {
-        if($this->find($this->email, "*", $msgDb)) {
-            $this->message = "<span class='warning'>The informed e-mail is already registered</span>";
-            return null;
-        } elseif($this->find($this->login, "*", $msgDb)) {
-            $this->message = "<span class='warning'>The informed login is already registered</span>";
-            return null;
-        }
-
         $this->id = $this->create(self::$entity, $this->safe());
-        if($this->fail()) {
-            $this->message = (!$msgDb ? "<span class='danger'>Error to Register, Check the data</span>" : $this->fail()->errorInfo[2]);
+        if ($this->fail()) {
+            $this->message = (!$msgDb
+                ? "<span class='danger'>Error to Register, Check the data</span>"
+                : $this->fail()->errorInfo[2]);
             return null;
         }
         $this->message = "<span class='success'>Registration successfully</span>";
     }
 
-    public function destroy(): ?User
+    public function destroy(): ?Player
     {
-        if(!empty($this->id)) {
+        if (!empty($this->id)) {
             $this->delete(self::$entity, "id=:id", "id={$this->id}");
         }
 
-        if($this->fail()) {
+        if ($this->fail()) {
             $this->message = "<span class='danger'>Could not remove the player</span>";
             return null;
         }
@@ -160,16 +151,11 @@ class Player extends Model implements Models
 
     public function required(): bool
     {
-        foreach($this->required as $field) {
-            if(empty(trim($this->$field))) {
+        foreach ($this->required as $field) {
+            if (empty(trim($field))) {
                 $this->message = "<span class='warning'>The field {$field} is required</span>";
                 return false;
             }
-        }
-
-        if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            $this->message = "<span class='warning'>The e-mail format does not appear valid</span>";
-            return false;
         }
 
         return true;
@@ -189,7 +175,7 @@ class Player extends Model implements Models
 
     public function getGroup(): ?Group
     {
-        if(!empty($this->group_id)) {
+        if (!empty($this->group_id)) {
             return $this->group = (new Group())->load($this->group_id);
         }
         return $this->group = null;
@@ -197,21 +183,22 @@ class Player extends Model implements Models
 
     public function token(string $login = null)
     {
-        if(!empty($this->id)) {
+        if (!empty($this->id)) {
             $this->token = crypt("Gera Token", "rl");
             $this->update(self::$entity, $this->safe(), "id = :id", "id={$this->id}");
         }
-        if($this->fail()) {
+        if ($this->fail()) {
             $this->message = "<span class='danger'>Error to Reset Password, try again</span>";
             return null;
         }
-        $this->message = "<span class='warning'>New password <span class='uppercase'>{$login}</span> will be registered in the next login</span>";
+        $this->message = "<span class='warning'>New password <span class='uppercase'>"
+            . "{$login}</span> will be registered in the next login</span>";
     }
 
     protected function safe(): ?array
     {
         $safe_ = (array) $this->data();
-        foreach(static::$safe as $unset) {
+        foreach (static::$safe as $unset) {
             unset($safe_[$unset]);
         }
 

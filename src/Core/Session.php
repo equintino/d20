@@ -4,53 +4,68 @@ namespace Core;
 
 class Session
 {
-    private $SID;
-    private $login;
+    private $user;
+    public readonly string $login;
+    public readonly string $password;
+    public readonly string $db;
 
-    public function __construct()
+    public function __construct(public readonly ?string $ses = "ses", public readonly ?string $sID = null)
     {
-        $connectionDirectory = __DIR__ . "/../ses";
-        if(!file_exists($connectionDirectory)) {
+        $connectionDirectory = __DIR__ . "/../" . $ses;
+        if (!file_exists($connectionDirectory)) {
             mkdir($connectionDirectory);
         }
-        if(!session_id()) {
+        if (!session_id()) {
             session_save_path($connectionDirectory);
             session_name("SVSESSID");
-            // ini_set('session.gc_maxlifetime', 3600);
             session_start();
         }
 
-        if(!empty($_SESSION["id"])) {
-            $this->setSID(session_id());
+        if (!empty($_SESSION["id"])) {
+            $_SESSION["id"] = session_id();
+            $this->sID(session_id());
         }
+        $this->user = ($_SESSION["login"] ?? null);
     }
 
     public function confSID($current, $old)
     {
-        return  crypt($current,$this->SID) == $this->SID;
+        return  crypt($current, $this->SID) == $this->SID;
     }
 
-    public function getSID()
+    public function getUser()
     {
-        return $this->SID;
+        return $this->user;
     }
 
-    private function setSID($SID)
+    public function setLogin(string $login): void
     {
-        $_SESSION["id"] = $SID;
-        $this->SID = $SID;
+        $this->login = $login;
     }
 
-    public function getLogin()
+    public function setPassword(string $password): void
     {
-        return $this->login;
+        $this->password = $password;
     }
 
-    public function setLogin($login): void
+    public function setDb(string $db): void
     {
-        // $_SESSION['login'] = (object)$login;
+        $this->db = $db;
+    }
+
+    public function setUser(\Models\User $user): void
+    {
+        $login = new \stdClass();
+        $login->id = $user->id;
+        $login->name = $user->name;
+        $login->email = $user->email;
+        $login->login = $user->login;
+        $login->group_id = $user->group_id;
+        $login->token = $user->token;
+        $login->db = $this->db;
+
         $_SESSION['login'] = $login;
-        $this->login = (object)$login;
+        $this->user = $login;
     }
 
     public function destroy()

@@ -1,0 +1,58 @@
+#avatar #thumb_image {
+    background: #676767;
+    width: 450px;
+    align-items: center;
+    display: flex;
+    overflow-x: auto;
+    border-radius:  5px;
+}
+
+#avatar #init {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#avatar #init button {
+    width: 180px;
+    font-size: 1.5em;
+}
+
+#avatar #list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#avatar #list .fieldset {
+    margin-top: 0;
+}
+
+#avatar #list .left {
+    width: 40%;
+}
+
+#avatar #list .left button {
+    width: 130px;
+}
+
+#avatar #list .left .fieldset, #avatar #list .right .fieldset {
+    height: 550px;
+}
+
+#avatar #list .left .fieldset {
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+}
+
+#avatar #list .right {
+    width: 60%;
+}
+
+#avatar #list .right > .fieldset {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

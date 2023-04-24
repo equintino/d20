@@ -1,32 +1,22 @@
+<style>
+    #init {
+        height: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #init button {
+        width: 180px;
+        font-size: 1.5em;
+    }
+</style>
 <div id="user">
-    <header class="header row form-inline">
-        <div class="col">
-            <?php if(!empty($companys)): ?>
-            <span class="color-primary">Empresa:</span>
-            <select class="form-input" name="NomeFantasia">
-                <option value=""></option>
-                <?php foreach($companys as $company): ?>
-                <option value="<?= $company->ID ?>" <?= ($company->ID === $companyId ? "selected" : null) ?> ><?= $company->NomeFantasia ?></option>
-                <?php endforeach ?>
-            </select>
-            <?php endif ?>
-        </div>
-        <div class="col-2 buttons mt-4">
-            <button class="button btnAction" style="float: right">Adicionar</button>
-            <button class="button btnAction" style="float: right; margin-right: 5px">Listar</button>
+    <header class="header">
+        <div id="init" class="buttons mt-3" >
+            <button class="btn btn-oval" style="float: right" value="new">Novo</button>
+            <button class="btn btn-oval" style="float: right; margin-right: 5px" value="list">Lista</button>
         </div>
     </header>
-    <main id="exhibition" ></main>
+    <!-- <main id="exhibition" ></main> -->
 </div>
-<script>
-    document.querySelector(".dropdown-toggle").onmouseover = (e) => {
-        let dropdownMenu = document.querySelector(".dropdown-menu")
-        let buttons = document.querySelector(".buttons")
-        if(dropdownMenu.style.display === "block") {
-            buttons.style.zIndex = -1
-        }
-        dropdownMenu.onmouseleave = () => {
-            buttons.style.zIndex = 1
-        }
-    }
-</script>

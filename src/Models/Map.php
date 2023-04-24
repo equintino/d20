@@ -16,7 +16,7 @@ class Map extends Model implements Models
     {
         $load = $this->read("SELECT {$columns} FROM " . self::$entity . " WHERE id=:id", "id={$id}");
 
-        if($this->fail || !$load->rowCount()) {
+        if ($this->fail || !$load->rowCount()) {
             $this->message = "File not found";
             return null;
         }
@@ -26,11 +26,11 @@ class Map extends Model implements Models
     /** @var $name string */
     public function find(string $name, string $columns = "*")
     {
-        if(filter_var($name, FILTER_SANITIZE_STRIPPED)) {
+        if (filter_var($name, FILTER_UNSAFE_RAW)) {
             $find = $this->read("SELECT {$columns} FROM " . self::$entity . " WHERE name=:name ", "name={$name}");
         }
 
-        if($this->fail || empty($find)) {
+        if ($this->fail || empty($find)) {
             $this->message = "File not found";
             return null;
         }
@@ -42,7 +42,7 @@ class Map extends Model implements Models
     {
         $terms = "";
         $params = "";
-        foreach($where as $k => $v) {
+        foreach ($where as $k => $v) {
             $terms .= " {$k}=:{$k} AND";
             $params .= "{$k}={$v}&";
         }
@@ -55,13 +55,13 @@ class Map extends Model implements Models
     public function activeAll(int $limit=30, int $offset=0, string $columns = "*", string $order = "name"): ?array
     {
         $sql = "SELECT {$columns} FROM  " . self::$entity . $this->order($order);
-        if($limit !== 0) {
+        if ($limit !== 0) {
             $all = $this->read($sql . $this->limit(), "limit={$limit}&offset={$offset}");
         } else {
             $all = $this->read($sql);
         }
 
-        if($this->fail || !$all->rowCount()) {
+        if ($this->fail || !$all->rowCount()) {
             $this->message = "Your query has not returned any registrations";
             return null;
         }
@@ -71,29 +71,31 @@ class Map extends Model implements Models
 
     public function readDataTable(string $sql, ?array $where)
     {
-        if(empty($where)) {
+        if (empty($where)) {
             return $this->activeAll();
         }
     }
 
     public function save(): ?Map
     {
-        if(!$this->required()) {
+        if (!$this->required()) {
             return null;
         }
 
         /** Update */
-        if(!empty($this->id)) {
+        if (!empty($this->id)) {
             $id = $this->id;
-            $balance = $this->read("SELECT id FROM " . self::$entity . " WHERE name = :name AND id != :id",
-                "name={$this->name}&id={$id}");
-            if($balance->rowCount()) {
+            $balance = $this->read(
+                "SELECT id FROM " . self::$entity . " WHERE name = :name AND id != :id",
+                "name={$this->name}&id={$id}"
+            );
+            if ($balance->rowCount()) {
                 $this->message = "<span class='warning'>The Informed mission is already registered</span>";
                 return null;
             }
 
             $this->update(self::$entity, $this->safe(), "id = :id", "id={$id}");
-            if($this->fail()) {
+            if ($this->fail()) {
                 $this->message = "<span class='danger'>Error updating, verify the data</span>";
                 return null;
             }
@@ -102,9 +104,9 @@ class Map extends Model implements Models
         }
 
         /** Create */
-        if(empty($this->id)) {
+        if (empty($this->id)) {
             $id = $this->create(self::$entity, $this->safe());
-            if($this->fail()) {
+            if ($this->fail()) {
                 $this->message = "<span class='danger'>Error to Register, Check the data</span>";
                 return null;
             }
@@ -117,11 +119,11 @@ class Map extends Model implements Models
 
     public function destroy()
     {
-        if(!empty($this->id)) {
+        if (!empty($this->id)) {
             $this->delete(self::$entity, "id=:id", "id={$this->id}");
         }
 
-        if($this->fail()) {
+        if ($this->fail()) {
             $this->message = "<div class=danger>Could not remove file</div>";
             return null;
         }
@@ -133,8 +135,8 @@ class Map extends Model implements Models
 
     public function required(): bool
     {
-        foreach($this->required as $field) {
-            if(empty(trim($this->$field))) {
+        foreach ($this->required as $field) {
+            if (empty(trim($this->$field))) {
                 $this->message = "The {$field} field is mandatory";
                 return false;
             }

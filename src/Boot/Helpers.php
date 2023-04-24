@@ -1,30 +1,30 @@
 <?php
 
 /** Core */
-$config = function() {
+$config = function () {
     return new Config\Config();
 };
 
-$user = function() {
+$user = function () {
     return new Models\User();
 };
 
-$group = function() {
+$group = function () {
     return new Models\Group();
 };
 
 /** cookie */
-$cookie = filter_input(INPUT_COOKIE, "svlogin", FILTER_SANITIZE_STRIPPED);
-parse_str($cookie, $cookie);
+$cookie = filter_input(INPUT_COOKIE, "svlogin", FILTER_UNSAFE_RAW);
 
-$login = base64_decode(filter_input(INPUT_COOKIE, "login", FILTER_SANITIZE_STRIPPED));
+$login = filter_input(INPUT_COOKIE, "login", FILTER_UNSAFE_RAW);
+$login = (isset($login) ? base64_decode(filter_input(INPUT_COOKIE, "login", FILTER_UNSAFE_RAW)) : null);
 
 /** set constants */
 $constText = "CONF_CONNECTION=local\r\nCONF_URL_BASE=initial-default-project\r\nCONF_URL_TEST=test/initial-default-project\r\nCONF_BASE_THEME=layout\r\nCONF_VIEW_THEME=template2\r\nCONF_SITE_NAME=Site-Address\r\nCONF_SITE_TITLE=System Name\r\nCONF_SITE_DESC=System Description";
 (new Support\FileTransation(".env", $constText))->getConst();
 
 /** url */
-function url(string $path=null): string
+function url(string $path=""): string
 {
     $path = preg_replace("/^\//", "", $path);
     return "../" . CONF_URL_BASE . "/" . $path;
@@ -39,10 +39,10 @@ function theme(string $path)
 {
     $bar = substr_count($_SERVER["REQUEST_URI"], "/");
     $dots = "";
-    for($x=2; $x < $bar; $x++) {
+    for ($x=2; $x < $bar; $x++) {
         $dots .= "../";
     }
-    if(preg_match("/ops/", $_SERVER["REQUEST_URI"])) {
+    if (preg_match("/ops/", $_SERVER["REQUEST_URI"])) {
         return "../themes/" . CONF_VIEW_THEME . "/{$path}";
     } else {
         return "{$dots}themes/" . CONF_VIEW_THEME . "/{$path}";
@@ -52,18 +52,18 @@ function theme(string $path)
 /** @var string $format(d/m/y) */
 function dateFormat(?string $date)
 {
-    if(empty($date)) {
+    if (empty($date)) {
         return null;
     }
-    if(preg_match('/\//', $date)) {
+    if (preg_match('/\//', $date)) {
         list($d, $m, $y) = explode("/", $date);
         $dateFormated = "{$y}-{$m}-{$d}";
         $datetime = new DateTime($dateFormated);
         return $datetime->format("Y-m-d H:i:s");
     }
-    if(preg_match('/-/', $date)) {
+    if (preg_match('/-/', $date)) {
         list($y, $m, $d) = explode("-", $date);
-        if(preg_match('/ /', $d)) {
+        if (preg_match('/ /', $d)) {
             $d = explode(" ", $d)[0];
         }
         return "{$d}/{$m}/{$y}";
@@ -78,7 +78,7 @@ function removeAccent(string $string)
 
 function removeAccentArray(array $array): array
 {
-    foreach($array as $key => $value) {
+    foreach ($array as $key => $value) {
         $arr[removeAccent($key)] = $value;
     }
     return $arr ?? [];
@@ -92,7 +92,7 @@ function filterNull($var)
 function filterNullException($array, $except)
 {
     return (
-        array_filter($array, function($v, $k) use($except) {
+        array_filter($array, function ($v, $k) use($except) {
             return ($v !== null || in_array($k, $except));
         },ARRAY_FILTER_USE_BOTH)
     );
@@ -110,8 +110,8 @@ function formatCurrency($val): string
 
 function getPost(array $post)
 {
-    foreach($post as $k => $v) {
-        $requestData[$k] = filter_input(INPUT_POST, $k, FILTER_SANITIZE_STRIPPED);
+    foreach ($post as $k => $v) {
+        $requestData[$k] = filter_input(INPUT_POST, $k, FILTER_SANITIZE_SPECIAL_CHARS);
     }
     return $requestData;
 }
@@ -132,22 +132,24 @@ function monthToNumber(string $month, bool $name=false)
         "novembro" => "11",
         "dezembro" => "12"
     ];
-    if($name) {
+    if ($name) {
         return array_search($month, $convertion);
     }
     return $convertion[strToLower($month)];
 }
 
-function alertLatch($msg, $background = "var(--cor-warning)") {
+function alertLatch($msg, $background = "var(--cor-warning)")
+{
     echo "<script>alertLatch('{$msg}','{$background}')</script>";
 }
 
-function abbreviationName($string, $act = null){
+function abbreviationName($string, $act = null)
+{
     $surname = explode(' ', mb_strtolower($string,'utf-8'));
     $fullName = null;
     $x = 1;
     foreach ($surname as $str){
-        if(strlen($string) > 19 && $act === 'wallet'){
+        if (strlen($string) > 19 && $act === 'wallet'){
             if ('maria' === strtolower($str)){
                 $str = 'M.ª';
             } elseif ('filho' === strtolower($str)){
@@ -169,11 +171,13 @@ function abbreviationName($string, $act = null){
     return trim($fullName);
 }
 
-function firstLetter(string $str) {
+function firstLetter(string $str)
+{
     return strtoupper(substr($str, 0, 1));
 }
 
-function abbreviationPlace(string $string) {
+function abbreviationPlace(string $string)
+{
     $key = trim(mb_strtolower($string, "UTF-8"));
     $abbreviation = [
         "rua" => "R.",

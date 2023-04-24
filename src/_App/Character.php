@@ -2,16 +2,15 @@
 
 namespace _App;
 
+use Core\Session;
+use Models\Mission;
+use Models\Breed;
+use Models\Category;
 use Models\Photo;
 
 class Character extends Controller
 {
     protected $page = "character";
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     public function init(?array $data): void
     {
@@ -20,11 +19,11 @@ class Character extends Controller
 
     public function add(): void
     {
-        $act = "add";
-        $login = $_SESSION["login"];
-        $breeds = (new \Models\Breed())->activeAll();
-        $classes = (new \Models\Category())->activeAll();
-        $this->view->render($this->page, compact("act", "login", "breeds", "classes"));
+        $act = ".add";
+        $login = (new Session())->getUser();
+        $breeds = (new Breed())->activeAll();
+        $classes = (new Category())->activeAll();
+        $this->view->render($this->page . $act, [ compact("login", "breeds", "classes") ]);
     }
 
     public function edit(array $data)
@@ -43,24 +42,45 @@ class Character extends Controller
             "chaotic" => "CAÓTICO"
         ];
         $character = (new \Models\Character())->load($id);
-        $breeds = (new \Models\Breed())->activeAll();
-        $categories = (new \Models\Category())->activeAll();
-        $mission = (!empty($character->mission_id) ? (new \Models\Mission())->load($character->mission_id) : null);
-        $this->view->setPath("Modals")->render($this->page, compact("act","login","trends1","trends2","character","breeds","categories","mission"));
+        $breeds = (new Breed())->activeAll();
+        $categories = (new Category())->activeAll();
+        $mission = (!empty($character->mission_id) ? (new Mission())->load($character->mission_id) : null);
+        $this->view->setPath("Modals")->render($this->page, [ compact( "act", "login", "trends1", "trends2",
+        "character", "breeds", "categories", "mission" ) ]);
     }
 
     public function list()
     {
-        $act = "list";
-        // $characters = ((new \Models\Character())->activeAll() ?? []);
-        $characters = ((new \Models\Character())->search(["name" => $_SESSION["login"]->login]) ?? []);
-        $this->view->render($this->page, compact("act","characters"));
+        $act = ".list";
+        $login = $_COOKIE['login'];
+        $userId = (new \Models\User())->find(['login' => $login])[0]->id;
+        $characters = (
+            (new \Models\Character())->join(
+                "characters.id,image_id,breed_id,category_id,story,players.mission_id,personage",
+                [
+                    "characters",
+                    "players"
+                ],
+                [
+                    "LEFT JOIN"
+                ],
+                [
+                    "characters.id=players.character_id"
+                ]
+            )
+            ->where([
+                // "characters.user_id" => $_SESSION["login"]->getUser()->id
+                "characters.user_id" => $userId
+            ])
+            ?? []
+        );
+        $this->view->render($this->page . $act, [ compact("act","characters") ]);
     }
 
     public function save(array $data)
     {
         $characters = new \Models\Character();
-        if(empty($characters->find($data["personage"]))) {
+        if (empty($characters->find($data["personage"]))) {
             $characters->bootstrap($data);
         } else {
             return print(json_encode("This personage already exists"));

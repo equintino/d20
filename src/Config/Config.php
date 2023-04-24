@@ -9,7 +9,6 @@ class Config
 {
     use CryptoTrait;
 
-    private $file;
     private $data;
     private $dsn;
     private $user;
@@ -17,11 +16,12 @@ class Config
     public $local;
     public $message;
     public $types = [ "mysql", "sqlsrv" ];
-    public $text = "[local]\r\ndsn='sqlsrv:Server=127.0.0.1;Database=lojascom_n'\r\nuser='SA'\r\npasswd='TVFudG4zOTIxMg=='\r\n[localMysql]\r\ndsn='mysql:host=localhost;dbname=lojascom_n'\r\nuser='root'\r\npasswd='TVFfbnRuMzkyMTI='";
 
-    public function __construct()
+    public function __construct(public readonly string $file = ".config.ini", public array $dataFile = [])
     {
-        $this->setFile("/.config.ini");
+        if (file_exists(__DIR__ . "/" . $file)) {
+            $this->dataFile = parse_ini_file(__DIR__ . "/" . $file, true);
+        }
         $this->local = $this->getConfConnection();
     }
 
@@ -31,44 +31,32 @@ class Config
         return Connect::getConfConnection();
     }
 
-    public function setConfConnection(string $data, string $connectionName = null)
+    public function setConfConnection(array $data, string $connectionName = null)
     {
-        parse_str($data, $data);
         $this->local = (!empty($connectionName) ? $connectionName : $data["connectionName"]);
         $this->data = $data;
         $this->setType($this->data["type"]);
         $this->setAddress($this->data["address"]);
         $this->setDatabase($this->data["db"]);
         $this->setUser($this->data["user"]);
-        if(!empty($this->data["passwd"])) {
+        if (!empty($this->data["passwd"])) {
             $this->setPasswd($this->data["passwd"]);
         }
     }
 
-    public function getFile(): ?array
-    {
-        return $this->file;
-    }
-
-    public function setFile(string $file)
-    {
-        if(file_exists(__DIR__ . $file)) {
-            $this->file = parse_ini_file(__DIR__ . $file, true);
-        } else {
-            $this->file = [];
-        }
-
-    }
-
     public function type(): ?string
     {
-        return strstr($this->file[$this->local]["dsn"], ":", true);
+        return (
+            !empty($this->dataFile[$this->local]) ?
+                strstr($this->dataFile[$this->local]["dsn"], ":", true)
+                : null
+        );
     }
 
     private function setType(string $type)
     {
         $dsn = "";
-        switch($type) {
+        switch ($type) {
             case "sqlsrv":
                 $dsn .= "sqlsrv:Server=";
                 break;
@@ -95,9 +83,9 @@ class Config
 
     private function setDatabase(string $database)
     {
-        if($this->data["type"] === "sqlsrv") {
+        if ($this->data["type"] === "sqlsrv") {
             $name = "Database";
-        } elseif($this->data["type"] === "mysql") {
+        } elseif ($this->data["type"] === "mysql") {
             $name = "dbname";
         }
         $this->dsn .= "{$name}={$database}";
@@ -145,7 +133,7 @@ class Config
 
     public function confirmSave(): bool
     {
-        if(array_key_exists($this->local, $this->file)) {
+        if (array_key_exists($this->local, $this->file)) {
             $this->message = "<span class=warning >The connection name already exists</span>";
             return false;
         } else {
@@ -153,25 +141,21 @@ class Config
         }
     }
 
-    public function save(string $data): bool
+    public function save(array $data): bool
     {
-        $file = (object) $this->getFile();
+        $file = $this->dataFile;
         $this->setConfConnection($data);
-        parse_str($data, $data);
         $connectionName = $data["connectionName"];
-        if(!empty($file->$connectionName)) {
-            $this->message = "<span class='warning'>Existing connection name</span>";
-            return false;
-        }
 
-        $file->$connectionName = [
+        $file[$connectionName] = [
             "dsn" => $this->getDsn(),
             "user" => $this->getUser(),
             "passwd" => $this->getPasswd()
         ];
 
-        $saved = $this->saveFile((array) $file);
-        $this->message = ($saved ? "<span class='success'>Data saved successfully</span>" : "<span class='danger'>Erro ao salvar</span>");
+        $saved = $this->saveFile($file);
+        $this->message = ($saved ? "<span class='success'>Data saved successfully</span>"
+            : "<span class='danger'>Erro ao salvar</span>");
         return $saved;
     }
 
@@ -189,14 +173,18 @@ class Config
         ];
 
         $saved = $this->saveFile((array) $file);
-        $this->message = ($saved ? "<span class='success'>Data saved successfully</span>" : "<span class='error'>Erro ao salvar</span>");
+
+        $this->message = (
+            $saved ? "<span class='success'>Data saved successfully</span>"
+                : "<span class='error'>Erro ao salvar</span>"
+        );
         return $saved;
     }
 
     public function delete(string $connectionName): ?bool
     {
         unset($this->file[$connectionName]);
-        if($this->saveFile($this->file)) {
+        if ($this->saveFile($this->file)) {
             $this->message = "<span class='success'>Excluded data successfully</span>";
             return true;
         } else {
@@ -209,7 +197,7 @@ class Config
     {
         $file = __DIR__ . "/../Config/.config.ini";
         /** saving file */
-        if(file_exists($file)) {
+        if (file_exists($file)) {
             $handle = fopen($file, "r+");
         } else {
             $handle = fopen($file, "w");
@@ -219,9 +207,9 @@ class Config
 
         /** replace data */
         $string = "";
-        foreach($data as $local => $params) {
+        foreach ($data as $local => $params) {
             $string .= "[{$local}]\r\n";
-            foreach($params as $param => $value) {
+            foreach ($params as $param => $value) {
                 $string .= "{$param}='{$value}'\r\n";
             }
         }

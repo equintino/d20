@@ -1,4 +1,4 @@
-const identif = (page, logged="Nenhum usuário logado") => {
+var identif = (page, logged) => {
     switch(page) {
         case "home":
             return "<i>Usuário:</i> " + logged;
@@ -12,29 +12,44 @@ const identif = (page, logged="Nenhum usuário logado") => {
             return "GERENCIAMENTO DE CLASSES";
         case "avatar":
             return "GERENCIAMENTO DE AVATARES";
-        case "mission":
+        case "mission": case "mission/init":
             return "GERENCIAMENTO DE MISSÕES";
         case "player":
             return "GERENCIAMENTO DE JOGADORES";
+        case "shield":
+            return "GERENCIAMENTO DE ACESSOS";
         default:
             return null;
     }
 }
 
-const callScript = (name) => {
+var callScript = (name) => {
     switch(name) {
         case "user":
-            scriptUser();
-            break;
+            scriptUser()
+            break
         case "character":
-            scriptCharacter();
-            break;
+            scriptCharacter()
+            break
         case "breed/add":
-            scriptBreed();
-            break;
+            scriptBreed()
+            break
         case "category":
-            scriptCategory();
-            break;
+            scriptCategory()
+            break
+        case "mission/init":
+            scriptMission(init)
+            break
+        case "player":
+            scriptPlayer()
+            break
+        case "avatar":
+            scriptAvatar()
+            break
+        case "shield":
+            scriptShield()
+            break
+        default:
     }
 }
 
@@ -50,29 +65,24 @@ $(function() {
         })
     })
     $("#topHeader ul li a").on("click", function(e) {
-        e.preventDefault();
-        let link = $(this).attr("href");
-        var page = ($(this).attr("data-page") ?? '');
-        var li = $(this).closest("li");
+        e.preventDefault()
+        var logged = (logged || null)
+        let link = $(this).attr("href")
+        let page = ($(this).attr("data-page") ?? '')
+        let li = $(this).closest("li")
 
-        $("#topHeader ul li").removeClass("active");
-        li.addClass("active");
+        $("#topHeader ul li").removeClass("active")
+        li.addClass("active")
         if($(this).attr("data-toggle") !== "dropdown") {
-            $("#upArrow").css("display","none");
-            $(".loading, #mask_main").show();
-            $(".identification").html(identif(page, logged));
+            $("#upArrow").css("display","none")
+            $(".loading, #mask_main").show()
+            $(".identification").html(identif(page, logged))
 
             $(".content").load(link, function() {
-                callScript(page);
-                $(".loading, #mask_main").hide();
-            });
-        } else {
-            // $(this).parent().find(".dropdown-menu:hover").css("display","block")
-            // $(this).parent().find(".dropdown-menu").addClass("show").css("display", "block")
-            // $(this).parent().find(".dropdown-menu").css("display", "block")
-            // console.log($(this).parent().find(".dropdown-menu").css("display", "block"))
-
+                callScript(page)
+                $(".loading, #mask_main").hide()
+            })
         }
-    });
-    $("#topHeader ul li [data-page=home]").trigger("click");
-});
+    })
+    // $("#topHeader ul li [data-page=home]").trigger("click")
+})

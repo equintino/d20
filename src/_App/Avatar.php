@@ -6,14 +6,14 @@ class Avatar extends Controller
 {
     protected $page = "avatar";
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function init(?array $data): void
     {
         $this->view->render($this->page);
+    }
+
+    public function carousel(): void
+    {
+        $this->view->render('carousel');
     }
 
     public function add(): void
@@ -21,7 +21,7 @@ class Avatar extends Controller
         $act = "add";
         $breeds = (new \Models\Breed())->activeAll();
         $categories = (new \Models\Category())->activeAll();
-        $this->view->render($this->page, compact("act", "breeds", "categories"));
+        $this->view->render($this->page,  [ compact("act", "breeds", "categories") ]);
     }
 
     public function list(): void
@@ -30,21 +30,21 @@ class Avatar extends Controller
         $avatars = (new \Models\Avatar())->activeAll();
         $breeds = (new \Models\Breed())->activeAll();
         $categories = (new \Models\Category())->activeAll();
-        $this->view->render($this->page, compact("act", "avatars", "breeds", "categories"));
+        $this->view->render($this->page, [ compact("act", "avatars", "breeds", "categories") ]);
     }
 
     public function getAvatars(array $data): string
     {
         $search = [
-            "breed_id" => $data["breed_id"],
-            "category_id" => $data["category_id"]
+            "breed_id" => $data["breedId"],
+            "category_id" => $data["categoryId"]
         ];
         $avatars = (new \Models\Avatar())->search($search);
-        foreach($avatars as $avatar) {
+        foreach ($avatars as $avatar) {
             $response[] = [
                 "id" => $avatar->id,
                 "image_id" => $avatar->image_id,
-                "category_id" => $data["category_id"]
+                "category_id" => $data["categoryId"]
             ];
         }
         return print(json_encode($response ?? "This breed has no definite image"));
@@ -52,43 +52,56 @@ class Avatar extends Controller
 
     public function edit(array $data): void
     {
-        $id = $data["id"];
+        $id = ( $data["id"] ?? null );
         $act = "edit";
         $breeds = (new \Models\Breed())->activeAll();
         $categories = (new \Models\Category())->activeAll();
         $avatar = (new \Models\Avatar())->load($id);
         echo "<script>var act='edit'</script>";
-        $this->view->setPath("Modals")->render($this->page, compact("act", "avatar", "breeds", "categories"));
+        $this->view->setPath("Modals")->render($this->page, [ compact("act", "avatar", "breeds", "categories") ]);
     }
 
     public function show(array $data): void
     {
         $list = $data["response"];
-        $category_id = $list[0]["category_id"];
-        $act = ($data["act"] ?? "list");
+        $categoryId = $data["categoryId"];
+        $breedId = $data["breedId"];
+        $act = (!empty($data["act"]) ? ".{$data['act']}" : null);
+        $source = ($data["source"] ?? null);
+        $currentCat = "";
         $categories = (new \Models\Category())->activeAll();
-        echo "<script>var act='{$act}'</script>";
-        $this->view->setPath("Modals")->render($this->page, compact("list", "act", "categories","category_id"));
+        $breeds = (new \Models\Breed())->activeAll();
+        foreach ($categories as $category) {
+            if ($category->id == $categoryId) {
+                $currentCat = $category;
+                break;
+            }
+        }
+        $this->view->setPath("Modals")->render($this->page . $act,
+            [
+                compact("list", "act", "categories", "categoryId", "breedId", "currentCat", "source", "breeds")
+            ]
+        );
     }
 
     public function save(array $data)
     {
         $avatars = (!empty($data["id"]) ? (new \Models\Avatar())->load($data["id"]) : new \Models\Avatar());
         $files = $_FILES["image"];
-        if(is_array($files["name"])) {
-            for($x = 0; $x < count($files["name"]); $x++) {
+        if (is_array($files["name"])) {
+            for ($x = 0; $x < count($files["name"]); $x++) {
                 $file["name"] = $files["name"][$x];
                 $file["type"] = $files["type"][$x];
                 $file["tmp_name"] = $files["tmp_name"][$x];
                 $file["size"] = $files["size"][$x];
-                if($files["error"][$x] === 0) {
+                if ($files["error"][$x] === 0) {
                     $data["image_id"] = (new \Models\Image())->fileSave($file);
                 }
                 $avatars->bootstrap($data);
                 $avatars->save();
             }
         } else {
-            if($files["error"] === 0) {
+            if ($files["error"] === 0) {
                 $image = (new \Models\Image())->load($avatars->image_id);
                 $data["image_id"] = $image->fileSave($files);
             }

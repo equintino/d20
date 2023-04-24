@@ -8,14 +8,29 @@ class Player extends Controller
 {
     protected $page = "player";
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function init(?array $data): void
     {
-        $this->view->render($this->page);
+        $players = (new \Models\Player())->join(
+            "players.id,players.character_id,users.login,missions.name,characters.active,"
+            . "characters.personage,trend1,trend2",
+            [
+                "users",
+                "characters",
+                "players",
+                "missions"
+            ],
+            [
+                "RIGHT JOIN",
+                "RIGHT JOIN",
+                "LEFT JOIN"
+            ],
+            [
+                "characters.user_id=users.id",
+                "players.character_id=characters.id",
+                "mission_id=missions.id"
+            ]
+        )->where();
+        $this->view->render($this->page, [ compact("players") ]);
     }
 
     public function add(): void
@@ -24,7 +39,7 @@ class Player extends Controller
         $login = $_SESSION["login"];
         $breeds = (new \Models\Breed())->activeAll();
         $classes = (new \Models\Category())->activeAll();
-        $this->view->render($this->page, compact("act", "login", "breeds", "classes"));
+        $this->view->render($this->page, [ compact("act", "login", "breeds", "classes") ]);
     }
 
     public function edit(array $data)
@@ -46,40 +61,41 @@ class Player extends Controller
         $breeds = (new \Models\Breed())->activeAll();
         $categories = (new \Models\Category())->activeAll();
         $mission = (!empty($character->mission_id) ? (new \Models\Mission())->load($character->mission_id) : null);
-        $this->view->setPath("Modals")->render($this->page, compact("act","login","trends1","trends2","character","breeds","categories","mission"));
+        $this->view->setPath("Modals")->render($this->page,
+            [
+                compact("act", "login", "trends1", "trends2",
+                "character", "breeds", "categories", "mission")
+            ]
+        );
     }
 
     public function list()
     {
         $act = "list";
-        $characters = ((new \Models\Character())->search(["name" => $_SESSION["login"]->login]) ?? []);
-        $this->view->render($this->page, compact("act","characters"));
+        $players = ((new \Models\Player())->search(["user_id" => $_SESSION["login"]->id]) ?? []);
+        $this->view->render($this->page, [ compact("act", "players") ]);
     }
 
     public function save(array $data)
     {
-        $characters = new \Models\Character();
-        if(empty($characters->find($data["personage"]))) {
-            $characters->bootstrap($data);
+        $player = new \Models\Player();
+        if (empty($player->find([ "character_id" => $data["character_id"] ]))) {
+            $player->bootstrap($data);
         } else {
-            return print(json_encode("This player already exists"));
+            return print(json_encode("This player has been in a mission"));
         }
-        $characters->save();
-        return print(json_encode($characters->message()));
+        $player->save();
+        return print(json_encode($player->message()));
     }
 
     public function update(array $data): string
     {
-        $character = (new \Models\Character())->load($data["id"]);
-        $character->personage = $data["personage"];
-        $character->breed_id = $data["breed_id"];
-        $character->image_id = $data["image_id"];
-        $character->category_id = $data["category_id"];
-        $character->trend1 = $data["trend1"];
-        $character->trend2 = $data["trend2"];
-        $character->story = $data["story"];
-        $character->save();
-        return print(json_encode($character->message()));
+        $player = (new \Models\Player())->load($data["id"]);
+        $player->user_id = $data["user_id"];
+        $player->character_id = $data["character_id"];
+        $player->mission_id = $data["mission_id"];
+        $player->save();
+        return print(json_encode($player->message()));
     }
 
     public function story(array $data): void
@@ -90,8 +106,8 @@ class Player extends Controller
     public function delete(array $data)
     {
         $id = $data["id"];
-        $character = (new \Models\Character())->load($id);
-        $character->destroy();
-        return print(json_encode($character->message()));
+        $player = (new \Models\Player())->load($id);
+        $player->destroy();
+        return print(json_encode($player->message()));
     }
 }

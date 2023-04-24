@@ -5,14 +5,23 @@ namespace _App;
 use Traits\GroupTrait;
 use Models\User;
 use Core\Safety;
+use Core\Session;
 
 class Group extends Controller
 {
     use GroupTrait;
 
-    public function __construct()
+    public function init()
     {
-        parent::__construct();
+        $groups = (new \Models\Group())->activeAll();
+        foreach ($groups as $group) {
+            $list[$group->name] = [
+                'id' => $group->id,
+                'name' => $group->name,
+                'access' => $group->access
+            ];
+        }
+        return print(json_encode($list));
     }
 
     public function list(): void
@@ -21,15 +30,21 @@ class Group extends Controller
         $screens = Safety::screens("/pages");
         $group_id = ((new User())->find($_SESSION["login"]->login)->group_id ?? null);
 
-        $this->view->render("shield", [ compact("groups","screens","group_id") ]);
+        $this->view->render("shield", [ compact("groups", "screens", "group_id") ]);
+    }
+
+    public function access(array $data): string
+    {
+        $groupId = $data["groupId"];
+        return print(json_encode(explode(",", (new \Models\Group())->load($groupId)->access)));
     }
 
     public function load(array $data): void
     {
         $group = $this->group()->find($data["groupName"]);
-        if($group) {
+        if ($group) {
             $security["access"] = [];
-            foreach(explode(",", $group->access) as $screen) {
+            foreach (explode(",", $group->access) as $screen) {
                 array_push($security["access"], Safety::renameScreen($screen));
             }
             echo json_encode($security);
@@ -53,21 +68,19 @@ class Group extends Controller
 
     public function update(): void
     {
-        $params = $this->getPost($_POST);
-        $group = $this->group()->find($params["name"]);
-
-        foreach($params as $key => $value) {
-            $value = ($key === "access" ? " home, error," . $value : $value);
-            $group->$key = $value;
-        }
-
+        $pages = $_POST["pages"];
+        $groupId = $_POST["groupId"];
+        $group = (new \Models\Group())->load($groupId);
+        $access = implode(",", $pages);
+        $group->access = "home,error,{$access}";
         $group->save(true);
         echo json_encode($group->message());
     }
 
     public function delete(array $data): void
     {
-        $group = $this->group()->find($data["name"]);
+        $id = $data["groupId"];
+        $group = $this->group()->load($id);
         $group->destroy();
         echo json_encode($group->message());
     }

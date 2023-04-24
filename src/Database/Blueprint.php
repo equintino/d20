@@ -4,14 +4,13 @@ namespace Database;
 
 class Blueprint
 {
-    private $entity;
     private $type;
     private $sql;
     private $array;
+    private array $timestamps;
 
-    public function __construct(string $entity, string $type)
+    public function __construct(public readonly string $entity, string $type)
     {
-        $this->entity = $entity;
         $this->type = $type;
         $this->sql = "";
     }
@@ -21,48 +20,53 @@ class Blueprint
         return $this->createIfExists() . "(" . $this->sql . ", " . implode(", ", $this->timestamps) . ")";
     }
 
-    public function createIfExists(): string
+    public function createIfExists(): ?string
     {
-        switch($this->type) {
+        switch ($this->type) {
             case "mysql":
                 return "CREATE TABLE IF NOT EXISTS " . $this->entity;
                 break;
             case "sqlsrv":
-                return "if not exists (select * from sysobjects where name='" . $this->entity . "' and xtype='U') CREATE TABLE " . $this->entity;
+                return "if not exists (select * from sysobjects where name='" . $this->entity
+                . "' and xtype='U') CREATE TABLE " . $this->entity;
+            default:
+                return null;
         }
     }
 
-    public function dropIfExists(): string
+    public function dropIfExists(): ?string
     {
-        switch($this->type) {
+        switch ($this->type) {
             case "mysql":
                 return $this->sql .= "DROP TABLE IF EXISTS " . $this->entity;
             case "sqlsrv":
                 return $this->sql .= "if exists (select * from sysobjects where name='"
                             . $this->entity . "' and xtype='U') DROP TABLE " . $this->entity;
+            default:
+                return null;
         }
     }
 
     /** @var string $name */
-    public function increment(string $name): string
+    public function increment(string $name): ?string
     {
-        switch($this->type) {
+        switch ($this->type) {
             case "mysql":
-                $this->sql .= "{$name} INT NOT NULL AUTO_INCREMENT PRIMARY KEY";
-                break;
+                return $this->sql .= "{$name} INT NOT NULL AUTO_INCREMENT PRIMARY KEY";
             case "sqlsrv":
-                $this->sql .= "{$name} INT NOT NULL IDENTITY(1,1) PRIMARY KEY";
+                return $this->sql .= "{$name} INT NOT NULL IDENTITY(1,1) PRIMARY KEY";
+            default:
+                return null;
         }
-        return $this->sql;
     }
 
     /** @var string name, @var string $null, @var string $default, */
     public function int(string $name): object
     {
-        if(strpos($name, ",")) {
+        if (strpos($name, ",")) {
             $this->array = $name;
             $names = explode(",", $name);
-            foreach($names as $value) {
+            foreach ($names as $value) {
                 $this->sql .= ", {$value} INT NOT NULL";
             }
         } else {
@@ -75,10 +79,10 @@ class Blueprint
     /** @var string $name, @var int $length, @var string $null, @var string $default */
     public function string(string $name, int $length = 255): object
     {
-        if(strpos($name, ",")) {
+        if (strpos($name, ",")) {
             $this->array = $name;
             $names = explode(",", $name);
-            foreach($names as $value) {
+            foreach ($names as $value) {
                 $this->sql .= ", {$value} VARCHAR({$length}) NOT NULL";
             }
         } else {
@@ -91,10 +95,10 @@ class Blueprint
     /** @var string $name, @var string $null, @var string $default */
     public function text(string $name): object
     {
-        if(strpos($name, ",")) {
+        if (strpos($name, ",")) {
             $this->array = $name;
             $names = explode(",", $name);
-            foreach($names as $value) {
+            foreach ($names as $value) {
                 $this->sql .= ", {$value} TEXT NOT NULL";
             }
         } else {
@@ -107,17 +111,19 @@ class Blueprint
     /** @var string $name, @var bool $default */
     public function bool(string $name): object
     {
-        switch($this->type) {
+        switch ($this->type) {
             case "mysql":
                 $boolean = "BOOLEAN";
                 break;
             case "sqlsrv":
                 $boolean = "BIT";
+                break;
+            default:
         }
-        if(strpos($name, ",")) {
+        if (strpos($name, ",")) {
             $this->array = $name;
             $names = explode(",", $name);
-            foreach($names as $value) {
+            foreach ($names as $value) {
                 $this->sql .= ", {$value} {$boolean} NOT NULL";
             }
         } else {
@@ -129,10 +135,10 @@ class Blueprint
 
     public function decimal(string $name, int $n, int $d): object
     {
-        if(strpos($name, ",")) {
+        if (strpos($name, ",")) {
             $this->array = $name;
             $names = explode(",", $name);
-            foreach($names as $value) {
+            foreach ($names as $value) {
                 $this->sql .= ", {$value} DECIMAL({$n},{$d}) NOT NULL";
             }
         } else {
@@ -144,16 +150,16 @@ class Blueprint
 
     public function enum(string $name, array $columns): object
     {
-        if(strpos($name, ",")) {
+        if (strpos($name, ",")) {
             $this->array = $name;
             $names = explode(",", $name);
             $col = implode(",", $columns);
-            foreach($names as $value) {
+            foreach ($names as $value) {
                 $this->sql .= ", {$value} ENUM({$col}) NOT NULL";
             }
         } else {
             $col = "";
-            foreach($columns as $column) {
+            foreach ($columns as $column) {
                 $col .= "'{$column}',";
             }
             $col = substr($col, 0, -1);
@@ -165,10 +171,10 @@ class Blueprint
 
     public function date(string $name): object
     {
-        if(strpos($name, ",")) {
+        if (strpos($name, ",")) {
             $this->array = $name;
             $names = explode(",", $name);
-            foreach($names as $value) {
+            foreach ($names as $value) {
                 $this->sql .= ", {$value} DATE NOT NULL";
             }
         } else {
@@ -180,10 +186,10 @@ class Blueprint
 
     public function datetime(string $name): object
     {
-        if(strpos($name, ",")) {
+        if (strpos($name, ",")) {
             $this->array = $name;
             $names = explode(",", $name);
-            foreach($names as $value) {
+            foreach ($names as $value) {
                 $this->sql .= ", {$value} DATETIME NOT NULL";
             }
         } else {
@@ -195,10 +201,10 @@ class Blueprint
 
     public function smalldatetime(string $name): object
     {
-        if(strpos($name, ",")) {
+        if (strpos($name, ",")) {
             $this->array = $name;
             $names = explode(",", $name);
-            foreach($names as $value) {
+            foreach ($names as $value) {
                 $this->sql .= ", {$value} SMALLDATETIME NOT NULL";
             }
         } else {
@@ -210,7 +216,7 @@ class Blueprint
 
     public function varbinary(string $name): object
     {
-        switch($this->type) {
+        switch ($this->type) {
             case "mysql":
                 $maximumSize = "LONGBLOB";
                 break;
@@ -220,10 +226,10 @@ class Blueprint
             default:
                 $maximumSize = null;
         }
-        if(strpos($name, ",")) {
+        if (strpos($name, ",")) {
             $this->array = $name;
             $names = explode(",", $name);
-            foreach($names as $value) {
+            foreach ($names as $value) {
                 $this->sql .= ", {$value} {$maximumSize} NOT NULL";
             }
         } else {
@@ -235,20 +241,24 @@ class Blueprint
 
     public function nullable(): object
     {
-        if($this->array !== null) {
+        if ($this->array !== null) {
             $names = explode(",", $this->array);
-            foreach($names as $name) {
-                $start = mb_strpos($this->sql, $name);
-                $end = mb_strpos(substr($this->sql, $start), "NULL,");
-                if($end) {
-                    $param = substr($this->sql, $start, $end + mb_strlen("NULL,"));
+            foreach ($names as $name) {
+                // $start = mb_strpos($this->sql, $name);
+                $start = strpos($this->sql, $name);
+                // $end = mb_strpos(substr($this->sql, $start), "NULL,");
+                $end = strpos(substr($this->sql, $start), "NULL,");
+                if ($end) {
+                    // $param = substr($this->sql, $start, $end + mb_strlen("NULL,"));
+                    $param = substr($this->sql, $start, $end + strlen("NULL,"));
                 } else {
                     $param = substr($this->sql, $start);
                 }
                 $newParam = str_replace("NOT ", "", $param);
 
                 $partOne = substr($this->sql, 0, $start);
-                $partTwo = substr($this->sql, $start + mb_strlen($param));
+                // $partTwo = substr($this->sql, $start + mb_strlen($param));
+                $partTwo = substr($this->sql, $start + strlen($param));
                 $this->sql = $partOne . $newParam . $partTwo;
             }
         } else {
@@ -275,7 +285,7 @@ class Blueprint
 
     public function timestamps(): object
     {
-        switch($this->type) {
+        switch ($this->type) {
             case "mysql":
                 $default = "CURRENT_TIMESTAMP";
                 $type = " DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP";
@@ -283,6 +293,7 @@ class Blueprint
             case "sqlsrv":
                 $default = "GETDATE()";
                 $type = null;
+                break;
             default:
                 $type = null;
 
@@ -296,10 +307,13 @@ class Blueprint
 
     public function foreign(string $column, string $table)
     {
-        switch($this->type) {
+        switch ($this->type) {
             case "mysql": case "sqlsrv":
-                $foreign = ", CONSTRAINT fk_{$this->entity}_{$table} FOREIGN KEY ({$column}) REFERENCES {$table} (id) ON DELETE CASCADE";
+                $foreign = ", CONSTRAINT fk_{$this->entity}_{$table} FOREIGN KEY ({$column}) REFERENCES
+                {$table} (id) ON DELETE CASCADE";
                 break;
+            default:
+                $foreign = null;
         }
         $this->sql .= $foreign;
         return $this;

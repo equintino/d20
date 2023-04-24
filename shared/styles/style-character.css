@@ -1,0 +1,86 @@
+#character {
+    height: 400px;
+    margin-top: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#character #init button {
+    width: 180px;
+    font-size: 1.5em;
+}
+
+/* #character .galery {
+    width: 350px;
+    float: right;
+    text-align: center;
+    //margin-right: 15%;
+} */
+
+/* #character .galery > div {
+    display: none;
+} */
+
+#character .galery img {
+    height: 350px;
+}
+
+#character #description {
+    height: 350px;
+    width: 100%;
+    /* margin-top: 40px; */
+    font-family: 'Libre Franklin', sans-serif;
+    font-weight: bolder;
+    letter-spacing: .1em;
+    text-align: justify;
+    padding: 80px 60px 0px 100px;
+}
+
+#character #description > p {
+    overflow: auto;
+    height: 160px;
+    color: black;
+    text-shadow: 1px 1px 1px black;
+}
+
+#character #list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+#character #list .left {
+    width: 350px;
+    text-align: center;
+}
+
+#character #list .left button {
+    width: 130px;
+}
+
+#character #list .left .fieldset, #list .right .fieldset {
+    height: 550px;
+}
+
+#character #list .left .fieldset {
+    overflow: auto;
+}
+
+#character #list .right {
+    /* width: 70%; */
+}
+
+#character #list .right > .fieldset {
+    display: flex;
+    justify-content: space-between;
+}
+
+#character #list .breed_class {
+    cursor: pointer;
+}
+
+#character #list #story {
+    width: 280px;
+}

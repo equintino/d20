@@ -18,7 +18,7 @@ class CreateImagesTable implements CreateTable
 
     public function up(string $entity): string
     {
-        $schema = Schema::create($entity, $this->type, function(Blueprint $table) {
+        return Schema::create($entity, $this->type, function(Blueprint $table) {
             $table->increment("id");
             $table->string("name");
             $table->int("type,size");
@@ -26,7 +26,6 @@ class CreateImagesTable implements CreateTable
             $table->timestamps();
             return $table->run();
         });
-        return $schema;
     }
 
     public function down(string $entity)

@@ -6,11 +6,6 @@ class Documentation extends Controller
 {
     protected $page = "documentation";
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function init(?array $data): void
     {
         $act = "show";
@@ -47,7 +42,7 @@ class Documentation extends Controller
         $descriptions = $data["descriptions"];
         $keys = array_keys(array_filter($files["name"]));
         $documentation = new \Models\Documentation();
-        foreach($keys as $key) {
+        foreach ($keys as $key) {
             $file["name"] = $names[$key];
             $file["description"] = $descriptions[$key];
             $file["type"] = $files["type"][$key];

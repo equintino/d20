@@ -18,7 +18,7 @@ class CreateDocumentationsTable implements CreateTable
 
     public function up(string $entity): string
     {
-        $schema = Schema::create($entity, $this->type, function(Blueprint $table) {
+        return Schema::create($entity, $this->type, function(Blueprint $table) {
             $table->increment("id");
             $table->string("name");
             $table->string("description");
@@ -27,7 +27,6 @@ class CreateDocumentationsTable implements CreateTable
             $table->timestamps();
             return $table->run();
         });
-        return $schema;
     }
 
     public function down(string $entity)

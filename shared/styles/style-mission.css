@@ -1,0 +1,70 @@
+#mission, #mission #list {
+    display: flex;
+    justify-content: center;
+    height: 400px;
+    align-items: center;
+}
+
+#mission #init button {
+    width: 180px;
+    font-size: 1.5em;
+}
+
+#mission .fieldset {
+    margin-top: 120px;
+}
+
+#mission #thumb_image {
+    background: #676767;
+    width: 450px;
+    align-items: center;
+    display: flex;
+    overflow-x: auto;
+    border-radius:  5px;
+}
+
+#mission #list .left {
+    text-align: center;
+}
+
+#mission .left fieldset {
+    overflow-x: auto;
+}
+
+#mission #list .right {
+    cursor: pointer;
+}
+
+#mission #images {
+    width: 350px;
+    height: 400px;
+}
+#editMission {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+#editMission section {
+   flex-direction: column;
+}
+
+#editMission #galery {
+    width: 280px;
+}
+
+#editMission table th {
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+#editMission table td {
+    color: white;
+    text-align: center;
+}
+
+#editMission section {
+    display: flex;
+    justify-items: center;
+}

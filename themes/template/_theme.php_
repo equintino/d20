@@ -3,11 +3,11 @@
     <head>
         <title><?= ( $head["title"] ?? "System Name" ) ?></title>
         <meta charset="UTF-8">
-        <link rel="shortcut icon" href="<?= theme("assets/img/logo.png") ?>">
+        <link rel="shortcut icon" href="<?= url() . "/" . theme("assets/img/logo.png") ?>">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="d20, rpg, game, jogo, play" />
         <meta name="author" content="Edmilson" />
-        <link href="<?= theme("assets/style.css") ?>" rel="stylesheet"/>
+        <link href="<?= url() . "/" . theme("assets/style.css") ?>" rel="stylesheet"/>
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     </head>
     <body class="body">
@@ -61,9 +61,9 @@
             <table id='tabAjax' class='display'></table>
         </section>
 
-        <section id="upArrow"><div style="text-align: center"><img src="<?= theme('assets/img/logo.png') ?>" alt="logo" height="40px"><br>Topo</div></section>
+        <section id="upArrow"><div style="text-align: center"><img src="<?= url() . "/" . theme('assets/img/logo.png') ?>" alt="logo" height="40px"><br>Topo</div></section>
 
         <script>var page = "<?= ($page ?? null) ?>";</script>
-        <script type="text/javascript" src="<?= theme("assets/scripts.js") ?>" ></script>
+        <script type="text/javascript" src="<?= url() . "/" . theme("assets/scripts.js") ?>" ></script>
     </body>
 </html>

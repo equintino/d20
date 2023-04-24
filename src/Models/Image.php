@@ -16,7 +16,7 @@ class Image extends Model implements Models
     {
         $load = $this->read("SELECT {$columns} FROM " . self::$entity . " WHERE id=:id", "id={$id}");
 
-        if($this->fail || !$load->rowCount()) {
+        if ($this->fail || !$load->rowCount()) {
             $this->message = "File not found";
             return null;
         }
@@ -25,11 +25,11 @@ class Image extends Model implements Models
 
     public function find(string $name, string $columns = "*")
     {
-        if(filter_var($name, FILTER_SANITIZE_STRIPPED)) {
+        if (filter_var($name, FILTER_UNSAFE_RAW)) {
             $find = $this->read("SELECT {$columns} FROM " . self::$entity . " WHERE name=:name ", "name={$name}");
         }
 
-        if($this->fail || empty($find)) {
+        if ($this->fail || empty($find)) {
             $this->message = "File not found";
             return null;
         }
@@ -41,7 +41,7 @@ class Image extends Model implements Models
     {
         $terms = "";
         $params = "";
-        foreach($where as $k => $v) {
+        foreach ($where as $k => $v) {
             $terms .= " {$k}=:{$k} AND";
             $params .= "{$k}={$v}&";
         }
@@ -54,13 +54,13 @@ class Image extends Model implements Models
     public function activeAll(int $limit=30, int $offset=0, string $columns = "*", string $order = "id"): ?array
     {
         $sql = "SELECT {$columns} FROM  " . self::$entity . " WHERE " . $this->order($order);
-        if($limit !== 0) {
+        if ($limit !== 0) {
             $all = $this->read($sql . $this->limit(), "limit={$limit}&offset={$offset}");
         } else {
             $all = $this->read($sql);
         }
 
-        if($this->fail || !$all->rowCount()) {
+        if ($this->fail || !$all->rowCount()) {
             $this->message = "Your query has not returned any registrations";
             return null;
         }
@@ -70,14 +70,14 @@ class Image extends Model implements Models
 
     public function readDataTable(string $sql, ?array $where)
     {
-        if(empty($where)) {
+        if (empty($where)) {
             return $this->activeAll();
         }
     }
 
     public function fileSave(array $file, int $id = null)
     {
-        if(!empty($id)) {
+        if (!empty($id)) {
             $data["id"] = $id;
         }
         $data["name"] = $file["name"];
@@ -92,19 +92,19 @@ class Image extends Model implements Models
     public function save()
     {
         static::$safe = ["id","created_at","updated_at"];
-        if(!$this->required()) {
+        if (!$this->required()) {
             return null;
         }
 
         $this->validateFields();
 
         /** Update */
-        if($this->id) {
+        if ($this->id) {
             return $this->update_();
         }
 
         /** Create */
-        if(empty($this->id)) {
+        if (empty($this->id)) {
             return $this->create_();
         }
     }
@@ -113,7 +113,7 @@ class Image extends Model implements Models
     {
         $this->update(self::$entity, $this->safe(), "id=:id", "id={$this->id}");
 
-        if($this->fail()) {
+        if ($this->fail()) {
             $this->message = "<span class='danger'>Error updating, check the data</span>";
             return null;
         }
@@ -123,11 +123,11 @@ class Image extends Model implements Models
 
     private function create_()
     {
-        if(!empty($this->id) && $this->find($this->id)) {
+        if (!empty($this->id) && $this->find($this->id)) {
             $this->message = "<span class='warning'>Informed file is already registered</span>";
         } else {
             $id = $this->create(self::$entity, $this->safe());
-            if($this->fail()) {
+            if ($this->fail()) {
                 $this->message = "<span class='danger'>Error to Register, Check the data</span>";
                 return null;
             }
@@ -141,22 +141,24 @@ class Image extends Model implements Models
         try {
             $columns = implode(", ", array_keys($data));
             $values = ":" . implode(", :", array_keys(removeAccentArray($data)));
-            $stmt = \Core\Connect::getInstance($msgDb)->prepare("INSERT INTO {$entity} ({$columns}) VALUES ({$values})");
+            $stmt = \Core\Connect::getInstance($msgDb)
+                ->prepare("INSERT INTO {$entity} ({$columns}) VALUES ({$values})");
 
-            foreach($data as $key => $value) {
+            foreach ($data as $key => $value) {
                 $$key = $value;
                 $params[":{$key}"] = $value;
             }
 
-            $stmt->bindParam(":image", $image, \PDO::PARAM_LOB, 0, \PDO::SQLSRV_ENCODING_BINARY);
+            // $stmt->bindParam(":image", $image, \PDO::PARAM_LOB, 0, \PDO::SQLSRV_ENCODING_BINARY);
+            $stmt->bindParam(":image", $image, \PDO::PARAM_LOB);
             $stmt->bindParam(':size', $size, \PDO::PARAM_INT);
             $stmt->bindParam(':name', $name, \PDO::PARAM_STR);
             $stmt->bindParam(':type', $type, \PDO::PARAM_STR);
 
-            if($stmt->execute()) {
+            if ($stmt->execute()) {
                 return \Core\Connect::getInstance($msgDb)->lastInsertId();
             }
-        } catch(\PDOException $exception) {
+        } catch (\PDOException $exception) {
             $this->fail = $exception;
             return null;
         }
@@ -164,10 +166,11 @@ class Image extends Model implements Models
 
     protected function update(string $entity, array $data, string $terms, string $params, bool $msgDb = false): ?int
     {
-        $data["updated_at"] = ($this->connectionDetails->type() === "sqlsrv" ? (new \DateTime())->format("d/m/Y H:i:s") : (new \DateTime())->format("Y-m-d H:i:s"));
+        $data["updated_at"] = ($this->connectionDetails->type() === "sqlsrv"
+            ? (new \DateTime())->format("d/m/Y H:i:s") : (new \DateTime())->format("Y-m-d H:i:s"));
 
         parse_str($params, $params);
-        foreach($data as $bind => $value) {
+        foreach ($data as $bind => $value) {
             $dataSet[] = $bind . "= :" . $bind;
             $params[$bind] = $value;
         }
@@ -182,16 +185,16 @@ class Image extends Model implements Models
     {
         $stmt = \Core\Connect::getInstance()->prepare($sql);
         try {
-            if($params) {
-                foreach($params as $key => $value) {
+            if ($params) {
+                foreach ($params as $key => $value) {
                     $type = \PDO::PARAM_STR;
-                    if(is_numeric($value)) {
+                    if (is_numeric($value)) {
                         $value = (float) $value;
-                    } elseif($value == null) {
+                    } elseif ($value == null) {
                         $type = \PDO::PARAM_NULL;
                     }
 
-                    if($key === "image") {
+                    if ($key === "image") {
                         $stmt->bindValue(":image", $value, \PDO::PARAM_LOB);
                     } else {
                         $stmt->bindValue(":{$key}", $value, $type);
@@ -199,7 +202,7 @@ class Image extends Model implements Models
                 }
             }
             $stmt->execute();
-        } catch(PDOException $exception) {
+        } catch (PDOException $exception) {
             $this->fail = $exception;
             return null;
         }
@@ -208,11 +211,11 @@ class Image extends Model implements Models
 
     public function destroy()
     {
-        if(!empty($this->id)) {
+        if (!empty($this->id)) {
             $this->delete(self::$entity, "id=:id", "id={$this->id}");
         }
 
-        if($this->fail()) {
+        if ($this->fail()) {
             $this->message = "<div class=danger>Could not remove file</div>";
             return null;
         }
@@ -224,9 +227,9 @@ class Image extends Model implements Models
 
     private function indType($type): int
     {
-        if(strpos($type, "/")) {
+        if (strpos($type, "/")) {
             $t = explode("/", $type)[1];
-            switch($t) {
+            switch ($t) {
                 case "png":
                     return 1;
                 case "jpg": case "jpeg":
@@ -253,8 +256,8 @@ class Image extends Model implements Models
 
     public function required(): bool
     {
-        foreach($this->required as $field) {
-            if(empty(trim($this->$field))) {
+        foreach ($this->required as $field) {
+            if (empty(trim($this->$field))) {
                 $this->message = "The {$field} field is mandatory";
                 return false;
             }

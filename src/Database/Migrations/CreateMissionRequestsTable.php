@@ -18,11 +18,11 @@ class CreateMissionRequestsTable implements CreateTable
 
     public function up(string $entity): string
     {
-        return Schema::create($entity, $this->type, function(Blueprint $table) {
+        return Schema::create($entity, $this->type, function (Blueprint $table) {
             $table->increment("id");
             $table->string("player");
-            $table->int("character_id")->foreign("character_id","characters");
-            $table->int("mission_id")->foreign("mission_id","missions");
+            $table->int("character_id")->foreign("character_id", "characters");
+            $table->int("mission_id")->foreign("mission_id", "missions");
             $table->timestamps();
             return $table->run();
         });

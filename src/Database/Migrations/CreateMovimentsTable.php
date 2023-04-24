@@ -18,7 +18,7 @@ class CreateMovimentsTable implements CreateTable
 
     public function up(string $entity)
     {
-        $schema = Schema::create($entity, $this->type, function(Blueprint $table) {
+        return Schema::create($entity, $this->type, function(Blueprint $table) {
             $table->increment("id");
             $table->int("year")->nullable();
             $table->int("month")->nullable();
@@ -32,7 +32,6 @@ class CreateMovimentsTable implements CreateTable
             $table->timestamps();
             return $table->run();
         });
-        return $schema;
     }
 
     public function down(string $entity)

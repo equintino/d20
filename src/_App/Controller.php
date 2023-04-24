@@ -18,22 +18,22 @@ abstract class Controller
 
     protected function getPost($data)
     {
-        foreach($data as $key => $value) {
-            $params[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_STRIPPED);
+        foreach ($data as $key => $value) {
+            $params[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         }
         return $params;
     }
 
     protected function getGet($data)
     {
-        foreach($data as $key => $value) {
-            $params[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_STRIPPED);
+        foreach ($data as $key => $value) {
+            $params[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         }
         return $params;
     }
 
     protected function seo(string $title, string $desc, string $url, string $img, bool $follow = false)
     {
-        return compact("title","desc","url","img","follow");
+        return compact("title", "desc", "url", "img", "follow");
     }
 }

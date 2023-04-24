@@ -16,7 +16,7 @@ class Character extends Model implements Models
     {
         $load = $this->read("SELECT {$columns} FROM " . self::$entity . " WHERE id=:id", "id={$id}");
 
-        if($this->fail || !$load->rowCount()) {
+        if ($this->fail || !$load->rowCount()) {
             $this->message = "File not found";
             return null;
         }
@@ -25,11 +25,14 @@ class Character extends Model implements Models
 
     public function find(string $personage, string $columns = "*")
     {
-        if(filter_var($personage, FILTER_SANITIZE_STRIPPED)) {
-            $find = $this->read("SELECT {$columns} FROM " . self::$entity . " WHERE personage=:personage ", "personage={$personage}");
+        if (filter_var($personage, FILTER_UNSAFE_RAW)) {
+            $find = $this->read(
+                "SELECT {$columns} FROM "
+                . self::$entity
+                . " WHERE personage=:personage ", "personage={$personage}");
         }
 
-        if($this->fail || empty($find)) {
+        if ($this->fail || empty($find)) {
             $this->message = "File not found";
             return null;
         }
@@ -41,26 +44,34 @@ class Character extends Model implements Models
     {
         $terms = "";
         $params = "";
-        foreach($where as $k => $v) {
-            $terms .= " {$k}=:{$k} AND";
-            $params .= "{$k}={$v}&";
+        $diff = "";
+        foreach ($where as $k => $v) {
+            if (!empty($v) && preg_match("/^!/", $v)) {
+                $diff = "{$k} != " . substr($v, strlen($v) -1) . " AND";
+            } elseif ($v === null) {
+                $diff = "{$k} is null AND";
+            } else {
+                $terms .= " {$k}=:{$k} AND";
+                $params .= "{$k}={$v}&";
+            }
         }
         $terms = substr($terms, 0, -3);
         $params = substr($params, 0, -1);
-        $data = $this->read("SELECT * FROM " . self::$entity . " WHERE {$terms} ", $params);
+        $data = $this->read("SELECT * FROM " . self::$entity . " WHERE {$diff} {$terms} ", $params);
+
         return $data->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
     }
 
-    public function activeAll(int $limit=30, int $offset=0, string $columns = "*", string $order = "name"): ?array
+    public function activeAll(int $limit=0, int $offset=0, string $columns = "*", string $order = "personage"): ?array
     {
         $sql = "SELECT {$columns} FROM  " . self::$entity . $this->order($order);
-        if($limit !== 0) {
+        if ($limit !== 0) {
             $all = $this->read($sql . $this->limit(), "limit={$limit}&offset={$offset}");
         } else {
             $all = $this->read($sql);
         }
 
-        if($this->fail || !$all->rowCount()) {
+        if ($this->fail || !$all->rowCount()) {
             $this->message = "Your query has not returned any registrations";
             return null;
         }
@@ -70,7 +81,7 @@ class Character extends Model implements Models
 
     public function readDataTable(string $sql, ?array $where)
     {
-        if(empty($where)) {
+        if (empty($where)) {
             return $this->activeAll();
         }
     }
@@ -78,19 +89,19 @@ class Character extends Model implements Models
     public function save()
     {
         static::$safe = ["id","created_at","updated_at"];
-        if(!$this->required()) {
+        if (!$this->required()) {
             return null;
         }
 
         $this->validateFields();
 
         /** Update */
-        if($this->id) {
+        if ($this->id) {
             return $this->update_();
         }
 
         /** Create */
-        if(empty($this->id)) {
+        if (empty($this->id)) {
             return $this->create_();
         }
     }
@@ -99,7 +110,7 @@ class Character extends Model implements Models
     {
         $this->update(self::$entity, $this->safe(), "id=:id", "id={$this->id}");
 
-        if($this->fail()) {
+        if ($this->fail()) {
             $this->message = "<span class='danger'>Error updating, check the data</span>";
             return null;
         }
@@ -109,11 +120,11 @@ class Character extends Model implements Models
 
     private function create_()
     {
-        if(!empty($this->id) && $this->find($this->id)) {
+        if (!empty($this->id) && $this->find($this->id)) {
             $this->message = "<span class='warning'>Informed file is already registered</span>";
         } else {
             $id = $this->create(self::$entity, $this->safe());
-            if($this->fail()) {
+            if ($this->fail()) {
                 $this->message = "<span class='danger'>Error to Register, Check the data</span>";
                 return null;
             }
@@ -127,27 +138,27 @@ class Character extends Model implements Models
         try {
             $columns = implode(", ", array_keys($data));
             $values = ":" . implode(", :", array_keys(removeAccentArray($data)));
-            $stmt = \Core\Connect::getInstance($msgDb)->prepare("INSERT INTO {$entity} ({$columns}) VALUES ({$values})");
+            $stmt = \Core\Connect::getInstance($msgDb)
+                ->prepare("INSERT INTO {$entity} ({$columns}) VALUES ({$values})");
 
-            foreach($data as $key => $value) {
+            foreach ($data as $key => $value) {
                 $$key = $value;
-                // $params[":{$key}"] = $value;
             }
 
-            $stmt->bindParam(':name', $name, \PDO::PARAM_STR);
+            // $stmt->bindParam(':name', $name, \PDO::PARAM_STR);
             $stmt->bindParam(':personage', $personage, \PDO::PARAM_STR);
             $stmt->bindParam(':story', $story, \PDO::PARAM_STR);
             $stmt->bindParam(':trend1', $trend1, \PDO::PARAM_STR);
             $stmt->bindParam(':trend2', $trend2, \PDO::PARAM_STR);
+            $stmt->bindParam(':user_id', $user_id, \PDO::PARAM_INT);
             $stmt->bindParam(':breed_id', $breed_id, \PDO::PARAM_INT);
             $stmt->bindParam(':category_id', $category_id, \PDO::PARAM_INT);
             $stmt->bindParam(':image_id', $image_id, \PDO::PARAM_INT);
-            // $stmt->bindParam(':mission_id', $mission_id, \PDO::PARAM_INT);
 
-            if($stmt->execute()) {
+            if ($stmt->execute()) {
                 return \Core\Connect::getInstance($msgDb)->lastInsertId();
             }
-        } catch(\PDOException $exception) {
+        } catch (\PDOException $exception) {
             $this->fail = $exception;
             return null;
         }
@@ -155,10 +166,11 @@ class Character extends Model implements Models
 
     protected function update(string $entity, array $data, string $terms, string $params, bool $msgDb = false): ?int
     {
-        $data["updated_at"] = ($this->connectionDetails->type() === "sqlsrv" ? (new \DateTime())->format("d/m/Y H:i:s") : (new \DateTime())->format("Y-m-d H:i:s"));
+        $data["updated_at"] = ($this->connectionDetails->type() === "sqlsrv"
+            ? (new \DateTime())->format("d/m/Y H:i:s") : (new \DateTime())->format("Y-m-d H:i:s"));
 
         parse_str($params, $params);
-        foreach($data as $bind => $value) {
+        foreach ($data as $bind => $value) {
             $dataSet[] = $bind . "= :" . $bind;
             $params[$bind] = $value;
         }
@@ -173,19 +185,19 @@ class Character extends Model implements Models
     {
         $stmt = \Core\Connect::getInstance()->prepare($sql);
         try {
-            if($params) {
-                foreach($params as $key => $value) {
+            if ($params) {
+                foreach ($params as $key => $value) {
                     $type = \PDO::PARAM_STR;
-                    if(is_numeric($value)) {
+                    if (is_numeric($value)) {
                         $value = (float) $value;
-                    } elseif($value == null) {
+                    } elseif ($value == null) {
                         $type = \PDO::PARAM_NULL;
                     }
                     $stmt->bindValue(":{$key}", $value, $type);
                 }
             }
             $stmt->execute();
-        } catch(PDOException $exception) {
+        } catch (PDOException $exception) {
             $this->fail = $exception;
             return null;
         }
@@ -194,11 +206,11 @@ class Character extends Model implements Models
 
     public function destroy()
     {
-        if(!empty($this->id)) {
+        if (!empty($this->id)) {
             $this->delete(self::$entity, "id=:id", "id={$this->id}");
         }
 
-        if($this->fail()) {
+        if ($this->fail()) {
             $this->message = "<div class=danger>Could not remove file</div>";
             return null;
         }
@@ -210,9 +222,9 @@ class Character extends Model implements Models
 
     private function indType($type): int
     {
-        if(strpos($type, "/")) {
+        if (strpos($type, "/")) {
             $t = explode("/", $type)[1];
-            switch($t) {
+            switch ($t) {
                 case "png":
                     return 1;
                 case "jpg": case "jpeg":
@@ -239,8 +251,8 @@ class Character extends Model implements Models
 
     public function required(): bool
     {
-        foreach($this->required as $field) {
-            if(empty(trim($this->$field))) {
+        foreach ($this->required as $field) {
+            if (empty(trim($this->$field))) {
                 $this->message = "The {$field} field is mandatory";
                 return false;
             }

@@ -18,17 +18,12 @@ class CreatePlayersTable implements CreateTable
 
     public function up(string $entity)
     {
-        return Schema::create($entity, $this->type, function(Blueprint $table) {
+        return Schema::create($entity, $this->type, function (Blueprint $table) {
             $table->increment("id");
-            $table->string("name");
-            $table->string("email",100)->unique();
-            $table->string("login",50)->unique();
-            $table->string("password,user");
             $table->bool("active")->nullable()->default(1);
-            $table->string("occupation",255)->nullable();
-            $table->int("company_id")->nullable()->default(1);
-            $table->int("group_id")->nullable();
-            $table->token();
+            $table->int("user_id")->foreign("user_id", "users");
+            $table->int("character_id")->foreign("character_id", "characters");
+            $table->int("mission_id")->foreign("mission_id", "missions");
             $table->timestamps();
             return $table->run();
         });

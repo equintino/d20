@@ -18,19 +18,19 @@ class CreateCharactersTable implements CreateTable
 
     public function up(string $entity): string
     {
-        $schema = Schema::create($entity, $this->type, function(Blueprint $table) {
+        return Schema::create($entity, $this->type, function (Blueprint $table) {
             $table->increment("id");
-            $table->string("name,personage");
+            $table->string("personage");
             $table->text("story")->nullable();
             $table->string("trend1,trend2")->nullable();
-            $table->int("breed_id")->foreign("breed_id","breeds");
-            $table->int("category_id")->foreign("category_id","categories");
-            $table->int("image_id")->foreign("image_id","images");
-            $table->int("mission_id")->foreign("mission_id","missions")->nullable();
+            $table->bool("active")->nullable()->default(1);
+            $table->int("user_id")->foreign("user_id", "users");
+            $table->int("breed_id")->foreign("breed_id", "breeds");
+            $table->int("category_id")->foreign("category_id", "categories");
+            $table->int("image_id")->foreign("image_id", "images");
             $table->timestamps();
             return $table->run();
         });
-        return $schema;
     }
 
     public function down(string $entity)

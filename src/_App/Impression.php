@@ -2,14 +2,21 @@
 
 namespace _App;
 
+enum NumberMonth: string
+{
+    case january = "01";
+    case february = '02';
+    case march = '03';
+    case april = '04';
+}
+
+// echo NumberMonth::january->name; // "Clubs"
+// echo NumberMonth::january->value; // "♣"
+
+
 class Impression extends Controller
 {
     protected $page = "imprression";
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     public function init(?array $data): void
     {
@@ -27,11 +34,11 @@ class Impression extends Controller
             "year" => $data["year"]
         ];
 
-        foreach($movimentDb->search($search) as $row) {
+        foreach ($movimentDb->search($search) as $row) {
             $output = $row->output;
             $depositTotal += $row->deposit;
             $outputTotal += $output;
-            if($output > 0) {
+            if ($output > 0) {
                 $outputDescription[] = [ $row->description, formatCurrency($row->output) ];
             }
 
@@ -47,7 +54,9 @@ class Impression extends Controller
         $offerTotal = formatCurrency($offerTotal);
         $depositTotal = formatCurrency($depositTotal);
         $outputTotal = formatCurrency($outputTotal);
-        $this->view->setPath("Modals")->render("impression", [ compact("depositTotal","titheTotal", "offerTotal", "outputTotal", "titles", "outputDescription", "totalBalance","month","year") ]);
+        $this->view->setPath("Modals")->render("impression", [ compact("depositTotal", "titheTotal",
+        "offerTotal", "outputTotal", "titles", "outputDescription", "totalBalance", "month", "year"
+        ) ]);
     }
 
     public function previousPrint(array $data): void
@@ -56,22 +65,26 @@ class Impression extends Controller
         $this->view->setPath("Modals")->render("impression", [ $data ]);
     }
 
-    private function numberMonth(string $name, bool $key=false)
+    // public function numberMonth(string $name, bool $key=false)
+    public function numberMonth(NumberMonth $name, bool $key=false)
     {
-        $months = [
-            "janeiro" => "01",
-            "fevereiro" => "02",
-            "março" => "03",
-            "abril" => "04",
-            "maio" => "05",
-            "junho" => "06",
-            "julho" => "07",
-            "agosto" => "08",
-            "setembro" => "09",
-            "outubro" => "10",
-            "novembro" => "11",
-            "dezembro" => "12"
-        ];
-        return ($key ? array_search($name, $months) : (int) $months[$name]);
+        var_dump(
+            // NumberMonth::$name->name
+        );die;
+        // $months = [
+        //     "janeiro" => "01",
+        //     "fevereiro" => "02",
+        //     "março" => "03",
+        //     "abril" => "04",
+        //     "maio" => "05",
+        //     "junho" => "06",
+        //     "julho" => "07",
+        //     "agosto" => "08",
+        //     "setembro" => "09",
+        //     "outubro" => "10",
+        //     "novembro" => "11",
+        //     "dezembro" => "12"
+        // ];
+        // return ($key ? array_search($name, $months) : (int) $months[$name]);
     }
 }

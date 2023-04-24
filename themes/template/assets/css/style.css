@@ -46,7 +46,7 @@
 }
 
 .loading, .text-loading {
-    display: none;
+    /* display: none; */
     text-align: center;
     -webkit-justify-content: center;
     align-items: center;
@@ -83,7 +83,7 @@
     right: 0;
     padding: 10px 30px;
     border-radius: 5px 0 0 0;
-    text-shadow: 1px 1px 4px gray;
+    text-shadow: 1px 1px 4px #000;
     letter-spacing: .08rem;
     font-weight: 300;
     font-size: .9rem;
@@ -347,6 +347,40 @@ main .form-signin {
     animation: turns .8s linear infinite;
 }
 
+@keyframes flash {
+    0%   { margin-right: -20% }
+    10%  { margin-right: 0% }
+    /* 100% { margin-right: -13% } */
+    /* 0%   { opacity: .8 }
+    5%   { opacity: 1  }
+    100% { opacity: 0  } */
+}
+
+.flash {
+    animation-name: flash;
+    animation-duration: 4s;
+    /* animation-delay: 2s; */
+}
+
+
+/* div {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: relative;
+    animation-name: example;
+    animation-duration: 4s;
+    animation-delay: 2s;
+  }
+
+  @keyframes example {
+    0%   {background-color:red; left:0px; top:0px;}
+    25%  {background-color:yellow; left:200px; top:0px;}
+    50%  {background-color:blue; left:200px; top:200px;}
+    75%  {background-color:green; left:0px; top:200px;}
+    100% {background-color:red; left:0px; top:0px;}
+  } */
+
 /** table configuration */
 .my-table {
     width: 100%;
@@ -376,7 +410,10 @@ main .form-signin {
 }
 
 .my-table tr:nth-child(even) {
-    background: #f2f2f2;
+    /* background: #191919; */
+    background: #240000;
+    /* border-top: 1px solid #494949;
+    border-bottom: 1px solid #494949; */
 }
 
 .my-table input[type=radio] {
@@ -414,11 +451,13 @@ main .form-signin {
     box-shadow: 2px 2px 2px gray;
     border-radius: 5px;
     background: var(--cor-primary-light);
-    max-height: 500px;
+    max-height: 550px;
     border: 1px solid white;
-    padding: 20px 40px;
+    /* padding: 20px 40px; */
+    padding: 0 40px;
     margin: 100px 40px 0 40px;
     color: #9a9a9a;
+    overflow: scroll;
 }
 
 .fieldset legend {
@@ -443,21 +482,13 @@ main .form-signin {
     float: right;
 }
 
-/* .fieldset .side-left {
-    float: left;
-}
-
-.fiedset .side-right {
-    float: right;
-} */
-
 .fieldset table thead th {
-    font-size: .7rem;
-    border-bottom: 1px solid black;
+    /* font-size: .7rem; */
+    /* border-bottom: 1px solid black; */
 }
 
 .fieldset table tr:last-child {
-    border-bottom: 1px solid black;
+    /* border-bottom: 1px solid black; */
 }
 
 /** bootbox */
@@ -647,7 +678,9 @@ main .form-signin {
     pointer-events: auto;
     background-clip: padding-box;
     outline: 0;
-    background: #ffffff;
+    background: #626262 none repeat scroll 0% 0%;
+    color: white;
+    /* background: #ffffff; */
     box-shadow: var(--box-shadow);
     z-index: 4;
     -webkit-transition: opacity 400ms ease-in;
@@ -810,7 +843,7 @@ main .form-signin {
 }
 
 .btn-silver:hover {
-    background-color: #565555;;
+    background-color: #565555;
 }
 
 .btn-silver:active {

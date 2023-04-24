@@ -4,7 +4,7 @@ namespace Core;
 
 abstract class Safety
 {
-    static $exceptions = [ "login", "home", "error", "character", "mission" ];
+    static $exceptions;
     static $includes = [];
 
     public static function dataConnection(): ?string
@@ -17,15 +17,40 @@ abstract class Safety
      * @var $path string
      * @var $exceptions array
      */
-    public static function screens($path = "pages"): ?array
+    public static function screens($path = "pages", $rename = true): ?array
     {
         $directory = dir(__DIR__ . "/../{$path}");
-        while($file = $directory->read()) {
-            if(!preg_match("/^[.]/", $file) && !in_array(substr($file, 0, -4), self::$exceptions)) {
-                $screens[] = self::renameScreen(substr($file, 0, -4));
+        while ($file = $directory->read()) {
+            if (!preg_match("/^[.]/", $file) && !in_array(substr($file, 0, -4), self::getExceptions())) {
+                $screens[] = ($rename ? self::renameScreen(substr($file, 0, -4)) : substr($file, 0, -4));
             }
         }
+        sort($screens);
         return array_merge($screens, self::$includes);
+    }
+
+    public static function restrictAccess(string $page): bool
+    {
+        if ($pos = strpos($page, ".")) {
+            $page = substr($page, 0, $pos);
+        }
+        if (!empty($_SESSION['login'])) {
+            $groupId = ($_SESSION['login']->getUser()->group_id ?? null);
+        }
+        $access = '';
+        if (!empty($groupId)) {
+            $group = (new \Models\Group())->load($groupId);
+            $access = trim($group->access);
+        }
+        if (preg_match("/\*|$page/", $access) || in_array($page, self::getExceptions())) {
+            return true;
+        }
+        return false;
+    }
+
+    private static function exceptions(string $file): bool
+    {
+        return !preg_match("/^[.]/", $file) && !in_array(substr($file, 0, -4), self::getExceptions());
     }
 
     public static function crypt(string $passwd): ?string
@@ -75,19 +100,42 @@ abstract class Safety
         return crypt($password,$param);
     }
 
-    public static function renameScreen(string $key)
+    public static function renameScreen(string $key): string
     {
         $screens = [
             "config" => "Configuração",
             "user" => "Login de Acesso",
             "shield" => "Segurança",
             "membership" => "Lista de Membros",
-            "moviment" => "Movimentação Financeira",
             "documentation" => "Documentação",
             "management" => "Gerenciamento",
-            "occupation" => "Funções",
+            "player" => "Jogadores"
         ];
         $key = trim($key);
-        return (array_key_exists($key, $screens) ? $screens[$key] : $key);
+        if (array_key_exists($key, $screens)) {
+            return $screens[$key];
+        }
+        if (in_array($key, $screens)) {
+            return array_search($key, $screens);
+        }
+        return $key;
+    }
+
+    private static function getExceptions(): array
+    {
+        return [
+            "index",
+            "login",
+            "home",
+            "error",
+            "character",
+            "mission",
+            "category",
+            "avatar",
+            "character.add",
+            "character.list",
+            "breed",
+            "personages"
+        ];
     }
 }
