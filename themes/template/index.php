@@ -8,16 +8,21 @@
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
         <link rel="stylesheet" href="<?= url() . "/" . theme("assets/style.css") ?>" />
         <style>
-            #login_container {
+            /* #login_container {
                 margin-bottom: -8px;
             }
 
             #login a:hover {
                 text-decoration: none;
+            }*/
+
+            #container_main {
+                display: grid;
+                margin-top: 60px;
             }
         </style>
     </head>
-    <body class="login body" >
+    <body class="body" >
         <header>
             <div id="top" style="display: none">
                 <?php require __DIR__ . "/top.php"; ?>
@@ -51,7 +56,7 @@
             </section> -->
         </div><!-- header2 -->
         <section>
-            <div class="container" ></div>
+            <div id="container_main" ></div>
         </section>
     </body>
 </html>

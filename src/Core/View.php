@@ -50,8 +50,8 @@ class View
             CONF_SITE_NAME . " - " . CONF_SITE_TITLE,
             CONF_SITE_DESC,
             url(),
-            url() . "/" . theme("assets/img/loading.png"),
-            url() . "/" . theme("assets/img/logo-menu.png")
+            url() . "/test/" . theme("assets/img/loading.png"),
+            url() . "/test/" . theme("assets/img/logo-menu.png")
         );
         /** makes variables available to the page */
         if ($params) {

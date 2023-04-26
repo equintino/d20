@@ -13,7 +13,7 @@ export default class Views {
     #container
 
     constructor() {
-        this.#container = document.querySelector('.container')
+        this.#container = document.querySelector('#container_main')
     }
 
     static showPage(page, fn) {

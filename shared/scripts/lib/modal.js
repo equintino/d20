@@ -1,10 +1,10 @@
 export default class Modal {
-    #id
+    id
     #box
     #mask
 
     constructor(id){
-        this.#id = id
+        this.id = id
     }
 
     openModal(boxe, page, fn) {
@@ -15,16 +15,18 @@ export default class Modal {
         this.#box.style = 'display: flex'
         this.#mask.style = 'display: block'
 
+        if (this.#box.querySelector('form') !== null) {
+            this.#box.querySelector('form').addEventListener('submit', (e) => {
+                e.preventDefault()
+                fn(e)
+            })
+        }
+
+        /** Closing */
         document.querySelector('#mask_main').addEventListener('click', () => {
             this.#box.style = 'display: none'
             this.#mask.style = 'display: none'
         })
-
-        this.#box.querySelector('form').addEventListener('submit', (e) => {
-            e.preventDefault()
-            fn(e)
-        })
-
         document.addEventListener('keyup', (e) => {
             if (e.key === 'Escape') { this.close() }
         })

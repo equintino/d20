@@ -1,5 +1,4 @@
 import AbstractControllers from "./abstractcontrollers.js"
-import Carousel from './../../lib/carousel.js'
 
 export default class Character extends AbstractControllers {
     constructor(deps) {
@@ -21,6 +20,27 @@ export default class Character extends AbstractControllers {
         if (btnName === 'new') {
             return this.view.showPage(this.service.open('GET', 'character/add'), (elem) => {
                 this.#setButton(elem)
+                this.view.changeCategory((formData) => {
+                    let list = this.service.open('POST', 'avatar', formData)
+                    formData.append('act', 'list')
+                    formData.append('response', list)
+
+                    this.view.openModal(this.service.open('POST', 'avatar/show', formData), formData, () => {
+                        this.view.carousel('#imageAvatar', JSON.parse(list))
+                        this.view.eventInModal('change', (formData) => {
+                            list = this.service.open('POST', 'avatar', formData)
+                            this.view.carousel('#imageAvatar', JSON.parse(list))
+
+                            let category = JSON.parse(this.service.open('POST', `category/id/${formData.get('idCategory')}`))
+                            this.view.updateCategory(category)
+                        })
+                    }, (response) => {
+                        /** submit */
+                        console.log(
+                            response
+                        )
+                    })
+                })
             })
         }
 
@@ -49,30 +69,9 @@ export default class Character extends AbstractControllers {
                         break
                     case 'breed':
                         const list = JSON.parse(this.service.open('POST', 'breed/list'))
-                        const carousel = new Carousel('#avatar', list)
-
-
-                        // let details = () => {
-                        //     // let breed = document.querySelector('.single-item img[aria-hidden=false]').attributes['alt']
-                        //     // console.log(
-                        //     //     breed
-                        //     // )
-                        //     // let breed = $(".single-item img[aria-hidden=false]").attr("alt")
-                        //     // let breed_id = $(".single-item img[aria-hidden=false]").attr("data-id")
-                        //     // let detail = $(".single-item img[aria-hidden=false]").attr("data-description")
-                        //     // $(".breed").closest("div").append("<input type='hidden' name='breed_id' value='"
-                        //     //     + breed_id + "' />")
-                        //     // $("#breed, .breed").text(breed.toUpperCase())
-                        //     // $(description).find("p").text(detail)
-                        // }
-                        // listAvatar.addEventListener("click", () => {
-                        //     details()
-                        // })
-                        // listAvatar.addEventListener("keydown", () => {
-                        //     details()
-                        // })
-                        // // $(".slick-next").trigger("click")
-                        // details()
+                        this.view.carousel('#avatar', list, (e) => {
+                            this.view.setDetails(e)
+                        })
                         break
                     case 'clear':
                         this.view.reset('#character form')

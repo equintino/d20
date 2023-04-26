@@ -5,13 +5,11 @@ const loading = utils.loading
 
 export default class Menu {
     #top
-    #container
     #identification
 
     constructor() {
         this.#top = document.querySelector('#top')
-        this.#container = document.querySelector('.container')
-        this.#identification = document.querySelector('.identification')
+        this.#identification = document.querySelector('#identification')
         this.#top.style = 'display: flow-root list-item'
     }
 

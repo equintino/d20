@@ -1,31 +1,3 @@
-<style>
-    #character {
-        /* background: gray; */
-    }
-
-    #container {
-        width: 100%;
-    }
-
-    .card_ {
-        position: absolute;
-        /* width: 60%; */
-        height: 100%;
-        /* left: 0; */
-        /* right: 0; */
-        /* margin: auto; */
-        transition: transform .4s ease;
-        cursor: pointer;
-        /* right: 250px; */
-    }
-
-    .cards_ {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        margin-bottom: 20px;
-    }
-</style>
 <main id="character">
     <div class='add'>
         <fieldset class="fieldset">
@@ -77,10 +49,6 @@
                 </section>
                 <section class=".side-right" >
                     <div id="avatar"></div>
-                    <!-- <div><span id="breed">&nbsp</span></div> -->
-                    <!-- <div class="single-item" style="display: block"> -->
-                        <!-- <div class="cards_"></div> -->
-                    <!-- </div> -->
                 </section>
             </form>
         </fieldset>

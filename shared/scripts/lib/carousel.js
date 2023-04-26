@@ -1,32 +1,26 @@
 export default class Carousel {
-    #elem
-    #list
+    #css
+    dataId
 
     constructor(elem, list) {
-        this.#elem = elem
-        this.#list = list
         this.carousel(elem, list)
     }
 
     carousel(elem, list) {
-        const css = this.#css()
+        this.#styles()
         let listImg = document.querySelector(elem)
-        // document.querySelector(elem).style = 'display: block'
-
-        // document.querySelector('.card').style = "position: absolute;width: 60%; height: 100%; left: 0;right: 0;margin: auto;ransition: transform .4s ease;ursor: pointer;"
 
         let items = []
-        let htmls = '<div class="cards">'
+        let htmls = '<div id="cards_">'
         for (let i in list) {
             items.push(parseInt(i) + 1)
-            htmls += `<label class="card_" id="item-${parseInt(i) + 1}" data-name="${list[i].name}" data-id="${list[i].id}" data-description="${list[i].description}"><img src="image/id/${list[i].image_id}" alt="${list[i].name}"></label>`
+            htmls += `<label class="card_" id="item-${parseInt(i) + 1}" data-name="${list[i].name}" data-id="${list[i].id}" data-description="${list[i].description}" ><img src="image/id/${list[i].image_id}" alt="${list[i].name}"></label>`
         }
         htmls += '</div>'
 
-        // let cards = listImg.querySelector(elem)
-        let cards = listImg
+        listImg.innerHTML = htmls
+        let cards = listImg.querySelector('#cards_')
 
-        cards.innerHTML = htmls
         let arrCards = []
 
         for (let i of items) {
@@ -36,32 +30,28 @@ export default class Carousel {
         for (let i in arrCards) {
             switch (i) {
                 case '0':
-                    arrCards[i].style = css[0]
+                    arrCards[i].style = this.#css.left
                     break
                 case '1':
-                    arrCards[i].style = css[1]
-                    document.querySelector('#description p').innerHTML = arrCards[i].attributes['data-description'].value
-                    document.querySelector('.breed').innerHTML = arrCards[i].attributes['data-name'].value.toUpperCase()
-                    document.querySelector('.breed').setAttribute('data-id', arrCards[i].attributes['data-id'].value)
+                    arrCards[i].style = this.#css.middle
+                    this.dataId = arrCards[i].attributes['data-id'].value
                     break
                 case '2':
-                    arrCards[i].style = css[2]
+                    arrCards[i].style = this.#css.right
                     break
                 default:
-                    arrCards[i].style = css[3]
+                    arrCards[i].style = this.#css.other
             }
         }
 
         cards.addEventListener('click', () => {
             let arr = this.#direction(arrCards, true)
-            arr[0].style = css[0]
-            arr[1].style = css[1]
-            arr[2].style = css[2]
-            arr[3].style = css[3]
+            arr[0].style = this.#css.left
+            arr[1].style = this.#css.middle
+            arr[2].style = this.#css.right
+            arr[3].style = this.#css.other
             arrCards = arr
-            document.querySelector('#description p').innerHTML = arr[1].attributes['data-description'].value
-            document.querySelector('.breed').innerHTML = arr[1].attributes['data-name'].value.toUpperCase()
-            document.querySelector('.breed').setAttribute('data-id', arr[1].attributes['data-id'].value)
+            this.dataId = arr[1].attributes['data-id'].value
         })
     }
 
@@ -82,12 +72,12 @@ export default class Carousel {
         return arrNew
     }
 
-    #css() {
-        return [
-            'transform: translatex(-60%) scale(0); opacity: .3; z-index: 0;',
-            'transform: translatex(0) scale(1);opacity: 1;z-index: 1;',
-            'transform: translatex(60%) scale(.4);opacity: .3;z-index: 0;',
-            'transform: translatex(60%) scale(.4);opacity: 0;z-index: 0;',
-        ]
+    #styles() {
+        this.#css = {
+            left: 'transform: translatex(-60%) scale(0); opacity: .3; z-index: 0;',
+            middle: 'transform: translatex(0) scale(1);opacity: 1;z-index: 1;',
+            right: 'transform: translatex(60%) scale(.4);opacity: .3;z-index: 0;',
+            other: 'transform: translatex(60%) scale(.4);opacity: 0;z-index: 0;'
+        }
     }
 }

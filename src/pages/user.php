@@ -4,6 +4,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-top: 40px;
     }
 
     #init button {
@@ -13,10 +14,9 @@
 </style>
 <div id="user">
     <header class="header">
-        <div id="init" class="buttons mt-3" >
+        <div id="init" class="buttons" >
             <button class="btn btn-oval" style="float: right" value="new">Novo</button>
             <button class="btn btn-oval" style="float: right; margin-right: 5px" value="list">Lista</button>
         </div>
     </header>
-    <!-- <main id="exhibition" ></main> -->
 </div>

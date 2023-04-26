@@ -1,6 +1,16 @@
+<style>
+    #identification {
+        top: 90px;
+        position: fixed;
+        accent-color: ;
+        right: 20px;
+        color: var(--cor-primary);
+        text-shadow: 1px 1px 1px #ea6060;
+    }
+</style>
 <nav id="topHeader" class="navbar navbar-expand-lg navbar-dark" >
-    <!-- <a class="navbar-brand" href="http://<?= CONF_SITE_NAME ?>" target="_blank"> -->
-        <!-- <img src="<?= ($head["logo"] || null) ?>" alt="logo" height="40" /> -->
+    <a class="navbar-brand" href="http://<?= CONF_SITE_NAME ?>" target="_blank">
+        <img src="<?= ($head["logo"] ?? null) ?>" alt="logo" height="40" />
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse"
     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -69,4 +79,4 @@
         </div><!-- navbar rigth-->
     </div><!-- navbar-collapse -->
 </nav>
-<div class="identification"><i>Usuário:</i> <?= ($logged ?? "No user logged in") ?></div>
+<div id="identification"><i>Usuário:</i> <?= ($logged ?? "No user logged in") ?></div>

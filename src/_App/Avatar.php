@@ -36,15 +36,15 @@ class Avatar extends Controller
     public function getAvatars(array $data): string
     {
         $search = [
-            "breed_id" => $data["breedId"],
-            "category_id" => $data["categoryId"]
+            "breed_id" => $data["idBreed"],
+            "category_id" => $data["idCategory"]
         ];
         $avatars = (new \Models\Avatar())->search($search);
         foreach ($avatars as $avatar) {
             $response[] = [
                 "id" => $avatar->id,
                 "image_id" => $avatar->image_id,
-                "category_id" => $data["categoryId"]
+                "category_id" => $data["idCategory"]
             ];
         }
         return print(json_encode($response ?? "This breed has no definite image"));
@@ -63,23 +63,23 @@ class Avatar extends Controller
 
     public function show(array $data): void
     {
-        $list = $data["response"];
-        $categoryId = $data["categoryId"];
-        $breedId = $data["breedId"];
+        $list = json_decode($data["response"]);
+        $idCategory = $data["idCategory"];
+        $idBreed = $data["idBreed"];
         $act = (!empty($data["act"]) ? ".{$data['act']}" : null);
         $source = ($data["source"] ?? null);
         $currentCat = "";
         $categories = (new \Models\Category())->activeAll();
         $breeds = (new \Models\Breed())->activeAll();
         foreach ($categories as $category) {
-            if ($category->id == $categoryId) {
+            if ($category->id == $idCategory) {
                 $currentCat = $category;
                 break;
             }
         }
         $this->view->setPath("Modals")->render($this->page . $act,
             [
-                compact("list", "act", "categories", "categoryId", "breedId", "currentCat", "source", "breeds")
+                compact("list", "act", "categories", "idCategory", "idBreed", "currentCat", "source", "breeds")
             ]
         );
     }

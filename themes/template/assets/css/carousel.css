@@ -1,0 +1,6 @@
+.card_ {
+    position: absolute;
+    transition: transform .4s ease;
+    cursor: pointer;
+    right: 130px;
+}

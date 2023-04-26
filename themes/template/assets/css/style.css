@@ -69,9 +69,9 @@
     background: var(--cor-primary);
 }
 
-.content {
+/* .content {
     margin-top: 100px;
-}
+} */
 
 .dropdown-item.active, .dropdown-item:active {
     background-color: var(--cor-primary);
@@ -539,10 +539,11 @@ main .form-signin {
 #boxe_main, #boxe2_main {
     position: fixed;
     width: 70%;
+    top: 10%;
     left: 15%;
     margin-top: 75px;
-    display: -ms-flexbox;
-    display: flex;
+    /* display: -ms-flexbox;
+    display: flex; */
     -ms-flex-direction: column;
     flex-direction: column;
     pointer-events: auto;
@@ -929,11 +930,6 @@ main .form-signin {
 /** config */
 #config .buttons{
     text-align: right;
-}
-
-#config, #shield, #user {
-    width: 80%;
-    margin: 30px auto;
 }
 
 .table-conf table i.fa-arrow-right, #tabList i.fa-arrow-right {

@@ -1,20 +1,28 @@
 <style>
+    #avatarList {
+        padding: 20px;
+    }
+
     #avatarList #imageAvatar {
         height: 350px;
         width: 350px;
         margin: auto;
         top: 15%;
     }
+
+    #avatarList #imageAvatar img {
+        max-height: 300px
+    }
 </style>
-<main id="avatarList">
+<form id="avatarList" method="POST" action="#">
     <div style="float: left">
         <?php if ($source !== "character"): ?>
         <section>
             <label class="label-rpg">Raça:</lebel>
-            <select name="breed" class="input-rpg" >
+            <select name="idBreed" class="input-rpg" >
                 <?php foreach($breeds as $breed): ?>
                 <option value="<?= $breed->id ?>" data-description="<?= $breed->description ?>"
-                    <?= ($breed->id == $breedId ? "selected"
+                    <?= ($breed->id == $idBreed ? "selected"
                     : null) ?>><?= $breed->name ?>
                 </option>
                 <?php endforeach ?>
@@ -22,9 +30,9 @@
         </section>
         <section>
             <label class="label-rpg">Classe:</lebel>
-            <select name="class" class="input-rpg" >
+            <select name="idCategory" class="input-rpg" >
                 <?php foreach($categories as $category): ?>
-                <option value="<?= $category->id ?>" <?= ($category->id == $categoryId ? "selected"
+                <option value="<?= $category->id ?>" <?= ($category->id == $idCategory ? "selected"
                     : null) ?>><?= $category->name ?></option>
                 <?php endforeach ?>
             </select>
@@ -33,16 +41,12 @@
         <section>
             <div id="breed_description">
             <label class="label-rpg">Características:</lebel><br>
-            <textarea class="input-rpg" disabled rows="10" ><?= ($currentCat->description
+            <textarea name="description" class="input-rpg" disabled rows="10" ><?= ($currentCat->description
                 ?? "Sem descrição") ?></textarea>
             </div>
         </section>
     </div>
     <section class="wrapper">
-        <div id="imageAvatar" class="mt-4">
-            <?php foreach($list as $avatar): ?>
-                <img data-id="<?= $avatar["id"] ?>" src="image/id/<?= $avatar["image_id"] ?>" alt="" height="350px"/>
-            <?php endforeach; ?>
-        </div>
+        <div id="imageAvatar" class="mt-4"></div>
     </section>
-</main>
+</form>
