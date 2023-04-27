@@ -1,6 +1,7 @@
 export default class Carousel {
     #css
     dataId
+    idImage
 
     constructor(elem, list) {
         this.carousel(elem, list)
@@ -14,7 +15,7 @@ export default class Carousel {
         let htmls = '<div id="cards_">'
         for (let i in list) {
             items.push(parseInt(i) + 1)
-            htmls += `<label class="card_" id="item-${parseInt(i) + 1}" data-name="${list[i].name}" data-id="${list[i].id}" data-description="${list[i].description}" ><img src="image/id/${list[i].image_id}" alt="${list[i].name}"></label>`
+            htmls += `<label class="card_" id="item-${parseInt(i) + 1}" data-name="${list[i].name}" data-id="${list[i].id}" data-idImage="${list[i].image_id}" data-description="${list[i].description}" ><img src="image/id/${list[i].image_id}" alt="${list[i].name}"></label>`
         }
         htmls += '</div>'
 
@@ -35,6 +36,7 @@ export default class Carousel {
                 case '1':
                     arrCards[i].style = this.#css.middle
                     this.dataId = arrCards[i].attributes['data-id'].value
+                    this.idImage = arrCards[i].attributes['data-idImage'].value
                     break
                 case '2':
                     arrCards[i].style = this.#css.right
@@ -52,6 +54,7 @@ export default class Carousel {
             arr[3].style = this.#css.other
             arrCards = arr
             this.dataId = arr[1].attributes['data-id'].value
+            this.idImage = arrCards[1].attributes['data-idImage'].value
         })
     }
 

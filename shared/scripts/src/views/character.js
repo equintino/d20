@@ -17,11 +17,13 @@ export default class Character extends AbstractViews {
 
         if (typeof(fn) === 'function') fn({
             id: carousel.dataId,
+            idImage: carousel.idImage,
             items
         })
         document.querySelector(id).addEventListener('click', () => {
             if (typeof(fn) === 'function') fn({
                 id: carousel.dataId,
+                idImage: carousel.idImage,
                 items
             })
         })
@@ -55,23 +57,47 @@ export default class Character extends AbstractViews {
     openModal(page, params, fn, response) {
         this.#modal = new Modal("#avatarList")
         this.#modal.openModal("#boxe_main", page, (e) => {
-            // console.log(
-            //     e
-            // )
-            // let formData = new FormData(e.target)
-            // for (let i in params) {
-            //     formData.append(i, params[i])
-            // }
-            // response(formData)
+
+        })
+        this.#modal.buttons('<button class="btn btn-rpg btn-danger" value="selected">Selecionar</button>', (e) => {
+            let btnName = e.target.value
+            if (btnName === 'selected') {
+                let breed = document.querySelector(this.#modal.id + ' [name=idBreed]')
+                let description = breed.selectedOptions[0].attributes['data-description'].value
+                let idBreed = breed.value
+                let breedName = breed.selectedOptions[0].innerText
+                let idCategory = document.querySelector(this.#modal.id + ' [name=idCategory]').value
+                let idImage = document.querySelector(this.#modal.id + ' [name=image_id]').value
+
+                response({
+                    idBreed,
+                    description,
+                    breedName,
+                    idCategory,
+                    idImage
+                })
+            }
         })
 
-        // this.#groups = this.#modal.getBox().querySelector('[name=group_id]')
         if (typeof(fn) === 'function') fn()
+    }
+
+    imgSelected(idImage) {
+        document.querySelector(`${this.#modal.id} [name=image_id]`)
+            .value = idImage
     }
 
     updateCategory(category) {
         document.querySelector(`${this.#modal.id} [name=description]`)
             .innerHTML = category.description
+    }
+
+    avatarSelected(data) {
+        document.querySelector('.breed').attributes['data-id'].value = data.idBreed
+        document.querySelector('.breed').innerText = data.breedName.toUpperCase()
+        document.querySelector('#myClass').value = data.idCategory
+        document.querySelector('#description p').innerHTML = data.description
+        document.querySelector('#avatar').innerHTML = `<img src=image/id/${data.idImage} alt="" height="350px"/>`
     }
 
     eventInModal(event, fn) {

@@ -650,7 +650,7 @@ main .form-signin {
     box-sizing: border-box;
 }
 
-#boxe_main #button {
+#boxe_main #close {
     position: absolute;
     top: 8px;
     right: 10px;
@@ -664,8 +664,8 @@ main .form-signin {
     margin-bottom: -24px;
 }
 
-#boxe_main #button:hover {
-    color: white;
+#boxe_main #close:hover {
+    color: #454545;
 }
 
 #div_dialogue {

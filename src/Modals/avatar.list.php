@@ -49,4 +49,5 @@
     <section class="wrapper">
         <div id="imageAvatar" class="mt-4"></div>
     </section>
+    <input type="hidden" name="image_id" value="" />
 </form>

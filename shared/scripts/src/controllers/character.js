@@ -22,23 +22,29 @@ export default class Character extends AbstractControllers {
                 this.#setButton(elem)
                 this.view.changeCategory((formData) => {
                     let list = this.service.open('POST', 'avatar', formData)
+
                     formData.append('act', 'list')
                     formData.append('response', list)
 
                     this.view.openModal(this.service.open('POST', 'avatar/show', formData), formData, () => {
-                        this.view.carousel('#imageAvatar', JSON.parse(list))
+                        list = JSON.parse(list)
+                        this.view.carousel('#imageAvatar', list, (data) => {
+                            this.view.imgSelected(data.idImage)
+                        })
+
                         this.view.eventInModal('change', (formData) => {
-                            list = this.service.open('POST', 'avatar', formData)
-                            this.view.carousel('#imageAvatar', JSON.parse(list))
+                            list = JSON.parse(this.service.open('POST', 'avatar', formData))
+                            this.view.carousel('#imageAvatar', list, (data) => {
+                                this.view.imgSelected(data.idImage)
+                            })
 
                             let category = JSON.parse(this.service.open('POST', `category/id/${formData.get('idCategory')}`))
                             this.view.updateCategory(category)
                         })
                     }, (response) => {
                         /** submit */
-                        console.log(
-                            response
-                        )
+                        this.view.avatarSelected(response)
+                        this.view.closeModal()
                     })
                 })
             })

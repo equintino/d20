@@ -41,7 +41,7 @@
 
             <section id="boxe_main" class="fadeInDown" >
                 <div id="title"></div>
-                <span id="button" class="close"><i class="fa fa-times-circle"></i></span>
+                <span id="close"><i class="fa fa-times-circle"></i></span>
                 <span id="message"></span>
                 <div id="content"></div>
                 <div id="buttons" style="text-align: right"></div>

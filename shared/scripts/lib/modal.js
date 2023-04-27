@@ -9,9 +9,10 @@ export default class Modal {
 
     openModal(boxe, page, fn) {
         this.#box = document.querySelector(boxe)
+        const close = this.#box.querySelector('#close')
         this.#mask = document.querySelector('#mask_main')
 
-        this.#box.innerHTML = page
+        this.#box.querySelector('#content').innerHTML = page
         this.#box.style = 'display: flex'
         this.#mask.style = 'display: block'
 
@@ -23,12 +24,26 @@ export default class Modal {
         }
 
         /** Closing */
-        document.querySelector('#mask_main').addEventListener('click', () => {
-            this.#box.style = 'display: none'
-            this.#mask.style = 'display: none'
-        })
+        const hidden = [
+            document.querySelector('#mask_main'),
+            close
+        ]
+        for (let i of hidden) {
+            i.addEventListener('click', () => {
+                this.close()
+            })
+        }
+
         document.addEventListener('keyup', (e) => {
             if (e.key === 'Escape') { this.close() }
+        })
+    }
+
+    buttons(buttons, fn) {
+        const btn = this.#box.querySelector('#buttons')
+        btn.innerHTML = buttons
+        btn.addEventListener('click', (e) => {
+            if (typeof(fn) === 'function') fn(e)
         })
     }
 
