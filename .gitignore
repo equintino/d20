@@ -2,4 +2,5 @@
 /nbproject/private/
 /vendor/
 /src/Config/.config.ini
+/src/Config/.config.json
 /src/ses

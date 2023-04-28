@@ -1,21 +1,13 @@
-import Views from './views.js'
-import Modal from './../../lib/modal.js'
-import Message from './../../lib/message.js'
+import AbstractViews from './abstractviews.js'
 
-export default class Login {
+export default class Login extends AbstractViews {
     #addLogin
     #enterForm
     #dbs
     #version
-    #groups
-    #modal
 
     constructor() {
-    }
-
-    showPage(page) {
-        Views.showPage(page)
-        this.initializer()
+        super()
     }
 
     initializer() {
@@ -65,31 +57,10 @@ export default class Login {
         }
     }
 
-    message(msg, background) {
-        Message.alertLatch(msg, background)
-    }
-
     confAddLogin(fn) {
         this.#addLogin.addEventListener('click', (e) => {
             fn()
         })
-    }
-
-    openModal(page, params, fn, response) {
-        this.#modal = new Modal()
-        this.#modal.openModal("#boxe_main", page, (e) => {
-            let formData = new FormData(e.target)
-            for (let i in params) {
-                formData.append(i, params[i])
-            }
-            response(formData)
-        })
-        this.#groups = this.#modal.getBox().querySelector('[name=group_id]')
-        fn()
-    }
-
-    closeModal() {
-        this.#modal.close()
     }
 
     setGroups(data) {
@@ -98,10 +69,10 @@ export default class Login {
         for (let i in groups) {
             opt += `<option value='${groups[i].id}'>${i}</option>`
         }
-        this.#groups.innerHTML = opt
+        this.modal.getBox().querySelector('[name=group_id]').innerHTML = opt
     }
 
     setNameLogin(login) {
-        this.#modal.getBox().querySelector('[name=login]').value = login
+        this.modal.getBox().querySelector('[name=login]').value = login
     }
 }

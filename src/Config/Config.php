@@ -17,10 +17,11 @@ class Config
     public $message;
     public $types = [ "mysql", "sqlsrv" ];
 
-    public function __construct(public readonly string $file = ".config.ini", public array $dataFile = [])
+    public function __construct(public readonly string $file = ".config.json", public array $dataFile = [])
     {
         if (file_exists(__DIR__ . "/" . $file)) {
-            $this->dataFile = parse_ini_file(__DIR__ . "/" . $file, true);
+            // $this->dataFile = parse_ini_file(__DIR__ . "/" . $file, true);
+            $this->dataFile = (array) file_get_contents(__DIR__ . "/" . $file);
         }
         $this->local = $this->getConfConnection();
     }
@@ -195,7 +196,8 @@ class Config
 
     private function saveFile(array $data): bool
     {
-        $file = __DIR__ . "/../Config/.config.ini";
+        // $file = __DIR__ . "/../Config/.config.ini";
+        $file = __DIR__ . "/../Config/.config.json";
         /** saving file */
         if (file_exists($file)) {
             $handle = fopen($file, "r+");
@@ -206,17 +208,18 @@ class Config
         rewind($handle);
 
         /** replace data */
-        $string = "";
-        foreach ($data as $local => $params) {
-            $string .= "[{$local}]\r\n";
-            foreach ($params as $param => $value) {
-                $string .= "{$param}='{$value}'\r\n";
-            }
-        }
+        // $string = "";
+        // foreach ($data as $local => $params) {
+        //     $string .= "[{$local}]\r\n";
+        //     foreach ($params as $param => $value) {
+        //         $string .= "{$param}='{$value}'\r\n";
+        //     }
+        // }
 
-        $resp = fwrite($handle, $string);
+        // $resp = fwrite($handle, $string);
+        $resp = fwrite($handle, json_encode($data));
         fclose($handle);
-        return $resp;
+        return ($resp);
     }
 
     public function message(): ?string

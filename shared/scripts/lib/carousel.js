@@ -1,7 +1,6 @@
 export default class Carousel {
     #css
-    dataId
-    idImage
+    element
 
     constructor(elem, list) {
         this.carousel(elem, list)
@@ -35,8 +34,7 @@ export default class Carousel {
                     break
                 case '1':
                     arrCards[i].style = this.#css.middle
-                    this.dataId = arrCards[i].attributes['data-id'].value
-                    this.idImage = arrCards[i].attributes['data-idImage'].value
+                    this.element = arrCards[i]
                     break
                 case '2':
                     arrCards[i].style = this.#css.right
@@ -53,8 +51,7 @@ export default class Carousel {
             arr[2].style = this.#css.right
             arr[3].style = this.#css.other
             arrCards = arr
-            this.dataId = arr[1].attributes['data-id'].value
-            this.idImage = arrCards[1].attributes['data-idImage'].value
+            this.element = arr[1]
         })
     }
 

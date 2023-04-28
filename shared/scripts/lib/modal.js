@@ -43,6 +43,9 @@ export default class Modal {
         const btn = this.#box.querySelector('#buttons')
         btn.innerHTML = buttons
         btn.addEventListener('click', (e) => {
+            if (e.target.value === 'reset') {
+                this.#box.querySelector('form').reset()
+            }
             if (typeof(fn) === 'function') fn(e)
         })
     }

@@ -1,32 +1,11 @@
 import AbstractViews from './abstractviews.js'
-import Carousel from './../../lib/carousel.js'
 import Message from './../../lib/message.js'
 import Modal from './../../lib/modal.js'
 
 export default class Character extends AbstractViews {
-    #modal
 
     constructor() {
         super()
-        this.#modal = new Modal()
-    }
-
-    carousel(id, list, fn) {
-        const carousel = new Carousel(id, list)
-        const items = document.querySelector(id).firstChild.children
-
-        if (typeof(fn) === 'function') fn({
-            id: carousel.dataId,
-            idImage: carousel.idImage,
-            items
-        })
-        document.querySelector(id).addEventListener('click', () => {
-            if (typeof(fn) === 'function') fn({
-                id: carousel.dataId,
-                idImage: carousel.idImage,
-                items
-            })
-        })
     }
 
     setDetails({ id, items }) {
@@ -55,19 +34,19 @@ export default class Character extends AbstractViews {
     }
 
     openModal(page, params, fn, response) {
-        this.#modal = new Modal("#avatarList")
-        this.#modal.openModal("#boxe_main", page, (e) => {
+        this.modal = new Modal("#avatarList")
+        this.modal.openModal("#boxe_main", page, (e) => {
 
         })
-        this.#modal.buttons('<button class="btn btn-rpg btn-danger" value="selected">Selecionar</button>', (e) => {
+        this.modal.buttons('<button class="btn btn-rpg btn-danger" value="selected">Selecionar</button>', (e) => {
             let btnName = e.target.value
             if (btnName === 'selected') {
-                let breed = document.querySelector(this.#modal.id + ' [name=idBreed]')
+                let breed = document.querySelector(this.modal.id + ' [name=idBreed]')
                 let description = breed.selectedOptions[0].attributes['data-description'].value
                 let idBreed = breed.value
                 let breedName = breed.selectedOptions[0].innerText
-                let idCategory = document.querySelector(this.#modal.id + ' [name=idCategory]').value
-                let idImage = document.querySelector(this.#modal.id + ' [name=image_id]').value
+                let idCategory = document.querySelector(this.modal.id + ' [name=idCategory]').value
+                let idImage = document.querySelector(this.modal.id + ' [name=image_id]').value
 
                 response({
                     idBreed,
@@ -82,13 +61,8 @@ export default class Character extends AbstractViews {
         if (typeof(fn) === 'function') fn()
     }
 
-    imgSelected(idImage) {
-        document.querySelector(`${this.#modal.id} [name=image_id]`)
-            .value = idImage
-    }
-
     updateCategory(category) {
-        document.querySelector(`${this.#modal.id} [name=description]`)
+        document.querySelector(`${this.modal.id} [name=description]`)
             .innerHTML = category.description
     }
 
@@ -98,16 +72,5 @@ export default class Character extends AbstractViews {
         document.querySelector('#myClass').value = data.idCategory
         document.querySelector('#description p').innerHTML = data.description
         document.querySelector('#avatar').innerHTML = `<img src=image/id/${data.idImage} alt="" height="350px"/>`
-    }
-
-    eventInModal(event, fn) {
-        const idModal = document.querySelector(this.#modal.id)
-        idModal.addEventListener(event, (e) => {
-            fn(new FormData(idModal))
-        })
-    }
-
-    closeModal() {
-        this.#modal.close()
     }
 }

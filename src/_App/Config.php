@@ -15,6 +15,19 @@ class Config extends Controller
         $this->config = new \Config\Config();
     }
 
+    public function init(array $data): string
+    {
+        $this->config->save($data);
+        return print($this->config->message());
+        // $configuration[$data['connectionName']] = [
+        //     "dns" => "{$data['type']}:host={$data['address']};dbname={$data['db']}",
+        //     'user' => $data['user'],
+        //     'passwd' => $data['passwd']
+        // ];
+
+        // return print(json_encode($configuration));
+    }
+
     public function list(): void
     {
         $config = (object) $this->config;
@@ -50,7 +63,7 @@ class Config extends Controller
     public function update(): void
     {
         $params = $this->getPost($_POST);
-        $data = $params["data"];
+        // $data = $params["data"];
         $this->config->update($params);
         echo json_encode($this->config->message());
     }

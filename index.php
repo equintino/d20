@@ -142,6 +142,7 @@
         $router->post("/group", "Group:init");
         $router->post("/user", "User:save");
         $router->get("/carousel", "Avatar:carousel");
+        $router->post("/config/init", "Config:init");
 
         /** Logout */
         $router->get("/exit", function () {

@@ -17,7 +17,9 @@ class Group extends Model implements Models
         $load = $this->read("SELECT {$columns} FROM " . self::$entity . " WHERE id=:id", "id={$id}", $msgDb);
 
         if ($this->fail || !$load->rowCount()) {
-            $this->message = ($msgDb ? $this->fail->errorInfo[2] : "<span class='warning'>Not Found Informed ID Group</span>");
+            $this->message = (
+                $msgDb ? $this->fail->errorInfo[2] : "<span class='warning'>Not Found Informed ID Group</span>"
+            );
             return null;
         }
 

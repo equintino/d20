@@ -15,7 +15,9 @@ export default class Login extends AbstractControllers {
     }
 
     #showLogin() {
-        this.view.showPage(this.service.open('POST', 'login'))
+        this.view.showPage(this.service.open('POST', 'login'), () => {
+            this.view.initializer()
+        })
         this.#setListConnection()
         this.#setVersion()
         this.#addLogin()
@@ -27,13 +29,15 @@ export default class Login extends AbstractControllers {
         try {
             conf = JSON.parse(this.service.open('POST', './src/Config/.config.json'))
         } catch (error) {
-            return this.view.openModal(this.service.open('POST', './src/Modals/config.php'), {}, () => {
+            return this.view.openModal(this.service.open('POST', './src/Modals/config.php'), {
+
+            }, () => {
                 this.view.setTypeDb(this.service.getTypeDb().db)
             }, (response) => {
-                const resp = this.service.save('confdb', response)
-                if (resp == 1) {
+                const resp = this.service.save('config/init', response)
+                if (resp !== false) {
                     this.view.message(resp, 'var(--cor-success)')
-                    this.view.closeModal()
+                    window.location.reload()
                 }
             })
         }
@@ -70,7 +74,22 @@ export default class Login extends AbstractControllers {
                 'act': 'add',
                 'user': 'login'
             }, () => {
-                this.view.setGroups(this.service.open('POST', 'group'))
+                this.view.setBtnModal(
+                    '<button class="btn btn-rpg btn-silver" value="reset">Limpar</button><button class="btn btn-rpg btn-danger" value="save">Salvar</button>',
+                    (e) => {
+                        let btnName = e.target.value
+                        if (btnName === 'save') {
+                            let formData = this.view.submit(this.view.modal.getBox())
+                            let resp = this.service.save('user/save', formData)
+                            let background = 'var(--cor-warning)'
+                            if (resp.indexOf('success') !== -1) {
+                                background = 'var(--cor-success)'
+                                this.view.modal.close()
+                            }
+                            this.view.message(resp, background)
+                        }
+                    }
+                )
             }, (response) => {
                 const validate = this.service.validate(response)
                 if (validate !== null) {

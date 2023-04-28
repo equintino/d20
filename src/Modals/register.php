@@ -1,8 +1,7 @@
 <style>
     #edit {
-        padding: 50px;
-        background: #434343;
         text-align: left;
+        padding: 10px 20px 20px;
     }
 
     #edit .label {
@@ -37,28 +36,5 @@
                 <input type="password" class="form-input" id="confPassword" name="confPassword"
                 <?= (isset($user) ? "disabled" : ("required='required'")) ?>/></div><!-- col -->
         </div>
-        <div class="row mr-4" >
-            <div class="col-2">
-                <label for="grupo" class="label" >Tipo:</label><br>
-                <select name="group_id" class="form-input" required>
-                    <option value=""></option>
-                    <?php foreach ($this->group as $group): ?>
-                        <?php if ($group->id !== 1): ?>
-                            <option value="<?= $group->id ?>"><?= $group->name ?></option>
-                        <?php endif ?>
-                    <?php endforeach ?>
-                </select>
-            </div>
-            <div class="col-md">
-                <label for="visivel" class="label mb-3">ATIVO: &nbsp&nbsp</label><br>
-                <label class="label">SIM </label><input class="form-radio" type="radio" name="active"
-                value=1 <?= (isset($user) && $user->active == 1 ? "checked" : null) ?> />
-                <label class="label"> NÃO </label><input type="radio" name="active" value=0
-                <?= (isset($user) && $user->active == "0" ? "checked" : null) ?> />
-            </div><!-- col -->
-        </div>
-        <button type="submit" class="button save" style="float: right;"><?= (isset($user)
-        ? "Gravar Alteração" : "Salvar") ?></button>
-        <button type="reset" class="button cancel" style="float: right;">Limpar</button>
     </form>
 </div>
