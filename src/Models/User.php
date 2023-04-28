@@ -47,7 +47,7 @@ class User extends Model implements Models
     }
 
     /** @var $busca array|string */
-    public function find($search, string $columns = "*", bool $msgDb = false)
+    public function find($search, string $columns = "*", bool $msgDb = false): array | User
     {
         $login = &$search;
         if (is_array($search)) {
@@ -71,13 +71,16 @@ class User extends Model implements Models
 
         if ($this->fail || $find->rowCount() === 0) {
             $this->message = (
-                empty($this->fail()) ? "<span class='warning'>Unscribed email or user informed</span>"
-                    : $this->fail()->errorInfo[2]
+                empty($this->fail()) ?
+                "<span class='warning'>Unscribed email or user informed</span>"
+                : $this->fail()->errorInfo[2]
             );
             return $this;
         }
 
-        return (is_array($search) ? $find->fetchAll(\PDO::FETCH_CLASS, __CLASS__) : $find->fetchObject(__CLASS__));
+        return (
+            is_array($search) ? $find->fetchAll(\PDO::FETCH_CLASS, __CLASS__) : $find->fetchObject(__CLASS__)
+        );
     }
 
     public function all(int $limit=30, int $offset=0, string $columns = "*", string $order = "id", bool $msgDb = false): ?array

@@ -13,15 +13,16 @@ class Config
     private $dsn;
     private $user;
     private $passwd;
+    public object $dataFile;
     public $local;
     public $message;
     public $types = [ "mysql", "sqlsrv" ];
 
-    public function __construct(public readonly string $file = ".config.json", public array $dataFile = [])
+    public function __construct(public readonly string $file = ".config.json")
     {
         if (file_exists(__DIR__ . "/" . $file)) {
             // $this->dataFile = parse_ini_file(__DIR__ . "/" . $file, true);
-            $this->dataFile = (array) file_get_contents(__DIR__ . "/" . $file);
+            $this->dataFile = json_decode(file_get_contents(__DIR__ . "/" . $file));
         }
         $this->local = $this->getConfConnection();
     }
@@ -48,8 +49,8 @@ class Config
     public function type(): ?string
     {
         return (
-            !empty($this->dataFile[$this->local]) ?
-                strstr($this->dataFile[$this->local]["dsn"], ":", true)
+            !empty($this->dataFile->{$this->local}) ?
+                strstr($this->dataFile->{$this->local}->dsn, ":", true)
                 : null
         );
     }

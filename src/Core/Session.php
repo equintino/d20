@@ -5,8 +5,8 @@ namespace Core;
 class Session
 {
     private $user;
-    public readonly string $login;
-    public readonly string $password;
+    public string $login;
+    public string $password;
     public readonly string $db;
 
     public function __construct(public readonly ?string $ses = "ses", public readonly ?string $sID = null)

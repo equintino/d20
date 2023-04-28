@@ -52,9 +52,8 @@ class Breed extends Model implements Models
         return $data->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
     }
 
-    public function activeAll(int $limit=30, int $offset=0, string $columns = "*", string $order = "name"): ?array
+    public function activeAll(int $limit=30, int $offset=0, string $columns = "*", string $order = "name")
     {
-        // $sql = "SELECT {$columns} FROM  " . self::$entity . " WHERE " . $this->order($order);
         $sql = "SELECT {$columns} FROM  " . self::$entity . $this->order($order);
         if ($limit !== 0) {
             $all = $this->read($sql . $this->limit(), "limit={$limit}&offset={$offset}");

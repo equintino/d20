@@ -46,7 +46,6 @@ class Connect
                 die("<div>Whoops, There was a mistake when connecting with the bank!</div>");
             }
         }
-
         return self::$instance;
     }
 
@@ -66,25 +65,30 @@ class Connect
     public static function getData(): ?array
     {
         if (self::$data !== null) {
-            return self::$data[self::getConfConnection()];
+            return (array) self::$data[self::getConfConnection()];
         }
 
         if (empty(self::getFile())) {
             return null;
         }
 
-        self::$data = parse_ini_file(self::getFile(), true);
+        // self::$data = parse_ini_file(self::getFile(), true);
+        // return (
+        //     !empty(self::$data[self::getConfConnection()]) ?
+        //         self::$data[self::getConfConnection()] : null
+        // );
 
-        return (
-            !empty(self::$data[self::getConfConnection()]) ?
-                self::$data[self::getConfConnection()] : null
-        );
+        self::$data = self::getFile();
+        return ((array) self::$data[self::getConfConnection()] ?? null);
     }
 
     public static function getFile()
     {
-        if (file_exists(__DIR__ . "/../Config/.config.ini")) {
-            return self::$file = __DIR__ . "/../Config/.config.ini";
+        // if (file_exists(__DIR__ . "/../Config/.config.ini")) {
+        //     return self::$file = __DIR__ . "/../Config/.config.ini";
+        // }
+        if (file_exists(__DIR__ . "/../Config/.config.json")) {
+            return self::$file = (array) json_decode(file_get_contents(__DIR__ . "/../Config/.config.json"));
         }
         return null;
     }

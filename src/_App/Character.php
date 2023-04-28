@@ -23,6 +23,7 @@ class Character extends Controller
         $login = (new Session())->getUser();
         $breeds = (new Breed())->activeAll();
         $classes = (new Category())->activeAll();
+
         $this->view->render($this->page . $act, [ compact("login", "breeds", "classes") ]);
     }
 
