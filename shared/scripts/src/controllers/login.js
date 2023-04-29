@@ -28,10 +28,11 @@ export default class Login extends AbstractControllers {
         let conf
         try {
             conf = JSON.parse(this.service.open('POST', './src/Config/.config.json'))
+            this.view.setConList(conf)
         } catch (error) {
-            return this.view.openModal(this.service.open('POST', './src/Modals/config.php'), {
-
+            this.view.openModal(this.service.open('POST', './src/Modals/config.php'), {
             }, () => {
+                this.view.autoFocusModal('connectionName')
                 this.view.setTypeDb(this.service.getTypeDb().db)
             }, (response) => {
                 const resp = this.service.save('config/init', response)
@@ -41,7 +42,6 @@ export default class Login extends AbstractControllers {
                 }
             })
         }
-        this.view.setConList(conf)
     }
 
     #enterLogin() {
@@ -90,6 +90,7 @@ export default class Login extends AbstractControllers {
                         }
                     }
                 )
+                this.view.autoFocusModal('name')
             }, (response) => {
                 const validate = this.service.validate(response)
                 if (validate !== null) {

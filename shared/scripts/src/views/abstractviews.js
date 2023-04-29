@@ -85,6 +85,10 @@ export default class AbstractViews {
         fn()
     }
 
+    autoFocusModal(name) {
+        document.querySelector(`#boxe_main [name='${name}']`).focus()
+    }
+
     setBtnModal(buttons, fn) {
         this.modal.buttons(buttons, fn)
     }

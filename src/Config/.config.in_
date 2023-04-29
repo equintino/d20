@@ -1,8 +1,0 @@
-[Mysql]
-dsn="mysql:host=localhost;dbname=d20"
-user="root"
-passwd="TVFfbnRuMzkyMTI="
-[Sqlsrv]
-dsn="sqlsrv:Server=localhost;Database=teste"
-user="SA"
-passwd="TVFfbnRuMzkyMTI="
