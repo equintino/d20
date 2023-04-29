@@ -52,7 +52,6 @@ class Login
     {
         $this->session->setLogin($this->login);
         $this->session->setPassword($this->password);
-        // $this->session->setDb($this->db);
         FileTransation::setLocal($this->db);
         $this->session->setUser($this->user);
         if (!empty($_SESSION["login"])) {

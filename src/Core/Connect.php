@@ -4,11 +4,12 @@ namespace Core;
 
 use \PDO;
 use \PDOException;
+use \Config\Config;
 
 class Connect
 {
     public static $data;
-    private static $file;
+    // private static $file;
 
     private const OPTIONS = [
         //PDO::SQLSRV_ATTR_ENCODING => PDO::SQLSRV_ENCODING_UTF8,
@@ -25,7 +26,8 @@ class Connect
      */
     public static function getInstance(bool $msgDb = false): ?PDO
     {
-        $config = self::getData();
+        // $config = self::getData();
+        $config = Config::getConfig();
         if (empty($config)) {
             (new Session())->destroy();
             die("Need to clean the browser cache");
@@ -33,9 +35,9 @@ class Connect
         if (empty(self::$instance)) {
             try {
                 self::$instance = new PDO(
-                    $config["dsn"],
-                    $config["user"],
-                    self::getPasswd($config["passwd"]),
+                    $config->dsn,
+                    $config->user,
+                    self::getPasswd($config->passwd),
                     self::OPTIONS
                 );
             } catch (\PDOException $exception) {
@@ -49,49 +51,49 @@ class Connect
         return self::$instance;
     }
 
-    public static function getConfConnection(): ?string
-    {
-        if (!empty($_SESSION["login"])) {
-            return $_SESSION["login"]->db;
-        }
-        return CONF_CONNECTION;
-    }
+    // public static function getConfConnection(): ?string
+    // {
+    //     if (!empty($_SESSION["login"])) {
+    //         return $_SESSION["login"]->db;
+    //     }
+    //     return CONF_CONNECTION;
+    // }
 
     public static function getPasswd(string $passwd): ?string
     {
         return Safety::decrypt($passwd);
     }
 
-    public static function getData(): ?array
-    {
-        if (self::$data !== null) {
-            return (array) self::$data[self::getConfConnection()];
-        }
+    // public static function getData(): ?array
+    // {
+    //     if (self::$data !== null) {
+    //         return (array) self::$data[self::getConfConnection()];
+    //     }
 
-        if (empty(self::getFile())) {
-            return null;
-        }
+    //     if (empty(self::getFile())) {
+    //         return null;
+    //     }
 
-        // self::$data = parse_ini_file(self::getFile(), true);
-        // return (
-        //     !empty(self::$data[self::getConfConnection()]) ?
-        //         self::$data[self::getConfConnection()] : null
-        // );
+    //     // self::$data = parse_ini_file(self::getFile(), true);
+    //     // return (
+    //     //     !empty(self::$data[self::getConfConnection()]) ?
+    //     //         self::$data[self::getConfConnection()] : null
+    //     // );
 
-        self::$data = self::getFile();
-        return ((array) self::$data[self::getConfConnection()] ?? null);
-    }
+    //     self::$data = self::getFile();
+    //     return ((array) self::$data[self::getConfConnection()] ?? null);
+    // }
 
-    public static function getFile()
-    {
-        // if (file_exists(__DIR__ . "/../Config/.config.ini")) {
-        //     return self::$file = __DIR__ . "/../Config/.config.ini";
-        // }
-        if (file_exists(__DIR__ . "/../Config/.config.json")) {
-            return self::$file = (array) json_decode(file_get_contents(__DIR__ . "/../Config/.config.json"));
-        }
-        return null;
-    }
+    // public static function getFile()
+    // {
+    //     // if (file_exists(__DIR__ . "/../Config/.config.ini")) {
+    //     //     return self::$file = __DIR__ . "/../Config/.config.ini";
+    //     // }
+    //     if (file_exists(__DIR__ . "/../Config/.config.json")) {
+    //         return self::$file = (array) json_decode(file_get_contents(__DIR__ . "/../Config/.config.json"));
+    //     }
+    //     return null;
+    // }
 
     final private function __construct()
     {

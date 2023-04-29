@@ -2,7 +2,7 @@
 
 namespace Config;
 
-use Core\Connect;
+// use Core\Connect;
 use Traits\CryptoTrait;
 
 class Config
@@ -13,29 +13,41 @@ class Config
     private $dsn;
     private $user;
     private $passwd;
-    public object $dataFile;
-    public $local;
+    public readonly string $file;
+    public static object $dataFile;
+    public static string $local;
     public $message;
     public $types = [ "mysql", "sqlsrv" ];
 
-    public function __construct(public readonly string $file = ".config.json")
+    public function __construct()
     {
-        if (file_exists(__DIR__ . "/" . $file)) {
+        $this->file = ".config.json";
+        if (file_exists(__DIR__ . "/" . $this->file)) {
             // $this->dataFile = parse_ini_file(__DIR__ . "/" . $file, true);
-            $this->dataFile = json_decode(file_get_contents(__DIR__ . "/" . $file));
+            self::$dataFile = json_decode(file_get_contents(__DIR__ . "/" . $this->file));
         }
-        $this->local = $this->getConfConnection();
+        self::$local = $this->getConfConnection();
+    }
+
+    public static function getConfig()
+    {
+        return self::$dataFile->{self::$local};
     }
 
     /** contant file env */
     public function getConfConnection(): ?string
     {
-        return Connect::getConfConnection();
+        // return Connect::getConfConnection();
+
+        if (!empty($_SESSION["login"])) {
+            return $_SESSION["login"]->db;
+        }
+        return CONF_CONNECTION;
     }
 
     public function setConfConnection(array $data, string $connectionName = null)
     {
-        $this->local = (!empty($connectionName) ? $connectionName : $data["connectionName"]);
+        self::$local = (!empty($connectionName) ? $connectionName : $data["connectionName"]);
         $this->data = $data;
         $this->setType($this->data["type"]);
         $this->setAddress($this->data["address"]);
@@ -49,8 +61,8 @@ class Config
     public function type(): ?string
     {
         return (
-            !empty($this->dataFile->{$this->local}) ?
-                strstr($this->dataFile->{$this->local}->dsn, ":", true)
+            !empty(self::$dataFile->{self::$local}) ?
+                strstr(self::$dataFile->{self::$local}->dsn, ":", true)
                 : null
         );
     }
@@ -70,7 +82,7 @@ class Config
 
     public function address(): ?string
     {
-        return substr(strstr(strstr($this->file[$this->local]["dsn"], "="), ";", true),1);
+        return substr(strstr(strstr($this->file[self::$local]["dsn"], "="), ";", true),1);
     }
 
     private function setAddress(string $address)
@@ -80,7 +92,7 @@ class Config
 
     public function database(): ?string
     {
-        return substr(strrchr($this->file[$this->local]["dsn"], "="), 1);
+        return substr(strrchr($this->file[self::$local]["dsn"], "="), 1);
     }
 
     private function setDatabase(string $database)
@@ -100,7 +112,7 @@ class Config
 
     public function user(): ?string
     {
-        return $this->file[$this->local]["user"];
+        return $this->file[self::$local]["user"];
     }
 
     public function getUser(): ?string
@@ -115,7 +127,7 @@ class Config
 
     public function passwd(): ?string
     {
-        return $this->decrypt($this->file[$this->local]["passwd"]);
+        return $this->decrypt($this->file[self::$local]["passwd"]);
     }
 
     public function getPasswd(): ?string
@@ -135,7 +147,7 @@ class Config
 
     public function confirmSave(): bool
     {
-        if (array_key_exists($this->local, $this->file)) {
+        if (array_key_exists(self::$local, $this->file)) {
             $this->message = "<span class=warning >The connection name already exists</span>";
             return false;
         } else {
@@ -145,7 +157,7 @@ class Config
 
     public function save(array $data): bool
     {
-        $file = $this->dataFile;
+        $file = self::$dataFile;
         $this->setConfConnection($data);
         $connectionName = $data["connectionName"];
 
@@ -222,6 +234,38 @@ class Config
         fclose($handle);
         return ($resp);
     }
+
+    // public static function getData(): ?object
+    // {
+
+    //     if ($this->dataFile !== null) {
+    //         return $this->dataFile->{$this->local};
+    //     }
+
+    //     if (empty(self::getFile())) {
+    //         return null;
+    //     }
+
+    //     // self::$data = parse_ini_file(self::getFile(), true);
+    //     // return (
+    //     //     !empty(self::$data[self::getConfConnection()]) ?
+    //     //         self::$data[self::getConfConnection()] : null
+    //     // );
+
+    //     $this->dataFile = self::getFile();
+    //     return ($this->dataFile->{$this->local} ?? null);
+    // }
+
+    // public static function getFile(): ?object
+    // {
+    //     // if (file_exists(__DIR__ . "/../Config/.config.ini")) {
+    //     //     return self::$file = __DIR__ . "/../Config/.config.ini";
+    //     // }
+    //     if (file_exists(__DIR__ . "/../Config/.config.json")) {
+    //         return $this->file = json_decode(file_get_contents(__DIR__ . "/../Config/.config.json"));
+    //     }
+    //     return null;
+    // }
 
     public function message(): ?string
     {
