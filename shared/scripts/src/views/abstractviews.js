@@ -4,13 +4,14 @@ import Carousel from "./../../lib/carousel.js"
 import Modal from "./../../lib/modal.js"
 import Message from "../../lib/message.js"
 
+const loading = utils.loading
 export default class AbstractViews {
-    loading
     buttons
     modal
+    loading
 
     constructor() {
-        this.loading = utils.loading
+        this.loading = loading
         this.buttons = document.querySelectorAll('#init button')
         this.modal = new Modal()
     }
@@ -26,7 +27,7 @@ export default class AbstractViews {
     setButtons(fn) {
         this.buttons.forEach((btn) => {
             btn.addEventListener('click', (e) => {
-                this.loading.show()
+                loading.show()
                 fn(e.target.value)
             })
         })
@@ -40,15 +41,30 @@ export default class AbstractViews {
         })
     }
 
-    reset(form) {
+    reset(form, fn) {
         document.querySelector(form).reset()
+        document.querySelectorAll(form + ' [required]').forEach((e) => {
+            e.style.background = '#333'
+            e.style.color = '#fff'
+        })
+        if (typeof(fn) === 'function') fn()
     }
 
-    submit(form) {
-        let formData = new FormData(
-            form.querySelector('form')
-        )
-        return formData
+    submit(form, fn) {
+        let data = document.querySelector(form)
+        let formData = new FormData(data)
+        let field
+        for (let i in data.querySelectorAll('[required]')) {
+            field = data.querySelectorAll('[required]')[i]
+            if (typeof(field.value) === 'undefined') break
+            if (field.value.trim() === '') {
+                field.style.background = 'pink'
+                field.style.color = 'rgb(48, 48, 48)'
+                field.focus()
+                break
+            }
+        }
+        if (typeof(fn) === 'function') fn(formData)
     }
 
     carousel(id, list, fn) {

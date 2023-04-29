@@ -78,15 +78,17 @@ export default class Login extends AbstractControllers {
                     '<button class="btn btn-rpg btn-silver" value="reset">Limpar</button><button class="btn btn-rpg btn-danger" value="save">Salvar</button>',
                     (e) => {
                         let btnName = e.target.value
+                        let id = `#${this.view.modal.getBox().id}`
                         if (btnName === 'save') {
-                            let formData = this.view.submit(this.view.modal.getBox())
-                            let resp = this.service.save('user/save', formData)
-                            let background = 'var(--cor-warning)'
-                            if (resp.indexOf('success') !== -1) {
-                                background = 'var(--cor-success)'
-                                this.view.modal.close()
-                            }
-                            this.view.message(resp, background)
+                            this.view.submit(id + ' form', (formData) => {
+                                let resp = this.service.save('user/save', formData)
+                                let background = 'var(--cor-warning)'
+                                if (resp.indexOf('success') !== -1) {
+                                    background = 'var(--cor-success)'
+                                    this.view.modal.close()
+                                }
+                                this.view.message(resp, background)
+                            })
                         }
                     }
                 )

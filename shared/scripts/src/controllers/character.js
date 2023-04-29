@@ -17,6 +17,7 @@ export default class Character extends AbstractControllers {
     }
 
     #optInit(btnName) {
+        this.view.loading.show()
         if (btnName === 'new') {
             return this.view.showPage(this.service.open('GET', 'character/add'), (elem) => {
                 this.#setButton(elem)
@@ -60,6 +61,7 @@ export default class Character extends AbstractControllers {
     #setButton(elem) {
         elem.querySelectorAll('button').forEach((btn) => {
             btn.addEventListener('click', (e) => {
+                this.view.loading.show()
                 e.preventDefault()
                 let btnName = e.target.value
                 switch (btnName) {
@@ -71,16 +73,24 @@ export default class Character extends AbstractControllers {
                         })
                         break
                     case 'save':
-                        this.view.submit('#character form')
+                        this.view.submit('#character form', (e) => {
+                            console.log(
+                                e
+                            )
+                            this.view.loading.hide()
+                        })
                         break
                     case 'breed':
                         const list = JSON.parse(this.service.open('POST', 'breed/list'))
                         this.view.carousel('#avatar', list, (e) => {
                             this.view.setDetails(e)
+                            this.view.loading.hide()
                         })
                         break
                     case 'clear':
-                        this.view.reset('#character form')
+                        this.view.reset('#character form', () => {
+                            this.view.loading.hide()
+                        })
                         break
                 }
             })

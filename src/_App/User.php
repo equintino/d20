@@ -95,7 +95,7 @@ class User extends Controller
         $passwd = $params["password"];
         $confPasswd = $params["confPassword"];
         if ($passwd !== $confPasswd) {
-            print(json_encode("<span class='warning'>The password was not confirmed</span>"));
+            print("<span class='warning'>The password was not confirmed</span>");
             die;
         } else {
             unset($params["confPassword"]);
