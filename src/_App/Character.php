@@ -78,16 +78,18 @@ class Character extends Controller
         $this->view->render($this->page . $act, [ compact("act","characters") ]);
     }
 
-    public function save(array $data)
+    public function save(array $data): string
     {
         $characters = new \Models\Character();
-        if (empty($characters->find($data["personage"]))) {
-            $characters->bootstrap($data);
-        } else {
-            return print(json_encode("This personage already exists"));
+        if (!empty($characters->find($data["personage"]))) {
+            return print("<span class='warning'>This personage already exists</span>");
         }
+        if (empty($data['stoty'])) {
+            $data['story'] = 'Nenhuma história foi contada';
+        }
+        $characters->bootstrap($data);
         $characters->save();
-        return print(json_encode($characters->message()));
+        return print($characters->message());
     }
 
     public function update(array $data): string

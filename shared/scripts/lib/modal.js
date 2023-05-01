@@ -43,14 +43,16 @@ export default class Modal {
         const btn = this.#box.querySelector('#buttons')
         btn.innerHTML = buttons
         btn.addEventListener('click', (e) => {
+            let form = this.#box.querySelector('form')
             if (e.target.value === 'reset') {
-                this.#box.querySelector('form').reset()
+                form.reset()
             }
-            if (typeof(fn) === 'function') fn(e)
+            if (typeof(fn) === 'function') fn(e, form)
         })
     }
 
     close() {
+        this.#box.querySelector('button').remove()
         this.#box.style = 'display: none'
         this.#mask.style = 'display: none'
     }

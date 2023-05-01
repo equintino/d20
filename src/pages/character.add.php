@@ -13,11 +13,12 @@
                     <div style="flex-grow: 2">
                         <button id="myBreed" class="btn-rpg" value="breed">Raça</button>
                         <strong class="breed">&nbsp</strong>
+                        <input type="hidden" name="breed_id" value="" />
                     </div>
                     <div style="flex-grow: 2">
                         <label>Classe: </label>
                         <span>
-                            <select id="myClass" class="input-rpg" name="class" required>
+                            <select id="myClass" class="input-rpg" name="category_id" required>
                                 <option></option>
                                 <?php foreach ($classes as $class): ?>
                                 <option value="<?= $class->id ?>"><?= strtoupper($class->name) ?></option>
@@ -49,6 +50,7 @@
                 </section>
                 <section class=".side-right" >
                     <div id="avatar"></div>
+                    <input type="hidden" name="image_id" value="" />
                 </section>
             </form>
         </fieldset>

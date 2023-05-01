@@ -142,6 +142,7 @@ class Character extends Model implements Models
                 ->prepare("INSERT INTO {$entity} ({$columns}) VALUES ({$values})");
 
             foreach ($data as $key => $value) {
+                $value = (is_numeric($value) ? (int) $value : $value);
                 $$key = $value;
             }
 

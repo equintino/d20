@@ -85,8 +85,8 @@ export default class AbstractViews {
         })
     }
 
-    imgSelected(idImage) {
-        document.querySelector(`${this.modal.id} [name=image_id]`)
+    imgSelected(idElement, idImage) {
+        document.querySelector(`${idElement} [name=image_id]`)
             .value = idImage
     }
 
@@ -98,7 +98,7 @@ export default class AbstractViews {
             }
             response(formData)
         })
-        fn()
+        if (typeof(fn) === 'function') fn(this.modal.getBox())
     }
 
     autoFocusModal(name) {
@@ -106,11 +106,13 @@ export default class AbstractViews {
     }
 
     setBtnModal(buttons, fn) {
-        this.modal.buttons(buttons, fn)
+        this.modal.buttons(buttons, (e, form) => {
+            if (typeof(fn) === 'function') fn(e, form)
+        })
     }
 
-    eventInModal(event, fn) {
-        const idModal = document.querySelector(this.modal.id)
+    eventInModal(idElement, event, fn) {
+        const idModal = document.querySelector(idElement)
         idModal.addEventListener(event, (e) => {
             fn(new FormData(idModal))
         })

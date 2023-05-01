@@ -30,22 +30,31 @@ export default class Character extends AbstractControllers {
                     this.view.openModal(this.service.open('POST', 'avatar/show', formData), formData, () => {
                         list = JSON.parse(list)
                         this.view.carousel('#imageAvatar', list, (data) => {
-                            this.view.imgSelected(data.idImage)
+                            this.view.imgSelected('#avatarList', data.idImage)
                         })
 
-                        this.view.eventInModal('change', (formData) => {
+                        this.view.eventInModal('#avatarList', 'change', (formData) => {
                             list = JSON.parse(this.service.open('POST', 'avatar', formData))
                             this.view.carousel('#imageAvatar', list, (data) => {
-                                this.view.imgSelected(data.idImage)
+                                this.view.imgSelected('#avatarList', data.idImage)
                             })
 
                             let category = JSON.parse(this.service.open('POST', `category/id/${formData.get('idCategory')}`))
-                            this.view.updateCategory(category)
+                            this.view.updateCategory('#avatarList', category)
+                        })
+
+                        this.view.setBtnModal('<button class="btn btn-rpg btn-danger" value="selected">Selecionar</button>', (e, form) => {
+                            let btnName = e.target.value
+                            if (btnName === 'selected') {
+                                this.view.avatarSelected(form)
+                                this.view.closeModal()
+                            }
                         })
                     }, (response) => {
                         /** submit */
-                        this.view.avatarSelected(response)
-                        this.view.closeModal()
+                        console.log(
+                            response
+                        )
                     })
                 })
             })
@@ -73,11 +82,27 @@ export default class Character extends AbstractControllers {
                         })
                         break
                     case 'save':
-                        this.view.submit('#character form', (e) => {
-                            console.log(
-                                e
-                            )
+                        this.view.submit('#character form', (formData) => {
+                            let resp = this.service.save('character/save', formData)
+                            this.view.message(resp, this.#background(resp))
                             this.view.loading.hide()
+
+                            if (resp.indexOf('success') !== -1) {
+                                this.view.openModal(this.service.open('GET', 'character/story'), {}, (elem) => {
+                                    elem.querySelector('[name=story]').focus()
+                                    this.view.setBtnModal('<button class="btn btn-rpg btn-silver" value="reset">Limpar</button><button class="btn btn-rpg btn-danger" value="save">Salvar</button>', (e, form) => {
+                                        let btnName = e.target.value
+                                        if (btnName === 'save') {
+                                            console.log(form)
+                                            // this.view.closeModal()
+                                        }
+                                    })
+                                }, (response) => {
+                                    console.log(
+                                        response
+                                    )
+                                })
+                            }
                         })
                         break
                     case 'breed':
@@ -95,5 +120,15 @@ export default class Character extends AbstractControllers {
                 }
             })
         })
+    }
+
+    #background(resp) {
+        if (resp.indexOf('danger') !== -1) {
+            return 'var(--cor-danger)'
+        }
+        if (resp.indexOf('warning') !== -1) {
+            return 'var(--cor-warning)'
+        }
+        return 'var(--cor-success)'
     }
 }
