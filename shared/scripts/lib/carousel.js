@@ -27,32 +27,36 @@ export default class Carousel {
             arrCards.push(cards.querySelector(`#item-${i}`))
         }
 
-        for (let i in arrCards) {
-            switch (i) {
-                case '0':
-                    arrCards[i].style = this.#css.left
-                    break
-                case '1':
-                    arrCards[i].style = this.#css.middle
-                    this.element = arrCards[i]
-                    break
-                case '2':
-                    arrCards[i].style = this.#css.right
-                    break
-                default:
-                    arrCards[i].style = this.#css.other
+        if (arrCards.length > 1) {
+            for (let i in arrCards) {
+                switch (i) {
+                    case '0':
+                        arrCards[i].style = this.#css.left
+                        break
+                    case '1':
+                        arrCards[i].style = this.#css.middle
+                        this.element = arrCards[i]
+                        break
+                    case '2':
+                        arrCards[i].style = this.#css.right
+                        break
+                    default:
+                        arrCards[i].style = this.#css.other
+                }
             }
-        }
 
-        cards.addEventListener('click', () => {
-            let arr = this.#direction(arrCards, true)
-            arr[0].style = this.#css.left
-            arr[1].style = this.#css.middle
-            arr[2].style = this.#css.right
-            arr[3].style = this.#css.other
-            arrCards = arr
-            this.element = arr[1]
-        })
+            cards.addEventListener('click', () => {
+                let arr = this.#direction(arrCards, true)
+                arr[0].style = this.#css.left
+                arr[1].style = this.#css.middle
+                arr[2].style = this.#css.right
+                arr[3].style = this.#css.other
+                arrCards = arr
+                this.element = arr[1]
+            })
+        } else {
+            this.element = arrCards[0]
+        }
     }
 
     #direction(arr, asc) {

@@ -32,13 +32,11 @@ export default class Character extends AbstractControllers {
                         this.view.carousel('#imageAvatar', list, (data) => {
                             this.view.imgSelected('#avatarList', data.idImage)
                         })
-
                         this.view.eventInModal('#avatarList', 'change', (formData) => {
                             list = JSON.parse(this.service.open('POST', 'avatar', formData))
                             this.view.carousel('#imageAvatar', list, (data) => {
                                 this.view.imgSelected('#avatarList', data.idImage)
                             })
-
                             let category = JSON.parse(this.service.open('POST', `category/id/${formData.get('idCategory')}`))
                             this.view.updateCategory('#avatarList', category)
                         })
@@ -84,6 +82,9 @@ export default class Character extends AbstractControllers {
                     case 'save':
                         this.view.submit('#character form', (formData) => {
                             let resp = this.service.save('character/save', formData)
+                            console.log(
+                                resp
+                            )
                             this.view.message(resp, this.#background(resp))
                             this.view.loading.hide()
 
@@ -93,7 +94,11 @@ export default class Character extends AbstractControllers {
                                     this.view.setBtnModal('<button class="btn btn-rpg btn-silver" value="reset">Limpar</button><button class="btn btn-rpg btn-danger" value="save">Salvar</button>', (e, form) => {
                                         let btnName = e.target.value
                                         if (btnName === 'save') {
-                                            console.log(form)
+                                            formData.append('story', form.querySelector('[name=story]').value)
+                                            console.log(
+                                                formData,
+                                                this.service.open('POST', 'character/update', formData)
+                                            )
                                             // this.view.closeModal()
                                         }
                                     })

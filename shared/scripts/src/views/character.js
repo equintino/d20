@@ -61,8 +61,8 @@ export default class Character extends AbstractViews {
     avatarSelected(data) {
         document.querySelector('.breed').attributes['data-id'].value = data.idBreed.value
         document.querySelector('.breed').innerText = data.idBreed.selectedOptions[0]['text'].toUpperCase()
+        document.querySelector('#description p').innerHTML = data.idBreed.selectedOptions[0].attributes['data-description'].value
         document.querySelector('#myClass').value = data.idCategory.value
-        document.querySelector('#description p').innerHTML = data.description.value
         document.querySelector('#avatar').innerHTML = `<img src=image/id/${data.image_id.value} alt="" height="350px"/>`
         document.querySelector('#myCharacter [name=image_id]').value = data.image_id.value
     }

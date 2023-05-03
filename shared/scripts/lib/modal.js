@@ -52,7 +52,8 @@ export default class Modal {
     }
 
     close() {
-        this.#box.querySelector('button').remove()
+        let button = this.#box.querySelector('button')
+        if (button !== null) button.remove()
         this.#box.style = 'display: none'
         this.#mask.style = 'display: none'
     }

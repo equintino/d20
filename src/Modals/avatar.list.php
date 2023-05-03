@@ -40,7 +40,7 @@
         <?php endif ?>
         <section>
             <div id="breed_description">
-            <label class="label-rpg">Características:</lebel><br>
+            <label class="label-rpg">Características da Classe:</lebel><br>
             <textarea name="description" class="input-rpg" disabled rows="10" ><?= ($currentCat->description
                 ?? "Sem descrição") ?></textarea>
             </div>

@@ -67,16 +67,16 @@ export default class AbstractViews {
         if (typeof(fn) === 'function') fn(formData)
     }
 
-    carousel(id, list, fn) {
-        const carousel = new Carousel(id, list)
-        const items = document.querySelector(id).firstChild.children
+    carousel(idElement, list, fn) {
+        const carousel = new Carousel(idElement, list)
+        const items = document.querySelector(idElement).firstChild.children
 
         if (typeof(fn) === 'function') fn({
             id: carousel.element.attributes["data-id"].value,
             idImage: carousel.element.attributes["data-idImage"].value,
             items
         })
-        document.querySelector(id).addEventListener('click', () => {
+        document.querySelector(idElement).addEventListener('click', () => {
             if (typeof(fn) === 'function') fn({
                 id: carousel.element.attributes["data-id"].value,
                 idImage: carousel.element.attributes["data-idImage"].value,
