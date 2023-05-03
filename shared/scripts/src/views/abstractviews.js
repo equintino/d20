@@ -70,18 +70,16 @@ export default class AbstractViews {
     carousel(idElement, list, fn) {
         const carousel = new Carousel(idElement, list)
         const items = document.querySelector(idElement).firstChild.children
-
-        if (typeof(fn) === 'function') fn({
-            id: carousel.element.attributes["data-id"].value,
-            idImage: carousel.element.attributes["data-idImage"].value,
-            items
-        })
-        document.querySelector(idElement).addEventListener('click', () => {
-            if (typeof(fn) === 'function') fn({
+        const func = () => {
+            fn({
                 id: carousel.element.attributes["data-id"].value,
                 idImage: carousel.element.attributes["data-idImage"].value,
                 items
             })
+        }
+        if (typeof(fn) === 'function') func()
+        document.querySelector(idElement).addEventListener('click', () => {
+            if (typeof(func) === 'function') func()
         })
     }
 

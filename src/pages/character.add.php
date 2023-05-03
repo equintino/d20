@@ -3,6 +3,7 @@
         <fieldset class="fieldset">
             <legend>CADASTRO DE PERSONAGEM</legend>
             <form enctype="multipart/form-data" id="myCharacter" action="character/save" method="POST">
+                <input type="hidden" name="image_id" value="" />
                 <section class="side-left">
                     <label>Jogador: </label>
                     <input class="input-rpg" name="name" value="<?= (strtoupper($login->login) ??
@@ -50,7 +51,6 @@
                 </section>
                 <section class=".side-right" >
                     <div id="avatar"></div>
-                    <input type="hidden" name="image_id" value="" />
                 </section>
             </form>
         </fieldset>
