@@ -53,7 +53,12 @@ export default class AbstractViews {
     submit(form, fn) {
         let data = document.querySelector(form)
         let formData = new FormData(data)
+        if (typeof(fn) === 'function') fn(formData, this.#validate(data))
+    }
+
+    #validate(data) {
         let field
+        let resp = true
         for (let i in data.querySelectorAll('[required]')) {
             field = data.querySelectorAll('[required]')[i]
             if (typeof(field.value) === 'undefined') break
@@ -61,10 +66,11 @@ export default class AbstractViews {
                 field.style.background = 'pink'
                 field.style.color = 'rgb(48, 48, 48)'
                 field.focus()
+                resp = false
                 break
             }
         }
-        if (typeof(fn) === 'function') fn(formData)
+        return resp
     }
 
     carousel(idElement, list, fn) {

@@ -93,14 +93,16 @@ export default class Character extends AbstractControllers {
                         })
                         break
                     case 'save':
-                        this.view.submit('#character form', (formData) => {
-                            let resp = this.service.save('character/save', formData)
-                            this.view.message(resp, this.#background(resp))
-                            this.view.loading.hide()
-                            if (resp.indexOf('success') !== -1) {
-                                this.view.reset('#character form')
-                                this.view.removeAvatarSelected()
+                        this.view.submit('#character form', (formData, validate) => {
+                            if (validate) {
+                                let resp = this.service.save('character/save', formData)
+                                this.view.message(resp, this.#background(resp))
+                                if (resp.indexOf('success') !== -1) {
+                                    this.view.reset('#character form')
+                                    this.view.removeAvatarSelected()
+                                }
                             }
+                            this.view.loading.hide()
                         })
                         break
                     case 'breed':
