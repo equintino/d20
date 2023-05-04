@@ -56,7 +56,7 @@
         $router->post("/character/update", "Character:update");
         $router->post("/character/edit", "Character:edit");
         $router->post("/character/delete", "Character:delete");
-        $router->get("/character/story", "Character:story");
+        $router->post("/character/story", "Character:story");
 
 
         /** The Player */

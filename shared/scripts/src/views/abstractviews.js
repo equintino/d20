@@ -2,7 +2,7 @@ import utils from "./../../lib/utils.js"
 import Views from "./views.js"
 import Carousel from "./../../lib/carousel.js"
 import Modal from "./../../lib/modal.js"
-import Message from "../../lib/message.js"
+import Message from "./../../lib/message.js"
 
 const loading = utils.loading
 export default class AbstractViews {
@@ -26,18 +26,23 @@ export default class AbstractViews {
 
     setButtons(fn) {
         this.buttons.forEach((btn) => {
-            btn.addEventListener('click', (e) => {
+            btn.onclick = (e) => {
                 loading.show()
                 fn(e.target.value)
-            })
+            }
         })
+    }
+
+    setFocus(elem, attr) {
+        elem.querySelector(attr).focus()
     }
 
     backInit(elem, fn) {
         elem.querySelectorAll('#init button').forEach((btn) => {
-            btn.addEventListener('click', (e) => {
+            btn.onclick = (e) => {
+                alert('clicou')
                 fn(e.target.value)
-            })
+            }
         })
     }
 
@@ -84,9 +89,9 @@ export default class AbstractViews {
             })
         }
         if (typeof(fn) === 'function') func()
-        document.querySelector(idElement).addEventListener('click', () => {
+        document.querySelector(idElement).onclick = () => {
             if (typeof(func) === 'function') func()
-        })
+        }
     }
 
     imgSelected(idElement, idImage) {
@@ -122,7 +127,8 @@ export default class AbstractViews {
         })
     }
 
-    closeModal() {
+    closeModal(fn) {
         this.modal.close()
+        if (typeof(fn) === 'function') fn()
     }
 }

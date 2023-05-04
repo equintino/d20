@@ -17,10 +17,10 @@ export default class Modal {
         this.#mask.style = 'display: block'
 
         if (this.#box.querySelector('form') !== null) {
-            this.#box.querySelector('form').addEventListener('submit', (e) => {
+            this.#box.querySelector('form').onsubmit = (e) => {
                 e.preventDefault()
                 fn(e)
-            })
+            }
         }
 
         /** Closing */
@@ -29,26 +29,26 @@ export default class Modal {
             close
         ]
         for (let i of hidden) {
-            i.addEventListener('click', () => {
+            i.onclick = () => {
                 this.close()
-            })
+            }
         }
 
-        document.addEventListener('keyup', (e) => {
+        document.onkeyup = (e) => {
             if (e.key === 'Escape') { this.close() }
-        })
+        }
     }
 
     buttons(buttons, fn) {
         const btn = this.#box.querySelector('#buttons')
         btn.innerHTML = buttons
-        btn.addEventListener('click', (e) => {
+        btn.onclick = (e) => {
             let form = this.#box.querySelector('form')
             if (e.target.value === 'reset') {
                 form.reset()
             }
             if (typeof(fn) === 'function') fn(e, form)
-        })
+        }
     }
 
     close() {
