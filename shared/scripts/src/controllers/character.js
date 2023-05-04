@@ -80,14 +80,17 @@ export default class Character extends AbstractControllers {
                 break
             case 'save':
                 this.view.submit('#character form', (formData, validate) => {
+                    let resp
                     if (validate) {
-                        let resp = this.service.save('character/save', formData)
-                        this.message(resp)
+                        resp = this.service.save('character/save', formData)
                         if (resp.indexOf('success') !== -1) {
                             this.view.reset('#character form')
                             this.view.removeAvatarSelected()
                         }
+                    } else {
+                        resp = "<span class='warning'>This field is necessary!!!</span>"
                     }
+                    this.message(resp)
                     this.view.loading.hide()
                 })
                 break
