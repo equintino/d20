@@ -8,6 +8,7 @@ export default class Character extends AbstractViews {
     }
 
     setDetails({ id, items }) {
+        document.querySelector('#myClass').value = ''
         for (let item of items) {
             if (item.attributes['data-id'].value === id) {
                 document.querySelector('#description p').innerHTML = item.attributes['data-description'].value
@@ -59,18 +60,34 @@ export default class Character extends AbstractViews {
             .innerHTML = category.description
     }
 
-    avatarSelected(data) {
+    avatarSelected(data, fn) {
         document.querySelector('.breed').attributes['data-id'].value = data.idBreed.value
         document.querySelector('.breed').innerText = data.idBreed.selectedOptions[0]['text'].toUpperCase()
         document.querySelector('#description p').innerHTML = data.idBreed.selectedOptions[0].attributes['data-description'].value
         document.querySelector('#myClass').value = data.idCategory.value
-        document.querySelector('#avatar').parentElement.innerHTML = `<div id='avatar'><img src=image/id/${data.image_id.value} alt="" height="350px"/></div>`
         document.querySelector('#myCharacter [name=image_id]').value = data.image_id.value
+        document.querySelector('#avatar').parentElement.innerHTML = `<div id='avatar'><img src=image/id/${data.image_id.value} alt="" height="350px" /></div>`
+        if (typeof(fn) === 'function') fn()
+    }
+
+    changeAvatar(fn) {
+        let idCategory = document.querySelector('#myClass').value
+        let breed = document.querySelector('.breed')
+        let formData = new FormData()
+        formData.append('idBreed', breed.attributes['data-id'].value)
+        formData.append('idCategory', idCategory)
+
+        let img = document.querySelector('#avatar img')
+        img.setAttribute('title', 'clique para trocar avatar')
+        img.style.cursor = 'pointer'
+        img.onclick = () => {
+            fn(formData)
+        }
     }
 
     removeAvatarSelected() {
-        const evt = new Event('click')
-        document.querySelector("#myBreed").dispatchEvent(evt, () => {})
+        document.querySelector('#avatar img').attributes['src'].value = ''
+        document.querySelector('[name=image_id]').value = ''
     }
 
     setStory(form) {

@@ -40,7 +40,6 @@ export default class AbstractViews {
     backInit(elem, fn) {
         elem.querySelectorAll('#init button').forEach((btn) => {
             btn.onclick = (e) => {
-                alert('clicou')
                 fn(e.target.value)
             }
         })

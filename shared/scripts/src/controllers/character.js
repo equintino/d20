@@ -49,7 +49,14 @@ export default class Character extends AbstractControllers {
             this.view.setBtnModal('<button class="btn btn-rpg btn-danger" value="selected">Selecionar</button>', (e, form) => {
                 let btnName = e.target.value
                 if (btnName === 'selected') {
-                    this.view.avatarSelected(form)
+                    this.view.avatarSelected(form, (e) => {
+                        this.view.changeAvatar((formData) => {
+                            let list = this.openFile('avatar', formData)
+                            formData.append('act', 'list')
+                            formData.append('response', list)
+                            this.#setModal(formData, list)
+                        })
+                    })
                     this.view.closeModal(() => {
                         /** The short story */
                         this.openModal('character/story', {}, (elem) => {
@@ -58,7 +65,9 @@ export default class Character extends AbstractControllers {
                                 let btnName = e.target.value
                                 if (btnName === 'save') {
                                     this.view.setStory(form)
-                                    this.view.closeModal()
+                                    this.view.closeModal(() => {
+                                        alert('fechei')
+                                    })
                                 }
                             })
                         })
