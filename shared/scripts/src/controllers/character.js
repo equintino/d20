@@ -26,34 +26,7 @@ export default class Character extends AbstractControllers {
 
                     formData.append('act', 'list')
                     formData.append('response', list)
-
-                    this.view.openModal(this.service.open('POST', 'avatar/show', formData), formData, () => {
-                        list = JSON.parse(list)
-                        this.view.carousel('#imageAvatar', list, (data) => {
-                            this.view.imgSelected('#avatarList', data.idImage)
-                        })
-                        this.view.eventInModal('#avatarList', 'change', (formData) => {
-                            list = JSON.parse(this.service.open('POST', 'avatar', formData))
-                            this.view.carousel('#imageAvatar', list, (data) => {
-                                this.view.imgSelected('#avatarList', data.idImage)
-                            })
-                            let category = JSON.parse(this.service.open('POST', `category/id/${formData.get('idCategory')}`))
-                            this.view.updateCategory('#avatarList', category)
-                        })
-
-                        this.view.setBtnModal('<button class="btn btn-rpg btn-danger" value="selected">Selecionar</button>', (e, form) => {
-                            let btnName = e.target.value
-                            if (btnName === 'selected') {
-                                this.view.avatarSelected(form)
-                                this.view.closeModal()
-                            }
-                        })
-                    }, (response) => {
-                        /** submit */
-                        console.log(
-                            response
-                        )
-                    })
+                    this.#setModal(formData, list)
                 })
             })
         }
@@ -63,6 +36,46 @@ export default class Character extends AbstractControllers {
                 this.#setButton(elem)
             })
         }
+    }
+
+    #setModal(formData, list) {
+        this.view.openModal(this.service.open('POST', 'avatar/show', formData), formData, () => {
+            list = JSON.parse(list)
+            this.view.carousel('#imageAvatar', list, (data) => {
+                this.view.imgSelected('#avatarList', data.idImage)
+            })
+            this.view.eventInModal('#avatarList', 'change', (formData) => {
+                this.view.loading.show()
+                list = JSON.parse(this.service.open('POST', 'avatar', formData))
+                this.view.carousel('#imageAvatar', list, (data) => {
+                    this.view.imgSelected('#avatarList', data.idImage)
+                    this.view.loading.hide()
+                })
+                let category = JSON.parse(this.service.open('POST', `category/id/${formData.get('idCategory')}`))
+                this.view.updateCategory('#avatarList', category)
+            })
+
+            this.view.setBtnModal('<button class="btn btn-rpg btn-danger" value="selected">Selecionar</button>', (e, form) => {
+                let btnName = e.target.value
+                if (btnName === 'selected') {
+                    this.view.avatarSelected(form)
+                    this.view.closeModal()
+
+                    /** The short story */
+                    this.view.openModal(this.service.open('GET', 'character/story'), {}, (elem) => {
+                        elem.querySelector('[name=story]').focus()
+                        this.view.setBtnModal('<button class="btn btn-rpg btn-silver" value="reset">Limpar</button><button class="btn btn-rpg btn-danger" value="save">Salvar</button>', (e, form) => {
+                            let btnName = e.target.value
+                            if (btnName === 'save') {
+                                this.view.setStory(form)
+                                this.view.closeModal()
+                            }
+                        })
+                    })
+                }
+            })
+            this.view.loading.hide()
+        })
     }
 
     #setButton(elem) {
@@ -82,31 +95,11 @@ export default class Character extends AbstractControllers {
                     case 'save':
                         this.view.submit('#character form', (formData) => {
                             let resp = this.service.save('character/save', formData)
-                            console.log(
-                                resp
-                            )
                             this.view.message(resp, this.#background(resp))
                             this.view.loading.hide()
-
                             if (resp.indexOf('success') !== -1) {
-                                this.view.openModal(this.service.open('GET', 'character/story'), {}, (elem) => {
-                                    elem.querySelector('[name=story]').focus()
-                                    this.view.setBtnModal('<button class="btn btn-rpg btn-silver" value="reset">Limpar</button><button class="btn btn-rpg btn-danger" value="save">Salvar</button>', (e, form) => {
-                                        let btnName = e.target.value
-                                        if (btnName === 'save') {
-                                            formData.append('story', form.querySelector('[name=story]').value)
-                                            console.log(
-                                                formData,
-                                                this.service.open('POST', 'character/update', formData)
-                                            )
-                                            // this.view.closeModal()
-                                        }
-                                    })
-                                }, (response) => {
-                                    console.log(
-                                        response
-                                    )
-                                })
+                                this.view.reset('#character form')
+                                this.view.removeAvatarSelected()
                             }
                         })
                         break

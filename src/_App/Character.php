@@ -78,7 +78,7 @@ class Character extends Controller
         $this->view->render($this->page . $act, [ compact("act","characters") ]);
     }
 
-    public function save(array $data): ?int
+    public function save(array $data): ?string
     {
         $characters = new \Models\Character();
         if (!empty($characters->find($data["personage"]))) {
@@ -88,8 +88,8 @@ class Character extends Controller
             $data['story'] = 'Nenhuma história foi contada';
         }
         $characters->bootstrap($data);
-        return $characters->save();
-        // return print($characters->message());
+        $characters->save();
+        return print($characters->message());
     }
 
     public function update(array $data): string

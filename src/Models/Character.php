@@ -118,7 +118,7 @@ class Character extends Model implements Models
         return $this->id;
     }
 
-    private function create_()
+    private function create_(): ?int
     {
         if (!empty($this->id) && $this->find($this->id)) {
             $this->message = "<span class='warning'>Informed file is already registered</span>";

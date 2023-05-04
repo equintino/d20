@@ -20,6 +20,7 @@ export default class Character extends AbstractViews {
 
     changeCategory(fn) {
         document.querySelector('#myClass').addEventListener('change', (e) => {
+            this.loading.show()
             let idCategory = e.target.value
             let breed = document.querySelector('.breed')
             if (typeof(breed.attributes['data-id']) === 'undefined') {
@@ -64,7 +65,15 @@ export default class Character extends AbstractViews {
         document.querySelector('#description p').innerHTML = data.idBreed.selectedOptions[0].attributes['data-description'].value
         document.querySelector('#myClass').value = data.idCategory.value
         document.querySelector('#avatar').parentElement.innerHTML = `<div id='avatar'><img src=image/id/${data.image_id.value} alt="" height="350px"/></div>`
-        // document.querySelector('#avatar').innerHTML = `<img src=image/id/${data.image_id.value} alt="" height="350px"/>`
         document.querySelector('#myCharacter [name=image_id]').value = data.image_id.value
+    }
+
+    removeAvatarSelected() {
+        const evt = new Event('click')
+        document.querySelector("#myBreed").dispatchEvent(evt, () => {})
+    }
+
+    setStory(form) {
+        document.querySelector('#character [name=story]').innerHTML = form.querySelector('[name=story]').value
     }
 }
