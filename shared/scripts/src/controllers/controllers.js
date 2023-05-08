@@ -44,10 +44,12 @@ export default class Controllers {
     #scriptLoad(page) {
         switch(page) {
             case 'character':
-                Character.initializer({
-                    view: this.#views.initClass(page),
-                    service: this.#services.initClass(page)
-                })
+                Character.initializer(
+                    new Character({
+                        view: this.#views.initClass(page),
+                        service: this.#services.initClass(page)
+                    })
+                )
                 break
             case 'mission':
                 Mission.initializer({

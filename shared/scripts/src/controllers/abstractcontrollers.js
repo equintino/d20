@@ -7,9 +7,27 @@ export default class AbstractControllers {
         this.service = service
     }
 
+    static initializer(cls) {
+        cls.init()
+    }
+
     init() {
         this.view.setButtons((btnName) => {
             this.optInit(btnName)
+        })
+    }
+
+    btnBack(page) {
+        this.showPage(page, (elem) => {
+            this.view.backInit(elem, (btnName) => {
+                this.optInit(btnName)
+            })
+        })
+    }
+
+    btnClean(id) {
+        this.view.reset(`${id} form`, () => {
+            this.view.loading.hide()
         })
     }
 
@@ -20,10 +38,12 @@ export default class AbstractControllers {
     setButton(elem) {
         elem.querySelectorAll('button').forEach((btn) => {
             btn.addEventListener('click', (e) => {
-                this.view.loading.show()
                 e.preventDefault()
-                let btnName = e.target.value
-                this.btnAction(btnName)
+                let btnActive = elem.querySelector('button.active')
+                this.view.loading.show()
+                this.btnAction(e.target)
+                if (btnActive !== null) elem.querySelector('button.active').classList.remove('active')
+                e.target.classList.add('active')
             })
         })
     }

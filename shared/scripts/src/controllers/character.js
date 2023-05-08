@@ -1,13 +1,8 @@
 import AbstractControllers from "./abstractcontrollers.js"
 
 export default class Character extends AbstractControllers {
-    constructor(deps) {
-        super(deps)
-    }
-
-    static initializer(deps) {
-        const character = new Character(deps)
-        character.init()
+    constructor(cls) {
+        super(cls)
     }
 
     optInit(btnName) {
@@ -65,9 +60,7 @@ export default class Character extends AbstractControllers {
                                 let btnName = e.target.value
                                 if (btnName === 'save') {
                                     this.view.setStory(form)
-                                    this.view.closeModal(() => {
-                                        alert('fechei')
-                                    })
+                                    this.view.closeModal()
                                 }
                             })
                         })
@@ -78,30 +71,16 @@ export default class Character extends AbstractControllers {
         })
     }
 
-    btnAction(btnName) {
-        switch (btnName) {
+    btnAction(btn) {
+        switch (btn.value) {
             case 'back':
-                this.showPage('character', (elem) => {
-                    this.view.backInit(elem, (btnName) => {
-                        this.optInit(btnName)
-                    })
-                })
+                this.btnBack('character')
+                break
+            case 'clear':
+                this.btnClean('#character')
                 break
             case 'save':
-                this.view.submit('#character form', (formData, validate) => {
-                    let resp
-                    if (validate) {
-                        resp = this.service.save('character/save', formData)
-                        if (resp.indexOf('success') !== -1) {
-                            this.view.reset('#character form')
-                            this.view.removeAvatarSelected()
-                        }
-                    } else {
-                        resp = "<span class='warning'>This field is necessary!!!</span>"
-                    }
-                    this.message(resp)
-                    this.view.loading.hide()
-                })
+                this.#submit()
                 break
             case 'breed':
                 this.view.carousel('#avatar', this.openFile('breed/list'), (e) => {
@@ -109,11 +88,40 @@ export default class Character extends AbstractControllers {
                     this.view.loading.hide()
                 })
                 break
-            case 'clear':
-                this.view.reset('#character form', () => {
-                    this.view.loading.hide()
-                })
+            case 'edit':
+                alert('edit')
                 break
+            default:
+                this.#btnCharacter(btn)
         }
+    }
+
+    #submit() {
+        this.view.submit('#character form', (formData, validate) => {
+            let resp
+            if (validate) {
+                resp = this.service.save('character/save', formData)
+                if (resp.indexOf('success') !== -1) {
+                    this.btnClean('#character')
+                    this.view.removeAvatarSelected()
+                }
+            } else {
+                resp = "<span class='warning'>This field is necessary!!!</span>"
+            }
+            this.message(resp)
+            this.view.loading.hide()
+        })
+    }
+
+    #btnCharacter(btn) {
+        this.view.setBtnCharacter(btn,  (data) => {
+            if (data.idCategory !== '') this.view.setCategory(this.openFile(`category/id/${data.idCategory}`))
+            if (data.idBreed !== '') this.view.setBreed(this.openFile(`breed/id/${data.idBreed}`))
+            if (data.idMission !== '') {
+                this.view.setMission(this.openFile(`mission/id/${data.idMission}`))
+            } else {
+                this.view.setMission(false)
+            }
+        })
     }
 }

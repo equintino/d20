@@ -93,4 +93,38 @@ export default class Character extends AbstractViews {
     setStory(form) {
         document.querySelector('#character [name=story]').innerHTML = form.querySelector('[name=story]').value
     }
+
+    setBtnCharacter(btn, fn) {
+        if (btn.offsetParent.querySelector('.left')) {
+            const sideRight = document.querySelector('#character .right')
+            let idCharacter = btn.attributes['data-id'].value
+            let idBreed = btn.attributes['data-breed_id'].value
+            let idCategory = btn.attributes['data-category_id'].value
+            let idImage = btn.attributes['data-image_id'].value
+            let story = btn.attributes['data-story'].value
+            let idMission = btn.attributes['data-mission'].value
+
+            sideRight.querySelector('#story p').innerHTML = `<textarea class='input-rpg' disabled >${story}</textarea>`
+            sideRight.querySelector('#avatar').innerHTML = `<img src='image/id/${idImage}' alt='' height='350px' />`
+            if (typeof(fn) === 'function') fn({
+                idCharacter,
+                idCategory,
+                idBreed,
+                idMission
+            })
+            this.loading.hide()
+        }
+    }
+
+    setCategory(category) {
+        document.querySelector('#detail_class').innerHTML = `<img src='image/id/${category.image_id}' alt='' height='50px' title='${category.name}'/>`
+    }
+
+    setBreed(breed) {
+        document.querySelector('#detail_breed').innerHTML = `<img src='image/id/${breed.image_id}' alt='' height='100px' title='${breed.name}'/>`
+    }
+
+    setMission(mission) {
+        document.querySelector('#list .breed_class p').innerHTML = `<textarea class='input-rpg' disabled >${(mission.name ?? '')}</textarea>`
+    }
 }
