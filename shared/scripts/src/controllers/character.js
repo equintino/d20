@@ -21,7 +21,13 @@ export default class Character extends AbstractControllers {
 
         if (btnName === 'list') {
             this.showPage('character/list', (elem) => {
-                this.setButton(elem)
+                this.setButton(elem, (btnActive, e) => {
+                    let btnName = e.target.value
+                    if (btnName !== 'edit' && btnName !== 'back') {
+                        if (btnActive !== null) btnActive.classList.remove('active')
+                        e.target.classList.add('active')
+                    }
+                })
             })
         }
     }
@@ -89,7 +95,7 @@ export default class Character extends AbstractControllers {
                 })
                 break
             case 'edit':
-                alert('edit')
+                this.#edition()
                 break
             default:
                 this.#btnCharacter(btn)
@@ -123,5 +129,115 @@ export default class Character extends AbstractControllers {
                 this.view.setMission(false)
             }
         })
+    }
+
+    #edition() {
+        const resp = this.view.edition()
+        if (typeof(resp) === 'undefined') return
+
+        this.openModal('character/edit', resp, () => {
+            let buttons = "<button class='btn btn-rpg btn-silver' value='delete'>Excluir</button>"
+                + "<button class='btn btn-rpg btn-danger' value='save'>Salvar</button>"
+            this.view.setBtnModal(buttons, (e, form) => {
+                let btnName = e.target.value
+                if (btnName === "delete") {
+                    alert('excluir')
+                    // modal.confirm({
+                    //     title: "Modo de Exclusão de Personagem",
+                    //     message: "Deseja realmente escluir este personagem?"
+                    // })
+                    // .on("click", function(i) {
+                    //     if (i.target.value === "1") {
+                    //         let id = modal.content.find("[data-id]").attr("data-id")
+                    //         $.ajax({
+                    //             url: "character/delete",
+                    //             type: "POST",
+                    //             dataType: "JSON",
+                    //             data: {
+                    //                 id
+                    //             },
+                    //             beforeSend: function() {
+                    //                 loading.show()
+                    //             },
+                    //             success: function(response) {
+                    //                 alertLatch("Personage removed successfully", "va(--cor-success)")
+                    //                 modal.hideContent()
+                    //                 $(".content").load("character/list", () => {
+                    //                     act.list(character)
+                    //                     loading.hide()
+                    //                 })
+                    //             },
+                    //             error: function(error) {
+                    //             },
+                    //             complete: function() {
+                    //                 loading.hide()
+                    //             }
+                    //         })
+                    //     }
+                    // })
+                } else if (btnName === "save") {
+                    this.view.submit('#myCharacter', (formData, validate) => {
+                        if (validate) {
+                            this.openFile('character/update', formData)
+                            this.view.closeModal()
+                        }
+                    })
+                    this.optInit('list')
+                }
+            })
+            this.view.loading.hide()
+        })
+
+        return
+        let editCharacter = modal.show({title, content, params, buttons})
+        editCharacter.event("change", (e) => {
+            if ((e.target.name === "breed_id" || e.target.name === "category_id") && typeof(edit_character) !== "undefined") {
+                let breedId = edit_character.querySelector("[name=breed_id").value
+                let categoryId = edit_character.querySelector("[name=category_id").value
+                if (e.target.name === "breed_id") {
+                    breedId = e.target.value
+                }
+                if (e.target.name === "category_id") {
+                    categoryId = e.target.value
+                }
+                let list = act.getAvatarList(breedId, categoryId)
+                let title = "Escolha seu Avatar"
+                let content = "avatar/show"
+                let buttons = "<button class='btn btn-rpg btn-silver' value='close'>Fechar"
+                    + "</button><button class='btn btn-rpg btn-danger' value='select'>"
+                    + "Selecionar</button>"
+                let callback = () => {
+                    scriptAvatarList()
+                }
+                let params = {
+                    act: "list",
+                    response: list,
+                    breedId,
+                    categoryId
+                }
+                let avatarSelected = modal.modal({title, content, params, buttons, callback})
+                avatarSelected.buttons.find("button").on("click", (e) => {
+                    if (e.target.value === "select") {
+                        let src = avatarList.querySelector(".slick-list img[aria-hidden=false]").src
+                        let image_id = src.split("/").pop()
+                        breedId = avatarList.querySelector("[name=breed]").value
+                        categoryId = avatarList.querySelector("[name=class]").value
+                        edit_character.querySelector("[name=breed_id").value = breedId
+                        edit_character.querySelector("[name=category_id").value = categoryId
+                        edit_character.querySelector("[name=image_id").value = image_id
+                        avatar.querySelector("img").src = src
+                        avatar.querySelector("img")["data-image_id"] = image_id
+                        modal.hideContent()
+                        editCharacter.buttons[0].querySelector("button").innerText = "Fechar"
+                        editCharacter.buttons[0].querySelector("button").value = "close"
+                    }
+                    if (e.target.value === "close") {
+                        modal.hideContent()
+                    }
+                })
+            }
+        })
+
+        return act
     }
 }

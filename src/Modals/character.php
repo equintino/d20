@@ -1,8 +1,6 @@
 <style>
-    #edit_character .side-right {
-        position: absolute;
-        right: 10;
-        top: 40;
+    #edit_character #myCharacter {
+        display: flex;
     }
 </style>
 <?php if (empty($act)): ?>
@@ -32,7 +30,7 @@
                     <?php endforeach ?>
                 </select>
                 <label class="label-rpg">Classe: </label>
-                <select id="myClass" name="category_id" class="input-rpg" <?= ($mission ? "disabled" : null) ?>>
+                <select name="category_id" class="input-rpg" <?= ($mission ? "disabled" : null) ?>>
                     <?php foreach ($categories as $category): ?>
                     <option value="<?= $category->id ?>" <?= ($character->category_id === $category->id ?
                     "selected" : null) ?>><?= $category->name ?></option>
@@ -61,7 +59,8 @@
                 : null) ?>><?= $character->story ?></textarea>
             </div>
         </section>
-        <section id="avatar" class="side-right" >
+        <!-- <section id="avatar" class="side-right" > -->
+        <section class="side-right" >
             <input name="image_id" type="hidden" value="<?= $character->image_id ?>" />
             <img data-image_id="<?= $character->image_id ?>" src="image/id/<?= $character->image_id ?>"
              alt="" height="300px"/>

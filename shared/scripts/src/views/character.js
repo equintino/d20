@@ -127,4 +127,31 @@ export default class Character extends AbstractViews {
     setMission(mission) {
         document.querySelector('#list .breed_class p').innerHTML = `<textarea class='input-rpg' disabled >${(mission.name ?? '')}</textarea>`
     }
+
+    edition() {
+        let btnActive = document.querySelector('#list .left button.active')
+        if (btnActive === null) {
+            this.loading.hide()
+            return this.message("Select a character","var(--cor-warning)")
+        }
+        let id = btnActive.attributes["data-id"].value
+        let image_id = btnActive.attributes["data-image_id"].value
+        let breed_id = btnActive.attributes["data-breed_id"].value
+        let category_id = btnActive.attributes["data-category_id"].value
+        let story = btnActive.attributes["data-story"].value
+        let mission = btnActive.attributes["data-mission"].value
+        if (mission !== "") {
+            this.loading.hide()
+            return this.message("This character is on a mission", "var(--cor-warning)")
+        }
+
+        let formData = new FormData()
+        formData.append('id', id)
+        formData.append('image_id', image_id)
+        formData.append('breed_id', breed_id)
+        formData.append('category_id', category_id)
+        formData.append('story', story)
+
+        return formData
+    }
 }
