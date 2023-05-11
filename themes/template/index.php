@@ -8,14 +8,6 @@
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
         <link rel="stylesheet" href="<?= url() . "/" . theme("assets/style.css") ?>" />
         <style>
-            /* #login_container {
-                margin-bottom: -8px;
-            }
-
-            #login a:hover {
-                text-decoration: none;
-            }*/
-
             #container_main {
                 display: grid;
                 margin-top: 60px;
@@ -30,14 +22,9 @@
         </header>
         <div class="header2">
             <section class="loading">
-                <!-- <img class="schedule" src="themes/template/assets/loading.png" alt="reading" height="50px"/> -->
                 <img class="schedule" src="" alt="" height="50px"/>
-                <!-- <p class="text-loading">Texto da ação "loading"</p> -->
             </section>
             <span id="alert" style="display: none;"></span>
-            <!-- Janelas -->
-            <div id="mask_main" style="display: none"></div>
-            <!-- <div id="mask2_main"></div> -->
 
             <section id="boxe_main" class="fadeInDown" >
                 <div id="title"></div>
@@ -45,16 +32,18 @@
                 <span id="message"></span>
                 <div id="content"></div>
                 <div id="buttons" style="text-align: right"></div>
+                <div id="mask_main" style="display: none"></div>
             </section>
 
-            <!-- <section id="boxe2_main" class="fadeInDown" >
-                <div id="title"></div>
-                <span id="button" class="close"><i class="fa fa-times-circle"></i></span>
-                <span id="message"></span>
-                <div id="content"></div>
-                <div id="buttons" style="text-align: right"></div>
-            </section> -->
-        </div><!-- header2 -->
+            <section id="boxe2_main" class="fadeInDown" >
+                <div id="title2"></div>
+                <span id="close2"><i class="fa fa-times-circle"></i></span>
+                <span id="message2"></span>
+                <div id="content2"></div>
+                <div id="buttons2" style="text-align: right"></div>
+                <div id="mask2_main" style="display: none"></div>
+            </section>
+        </div>
         <section>
             <div id="container_main" ></div>
         </section>

@@ -33,8 +33,8 @@ export default class AbstractViews {
         })
     }
 
-    setFocus(elem, attr) {
-        elem.querySelector(attr).focus()
+    setFocus({ elem, property }) {
+        elem.querySelector(property).focus()
     }
 
     backInit(elem, fn) {
@@ -54,10 +54,13 @@ export default class AbstractViews {
         if (typeof(fn) === 'function') fn()
     }
 
-    submit(form, fn) {
+    submit({ form, fn }) {
         let data = document.querySelector(form)
         let formData = new FormData(data)
-        if (typeof(fn) === 'function') fn(formData, this.#validate(data))
+        if (typeof(fn) === 'function') fn({
+            formData,
+            validate: this.#validate(data)
+        })
     }
 
     #validate(data) {
@@ -77,57 +80,63 @@ export default class AbstractViews {
         return resp
     }
 
-    carousel(idElement, list, fn) {
-        const carousel = new Carousel(idElement, list)
-        const items = document.querySelector(idElement).firstChild.children
+    carousel(data) {
+        const carousel = new Carousel(data.idElement, data.list)
+        const items = document.querySelector(data.idElement).firstChild.children
         const func = () => {
-            fn({
+            data.fn({
                 id: carousel.element.attributes["data-id"].value,
                 idImage: carousel.element.attributes["data-idImage"].value,
                 items
             })
         }
-        if (typeof(fn) === 'function') func()
-        document.querySelector(idElement).onclick = () => {
+        if (typeof(data.fn) === 'function') func()
+        document.querySelector(data.idElement).onclick = () => {
             if (typeof(func) === 'function') func()
         }
     }
 
-    imgSelected(idElement, idImage) {
-        document.querySelector(`${idElement} [name=image_id]`)
-            .value = idImage
+    imgSelected(data) {
+        document.querySelector(`${data.idElement} [name=image_id]`)
+            .value = data.idImage
     }
 
-    openModal(page, params, fn, response) {
-        this.modal.openModal("#boxe_main", page, (e) => {
+    openModal(data) {
+        const box = (data.box ?? '#boxe_main')
+        this.modal.openModal(box, data.page, (e) => {
             let formData = new FormData(e.target)
             for (let i in params) {
                 formData.append(i, params[i])
             }
             response(formData)
-        })
-        if (typeof(fn) === 'function') fn(this.modal.getBox())
+        }, data.title, data.message)
+        if (typeof(data.fn) === 'function') data.fn(this.modal.getBox())
     }
 
     autoFocusModal(name) {
         document.querySelector(`#boxe_main [name='${name}']`).focus()
     }
 
-    setBtnModal(buttons, fn) {
+    setBtnModal({ buttons, fn, box }) {
         this.modal.buttons(buttons, (e, form) => {
             if (typeof(fn) === 'function') fn(e, form)
+        }, box)
+    }
+
+    eventInModal(data) {
+        const idModal = document.querySelector(data.idElement)
+        idModal.addEventListener(data.event, (e) => {
+            data.fn(new FormData(idModal))
         })
     }
 
-    eventInModal(idElement, event, fn) {
-        const idModal = document.querySelector(idElement)
-        idModal.addEventListener(event, (e) => {
-            fn(new FormData(idModal))
-        })
-    }
-
-    closeModal(fn) {
+    closeModal(data) {
         this.modal.close()
+        if (typeof(data) !== 'undefined' && typeof(data.fn) === 'function') data.fn()
+    }
+
+    closeAllModal(fn) {
+        this.modal.close(null, null, 'all')
         if (typeof(fn) === 'function') fn()
     }
 }

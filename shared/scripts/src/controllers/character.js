@@ -8,77 +8,139 @@ export default class Character extends AbstractControllers {
     optInit(btnName) {
         this.view.loading.show()
         if (btnName === 'new') {
-            this.showPage('character/add', (elem) => {
-                this.setButton(elem)
-                this.view.changeCategory((formData) => {
-                    let list = this.openFile('avatar', formData)
-                    formData.append('act', 'list')
-                    formData.append('response', list)
-                    this.#setModal(formData, list)
-                })
+            this.showPage({
+                page: 'character/add',
+                fn: (elem) => {
+                    this.setButton({ elem })
+                    this.view.changeCategory({
+                        fn: (formData) => {
+                            let list = this.openFile({
+                                page: 'avatar',
+                                formData
+                            })
+                            formData.append('act', 'list')
+                            formData.append('response', list)
+                            this.#setModal({ formData, list })
+                        }
+                    })
+                }
             })
         }
 
         if (btnName === 'list') {
-            this.showPage('character/list', (elem) => {
-                this.setButton(elem, (btnActive, e) => {
-                    let btnName = e.target.value
-                    if (btnName !== 'edit' && btnName !== 'back') {
-                        if (btnActive !== null) btnActive.classList.remove('active')
-                        e.target.classList.add('active')
-                    }
-                })
+            this.showPage({
+                page: 'character/list',
+                fn: (elem) => {
+                    this.setButton({
+                        elem,
+                        fn: (data) => {
+                            let btnName = data.e.target.value
+                            if (btnName !== 'edit' && btnName !== 'back') {
+                                if (data.btnActive !== null) data.btnActive.classList.remove('active')
+                                data.e.target.classList.add('active')
+                            }
+                        }
+                    })
+                }
             })
         }
     }
 
-    #setModal(formData, list) {
-        this.openModal('avatar/show', formData, () => {
-            this.view.carousel('#imageAvatar', list, (data) => {
-                this.view.imgSelected('#avatarList', data.idImage)
-            })
-            this.view.eventInModal('#avatarList', 'change', (formData) => {
-                this.view.loading.show()
-                this.view.carousel('#imageAvatar', this.openFile('avatar', formData), (data) => {
-                    this.view.imgSelected('#avatarList', data.idImage)
-                    this.view.loading.hide()
-                })
-                let category = this.openFile(`category/id/${formData.get('idCategory')}`)
-                this.view.updateCategory('#avatarList', category)
-            })
-
-            this.view.setBtnModal('<button class="btn btn-rpg btn-danger" value="selected">Selecionar</button>', (e, form) => {
-                let btnName = e.target.value
-                if (btnName === 'selected') {
-                    this.view.avatarSelected(form, (e) => {
-                        this.view.changeAvatar((formData) => {
-                            let list = this.openFile('avatar', formData)
-                            formData.append('act', 'list')
-                            formData.append('response', list)
-                            this.#setModal(formData, list)
+    #setModal({ formData, list }) {
+        this.openModal({
+            page: 'avatar/show',
+            formData: formData,
+            fn: () => {
+                this.view.carousel({
+                    idElement: '#imageAvatar',
+                    list: list,
+                    fn: (data) => {
+                        this.view.imgSelected({
+                            idElement: '#avatarList',
+                            idImage: data.idImage
                         })
-                    })
-                    this.view.closeModal(() => {
-                        /** The short story */
-                        this.openModal('character/story', {}, (elem) => {
-                            this.view.setFocus(elem, '[name=story]')
-                            this.view.setBtnModal('<button class="btn btn-rpg btn-silver" value="reset">Limpar</button><button class="btn btn-rpg btn-danger" value="save">Salvar</button>', (e, form) => {
-                                let btnName = e.target.value
-                                if (btnName === 'save') {
-                                    this.view.setStory(form)
-                                    this.view.closeModal()
+                    }
+                })
+                this.view.eventInModal({
+                    idElement: '#avatarList',
+                    event: 'change',
+                    fn: (formData) => {
+                        this.view.loading.show()
+                        this.view.carousel({
+                            idElement: '#imageAvatar',
+                            list: this.openFile({
+                                page: 'avatar',
+                                formData
+                            }),
+                            fn: (data) => {
+                                this.view.imgSelected({
+                                    idElement: '#avatarList',
+                                    idImage: data.idImage
+                                })
+                                this.view.loading.hide()
+                            }
+                        })
+                        let category = this.openFile({ page: `category/id/${formData.get('idCategory')}` })
+                        this.view.updateCategory({
+                            idElement: '#avatarList',
+                            category
+                        })
+                    }
+                })
+
+                this.view.setBtnModal({
+                    buttons: '<button class="btn btn-rpg btn-danger" value="selected">Selecionar</button>',
+                    fn: (e, form) => {
+                        let btnName = e.target.value
+                        if (btnName === 'selected') {
+                            this.view.avatarSelected({
+                                form,
+                                fn: (e) => {
+                                    this.view.changeAvatar({
+                                        fn: (formData) => {
+                                            let list = this.openFile({ page: 'avatar', formData })
+                                            formData.append('act', 'list')
+                                            formData.append('response', list)
+                                            this.#setModal({ formData, list })
+                                        }
+                                    })
                                 }
                             })
-                        })
-                    })
-                }
-            })
-            this.view.loading.hide()
+                            this.view.closeModal({
+                                fn: () => {
+                                    /** The short story */
+                                    this.openModal({
+                                        page: 'character/story',
+                                        formData: {},
+                                        fn: (elem) => {
+                                            this.view.setFocus({
+                                                elem,
+                                                property: '[name=story]'
+                                            })
+                                            this.view.setBtnModal({
+                                                buttons: '<button class="btn btn-rpg btn-silver" value="reset">Limpar</button><button class="btn btn-rpg btn-danger" value="save">Salvar</button>',
+                                                fn: (e, form) => {
+                                                    let btnName = e.target.value
+                                                    if (btnName === 'save') {
+                                                        this.view.setStory({ form })
+                                                        this.view.closeModal()
+                                                    }
+                                                }
+                                            })
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                    }
+                })
+                this.view.loading.hide()
+            }
         })
     }
 
-    btnAction(btn) {
-        switch (btn.value) {
+    btnAction(data) {
+        switch (data.btn.value) {
             case 'back':
                 this.btnBack('character')
                 break
@@ -89,42 +151,52 @@ export default class Character extends AbstractControllers {
                 this.#submit()
                 break
             case 'breed':
-                this.view.carousel('#avatar', this.openFile('breed/list'), (e) => {
-                    this.view.setDetails(e)
-                    this.view.loading.hide()
+                this.view.carousel({
+                    idElement: '#avatar',
+                    list: this.openFile({ page: 'breed/list' }),
+                    fn: (e) => {
+                        this.view.setDetails(e)
+                        this.view.loading.hide()
+                    }
                 })
                 break
             case 'edit':
                 this.#edition()
                 break
             default:
-                this.#btnCharacter(btn)
+                this.#btnCharacter(data.btn)
         }
     }
 
     #submit() {
-        this.view.submit('#character form', (formData, validate) => {
-            let resp
-            if (validate) {
-                resp = this.service.save('character/save', formData)
-                if (resp.indexOf('success') !== -1) {
-                    this.btnClean('#character')
-                    this.view.removeAvatarSelected()
+        this.view.submit({
+            form: '#character form',
+            fn: ({ formData, validate }) => {
+                let resp
+                if (validate) {
+                    resp = this.service.save({
+                        page: 'character/save',
+                        formData
+                    })
+                    if (resp.indexOf('success') !== -1) {
+                        this.btnClean('#character')
+                        this.view.removeAvatarSelected()
+                    }
+                } else {
+                    resp = "<span class='warning'>This field is necessary!!!</span>"
                 }
-            } else {
-                resp = "<span class='warning'>This field is necessary!!!</span>"
+                this.message({ msg: resp })
+                this.view.loading.hide()
             }
-            this.message(resp)
-            this.view.loading.hide()
         })
     }
 
     #btnCharacter(btn) {
         this.view.setBtnCharacter(btn,  (data) => {
-            if (data.idCategory !== '') this.view.setCategory(this.openFile(`category/id/${data.idCategory}`))
-            if (data.idBreed !== '') this.view.setBreed(this.openFile(`breed/id/${data.idBreed}`))
+            if (data.idCategory !== '') this.view.setCategory(this.openFile({ page: `category/id/${data.idCategory}` }))
+            if (data.idBreed !== '') this.view.setBreed(this.openFile({ page: `breed/id/${data.idBreed}` }))
             if (data.idMission !== '') {
-                this.view.setMission(this.openFile(`mission/id/${data.idMission}`))
+                this.view.setMission(this.openFile({ page: `mission/id/${data.idMission}` }))
             } else {
                 this.view.setMission(false)
             }
@@ -135,57 +207,57 @@ export default class Character extends AbstractControllers {
         const resp = this.view.edition()
         if (typeof(resp) === 'undefined') return
 
-        this.openModal('character/edit', resp, () => {
-            let buttons = "<button class='btn btn-rpg btn-silver' value='delete'>Excluir</button>"
+        this.openModal({
+            page: 'character/edit',
+            formData: resp,
+            fn: () => {
+                let buttons = "<button class='btn btn-rpg btn-silver' value='delete'>Excluir</button>"
                 + "<button class='btn btn-rpg btn-danger' value='save'>Salvar</button>"
-            this.view.setBtnModal(buttons, (e, form) => {
-                let btnName = e.target.value
-                if (btnName === "delete") {
-                    alert('excluir')
-                    // modal.confirm({
-                    //     title: "Modo de Exclusão de Personagem",
-                    //     message: "Deseja realmente escluir este personagem?"
-                    // })
-                    // .on("click", function(i) {
-                    //     if (i.target.value === "1") {
-                    //         let id = modal.content.find("[data-id]").attr("data-id")
-                    //         $.ajax({
-                    //             url: "character/delete",
-                    //             type: "POST",
-                    //             dataType: "JSON",
-                    //             data: {
-                    //                 id
-                    //             },
-                    //             beforeSend: function() {
-                    //                 loading.show()
-                    //             },
-                    //             success: function(response) {
-                    //                 alertLatch("Personage removed successfully", "va(--cor-success)")
-                    //                 modal.hideContent()
-                    //                 $(".content").load("character/list", () => {
-                    //                     act.list(character)
-                    //                     loading.hide()
-                    //                 })
-                    //             },
-                    //             error: function(error) {
-                    //             },
-                    //             complete: function() {
-                    //                 loading.hide()
-                    //             }
-                    //         })
-                    //     }
-                    // })
-                } else if (btnName === "save") {
-                    this.view.submit('#myCharacter', (formData, validate) => {
-                        if (validate) {
-                            this.openFile('character/update', formData)
-                            this.view.closeModal()
+                this.view.setBtnModal({
+                    buttons,
+                    fn: (e, form) => {
+                        let btnName = e.target.value
+                        if (btnName === "delete") {
+                            let formData = new FormData(form)
+                            this.view.openModal({
+                                box: '#boxe2_main',
+                                title: 'MODO DE EXCLUSÃO',
+                                message: `Deseja realmente excluir este Personagem? (${formData.get('personage').toUpperCase()})`
+                            })
+                            let buttons2 = "<button class='btn btn-rpg btn-silver' "
+                                + "value='no'>Não</button><button class='btn btn-rpg "
+                                + "btn-danger' value='yes'>Sim</button>"
+                            this.view.setBtnModal({
+                                buttons: buttons2,
+                                fn: (e, form) => {
+                                    if (e.target.value === 'yes') {
+                                        let resp = this.service.open('POST', 'character/delete', formData)
+                                        if (resp.indexOf('success') !== -1) {
+                                            this.view.closeAllModal()
+                                            this.optInit('list')
+                                            resp = 'Successful removed character'
+                                        }
+                                        this.message({ msg: resp })
+                                    }
+                                },
+                                box: '#boxe2_main'
+                            })
+                        } else if (btnName === "save") {
+                            this.view.submit({
+                                form: '#myCharacter',
+                                fn: (formData, validate) => {
+                                    if (validate) {
+                                        this.openFile({ page: 'character/update', formData })
+                                        this.view.closeModal()
+                                    }
+                                }
+                            })
+                            this.optInit('list')
                         }
-                    })
-                    this.optInit('list')
-                }
-            })
-            this.view.loading.hide()
+                    }
+                })
+                this.view.loading.hide()
+            }
         })
 
         return

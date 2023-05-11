@@ -19,7 +19,7 @@ export default class Character extends AbstractViews {
         }
     }
 
-    changeCategory(fn) {
+    changeCategory({ fn }) {
         document.querySelector('#myClass').addEventListener('change', (e) => {
             this.loading.show()
             let idCategory = e.target.value
@@ -33,7 +33,7 @@ export default class Character extends AbstractViews {
             let formData = new FormData()
             formData.append('idBreed', breed.attributes['data-id'].value)
             formData.append('idCategory', idCategory)
-            fn(formData)
+            if (typeof(fn) !== 'undefined') fn(formData)
         })
     }
 
@@ -55,22 +55,22 @@ export default class Character extends AbstractViews {
         })
     }
 
-    updateCategory(idModal, category) {
-        document.querySelector(`${idModal} [name=description]`)
+    updateCategory({ idElement, category }) {
+        document.querySelector(`${idElement} [name=description]`)
             .innerHTML = category.description
     }
 
-    avatarSelected(data, fn) {
-        document.querySelector('.breed').attributes['data-id'].value = data.idBreed.value
-        document.querySelector('.breed').innerText = data.idBreed.selectedOptions[0]['text'].toUpperCase()
-        document.querySelector('#description p').innerHTML = data.idBreed.selectedOptions[0].attributes['data-description'].value
-        document.querySelector('#myClass').value = data.idCategory.value
-        document.querySelector('#myCharacter [name=image_id]').value = data.image_id.value
-        document.querySelector('#avatar').parentElement.innerHTML = `<div id='avatar'><img src=image/id/${data.image_id.value} alt="" height="350px" /></div>`
+    avatarSelected({ form, fn }) {
+        document.querySelector('.breed').attributes['data-id'].value = form.idBreed.value
+        document.querySelector('.breed').innerText = form.idBreed.selectedOptions[0]['text'].toUpperCase()
+        document.querySelector('#description p').innerHTML = form.idBreed.selectedOptions[0].attributes['data-description'].value
+        document.querySelector('#myClass').value = form.idCategory.value
+        document.querySelector('#myCharacter [name=image_id]').value = form.image_id.value
+        document.querySelector('#avatar').parentElement.innerHTML = `<div id='avatar'><img src=image/id/${form.image_id.value} alt="" height="350px" /></div>`
         if (typeof(fn) === 'function') fn()
     }
 
-    changeAvatar(fn) {
+    changeAvatar({ fn }) {
         let idCategory = document.querySelector('#myClass').value
         let breed = document.querySelector('.breed')
         let formData = new FormData()
@@ -90,8 +90,8 @@ export default class Character extends AbstractViews {
         document.querySelector('[name=image_id]').value = ''
     }
 
-    setStory(form) {
-        document.querySelector('#character [name=story]').innerHTML = form.querySelector('[name=story]').value
+    setStory({ form }) {
+        document.querySelector('#character [name=story]').value = form.querySelector('[name=story]').value
     }
 
     setBtnCharacter(btn, fn) {

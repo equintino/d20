@@ -1,23 +1,51 @@
 export default class Modal {
     id
     #box
-    #mask
 
     constructor(id){
         this.id = id
     }
 
-    openModal(boxe, page, fn) {
-        this.#box = document.querySelector(boxe)
-        const close = this.#box.querySelector('#close')
-        this.#mask = document.querySelector('#mask_main')
+    openModal(box, page, fn, title, message) {
+        let wProperty = {
+            box: '#boxe_main',
+            close: '#close',
+            title: '#title',
+            message: '#message',
+            mask: '#mask_main',
+            content: '#content'
+        }
+        if (box === '#boxe2_main') {
+            wProperty = {
+                box: '#boxe2_main',
+                close: '#close2',
+                title: '#title2',
+                message: '#message2',
+                mask: '#mask2_main',
+                content: '#content2'
+            }
+        }
 
-        this.#box.querySelector('#content').innerHTML = page
-        this.#box.style = 'display: flex'
-        this.#mask.style = 'display: block'
+        const mask = document.querySelector(wProperty.mask)
+        const _box = document.querySelector(wProperty.box)
+        this.#box = _box
+        const close = _box.querySelector(wProperty.close)
+        const _title = _box.querySelector(wProperty.title)
+        const _message = _box.querySelector(wProperty.message)
+        const content = _box.querySelector(wProperty.content)
 
-        if (this.#box.querySelector('form') !== null) {
-            this.#box.querySelector('form').onsubmit = (e) => {
+        content.innerHTML = (page ?? null)
+        _title.innerHTML = (title ?? null)
+        _message.innerHTML = (message ?? null)
+
+        _box.style = 'display: flex'
+        _title.style = 'display: block'
+        if (typeof(message) !== 'undefined') _message.style = 'display: block'
+        // if (typeof(page) !== 'undefined') content.style = 'display: block'
+        mask.style = 'display: block'
+
+        if (_box.querySelector('form') !== null) {
+            _box.querySelector('form').onsubmit = (e) => {
                 e.preventDefault()
                 fn(e)
             }
@@ -25,37 +53,53 @@ export default class Modal {
 
         /** Closing */
         const hidden = [
-            document.querySelector('#mask_main'),
+            mask,
             close
         ]
         for (let i of hidden) {
-            i.onclick = () => {
-                this.close()
+            i.onclick = (e) => {
+                this.close(_box, mask)
             }
         }
 
         document.onkeyup = (e) => {
-            if (e.key === 'Escape') { this.close() }
+            if (e.key === 'Escape') { this.close(_box, mask) }
         }
     }
 
-    buttons(buttons, fn) {
-        const btn = this.#box.querySelector('#buttons')
+    buttons(buttons, fn, box) {
+        const btn = (
+            typeof(box) !== 'undefined' ?
+                document.querySelector(`${box} #buttons2`) : this.#box.querySelector('#buttons')
+        )
         btn.innerHTML = buttons
         btn.onclick = (e) => {
-            let form = this.#box.querySelector('form')
-            if (e.target.value === 'reset') {
+            let form = e.target.parentElement.parentElement.querySelector('form')
+            let btnName = e.target.value
+            if (btnName === 'reset') {
                 form.reset()
+            }
+            if (btnName === 'no') {
+                this.close(e.target.parentElement.parentElement)
             }
             if (typeof(fn) === 'function') fn(e, form)
         }
     }
 
-    close() {
-        let button = this.#box.querySelector('button')
+    close(box, mask, all) {
+        if (typeof(all) !== 'undefined') {
+            document.querySelector('#boxe_main').style.display = 'none'
+            // document.querySelector('#mask_main').style.display = 'none'
+            document.querySelector('#boxe2_main').style.display = 'none'
+            // document.querySelector('#mask2_main').style.display = 'none'
+            return
+        }
+        let _box = (box ?? document.querySelector('#boxe_main'))
+        // let _mask = (mask ?? document.querySelector('#mask_main'))
+        let button = _box.querySelector('button')
         if (button !== null) button.remove()
-        this.#box.style = 'display: none'
-        this.#mask.style = 'display: none'
+        _box.style = 'display: none'
+        // _mask.style = 'display: none'
     }
 
     getBox() {

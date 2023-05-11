@@ -13,9 +13,9 @@ class Login extends Controller {
         foreach ($data as $key => $value) {
             $$key = $value;
         }
-        $login = (new \Core\Login($login, $password, $db))->user();
-        $login->validate();
+        $lg = (new \Core\Login($login, $password, $db))->user();
+        $lg->validate();
 
-        return print($login->message ?? null);
+        return print($lg->message ?? null);
     }
 }

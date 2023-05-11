@@ -18,10 +18,13 @@ export default class AbstractControllers {
     }
 
     btnBack(page) {
-        this.showPage(page, (elem) => {
-            this.view.backInit(elem, (btnName) => {
-                this.optInit(btnName)
-            })
+        this.showPage({
+            page,
+            fn: (elem) => {
+                this.view.backInit(elem, (btnName) => {
+                    this.optInit(btnName)
+                })
+            }
         })
     }
 
@@ -31,31 +34,35 @@ export default class AbstractControllers {
         })
     }
 
-    showPage(page, fn) {
-        this.view.showPage(this.service.open('GET', page), fn)
+    showPage(data) {
+        this.view.showPage(this.service.open('GET', data.page), data.fn)
     }
 
-    setButton(elem, fn) {
-        elem.querySelectorAll('button').forEach((btn) => {
+    setButton(data) {
+        data.elem.querySelectorAll('button').forEach((btn) => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault()
-                let btnActive = elem.querySelector('.left button.active')
+                let btnActive = data.elem.querySelector('.left button.active')
                 this.view.loading.show()
-                this.btnAction(e.target)
-                if (typeof(fn) === 'function') fn(btnActive, e)
+                this.btnAction({ btn: e.target })
+                if (typeof(data.fn) === 'function') data.fn({ btnActive, e })
             })
         })
     }
 
-    openModal(page, formData, fn) {
-        this.view.openModal(this.service.open('POST', page, formData), formData, fn)
+    openModal(data) {
+        this.view.openModal({
+            page: this.service.open('POST', data.page, data.formData),
+            formData: data.formData,
+            fn: data.fn
+        })
     }
 
-    openFile(page, formData) {
-        return JSON.parse(this.service.open('POST', page, formData))
+    openFile(data) {
+        return JSON.parse(this.service.open('POST', data.page, data.formData))
     }
 
-    message(msg) {
+    message({ msg }) {
         this.view.message(msg, this.background(msg))
     }
 

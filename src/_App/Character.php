@@ -84,7 +84,7 @@ class Character extends Controller
         if (!empty($characters->find($data["personage"]))) {
             return print("<span class='warning'>This personage already exists</span>");
         }
-        if (empty($data['stoty'])) {
+        if (empty($data['story'])) {
             $data['story'] = 'Nenhuma história foi contada';
         }
         $characters->bootstrap($data);
@@ -111,11 +111,11 @@ class Character extends Controller
         $this->view->setPath("Modals")->render($this->page);
     }
 
-    public function delete(array $data)
+    public function delete(array $data): string
     {
         $id = $data["id"];
         $character = (new \Models\Character())->load($id);
         $character->destroy();
-        return print(json_encode($character->message()));
+        return print($character->message());
     }
 }

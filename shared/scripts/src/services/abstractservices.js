@@ -23,8 +23,8 @@ export default class AbstractServices {
         Cookie.getCookie(name)
     }
 
-    save(page, data) {
-        this.readFile.open('POST', page, false, data)
+    save({ page, formData }) {
+        this.readFile.open('POST', page, false, formData)
         return this.readFile.content
     }
 
