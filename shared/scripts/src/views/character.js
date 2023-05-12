@@ -103,8 +103,9 @@ export default class Character extends AbstractViews {
             let idImage = btn.attributes['data-image_id'].value
             let story = btn.attributes['data-story'].value
             let idMission = btn.attributes['data-mission'].value
+            let lines = parseInt(story.length/17) + 2
 
-            sideRight.querySelector('#story p').innerHTML = `<textarea class='input-rpg' disabled >${story}</textarea>`
+            sideRight.querySelector('#story p').innerHTML = `<textarea class='input-rpg' disabled rows='${lines}'>${story} </textarea>`
             sideRight.querySelector('#avatar').innerHTML = `<img src='image/id/${idImage}' alt='' height='350px' />`
             if (typeof(fn) === 'function') fn({
                 idCharacter,

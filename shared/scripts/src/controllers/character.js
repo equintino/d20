@@ -211,8 +211,9 @@ export default class Character extends AbstractControllers {
             page: 'character/edit',
             formData: resp,
             fn: () => {
-                let buttons = "<button class='btn btn-rpg btn-silver' value='delete'>Excluir</button>"
-                + "<button class='btn btn-rpg btn-danger' value='save'>Salvar</button>"
+                let buttons = "<button class='btn btn-rpg btn-silver' value='delete'>"
+                    + "Excluir</button><button class='btn btn-rpg btn-danger' value='save'>"
+                    + "Salvar</button>"
                 this.view.setBtnModal({
                     buttons,
                     fn: (e, form) => {
@@ -245,7 +246,7 @@ export default class Character extends AbstractControllers {
                         } else if (btnName === "save") {
                             this.view.submit({
                                 form: '#myCharacter',
-                                fn: (formData, validate) => {
+                                fn: ({ formData, validate }) => {
                                     if (validate) {
                                         this.openFile({ page: 'character/update', formData })
                                         this.view.closeModal()
