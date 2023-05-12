@@ -62,6 +62,7 @@ export default class Character extends AbstractViews {
 
     avatarSelected({ form, fn }) {
         document.querySelector('.breed').attributes['data-id'].value = form.idBreed.value
+        document.querySelector('#myCharacter [name=breed_id]').value = form.idBreed.value
         document.querySelector('.breed').innerText = form.idBreed.selectedOptions[0]['text'].toUpperCase()
         document.querySelector('#description p').innerHTML = form.idBreed.selectedOptions[0].attributes['data-description'].value
         document.querySelector('#myClass').value = form.idCategory.value
