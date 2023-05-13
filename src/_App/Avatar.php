@@ -36,15 +36,15 @@ class Avatar extends Controller
     public function getAvatars(array $data): string
     {
         $search = [
-            "breed_id" => $data["idBreed"],
-            "category_id" => $data["idCategory"]
+            "breed_id" => $data["breed_id"],
+            "category_id" => $data["category_id"]
         ];
         $avatars = (new \Models\Avatar())->search($search);
         foreach ($avatars as $avatar) {
             $response[] = [
                 "id" => $avatar->id,
                 "image_id" => $avatar->image_id,
-                "category_id" => $data["idCategory"]
+                "category_id" => $data["category_id"]
             ];
         }
         return print(json_encode($response ?? "This breed has no definite image"));
@@ -64,8 +64,8 @@ class Avatar extends Controller
     public function show(array $data): void
     {
         $list = json_decode($data["response"]);
-        $idCategory = $data["idCategory"];
-        $idBreed = $data["idBreed"];
+        $idCategory = $data["category_id"];
+        $idBreed = $data["breed_id"];
         $act = (!empty($data["act"]) ? ".{$data['act']}" : null);
         $source = ($data["source"] ?? null);
         $currentCat = "";

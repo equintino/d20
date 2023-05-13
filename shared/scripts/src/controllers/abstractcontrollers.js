@@ -38,28 +38,29 @@ export default class AbstractControllers {
         this.view.showPage(this.service.open('GET', data.page), data.fn)
     }
 
-    setButton(data) {
-        data.elem.querySelectorAll('button').forEach((btn) => {
+    setButton({ elem, fn }) {
+        elem.querySelectorAll('button').forEach((btn) => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault()
-                let btnActive = data.elem.querySelector('.left button.active')
+                let btnActive = elem.querySelector('.left button.active')
                 this.view.loading.show()
                 this.btnAction({ btn: e.target })
-                if (typeof(data.fn) === 'function') data.fn({ btnActive, e })
+                if (typeof(fn) === 'function') fn({ btnActive, e })
             })
         })
     }
 
-    openModal(data) {
+    openModal({ page, formData, fn, box }) {
         this.view.openModal({
-            page: this.service.open('POST', data.page, data.formData),
-            formData: data.formData,
-            fn: data.fn
+            page: this.service.open('POST', page, formData),
+            formData,
+            fn,
+            box
         })
     }
 
-    openFile(data) {
-        return JSON.parse(this.service.open('POST', data.page, data.formData))
+    openFile({ page, formData }) {
+        return JSON.parse(this.service.open('POST', page, formData))
     }
 
     message({ msg }) {

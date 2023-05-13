@@ -64,7 +64,7 @@ export default class Character extends AbstractControllers {
                 this.view.eventInModal({
                     idElement: '#avatarList',
                     event: 'change',
-                    fn: (formData) => {
+                    fn: ({ formData }) => {
                         this.view.loading.show()
                         this.view.carousel({
                             idElement: '#imageAvatar',
@@ -80,7 +80,7 @@ export default class Character extends AbstractControllers {
                                 this.view.loading.hide()
                             }
                         })
-                        let category = this.openFile({ page: `category/id/${formData.get('idCategory')}` })
+                        let category = this.openFile({ page: `category/id/${formData.get('category_id')}` })
                         this.view.updateCategory({
                             idElement: '#avatarList',
                             category
@@ -139,8 +139,8 @@ export default class Character extends AbstractControllers {
         })
     }
 
-    btnAction(data) {
-        switch (data.btn.value) {
+    btnAction({ btn }) {
+        switch (btn.value) {
             case 'back':
                 this.btnBack('character')
                 break
@@ -164,7 +164,7 @@ export default class Character extends AbstractControllers {
                 this.#edition()
                 break
             default:
-                this.#btnCharacter(data.btn)
+                this.#btnCharacter(btn)
         }
     }
 
@@ -192,13 +192,19 @@ export default class Character extends AbstractControllers {
     }
 
     #btnCharacter(btn) {
-        this.view.setBtnCharacter(btn,  (data) => {
-            if (data.idCategory !== '') this.view.setCategory(this.openFile({ page: `category/id/${data.idCategory}` }))
-            if (data.idBreed !== '') this.view.setBreed(this.openFile({ page: `breed/id/${data.idBreed}` }))
-            if (data.idMission !== '') {
-                this.view.setMission(this.openFile({ page: `mission/id/${data.idMission}` }))
+        this.view.setBtnCharacter(btn,  ({ idCategory, idBreed, idMission }) => {
+            if (idCategory !== '') this.view.setCategory({
+                category: this.openFile({ page: `category/id/${idCategory}` })
+            })
+            if (idBreed !== '') this.view.setBreed({
+                breed: this.openFile({ page: `breed/id/${idBreed}` })
+            })
+            if (idMission !== '') {
+                this.view.setMission({
+                    mission: this.openFile({ page: `mission/id/${idMission}` })
+                })
             } else {
-                this.view.setMission(false)
+                this.view.setMission({ mission: false })
             }
         })
     }
@@ -255,6 +261,57 @@ export default class Character extends AbstractControllers {
                             })
                             this.optInit('list')
                         }
+                    }
+                })
+                this.view.eventInModal({
+                    idElement: '#myCharacter',
+                    event: 'change',
+                    fn: ({ e, formData }) => {
+                        let property = e.target.name
+                        let idCategory = formData.get('category_id')
+                        let idBreed = formData.get('breed_id')
+
+                        formData.append('act', 'list')
+                        // formData.append('list', this.openFile({
+                        //     page: 'avatar',
+                        //     formData
+                        // }))
+                        console.log(
+                            this.openFile({
+                                page: 'avatar',
+                                formData
+                            })
+                        )
+                        this.view.loading.show()
+
+                        if(property === 'category_id' || property === 'breed_id') {
+                            this.openModal({
+                                page: 'avatar/show',
+                                formData,
+                                box: '#boxe2_main'
+                            })
+                        }
+                        // this.view.carousel({
+                        //     idElement: '#imageAvatar',
+                        //     list: this.openFile({
+                        //         page: 'avatar',
+                        //         formData
+                        //     }),
+                        //     fn: (data) => {
+                        //         this.view.imgSelected({
+                        //             idElement: '#avatarList',
+                        //             idImage: data.idImage
+                        //         })
+                        //         this.view.loading.hide()
+                        //     }
+                        // })
+                        // let category = this.openFile({
+                        //     page: `category/id/${formData.get('idCategory')}`
+                        // })
+                        // this.view.updateCategory({
+                        //     idElement: '#avatarList',
+                        //     category
+                        // })
                     }
                 })
                 this.view.loading.hide()

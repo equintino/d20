@@ -31,17 +31,17 @@ export default class Character extends AbstractViews {
                 return Message.alertLatch('Need choose your breed first', 'var(--cor-warning)')
             }
             let formData = new FormData()
-            formData.append('idBreed', breed.attributes['data-id'].value)
-            formData.append('idCategory', idCategory)
+            formData.append('breed_id', breed.attributes['data-id'].value)
+            formData.append('category_id', idCategory)
             if (typeof(fn) !== 'undefined') fn(formData)
         })
     }
 
     updateDataModal(idModal, response) {
-        let idCategory = document.querySelector(idModal + ' [name=idCategory]').value
+        let idCategory = document.querySelector(idModal + ' [name=category_id]').value
         let idImage = document.querySelector(idModal + ' [name=image_id]').value
 
-        let breed = document.querySelector(idModal + ' [name=idBreed]')
+        let breed = document.querySelector(idModal + ' [name=breed_id]')
         let description = breed.selectedOptions[0].attributes['data-description'].value
         let idBreed = breed.value
         let breedName = breed.selectedOptions[0].innerText
@@ -61,11 +61,11 @@ export default class Character extends AbstractViews {
     }
 
     avatarSelected({ form, fn }) {
-        document.querySelector('.breed').attributes['data-id'].value = form.idBreed.value
-        document.querySelector('#myCharacter [name=breed_id]').value = form.idBreed.value
-        document.querySelector('.breed').innerText = form.idBreed.selectedOptions[0]['text'].toUpperCase()
-        document.querySelector('#description p').innerHTML = form.idBreed.selectedOptions[0].attributes['data-description'].value
-        document.querySelector('#myClass').value = form.idCategory.value
+        document.querySelector('.breed').attributes['data-id'].value = form.breed_id.value
+        document.querySelector('#myCharacter [name=breed_id]').value = form.breed_id.value
+        document.querySelector('.breed').innerText = form.breed_id.selectedOptions[0]['text'].toUpperCase()
+        document.querySelector('#description p').innerHTML = form.breed_id.selectedOptions[0].attributes['data-description'].value
+        document.querySelector('#myClass').value = form.category_id.value
         document.querySelector('#myCharacter [name=image_id]').value = form.image_id.value
         document.querySelector('#avatar').parentElement.innerHTML = `<div id='avatar'><img src=image/id/${form.image_id.value} alt="" height="350px" /></div>`
         if (typeof(fn) === 'function') fn()
@@ -75,8 +75,8 @@ export default class Character extends AbstractViews {
         let idCategory = document.querySelector('#myClass').value
         let breed = document.querySelector('.breed')
         let formData = new FormData()
-        formData.append('idBreed', breed.attributes['data-id'].value)
-        formData.append('idCategory', idCategory)
+        formData.append('breed_id', breed.attributes['data-id'].value)
+        formData.append('category_id', idCategory)
 
         let img = document.querySelector('#avatar img')
         img.setAttribute('title', 'clique para trocar avatar')
@@ -118,15 +118,15 @@ export default class Character extends AbstractViews {
         }
     }
 
-    setCategory(category) {
+    setCategory({ category }) {
         document.querySelector('#detail_class').innerHTML = `<img src='image/id/${category.image_id}' alt='' height='50px' title='${category.name}'/>`
     }
 
-    setBreed(breed) {
+    setBreed({ breed }) {
         document.querySelector('#detail_breed').innerHTML = `<img src='image/id/${breed.image_id}' alt='' height='100px' title='${breed.name}'/>`
     }
 
-    setMission(mission) {
+    setMission({ mission }) {
         document.querySelector('#list .breed_class p').innerHTML = `<textarea class='input-rpg' disabled >${(mission.name ?? '')}</textarea>`
     }
 
@@ -138,8 +138,8 @@ export default class Character extends AbstractViews {
         }
         let id = btnActive.attributes["data-id"].value
         let image_id = btnActive.attributes["data-image_id"].value
-        let breed_id = btnActive.attributes["data-breed_id"].value
-        let category_id = btnActive.attributes["data-category_id"].value
+        let idBreed = btnActive.attributes["data-breed_id"].value
+        let idCategory = btnActive.attributes["data-category_id"].value
         let story = btnActive.attributes["data-story"].value
         let mission = btnActive.attributes["data-mission"].value
         if (mission !== "") {
@@ -150,8 +150,8 @@ export default class Character extends AbstractViews {
         let formData = new FormData()
         formData.append('id', id)
         formData.append('image_id', image_id)
-        formData.append('breed_id', breed_id)
-        formData.append('category_id', category_id)
+        formData.append('breed_id', idBreed)
+        formData.append('category_id', idCategory)
         formData.append('story', story)
 
         return formData

@@ -19,7 +19,7 @@
         <?php if ($source !== "character"): ?>
         <section>
             <label class="label-rpg">Raça:</lebel>
-            <select name="idBreed" class="input-rpg" >
+            <select name="breed_id" class="input-rpg" >
                 <?php foreach($breeds as $breed): ?>
                 <option value="<?= $breed->id ?>" data-description="<?= $breed->description ?>"
                     <?= ($breed->id == $idBreed ? "selected"
@@ -30,7 +30,7 @@
         </section>
         <section>
             <label class="label-rpg">Classe:</lebel>
-            <select name="idCategory" class="input-rpg" >
+            <select name="category_id" class="input-rpg" >
                 <?php foreach($categories as $category): ?>
                 <option value="<?= $category->id ?>" <?= ($category->id == $idCategory ? "selected"
                     : null) ?>><?= $category->name ?></option>
