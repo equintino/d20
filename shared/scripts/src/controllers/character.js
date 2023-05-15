@@ -13,13 +13,13 @@ export default class Character extends AbstractControllers {
                 fn: (elem) => {
                     this.setButton({ elem })
                     this.view.changeCategory({
-                        fn: (formData) => {
+                        fn: ({ formData }) => {
                             let list = this.openFile({
                                 page: 'avatar',
                                 formData
                             })
                             formData.append('act', 'list')
-                            formData.append('response', list)
+                            formData.append('list', list)
                             this.#setModal({ formData, list })
                         }
                     })
@@ -72,10 +72,10 @@ export default class Character extends AbstractControllers {
                                 page: 'avatar',
                                 formData
                             }),
-                            fn: (data) => {
+                            fn: ({idImage }) => {
                                 this.view.imgSelected({
                                     idElement: '#avatarList',
-                                    idImage: data.idImage
+                                    idImage: idImage
                                 })
                                 this.view.loading.hide()
                             }
@@ -90,7 +90,7 @@ export default class Character extends AbstractControllers {
 
                 this.view.setBtnModal({
                     buttons: '<button class="btn btn-rpg btn-danger" value="selected">Selecionar</button>',
-                    fn: (e, form) => {
+                    fn: ({ e, form }) => {
                         let btnName = e.target.value
                         if (btnName === 'selected') {
                             this.view.avatarSelected({
@@ -100,7 +100,7 @@ export default class Character extends AbstractControllers {
                                         fn: (formData) => {
                                             let list = this.openFile({ page: 'avatar', formData })
                                             formData.append('act', 'list')
-                                            formData.append('response', list)
+                                            formData.append('list', list)
                                             this.#setModal({ formData, list })
                                         }
                                     })
@@ -119,7 +119,7 @@ export default class Character extends AbstractControllers {
                                             })
                                             this.view.setBtnModal({
                                                 buttons: '<button class="btn btn-rpg btn-silver" value="reset">Limpar</button><button class="btn btn-rpg btn-danger" value="save">Salvar</button>',
-                                                fn: (e, form) => {
+                                                fn: ({ e, form }) => {
                                                     let btnName = e.target.value
                                                     if (btnName === 'save') {
                                                         this.view.setStory({ form })
@@ -209,6 +209,97 @@ export default class Character extends AbstractControllers {
         })
     }
 
+    #avatar({ formData }) {
+        formData.append('act', 'list')
+        formData.append('source', 'character')
+        this.view.loading.show()
+
+        this.openModal({
+            page: 'avatar/show',
+            formData,
+            box: '#boxe2_main'
+        })
+
+        this.view.carousel({
+            idElement: '#imageAvatar',
+            list: this.openFile({
+                page: 'avatar',
+                formData
+            }),
+            fn: ({ idImage }) => {
+                this.view.imgSelected({
+                    idElement: '#avatarList',
+                    idImage
+                })
+                this.view.loading.hide()
+            }
+        })
+        let buttons = '<button class="btn btn-rpg btn-danger" value="selected">Selecionar</button>'
+        this.view.setBtnModal({
+            buttons: buttons,
+            fn: ({ e, form }) => {
+                if (e.target.value === 'selected') {
+                    let idImage = form.querySelector('[name=image_id]').value
+                    document.querySelector('#myCharacter [name=image_id]').value = idImage
+                    document.querySelector('#myCharacter img').src = `image/id/${idImage}`
+                    this.view.closeModal({
+                        box: document.querySelector('#boxe2_main')
+                    })
+                }
+            },
+            box: '#boxe2_main'
+        })
+    }
+
+    #setBtnModal() {
+        let buttons = "<button class='btn btn-rpg btn-silver' value='delete'>"
+            + "Excluir</button><button class='btn btn-rpg btn-danger' value='save'>"
+            + "Salvar</button>"
+        this.view.setBtnModal({
+            buttons,
+            fn: ({ e, form }) => {
+                let btnName = e.target.value
+                if (btnName === "delete") {
+                    let formData = new FormData(form)
+                    this.view.openModal({
+                        box: '#boxe2_main',
+                        title: 'MODO DE EXCLUSÃO',
+                        message: `Deseja realmente excluir este Personagem? (${formData.get('personage').toUpperCase()})`
+                    })
+                    let buttons2 = "<button class='btn btn-rpg btn-silver' "
+                        + "value='no'>Não</button><button class='btn btn-rpg "
+                        + "btn-danger' value='yes'>Sim</button>"
+                    this.view.setBtnModal({
+                        buttons: buttons2,
+                        fn: ({ e, form }) => {
+                            if (e.target.value === 'yes') {
+                                let resp = this.service.open('POST', 'character/delete', formData)
+                                if (resp.indexOf('success') !== -1) {
+                                    this.view.closeAllModal()
+                                    this.optInit('list')
+                                    resp = 'Successful removed character'
+                                }
+                                this.message({ msg: resp })
+                            }
+                        },
+                        box: '#boxe2_main'
+                    })
+                } else if (btnName === "save") {
+                    this.view.submit({
+                        form: '#myCharacter',
+                        fn: ({ formData, validate }) => {
+                            if (validate) {
+                                this.openFile({ page: 'character/update', formData })
+                                this.view.closeModal({})
+                            }
+                        }
+                    })
+                    this.optInit('list')
+                }
+            }
+        })
+    }
+
     #edition() {
         const resp = this.view.edition()
         if (typeof(resp) === 'undefined') return
@@ -217,157 +308,23 @@ export default class Character extends AbstractControllers {
             page: 'character/edit',
             formData: resp,
             fn: () => {
-                let buttons = "<button class='btn btn-rpg btn-silver' value='delete'>"
-                    + "Excluir</button><button class='btn btn-rpg btn-danger' value='save'>"
-                    + "Salvar</button>"
-                this.view.setBtnModal({
-                    buttons,
-                    fn: (e, form) => {
-                        let btnName = e.target.value
-                        if (btnName === "delete") {
-                            let formData = new FormData(form)
-                            this.view.openModal({
-                                box: '#boxe2_main',
-                                title: 'MODO DE EXCLUSÃO',
-                                message: `Deseja realmente excluir este Personagem? (${formData.get('personage').toUpperCase()})`
-                            })
-                            let buttons2 = "<button class='btn btn-rpg btn-silver' "
-                                + "value='no'>Não</button><button class='btn btn-rpg "
-                                + "btn-danger' value='yes'>Sim</button>"
-                            this.view.setBtnModal({
-                                buttons: buttons2,
-                                fn: (e, form) => {
-                                    if (e.target.value === 'yes') {
-                                        let resp = this.service.open('POST', 'character/delete', formData)
-                                        if (resp.indexOf('success') !== -1) {
-                                            this.view.closeAllModal()
-                                            this.optInit('list')
-                                            resp = 'Successful removed character'
-                                        }
-                                        this.message({ msg: resp })
-                                    }
-                                },
-                                box: '#boxe2_main'
-                            })
-                        } else if (btnName === "save") {
-                            this.view.submit({
-                                form: '#myCharacter',
-                                fn: ({ formData, validate }) => {
-                                    if (validate) {
-                                        this.openFile({ page: 'character/update', formData })
-                                        this.view.closeModal()
-                                    }
-                                }
-                            })
-                            this.optInit('list')
-                        }
-                    }
-                })
-                this.view.eventInModal({
+                this.#setBtnModal()
+                this.eventInModal({
                     idElement: '#myCharacter',
-                    event: 'change',
+                    events: [ 'click', 'change' ],
                     fn: ({ e, formData }) => {
                         let property = e.target.name
-                        let idCategory = formData.get('category_id')
-                        let idBreed = formData.get('breed_id')
-
-                        formData.append('act', 'list')
-                        // formData.append('list', this.openFile({
-                        //     page: 'avatar',
-                        //     formData
-                        // }))
-                        console.log(
-                            this.openFile({
-                                page: 'avatar',
-                                formData
-                            })
-                        )
-                        this.view.loading.show()
-
-                        if(property === 'category_id' || property === 'breed_id') {
-                            this.openModal({
-                                page: 'avatar/show',
-                                formData,
-                                box: '#boxe2_main'
-                            })
+                        if ((e.target.tagName === 'IMG' && e.type === 'click') ||
+                            (
+                                (property === 'category_id' || property === 'breed_id')
+                                    && e.type === 'change'
+                            )) {
+                            this.#avatar({ formData })
                         }
-                        // this.view.carousel({
-                        //     idElement: '#imageAvatar',
-                        //     list: this.openFile({
-                        //         page: 'avatar',
-                        //         formData
-                        //     }),
-                        //     fn: (data) => {
-                        //         this.view.imgSelected({
-                        //             idElement: '#avatarList',
-                        //             idImage: data.idImage
-                        //         })
-                        //         this.view.loading.hide()
-                        //     }
-                        // })
-                        // let category = this.openFile({
-                        //     page: `category/id/${formData.get('idCategory')}`
-                        // })
-                        // this.view.updateCategory({
-                        //     idElement: '#avatarList',
-                        //     category
-                        // })
                     }
                 })
                 this.view.loading.hide()
             }
         })
-
-        return
-        let editCharacter = modal.show({title, content, params, buttons})
-        editCharacter.event("change", (e) => {
-            if ((e.target.name === "breed_id" || e.target.name === "category_id") && typeof(edit_character) !== "undefined") {
-                let breedId = edit_character.querySelector("[name=breed_id").value
-                let categoryId = edit_character.querySelector("[name=category_id").value
-                if (e.target.name === "breed_id") {
-                    breedId = e.target.value
-                }
-                if (e.target.name === "category_id") {
-                    categoryId = e.target.value
-                }
-                let list = act.getAvatarList(breedId, categoryId)
-                let title = "Escolha seu Avatar"
-                let content = "avatar/show"
-                let buttons = "<button class='btn btn-rpg btn-silver' value='close'>Fechar"
-                    + "</button><button class='btn btn-rpg btn-danger' value='select'>"
-                    + "Selecionar</button>"
-                let callback = () => {
-                    scriptAvatarList()
-                }
-                let params = {
-                    act: "list",
-                    response: list,
-                    breedId,
-                    categoryId
-                }
-                let avatarSelected = modal.modal({title, content, params, buttons, callback})
-                avatarSelected.buttons.find("button").on("click", (e) => {
-                    if (e.target.value === "select") {
-                        let src = avatarList.querySelector(".slick-list img[aria-hidden=false]").src
-                        let image_id = src.split("/").pop()
-                        breedId = avatarList.querySelector("[name=breed]").value
-                        categoryId = avatarList.querySelector("[name=class]").value
-                        edit_character.querySelector("[name=breed_id").value = breedId
-                        edit_character.querySelector("[name=category_id").value = categoryId
-                        edit_character.querySelector("[name=image_id").value = image_id
-                        avatar.querySelector("img").src = src
-                        avatar.querySelector("img")["data-image_id"] = image_id
-                        modal.hideContent()
-                        editCharacter.buttons[0].querySelector("button").innerText = "Fechar"
-                        editCharacter.buttons[0].querySelector("button").value = "close"
-                    }
-                    if (e.target.value === "close") {
-                        modal.hideContent()
-                    }
-                })
-            }
-        })
-
-        return act
     }
 }

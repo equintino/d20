@@ -96,21 +96,21 @@ export default class AbstractViews {
         }
     }
 
-    imgSelected(data) {
-        document.querySelector(`${data.idElement} [name=image_id]`)
-            .value = data.idImage
+    imgSelected({ idElement, idImage }) {
+        document.querySelector(`${idElement} [name=image_id]`)
+            .value = idImage
     }
 
-    openModal(data) {
-        const box = (data.box ?? '#boxe_main')
-        this.modal.openModal(box, data.page, (e) => {
+    openModal({ box, page, title, message, fn }) {
+        const _box = (box ?? '#boxe_main')
+        this.modal.openModal(_box, page, (e) => {
             let formData = new FormData(e.target)
             for (let i in params) {
                 formData.append(i, params[i])
             }
             response(formData)
-        }, data.title, data.message)
-        if (typeof(data.fn) === 'function') data.fn(this.modal.getBox())
+        }, title, message)
+        if (typeof(fn) === 'function') fn(this.modal.getBox())
     }
 
     autoFocusModal(name) {
@@ -118,8 +118,8 @@ export default class AbstractViews {
     }
 
     setBtnModal({ buttons, fn, box }) {
-        this.modal.buttons(buttons, (e, form) => {
-            if (typeof(fn) === 'function') fn(e, form)
+        this.modal.buttons(buttons, (data) => {
+            if (typeof(fn) === 'function') fn(data)
         }, box)
     }
 
@@ -134,12 +134,13 @@ export default class AbstractViews {
     }
 
     closeModal(data) {
-        this.modal.close()
+        let _data = (data ?? {})
+        this.modal.close(_data)
         if (typeof(data) !== 'undefined' && typeof(data.fn) === 'function') data.fn()
     }
 
     closeAllModal(fn) {
-        this.modal.close(null, null, 'all')
+        this.modal.close({ all: 'all' })
         if (typeof(fn) === 'function') fn()
     }
 }

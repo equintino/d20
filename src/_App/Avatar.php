@@ -63,7 +63,8 @@ class Avatar extends Controller
 
     public function show(array $data): void
     {
-        $list = json_decode($data["response"]);
+        // $list = json_decode($data["list"]);
+        $list = null;
         $idCategory = $data["category_id"];
         $idBreed = $data["breed_id"];
         $act = (!empty($data["act"]) ? ".{$data['act']}" : null);

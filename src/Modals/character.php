@@ -59,11 +59,11 @@
                 : null) ?>><?= $character->story ?></textarea>
             </div>
         </section>
-        <!-- <section id="avatar" class="side-right" > -->
         <section class="side-right" >
             <input name="image_id" type="hidden" value="<?= $character->image_id ?>" />
-            <img data-image_id="<?= $character->image_id ?>" src="image/id/<?= $character->image_id ?>"
-             alt="" height="300px"/>
+            <img data-image_id="<?= $character->image_id ?>"
+                src="image/id/<?= $character->image_id ?>" alt="" height="300px"
+                title="Clique aqui para trocar avatar" style="cursor: pointer"/>
             <p class="label-rpg"><?= ($mission ? "Em Missão: <strong><i style='font-size: 1.1em'>
             {$mission->name}</i></strong>" : null) ?></p>
         </section>

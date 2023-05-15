@@ -41,7 +41,6 @@ export default class Modal {
         _box.style = 'display: flex'
         _title.style = 'display: block'
         if (typeof(message) !== 'undefined') _message.style = 'display: block'
-        // if (typeof(page) !== 'undefined') content.style = 'display: block'
         mask.style = 'display: block'
 
         if (_box.querySelector('form') !== null) {
@@ -58,12 +57,12 @@ export default class Modal {
         ]
         for (let i of hidden) {
             i.onclick = (e) => {
-                this.close(_box, mask)
+                this.close({ box: _box })
             }
         }
 
         document.onkeyup = (e) => {
-            if (e.key === 'Escape') { this.close(_box, mask) }
+            if (e.key === 'Escape') { this.close({ box: _box }) }
         }
     }
 
@@ -80,26 +79,24 @@ export default class Modal {
                 form.reset()
             }
             if (btnName === 'no') {
-                this.close(e.target.parentElement.parentElement)
+                this.close({
+                    box: e.target.parentElement.parentElement
+                })
             }
-            if (typeof(fn) === 'function') fn(e, form)
+            if (typeof(fn) === 'function') fn({ e, form })
         }
     }
 
-    close(box, mask, all) {
+    close({ box, all }) {
         if (typeof(all) !== 'undefined') {
             document.querySelector('#boxe_main').style.display = 'none'
-            // document.querySelector('#mask_main').style.display = 'none'
             document.querySelector('#boxe2_main').style.display = 'none'
-            // document.querySelector('#mask2_main').style.display = 'none'
             return
         }
         let _box = (box ?? document.querySelector('#boxe_main'))
-        // let _mask = (mask ?? document.querySelector('#mask_main'))
         let button = _box.querySelector('button')
         if (button !== null) button.remove()
         _box.style = 'display: none'
-        // _mask.style = 'display: none'
     }
 
     getBox() {

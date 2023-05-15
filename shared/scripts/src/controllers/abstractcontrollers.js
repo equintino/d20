@@ -34,8 +34,8 @@ export default class AbstractControllers {
         })
     }
 
-    showPage(data) {
-        this.view.showPage(this.service.open('GET', data.page), data.fn)
+    showPage({ page, fn }) {
+        this.view.showPage(this.service.open('GET', page), fn)
     }
 
     setButton({ elem, fn }) {
@@ -57,6 +57,16 @@ export default class AbstractControllers {
             fn,
             box
         })
+    }
+
+    /** @idElement string
+     * @events array
+     * @fn function
+     */
+    eventInModal({ idElement, events, fn }) {
+        for (let event of events) {
+            this.view.eventInModal({ idElement, event, fn })
+        }
     }
 
     openFile({ page, formData }) {

@@ -33,7 +33,7 @@ export default class Character extends AbstractViews {
             let formData = new FormData()
             formData.append('breed_id', breed.attributes['data-id'].value)
             formData.append('category_id', idCategory)
-            if (typeof(fn) !== 'undefined') fn(formData)
+            if (typeof(fn) !== 'undefined') fn({ formData })
         })
     }
 

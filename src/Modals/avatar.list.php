@@ -15,8 +15,8 @@
     }
 </style>
 <form id="avatarList" method="POST" action="#">
+    <?php if ($source !== "character"): ?>
     <div style="float: left">
-        <?php if ($source !== "character"): ?>
         <section>
             <label class="label-rpg">Raça:</lebel>
             <select name="breed_id" class="input-rpg" >
@@ -37,7 +37,6 @@
                 <?php endforeach ?>
             </select>
         </section>
-        <?php endif ?>
         <section>
             <div id="breed_description">
             <label class="label-rpg">Características da Classe:</lebel><br>
@@ -46,6 +45,7 @@
             </div>
         </section>
     </div>
+    <?php endif ?>
     <section class="wrapper">
         <div id="imageAvatar" class="mt-4"></div>
     </section>
