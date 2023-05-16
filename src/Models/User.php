@@ -123,39 +123,39 @@ class User extends Model implements Models
         $email = $this->read("SELECT id FROM " . self::$entity . " WHERE email = :email AND id != :id",
             "email={$this->Email}&id={$this->id}");
         if ($email->rowCount()) {
-            $this->message = "The informed e-mail is already registered";
+            $this->message = "<span class='warning'>The informed e-mail is already registered</span>";
             return null;
         }
 
         $this->update(self::$entity, $this->safe(), "id = :id", "id={$this->id}");
         if ($this->fail()) {
             $this->message = (
-                !$msgDb ? "Error updating, verify the data" : $this->fail()->errorInfo[2]
+                !$msgDb ? "<span class='danger'>Error updating, verify the data</span>" : $this->fail()->errorInfo[2]
             );
             return null;
         }
-        $this->message = "Data updated successfully";
+        $this->message = "<span class='success'>Data updated successfully</span>";
     }
 
     private function create_(bool $msgDb)
     {
         $user = new User();
         if ($user->find($this->email, "*", $msgDb)->email) {
-            $this->message = "The informed e-mail is already registered";
+            $this->message = "<span class='warning'>The informed e-mail is already registered</span>";
             return null;
         } elseif ($user->find($this->login, "*", $msgDb)->login) {
-            $this->message = "The informed login is already registered";
+            $this->message = "<span class='warning'>The informed login is already registered</span>";
             return null;
         }
 
         $this->id = $this->create(self::$entity, $this->safe());
         if ($this->fail()) {
             $this->message = (
-                !$msgDb ? "Error to Register, Check the data" : $this->fail()->errorInfo[2]
+                !$msgDb ? "<span class='warning'>Error to Register, Check the data</span>" : $this->fail()->errorInfo[2]
             );
             return null;
         }
-        $this->message = "Registration successfully";
+        $this->message = "<span class='success'>Registration successfully</span>";
     }
 
     public function destroy(): ?User

@@ -2,14 +2,13 @@ export default class Carousel {
     #css
     element
 
-    constructor(elem, list) {
-        this.carousel(elem, list)
+    constructor(deps) {
+        this.carousel(deps)
     }
 
-    carousel(elem, list) {
+    carousel({ idElement, list }) {
         this.#styles()
-        let listImg = document.querySelector(elem)
-
+        let listImg = document.querySelector(idElement)
         let items = []
         let htmls = '<div id="cards_">'
         for (let i in list) {
@@ -70,8 +69,8 @@ export default class Carousel {
             }
             pos.push(i)
         }
-        for (let x = 0; x < pos.length; x++) {
-            arrNew.push(arr[pos[x]])
+        for (const element of pos) {
+            arrNew.push(arr[element])
         }
         return arrNew
     }

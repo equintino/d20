@@ -5,14 +5,13 @@ export default class Menu extends AbstractControllers {
         super(deps)
     }
 
-    static async initializer(deps, fn) {
-        const menu = new Menu(deps)
-        menu.#init(fn)
+    static async initializer({ menu, fn }) {
+        menu.init(fn)
     }
 
-    #init(fn) {
+    init(fn) {
         let page = 'home'
-        this.view.showPage(this.service.open('GET', page))
+        this.showPage({ page })
         this.view.setIdentification(this.service.identification(page))
         this.#setMenu(fn)
     }
@@ -24,9 +23,12 @@ export default class Menu extends AbstractControllers {
                     this.view.reload()
                 })
             }
-            this.view.showPage(this.service.open('GET', page))
+            this.showPage({ page })
             this.view.setIdentification(this.service.identification(page))
-            fn(page)
+            fn({
+                cls: page,
+                script: page
+            })
         })
     }
 }

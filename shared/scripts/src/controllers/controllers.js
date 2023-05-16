@@ -27,58 +27,63 @@ export default class Controllers {
 
     #login() {
         Login.initializer({
-            view: this.#views.initClass('login'),
-            service: this.#services.initClass('login')
+            login: new Login({
+                view: this.#views.initClass('login'),
+                service: this.#services.initClass('login')
+            })
         })
     }
 
     #menu() {
         Menu.initializer({
-            view: this.#views.initClass('menu'),
-            service: this.#services.initClass('menu')
-        }, (page) => {
-            this.#scriptLoad(page)
+            menu: new Menu({
+                view: this.#views.initClass('menu'),
+                service: this.#services.initClass('menu')
+            }),
+            fn: (page) => {
+                this.#scriptLoad(page)
+            }
         })
     }
 
-    #scriptLoad(page) {
-        switch(page) {
+    #scriptLoad({ cls, script }) {
+        switch(script) {
             case 'character':
                 Character.initializer(
                     new Character({
-                        view: this.#views.initClass(page),
-                        service: this.#services.initClass(page)
+                        view: this.#views.initClass(cls),
+                        service: this.#services.initClass(cls)
                     })
                 )
                 break
             case 'mission':
                 Mission.initializer({
-                    view: this.#views.initClass(page),
-                    service: this.#services.initClass(page)
+                    view: this.#views.initClass(cls),
+                    service: this.#services.initClass(cls)
                 })
                 break
             case 'breed':
                 Breed.initializer({
-                    view: this.#views.initClass(page),
-                    service: this.#services.initClass(page)
+                    view: this.#views.initClass(cls),
+                    service: this.#services.initClass(cls)
                 })
                 break
             case 'category':
                 Category.initializer({
-                    view: this.#views.initClass(page),
-                    service: this.#services.initClass(page)
+                    view: this.#views.initClass(cls),
+                    service: this.#services.initClass(cls)
                 })
                 break
             case 'avatar':
                 Avatar.initializer({
-                    view: this.#views.initClass(page),
-                    service: this.#services.initClass(page)
+                    view: this.#views.initClass(cls),
+                    service: this.#services.initClass(cls)
                 })
                 break
             case 'user':
                 User.initializer({
-                    view: this.#views.initClass(page),
-                    service: this.#services.initClass(page)
+                    view: this.#views.initClass(cls),
+                    service: this.#services.initClass(cls)
                 })
                 break
         }

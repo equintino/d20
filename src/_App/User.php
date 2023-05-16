@@ -92,8 +92,8 @@ class User extends Controller
 
     private function confPassword(array $params): ?array
     {
-        $passwd = $params["password"];
-        $confPasswd = $params["confPassword"];
+        $passwd = ($params["password"] ?? null);
+        $confPasswd = ($params["confPassword"] ?? null);
         if ($passwd !== $confPasswd) {
             print("<span class='warning'>The password was not confirmed</span>");
             die;

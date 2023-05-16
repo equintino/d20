@@ -20,8 +20,8 @@ export default class AbstractViews {
         Message.alertLatch(msg, background)
     }
 
-    showPage(page, fn) {
-        Views.showPage(page, fn)
+    showPage(data) {
+        Views.showPage(data)
     }
 
     setButtons(fn) {
@@ -81,7 +81,7 @@ export default class AbstractViews {
     }
 
     carousel(data) {
-        const carousel = new Carousel(data.idElement, data.list)
+        const carousel = new Carousel(data)
         const items = document.querySelector(data.idElement).firstChild.children
         const func = () => {
             data.fn({
@@ -92,7 +92,7 @@ export default class AbstractViews {
         }
         if (typeof(data.fn) === 'function') func()
         document.querySelector(data.idElement).onclick = () => {
-            if (typeof(func) === 'function') func()
+            if (typeof(data.fn) === 'function') func()
         }
     }
 

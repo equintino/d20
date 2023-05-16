@@ -16,7 +16,7 @@ export default class Views {
         this.#container = document.querySelector('#container_main')
     }
 
-    static showPage(page, fn) {
+    static showPage({ page, fn }) {
         const view = new Views()
         view.#container.innerHTML = page
         if (typeof(fn) === 'function') fn(view.#container)

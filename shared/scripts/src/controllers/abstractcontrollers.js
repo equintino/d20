@@ -35,7 +35,14 @@ export default class AbstractControllers {
     }
 
     showPage({ page, fn }) {
-        this.view.showPage(this.service.open('GET', page), fn)
+        const _page = this.service.open({
+                method: 'GET',
+                url: page
+            })
+        this.view.showPage({
+            page: _page,
+            fn
+        })
     }
 
     setButton({ elem, fn }) {
@@ -52,7 +59,11 @@ export default class AbstractControllers {
 
     openModal({ page, formData, fn, box }) {
         this.view.openModal({
-            page: this.service.open('POST', page, formData),
+            page: this.service.open({
+                method: 'POST',
+                url: page,
+                formData
+            }),
             formData,
             fn,
             box
@@ -69,8 +80,20 @@ export default class AbstractControllers {
         }
     }
 
-    openFile({ page, formData }) {
-        return JSON.parse(this.service.open('POST', page, formData))
+    openFile(data) {
+        return (this.service.open({
+            method: (data.method ?? 'POST'),
+            url: data.url,
+            formData: data.formData
+        }))
+    }
+
+    getDataFile(data) {
+        return JSON.parse(this.service.open({
+            method: 'POST',
+            url: data.url,
+            formData: data.formData
+        }))
     }
 
     message({ msg }) {

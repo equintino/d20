@@ -1,13 +1,14 @@
-import Views from './views.js'
 import utils from './../../lib/utils.js'
+import AbstractViews from './abstractviews.js'
 
 const loading = utils.loading
 
-export default class Menu {
+export default class Menu extends AbstractViews {
     #top
     #identification
 
     constructor() {
+        super()
         this.#top = document.querySelector('#top')
         this.#identification = document.querySelector('#identification')
         this.#top.style = 'display: flow-root list-item'
@@ -15,10 +16,6 @@ export default class Menu {
 
     setIdentification(data) {
         this.#identification.innerHTML = data
-    }
-
-    showPage(page) {
-        Views.showPage(page)
     }
 
     setMenu(fn) {
@@ -34,13 +31,15 @@ export default class Menu {
             fn(page)
         })
         const dropdown = this.#top.querySelector('.dropdown')
-        dropdown.onmouseover = (e) => {
-            this.#top.querySelector('.dropdown-menu').style = 'display: block'
-            this.#identification.style = 'z-index: -1'
-        }
-        dropdown.onmouseleave = () => {
-            this.#top.querySelector('.dropdown-menu').style = 'display: none'
-            this.#identification.style = 'z-index: 1'
+        if (dropdown !== null) {
+            dropdown.onmouseover = (e) => {
+                this.#top.querySelector('.dropdown-menu').style = 'display: block'
+                this.#identification.style = 'z-index: -1'
+            }
+            dropdown.onmouseleave = () => {
+                this.#top.querySelector('.dropdown-menu').style = 'display: none'
+                this.#identification.style = 'z-index: 1'
+            }
         }
     }
 

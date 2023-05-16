@@ -14,8 +14,8 @@ export default class Character extends AbstractControllers {
                     this.setButton({ elem })
                     this.view.changeCategory({
                         fn: ({ formData }) => {
-                            let list = this.openFile({
-                                page: 'avatar',
+                            let list = this.getDataFile({
+                                url: 'avatar',
                                 formData
                             })
                             formData.append('act', 'list')
@@ -68,8 +68,8 @@ export default class Character extends AbstractControllers {
                         this.view.loading.show()
                         this.view.carousel({
                             idElement: '#imageAvatar',
-                            list: this.openFile({
-                                page: 'avatar',
+                            list: this.getDataFile({
+                                url: 'avatar',
                                 formData
                             }),
                             fn: ({idImage }) => {
@@ -80,7 +80,7 @@ export default class Character extends AbstractControllers {
                                 this.view.loading.hide()
                             }
                         })
-                        let category = this.openFile({ page: `category/id/${formData.get('category_id')}` })
+                        let category = this.getDataFile({ url: `category/id/${formData.get('category_id')}` })
                         this.view.updateCategory({
                             idElement: '#avatarList',
                             category
@@ -98,7 +98,7 @@ export default class Character extends AbstractControllers {
                                 fn: (e) => {
                                     this.view.changeAvatar({
                                         fn: (formData) => {
-                                            let list = this.openFile({ page: 'avatar', formData })
+                                            let list = this.openFile({ url: 'avatar', formData })
                                             formData.append('act', 'list')
                                             formData.append('list', list)
                                             this.#setModal({ formData, list })
@@ -153,7 +153,7 @@ export default class Character extends AbstractControllers {
             case 'breed':
                 this.view.carousel({
                     idElement: '#avatar',
-                    list: this.openFile({ page: 'breed/list' }),
+                    list: this.getDataFile({ url: 'breed/list' }),
                     fn: (e) => {
                         this.view.setDetails(e)
                         this.view.loading.hide()
@@ -175,7 +175,7 @@ export default class Character extends AbstractControllers {
                 let resp
                 if (validate) {
                     resp = this.service.save({
-                        page: 'character/save',
+                        url: 'character/save',
                         formData
                     })
                     if (resp.indexOf('success') !== -1) {
@@ -194,14 +194,14 @@ export default class Character extends AbstractControllers {
     #btnCharacter(btn) {
         this.view.setBtnCharacter(btn,  ({ idCategory, idBreed, idMission }) => {
             if (idCategory !== '') this.view.setCategory({
-                category: this.openFile({ page: `category/id/${idCategory}` })
+                category: this.getDataFile({ url: `category/id/${idCategory}` })
             })
             if (idBreed !== '') this.view.setBreed({
-                breed: this.openFile({ page: `breed/id/${idBreed}` })
+                breed: this.getDataFile({ url: `breed/id/${idBreed}` })
             })
             if (idMission !== '') {
                 this.view.setMission({
-                    mission: this.openFile({ page: `mission/id/${idMission}` })
+                    mission: this.getDataFile({ url: `mission/id/${idMission}` })
                 })
             } else {
                 this.view.setMission({ mission: false })
@@ -222,8 +222,8 @@ export default class Character extends AbstractControllers {
 
         this.view.carousel({
             idElement: '#imageAvatar',
-            list: this.openFile({
-                page: 'avatar',
+            list: this.getDataFile({
+                url: 'avatar',
                 formData
             }),
             fn: ({ idImage }) => {
@@ -273,7 +273,7 @@ export default class Character extends AbstractControllers {
                         buttons: buttons2,
                         fn: ({ e, form }) => {
                             if (e.target.value === 'yes') {
-                                let resp = this.service.open('POST', 'character/delete', formData)
+                                let resp = this.openFile({ url: 'character/delete', formData })
                                 if (resp.indexOf('success') !== -1) {
                                     this.view.closeAllModal()
                                     this.optInit('list')
@@ -289,7 +289,7 @@ export default class Character extends AbstractControllers {
                         form: '#myCharacter',
                         fn: ({ formData, validate }) => {
                             if (validate) {
-                                this.openFile({ page: 'character/update', formData })
+                                this.openFile({ url: 'character/update', formData })
                                 this.view.closeModal({})
                             }
                         }

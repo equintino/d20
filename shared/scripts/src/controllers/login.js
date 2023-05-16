@@ -5,18 +5,20 @@ export default class Login extends AbstractControllers {
         super(deps)
     }
 
-    static async initializer(deps) {
-        const login = new Login(deps)
+    static async initializer({ login }) {
         login.init()
     }
 
-    init() {
-        this.#showLogin()
-    }
+    init() { this.#showLogin() }
 
     #showLogin() {
-        this.view.showPage(this.service.open('POST', 'login'), () => {
-            this.view.initializer()
+        this.view.showPage({
+            page: this.openFile({
+                url: 'login'
+            }),
+            fn: () => {
+                this.view.initializer()
+            }
         })
         this.#setListConnection()
         this.#setVersion()
@@ -25,13 +27,14 @@ export default class Login extends AbstractControllers {
     }
 
     #setListConnection() {
-        let conf
         try {
-            conf = JSON.parse(this.service.open('POST', './src/Config/.config.json'))
-            this.view.setConList(conf)
+            this.view.setConnList(this.getDataFile({
+                url: './src/Config/.config.json'
+            }))
         } catch (error) {
-            this.view.openModal(this.service.open('POST', './src/Modals/config.php'), {
-            }, () => {
+            this.view.openModal(this.openFile({
+                url: './src/Modals/config.php'
+            }), {}, () => {
                 this.view.autoFocusModal('connectionName')
                 this.view.setTypeDb(this.service.getTypeDb().db)
             }, (response) => {
@@ -45,8 +48,11 @@ export default class Login extends AbstractControllers {
     }
 
     #enterLogin() {
-        this.view.enterLogin((data) => {
-            const response = this.service.open('POST','login/enter', data)
+        this.view.enterLogin((formData) => {
+            const response = this.getDataFile({
+                url: 'login/enter',
+                formData
+            })
             if (response === 'reset password') {
                 return this.view.openModal(this.service.readFile('token'), {}, () => {
                     let params = new URLSearchParams(data)
@@ -59,8 +65,8 @@ export default class Login extends AbstractControllers {
                     this.view.message(resp, 'var(--cor-success)')
                 })
             }
-            if (response === '1') {
-                this.service.setCookie(data)
+            if (response == true) {
+                this.service.setCookie(formData)
                 return window.location.reload()
             }
             this.view.message(response, 'var(--cor-warning)')
@@ -69,50 +75,67 @@ export default class Login extends AbstractControllers {
 
     #addLogin() {
         this.view.confAddLogin(() => {
-            this.view.openModal(this.service.open('POST', 'register'), {
-                'action': 'add',
-                'act': 'add',
-                'user': 'login'
-            }, () => {
-                this.view.setBtnModal(
-                    '<button class="btn btn-rpg btn-silver" value="reset">Limpar</button><button class="btn btn-rpg btn-danger" value="save">Salvar</button>',
-                    (e) => {
-                        let btnName = e.target.value
-                        let id = `#${this.view.modal.getBox().id}`
-                        if (btnName === 'save') {
-                            this.view.submit(id + ' form', (formData) => {
-                                let resp = this.service.save('user/save', formData)
-                                let background = 'var(--cor-warning)'
-                                if (resp.indexOf('success') !== -1) {
-                                    background = 'var(--cor-success)'
-                                    this.view.modal.close()
-                                }
-                                this.view.message(resp, background)
-                            })
+            this.view.openModal({
+                page: this.openFile({
+                    method: 'POST',
+                    url: 'register'
+                }),
+                formData: {
+                    'action': 'add',
+                    'act': 'add',
+                    'user': 'login'
+                },
+                fn: () => {
+                    this.view.setBtnModal({
+                        buttons: '<button class="btn btn-rpg btn-silver" value="reset">Limpar'
+                            + '</button><button class="btn btn-rpg btn-danger" value="save">'
+                            + 'Salvar</button>',
+                        fn: ({ e }) => {
+                            let btnName = e.target.value
+                            let id = `#${this.view.modal.getBox().id}`
+                            if (btnName === 'save') {
+                                this.view.submit({
+                                    form: id + ' form',
+                                    fn: ({ formData, validate }) => {
+                                        let resp = '<span class="warning">Thie field is necessary</span>'
+                                        if (validate) {
+                                            resp = this.service.save({ url: 'user/save', formData })
+                                            if (resp.indexOf('success') !== -1) {
+                                                this.view.closeModal()
+                                            }
+                                        }
+                                        this.message({ msg: resp })
+                                    }
+                                })
+                            }
                         }
+                    })
+                    this.view.autoFocusModal('name')
+                },
+                response: (response) => {
+                    const validate = this.service.validate(response)
+                    if (validate !== null) {
+                        return this.view.message(validate, 'var(--cor-warning)')
                     }
-                )
-                this.view.autoFocusModal('name')
-            }, (response) => {
-                const validate = this.service.validate(response)
-                if (validate !== null) {
-                    return this.view.message(validate, 'var(--cor-warning)')
-                }
-                const resp = this.service.save('user', response)
-                let background = 'var(--cor-warning)'
-                if (resp.indexOf('success') !== -1) {
-                    background = 'var(--cor-success)'
-                    this.view.closeModal()
-                }
+                    const resp = this.service.save('user', response)
+                    let background = 'var(--cor-warning)'
+                    if (resp.indexOf('success') !== -1) {
+                        background = 'var(--cor-success)'
+                        this.view.closeModal()
+                    }
 
-                this.view.message(resp, background)
+                    this.view.message(resp, background)
+                }
             })
         })
     }
 
     #setVersion() {
         this.view.setVersion(
-            JSON.parse(this.service.open('POST', './version.json')).version
+            this.getDataFile({
+                method: 'POST',
+                url: './version.json'
+            }).version
         )
     }
 }

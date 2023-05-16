@@ -9,8 +9,8 @@ export default class AbstractServices {
         this.readFile = new ReadFile()
     }
 
-    open(method, page, data) {
-        return Services.open(method, page, data)
+    open(data) {
+        return Services.open(data)
     }
 
     setCookie(data) {
@@ -23,8 +23,12 @@ export default class AbstractServices {
         Cookie.getCookie(name)
     }
 
-    save({ page, formData }) {
-        this.readFile.open('POST', page, false, formData)
+    save({ url, formData }) {
+        this.readFile.open({
+            method: 'POST',
+            url,
+            formData
+        })
         return this.readFile.content
     }
 

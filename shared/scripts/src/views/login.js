@@ -25,7 +25,7 @@ export default class Login extends AbstractViews {
         this.#version.innerHTML = version
     }
 
-    setConList(connections) {
+    setConnList(connections) {
         let opt = '<option value=""></option>'
         for (let i in connections) {
             opt += `<option value="${i}">${i}</option>`

@@ -35,15 +35,15 @@ class Login
     public function validate(): bool | string
     {
         if (!$this->user->login) {
-            return $this->message = "No exist login";
+            return $this->message = json_encode("No exist login");
         }
         if ($this->user->token) {
-            $this->message = "reset password";
+            $this->message = json_encode("reset password");
         } elseif ($this->user->validate($this->password, $this->user->password)) {
             $this->setSession();
             $this->message = true;
         } else {
-            $this->message = "Invalid password";
+            $this->message = json_encode("Invalid password");
         }
         return $this->message;
     }

@@ -15,9 +15,14 @@ export default class Services {
         this.#readFile = new ReadFile()
     }
 
-    static open(method, page, data) {
+    static open({ method, url, formData }) {
         const services = new Services()
-        services.#readFile.open(method, page, false, data)
+        services.#readFile.open({
+            method,
+            url,
+            formData,
+            async: false
+        })
         return services.#readFile.content
     }
 
