@@ -57,10 +57,12 @@ export default class Controllers {
                 )
                 break
             case 'mission':
-                Mission.initializer({
-                    view: this.#views.initClass(cls),
-                    service: this.#services.initClass(cls)
-                })
+                Mission.initializer(
+                    new Mission({
+                        view: this.#views.initClass(cls),
+                        service: this.#services.initClass(cls)
+                    })
+                )
                 break
             case 'breed':
                 Breed.initializer({

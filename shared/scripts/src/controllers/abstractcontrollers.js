@@ -35,12 +35,11 @@ export default class AbstractControllers {
     }
 
     showPage({ page, fn }) {
-        const _page = this.service.open({
+        this.view.showPage({
+            page: this.service.open({
                 method: 'GET',
                 url: page
-            })
-        this.view.showPage({
-            page: _page,
+            }),
             fn
         })
     }

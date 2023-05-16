@@ -63,7 +63,7 @@ class Mission extends Model implements Models
         }
 
         if ($this->fail || !$all->rowCount()) {
-            $this->message = "Your query has not returned any registrations";
+            $this->message = "<span class='warning'>Your query has not returned any registrations</span>";
             return null;
         }
 

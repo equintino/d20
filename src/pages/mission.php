@@ -14,16 +14,16 @@
                 <section>
                     <div>
                         <label>Nome:</label>
-                        <input class="input-rpg" type="text" name="name" size="50"/>
+                        <input class="input-rpg" type="text" name="name" size="50" required/>
                     </div>
                     <div>
                         <label>Local:</label>
-                        <input class="input-rpg" type="text" name="place" size="50"/>
+                        <input class="input-rpg" type="text" name="place" size="50" required/>
                     </div>
                     <div>
                         <label>História:</label>
                         <textarea class="input-rpg" rows="5" cols="48" type="text" name="story"
-                        style="text-transform: none"></textarea>
+                        style="text-transform: none" required></textarea>
                     </div>
                 </section>
             </form>

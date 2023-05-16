@@ -101,7 +101,7 @@ class Mission extends Controller
             "place" => $mission->place,
             "story" => $mission->story
         ];
-        return print(json_encode($dataMission));
+        return print($dataMission);
     }
 
     public function loadId(array $data): ?string
@@ -114,7 +114,7 @@ class Mission extends Controller
             "place" => $mission->place,
             "story" => $mission->story
         ];
-        return print(json_encode($dataMission));
+        return print($dataMission);
     }
 
     public function map(array $data): void
@@ -150,7 +150,7 @@ class Mission extends Controller
         } else {
             $personages = [];
         }
-        return print(json_encode($personages));
+        return print($personages);
     }
 
     public function mapSave(array $data)
@@ -162,7 +162,7 @@ class Mission extends Controller
         }
         $maps->bootstrap($data);
         $maps->save();
-        return print(json_encode($maps->message()));
+        return print($maps->message());
     }
 
     public function mapLoad(array $data): ?string
@@ -172,7 +172,7 @@ class Mission extends Controller
         foreach ($maps as $map) {
             $images[] = $map->image_id;
         }
-        return print(json_encode($images ?? null));
+        return print($images ?? null);
     }
 
     public function mapEdit(array $data)
@@ -199,7 +199,7 @@ class Mission extends Controller
         $mission = new \Models\Mission();
         $mission->bootstrap($data);
         $mission->save();
-        return print(json_encode($mission->message()));
+        return print($mission->message());
     }
 
     public function update(array $data)
@@ -241,7 +241,7 @@ class Mission extends Controller
                 }
             }
         }
-        return print(json_encode($mission->message()));
+        return print($mission->message());
     }
 
     public function delete(array $data)
@@ -258,6 +258,6 @@ class Mission extends Controller
             (new \Models\Image())->load($map->image_id)->destroy();
         }
         $mission->destroy();
-        return print(json_encode($mission->destroy()));
+        return print($mission->destroy());
     }
 }
