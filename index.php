@@ -111,6 +111,7 @@
         $router->post("/mission/load/{name}", "Mission:load");
         $router->post("/mission/id/{id}", "Mission:loadId");
         $router->post("/mission/personages/{name}", "Mission:personages");
+        $router->post("/mission/personages", "Mission:personages");
         $router->get("/mission/edit/{id}", "Mission:edit");
         $router->get("/mission/list", "Mission:list");
         $router->post("/map/add", "Mission:map");

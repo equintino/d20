@@ -34,11 +34,7 @@ export default class Character extends AbstractControllers {
                     this.setButton({
                         elem,
                         fn: (data) => {
-                            let btnName = data.e.target.value
-                            if (btnName !== 'edit' && btnName !== 'back') {
-                                if (data.btnActive !== null) data.btnActive.classList.remove('active')
-                                data.e.target.classList.add('active')
-                            }
+                            this.view.btnActive(data)
                         }
                     })
                 }
@@ -140,7 +136,7 @@ export default class Character extends AbstractControllers {
     }
 
     btnAction({ btn }) {
-        switch (btn.value) {
+        switch (btn.target.value) {
             case 'back':
                 this.btnBack('character')
                 break
@@ -164,7 +160,7 @@ export default class Character extends AbstractControllers {
                 this.#edition()
                 break
             default:
-                this.#btnCharacter(btn)
+                this.#btnCharacter(btn.target)
         }
     }
 

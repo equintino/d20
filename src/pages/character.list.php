@@ -4,7 +4,7 @@
             <button class="btn btn-rpg btn-info" value="back" style="margin-top: 115px">Voltar</button>
         </section>
         <section class="left">
-            <fieldset class="fieldset">
+            <fieldset class="fieldset btnSelection">
                 <legend>Personagens</legend>
                 <?php foreach ($characters as $character): ?>
                 <button class="btn btn-oval" data-id="<?= $character->id ?>" data-image_id="<?=

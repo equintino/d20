@@ -26,10 +26,16 @@
 
 #mission #list .left {
     text-align: center;
+    width: 80%;
 }
 
 #mission .left fieldset {
     overflow-x: auto;
+}
+
+#mission .left button {
+    width: 100%;
+    margin-left: auto;
 }
 
 #mission #list .right {
@@ -40,6 +46,7 @@
     width: 350px;
     height: 400px;
 }
+
 #editMission {
     display: flex;
     justify-content: center;
@@ -48,6 +55,8 @@
 
 #editMission section {
    flex-direction: column;
+   display: flex;
+   justify-items: center;
 }
 
 #editMission #galery {
@@ -63,9 +72,4 @@
 #editMission table td {
     color: white;
     text-align: center;
-}
-
-#editMission section {
-    display: flex;
-    justify-items: center;
 }

@@ -1,3 +1,18 @@
+<style>
+    #mission #images img {
+        height: 230px;
+    }
+
+    #mission #images {
+        position: relative;
+        width: 480px;
+    }
+
+    #mission .middle fieldset {
+        overflow: hidden;
+    }
+
+</style>
 <main id="mission">
     <?php if(empty($act)): ?>
     <div id="init">
@@ -42,22 +57,22 @@
                 <button class="btn btn-rpg btn-info" style="margin-top: 20px" value="back">Voltar</button>
             </section>
             <section class="left">
-                <fieldset class="fieldset">
+                <fieldset class="fieldset btnSelection">
                     <legend>Missões</legend>
                     <?php foreach($missions as $mission): ?>
-                        <div>
                             <button class="btn btn-oval" data-id="<?= $mission->id ?>"
-                                data-groupname="<?= $group->name ?>" data-access="<?= (
+                                data-groupname="<?= $group->name ?>" data-map_id="<?=
+                                $mission->map_id ?>" data-access="<?= (
                                         $group->access ?? null
-                                    ) ?>" ><?= $mission->name ?></button>
-                        </div>
+                                    ) ?>" value="<?= $mission->id ?>"><?= $mission->name ?></button>
                     <?php endforeach ?>
                 </fieldset>
             </section>
-            <section class="midle" title="Clique para editar mapa">
+            <section class="middle" title="Clique 2x para editar mapa">
                 <fieldset class="fieldset">
                     <legend>Mapas</legend>
                     <div id="images"></div>
+                    <p>Total de Mapas: </p>
                 </fieldset>
             </section>
             <section>

@@ -20,8 +20,8 @@ export default class AbstractViews {
         Message.alertLatch(msg, background)
     }
 
-    showPage(data) {
-        Views.showPage(data)
+    showPage({ page, fn }) {
+        Views.showPage({ page, fn })
     }
 
     setButtons(fn) {
@@ -35,6 +35,15 @@ export default class AbstractViews {
 
     setFocus({ elem, property }) {
         elem.querySelector(property).focus()
+    }
+
+    btnActive({ e }) {
+        const elem = e.target.parentElement
+        const btnActive = elem.querySelector('.active')
+        if (elem.classList.value.indexOf('btnSelection') !== -1) {
+            if (btnActive !== null) btnActive.classList.remove('active')
+            e.target.classList.add('active')
+        }
     }
 
     backInit(elem, fn) {

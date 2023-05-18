@@ -46,10 +46,15 @@ export default class Carousel {
 
             cards.addEventListener('click', () => {
                 let arr = this.#direction(arrCards, true)
-                arr[0].style = this.#css.left
-                arr[1].style = this.#css.middle
-                arr[2].style = this.#css.right
-                arr[3].style = this.#css.other
+                if (arr.length < 3) {
+                    arr[0].style = this.#css.left
+                    arr[1].style = this.#css.middle
+                } else {
+                    arr[0].style = this.#css.left
+                    arr[1].style = this.#css.middle
+                    arr[2].style = this.#css.right
+                }
+                // arr[3].style = this.#css.other
                 arrCards = arr
                 this.element = arr[1]
             })

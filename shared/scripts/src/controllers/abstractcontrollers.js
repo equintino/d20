@@ -50,7 +50,7 @@ export default class AbstractControllers {
                 e.preventDefault()
                 let btnActive = elem.querySelector('.left button.active')
                 this.view.loading.show()
-                this.btnAction({ btn: e.target })
+                this.btnAction({ btn: e })
                 if (typeof(fn) === 'function') fn({ btnActive, e })
             })
         })

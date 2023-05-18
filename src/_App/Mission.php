@@ -114,7 +114,7 @@ class Mission extends Controller
             "place" => $mission->place,
             "story" => $mission->story
         ];
-        return print($dataMission);
+        return print(json_encode($dataMission));
     }
 
     public function map(array $data): void
@@ -125,7 +125,7 @@ class Mission extends Controller
 
     public function personages(array $data)
     {
-        $missionName = str_replace('_', ' ', filter_var($data["name"], FILTER_UNSAFE_RAW));
+        $missionName = str_replace('_', ' ', filter_var($data["nameMission"], FILTER_UNSAFE_RAW));
         $missionId = (new \Models\Mission())->find($missionName)->id;
         $players = (new \Models\Player())->join(
             "*",
@@ -150,7 +150,7 @@ class Mission extends Controller
         } else {
             $personages = [];
         }
-        return print($personages);
+        return print(json_encode($personages));
     }
 
     public function mapSave(array $data)
@@ -167,12 +167,19 @@ class Mission extends Controller
 
     public function mapLoad(array $data): ?string
     {
-        $mission_id = $data["id"];
-        $maps = (new \Models\Map())->search(["mission_id" => $mission_id]);
-        foreach ($maps as $map) {
-            $images[] = $map->image_id;
+        $idMission = $data["id"];
+        $images = [];
+        $maps = (new \Models\Map())->search(["mission_id" => $idMission]);
+        if ($maps) {
+            foreach ($maps as $map) {
+                $images[] = [
+                    'image_id' => $map->image_id,
+                    'name' => $map->name
+                ];
+            }
         }
-        return print($images ?? null);
+        return print(json_encode($images));
+        // return print(json_encode($images) ?? null);
     }
 
     public function mapEdit(array $data)
