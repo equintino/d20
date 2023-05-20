@@ -44,7 +44,7 @@ export default class AbstractControllers {
         })
     }
 
-    setButton({ elem, fn }) {
+    setButtons({ elem, fn }) {
         elem.querySelectorAll('button').forEach((btn) => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault()

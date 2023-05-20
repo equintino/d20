@@ -11,7 +11,7 @@ export default class Character extends AbstractControllers {
             this.showPage({
                 page: 'character/add',
                 fn: (elem) => {
-                    this.setButton({ elem })
+                    this.setButtons({ elem })
                     this.view.changeCategory({
                         fn: ({ formData }) => {
                             let list = this.getDataFile({
@@ -31,7 +31,7 @@ export default class Character extends AbstractControllers {
             this.showPage({
                 page: 'character/list',
                 fn: (elem) => {
-                    this.setButton({
+                    this.setButtons({
                         elem,
                         fn: (data) => {
                             this.view.btnActive(data)
@@ -86,12 +86,12 @@ export default class Character extends AbstractControllers {
 
                 this.view.setBtnModal({
                     buttons: '<button class="btn btn-rpg btn-danger" value="selected">Selecionar</button>',
-                    fn: ({ e, form }) => {
+                    fn: ({ e, formData, form }) => {
                         let btnName = e.target.value
                         if (btnName === 'selected') {
                             this.view.avatarSelected({
-                                form,
-                                fn: (e) => {
+                                formData,
+                                fn: () => {
                                     this.view.changeAvatar({
                                         fn: (formData) => {
                                             let list = this.openFile({ url: 'avatar', formData })
@@ -100,7 +100,8 @@ export default class Character extends AbstractControllers {
                                             this.#setModal({ formData, list })
                                         }
                                     })
-                                }
+                                },
+                                form
                             })
                             this.view.closeModal({
                                 fn: () => {
@@ -115,10 +116,10 @@ export default class Character extends AbstractControllers {
                                             })
                                             this.view.setBtnModal({
                                                 buttons: '<button class="btn btn-rpg btn-silver" value="reset">Limpar</button><button class="btn btn-rpg btn-danger" value="save">Salvar</button>',
-                                                fn: ({ e, form }) => {
+                                                fn: ({ e, formData }) => {
                                                     let btnName = e.target.value
                                                     if (btnName === 'save') {
-                                                        this.view.setStory({ form })
+                                                        this.view.setStory({ formData })
                                                         this.view.closeModal()
                                                     }
                                                 }
@@ -188,7 +189,7 @@ export default class Character extends AbstractControllers {
     }
 
     #btnCharacter(btn) {
-        this.view.setBtnCharacter(btn,  ({ idCategory, idBreed, idMission }) => {
+        this.view.setBtnCharacter(btn, ({ idCategory, idBreed, idMission }) => {
             if (idCategory !== '') this.view.setCategory({
                 category: this.getDataFile({ url: `category/id/${idCategory}` })
             })
@@ -206,9 +207,9 @@ export default class Character extends AbstractControllers {
     }
 
     #avatar({ formData }) {
+        this.view.loading.show()
         formData.append('act', 'list')
         formData.append('source', 'character')
-        this.view.loading.show()
 
         this.openModal({
             page: 'avatar/show',
@@ -233,14 +234,9 @@ export default class Character extends AbstractControllers {
         let buttons = '<button class="btn btn-rpg btn-danger" value="selected">Selecionar</button>'
         this.view.setBtnModal({
             buttons: buttons,
-            fn: ({ e, form }) => {
+            fn: ({ e, formData }) => {
                 if (e.target.value === 'selected') {
-                    let idImage = form.querySelector('[name=image_id]').value
-                    document.querySelector('#myCharacter [name=image_id]').value = idImage
-                    document.querySelector('#myCharacter img').src = `image/id/${idImage}`
-                    this.view.closeModal({
-                        box: document.querySelector('#boxe2_main')
-                    })
+                    this.view.setAvatarModal({ formData })
                 }
             },
             box: '#boxe2_main'
@@ -253,10 +249,9 @@ export default class Character extends AbstractControllers {
             + "Salvar</button>"
         this.view.setBtnModal({
             buttons,
-            fn: ({ e, form }) => {
+            fn: ({ e, formData }) => {
                 let btnName = e.target.value
                 if (btnName === "delete") {
-                    let formData = new FormData(form)
                     this.view.openModal({
                         box: '#boxe2_main',
                         title: 'MODO DE EXCLUSÃO',
@@ -267,7 +262,7 @@ export default class Character extends AbstractControllers {
                         + "btn-danger' value='yes'>Sim</button>"
                     this.view.setBtnModal({
                         buttons: buttons2,
-                        fn: ({ e, form }) => {
+                        fn: ({ e }) => {
                             if (e.target.value === 'yes') {
                                 let resp = this.openFile({ url: 'character/delete', formData })
                                 if (resp.indexOf('success') !== -1) {

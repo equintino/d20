@@ -74,6 +74,7 @@ export default class Modal {
         btn.innerHTML = buttons
         btn.onclick = (e) => {
             let form = e.target.parentElement.parentElement.querySelector('form')
+            let formData = (form !== null ? new FormData(form) : form)
             let btnName = e.target.value
             if (btnName === 'reset') {
                 form.reset()
@@ -83,7 +84,7 @@ export default class Modal {
                     box: e.target.parentElement.parentElement
                 })
             }
-            if (typeof(fn) === 'function') fn({ e, form })
+            if (typeof(fn) === 'function') fn({ e, formData, form })
         }
     }
 

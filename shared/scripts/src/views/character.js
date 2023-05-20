@@ -60,14 +60,14 @@ export default class Character extends AbstractViews {
             .innerHTML = category.description
     }
 
-    avatarSelected({ form, fn }) {
-        document.querySelector('.breed').attributes['data-id'].value = form.breed_id.value
-        document.querySelector('#myCharacter [name=breed_id]').value = form.breed_id.value
+    avatarSelected({ formData, fn, form }) {
+        document.querySelector('.breed').attributes['data-id'].value = formData.get('breed_id')
+        document.querySelector('#myCharacter [name=breed_id]').value = formData.get('breed_id')
         document.querySelector('.breed').innerText = form.breed_id.selectedOptions[0]['text'].toUpperCase()
         document.querySelector('#description p').innerHTML = form.breed_id.selectedOptions[0].attributes['data-description'].value
-        document.querySelector('#myClass').value = form.category_id.value
-        document.querySelector('#myCharacter [name=image_id]').value = form.image_id.value
-        document.querySelector('#avatar').parentElement.innerHTML = `<div id='avatar'><img src=image/id/${form.image_id.value} alt="" height="350px" /></div>`
+        document.querySelector('#myClass').value = formData.get('category_id')
+        document.querySelector('#myCharacter [name=image_id]').value = formData.get('image_id')
+        document.querySelector('#avatar').parentElement.innerHTML = `<div id='avatar'><img src=image/id/${formData.get('image_id')} alt="" height="350px" /></div>`
         if (typeof(fn) === 'function') fn()
     }
 
@@ -91,8 +91,8 @@ export default class Character extends AbstractViews {
         document.querySelector('[name=image_id]').value = ''
     }
 
-    setStory({ form }) {
-        document.querySelector('#character [name=story]').value = form.querySelector('[name=story]').value
+    setStory({ formData }) {
+        document.querySelector('#character [name=story]').value = formData.get('story')
     }
 
     setBtnCharacter(btn, fn) {
@@ -155,5 +155,14 @@ export default class Character extends AbstractViews {
         formData.append('story', story)
 
         return formData
+    }
+
+    setAvatarModal({ formData }) {
+        let idImage = formData.get('image_id')
+        document.querySelector('#myCharacter [name=image_id]').value = idImage
+        document.querySelector('#myCharacter img').src = `image/id/${idImage}`
+        this.closeModal({
+            box: document.querySelector('#boxe2_main')
+        })
     }
 }

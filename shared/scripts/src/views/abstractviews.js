@@ -43,6 +43,7 @@ export default class AbstractViews {
         if (elem.classList.value.indexOf('btnSelection') !== -1) {
             if (btnActive !== null) btnActive.classList.remove('active')
             e.target.classList.add('active')
+            return e
         }
     }
 
