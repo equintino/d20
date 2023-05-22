@@ -123,10 +123,11 @@ class Mission extends Controller
         $this->view->setPath("Modals")->render("map", [ compact("mission") ]);
     }
 
-    public function personages(array $data)
+    public function personages(array $data): string
     {
-        $missionName = str_replace('_', ' ', filter_var($data["nameMission"], FILTER_UNSAFE_RAW));
-        $missionId = (new \Models\Mission())->find($missionName)->id;
+        // $missionName = str_replace('_', ' ', filter_var($data["nameMission"], FILTER_UNSAFE_RAW));
+        // $missionId = (new \Models\Mission())->find($missionName)->id;
+        $idMission = filter_var($data['id']);
         $players = (new \Models\Player())->join(
             "*",
             [
@@ -141,7 +142,7 @@ class Mission extends Controller
             ]
         )
         ->where([
-            "mission_id" => $missionId
+            "mission_id" => $idMission
         ]);
         if (!empty($players)) {
             foreach ($players as $player) {
@@ -251,7 +252,7 @@ class Mission extends Controller
         return print($mission->message());
     }
 
-    public function delete(array $data)
+    public function delete(array $data): string
     {
         $id = $data["id"];
         $mission = (new \Models\Mission())->load($id);
@@ -265,6 +266,6 @@ class Mission extends Controller
             (new \Models\Image())->load($map->image_id)->destroy();
         }
         $mission->destroy();
-        return print($mission->destroy());
+        return print(json_encode($mission->message()));
     }
 }

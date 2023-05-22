@@ -252,18 +252,11 @@ export default class Character extends AbstractControllers {
             fn: ({ e, formData }) => {
                 let btnName = e.target.value
                 if (btnName === "delete") {
-                    this.view.openModal({
-                        box: '#boxe2_main',
+                    this.confirm({
                         title: 'MODO DE EXCLUSÃO',
-                        message: `Deseja realmente excluir este Personagem? (${formData.get('personage').toUpperCase()})`
-                    })
-                    let buttons2 = "<button class='btn btn-rpg btn-silver' "
-                        + "value='no'>Não</button><button class='btn btn-rpg "
-                        + "btn-danger' value='yes'>Sim</button>"
-                    this.view.setBtnModal({
-                        buttons: buttons2,
+                        message: `Deseja realmente excluir este Personagem? (${formData.get('personage').toUpperCase()})`,
                         fn: ({ e }) => {
-                            if (e.target.value === 'yes') {
+                            if (e.target.value =='yes') {
                                 let resp = this.openFile({ url: 'character/delete', formData })
                                 if (resp.indexOf('success') !== -1) {
                                     this.view.closeAllModal()
@@ -272,8 +265,7 @@ export default class Character extends AbstractControllers {
                                 }
                                 this.message({ msg: resp })
                             }
-                        },
-                        box: '#boxe2_main'
+                        }
                     })
                 } else if (btnName === "save") {
                     this.view.submit({

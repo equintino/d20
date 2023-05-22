@@ -69,6 +69,24 @@ export default class AbstractControllers {
         })
     }
 
+    confirm({ title, message, fn }) {
+        this.view.openModal({
+            box: '#boxe2_main',
+            title,
+            message
+        })
+        let btn = "<button class='btn btn-rpg btn-silver' "
+            + "value='no'>Não</button><button class='btn btn-rpg "
+            + "btn-danger' value='yes'>Sim</button>"
+        this.view.setBtnModal({
+            buttons: btn,
+            fn: (data) => {
+                if (typeof(fn) === 'function') fn(data)
+            },
+            box: '#boxe2_main'
+        })
+    }
+
     /** @idElement string
      * @events array
      * @fn function

@@ -68,11 +68,12 @@
                     <?php endforeach ?>
                 </fieldset>
             </section>
-            <section class="middle" title="Clique 2x para editar mapa">
+            <section class="middle" title="Clique para mudar mapa">
                 <fieldset class="fieldset">
                     <legend>Mapas</legend>
                     <div id="images"></div>
-                    <p>Total de Mapas: </p>
+                    <p style="float: left">Total de Mapas: </p>
+                    <button class="btn btn-rpg btn-danger" value="edit-map" style="float: right">Editar Mapa</button>
                 </fieldset>
             </section>
             <section>

@@ -14,10 +14,12 @@ export default class Mission extends AbstractControllers {
                     elem,
                     fn: ({ btnActive, e }) => {
                         this.view.btnActive({ e })
-                        if (btnActive === null && e.target.value === 'edit') {
+                        let btnValue = e.target.value
+                        if (btnActive === null && btnValue === 'edit') {
                             this.view.loading.hide()
                             return this.message({ msg: '<span class="warning">No mission selected</span>'})
                         }
+                        if (btnValue === 'edit') this.#edition({ btnActive, e })
                     }
                 })
             }
@@ -60,74 +62,6 @@ export default class Mission extends AbstractControllers {
                 this.btnClean('#mission')
                 break
             case 'edit':
-                console.log(
-                    btn
-                )
-                return
-                // if (list.querySelector("button.active") !== null) {
-                    let mission_id = list.querySelector(".left button.active").attributes["data-id"].value
-                    modal.show({
-                        title: "Modo de edição de Missão",
-                        content: "mission/edit/" + mission_id,
-                        buttons: "<button class='btn btn-rpg btn-silver mr-1' value='delete'>"
-                            + "Excluir</button><button class='btn btn-rpg btn-green' "
-                            + "value='save'>Salvar</button>"
-                    })
-                    .on("click", function(e) {
-                        let formData = new FormData(modal.content.find(form_mission)[0])
-                        if (e.target.value === "save") {
-                            if (saveData("mission/update", formData)) {
-                                modal.hideContent();
-                            }
-                            $(".content").load("mission/list", function() {
-                                act.list()
-                                loading.hide()
-                            })
-                        } else if (e.target.value === "delete") {
-                            if (modal.content.find("#personage td").text().length !== 0) {
-                                return alertLatch("This mission is happing", "var(--cor-warning)")
-                            }
-                            modal.confirm({
-                                title: "Modo de Exclusão",
-                                message: "Deseja realmente excluir esta MISSÂO?"
-                            })
-                            .on("click", function(i) {
-                                if (i.target.value === "1") {
-                                    let id = modal.content.find("[name=id]").val()
-                                    $.ajax({
-                                        url: "mission/delete",
-                                        type: "POST",
-                                        dataType: "JSON",
-                                        data: {
-                                            id
-                                        },
-                                        beforeSend: function() {
-                                            loading.show()
-                                        },
-                                        success: function(response) {
-                                            alertLatch("Mission removed successfully", "var(--cor-success)")
-                                            modal.hideContent()
-                                            $(".content").load("mission/list", function() {
-                                                act.list()
-                                                loading.hide()
-                                            })
-                                        },
-                                        error: function(error) {
-                                            alertLatch(error.responseText)
-                                        },
-                                        complete: function() {
-                                            loading.hide()
-                                        }
-
-                                    })
-                                }
-                            })
-                        }
-                    })
-                // } else {
-                //     loading.hide()
-                //     alertLatch("No selected mission", "var(--cor-warning)")
-                // }
                 break
             default:
                 this.#activeMission({ e: btn })
@@ -151,6 +85,65 @@ export default class Mission extends AbstractControllers {
 
         this.view.setDetailMission({
             mission
+        })
+        this.view.loading.hide()
+    }
+
+    #edition({ btnActive }) {
+        const idMission = btnActive.attributes['data-id'].value
+        const buttons = "<button class='btn btn-rpg btn-silver mr-1' value='delete'>"
+            + "Excluir</button><button class='btn btn-rpg btn-green' "
+            + "value='save'>Salvar</button>"
+        const formData = new FormData()
+
+        formData.append('id', idMission)
+        this.openModal({
+            page: `mission/edit`,
+            formData
+        })
+        this.view.setBtnModal({
+            buttons,
+            fn: (data) => {
+                const btnName = data.e.target.value
+                let resp
+                if (btnName === 'save') {
+                    resp = this.openFile({
+                        url: 'mission/update',
+                        formData: data.formData
+                    })
+                    if (resp.indexOf('success') !== -1) {
+                        this.message({ msg: resp })
+                        this.view.closeModal()
+                        this.optInit('mission/list')
+                    }
+                } else if (btnName === 'delete') {
+                    let personages = this.getDataFile({
+                        url: `mission/personages`,
+                        formData
+                    })
+                    if (personages.length > 0) {
+                        return this.message({ msg: '<span class="warning">Ongoing mission</span>' })
+                    }
+                    this.confirm({
+                        title: 'Modo de Exclusão',
+                        message: 'Deseja realmente excluir esta Missão?',
+                        fn: ({ e }) => {
+                            let resp
+                            if (e.target.value === 'yes') {
+                                resp = this.getDataFile({
+                                    url: 'mission/delete',
+                                    formData
+                                })
+                                if (resp.indexOf('success') !== -1) {
+                                    this.optInit('mission/list')
+                                    this.view.closeAllModal()
+                                }
+                                this.message({ msg: resp })
+                            }
+                        }
+                    })
+                }
+            },
         })
         this.view.loading.hide()
     }
