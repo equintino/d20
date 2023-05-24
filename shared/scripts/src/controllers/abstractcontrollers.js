@@ -106,11 +106,12 @@ export default class AbstractControllers {
     }
 
     getDataFile(data) {
-        return JSON.parse(this.service.open({
+        const dataFile = this.service.open({
             method: 'POST',
             url: data.url,
             formData: data.formData
-        }))
+        })
+        return (JSON.parse(dataFile) ?? null)
     }
 
     message({ msg }) {

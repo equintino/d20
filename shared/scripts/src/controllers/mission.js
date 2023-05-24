@@ -61,6 +61,9 @@ export default class Mission extends AbstractControllers {
             case 'clear':
                 this.btnClean('#mission')
                 break
+            case 'map':
+                this.#editMap()
+                break
             case 'edit':
                 break
             default:
@@ -87,6 +90,17 @@ export default class Mission extends AbstractControllers {
             mission
         })
         this.view.loading.hide()
+    }
+
+    #editMap() {
+        const maps = document.querySelector('#mission #images #cards_')
+        if (maps !== null && maps.children.length > 0) {
+            for (let map of maps.children) {
+                if (map.style.zIndex == 1) {
+                    const nameMap = map.attributes['data-name'].value
+                }
+            }
+        }
     }
 
     #edition({ btnActive }) {

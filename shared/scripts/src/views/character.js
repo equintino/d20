@@ -72,17 +72,18 @@ export default class Character extends AbstractViews {
     }
 
     changeAvatar({ fn }) {
+        let formData = new FormData()
         let idCategory = document.querySelector('#myClass').value
         let breed = document.querySelector('.breed')
-        let formData = new FormData()
+        let img = document.querySelector('#avatar img')
+
         formData.append('breed_id', breed.attributes['data-id'].value)
         formData.append('category_id', idCategory)
 
-        let img = document.querySelector('#avatar img')
         img.setAttribute('title', 'clique para trocar avatar')
         img.style.cursor = 'pointer'
         img.onclick = () => {
-            fn(formData)
+            fn({ formData })
         }
     }
 

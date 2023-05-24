@@ -73,7 +73,7 @@
                     <legend>Mapas</legend>
                     <div id="images"></div>
                     <p style="float: left">Total de Mapas: </p>
-                    <button class="btn btn-rpg btn-danger" value="edit-map" style="float: right">Editar Mapa</button>
+                    <button class="btn btn-rpg btn-danger" value="map" style="float: right">Editar Mapa</button>
                 </fieldset>
             </section>
             <section>
