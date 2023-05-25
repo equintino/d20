@@ -27,4 +27,25 @@ export default class Mission extends AbstractViews {
             list: mission.maps
         })
     }
+
+    getMapSelected({ elem }) {
+        const maps = elem.querySelector('#mission #images #cards_')
+        if (maps !== null && maps.children.length > 0) {
+            for (let map of maps.children) {
+                if (map.style.zIndex == 1) {
+                    const idMap = map.attributes['data-id'].value
+                    const idImage = map.attributes['data-idImage'].value
+                    const formData = new FormData()
+                    formData.append('id', idMap)
+                    formData.append('image_id', idImage)
+                    return formData
+                }
+            }
+        }
+        return null
+    }
+
+    btnActiveSelected({ elem }) {
+        return elem.querySelector('#mission #list .active')
+    }
 }

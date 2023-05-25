@@ -50,13 +50,13 @@ export default class AbstractControllers {
                 e.preventDefault()
                 let btnActive = elem.querySelector('.left button.active')
                 this.view.loading.show()
-                this.btnAction({ btn: e })
+                this.btnAction({ btn: e, elem })
                 if (typeof(fn) === 'function') fn({ btnActive, e })
             })
         })
     }
 
-    openModal({ page, formData, fn, box }) {
+    openModal({ page, formData, fn, buttons, box }) {
         this.view.openModal({
             page: this.service.open({
                 method: 'POST',
@@ -67,6 +67,11 @@ export default class AbstractControllers {
             fn,
             box
         })
+        if (typeof(buttons) !== 'undefined') {
+            this.view.setBtnModal({
+                buttons
+            })
+        }
     }
 
     confirm({ title, message, fn }) {
@@ -91,9 +96,9 @@ export default class AbstractControllers {
      * @events array
      * @fn function
      */
-    eventInModal({ idElement, events, fn }) {
+    eventInModal({ idForm, events, fn }) {
         for (let event of events) {
-            this.view.eventInModal({ idElement, event, fn })
+            this.view.eventInModal({ idForm, event, fn })
         }
     }
 

@@ -1,3 +1,4 @@
+import ThumbImage from "../../lib/thumbImage.js"
 import AbstractControllers from "./abstractcontrollers.js"
 
 export default class Mission extends AbstractControllers {
@@ -26,7 +27,7 @@ export default class Mission extends AbstractControllers {
         })
     }
 
-    btnAction({ btn }) {
+    btnAction({ btn, elem }) {
         let btnName = btn.target.value
         switch (btnName) {
             case 'back':
@@ -62,7 +63,7 @@ export default class Mission extends AbstractControllers {
                 this.btnClean('#mission')
                 break
             case 'map':
-                this.#editMap()
+                this.#editMap({ elem })
                 break
             case 'edit':
                 break
@@ -92,14 +93,52 @@ export default class Mission extends AbstractControllers {
         this.view.loading.hide()
     }
 
-    #editMap() {
-        const maps = document.querySelector('#mission #images #cards_')
-        if (maps !== null && maps.children.length > 0) {
-            for (let map of maps.children) {
-                if (map.style.zIndex == 1) {
-                    const nameMap = map.attributes['data-name'].value
+    #editMap({ elem }) {
+        const formData = this.view.getMapSelected({ elem })
+        const btnActive = this.view.btnActiveSelected({ elem })
+        if (btnActive === null) {
+            this.view.loading.hide()
+            return this.message({
+                msg: '<span class="warning">No Mission selected</span>'
+            })
+        }
+        if (formData) {
+            const buttons = "<button class='btn btn-rpg btn-silver' value='delete'>"
+                + "Excluir</button><button class='btn btn-rpg btn-info' "
+                + "value='add'>Adicionar</button>"
+                + "<button class='btn btn-rpg btn-danger' value='save'>Salvar</button>"
+            this.openModal({
+                page: 'map/edit',
+                formData,
+                fn: () => {
+                    this.view.loading.hide()
+                },
+                buttons
+            })
+        } else {
+            const formData = new FormData()
+            formData.append('mission', btnActive.value)
+            this.openModal({
+                page: 'map/add',
+                formData,
+                fn: () => {
+                    this.view.loading.hide()
+                },
+                buttons: '<button class="btn btn-rpg btn-danger">Salvar</button>'
+            })
+            this.view.eventInModal({
+                idForm: '#form_map',
+                event: 'change',
+                fn: ({ e, formData }) => {
+                    const type = e.target.attributes['type']
+                    if (typeof(type) !== 'undefined' && type.value === 'file') {
+                        new ThumbImage({
+                            origin: '#image',
+                            destination: '#thumb_image'
+                        }).setImg({ height: '200px' })
+                    }
                 }
-            }
+            })
         }
     }
 

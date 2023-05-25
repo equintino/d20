@@ -119,7 +119,8 @@ class Mission extends Controller
 
     public function map(array $data): void
     {
-        $mission = $data["mission"];
+        $mission = (new \Models\Mission())->load($data['mission']);
+        // $mission = $data["mission"];
         $this->view->setPath("Modals")->render("map", [ compact("mission") ]);
     }
 
@@ -174,8 +175,10 @@ class Mission extends Controller
         if ($maps) {
             foreach ($maps as $map) {
                 $images[] = [
-                    'image_id' => $map->image_id,
-                    'name' => $map->name
+                    'id' => $map->id,
+                    'name' => $map->name,
+                    'description' => $map->description,
+                    'image_id' => $map->image_id
                 ];
             }
         }

@@ -133,13 +133,11 @@ export default class AbstractViews {
         }, box)
     }
 
-    eventInModal({ idElement, event, fn }) {
-        const idModal = document.querySelector(idElement)
+    eventInModal({ idForm, event, fn }) {
+        const idModal = document.querySelector(idForm)
         idModal.addEventListener(event, (e) => {
-            fn({
-                e,
-                formData: new FormData(idModal)
-            })
+            const formData = new FormData(idModal)
+            fn({ e, formData })
         })
     }
 

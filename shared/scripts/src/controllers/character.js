@@ -63,7 +63,7 @@ export default class Character extends AbstractControllers {
             fn: () => {
                 this.#carousel({ list })
                 this.view.eventInModal({
-                    idElement: '#avatarList',
+                    idForm: '#avatarList',
                     event: 'change',
                     fn: ({ formData }) => {
                         this.view.loading.show()
@@ -282,7 +282,7 @@ export default class Character extends AbstractControllers {
             fn: () => {
                 this.#setBtnModal()
                 this.eventInModal({
-                    idElement: '#myCharacter',
+                    idForm: '#myCharacter',
                     events: [ 'click', 'change' ],
                     fn: ({ e, formData }) => {
                         let property = e.target.name
