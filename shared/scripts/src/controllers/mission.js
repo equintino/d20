@@ -1,4 +1,3 @@
-import ThumbImage from "../../lib/thumbImage.js"
 import AbstractControllers from "./abstractcontrollers.js"
 
 export default class Mission extends AbstractControllers {
@@ -103,17 +102,55 @@ export default class Mission extends AbstractControllers {
             })
         }
         if (formData) {
+            formData.append('mission_id', btnActive.attributes['data-id'].value)
             const buttons = "<button class='btn btn-rpg btn-silver' value='delete'>"
                 + "Excluir</button><button class='btn btn-rpg btn-info' "
-                + "value='add'>Adicionar</button>"
+                + "value='add'>Novo</button>"
                 + "<button class='btn btn-rpg btn-danger' value='save'>Salvar</button>"
             this.openModal({
                 page: 'map/edit',
                 formData,
                 fn: () => {
                     this.view.loading.hide()
-                },
-                buttons
+                }
+            })
+            this.view.setBtnModal({
+                buttons,
+                fn: ({ e, formData }) => {
+                    if (e.target.value === 'save') {
+                        const resp = this.getDataFile({
+                            url: 'image/save',
+                            formData
+                        })
+                        if (resp.indexOf('success') !== -1) {
+                            this.view.closeModal()
+                            this.message({
+                                msg: '<span class="warning">Recharge the page to update the map</span>'
+                            })
+                        }
+                    }
+                }
+            })
+            this.eventInModal({
+                idForm: '#form_map',
+                events: [ 'change' ],
+                fn: ({ formData }) => {
+                    this.view.thumbImage({
+                        origin: '#image',
+                        destination: '#thumb_image',
+                        params: {
+                            height: '200px'
+                        }
+                    })
+                    console.log(
+
+                        // this.getDataFile({
+                        //     method: 'POST',
+                        //     url: 'map/save',
+                        //     formData
+                        // })
+                    )
+                }
             })
         } else {
             const formData = new FormData()
@@ -123,8 +160,21 @@ export default class Mission extends AbstractControllers {
                 formData,
                 fn: () => {
                     this.view.loading.hide()
-                },
-                buttons: '<button class="btn btn-rpg btn-danger">Salvar</button>'
+                }
+            })
+            this.view.setBtnModal({
+                buttons: '<button class="btn btn-rpg btn-danger">Salvar</button>',
+                fn: ({ formData }) => {
+                    const resp = this.getDataFile({
+                        url: 'map/save',
+                        formData
+                    })
+                    if (resp.indexOf('success') !== -1) {
+                        this.view.closeModal()
+                        this.message({ msg: resp })
+                        this.optInit('mission/list')
+                    }
+                }
             })
             this.view.eventInModal({
                 idForm: '#form_map',
@@ -132,10 +182,13 @@ export default class Mission extends AbstractControllers {
                 fn: ({ e, formData }) => {
                     const type = e.target.attributes['type']
                     if (typeof(type) !== 'undefined' && type.value === 'file') {
-                        new ThumbImage({
+                        this.view.thumbImage({
                             origin: '#image',
-                            destination: '#thumb_image'
-                        }).setImg({ height: '200px' })
+                            destination: '#thumb_image',
+                            params: {
+                                height: '200px'
+                            }
+                        })
                     }
                 }
             })

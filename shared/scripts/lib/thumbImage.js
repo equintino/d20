@@ -25,9 +25,7 @@ export default class ThumbImage {
     }
 
     setImg({ height, width }) {
-        console.log(
-            this.#img.style.height = height,
-            this.#img.style.width = width
-        )
+        this.#img.style.height = height,
+        this.#img.style.width = width
     }
 }

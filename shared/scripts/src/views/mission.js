@@ -32,10 +32,19 @@ export default class Mission extends AbstractViews {
         const maps = elem.querySelector('#mission #images #cards_')
         if (maps !== null && maps.children.length > 0) {
             for (let map of maps.children) {
+                const formData = new FormData()
+                let idMap
+                let idImage
+                if (maps.children.length === 1) {
+                    idMap = map.attributes['data-id'].value
+                    idImage = map.attributes['data-idImage'].value
+                    formData.append('id', idMap)
+                    formData.append('image_id', idImage)
+                    return formData
+                }
                 if (map.style.zIndex == 1) {
-                    const idMap = map.attributes['data-id'].value
-                    const idImage = map.attributes['data-idImage'].value
-                    const formData = new FormData()
+                    idMap = map.attributes['data-id'].value
+                    idImage = map.attributes['data-idImage'].value
                     formData.append('id', idMap)
                     formData.append('image_id', idImage)
                     return formData

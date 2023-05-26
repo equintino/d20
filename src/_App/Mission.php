@@ -152,10 +152,10 @@ class Mission extends Controller
         } else {
             $personages = [];
         }
-        return print(json_encode($personages));
+        return print json_encode($personages);
     }
 
-    public function mapSave(array $data)
+    public function mapSave(array $data): ?string
     {
         $maps = new \Models\Map();
         $file = $_FILES["image"];
@@ -164,7 +164,7 @@ class Mission extends Controller
         }
         $maps->bootstrap($data);
         $maps->save();
-        return print($maps->message());
+        return print json_encode($maps->message());
     }
 
     public function mapLoad(array $data): ?string
@@ -188,10 +188,10 @@ class Mission extends Controller
 
     public function mapEdit(array $data)
     {
-        $id = $data["image_id"];
-        $act = "edit";
-        $image = (new \Models\Image())->load($id);
-        $this->view->setPath("Modals")->render("map", [ compact("act","image") ]);
+        // $act = "edit";
+        $map = (new \Models\Map())->load($data['id']);
+        $image = (new \Models\Image())->load($data['image_id']);
+        $this->view->setPath("Modals")->render("map", [ compact("image", "map") ]);
     }
 
     public function list(): void

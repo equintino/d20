@@ -86,7 +86,7 @@ class Image extends Model implements Models
         $data["image"] = file_get_contents($file["tmp_name"]);
 
         $this->bootstrap($data);
-        return ($this->save() ?? $this->message());
+        return $this->save() ?? $this->message();
     }
 
     public function save()
@@ -117,7 +117,7 @@ class Image extends Model implements Models
             $this->message = "<span class='danger'>Error updating, check the data</span>";
             return null;
         }
-        $this->message = "<span class='success'>File saved succefuly</span>";
+        $this->message = "<span class='success'>File saved successful</span>";
         return $this->id;
     }
 

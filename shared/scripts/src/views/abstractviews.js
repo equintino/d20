@@ -1,4 +1,5 @@
 import utils from "./../../lib/utils.js"
+import ThumbImage from "../../lib/thumbImage.js"
 import Views from "./views.js"
 import Carousel from "./../../lib/carousel.js"
 import Modal from "./../../lib/modal.js"
@@ -150,5 +151,15 @@ export default class AbstractViews {
     closeAllModal(fn) {
         this.modal.close({ all: 'all' })
         if (typeof(fn) === 'function') fn()
+    }
+
+    /**
+     *
+     * @param {origin, destination} string
+     * @returns setImg{height, width}
+     * @params object { height, width }
+     */
+    thumbImage({ origin, destination, params }) {
+        return new ThumbImage({ origin, destination }).setImg(params)
     }
 }

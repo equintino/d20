@@ -56,7 +56,7 @@ export default class AbstractControllers {
         })
     }
 
-    openModal({ page, formData, fn, buttons, box }) {
+    openModal({ page, formData, fn, box }) {
         this.view.openModal({
             page: this.service.open({
                 method: 'POST',
@@ -67,11 +67,6 @@ export default class AbstractControllers {
             fn,
             box
         })
-        if (typeof(buttons) !== 'undefined') {
-            this.view.setBtnModal({
-                buttons
-            })
-        }
     }
 
     confirm({ title, message, fn }) {
@@ -92,7 +87,7 @@ export default class AbstractControllers {
         })
     }
 
-    /** @idElement string
+    /** @idForm string
      * @events array
      * @fn function
      */
@@ -110,6 +105,11 @@ export default class AbstractControllers {
         }))
     }
 
+    /**
+     * @method string
+     * @url string
+     * @formData FormData
+     */
     getDataFile(data) {
         const dataFile = this.service.open({
             method: 'POST',

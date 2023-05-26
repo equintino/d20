@@ -7,32 +7,36 @@
 </style>
 <div id="map">
     <form id="form_map" action="map/add" method="POST" enctype="multipart/form-data">
-        <?php if (empty($act)): ?>
+        <?php //if (empty($act)): ?>
+        <input type="hidden" name="mission_id" value="<?= ($mission->id ?? null) ?>" />
         <div>
-            <h3 style="color: white"><?= $mission->name ?></h3>
+            <h3 style="color: white"><?= ($mission->name ?? null) ?></h3>
         </div>
         <div>
             <label class="label-rpg">Nome:</label>
-            <input class="input-rpg" type="text" name="name" required/>
+            <input class="input-rpg" type="text" name="name" value="<?= ($map->name ?? null) ?>" required/>
             <input id="image" class="input-rpg" type="file" name="image" required/>
         </div>
         <div>
             <label class="label-rpg">Descrição:</label>
-            <textarea rows="15" cols="30" class="input-rpg" name="description" required></textarea>
-            <img id="thumb_image" src="#" alt="" style="margin: -250px 0 0 150px;">
+            <textarea rows="15" cols="30" class="input-rpg" name="description"
+                value="<?= ($map->description ?? null) ?>" required></textarea>
+            <img id="thumb_image" src="<?= (!empty($image->id) ? 'image/id/' . $image->id : '#') ?>"
+                alt="" style="margin: -250px 0 0 150px;" height="200px">
         </div>
-        <?php elseif($act === "edit"): ?>
-        <section class="mt-5">
-            <img id="thumb_image" src="image/id/<?= $image->id ?>" alt="" height="250px" />
-            <input id="image" class="input-rpg" type="file" name="image" />
+        <?php //elseif($act === "edit"): ?>
+        <input type="hidden" name="id" value="<?= ($image->id ?? null) ?>" />
+        <section>
+            <!-- <img id="thumb_image" src="image/id/<?= $image->id ?>" alt="" width="350px" /> -->
+            <!-- <input id="image" class="input-rpg" type="file" name="image" /> -->
         </section>
-        <?php endif ?>
+        <?php //endif ?>
     </form>
 </div>
-<script>
+<!-- <script>
     if(typeof(image) !== "undefined") {
         image.onchange = () => {
             thumbImage(image, thumb_image)
         }
     }
-</script>
+</script> -->

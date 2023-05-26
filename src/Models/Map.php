@@ -85,12 +85,12 @@ class Map extends Model implements Models
         /** Update */
         if (!empty($this->id)) {
             $id = $this->id;
-            $balance = $this->read(
+            $map = $this->read(
                 "SELECT id FROM " . self::$entity . " WHERE name = :name AND id != :id",
                 "name={$this->name}&id={$id}"
             );
-            if ($balance->rowCount()) {
-                $this->message = "<span class='warning'>The Informed mission is already registered</span>";
+            if ($map->rowCount()) {
+                $this->message = "<span class='warning'>The Informed map is already registered</span>";
                 return null;
             }
 
