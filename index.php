@@ -119,6 +119,7 @@
         $router->post("/map/save", "Mission:mapSave");
         $router->post("/map/load", "Mission:mapLoad");
         $router->post("/map/edit", "Mission:mapEdit");
+        $router->post("/map/delete", "Mission:mapDelete");
 
 
         /** The Mission Request */

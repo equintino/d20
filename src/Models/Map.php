@@ -124,10 +124,10 @@ class Map extends Model implements Models
         }
 
         if ($this->fail()) {
-            $this->message = "<div class=danger>Could not remove file</div>";
+            $this->message = "<span class=danger>Could not remove file</span>";
             return null;
         }
-        $this->message = "<div class=success>File successfully</div>";
+        $this->message = "<span class=success>File successfully</span>";
         $this->data = null;
 
         return $this;

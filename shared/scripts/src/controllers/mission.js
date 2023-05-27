@@ -102,39 +102,42 @@ export default class Mission extends AbstractControllers {
             })
         }
         if (formData) {
-            formData.append('mission_id', btnActive.attributes['data-id'].value)
-            const buttons = "<button class='btn btn-rpg btn-silver' value='delete'>"
-                + "Excluir</button><button class='btn btn-rpg btn-info' "
-                + "value='add'>Novo</button>"
-                + "<button class='btn btn-rpg btn-danger' value='save'>Salvar</button>"
-            this.openModal({
-                page: 'map/edit',
-                formData,
-                fn: () => {
-                    this.view.loading.hide()
+            this.#mapModal({ formData, btnActive })
+        } else {
+           this.#addMap({ btnActive })
+        }
+    }
+
+    #addMap({ btnActive }) {
+        const formData = new FormData()
+        formData.append('mission', btnActive.value)
+        this.openModal({
+            page: 'map/add',
+            formData,
+            fn: () => {
+                this.view.loading.hide()
+            }
+        })
+        this.view.setBtnModal({
+            buttons: '<button class="btn btn-rpg btn-danger">Salvar</button>',
+            fn: ({ formData }) => {
+                const resp = this.getDataFile({
+                    url: 'map/save',
+                    formData
+                })
+                if (resp.indexOf('success') !== -1) {
+                    this.view.closeModal()
+                    this.message({ msg: resp })
+                    this.optInit('mission/list')
                 }
-            })
-            this.view.setBtnModal({
-                buttons,
-                fn: ({ e, formData }) => {
-                    if (e.target.value === 'save') {
-                        const resp = this.getDataFile({
-                            url: 'image/save',
-                            formData
-                        })
-                        if (resp.indexOf('success') !== -1) {
-                            this.view.closeModal()
-                            this.message({
-                                msg: '<span class="warning">Recharge the page to update the map</span>'
-                            })
-                        }
-                    }
-                }
-            })
-            this.eventInModal({
-                idForm: '#form_map',
-                events: [ 'change' ],
-                fn: ({ formData }) => {
+            }
+        })
+        this.view.eventInModal({
+            idForm: '#form_map',
+            event: 'change',
+            fn: ({ e, formData }) => {
+                const type = e.target.attributes['type']
+                if (typeof(type) !== 'undefined' && type.value === 'file') {
                     this.view.thumbImage({
                         origin: '#image',
                         destination: '#thumb_image',
@@ -142,57 +145,74 @@ export default class Mission extends AbstractControllers {
                             height: '200px'
                         }
                     })
-                    console.log(
+                }
+            }
+        })
+    }
 
-                        // this.getDataFile({
-                        //     method: 'POST',
-                        //     url: 'map/save',
-                        //     formData
-                        // })
-                    )
-                }
-            })
-        } else {
-            const formData = new FormData()
-            formData.append('mission', btnActive.value)
-            this.openModal({
-                page: 'map/add',
-                formData,
-                fn: () => {
-                    this.view.loading.hide()
-                }
-            })
-            this.view.setBtnModal({
-                buttons: '<button class="btn btn-rpg btn-danger">Salvar</button>',
-                fn: ({ formData }) => {
+    #mapModal({ formData, btnActive }) {
+        formData.append('mission_id', btnActive.attributes['data-id'].value)
+        const buttons = "<button class='btn btn-rpg btn-silver' value='delete'>"
+            + "Excluir</button><button class='btn btn-rpg btn-info' "
+            + "value='add'>Novo</button>"
+            + "<button class='btn btn-rpg btn-danger' value='save'>Salvar</button>"
+        this.openModal({
+            page: 'map/edit',
+            formData,
+            fn: () => {
+                this.view.loading.hide()
+            }
+        })
+        this.view.setBtnModal({
+            buttons,
+            fn: ({ e, formData }) => {
+                if (e.target.value === 'save') {
                     const resp = this.getDataFile({
                         url: 'map/save',
                         formData
                     })
                     if (resp.indexOf('success') !== -1) {
                         this.view.closeModal()
-                        this.message({ msg: resp })
-                        this.optInit('mission/list')
-                    }
-                }
-            })
-            this.view.eventInModal({
-                idForm: '#form_map',
-                event: 'change',
-                fn: ({ e, formData }) => {
-                    const type = e.target.attributes['type']
-                    if (typeof(type) !== 'undefined' && type.value === 'file') {
-                        this.view.thumbImage({
-                            origin: '#image',
-                            destination: '#thumb_image',
-                            params: {
-                                height: '200px'
-                            }
+                        this.message({
+                            msg: '<span class="warning">Recharge the page to update the map</span>'
                         })
                     }
+                } else if (e.target.value === 'delete') {
+                    this.confirm({
+                        title: 'Modo de Exclusão',
+                        message: 'Deseja realmente excluir este MAPA?',
+                        fn: ({ e }) => {
+                            if (e.target.value === 'yes') {
+                                const resp = this.getDataFile({
+                                    method: 'POST',
+                                    url: 'map/delete',
+                                    formData
+                                })
+                                if (resp.indexOf('success') !== -1) {
+                                    this.view.closeAllModal()
+                                    this.optInit('mission/list')
+                                }
+                            }
+                        }
+                    })
+                } else {
+                    this.#addMap({ btnActive })
                 }
-            })
-        }
+            }
+        })
+        this.eventInModal({
+            idForm: '#form_map',
+            events: [ 'change' ],
+            fn: () => {
+                this.view.thumbImage({
+                    origin: '#image',
+                    destination: '#thumb_image',
+                    params: {
+                        height: '200px'
+                    }
+                })
+            }
+        })
     }
 
     #edition({ btnActive }) {

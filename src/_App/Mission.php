@@ -101,7 +101,7 @@ class Mission extends Controller
             "place" => $mission->place,
             "story" => $mission->story
         ];
-        return print($dataMission);
+        return print $dataMission;
     }
 
     public function loadId(array $data): ?string
@@ -114,7 +114,7 @@ class Mission extends Controller
             "place" => $mission->place,
             "story" => $mission->story
         ];
-        return print(json_encode($dataMission));
+        return print json_encode($dataMission);
     }
 
     public function map(array $data): void
@@ -157,14 +157,18 @@ class Mission extends Controller
 
     public function mapSave(array $data): ?string
     {
-        $maps = new \Models\Map();
+        $map = new \Models\Map();
+        if (!empty($data['id'])) {
+            $map = $map->load($data['id']);
+        }
         $file = $_FILES["image"];
         if ($file["error"] === 0) {
-            $data["image_id"] = (new \Models\Image())->fileSave($file);
+            $idImage = ($map->image_id ?? null);
+            $data["image_id"] = (new \Models\Image())->fileSave($file, $idImage);
         }
-        $maps->bootstrap($data);
-        $maps->save();
-        return print json_encode($maps->message());
+        $map->bootstrap($data);
+        $map->save();
+        return print json_encode($map->message());
     }
 
     public function mapLoad(array $data): ?string
@@ -182,16 +186,22 @@ class Mission extends Controller
                 ];
             }
         }
-        return print(json_encode($images));
+        return print json_encode($images);
         // return print(json_encode($images) ?? null);
     }
 
-    public function mapEdit(array $data)
+    public function mapEdit(array $data): void
     {
-        // $act = "edit";
         $map = (new \Models\Map())->load($data['id']);
         $image = (new \Models\Image())->load($data['image_id']);
         $this->view->setPath("Modals")->render("map", [ compact("image", "map") ]);
+    }
+
+    public function mapDelete(array $data): ?string
+    {
+        $map = (new \Models\Map())->load($data["id"]);
+        $map->destroy();
+        return print json_encode($map->message());
     }
 
     public function list(): void
@@ -210,7 +220,7 @@ class Mission extends Controller
         $mission = new \Models\Mission();
         $mission->bootstrap($data);
         $mission->save();
-        return print($mission->message());
+        return print $mission->message();
     }
 
     public function update(array $data)
@@ -252,7 +262,7 @@ class Mission extends Controller
                 }
             }
         }
-        return print($mission->message());
+        return print $mission->message();
     }
 
     public function delete(array $data): string
@@ -269,6 +279,6 @@ class Mission extends Controller
             (new \Models\Image())->load($map->image_id)->destroy();
         }
         $mission->destroy();
-        return print(json_encode($mission->message()));
+        return print json_encode($mission->message());
     }
 }

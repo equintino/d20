@@ -6,7 +6,6 @@ export default class ThumbImage {
     }
 
     #thumbImage({ origin, destination }) {
-        // this.#destination.querySelection("img").remove()
         const _origin = document.querySelector(origin)
         const _destination = document.querySelector(destination)
         const [file] = _origin.files
