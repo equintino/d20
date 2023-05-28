@@ -1,5 +1,7 @@
 <style>
-    #avatarList {
+    #avatarList #imageAvatar {
+        position: relative;
+        left: 90px;
         padding: 20px;
     }
 

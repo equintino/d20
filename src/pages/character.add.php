@@ -1,3 +1,9 @@
+<style>
+    #character .add {
+        max-width: 1400px;
+        position: relative;
+    }
+</style>
 <main id="character">
     <div class='add'>
         <fieldset class="fieldset">

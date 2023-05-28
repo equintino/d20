@@ -12,6 +12,11 @@
         overflow: hidden;
     }
 
+    #mission .btnSelection {
+        max-width: 250px;
+        margin: 0 40px;
+    }
+
 </style>
 <main id="mission">
     <?php if(empty($act)): ?>

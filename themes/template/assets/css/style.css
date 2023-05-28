@@ -536,11 +536,17 @@ main .form-signin {
     /* background-image: linear-gradient(to bottom, #000, #fff); */
 }
 
+.header2 {
+    display: flex;
+    justify-content: center;
+}
+
 #boxe_main, #boxe2_main {
     position: fixed;
     width: 70%;
+    max-width: 900px;
     top: 15%;
-    left: 15%;
+    /* left: 15%; */
     /* margin-top: 75px; */
     /* display: -ms-flexbox;
     display: flex; */
@@ -664,6 +670,7 @@ main .form-signin {
 
 #boxe_main #buttons, #boxe2_main #buttons2, #div_dialogue #buttons {
     background: #626262 none repeat scroll 0% 0%;
+    padding-right: 5px;
 }
 
 #boxe_main #buttons button, #boxe2_main #buttons2 button {
