@@ -63,18 +63,14 @@ export default class AbstractControllers {
                 url: page,
                 formData
             }),
-            formData,
-            fn,
-            box,
-            title
+            formData, fn, box, title
         })
     }
 
     confirm({ title, message, fn }) {
         this.view.openModal({
             box: '#boxe2_main',
-            title,
-            message
+            title, message
         })
         let btn = "<button class='btn btn-rpg btn-silver' "
             + "value='no'>Não</button><button class='btn btn-rpg "

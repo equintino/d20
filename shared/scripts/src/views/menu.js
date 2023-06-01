@@ -36,8 +36,8 @@ export default class Menu extends AbstractViews {
                 this.#top.querySelector('.dropdown-menu').style = 'display: block'
                 this.#identification.style = 'z-index: -1'
             }
-            dropdown.onmouseleave = () => {
-                this.#top.querySelector('.dropdown-menu').style = 'display: none'
+            dropdown.parentElement.onmouseleave = () => {
+                this.#top.querySelector('.dropdown-menu').style.display = 'none'
                 this.#identification.style = 'z-index: 1'
             }
         }

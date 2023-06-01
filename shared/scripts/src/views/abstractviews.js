@@ -154,7 +154,6 @@ export default class AbstractViews {
     }
 
     /**
-     *
      * @param {origin, destination} string
      * @returns setImg{height, width}
      * @params object { height, width }
