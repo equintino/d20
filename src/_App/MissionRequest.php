@@ -8,7 +8,7 @@ class MissionRequest extends Mission
     {
         $login = $_SESSION["login"];
         $mission_id = $data["mission_id"];
-        $act = "mission_request";
+        $act = $data["act"];
         $players = (new \Models\Player())->join(
             "characters.id,personage,users.login,characters.user_id",
             [
@@ -26,7 +26,7 @@ class MissionRequest extends Mission
             ]
         )
         ->where([
-            "users.id" => $_SESSION["login"]->id,
+            "users.id" => $login->id,
             "players.mission_id" => null
         ]);
         $this->view->setPath("Modals")->render($this->page, [ compact("act", "mission_id", "players"

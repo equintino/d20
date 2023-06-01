@@ -15,11 +15,12 @@ export default class Mission extends AbstractControllers {
                     fn: ({ btnActive, e }) => {
                         this.view.btnActive({ e })
                         let btnValue = e.target.value
-                        if (btnActive === null && btnValue === 'edit') {
+                        if (btnActive === null && (btnValue === 'edit' || btnValue === 'include')) {
                             this.view.loading.hide()
                             return this.message({ msg: '<span class="warning">No mission selected</span>'})
                         }
                         if (btnValue === 'edit') this.#edition({ btnActive, e })
+                        if (btnValue === 'include') this.#include({ btnActive, e })
                     }
                 })
             }
@@ -64,7 +65,7 @@ export default class Mission extends AbstractControllers {
             case 'map':
                 this.#editMap({ elem })
                 break
-            case 'edit':
+            case 'edit': case 'include':
                 break
             default:
                 this.#activeMission({ e: btn })
@@ -272,5 +273,41 @@ export default class Mission extends AbstractControllers {
             },
         })
         this.view.loading.hide()
+    }
+
+    #include({ btnActive, e }) {
+        /** Request into a mession */
+        const idMission = btnActive.attributes['data-id'].value
+        const formData = new FormData()
+        formData.append('mission_id', idMission)
+        formData.append('act', 'missionRequest')
+        this.openModal({
+            title: 'SELECIONE UM PERSONAGEM',
+            page: 'missionRequest/init',
+            formData,
+            fn: () => {
+                this.view.loading.hide()
+            }
+        })
+        this.view.setBtnModal({
+            buttons: '<button class="btn btn-rpg btn-danger" value="confirm">Confirmar</button>',
+            fn: ({ formData }) => {
+                if (formData.get('character_id') === null) {
+                    return this.message({
+                        msg: '<span class="warning">No character was selected</span>'
+                    })
+                }
+                const resp = this.getDataFile({
+                    method: 'POST',
+                    url: 'missionRequest/request',
+                    formData
+                })
+                if (resp.indexOf('success') !== -1) {
+                    this.message({ msg: resp })
+                    return this.view.closeModal()
+                }
+                this.message({ msg: resp })
+            }
+        })
     }
 }

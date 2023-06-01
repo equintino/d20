@@ -13,8 +13,11 @@
     }
 
     #mission .btnSelection {
-        max-width: 250px;
-        margin: 0 40px;
+        width: 250px;
+    }
+
+    #mission .btnSelection button {
+        width: 130px;
     }
 
 </style>
@@ -78,7 +81,9 @@
                     <legend>Mapas</legend>
                     <div id="images"></div>
                     <p style="float: left">Total de Mapas: </p>
+                    <?php if (strpos($group->access, "*") || strtolower($group->name) === "mestre"): ?>
                     <button class="btn btn-rpg btn-danger" value="map" style="float: right">Editar Mapa</button>
+                    <?php endif ?>
                 </fieldset>
             </section>
             <section>

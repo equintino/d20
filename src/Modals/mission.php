@@ -1,6 +1,6 @@
 <main id="editMission">
     <form id="form_mission" method="POST" action="mission/save" enctype="multipart/form-data" >
-    <?php if (!empty($act) && $act === "mission_request"): ?>
+    <?php if (!empty($act) && $act === "missionRequest"): ?>
         <session>
             <table class="table">
                 <thead>

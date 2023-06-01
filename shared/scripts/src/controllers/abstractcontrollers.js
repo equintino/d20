@@ -56,7 +56,7 @@ export default class AbstractControllers {
         })
     }
 
-    openModal({ page, formData, fn, box }) {
+    openModal({ page, formData, fn, box, title }) {
         this.view.openModal({
             page: this.service.open({
                 method: 'POST',
@@ -65,7 +65,8 @@ export default class AbstractControllers {
             }),
             formData,
             fn,
-            box
+            box,
+            title
         })
     }
 

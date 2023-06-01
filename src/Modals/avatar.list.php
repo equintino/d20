@@ -3,9 +3,6 @@
         position: relative;
         left: 90px;
         padding: 20px;
-    }
-
-    #avatarList #imageAvatar {
         height: 350px;
         width: 350px;
         margin: auto;
