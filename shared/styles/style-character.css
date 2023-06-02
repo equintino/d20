@@ -11,24 +11,6 @@
     font-size: 1.5em;
 }
 
-#character #description {
-    height: 350px;
-    width: 100%;
-    /* margin-top: 40px; */
-    font-family: 'Libre Franklin', sans-serif;
-    font-weight: bolder;
-    letter-spacing: .1em;
-    text-align: justify;
-    padding: 80px 70px 0px 100px;
-}
-
-#character #description > p {
-    overflow: auto;
-    height: 160px;
-    color: black;
-    text-shadow: 1px 1px 1px black;
-}
-
 #character #list {
     display: flex;
     flex-direction: row;

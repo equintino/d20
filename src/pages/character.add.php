@@ -3,6 +3,23 @@
         max-width: 1400px;
         position: relative;
     }
+
+    #character .description {
+        height: 280px;
+        width: 100%;
+        font-family: 'Libre Franklin', sans-serif;
+        font-weight: bolder;
+        letter-spacing: .1em;
+        /* text-align: justify; */
+        padding: 60px 70px 0px 100px;
+    }
+
+    #character .description > p {
+        overflow: auto;
+        height: 160px;
+        color: black;
+        text-shadow: 1px 1px 1px black;
+    }
 </style>
 <main id="character">
     <div class='add'>
@@ -50,11 +67,10 @@
                             <option value="chaotic">CAÓTICO</option>
                         </select>
                     </div>
-                    <div id="description"  style="background: url('d20/<?= url() . "/"
+                    <div class="description"  style="background: url('d20/<?= url() . "/"
                         . theme("assets/img/pergaminho.png") ?>'); background-repeat: round">
                         <p></p>
                     </div>
-                    <script>var jogador='<?= $login->login ?>';</script>
                 </section>
                 <section class=".side-right" >
                     <div id="avatar"></div>

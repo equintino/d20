@@ -11,7 +11,7 @@ export default class Character extends AbstractViews {
         document.querySelector('#myClass').value = ''
         for (let item of items) {
             if (item.attributes['data-id'].value === id) {
-                document.querySelector('#description p').innerHTML = item.attributes['data-description'].value
+                document.querySelector('.description p').innerHTML = item.attributes['data-description'].value
                 document.querySelector('.breed').innerHTML = item.attributes['data-name'].value.toUpperCase()
                 document.querySelector('[name=breed_id]').value = item.attributes['data-id'].value
                 document.querySelector('.breed').setAttribute('data-id', item.attributes['data-id'].value)
@@ -46,13 +46,7 @@ export default class Character extends AbstractViews {
         let idBreed = breed.value
         let breedName = breed.selectedOptions[0].innerText
 
-        response({
-            idBreed,
-            description,
-            breedName,
-            idCategory,
-            idImage
-        })
+        response({ idBreed, description, breedName, idCategory, idImage })
     }
 
     updateCategory({ idElement, category }) {
@@ -64,7 +58,7 @@ export default class Character extends AbstractViews {
         document.querySelector('.breed').attributes['data-id'].value = formData.get('breed_id')
         document.querySelector('#myCharacter [name=breed_id]').value = formData.get('breed_id')
         document.querySelector('.breed').innerText = form.breed_id.selectedOptions[0]['text'].toUpperCase()
-        document.querySelector('#description p').innerHTML = form.breed_id.selectedOptions[0].attributes['data-description'].value
+        document.querySelector('.description p').innerHTML = form.breed_id.selectedOptions[0].attributes['data-description'].value
         document.querySelector('#myClass').value = formData.get('category_id')
         document.querySelector('#myCharacter [name=image_id]').value = formData.get('image_id')
         document.querySelector('#avatar').parentElement.innerHTML = `<div id='avatar'><img src=image/id/${formData.get('image_id')} alt="" height="350px" /></div>`

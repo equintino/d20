@@ -20,6 +20,8 @@ export default class Menu extends AbstractViews {
 
     setMenu(fn) {
         this.#top.addEventListener('click', (e) => {
+            if (typeof(e.target.attributes['href']) === 'undefined'
+                || e.target.attributes['href'].value === '#') return
             e.preventDefault()
             loading.show()
             this.#active(e)

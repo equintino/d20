@@ -82,14 +82,14 @@ class Character extends Controller
     {
         $characters = new \Models\Character();
         if (!empty($characters->find($data["personage"]))) {
-            return print("<span class='warning'>This personage already exists</span>");
+            return print "<span class='warning'>This personage already exists</span>";
         }
         if (empty($data['story'])) {
             $data['story'] = 'Nenhuma história foi contada';
         }
         $characters->bootstrap($data);
         $characters->save();
-        return print($characters->message());
+        return print $characters->message();
     }
 
     public function update(array $data): string
@@ -103,7 +103,7 @@ class Character extends Controller
         $character->trend2 = $data["trend2"];
         $character->story = $data["story"];
         $character->save();
-        return print(json_encode($character->message()));
+        return print json_encode($character->message());
     }
 
     public function story(array $data): void
@@ -116,6 +116,6 @@ class Character extends Controller
         $id = $data["id"];
         $character = (new \Models\Character())->load($id);
         $character->destroy();
-        return print($character->message());
+        return print $character->message();
     }
 }
