@@ -24,7 +24,8 @@ export default class Character extends AbstractViews {
             this.loading.show()
             let idCategory = e.target.value
             let breed = document.querySelector('.breed')
-            if (typeof(breed.attributes['data-id']) === 'undefined') {
+            if (typeof(breed.attributes['data-id']) === 'undefined'
+                || breed.attributes['data-id'].value === '') {
                 e.target.value = ''
                 let evt = new Event('click')
                 document.getElementById('myBreed').dispatchEvent(evt)
@@ -82,6 +83,11 @@ export default class Character extends AbstractViews {
     }
 
     removeAvatarSelected() {
+        const breed = document.querySelector('.breed')
+        breed.attributes['data-id'].value = ''
+        breed.innerText = ''
+        document.querySelector('[name=breed_id]').value = ''
+        document.querySelector('.description > p').innerText = ''
         document.querySelector('#avatar img').attributes['src'].value = ''
         document.querySelector('[name=image_id]').value = ''
     }
