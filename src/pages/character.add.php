@@ -1,7 +1,7 @@
 <style>
     #character .add {
         max-width: 1400px;
-        position: relative;
+        /* position: relative; */
     }
 
     #character .description {
