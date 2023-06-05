@@ -28,14 +28,8 @@ export default class Breed extends AbstractControllers {
                         }
                     }
                 })
-                elem.querySelector('[type=file]').onchange = (e) => {
-                    this.view.thumbImage({
-                        origin: '#image',
-                        destination: '#thumb_image',
-                        params: {
-                            height: '280px'
-                        }
-                    })
+                if (btnName === 'new') {
+                    this.view.changeFile(elem)
                 }
             }
         })
@@ -66,6 +60,76 @@ export default class Breed extends AbstractControllers {
             case 'clear':
                 this.btnClean('#breed')
                 break
+            case 'edit':
+                const formData = new FormData()
+                formData.append('id', data.elem.querySelector('.left .active').attributes['data-id'].value)
+                this.openModal({
+                    page: 'breed/edit',
+                    title: 'MODO DE EDIÇÃO DE RAÇAS',
+                    formData
+                })
+                return console.log(
+                    data
+                )
+                let id = avatar.children[0].attributes["data-id"].value
+                modal.show({
+                    title: "Modo de edição de RAÇAS",
+                    content: "breed/edit",
+                    params: { id },
+                    buttons: "<button class='btn btn-rpg btn-silver mr-1' value='delete'>Excluir</button><button class='btn btn-rpg btn-green' value='save'>Salvar</button>"
+                }).on("click", function(e) {
+                    if(e.target.value === "save") {
+                        let formData = new FormData($(e.target.offsetParent).find("form")[0])
+                        if(saveData("breed/save", formData)) {
+                            modal.hideContent();
+                        }
+                    } else if(e.target.value === "delete") {
+                        modal.confirm({
+                            title: "Modo de Exclusão",
+                            message: "Deseja realmente excluir esta RAÇA?"
+                        }).on("click", function(i) {
+                            if(i.target.value === "1") {
+                                let name = modal.content.find("[name=name]").val()
+                                $.ajax({
+                                    url: "breed/delete",
+                                    type: "POST",
+                                    dataType: "JSON",
+                                    data: {
+                                        name
+                                    },
+                                    beforeSend: function() {
+                                        loading.show()
+                                    },
+                                    success: function(response) {
+                                        alertLatch("Breed removed successfully", "var(--cor-success)")
+                                        modal.hideContent()
+                                        $(".content").load("breed/list", function() {
+                                            loading.hide()
+                                        })
+                                    },
+                                    error: function(error) {
+
+                                    },
+                                    complete: function() {
+                                        loading.hide()
+                                    }
+
+                                })
+                            }
+                        })
+                    }
+                })
+                break
+            default:
+                this.#btnActive(data)
+                this.view.loading.hide()
         }
+    }
+
+    #btnActive(data) {
+        let idImage = data.btn.target.attributes['data-image_id'].value
+        let idBreed = data.btn.target.attributes['data-id'].value
+        this.view.btnActive({ e: data.btn })
+        document.querySelector('#avatar').innerHTML = `<img src="image/id/${idImage}" alt="" />`
     }
 }

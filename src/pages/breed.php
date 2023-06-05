@@ -1,49 +1,52 @@
 <style>
-    #init {
+    #breed {
+        margin-top: 40px;
+    }
+
+    #breed #init {
         height: 400px;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 40px;
     }
 
-    #init button {
+    #breed #init button {
         width: 180px;
         font-size: 1.5em;
     }
 
-    #list {
+    #breed #list {
         display: flex;
         flex-direction: row;
         justify-content: center;
     }
 
-    #list .fieldset {
+    #breed #list .fieldset {
         margin-top: 0;
     }
 
-    #list .left {
+    #breed #list .left {
         width: 30%;
         text-align: center;
     }
 
-    #list .left button {
+    #breed #list .left button {
         width: 130px;
     }
 
-    #list .left .fieldset, #list .right .fieldset {
+    #breed #list .left .fieldset, #list .right .fieldset {
         height: 550px;
     }
 
-    #list .left .fieldset {
+    #breed #list .left .fieldset {
         overflow: auto;
     }
 
-    #list .right {
+    #breed #list .right {
         width: 60%;
     }
 
-    #list .right > .fieldset {
+    #breed #list .right > .fieldset {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -92,10 +95,11 @@
                 <button class="btn btn-rpg btn-info" style="margin-top: 20px" value="back">Voltar</button>
             </section>
             <section class="left">
-                <fieldset class="fieldset">
+                <fieldset class="fieldset btnSelection">
                     <legend>Raças</legend>
                     <?php foreach($breeds as $breed): ?>
-                        <button class="btn btn-oval" data-id="<?= $breed->id ?>" data-image_id="<?= $breed->image_id ?>"><?= $breed->name ?></button>
+                        <button class="btn btn-oval" data-id="<?= $breed->id ?>"
+                            data-image_id="<?= $breed->image_id ?>"><?= $breed->name ?></button>
                     <?php endforeach ?>
                 </fieldset>
             </section>
