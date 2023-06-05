@@ -38,6 +38,10 @@ export default class AbstractViews {
         elem.querySelector(property).focus()
     }
 
+    /**
+     * @e btn click
+     * add class active
+     */
     btnActive({ e }) {
         const elem = e.target.parentElement
         const btnActive = elem.querySelector('.active')
@@ -159,6 +163,7 @@ export default class AbstractViews {
      * @params object { height, width }
      */
     thumbImage({ origin, destination, params }) {
-        return new ThumbImage({ origin, destination }).setImg(params)
+        const thumbImage = new ThumbImage({ origin, destination })
+        if (typeof(parems) !== 'undefined') thumbImage.setImg(params)
     }
 }

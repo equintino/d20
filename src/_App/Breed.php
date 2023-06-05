@@ -35,7 +35,7 @@ class Breed extends Controller
                 'image_id' => $breed->image_id
             ];
         }
-        return print(json_encode($list));
+        return print json_encode($list);
     }
 
     public function edit(array $data): void
@@ -50,11 +50,11 @@ class Breed extends Controller
         $id = $data["id"];
         $breed = (new \Models\Breed())->load($id);
 
-        return print(json_encode([
+        return print json_encode([
             "name" => $breed->name,
             "description" => $breed->description,
             "image_id" => $breed->image_id
-        ]));
+        ]);
     }
 
     public function showImage(array $data): void
@@ -68,7 +68,7 @@ class Breed extends Controller
 
     public function save(array $data)
     {
-        $breed = ((new \Models\Breed())->find($data["name"])[0] ?? new \Models\Breed());
+        $breed = (!empty($data['id']) ? (new \Models\Breed())->load($data["id"]) : new \Models\Breed());
         if ($_FILES["image"]["error"] === 0) {
             if (empty($breed->image_id)) {
                 $data["image_id"] = (new \Models\Image())->fileSave($_FILES["image"]);
@@ -79,12 +79,12 @@ class Breed extends Controller
         }
         $breed->bootstrap($data);
         $breed->save();
-        return print(json_encode($breed->message()));
+        return print json_encode($breed->message());
     }
 
     public function delete(array $data)
     {
         $breed = (new \Models\Breed())->find($data["name"])[0];
-        return print(json_encode($breed->destroy()));
+        return print json_encode($breed->destroy());
     }
 }

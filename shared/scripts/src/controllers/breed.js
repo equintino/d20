@@ -35,8 +35,8 @@ export default class Breed extends AbstractControllers {
         })
     }
 
-    btnAction(data) {
-        const btnName = data.btn.target.value
+    btnAction({ btn, elem }) {
+        const btnName = btn.target.value
         switch (btnName) {
             case 'back':
                 this.btnBack('breed')
@@ -53,6 +53,7 @@ export default class Breed extends AbstractControllers {
                         if (resp.indexOf('success') !== -1) {
                             this.btnClean('#breed')
                             this.message({ msg: resp })
+                            this.view.cleanImg('#thumb_image')
                         }
                     }
                 })
@@ -61,16 +62,8 @@ export default class Breed extends AbstractControllers {
                 this.btnClean('#breed')
                 break
             case 'edit':
-                const formData = new FormData()
-                formData.append('id', data.elem.querySelector('.left .active').attributes['data-id'].value)
-                this.openModal({
-                    page: 'breed/edit',
-                    title: 'MODO DE EDIÇÃO DE RAÇAS',
-                    formData
-                })
-                return console.log(
-                    data
-                )
+                this.#edition(elem)
+                return
                 let id = avatar.children[0].attributes["data-id"].value
                 modal.show({
                     title: "Modo de edição de RAÇAS",
@@ -121,15 +114,74 @@ export default class Breed extends AbstractControllers {
                 })
                 break
             default:
-                this.#btnActive(data)
+                this.view.updateDataBreed({ btn })
                 this.view.loading.hide()
         }
     }
 
-    #btnActive(data) {
-        let idImage = data.btn.target.attributes['data-image_id'].value
-        let idBreed = data.btn.target.attributes['data-id'].value
-        this.view.btnActive({ e: data.btn })
-        document.querySelector('#avatar').innerHTML = `<img src="image/id/${idImage}" alt="" />`
+    #edition(elem) {
+        const formData = this.view.edition(elem)
+        if (typeof(formData) === 'string') {
+            this.view.loading.hide()
+            return this.message({ msg: formData})
+        }
+        this.openModal({
+            page: 'breed/edit',
+            title: 'MODO DE EDIÇÃO DE RAÇAS',
+            formData,
+            fn: () => {
+                this.view.loading.hide()
+            }
+        })
+        this.view.setBtnModal({
+            buttons: '<button class="btn btn-rpg btn-silver" value="delete">Excluir</button><button class="btn btn-rpg btn-danger" value="save">Salvar</button>',
+            fn: ({ e, formData }) => {
+                const btnName = e.target.value
+                if (btnName === 'save') {
+                    const resp = this.getDataFile({
+                        method: 'POST',
+                        url: 'breed/save',
+                        formData
+                    })
+                    if (resp.indexOf('success') !== -1) {
+                        this.view.closeModal()
+                        this.message({ msg: resp })
+                        this.optInit('list')
+                        setTimeout(() => {
+                            this.message({ msg: '<span class="warning">Necessary reload for update image!</span>'})
+                        }, 2000)
+                    }
+                }
+                if (btnName === 'delete') {
+                    this.confirm({
+                        title: 'MODO DE EXCLUSÃO DE RAÇAS',
+                        message: 'Deseja realmente excluir esta RAÇA?',
+                        fn: ({ e }) => {
+                            if (e.target.value === 'yes') {
+                                this.getDataFile({
+                                    method: 'POST',
+                                    url: 'breed/delete',
+                                    formData
+                                })
+                                this.view.closeAllModal()
+                                this.optInit('breed/list')
+                            }
+                        }
+                    })
+                }
+            }
+        })
+        this.eventInModal({
+            idForm: '#form-breed',
+            events: [ 'change'],
+            fn: ({ e }) => {
+                if (e.target.attributes['type'].value === 'file') {
+                    this.view.thumbImage({
+                        origin: '#image',
+                        destination: '#thumb_image'
+                    })
+                }
+            }
+        })
     }
 }

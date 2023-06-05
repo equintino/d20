@@ -16,10 +16,12 @@
                 <div>
                     <label class="label-rpg">Tipo:</label>
                     <input class="input-rpg" type="text" name="name" value="<?= $breed->name ?>"/>
+                    <input type="hidden" name="id" value="<?= $breed->id ?>" />
                 </div>
                 <div>
                     <label class="label-rpg">Descrição:</label>
-                    <textarea class="input-rpg" rows="5" cols="48" type="text" name="description" style="text-transform: none" ><?= $breed->description ?></textarea>
+                    <textarea class="input-rpg" rows="5" cols="48" type="text" name="description"
+                        style="text-transform: none" ><?= $breed->description ?></textarea>
                 </div>
             </section>
             <section class="side-right" style="text-align: center">
