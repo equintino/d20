@@ -64,16 +64,17 @@
             <section class="side-left">
                 <div>
                     <label>Tipo:</label>
-                    <input class="input-rpg" type="text" name="name" />
+                    <input class="input-rpg" type="text" name="name" required/>
                 </div>
                 <div>&nbsp&nbsp&nbsp</div>
                 <div>
                     <label>Imagem:</label>
-                    <input id="image" class="input-rpg" type="file" name="image" />
+                    <input id="image" class="input-rpg" type="file" name="image" required/>
                 </div>
                 <div>
                     <label>Descrição:</label>
-                    <textarea class="input-rpg" rows="5" cols="48" type="text" name="description" style="text-transform: none"></textarea>
+                    <textarea class="input-rpg" rows="5" cols="48" type="text" name="description"
+                        style="text-transform: none"></textarea>
                 </div>
             </section>
             <section class="side-right" style="justify-content: center">
@@ -94,17 +95,18 @@
                 <button class="btn btn-rpg btn-info" style="margin-top: 20px" value="back">Voltar</button>
             </section>
             <section class="left">
-                <fieldset class="fieldset">
+                <fieldset class="fieldset btnSelection">
                     <legend>Classes</legend>
                     <?php foreach($categories as $category): ?>
-                        <button class="btn btn-oval" data-image_id="<?= $category->image_id ?>" data-id="<?= $category->id ?>"><?= $category->name ?></button>
+                        <button class="btn btn-oval" data-image_id="<?= $category->image_id ?>"
+                            data-id="<?= $category->id ?>"><?= $category->name ?></button>
                     <?php endforeach ?>
                 </fieldset>
             </section>
             <section class="right">
                 <fieldset class="fieldset">
                     <legend>Emblema</legend>
-                    <div id="symbol"></div>
+                    <div id="symbol"><img src="" alt="" /></div>
                 </fieldset>
             </section>
             <section>

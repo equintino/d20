@@ -1,55 +1,62 @@
 import AbstractControllers from "./abstractcontrollers.js"
 
 export default class Category extends AbstractControllers {
-    constructor(deps) {
-        super(deps)
+    constructor(cls) {
+        super(cls)
     }
 
-    static initializer(deps) {
-        const category = new Category(deps)
-        category.#init()
-    }
-
-    #init() {
-        this.view.setButtons((btnName) => {
-            this.#optInit(btnName)
+    optInit(btnName) {
+        const page = (btnName === 'new' ? 'category/add' : 'category/list')
+        this.showPage({
+            page,
+            fn: (elem) => {
+                this.setButtons({
+                    elem,
+                    fn: (data) => {
+                        this.view.btnActive(data)
+                    }
+                })
+                if (btnName === 'new') this.view.changeImg()
+            }
         })
     }
 
-    #optInit(btnName) {
-        if (btnName === 'new') {
-            return this.view.showPage(this.service.open('GET', 'category/add'), (elem) => {
-                this.#setButton(elem)
-            })
-        }
-
-        if (btnName === 'list') {
-            return this.view.showPage(this.service.open('GET', 'category/list'), (elem) => {
-                this.#setButton(elem)
-            })
-        }
-    }
-
-    #setButton(elem) {
-        elem.querySelectorAll('button').forEach((btn) => {
-            btn.addEventListener('click', (e) => {
-                let btnName = e.target.value
-                switch (btnName) {
-                    case 'back':
-                        this.view.showPage(this.service.open('GET', 'category'), (elem) => {
-                            this.view.backInit(elem, (btnName) => {
-                                this.#optInit(btnName)
+    btnAction({ btn }) {
+        switch (btn.target.value) {
+            case 'back':
+                this.btnBack('category')
+                break
+            case 'clear':
+                this.btnClean('#category')
+                this.view.cleanImg()
+                break
+            case 'save':
+                this.view.submit({
+                    form: '#category form',
+                    fn: ({ formData, validate }) => {
+                        let resp
+                        if (validate) {
+                            resp = this.getDataFile({
+                                method: 'POST',
+                                url: 'category/save',
+                                formData
                             })
-                        })
-                        break
-                    case 'save':
-                        this.view.submit('#category form')
-                        break
-                    case 'clear':
-                        this.view.reset('#category form')
-                        break
-                }
-            })
-        })
+                            if (resp.indexOf('success') !== -1) {
+                                this.btnClean('#category')
+                                this.view.cleanImg()
+                            }
+                        } else {
+                            resp = '<span class="warning">This field is necessary</span>'
+                        }
+                        this.message({ msg: resp })
+                        this.view.loading.hide()
+                    }
+                })
+                break
+            case 'edit':
+                break
+            default:
+                this.view.updateCategory(btn)
+        }
     }
 }

@@ -1,8 +1,8 @@
 import AbstractControllers from "./abstractcontrollers.js"
 
 export default class Mission extends AbstractControllers {
-    constructor(deps) {
-        super(deps)
+    constructor(cls) {
+        super(cls)
     }
 
     optInit(btnName) {

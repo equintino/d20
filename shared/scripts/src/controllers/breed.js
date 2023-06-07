@@ -1,19 +1,8 @@
 import AbstractControllers from "./abstractcontrollers.js"
 
 export default class Breed extends AbstractControllers {
-    constructor(deps) {
-        super(deps)
-    }
-
-    static initializer(deps) {
-        const breed = new Breed(deps)
-        breed.#init()
-    }
-
-    #init() {
-        this.view.setButtons((btnName) => {
-            this.optInit(btnName)
-        })
+    constructor(cls) {
+        super(cls)
     }
 
     optInit(btnName) {
@@ -21,12 +10,7 @@ export default class Breed extends AbstractControllers {
         this.showPage({
             page, fn: (elem) => {
                 this.setButtons({
-                    elem,
-                    fn: ({ e }) => {
-                        if (e.target.value === 'clear') {
-                            elem.querySelector('#thumb_image').src = ''
-                        }
-                    }
+                    elem
                 })
                 if (btnName === 'new') {
                     this.view.changeFile(elem)
@@ -41,77 +25,35 @@ export default class Breed extends AbstractControllers {
             case 'back':
                 this.btnBack('breed')
                 break
+            case 'clear':
+                this.btnClean('#breed')
+                this.view.cleanImg('#thumb_image')
+                break
             case 'save':
                 this.view.submit({
                     form: '#form_breed',
-                    fn: ({ formData }) => {
-                        let resp = this.getDataFile({
-                            method: 'POST',
-                            url: 'breed/save',
-                            formData
-                        })
-                        if (resp.indexOf('success') !== -1) {
-                            this.btnClean('#breed')
-                            this.message({ msg: resp })
-                            this.view.cleanImg('#thumb_image')
+                    fn: ({ formData, validate }) => {
+                        let resp
+                        if (validate) {
+                            resp = this.getDataFile({
+                                method: 'POST',
+                                url: 'breed/save',
+                                formData
+                            })
+                            if (resp.indexOf('success') !== -1) {
+                                this.btnClean('#breed')
+                                this.view.cleanImg('#thumb_image')
+                            }
+                        } else {
+                            resp = "<span class='warning'>This field is necessary!!!</span>"
                         }
+                        this.message({ msg: resp })
+                        this.view.loading.hide()
                     }
                 })
-                break
-            case 'clear':
-                this.btnClean('#breed')
                 break
             case 'edit':
                 this.#edition(elem)
-                return
-                let id = avatar.children[0].attributes["data-id"].value
-                modal.show({
-                    title: "Modo de edição de RAÇAS",
-                    content: "breed/edit",
-                    params: { id },
-                    buttons: "<button class='btn btn-rpg btn-silver mr-1' value='delete'>Excluir</button><button class='btn btn-rpg btn-green' value='save'>Salvar</button>"
-                }).on("click", function(e) {
-                    if(e.target.value === "save") {
-                        let formData = new FormData($(e.target.offsetParent).find("form")[0])
-                        if(saveData("breed/save", formData)) {
-                            modal.hideContent();
-                        }
-                    } else if(e.target.value === "delete") {
-                        modal.confirm({
-                            title: "Modo de Exclusão",
-                            message: "Deseja realmente excluir esta RAÇA?"
-                        }).on("click", function(i) {
-                            if(i.target.value === "1") {
-                                let name = modal.content.find("[name=name]").val()
-                                $.ajax({
-                                    url: "breed/delete",
-                                    type: "POST",
-                                    dataType: "JSON",
-                                    data: {
-                                        name
-                                    },
-                                    beforeSend: function() {
-                                        loading.show()
-                                    },
-                                    success: function(response) {
-                                        alertLatch("Breed removed successfully", "var(--cor-success)")
-                                        modal.hideContent()
-                                        $(".content").load("breed/list", function() {
-                                            loading.hide()
-                                        })
-                                    },
-                                    error: function(error) {
-
-                                    },
-                                    complete: function() {
-                                        loading.hide()
-                                    }
-
-                                })
-                            }
-                        })
-                    }
-                })
                 break
             default:
                 this.view.updateDataBreed({ btn })

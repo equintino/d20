@@ -65,16 +65,20 @@ export default class Controllers {
                 )
                 break
             case 'breed':
-                Breed.initializer({
-                    view: this.#views.initClass(cls),
-                    service: this.#services.initClass(cls)
-                })
+                Breed.initializer(
+                    new Breed({
+                        view: this.#views.initClass(cls),
+                        service: this.#services.initClass(cls)
+                    })
+                )
                 break
             case 'category':
-                Category.initializer({
-                    view: this.#views.initClass(cls),
-                    service: this.#services.initClass(cls)
-                })
+                Category.initializer(
+                    new Category({
+                        view: this.#views.initClass(cls),
+                        service: this.#services.initClass(cls)
+                    })
+                )
                 break
             case 'avatar':
                 Avatar.initializer({

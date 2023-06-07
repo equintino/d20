@@ -65,16 +65,17 @@
             <section class="side-left">
                 <div>
                     <label>Tipo:</label>
-                    <input class="input-rpg" type="text" name="name" />
+                    <input class="input-rpg" type="text" name="name" required/>
                 </div>
                 <div>&nbsp&nbsp&nbsp</div>
                 <div>
                     <label>Imagem:</label>
-                    <input id="image" class="input-rpg" type="file" name="image" />
+                    <input id="image" class="input-rpg" type="file" name="image" required/>
                 </div>
                 <div>
                     <label>Descrição:</label>
-                    <textarea class="input-rpg" rows="5" cols="48" type="text" name="description" style="text-transform: none"></textarea>
+                    <textarea class="input-rpg" rows="5" cols="48" type="text" name="description"
+                        style="text-transform: none"></textarea>
                 </div>
             </section>
             <section class="side-right" style="justify-content: center">
