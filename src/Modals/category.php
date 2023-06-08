@@ -47,10 +47,12 @@
                 <div>
                     <label class="label-rpg">Tipo:</label>
                     <input class="input-rpg" type="text" name="name" value="<?= $category->name ?>"/>
+                    <input type="hidden" name="id" value="<?= $category->id ?>" />
                 </div>
                 <div>
                     <label class="label-rpg">Descrição:</label>
-                    <textarea class="input-rpg" rows="5" cols="48" type="text" name="description" style="text-transform: none" ><?= $category->description ?></textarea>
+                    <textarea class="input-rpg" rows="5" cols="48" type="text" name="description"
+                        style="text-transform: none" required><?= $category->description ?></textarea>
                 </div>
             </section>
             <section class="side-right" style="text-align: center">
@@ -60,9 +62,3 @@
         </div>
     </form>
 </div>
-
-<script>
-    image.onchange = () => {
-        thumbImage(image, thumb_image)
-    }
-</script>

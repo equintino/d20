@@ -36,16 +36,16 @@ class Category extends Controller
         $id = $data["id"];
         $category = (new \Models\Category())->load($id);
 
-        return print(json_encode([
+        return print json_encode([
             "name" => $category->name,
             "description" => $category->description,
             "image_id" => $category->image_id
-        ]));
+        ]);
     }
 
     public function save(array $data)
     {
-        $category = ((new \Models\Category())->find($data["name"])[0] ?? new \Models\Category());
+        $category = (!empty($data['id']) ? (new \Models\Category())->load($data["id"]) : new \Models\Category());
         if ($_FILES["image"]["error"] === 0) {
             if (empty($category->image_id)) {
                 $data["image_id"] = (new \Models\Image())->fileSave($_FILES["image"]);
@@ -56,12 +56,13 @@ class Category extends Controller
         }
         $category->bootstrap($data);
         $category->save();
-        return print(json_encode($category->message()));
+        return print json_encode($category->message());
     }
 
     public function delete(array $data)
     {
         $category = (new \Models\Category())->find($data["name"])[0];
-        return print(json_encode($category->destroy()));
+        $category->destroy();
+        return print json_encode($category->message());
     }
 }

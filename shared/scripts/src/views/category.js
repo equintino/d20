@@ -20,4 +20,14 @@ export default class Category extends AbstractViews {
         document.querySelector('#symbol img').src = `image/id/${idImage}`
         this.loading.hide()
     }
+
+    edition(elem) {
+        const btnActive = elem.querySelector('.active')
+        if (btnActive === null) return null
+
+        const idCategory = btnActive.attributes['data-id'].value
+        const formData = new FormData()
+        formData.append('id', idCategory)
+        return formData
+    }
 }

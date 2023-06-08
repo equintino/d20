@@ -21,7 +21,7 @@ export default class Category extends AbstractControllers {
         })
     }
 
-    btnAction({ btn }) {
+    btnAction({ btn, elem }) {
         switch (btn.target.value) {
             case 'back':
                 this.btnBack('category')
@@ -54,9 +54,81 @@ export default class Category extends AbstractControllers {
                 })
                 break
             case 'edit':
+                this.#edition(elem)
                 break
             default:
                 this.view.updateCategory(btn)
         }
+    }
+
+    #edition(elem) {
+        const formData = this.view.edition(elem)
+        if (formData === null) {
+            this.view.loading.hide()
+            return this.message({ msg: '<span class="warning">No category selected</span>'})
+        }
+        this.openModal({
+            title: 'MODO DE EDIÇÃO DE CLASSE',
+            page: `category/edit`,
+            formData,
+            fn: () => {
+                this.view.loading.hide()
+            }
+        })
+        this.view.setBtnModal({
+            buttons: '<button class="btn btn-rpg btn-silver" value="delete">Excluir</button><button class="btn btn-rpg btn-danger" value="save">Salvar</button>',
+            fn: ({ e, form, formData }) => {
+                const btnName = e.target.value
+                if (btnName === 'delete') {
+                    this.confirm({
+                        message: 'Deseja realmente excluir esta CLASSE?',
+                        fn: ({ e }) => {
+                            let resp
+                            if (e.target.value === 'yes') {
+                                resp = this.getDataFile({
+                                    method: 'POST',
+                                    url: 'category/delete',
+                                    formData
+                                })
+                                if (resp.indexOf('success') !== -1) {
+                                    this.view.closeAllModal()
+                                    this.optInit('list')
+                                }
+                                this.message({ msg: resp })
+                            }
+                        }
+                    })
+                }
+                if (btnName === 'save') {
+                    this.view.submit({
+                        form: '#form_edit',
+                        fn: ({ formData, validate}) => {
+                            if (validate) {
+                                let resp = this.getDataFile({
+                                    method: 'POST',
+                                    url: 'category/save',
+                                    formData
+                                })
+                                if (resp.indexOf('success') !== -1) {
+                                    this.view.closeModal()
+                                    this.optInit('list')
+                                    resp = '<span class="warning">It is necessary reload this page<span>'
+                                }
+                                this.message({ msg: resp })
+                            } else {
+                                this.message({ msg: '<span class="warning">This field is necessary<span>'})
+                            }
+                        }
+                    })
+                }
+            }
+        })
+        this.eventInModal({
+            idForm: '#form_edit',
+            events: [ 'change' ],
+            fn: () => {
+                this.view.thumbImage({ origin: '#image', destination: '#thumb_image' })
+            }
+        })
     }
 }
