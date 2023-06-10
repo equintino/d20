@@ -81,10 +81,12 @@ export default class Controllers {
                 )
                 break
             case 'avatar':
-                Avatar.initializer({
-                    view: this.#views.initClass(cls),
-                    service: this.#services.initClass(cls)
-                })
+                Avatar.initializer(
+                    new Avatar({
+                        view: this.#views.initClass(cls),
+                        service: this.#services.initClass(cls)
+                    })
+                )
                 break
             case 'user':
                 User.initializer({

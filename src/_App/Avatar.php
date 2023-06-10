@@ -47,7 +47,7 @@ class Avatar extends Controller
                 "category_id" => $data["category_id"]
             ];
         }
-        return print(json_encode($response ?? "This breed has no definite image"));
+        return print json_encode($response ?? "This breed has no definite image");
     }
 
     public function edit(array $data): void
@@ -109,7 +109,7 @@ class Avatar extends Controller
             $avatars->bootstrap($data);
             $avatars->save();
         }
-        return print(json_encode($avatars->message()));
+        return print json_encode($avatars->message());
     }
 
     public function delete(array $data)
@@ -117,6 +117,6 @@ class Avatar extends Controller
         $avatar = (new \Models\Avatar())->load($data["id"]);
         $image = (new \Models\Image())->load($avatar->image_id);
         $image->destroy();
-        return print(json_encode($avatar->destroy()));
+        return print json_encode($avatar->destroy());
     }
 }

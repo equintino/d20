@@ -1,55 +1,53 @@
 import AbstractControllers from "./abstractcontrollers.js"
 
 export default class Avatar extends AbstractControllers {
-    constructor(deps) {
-        super(deps)
+    constructor(cls) {
+        super(cls)
     }
 
-    static initializer(deps) {
-        const avatar = new Avatar(deps)
-        avatar.#init()
-    }
-
-    #init() {
-        this.view.setButtons((btnName) => {
-            this.#optInit(btnName)
+    optInit(btnName) {
+        const page = (btnName === 'new' ? 'avatar/add' : 'avatar/list')
+        this.showPage({
+            page,
+            fn: (elem) => {
+                this.setButtons({ elem })
+                this.view.showAvatar()
+            }
         })
     }
 
-    #optInit(btnName) {
-        if (btnName === 'new') {
-            return this.view.showPage(this.service.open('GET', 'avatar/add'), (elem) => {
-                this.#setButton(elem)
-            })
-        }
-
-        if (btnName === 'list') {
-            return this.view.showPage(this.service.open('GET', 'avatar/list'), (elem) => {
-                this.#setButton(elem)
-            })
-        }
-    }
-
-    #setButton(elem) {
-        elem.querySelectorAll('button').forEach((btn) => {
-            btn.addEventListener('click', (e) => {
-                let btnName = e.target.value
-                switch (btnName) {
-                    case 'back':
-                        this.view.showPage(this.service.open('GET', 'avatar'), (elem) => {
-                            this.view.backInit(elem, (btnName) => {
-                                this.#optInit(btnName)
+    btnAction({ btn }) {
+        switch (btn.target.value) {
+            case 'back':
+                this.btnBack('avatar')
+                break
+            case 'clear':
+                this.btnClean('#avatar')
+                this.view.cleanImg('#thumb_image')
+                break
+            case 'save':
+                this.view.submit({
+                    form: '#avatar form',
+                    fn: ({ validate, formData }) => {
+                        let resp
+                        if (validate) {
+                            resp = this.getDataFile({
+                                method: 'POST',
+                                url: 'avatar/save',
+                                formData
                             })
-                        })
-                        break
-                    case 'save':
-                        this.view.submit('#avatar form')
-                        break
-                    case 'clear':
-                        this.view.reset('#avatar form')
-                        break
-                }
-            })
-        })
+                            if (resp.indexOf('success') !== -1) {
+                                this.btnClean('#avatar')
+                                this.view.cleanImg('#thumb_image')
+                            }
+                        } else {
+                            resp = '<span class="warning">This field is necessary!</span>'
+                        }
+                        this.message({ msg: resp })
+                        this.view.loading.hide()
+                    }
+                })
+                break
+        }
     }
 }

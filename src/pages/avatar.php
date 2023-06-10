@@ -44,7 +44,7 @@
                 </div>
             </section>
             <section class="side-right" style="justify-content: center">
-                <div id="thumb_image"></div>
+                <img id="thumb_image" src="" alt="" height="250px"/>
             </section>
         </form>
     </fieldset>

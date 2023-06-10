@@ -81,6 +81,14 @@ export default class AbstractViews {
     #validate(data) {
         let field
         let resp = true
+        let checked = 0
+        for (let i of data.querySelectorAll('[type=radio]')) {
+            if (i.checked) checked ++
+        }
+        if (checked == 0) {
+            data.querySelector('[type=radio]').parentElement.style.border = '1px solid pink'
+            resp = false
+        }
         for (let i in data.querySelectorAll('[required]')) {
             field = data.querySelectorAll('[required]')[i]
             if (typeof(field.value) === 'undefined') break

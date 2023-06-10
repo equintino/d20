@@ -1,6 +1,6 @@
 #avatar #thumb_image {
     background: #676767;
-    width: 450px;
+    /* width: 450px; */
     align-items: center;
     display: flex;
     overflow-x: auto;
