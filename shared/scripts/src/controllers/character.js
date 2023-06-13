@@ -42,36 +42,40 @@ export default class Character extends AbstractControllers {
         }
     }
 
-    #carousel({ list }) {
-        this.view.carousel({
-            idElement: '#imageAvatar',
-            list: list,
-            fn: ({ idImage }) => {
-                this.view.imgSelected({
-                    idElement: '#avatarList',
-                    idImage: idImage
-                })
-                this.view.loading.hide()
-            }
-        })
-    }
-
     #setModal({ formData, list }) {
         this.openModal({
             page: 'avatar/show',
             formData: formData,
             fn: () => {
-                this.#carousel({ list })
+                this.view.carousel({
+                    idElement: '#imageAvatar',
+                    list,
+                    fn: ({ idImage }) => {
+                        this.view.imgSelected({
+                            idElement: '#avatarList',
+                            idImage: idImage
+                        })
+                        this.view.loading.hide()
+                    }
+                })
                 this.view.eventInModal({
                     idForm: '#avatarList',
                     event: 'change',
                     fn: ({ formData }) => {
                         this.view.loading.show()
-                        this.#carousel({
+                        this.view.carousel({
+                            idElement: '#imageAvatar',
                             list: this.getDataFile({
                                 url: 'avatar',
                                 formData
-                            })
+                            }),
+                            fn: ({ idImage }) => {
+                                this.view.imgSelected({
+                                    idElement: '#avatarList',
+                                    idImage: idImage
+                                })
+                                this.view.loading.hide()
+                            }
                         })
                         let category = this.getDataFile({ url: `category/id/${formData.get('category_id')}` })
                         this.view.updateCategory({
@@ -213,11 +217,19 @@ export default class Character extends AbstractControllers {
             box: '#boxe2_main'
         })
 
-        this.#carousel({
+        this.view.carousel({
+            idElement: '#imageAvatar',
             list: this.getDataFile({
                 url: 'avatar',
                 formData
-            })
+            }),
+            fn: ({ idImage }) => {
+                this.view.imgSelected({
+                    idElement: '#avatarList',
+                    idImage: idImage
+                })
+                this.view.loading.hide()
+            }
         })
 
         let buttons = '<button class="btn btn-rpg btn-danger" value="selected">Selecionar</button>'

@@ -88,10 +88,62 @@ export default class Avatar extends AbstractControllers {
         this.openModal({
             page: 'avatar/edit',
             formData,
-            fn: (data) => {
-                console.log(
-                    data
-                )
+            fn: () => {
+                this.view.setBtnModal({
+                    buttons: '<button class="btn btn-rpg btn-silver" value="delete">Excluir</button><button class="btn btn-danger btn-rpg" value="save">Salvar</button>',
+                    fn: ({ e, formData }) => {
+                        let resp
+                        if (e.target.value === 'delete') {
+                            this.confirm({
+                                title: 'MODO DE EXCLUSÃO',
+                                message: 'Deseja realmente excluir este AVATAR?',
+                                fn: ({ e }) => {
+                                    if (e.target.value === 'yes') {
+                                        idAvatar = formData.get('id')
+                                        resp = this.getDataFile({
+                                            method: 'POST',
+                                            url: 'avatar/delete',
+                                            formData
+                                        })
+                                    }
+                                    if (resp.indexOf('success') !== -1) {
+                                        this.optInit('list')
+                                        this.message({ msg: resp })
+                                        this.view.closeAllModal()
+                                    }
+                                }
+                            })
+                        }
+                        if (e.target.value === 'save') {
+                            resp = this.getDataFile({
+                                method: 'POST',
+                                url: 'avatar/save',
+                                formData
+                            })
+                            if (resp.indexOf('success') !== -1) {
+                                if (formData.get('image').size !== 0) {
+                                    resp = '<span class="warning">It is necessary reload this page</span>'
+                                }
+                                this.optInit('list')
+                                this.message({ msg: resp })
+                                this.view.closeModal()
+                            }
+                        }
+                    }
+                })
+                this.eventInModal({
+                    idForm: '#form_avatar',
+                    events: [ 'change' ],
+                    fn: ({ e }) => {
+                        let attr = e.target.attributes['type']
+                        if (typeof(attr) !== 'undefined' && attr.value === 'file') {
+                            this.view.thumbImage({
+                                origin: '#image',
+                                destination: '#thumb_image'
+                            })
+                        }
+                    }
+                })
             }
         })
     }

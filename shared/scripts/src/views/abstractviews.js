@@ -85,7 +85,7 @@ export default class AbstractViews {
         for (let i of data.querySelectorAll('[type=radio]')) {
             if (i.checked) checked ++
         }
-        if (checked == 0) {
+        if (data.querySelector('[type=radio]') !== null && checked == 0) {
             data.querySelector('[type=radio]').parentElement.style.border = '1px solid pink'
             resp = false
         }

@@ -56,9 +56,9 @@
                 </div>
             </section>
             <section class="side-right" >
-                <div id="thumb_image" >
-                    <img src="image/id/<?= ($avatar->image_id ?? null) ?>" alt="" height="300px"/>
-                </div>
+                <!--<div id="thumb_image" > -->
+                    <img id="thumb_image" src="image/id/<?= ($avatar->image_id ?? null) ?>" alt="" height="300px"/>
+                <!-- </div> -->
                 <div>
                     <label>Imagem:</label>
                     <input id="image" class="input-rpg" type="file" name="image" />
@@ -67,10 +67,10 @@
         </div>
     </form>
 </div>
-<script>
-    image.onchange = () => {
-        let img = thumbImage(image, thumb_image)
-        $(thumb_image).find("img").remove()
-        $(thumb_image).append(img)
-    }
-</script>
+<!-- <script>
+    // image.onchange = () => {
+    //     let img = thumbImage(image, thumb_image)
+    //     $(thumb_image).find("img").remove()
+    //     $(thumb_image).append(img)
+    // }
+</script> -->

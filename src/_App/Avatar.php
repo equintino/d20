@@ -112,11 +112,12 @@ class Avatar extends Controller
         return print json_encode($avatars->message());
     }
 
-    public function delete(array $data)
+    public function delete(array $data): ?string
     {
         $avatar = (new \Models\Avatar())->load($data["id"]);
         $image = (new \Models\Image())->load($avatar->image_id);
         $image->destroy();
-        return print json_encode($avatar->destroy());
+        $avatar->destroy();
+        return print json_encode($avatar->message());
     }
 }

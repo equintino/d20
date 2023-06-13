@@ -21,11 +21,6 @@ export default class Mission extends AbstractViews {
         document.querySelector('#mission #personage').innerHTML = text
         document.querySelector('#mission #images').innerHTML = imgs
         document.querySelector('#mission .middle p').innerText = `Total de Maps: ${mission.maps.length}`
-
-        this.carousel({
-            idElement: '#images',
-            list: mission.maps
-        })
     }
 
     getMapSelected({ elem }) {

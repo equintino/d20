@@ -87,8 +87,11 @@ export default class Mission extends AbstractControllers {
         formData.append('nameMission', e.target.innerText)
         mission.personages = this.getDataFile({ url: `mission/personages`, formData })
 
-        this.view.setDetailMission({
-            mission
+        this.view.setDetailMission({ mission })
+
+        this.view.carousel({
+            idElement: '#images',
+            list: mission.maps
         })
         this.view.loading.hide()
     }
