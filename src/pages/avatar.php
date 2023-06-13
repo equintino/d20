@@ -1,3 +1,20 @@
+<style>
+    #avatar {
+        margin-top: 50px;
+    }
+
+    #avatar .avatar {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        margin-right: 70px;
+        padding-top: 50px;
+    }
+
+    #avatar .avatar img {
+        height: 300px;
+    }
+</style>
 <main id="avatar">
     <?php if(empty($act)): ?>
     <div id="init">
@@ -84,7 +101,7 @@
             <section class="right">
                 <fieldset class="fieldset">
                     <legend>Avatar</legend>
-                    <div class="avatar" style="width: 100%"></div>
+                    <div class="avatar"></div>
                 </fieldset>
             </section>
             <section>

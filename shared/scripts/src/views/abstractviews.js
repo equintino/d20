@@ -124,6 +124,16 @@ export default class AbstractViews {
             .value = idImage
     }
 
+    getImgSelectedInCarousel() {
+        let idImg
+        document.querySelectorAll('#cards_ .card_').forEach((i) => {
+            if (i.style.zIndex === '1') {
+                idImg = i.attributes['data-id'].value
+            }
+        })
+        return idImg
+    }
+
     openModal({ box, page, title, message, fn }) {
         const _box = (box ?? '#boxe_main')
         this.modal.openModal(_box, page, (e) => {

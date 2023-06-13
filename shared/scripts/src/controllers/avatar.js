@@ -11,12 +11,13 @@ export default class Avatar extends AbstractControllers {
             page,
             fn: (elem) => {
                 this.setButtons({ elem })
-                this.view.showAvatar()
+                if (btnName === 'new') this.view.showAvatar()
+                if (btnName === 'list') this.#checkAvatar(elem)
             }
         })
     }
 
-    btnAction({ btn }) {
+    btnAction({ btn, elem }) {
         switch (btn.target.value) {
             case 'back':
                 this.btnBack('avatar')
@@ -48,6 +49,50 @@ export default class Avatar extends AbstractControllers {
                     }
                 })
                 break
+            case 'edit':
+                const formData = this.view.getAvatarSelected(elem)
+                if (formData === null) {
+                    this.view.loading.hide()
+                    return this.message({
+                        msg: '<span class="warning">No Selected breed and cetegory</span>'
+                    })
+                }
+                const idAvatar = this.view.getImgSelectedInCarousel()
+                this.#edition(formData, idAvatar)
+                this.view.loading.hide()
+                break
         }
+    }
+
+    #checkAvatar(elem) {
+        this.view.checkAvatar({
+            elem,
+            fn: (formData) => {
+                if (formData === null) return
+                const list =  this.getDataFile({
+                    method: 'POST',
+                    url: 'avatar',
+                    formData
+                })
+                this.view.carousel({
+                    idElement: '.avatar',
+                    list
+                })
+                this.view.loading.hide()
+            }
+        })
+    }
+
+    #edition(formData, idAvatar) {
+        formData.append('id', idAvatar)
+        this.openModal({
+            page: 'avatar/edit',
+            formData,
+            fn: (data) => {
+                console.log(
+                    data
+                )
+            }
+        })
     }
 }

@@ -89,10 +89,12 @@ export default class Controllers {
                 )
                 break
             case 'user':
-                User.initializer({
-                    view: this.#views.initClass(cls),
-                    service: this.#services.initClass(cls)
-                })
+                User.initializer(
+                    new User({
+                        view: this.#views.initClass(cls),
+                        service: this.#services.initClass(cls)
+                    })
+                )
                 break
         }
     }
