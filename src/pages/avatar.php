@@ -1,20 +1,3 @@
-<style>
-    #avatar {
-        margin-top: 50px;
-    }
-
-    #avatar .avatar {
-        width: 100%;
-        height: 100%;
-        position: relative;
-        margin-right: 70px;
-        padding-top: 50px;
-    }
-
-    #avatar .avatar img {
-        height: 300px;
-    }
-</style>
 <main id="avatar">
     <?php if(empty($act)): ?>
     <div id="init">

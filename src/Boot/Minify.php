@@ -14,6 +14,7 @@ foreach ($cssDir as $css) {
 
 $minCSS->add(__DIR__ . "/../../shared/styles/style-home.css");
 $minCSS->add(__DIR__ . "/../../shared/styles/style-character.css");
+$minCSS->add(__DIR__ . "/../../shared/styles/style-breed.css");
 $minCSS->add(__DIR__ . "/../../shared/styles/style-mission.css");
 $minCSS->add(__DIR__ . "/../../shared/styles/style-avatar.css");
 

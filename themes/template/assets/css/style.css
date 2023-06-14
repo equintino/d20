@@ -423,7 +423,6 @@ main .form-signin {
 
 /** icon stylization */
 .icon-edition {
-    border: none;
     font-size: .8em;
     cursor: pointer;
     color: rgb(148, 147, 147);
@@ -482,14 +481,14 @@ main .form-signin {
     float: right;
 }
 
-.fieldset table thead th {
-    /* font-size: .7rem; */
-    /* border-bottom: 1px solid black; */
-}
+/* .fieldset table thead th {
+    font-size: .7rem;
+    border-bottom: 1px solid black;
+} */
 
-.fieldset table tr:last-child {
-    /* border-bottom: 1px solid black; */
-}
+/* .fieldset table tr:last-child {
+    border-bottom: 1px solid black;
+} */
 
 /** bootbox */
 .modal-content {
@@ -566,9 +565,9 @@ main .form-signin {
     background: #626262 none repeat scroll 0% 0%;
 }
 
-#mask2_main {
-    /* z-index: 3; */
-}
+/* #mask2_main {
+    z-index: 3;
+} */
 
 @-webkit-keyframes fadeInDown {
     0% {
@@ -686,8 +685,8 @@ main .form-signin {
     position: fixed;
     width: 50%;
     margin: -5px 25%;
-    display: -ms-flexbox;
-    display: flex;
+    /* display: -ms-flexbox; */
+    /* display: flex; */
     -ms-flex-direction: column;
     flex-direction: column;
     pointer-events: auto;
@@ -966,4 +965,16 @@ main .form-signin {
     .printable * {
         visibility: visible;
     }
+}
+
+#init {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#init button {
+    width: 180px;
+    font-size: 1.5em;
 }

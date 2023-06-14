@@ -1,0 +1,53 @@
+
+/* #breed {
+    margin-top: 40px;
+} */
+/*
+#breed #init {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+/*
+#breed #init button {
+    width: 180px;
+    font-size: 1.5em;
+} */
+
+#breed #list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#breed #list .fieldset {
+    margin-top: 0;
+}
+
+#breed #list .left {
+    width: 30%;
+    text-align: center;
+}
+
+#breed #list .left button {
+    width: 130px;
+}
+
+#breed #list .left .fieldset, #list .right .fieldset {
+    height: 550px;
+}
+
+#breed #list .left .fieldset {
+    overflow: auto;
+}
+
+#breed #list .right {
+    width: 60%;
+}
+
+#breed #list .right > .fieldset {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

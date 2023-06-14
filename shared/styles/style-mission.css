@@ -1,4 +1,4 @@
-#mission, #mission #list {
+#mission #list {
     display: flex;
     justify-content: center;
     height: 400px;
@@ -6,10 +6,10 @@
     margin-top: 40px;
 }
 
-#mission #init button {
+/* #mission #init button {
     width: 180px;
     font-size: 1.5em;
-}
+} */
 
 #mission .fieldset {
     margin-top: 120px;

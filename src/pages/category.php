@@ -1,5 +1,5 @@
 <style>
-    #init {
+    /* #init {
         height: 400px;
         display: flex;
         justify-content: center;
@@ -10,7 +10,7 @@
     #init button {
         width: 180px;
         font-size: 1.5em;
-    }
+    } */
 
     #list {
         display: flex;
