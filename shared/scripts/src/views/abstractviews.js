@@ -1,9 +1,9 @@
 import utils from "./../../lib/utils.js"
 import ThumbImage from "../../lib/thumbImage.js"
-import Views from "./views.js"
 import Carousel from "./../../lib/carousel.js"
 import Modal from "./../../lib/modal.js"
 import Message from "./../../lib/message.js"
+import Views from "./views.js"
 
 const loading = utils.loading
 export default class AbstractViews {

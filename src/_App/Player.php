@@ -82,10 +82,10 @@ class Player extends Controller
         if (empty($player->find([ "character_id" => $data["character_id"] ]))) {
             $player->bootstrap($data);
         } else {
-            return print(json_encode("This player has been in a mission"));
+            return print json_encode("This player has been in a mission");
         }
         $player->save();
-        return print(json_encode($player->message()));
+        return print json_encode($player->message());
     }
 
     public function update(array $data): string
@@ -95,7 +95,7 @@ class Player extends Controller
         $player->character_id = $data["character_id"];
         $player->mission_id = $data["mission_id"];
         $player->save();
-        return print(json_encode($player->message()));
+        return print json_encode($player->message());
     }
 
     public function story(array $data): void
@@ -103,11 +103,11 @@ class Player extends Controller
         $this->view->setPath("Modals")->render($this->page);
     }
 
-    public function delete(array $data)
+    public function delete(array $data): string
     {
         $id = $data["id"];
         $player = (new \Models\Player())->load($id);
         $player->destroy();
-        return print(json_encode($player->message()));
+        return print json_encode($player->message());
     }
 }

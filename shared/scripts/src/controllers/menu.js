@@ -5,7 +5,7 @@ export default class Menu extends AbstractControllers {
         super(deps)
     }
 
-    static async initializer({ menu, fn }) {
+    static initializer({ menu, fn }) {
         menu.init(fn)
     }
 

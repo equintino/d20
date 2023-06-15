@@ -7,6 +7,7 @@ import Breed from './breed.js'
 import Category from './category.js'
 import Avatar from './avatar.js'
 import User from './user.js'
+import Player from './player.js'
 
 export default class Services {
     #readFile
@@ -44,6 +45,8 @@ export default class Services {
                 return new Avatar()
             case 'user':
                 return new User()
+            case 'player':
+                return new Player()
         }
     }
 }

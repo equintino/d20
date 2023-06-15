@@ -7,6 +7,7 @@ import Breed from './breed.js'
 import Category from './category.js'
 import Avatar from './avatar.js'
 import User from './user.js'
+import Player from './player.js'
 
 const loading = utils.loading
 export default class Views {
@@ -43,6 +44,8 @@ export default class Views {
                 return new Avatar()
             case 'user':
                 return new User()
+            case 'player':
+                return new Player()
         }
     }
 }

@@ -7,6 +7,7 @@ import Breed from './breed.js'
 import Category from './category.js'
 import Avatar from './avatar.js'
 import User from './user.js'
+import Player from './player.js'
 
 export default class Controllers {
     #views
@@ -91,6 +92,14 @@ export default class Controllers {
             case 'user':
                 User.initializer(
                     new User({
+                        view: this.#views.initClass(cls),
+                        service: this.#services.initClass(cls)
+                    })
+                )
+                break
+            case 'player':
+                Player.initializer(
+                    new Player({
                         view: this.#views.initClass(cls),
                         service: this.#services.initClass(cls)
                     })

@@ -5,7 +5,7 @@ export default class Login extends AbstractControllers {
         super(deps)
     }
 
-    static async initializer({ login }) {
+    static initializer({ login }) {
         login.init()
     }
 
