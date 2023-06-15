@@ -58,7 +58,13 @@ export default class Avatar extends AbstractControllers {
                     })
                 }
                 const idAvatar = this.view.getImgSelectedInCarousel()
-                this.#edition(formData, idAvatar)
+                if (idAvatar != null) {
+                    this.#edition(formData, idAvatar)
+                } else {
+                    this.message({
+                        msg: '<span class="warning">There is no avatar figure</span>'
+                    })
+                }
                 this.view.loading.hide()
                 break
         }
