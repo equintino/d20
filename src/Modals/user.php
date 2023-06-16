@@ -62,11 +62,16 @@
                 </div><!-- col -->
             </div>
         </fieldset>
-        <button type="submit" class="button save" style="float: right; margin-right: 40px"><?=
-        (isset($user) ? "Gravar Alteração" : "Salvar") ?></button>
-        <?php if(!isset($user)): ?>
-        <button type="reset" class="button cancel" style="float: right;">Limpar</button>
-        <?php endif ?>
+        <section style="margin: -8px 40px;">
+        <button class="btn btn-rpg btn-info" value="back">Volta</button>
+        <div style="float: right;">
+            <?php if(!isset($user)): ?>
+            <button type="reset" class="btn btn-rpg btn-silver" value="clean">Limpar</button>
+            <?php endif ?>
+            <button type="submit" class="btn btn-rpg btn-danger" value="save"><?=
+            (isset($user) ? "Gravar Alteração" : "Salvar") ?></button>
+        </div>
+        </section>
     </form>
 </div><!-- edit -->
 

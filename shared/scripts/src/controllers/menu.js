@@ -25,10 +25,7 @@ export default class Menu extends AbstractControllers {
             }
             this.showPage({ page })
             this.view.setIdentification(this.service.identification(page))
-            fn({
-                cls: page,
-                script: page
-            })
+            fn({ cls: page, script: page })
         })
     }
 }

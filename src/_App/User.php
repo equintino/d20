@@ -57,7 +57,7 @@ class User extends Controller
 
         $user->bootstrap($data);
         $user->save(true);
-        return print($user->message());
+        return print json_encode($user->message());
     }
 
     public function update(array $data): void
@@ -95,8 +95,7 @@ class User extends Controller
         $passwd = ($params["password"] ?? null);
         $confPasswd = ($params["confPassword"] ?? null);
         if ($passwd !== $confPasswd) {
-            print("<span class='warning'>The password was not confirmed</span>");
-            die;
+            die(json_encode("<span class='warning'>The password was not confirmed</span>"));
         } else {
             unset($params["confPassword"]);
         }
