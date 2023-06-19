@@ -26,9 +26,11 @@
         $router->get("/user/add", "User:add");
         $router->post("/user/save", "User:save");
         $router->get("/user/list", "User:list");
-        $router->get("/user/login/{login}", "User:edit");
+        // $router->get("/user/login/{login}", "User:edit");
+        $router->post("/user/edit", "User:edit");
         $router->post("/user/update", "User:update");
-        $router->post("/user/delete/{login}", "User:delete");
+        // $router->post("/user/delete/{login}", "User:delete");
+        $router->post("/user/delete", "User:delete");
         $router->post("/user/reset", "User:reset");
 
 

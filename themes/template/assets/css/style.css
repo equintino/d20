@@ -454,7 +454,8 @@ main .form-signin {
     border: 1px solid white;
     /* padding: 20px 40px; */
     padding: 0 40px;
-    margin: 100px 40px 0 40px;
+    margin: 0 40px;
+    /* margin: 100px 40px 0 40px; */
     color: #9a9a9a;
     overflow: scroll;
 }

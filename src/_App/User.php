@@ -52,8 +52,12 @@ class User extends Controller
     public function save(array $data): string
     {
         $data["user"] = &$data["login"];
-        $data = $this->confPassword($data);
-        $user = new \Models\User();
+        if (empty($data['id'])) {
+            $data = $this->confPassword($data);
+            $user = new \Models\User();
+        } else {
+            $user = (new \Models\User())->load($data['id']);
+        }
 
         $user->bootstrap($data);
         $user->save(true);
@@ -83,11 +87,11 @@ class User extends Controller
         echo json_encode($user->message());
     }
 
-    public function delete(array $data): void
+    public function delete(array $data): ?string
     {
         $user = (new \Models\User())->find($data["login"]);
         $user->destroy();
-        echo json_encode($user->message());
+        return print json_encode($user->message());
     }
 
     private function confPassword(array $params): ?array

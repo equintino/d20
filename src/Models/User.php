@@ -17,7 +17,7 @@ class User extends Model implements Models
     /** @var array filds required */
     private $required = [ "login", "password", "user", "name", "email" ];
 
-    private $fields = ['name','email','login','user','password','group_id','token'];
+    private $fields = ['name','email','login','user','password','group_id','token', 'active'];
 
     public function getEntity()
     {
@@ -121,7 +121,7 @@ class User extends Model implements Models
     private function update_(bool $msgDb)
     {
         $email = $this->read("SELECT id FROM " . self::$entity . " WHERE email = :email AND id != :id",
-            "email={$this->Email}&id={$this->id}");
+            "email={$this->email}&id={$this->id}");
         if ($email->rowCount()) {
             $this->message = "<span class='warning'>The informed e-mail is already registered</span>";
             return null;

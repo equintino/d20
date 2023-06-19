@@ -8,7 +8,7 @@
     <form id="loginRegister" action="#" method="POST" class="form-horizontal">
         <fieldset class="fieldset">
             <legend>IDENTIFICAÇÃO</legend>
-            <div class="form-row mb-2">
+            <div class="form-row">
                 <div class="col-md">
                     <input name="id" type="hidden" value="<?= (isset($user) ? $user->id : null) ?>" />
                     <label class="label-rpg" for="name">Nome Completo: </label><br>
@@ -36,7 +36,7 @@
                     (isset($user) ? "disabled" : ("required='required'")) ?>/></div><!-- col -->
             </div><!-- row -->
             <?php else: ?>
-                <input type="hidden" name="login" value="<?= $user->login ?>" ?>
+                <input type="hidden" name="login" value="<?= $user->login ?>" />
             <?php endif ?>
             <div class="row mr-4" >
                 <!-- <div class="col">
@@ -62,16 +62,18 @@
                 </div><!-- col -->
             </div>
         </fieldset>
+        <?php if (empty($user)): ?>
         <section style="margin: -8px 40px;">
-        <button class="btn btn-rpg btn-info" value="back">Volta</button>
-        <div style="float: right;">
-            <?php if(!isset($user)): ?>
-            <button type="reset" class="btn btn-rpg btn-silver" value="clean">Limpar</button>
-            <?php endif ?>
-            <button type="submit" class="btn btn-rpg btn-danger" value="save"><?=
-            (isset($user) ? "Gravar Alteração" : "Salvar") ?></button>
-        </div>
+            <button class="btn btn-rpg btn-info" value="back">Volta</button>
+            <div style="float: right;">
+                <?php if(!isset($user)): ?>
+                <button type="reset" class="btn btn-rpg btn-silver" value="clean">Limpar</button>
+                <?php endif ?>
+                <button type="submit" class="btn btn-rpg btn-danger" value="save"><?=
+                (isset($user) ? "Gravar Alteração" : "Salvar") ?></button>
+            </div>
         </section>
+        <?php endif ?>
     </form>
 </div><!-- edit -->
 
