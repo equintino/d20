@@ -87,6 +87,13 @@ class User extends Controller
         echo json_encode($user->message());
     }
 
+    public function token(array $data)
+    {
+        $login = $data['login'];
+        $user = (new \Models\User())->find([ "login" => $data['login']])[0];
+        $this->view->setPath('Modals')->render('token', [ compact('login', 'user') ]);
+    }
+
     public function delete(array $data): ?string
     {
         $user = (new \Models\User())->find($data["login"]);

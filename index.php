@@ -32,6 +32,7 @@
         // $router->post("/user/delete/{login}", "User:delete");
         $router->post("/user/delete", "User:delete");
         $router->post("/user/reset", "User:reset");
+        $router->post("/user/token", 'User:token');
 
 
         /** The Shield's Screens */

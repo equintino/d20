@@ -1,6 +1,7 @@
 <style>
     #formToken {
         display: grid;
+        margin-top: 20px;
     }
 
     #formToken label {
@@ -14,9 +15,12 @@
 </style>
 <form id="formToken" class="form-signin" action="#" method="POST" >
     <input type="hidden" name="login" value="<?= $login ?>" />
-    <input class="form-control" type="password" name="password" autofocus/>
+    <input type="hidden" name="name" value="<?= $user->name ?>" />
+    <input type="hidden" name="email" value="<?= $user->email ?>" />
+    <input type="hidden" name="token" value="" />
+    <input class="form-control" type="password" name="password" autofocus required/>
     <label class="label" for="password">Digite sua nova senha</label>
-    <input class="form-input" type="password" name="confPassword" />
+    <input class="form-input" type="password" name="confPassword" required/>
     <label class="label" for="confPassword">Confirme</label>
-    <button id="btn-token" class="button-style mt-3" >Enviar</button>
+    <!-- <button id="btn-token" class="button-style mt-3" >Enviar</button> -->
 </form>

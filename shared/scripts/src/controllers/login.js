@@ -54,15 +54,42 @@ export default class Login extends AbstractControllers {
                 formData
             })
             if (response === 'reset password') {
-                return this.view.openModal(this.service.readFile('token'), {}, () => {
-                    let params = new URLSearchParams(data)
-                    this.view.setNameLogin(params.get('login'))
-                }, (response) => {
-                    const resp = this.service.update('user', response)
-                    if (resp.indexOf('success')) {
-                        this.view.closeModal()
+                return this.openModal({
+                    title: 'RESET DE SENHA',
+                    page: 'user/token',
+                    formData,
+                    fn: (elem) => {
+                        this.view.setBtnModal({
+                            buttons: '<button class="btn btn-rpg btn-danger" value="save">Salvar</button>',
+                            fn: ({ e, formData }) => {
+                                if (e.target.value === 'save') {
+                                    let resp
+                                    this.view.submit({
+                                        form: '#formToken',
+                                        fn: ({ formData, validate }) => {
+                                            if (validate) {
+                                                resp = this.getDataFile({
+                                                    before: () => {
+                                                        this.view.loading.show()
+                                                    },
+                                                    method: 'POST',
+                                                    url: 'user/update',
+                                                    formData
+                                                })
+                                                if (resp.indexOf('success') !== -1) {
+                                                    this.view.closeAllModal()
+                                                }
+                                            } else {
+                                                resp = '<span class="warning">This field is necessary</span>'
+                                            }
+                                        }
+                                    })
+                                    this.message({ msg: resp })
+                                    this.view.loading.hide()
+                                }
+                            }
+                        })
                     }
-                    this.view.message(resp, 'var(--cor-success)')
                 })
             }
             if (response == true) {
