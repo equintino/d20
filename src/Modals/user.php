@@ -88,9 +88,9 @@
                     <th>LOGIN</th>
                     <th>GRUPO</th>
                     <th>ATIVO</th>
-                    <th>EDITAR</th>
-                    <th>EXCLUIR</th>
-                    <th>RESETAR SENHA</th>
+                    <th style="text-align: center">EDITAR</th>
+                    <th style="text-align: center">EXCLUIR</th>
+                    <th style="text-align: center">RESETAR SENHA</th>
                 </tr>
             </thead>
             <tbody>
@@ -107,13 +107,13 @@
                             <td><?= (!empty($user->getGroup()) ? $user->getGroup()->name : null) ?></td>
                             <td><?= $user->active == 1 ? "SIM" : "NÃO"; ?></td>
                             <td title="Edita" data-action="edit" data-id="<?= $user->id ?>"
-                                data="<?= $user->login ?>" >
+                                data="<?= $user->login ?>" style="text-align: center">
                             <i class="fa fa-pencil" ></i></td>
                             <td title="Exclui" data-action="delete" data-id="<?= $user->id ?>"
-                                data="<?= $user->login ?>" >
+                                data="<?= $user->login ?>" style="text-align: center" >
                             <i class="fa fa-times"></i></td>
                             <td title="Reseta" data-action="reset" data-id="<?= $user->id ?>"
-                                data="<?= $user->login ?>" >
+                                data="<?= $user->login ?>" style="text-align: center" >
                             <i class="fa fa-key "></i></td>
                         </tr>
                 <?php endif; endforeach;
@@ -121,4 +121,7 @@
             </tbody>
         </table>
     </fieldset>
+    <section style="margin: -8px 40px;">
+        <button class="btn btn-rpg btn-info" value="back">Volta</button>
+    </section>
 <?php endif; ?>
