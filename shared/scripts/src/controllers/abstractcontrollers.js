@@ -107,11 +107,12 @@ export default class AbstractControllers {
      * @url string
      * @formData FormData
      */
-    getDataFile(data) {
+    getDataFile({ before, url, formData }) {
+        if (typeof(before) === 'function') before()
         const dataFile = this.service.open({
             method: 'POST',
-            url: data.url,
-            formData: data.formData
+            url: url,
+            formData: formData
         })
         return (JSON.parse(dataFile) ?? null)
     }

@@ -221,7 +221,7 @@ class User extends Model implements Models
             $this->message = "<span class='danger'>Error to Reset Password, try again</span>";
             return null;
         }
-        $this->message = "<span class='warning'>New password <span class='uppercase'>{$login}</span>"
+        $this->message = "<span class='success'>New password <span class='uppercase'>{$login}</span>"
             . " will be registered in the next login</span>";
     }
 
