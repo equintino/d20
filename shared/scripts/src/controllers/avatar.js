@@ -71,6 +71,7 @@ export default class Avatar extends AbstractControllers {
     }
 
     #checkAvatar(elem) {
+        this.view.correctionDropdownMenu()
         this.view.checkAvatar({
             elem,
             fn: (formData) => {

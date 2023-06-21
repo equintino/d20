@@ -36,4 +36,15 @@ export default class Avatar extends AbstractViews {
         formData.append('category_id', idCategory)
         return formData
     }
+
+    correctionDropdownMenu() {
+        const dropdown = document.querySelector('#top .dropdown-menu')
+        const avatar = document.querySelector('.avatar').style
+        dropdown.addEventListener('mouseover', (e) => {
+            avatar.zIndex = -1
+        })
+        dropdown.addEventListener('mouseleave', () => {
+            avatar.zIndex = 0
+        })
+    }
 }
