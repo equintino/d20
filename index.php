@@ -43,7 +43,8 @@
         /** The Group's Screens */
         $router->namespace("_App");
         $router->post("/group/{login}", "Group:access");
-        $router->get("/group/add", "Group:add");
+        // $router->get("/group/add", "Group:add");
+        $router->post("/group/add", "Group:add");
         $router->post("/group/save", "Group:save");
         $router->post("/group/delete", "Group:delete");
         $router->post("/group/access", "Group:access");

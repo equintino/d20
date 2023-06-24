@@ -8,6 +8,7 @@ import Category from './category.js'
 import Avatar from './avatar.js'
 import User from './user.js'
 import Player from './player.js'
+import Shield from './shield.js'
 
 export default class Services {
     #readFile
@@ -47,6 +48,8 @@ export default class Services {
                 return new User()
             case 'player':
                 return new Player()
+            case 'shield':
+                return new Shield()
         }
     }
 }

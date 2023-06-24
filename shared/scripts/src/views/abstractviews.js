@@ -36,6 +36,9 @@ export default class AbstractViews {
 
     setFocus({ elem, property }) {
         elem.querySelector(property).focus()
+        elem.querySelector('form').onsubmit = (e) => {
+            e.preventDefault()
+        }
     }
 
     /**

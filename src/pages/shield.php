@@ -27,12 +27,12 @@
 </style>
 <main id="shield" class="">
     <section class="group">
-        <fieldset class="fieldset">
+        <fieldset class="fieldset btnSelection">
             <legend>GRUPOS</legend>
             <?php foreach($groups as $group): ?>
                 <button class="btn btn-oval <?= (
                         $group->id === $login->group_id ? "active" : null
-                    ) ?>" data-id="<?= $group->id ?>"><?= $group->name ?></button>
+                    ) ?>" data-id="<?= $group->id ?>" value="<?= $group->id ?>"><?= $group->name ?></button>
             <?php endforeach ?>
         </fieldset>
         <button class="btn btn-rpg btn-danger" value="add" >Adicionar Grupo</button>

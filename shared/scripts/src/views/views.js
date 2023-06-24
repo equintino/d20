@@ -8,6 +8,7 @@ import Category from './category.js'
 import Avatar from './avatar.js'
 import User from './user.js'
 import Player from './player.js'
+import Shield from './shield.js'
 
 const loading = utils.loading
 export default class Views {
@@ -46,6 +47,8 @@ export default class Views {
                 return new User()
             case 'player':
                 return new Player()
+            case 'shield':
+                return new Shield()
         }
     }
 }

@@ -8,6 +8,7 @@ import Category from './category.js'
 import Avatar from './avatar.js'
 import User from './user.js'
 import Player from './player.js'
+import Shield from './shield.js'
 
 export default class Controllers {
     #views
@@ -100,6 +101,14 @@ export default class Controllers {
             case 'player':
                 Player.initializer(
                     new Player({
+                        view: this.#views.initClass(cls),
+                        service: this.#services.initClass(cls)
+                    })
+                )
+                break
+            case 'shield':
+                Shield.initializer(
+                    new Shield({
                         view: this.#views.initClass(cls),
                         service: this.#services.initClass(cls)
                     })

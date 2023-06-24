@@ -35,8 +35,9 @@ class Group extends Controller
 
     public function access(array $data): string
     {
-        $groupId = $data["groupId"];
-        return print(json_encode(explode(",", (new \Models\Group())->load($groupId)->access)));
+        // $groupId = $data["groupId"];
+        $id = $data["id"];
+        return print json_encode(explode(",", (new \Models\Group())->load($id)->access));
     }
 
     public function load(array $data): void
@@ -68,10 +69,12 @@ class Group extends Controller
 
     public function update(): void
     {
-        $pages = $_POST["pages"];
-        $groupId = $_POST["groupId"];
+        // $pages = $_POST["pages"];
+        // $groupId = $_POST["groupId"];
+        $access = $_POST['pages'];
+        $groupId = $_POST["id"];
         $group = (new \Models\Group())->load($groupId);
-        $access = implode(",", $pages);
+        // $access = implode(",", $pages);
         $group->access = "home,error,{$access}";
         $group->save(true);
         echo json_encode($group->message());
@@ -79,7 +82,8 @@ class Group extends Controller
 
     public function delete(array $data): void
     {
-        $id = $data["groupId"];
+        // $id = $data["groupId"];
+        $id = $data["id"];
         $group = $this->group()->load($id);
         $group->destroy();
         echo json_encode($group->message());
