@@ -4,11 +4,14 @@ export default class Shield extends AbstractControllers {
     constructor(cls) {
         super(cls)
         this.view.init((btn) => {
-            this.setButton(btn)
+            this.#setButton(btn)
         })
+        const btnActive = this.view.getBtnActive()
+        if (btnActive !== null) this.#groups({ btnActive })
     }
 
-    setButton({ e, btnName }) {
+    #setButton({ e, btnName }) {
+        this.view.btnActive({ e })
         const btnActive = this.view.getBtnActive()
         this.view.loading.show()
         switch(btnName) {
@@ -41,7 +44,7 @@ export default class Shield extends AbstractControllers {
                                     page: 'shield',
                                     fn: () => {
                                         this.view.init((btn) => {
-                                            this.setButton(btn)
+                                            this.#setButton(btn)
                                         })
                                     }
                                 })
@@ -55,7 +58,8 @@ export default class Shield extends AbstractControllers {
             case 'save':
                 if (btnActive !== null) {
                     const formData = this.view.getAllCheck()
-                    formData.append('id', this.view.getBtnActive().attributes['data-id'].value)
+                    const id = this.view.getBtnActive().value
+                    formData.append('id', id)
                     let resp = this.getDataFile({
                         method: 'POST',
                         url: 'group/update',
@@ -68,7 +72,7 @@ export default class Shield extends AbstractControllers {
                 this.view.loading.hide()
                 break
             default:
-                this.#groups(e)
+                this.#groups({ btnActive })
         }
     }
 
@@ -102,7 +106,7 @@ export default class Shield extends AbstractControllers {
                             page: 'shield',
                             fn: () => {
                                 this.view.init((btn) => {
-                                    this.setButton(btn)
+                                    this.#setButton(btn)
                                 })
                             }
                         })
@@ -114,10 +118,9 @@ export default class Shield extends AbstractControllers {
         })
     }
 
-    #groups(e) {
+    #groups({ btnActive }) {
         const formData = new FormData()
-        formData.append('id', e.target.value)
-        this.view.btnActive({ e })
+        formData.append('id', btnActive.value)
 
         const access = this.getDataFile({
             method: 'POST',

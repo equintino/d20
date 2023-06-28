@@ -18,7 +18,8 @@ class Group extends Model implements Models
 
         if ($this->fail || !$load->rowCount()) {
             $this->message = (
-                $msgDb ? $this->fail->errorInfo[2] : "<span class='warning'>Not Found Informed ID Group</span>"
+                $msgDb && $this->fail ?
+                    $this->fail->errorInfo[2] : "<span class='warning'>Not Found Informed ID Group</span>"
             );
             return null;
         }
