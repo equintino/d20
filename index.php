@@ -149,7 +149,13 @@
         $router->post("/group", "Group:init");
         $router->post("/user", "User:save");
         $router->get("/carousel", "Avatar:carousel");
-        $router->post("/config/init", "Config:init");
+        // $router->post("/config/init", "Config:init");
+        $router->get("/config", "Config:list");
+        $router->post("/config/register", "Config:add");
+        $router->post("/config/save", "Config:save");
+        $router->post("/config/edit", "Config:edit");
+        $router->post("/config/update", "Config:update");
+        $router->post("/config/delete", "Config:delete");
 
         /** Logout */
         $router->get("/exit", function () {

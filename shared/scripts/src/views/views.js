@@ -9,6 +9,7 @@ import Avatar from './avatar.js'
 import User from './user.js'
 import Player from './player.js'
 import Shield from './shield.js'
+import Config from './config.js'
 
 const loading = utils.loading
 export default class Views {
@@ -49,6 +50,8 @@ export default class Views {
                 return new Player()
             case 'shield':
                 return new Shield()
+            case 'config':
+                return new Config()
         }
     }
 }

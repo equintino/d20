@@ -2,6 +2,7 @@
 
 namespace Config;
 
+use JsonException;
 use Traits\CryptoTrait;
 
 class Config
@@ -29,7 +30,7 @@ class Config
 
     public static function getConfig(): ?object
     {
-        return (self::$dataFile->{self::getConfConnection()} ?? null);
+        return self::$dataFile->{self::getConfConnection()} ?? null;
     }
 
     /** contant file env */
@@ -56,11 +57,8 @@ class Config
 
     public function type(): ?string
     {
-        return (
-            !empty(self::$dataFile->{self::$local}) ?
-                strstr(self::$dataFile->{self::$local}->dsn, ":", true)
-                : null
-        );
+        return !empty(self::$dataFile->{self::$local}) ?
+                    strstr(self::$dataFile->{self::$local}->dsn, ":", true) : null;
     }
 
     private function setType(string $type)
@@ -72,13 +70,16 @@ class Config
                 break;
             case "mysql":
                 $dsn .= "mysql:host=";
+                break;
+            default:
         }
         $this->dsn = $dsn;
     }
 
     public function address(): ?string
     {
-        return substr(strstr(strstr(self::$file[self::$local]["dsn"], "="), ";", true),1);
+        return substr(strstr(strstr(self::$dataFile->{self::$local}->dsn, "="), ";", true),1);
+        // return substr(strstr(strstr(self::$file[self::$local]["dsn"], "="), ";", true),1);
     }
 
     private function setAddress(string $address)
@@ -88,7 +89,8 @@ class Config
 
     public function database(): ?string
     {
-        return substr(strrchr(self::$file[self::$local]["dsn"], "="), 1);
+        return substr(strrchr(self::$dataFile->{self::$local}->dsn, "="), 1);
+        // return substr(strrchr(self::$file[self::$local]["dsn"], "="), 1);
     }
 
     private function setDatabase(string $database)
@@ -108,7 +110,8 @@ class Config
 
     public function user(): ?string
     {
-        return self::$file[self::$local]["user"];
+        return self::$dataFile->{self::$local}->user;
+        // return self::$file[self::$local]["user"];
     }
 
     public function getUser(): ?string
@@ -193,8 +196,8 @@ class Config
 
     public function delete(string $connectionName): ?bool
     {
-        unset($this->file[$connectionName]);
-        if ($this->saveFile($this->file)) {
+        unset(self::$dataFile->$connectionName);
+        if ($this->saveFile(self::$dataFile)) {
             $this->message = "<span class='success'>Excluded data successfully</span>";
             return true;
         } else {
@@ -216,7 +219,7 @@ class Config
         rewind($handle);
         $resp = fwrite($handle, json_encode($data, JSON_FORCE_OBJECT));
         fclose($handle);
-        return ($resp);
+        return $resp;
     }
 
     public function message(): ?string

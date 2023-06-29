@@ -9,6 +9,7 @@ import Avatar from './avatar.js'
 import User from './user.js'
 import Player from './player.js'
 import Shield from './shield.js'
+import Config from './config.js'
 
 export default class Controllers {
     #views
@@ -109,6 +110,14 @@ export default class Controllers {
             case 'shield':
                 Shield.initializer(
                     new Shield({
+                        view: this.#views.initClass(cls),
+                        service: this.#services.initClass(cls)
+                    })
+                )
+                break
+            case 'config':
+                Config.initializer(
+                    new Config({
                         view: this.#views.initClass(cls),
                         service: this.#services.initClass(cls)
                     })

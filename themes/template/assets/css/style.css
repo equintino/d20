@@ -387,7 +387,7 @@ main .form-signin {
 }
 
 .my-table th {
-    color: var(--cor-primary);
+    /* color: var(--cor-primary); */
     font-size: .8rem;
 }
 

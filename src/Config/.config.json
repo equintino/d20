@@ -1,1 +1,1 @@
-{"Mysql":{"dsn":"mysql:host=localhost;dbname=d20","user":"root","passwd":"TVFfbnRuMzkyMTI="}}
+{"Mysql":{"dsn":"mysql:host=localhost;dbname=d20","user":"root","passwd":"TVFfbnRuMzkyMTI="},"teste":{"dsn":"mysql:host=localhost;dbname=d20","user":"root","passwd":null}}

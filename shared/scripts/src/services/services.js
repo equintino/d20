@@ -9,6 +9,7 @@ import Avatar from './avatar.js'
 import User from './user.js'
 import Player from './player.js'
 import Shield from './shield.js'
+import Config from './config.js'
 
 export default class Services {
     #readFile
@@ -50,6 +51,8 @@ export default class Services {
                 return new Player()
             case 'shield':
                 return new Shield()
+            case 'config':
+                return new Config()
         }
     }
 }

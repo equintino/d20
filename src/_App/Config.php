@@ -18,14 +18,16 @@ class Config extends Controller
     public function init(array $data): string
     {
         $this->config->save($data);
-        return print($this->config->message());
+        return print $this->config->message();
     }
 
     public function list(): void
     {
-        $config = (object) $this->config;
-        $activeConnection = Connect::getConfConnection();
+        $config = $this->config;
+        // $activeConnection = Connect::getConfConnection();
+        $activeConnection = $this->config->getConfConnection();
         $this->view->render("config", [ compact("config","activeConnection") ]);
+        // $this->view->render("config", [ compact("config") ]);
     }
 
     public function add(): void
@@ -40,15 +42,19 @@ class Config extends Controller
         $types = $this->config->types;
         $connectionName = $data["connectionName"];
         $config = $this->config;
-        $config->local = $connectionName;
+        $config::$local = $connectionName;
 
-        ($this->view->setPath("Modals")->render("config", [ compact("config", "types") ]));
+        ($this->view->setPath("Modals")->render("config", [ compact("config", "types", "connectionName") ]));
     }
 
-    public function save(): void
+    public function save(array $data): void
     {
-        $params = $this->getPost($_POST);
-        $data = $params["data"];
+        // $params = $this->getPost($_POST);
+        // $data = $params["data"];
+        // var_dump(
+        //     // $params,
+        //     $data
+        // );die;
         $this->config->save($data);
         echo json_encode($this->config->message());
     }

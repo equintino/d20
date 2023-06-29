@@ -1,9 +1,9 @@
 <div id="config">
-    <div class="buttons">
+    <!-- <div class="buttons">
         <button class="button btnAction">Adicionar</button>
-    </div>
+    </div> -->
     <div class="table-conf">
-        <fieldset class="fieldset pt-3" style="width: 100%">
+        <fieldset class="fieldset" >
             <legend>BANCO DE DADOS</legend>
             <table aria-describedby="List of access to the bank" id="tab-conf" class="my-table" >
                 <thead>
@@ -20,29 +20,37 @@
                 <tbody>
                     <?php
                         $localSelected = $config->getConfConnection();
-                        foreach($config->getFile() as $local => $params):
+                        echo '<pre>';
+                        foreach($config::$dataFile as $local => $params):
+                            $type = strstr($params->dsn, ':', true);
+                            $adreess = substr(strstr(strstr(strstr($params->dsn, ':'), ';', true), '='), 1);
+                            $dbname = explode('=', $params->dsn);
+                            $db = array_pop($dbname);
                             $active = null;
                             $background = null;
                             $arrow = null;
-                            $config->local = $local;
+                            // $config->local = $local;
                             if($localSelected === $local) {
-                                $active = "*";
-                                $arrow = "<i class='fa fa-arrow-right' aria-hidden='true' ></i>";
-                                $background = "#c3d2dd";
+                                // $active = "*";
+                                $arrow = "<i class='fa fa-arrow-right' aria-hidden='true' style='color: white'></i>";
+                                $background = "#5d5d5d";
                             } ?>
-                    <tr style="background: <?= $background ?>">
+                    <tr style="border: 1px solid <?= $background ?>; border-left: none; border-right: none">
                         <td><?= (!empty($arrow) ? $arrow : null) ?></td>
-                        <td><?= $active.$local ?></td>
-                        <td><?= $config->type() ?></td>
-                        <td><?= $config->address() ?></td>
-                        <td><?= $config->database() ?></td>
-                        <td><?= $config->user() ?></td>
-                        <td class="icon-edition"><span class="fa fa-pencil edition"></span></td>
-                        <td class="icon-edition"><span class="fa fa-trash delete"></span></td>
+                        <td><?= $local ?></td>
+                        <!-- <td><?= $config->type() ?></td> -->
+                        <td><?= $type ?></td>
+                        <td><?= $adreess ?></td>
+                        <td><?= $db ?></td>
+                        <td><?= $params->user ?></td>
+                        <td class="icon-edition"><span class="fa fa-pencil edition" action="edit"></span></td>
+                        <td class="icon-edition"><span class="fa fa-trash delete" action="delete"></span></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            <br>
         </fieldset>
+        <button class="btn btn-rpg btn-danger" style="float: right; margin: -5px 40px" action="add" value="add">Adcionar</button>
     </div>
 </div>
