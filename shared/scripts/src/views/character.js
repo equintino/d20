@@ -88,7 +88,7 @@ export default class Character extends AbstractViews {
         breed.innerText = ''
         document.querySelector('[name=breed_id]').value = ''
         document.querySelector('.description > p').innerText = ''
-        document.querySelector('#avatar img').attributes['src'].value = ''
+        document.querySelector('#avatar > *').remove()
         document.querySelector('[name=image_id]').value = ''
     }
 

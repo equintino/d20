@@ -1,9 +1,6 @@
 #character {
-    /* height: 400px; */
-    /* margin-top: 40px; */
     display: flex;
     justify-content: center;
-    /* align-items: center; */
 }
 
 #character .add #avatar {
@@ -16,10 +13,6 @@
 
 #character #list {
     display: flex;
-    /* flex-direction: row; */
-    /* justify-content: center; */
-    /* width: 100%; */
-    /* background: yellow; */
 }
 
 #character #list .left {

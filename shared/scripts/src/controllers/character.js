@@ -143,6 +143,7 @@ export default class Character extends AbstractControllers {
                 break
             case 'clear':
                 this.btnClean('#character')
+                this.view.removeAvatarSelected()
                 break
             case 'save':
                 this.#submit()
@@ -171,7 +172,8 @@ export default class Character extends AbstractControllers {
             fn: ({ formData, validate }) => {
                 let resp
                 if (validate) {
-                    resp = this.service.save({
+                    resp = this.getDataFile({
+                        method: 'POST',
                         url: 'character/save',
                         formData
                     })

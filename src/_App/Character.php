@@ -82,14 +82,14 @@ class Character extends Controller
     {
         $characters = new \Models\Character();
         if (!empty($characters->find($data["personage"]))) {
-            return print "<span class='warning'>This personage already exists</span>";
+            return print json_encode("<span class='warning'>This personage already exists</span>");
         }
         if (empty($data['story'])) {
             $data['story'] = 'Nenhuma história foi contada';
         }
         $characters->bootstrap($data);
         $characters->save();
-        return print $characters->message();
+        return print json_encode($characters->message());
     }
 
     public function update(array $data): string
