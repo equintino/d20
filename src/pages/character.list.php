@@ -1,5 +1,5 @@
 <main id="character">
-    <div id="list" class="mt-5">
+    <div id="list">
         <section>
             <button class="btn btn-rpg btn-info" value="back" style="margin-top: 115px">Voltar</button>
         </section>

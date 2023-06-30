@@ -1,21 +1,25 @@
-/* #character {
-    height: 400px;
-    margin-top: 40px;
+#character {
+    /* height: 400px; */
+    /* margin-top: 40px; */
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
 }
 
-#character #init button {
-    width: 180px;
-    font-size: 1.5em;
-} */
+#character .add #avatar {
+    position: relative;
+}
+
+#character #list, #character .add {
+    margin-top: 40px;
+}
 
 #character #list {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
+    /* flex-direction: row; */
+    /* justify-content: center; */
+    /* width: 100%; */
+    /* background: yellow; */
 }
 
 #character #list .left {

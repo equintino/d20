@@ -46,7 +46,6 @@
 }
 
 .loading, .text-loading {
-    /* display: none; */
     text-align: center;
     -webkit-justify-content: center;
     align-items: center;
@@ -66,7 +65,7 @@
 }
 
 #top {
-    background: var(--cor-primary);
+    /* background: var(--cor-primary); */
 }
 
 /* .content {
@@ -359,27 +358,7 @@ main .form-signin {
 .flash {
     animation-name: flash;
     animation-duration: 4s;
-    /* animation-delay: 2s; */
 }
-
-
-/* div {
-    width: 100px;
-    height: 100px;
-    background-color: red;
-    position: relative;
-    animation-name: example;
-    animation-duration: 4s;
-    animation-delay: 2s;
-  }
-
-  @keyframes example {
-    0%   {background-color:red; left:0px; top:0px;}
-    25%  {background-color:yellow; left:200px; top:0px;}
-    50%  {background-color:blue; left:200px; top:200px;}
-    75%  {background-color:green; left:0px; top:200px;}
-    100% {background-color:red; left:0px; top:0px;}
-  } */
 
 /** table configuration */
 .my-table {
@@ -410,10 +389,7 @@ main .form-signin {
 }
 
 .my-table tr:nth-child(even) {
-    /* background: #191919; */
     background: #240000;
-    /* border-top: 1px solid #494949;
-    border-bottom: 1px solid #494949; */
 }
 
 .my-table input[type=radio] {
@@ -452,10 +428,8 @@ main .form-signin {
     background: var(--cor-primary-light);
     max-height: 550px;
     border: 1px solid white;
-    /* padding: 20px 40px; */
     padding: 0 40px;
     margin: 0 40px;
-    /* margin: 100px 40px 0 40px; */
     color: #9a9a9a;
     overflow: scroll;
 }
@@ -481,15 +455,6 @@ main .form-signin {
 .fieldset .side-right {
     float: right;
 }
-
-/* .fieldset table thead th {
-    font-size: .7rem;
-    border-bottom: 1px solid black;
-} */
-
-/* .fieldset table tr:last-child {
-    border-bottom: 1px solid black;
-} */
 
 /** bootbox */
 .modal-content {
@@ -533,7 +498,6 @@ main .form-signin {
     z-index: -1;
     display: none;
     background-color: #000;
-    /* background-image: linear-gradient(to bottom, #000, #fff); */
 }
 
 .header2 {
@@ -546,16 +510,11 @@ main .form-signin {
     width: 70%;
     max-width: 900px;
     top: 15%;
-    /* left: 15%; */
-    /* margin-top: 75px; */
-    /* display: -ms-flexbox;
-    display: flex; */
     -ms-flex-direction: column;
     flex-direction: column;
     pointer-events: auto;
     background-clip: padding-box;
     outline: 0;
-    /* background: #ffffff; */
     box-shadow: var(--box-shadow);
     z-index: 2;
     -webkit-transition: opacity 400ms ease-in;
@@ -565,10 +524,6 @@ main .form-signin {
     display: none;
     background: #626262 none repeat scroll 0% 0%;
 }
-
-/* #mask2_main {
-    z-index: 3;
-} */
 
 @-webkit-keyframes fadeInDown {
     0% {
@@ -611,15 +566,12 @@ main .form-signin {
 #boxe_main #message, #boxe2_main #message2, #div_dialogue #message {
     font-size: 1.1em;
     font-weight: 600;
-    /* margin-left: 10px; */
-    /* margin: 5px 20px; */
     display: none;
     color: white;
     background: #626262 none repeat scroll 0% 0%;
 }
 
 #boxe2_main #message2 {
-    /* margin: 10px 30px 30px; */
     padding: 20px 20px 0 40px;
 }
 
@@ -628,9 +580,7 @@ main .form-signin {
 }
 
 #boxe_main #content, #boxe2_main #content2, #div_dialogue #content {
-    /* display: none; */
     padding: 0 20px;
-    /* font-size: .9rem; */
     max-height: 550px;
     background: #626262 none repeat scroll 0% 0%;
 }
@@ -641,9 +591,7 @@ main .form-signin {
 
 #boxe_main input, #boxe_main select, #boxe2_main input, #boxe2_main select {
     height: 25px;
-    /* width: 100%; */
     font-size: .9rem;
-    /* color: var(--text-secondary); */
     outline: none;
     border: 0;
     border-bottom: 2px solid #CED4DA;
@@ -686,8 +634,6 @@ main .form-signin {
     position: fixed;
     width: 50%;
     margin: -5px 25%;
-    /* display: -ms-flexbox; */
-    /* display: flex; */
     -ms-flex-direction: column;
     flex-direction: column;
     pointer-events: auto;
@@ -695,7 +641,6 @@ main .form-signin {
     outline: 0;
     background: #626262 none repeat scroll 0% 0%;
     color: white;
-    /* background: #ffffff; */
     box-shadow: var(--box-shadow);
     z-index: 4;
     -webkit-transition: opacity 400ms ease-in;
@@ -969,7 +914,7 @@ main .form-signin {
 }
 
 #init {
-    height: 400px;
+    height: 30rem;
     display: flex;
     justify-content: center;
     align-items: center;
