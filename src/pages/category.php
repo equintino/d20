@@ -1,50 +1,41 @@
 <style>
-    /* #init {
-        height: 400px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    #category > fieldset, #category #list {
         margin-top: 40px;
     }
 
-    #init button {
-        width: 180px;
-        font-size: 1.5em;
-    } */
-
-    #list {
+    #category #list {
         display: flex;
         flex-direction: row;
         justify-content: center;
     }
 
-    #list .fieldset {
+    #category #list .fieldset {
         margin-top: 0;
     }
 
-    #list .left {
+    #category #list .left {
         width: 30%;
         text-align: center;
     }
 
-    #list .left button {
+    #category #list .left button {
         width: 130px;
     }
 
-    #list .left .fieldset, #list .right .fieldset {
+    #category #list .left .fieldset, #category #list .right .fieldset {
         height: 550px;
     }
 
-    #list .left .fieldset {
+    #category #list .left .fieldset {
         overflow: auto;
     }
 
-    #list .right {
+    #category #list .right {
         width: 60%;
         text-align: center;
     }
 
-    #list #symbol {
+    #category #list #symbol {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -115,116 +106,3 @@
         </div>
     <?php endif ?>
 </main>
-<script>
-    if(typeof(image) !== "undefined") {
-        image.onchange = evt => {
-            thumbImage(image, thumb_image)
-        }
-    }
-    category.onclick = (e) => {
-        loading.show()
-        let btnName = e.target.value
-        switch(btnName) {
-            case "new":
-                $(".content").load("category/add", function() {
-                    loading.hide()
-                })
-                break;
-            case "back":
-                $(".content").load("category", function() {
-                    loading.hide()
-                })
-                break;
-            case "clear":
-                for(let i=0; i < form_category.length; i++) {
-                    form_category[i].value = ""
-                }
-                thumb_image.src = "#"
-                loading.hide()
-                break;
-            case "save":
-                let formData = new FormData(form_category)
-                if(saveData("category/save", formData)) {
-                    for(let i=0; i < form_category.length; i++) {
-                        form_category[i].value = ""
-                    }
-                    thumb_image.src = "#"
-                }
-                loading.hide()
-                break;
-            case "list":
-                $(".content").load("category/list", function() {
-                    loading.hide()
-                })
-                break;
-            case "edit":
-                if(typeof(symbol.children[0]) !== "undefined") {
-                    let id = symbol.children[0].attributes["data-id"].value
-                    modal.show({
-                        title: "Modo de edição de CLASSES",
-                        content: "category/edit",
-                        params: { id },
-                        buttons: "<button class='btn btn-rpg btn-silver mr-1' value='delete'>Excluir</button><button class='btn btn-rpg btn-green' value='save'>Salvar</button>"
-                    }).on("click", function(e) {
-                        if(e.target.value === "save") {
-                            let formData = new FormData($(e.target.offsetParent).find("form")[0])
-                            if(saveData("category/save", formData)) {
-                                modal.hideContent();
-                            }
-                        } else if(e.target.value === "delete") {
-                            modal.confirm({
-                                title: "Modo de Exclusão",
-                                message: "Deseja realmente excluir esta CLASSE?"
-                            }).on("click", function(i) {
-                                if(i.target.value === "1") {
-                                    let name = modal.content.find("[name=name]").val()
-                                    $.ajax({
-                                        url: "category/delete",
-                                        type: "POST",
-                                        dataType: "JSON",
-                                        data: {
-                                            name
-                                        },
-                                        beforeSend: function() {
-                                            loading.show()
-                                        },
-                                        success: function(response) {
-                                            alertLatch("Class removed successfully", "var(--cor-success)")
-                                            modal.hideContent()
-                                            $(".content").load("category/list", function() {
-                                                loading.hide()
-                                            })
-                                        },
-                                        error: function(error) {
-
-                                        },
-                                        complete: function() {
-                                            loading.hide()
-                                        }
-                                    })
-                                }
-                            })
-                        }
-                    })
-                } else {
-                    loading.hide()
-                }
-                break;
-            default:
-                loading.hide()
-        }
-
-        if(typeof(e.target.attributes["data-id"]) !== "undefined") {
-            let id = e.target.attributes["data-id"].value
-            let image_id = e.target.attributes["data-image_id"].value
-            symbol.innerHTML = "<img data-id='" + id + "' src='image/id/" + image_id + "' alt='' height='230px'/>"
-            loading.hide()
-        }
-    }
-
-    /** Keep actived the button */
-    $(".btn-oval").on("click", function() {
-        $(".btn-oval").removeClass("active")
-        $(this).addClass("active")
-    })
-</script>

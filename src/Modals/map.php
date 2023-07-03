@@ -34,10 +34,3 @@
         <?php //endif ?>
     </form>
 </div>
-<!-- <script>
-    if(typeof(image) !== "undefined") {
-        image.onchange = () => {
-            thumbImage(image, thumb_image)
-        }
-    }
-</script> -->

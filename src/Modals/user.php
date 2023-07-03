@@ -1,8 +1,13 @@
 <style>
-    #tabList th {
+    #user {
+        margin-top: 40px;
+    }
+
+    #user #tabList th {
         color: white;
     }
 </style>
+<div id="user">
 <?php if(!empty($act) && $act === "edit"): ?>
 <div id="edit">
     <form id="loginRegister" action="#" method="POST" class="form-horizontal">
@@ -125,3 +130,4 @@
         <button class="btn btn-rpg btn-info" value="back">Volta</button>
     </section>
 <?php endif; ?>
+</div>

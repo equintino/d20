@@ -31,8 +31,3 @@
         </form>
     </div>
 </div>
-<script>
-    image.onchange = () => {
-        thumbImage(image, thumb_image)
-    }
-</script>

@@ -1,7 +1,6 @@
 <style>
     #character .add {
         max-width: 1400px;
-        /* position: relative; */
     }
 
     #character .description {
@@ -10,7 +9,6 @@
         font-family: 'Libre Franklin', sans-serif;
         font-weight: bolder;
         letter-spacing: .1em;
-        /* text-align: justify; */
         padding: 60px 70px 0px 100px;
     }
 

@@ -1,7 +1,9 @@
+<style>
+    #config {
+        margin-top: 40px;
+    }
+</style>
 <div id="config">
-    <!-- <div class="buttons">
-        <button class="button btnAction">Adicionar</button>
-    </div> -->
     <div class="table-conf">
         <fieldset class="fieldset" >
             <legend>BANCO DE DADOS</legend>
@@ -51,6 +53,7 @@
             </table>
             <br>
         </fieldset>
-        <button class="btn btn-rpg btn-danger" style="float: right; margin: -5px 40px" action="add" value="add">Adcionar</button>
+        <button class="btn btn-rpg btn-danger" style="float: right; margin: -5px 40px"
+            action="add" value="add">Adcionar</button>
     </div>
 </div>

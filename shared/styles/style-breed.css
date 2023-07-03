@@ -1,19 +1,6 @@
-
-/* #breed {
+#breed > fieldset, #breed #list {
     margin-top: 40px;
-} */
-/*
-#breed #init {
-    height: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
-/*
-#breed #init button {
-    width: 180px;
-    font-size: 1.5em;
-} */
+}
 
 #breed #list {
     display: flex;

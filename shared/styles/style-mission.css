@@ -1,19 +1,9 @@
 #mission #list {
     display: flex;
     justify-content: center;
-    /* height: 400px; */
     align-items: center;
     margin-top: 40px;
 }
-
-/* #mission #init button {
-    width: 180px;
-    font-size: 1.5em;
-} */
-
-/* #mission .fieldset {
-    margin-top: 120px;
-} */
 
 #mission #thumb_image {
     background: #676767;
@@ -26,7 +16,6 @@
 
 #mission #list .left {
     text-align: center;
-    /* width: 80%; */
 }
 
 #mission .left fieldset {

@@ -2,7 +2,6 @@
     #mission #register {
         margin: 40px auto;
         width: 700px;
-
     }
 
     #mission .buttons {
@@ -92,7 +91,7 @@
                     <?php endforeach ?>
                 </fieldset>
             </section>
-            <section class="middle" title="Clique para mudar mapa">
+            <section class="middle" title="Clique para ver outro mapa">
                 <fieldset class="fieldset">
                     <legend>Mapas</legend>
                     <div id="images"></div>

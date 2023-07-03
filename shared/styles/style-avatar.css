@@ -1,34 +1,12 @@
-#avatar #thumb_image {
-    align-items: center;
-    display: flex;
-    background: #676767;
-    width: 450px;
-    overflow-x: auto;
-    border-radius:  5px;
-}
-
-/* #avatar {
-    height: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#avatar > fieldset, #avatar #list {
     margin-top: 40px;
 }
-
-#avatar #init button {
-    width: 180px;
-    font-size: 1.5em;
-} */
 
 #avatar #list {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
-
-/* #avatar {
-    margin-top: 50px;
-} */
 
 #avatar .avatar {
     width: 100%;

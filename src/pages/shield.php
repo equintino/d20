@@ -1,9 +1,10 @@
 <style>
     #shield {
-        display: flex;//inline-flex;
-        flex-direction: row;
+        display: flex;
+        /* flex-direction: row; */
         justify-content: center;
-        width: 90%;
+        /* width: 90%; */
+        margin-top: 40px;
     }
 
     #shield fieldset {
@@ -17,7 +18,7 @@
     }
 
     #shield .group {
-        width: 35%;
+        width: 370px;
     }
 
     #shield button:not(fieldset > button) {

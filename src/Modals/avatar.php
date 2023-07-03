@@ -67,10 +67,3 @@
         </div>
     </form>
 </div>
-<!-- <script>
-    // image.onchange = () => {
-    //     let img = thumbImage(image, thumb_image)
-    //     $(thumb_image).find("img").remove()
-    //     $(thumb_image).append(img)
-    // }
-</script> -->

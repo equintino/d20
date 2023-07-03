@@ -1,4 +1,8 @@
 <style>
+    #player {
+        margin-top: 40px;
+    }
+
     #player th {
         color: white;
     }

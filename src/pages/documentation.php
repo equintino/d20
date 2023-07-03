@@ -8,7 +8,10 @@
             </thead>
             <tbody>
                 <?php foreach($documentations as $documentation): ?>
-                <tr id="<?= $documentation->id ?>"><td><?= $documentation->name ?></td><td><?= $documentation->description ?></td></tr>
+                <tr id="<?= $documentation->id ?>">
+                    <td><?= $documentation->name ?></td>
+                    <td><?= $documentation->description ?></td>
+                </tr>
                 <?php endforeach ?>
             </tbody>
         </table>
