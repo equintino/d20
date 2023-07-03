@@ -1,7 +1,7 @@
 #mission #list {
     display: flex;
     justify-content: center;
-    height: 400px;
+    /* height: 400px; */
     align-items: center;
     margin-top: 40px;
 }
@@ -26,7 +26,7 @@
 
 #mission #list .left {
     text-align: center;
-    width: 80%;
+    /* width: 80%; */
 }
 
 #mission .left fieldset {
