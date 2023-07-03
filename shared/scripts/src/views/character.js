@@ -77,6 +77,7 @@ export default class Character extends AbstractViews {
 
         img.setAttribute('title', 'clique para trocar avatar')
         img.style.cursor = 'pointer'
+        img.style.float = 'right'
         img.onclick = () => {
             fn({ formData })
         }

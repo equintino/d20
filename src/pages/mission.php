@@ -1,4 +1,15 @@
 <style>
+    #mission #register {
+        margin: 40px auto;
+        width: 700px;
+
+    }
+
+    #mission .buttons {
+        float: right;
+        margin-right: 40px;
+    }
+
     #mission #images img {
         height: 230px;
     }
@@ -19,46 +30,51 @@
     #mission .btnSelection button {
         width: 130px;
     }
-
 </style>
 <main id="mission">
-    <?php if(empty($act)): ?>
+    <?php if (empty($act)): ?>
     <div id="init">
-        <?php if($this->group->id == "1" || strtolower($this->group->name) === "mestre"): ?>
+        <?php if ($this->group->id == "1" || strtolower($this->group->name) === "mestre"): ?>
             <button class="btn btn-oval" value="new" >Nova</button>
         <?php endif ?>
         <button class="btn btn-oval" value="list">Lista</button>
     </div>
-    <?php elseif($act === "add"): ?>
-    <section>
-        <fieldset class="fieldset">
-            <legend>CADASTRO DE MISSÃO</legend>
-            <form id="form_mission" method="POST" action="mission/save" enctype="multipart/form-data" >
-                <section>
-                    <div>
-                        <label>Nome:</label>
-                        <input class="input-rpg" type="text" name="name" size="50" required/>
-                    </div>
-                    <div>
-                        <label>Local:</label>
-                        <input class="input-rpg" type="text" name="place" size="50" required/>
-                    </div>
-                    <div>
-                        <label>História:</label>
-                        <textarea class="input-rpg" rows="5" cols="48" type="text" name="story"
-                        style="text-transform: none" required></textarea>
-                    </div>
-                </section>
-            </form>
-        </fieldset>
-        <div style="float: left; margin-left: 40px">
-            <button type="button" class="btn btn-rpg btn-silver" value="back">Voltar</button>
-        </div>
-        <div style="text-align: right; margin-right: 40px">
-            <button type="reset" class="btn-rpg btn-silver" value="clear">Limpar</button>
-            <button type="submit" class="btn-rpg btn-green" value="save">Salvar</button>
-        </div>
-    </section>
+    <?php elseif ($act === "add"): ?>
+    <div id="add">
+        <section>
+            <button class="btn btn-rpg btn-info" style="margin-top: 20px" value="back">Voltar</button>
+        </section>
+        <section id="register">
+            <fieldset class="fieldset">
+                <legend>CADASTRO DE MISSÃO</legend>
+                <form id="form_mission" method="POST" action="mission/save" enctype="multipart/form-data" >
+                    <section>
+                        <div>
+                            <label>Nome:</label>
+                            <input class="input-rpg" type="text" name="name" size="50" required/>
+                        </div>
+                        <div>
+                            <label>Local:</label>
+                            <input class="input-rpg" type="text" name="place" size="50" required/>
+                        </div>
+                        <div>
+                            <label>História:</label>
+                            <textarea class="input-rpg" rows="5" cols="48" type="text" name="story"
+                            style="text-transform: none" required></textarea>
+                        </div>
+                    </section>
+                </form>
+            </fieldset>
+            <!-- <div style="float: left; margin-left: 40px">
+                <button type="button" class="btn btn-rpg btn-silver" value="back">Voltar</button>
+            </div> -->
+            <!-- <div style="text-align: right; margin-right: 40px"> -->
+            <div class="buttons">
+                <button type="reset" class="btn-rpg btn-silver" value="clear">Limpar</button>
+                <button type="submit" class="btn-rpg btn-green" value="save">Salvar</button>
+            </div>
+        </section>
+    </div>
     <?php elseif($act === "list"): ?>
         <div id="list">
             <section>
