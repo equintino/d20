@@ -66,7 +66,6 @@ class User extends Controller
 
     public function update(array $data): void
     {
-        // $user = (new \Models\User())->load($data["id"]);
         $user = (new \Models\User())->find($data['login']);
         foreach ($data as $key => $value) {
             if ($key === 'password') {
@@ -106,7 +105,7 @@ class User extends Controller
         $passwd = ($params["password"] ?? null);
         $confPasswd = ($params["confPassword"] ?? null);
         if ($passwd !== $confPasswd) {
-            die(json_encode("<span class='warning'>The password was not confirmed</span>"));
+            die("<span class='warning'>The password was not confirmed</span>");
         } else {
             unset($params["confPassword"]);
         }

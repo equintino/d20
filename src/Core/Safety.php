@@ -34,8 +34,11 @@ abstract class Safety
         if ($pos = strpos($page, ".")) {
             $page = substr($page, 0, $pos);
         }
-        if (!empty($_SESSION['login'])) {
-            $groupId = ($_SESSION['login']->getUser()->group_id ?? null);
+        if (array_key_exists('login', $_SESSION)) {
+            $groupId = (
+                method_exists($_SESSION['login'], 'getUser') ?
+                    $_SESSION['login']->getUser()->group_id : null
+            );
         }
         $access = '';
         if (!empty($groupId)) {

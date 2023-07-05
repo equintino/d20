@@ -16,6 +16,6 @@ class Login extends Controller {
         $lg = (new \Core\Login($login, $password, $db))->user();
         $lg->validate();
 
-        return print($lg->message ?? null);
+        return print $lg->message ?? null;
     }
 }

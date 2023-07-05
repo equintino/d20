@@ -36,5 +36,15 @@
                 <input type="password" class="form-input" id="confPassword" name="confPassword"
                 <?= (isset($user) ? "disabled" : ("required='required'")) ?>/></div><!-- col -->
         </div>
+        <div class="row col-4">
+            <label for="grupo" class="label-rpg" >Grupo:</label><br>
+            <select name="group_id" class="form-input" >
+                <option value=""></option>
+                <?php foreach($groups as $group): ?>
+                <option value="<?= $group->id ?>" <?= (isset($user)
+                && $user->group_id ==  $group->id) ? "selected" : null ?>><?= $group->name ?></option>
+                <?php endforeach ?>
+            </select>
+        </div>
     </form>
 </div>
