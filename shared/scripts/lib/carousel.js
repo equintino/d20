@@ -54,7 +54,6 @@ export default class Carousel {
                     arr[1].style = this.#css.middle
                     arr[2].style = this.#css.right
                 }
-                // arr[3].style = this.#css.other
                 arrCards = arr
                 this.element = arr[1]
             })
