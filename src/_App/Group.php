@@ -21,7 +21,7 @@ class Group extends Controller
                 'access' => $group->access
             ];
         }
-        return print(json_encode($list));
+        return print json_encode($list);
     }
 
     public function list(): void

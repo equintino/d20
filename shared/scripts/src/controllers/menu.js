@@ -5,7 +5,7 @@ export default class Menu extends AbstractControllers {
         super(deps)
     }
 
-    static initializer({ menu, fn }) {
+    static initializer( menu, fn ) {
         menu.init(fn)
     }
 
@@ -25,7 +25,7 @@ export default class Menu extends AbstractControllers {
             }
             this.showPage({ page })
             this.view.setIdentification(this.service.identification(page))
-            fn({ cls: page, script: page })
+            if (typeof(fn) === 'function') fn(page)
         })
     }
 }

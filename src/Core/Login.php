@@ -17,13 +17,15 @@ class Login
         $this->session = new Session("ses");
         $this->db = $db;
         $this->session->setDb($db);
+        // $this->login = $login;
+        // $this->password = $password;
         $_SESSION['login'] = $this->session;
     }
 
     public function user(): Login | string
     {
         $this->user = (new User())->find($this->login);
-        if (!$this->user && preg_match("/doesn't exist/", $this->user->message())) {
+        if (!empty($this->user->message()) && preg_match("/doesn't exist/", $this->user->message())) {
             $this->user->createThisTable();
             $this->message = "No data";
         } elseif (!$this->user->login) {
@@ -41,7 +43,7 @@ class Login
             $this->message = json_encode("reset password");
         } elseif ($this->user->validate($this->password, $this->user->password)) {
             $this->setSession();
-            $this->message = true;
+            $this->message = json_encode(1);
         } else {
             $this->message = json_encode("Invalid password");
         }

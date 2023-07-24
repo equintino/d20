@@ -29,7 +29,10 @@ export default class Menu extends AbstractServices {
     }
 
     exit(fn) {
-        Cookie.deleteCookie('login')
+        const cookies = Cookie.getAll()
+        for (let name in cookies) {
+            Cookie.deleteCookie(name)
+        }
         fn()
     }
 }

@@ -23,14 +23,14 @@ class Session
 
         if (!empty($_SESSION["id"])) {
             $_SESSION["id"] = session_id();
-            $this->sID(session_id());
+            $this->sID = session_id();
         }
         $this->user = ($_SESSION["login"] ?? null);
     }
 
     public function confSID($current, $old)
     {
-        return  crypt($current, $this->SID) == $this->SID;
+        return crypt($current, $this->SID) == $this->SID;
     }
 
     public function getUser()

@@ -39,9 +39,9 @@ class View
 
         if (!strpos($this->path, "Server") && !strpos($this->path, "Modals") && empty($this->access)
             && !Safety::restrictAccess($page)) {
-            return print("<h5 align='center' style='color: var(--cor-primary)'>Restricted access</h5>");
+            return print "<h5 align='center' style='color: var(--cor-primary)'>Restricted access</h5>";
         }
-        require $this->path . "/{$page}.php";
+        include_once $this->path . "/{$page}.php";
     }
 
     public function insertTheme(array $params = null, string $path = null)

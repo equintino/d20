@@ -8,6 +8,7 @@ class Login extends Controller {
         $this->view->render('login');
     }
 
+    /** conferir o uso */
     public function enter(array $data)
     {
         foreach ($data as $key => $value) {
