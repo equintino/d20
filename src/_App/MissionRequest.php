@@ -29,7 +29,7 @@ class MissionRequest extends Mission
             "users.id" => $login->id,
             "players.mission_id" => null
         ]);
-        $this->view->setPath("Modals")->render($this->page, [ compact("act", "mission_id", "players"
+        $this->setPath("Modals")->render($this->page, [ compact("act", "mission_id", "players"
         ) ]);
     }
 
@@ -40,7 +40,7 @@ class MissionRequest extends Mission
         $missionRequest = new \Models\MissionRequest();
         $missionRequest->bootstrap($data);
         $missionRequest->save();
-        return print(json_encode($missionRequest->message()));
+        return print json_encode($missionRequest->message());
     }
 
     public function save(array $data)
@@ -50,13 +50,13 @@ class MissionRequest extends Mission
 
         if ($action === "reject") {
             $missionRequest->destroy();
-            return print(json_encode($missionRequest->message()));
+            return print json_encode($missionRequest->message());
         }
         if ($action === "acept") {
             $character = (new \Models\Character())->load($missionRequest->character_id);
             $character->mission_id = (int) $data["missionR"];
             $character->save();
-            return print(json_encode($character->message()));
+            return print json_encode($character->message());
         }
     }
 }

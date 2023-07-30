@@ -8,27 +8,27 @@ class Category extends Controller
 
     public function init(?array $data): void
     {
-        $this->view->render($this->page);
+        $this->render($this->page);
     }
 
     public function add(): void
     {
         $act = "add";
-        $this->view->render($this->page, [ compact("act") ]);
+        $this->render($this->page, [ compact("act") ]);
     }
 
     public function list(): void
     {
         $act = "list";
         $categories = (new \Models\Category())->activeAll();
-        $this->view->render($this->page, [ compact("act", "categories") ]);
+        $this->render($this->page, [ compact("act", "categories") ]);
     }
 
     public function edit(array $data): void
     {
         $id = $data["id"];
         $category = (new \Models\Category())->load($id);
-        $this->view->setPath("Modals")->render($this->page, [ compact("category") ]);
+        $this->setPath("Modals")->render($this->page, [ compact("category") ]);
     }
 
     public function load(array $data)

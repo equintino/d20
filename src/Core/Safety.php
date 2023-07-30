@@ -36,7 +36,7 @@ abstract class Safety
         }
         if (array_key_exists('login', $_SESSION)) {
             $groupId = (
-                method_exists($_SESSION['login'], 'getUser') ?
+                !empty($_SESSION['login']->getUser()->geoup_id) ?
                     $_SESSION['login']->getUser()->group_id : null
             );
         }

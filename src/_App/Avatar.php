@@ -8,12 +8,12 @@ class Avatar extends Controller
 
     public function init(?array $data): void
     {
-        $this->view->render($this->page);
+        $this->render($this->page);
     }
 
     public function carousel(): void
     {
-        $this->view->render('carousel');
+        $this->render('carousel');
     }
 
     public function add(): void
@@ -21,7 +21,7 @@ class Avatar extends Controller
         $act = "add";
         $breeds = (new \Models\Breed())->activeAll();
         $categories = (new \Models\Category())->activeAll();
-        $this->view->render($this->page,  [ compact("act", "breeds", "categories") ]);
+        $this->render($this->page,  [ compact("act", "breeds", "categories") ]);
     }
 
     public function list(): void
@@ -30,7 +30,7 @@ class Avatar extends Controller
         $avatars = (new \Models\Avatar())->activeAll();
         $breeds = (new \Models\Breed())->activeAll();
         $categories = (new \Models\Category())->activeAll();
-        $this->view->render($this->page, [ compact("act", "avatars", "breeds", "categories") ]);
+        $this->render($this->page, [ compact("act", "avatars", "breeds", "categories") ]);
     }
 
     public function getAvatars(array $data): string
@@ -58,7 +58,7 @@ class Avatar extends Controller
         $categories = (new \Models\Category())->activeAll();
         $avatar = (new \Models\Avatar())->load($id);
         echo "<script>var act='edit'</script>";
-        $this->view->setPath("Modals")->render($this->page, [ compact("act", "avatar", "breeds", "categories") ]);
+        $this->setPath("Modals")->render($this->page, [ compact("act", "avatar", "breeds", "categories") ]);
     }
 
     public function show(array $data): void
@@ -78,7 +78,7 @@ class Avatar extends Controller
                 break;
             }
         }
-        $this->view->setPath("Modals")->render($this->page . $act,
+        $this->setPath("Modals")->render($this->page . $act,
             [
                 compact("list", "act", "categories", "idCategory", "idBreed", "currentCat", "source", "breeds")
             ]

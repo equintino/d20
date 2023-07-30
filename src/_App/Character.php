@@ -14,7 +14,8 @@ class Character extends Controller
 
     public function init(?array $data): void
     {
-        $this->view->render($this->page);
+        // $this->view->render($this->page);
+        $this->render($this->page);
     }
 
     public function add(): void
@@ -24,7 +25,8 @@ class Character extends Controller
         $breeds = (new Breed())->activeAll();
         $classes = (new Category())->activeAll();
 
-        $this->view->render($this->page . $act, [ compact("login", "breeds", "classes") ]);
+        // $this->view->render($this->page . $act, [ compact("login", "breeds", "classes") ]);
+        $this->render($this->page . $act, [ compact("login", "breeds", "classes") ]);
     }
 
     public function edit(array $data)
@@ -46,7 +48,7 @@ class Character extends Controller
         $breeds = (new Breed())->activeAll();
         $categories = (new Category())->activeAll();
         $mission = (!empty($character->mission_id) ? (new Mission())->load($character->mission_id) : null);
-        $this->view->setPath("Modals")->render($this->page, [ compact( "act", "login", "trends1", "trends2",
+        $this->setPath("Modals")->render($this->page, [ compact( "act", "login", "trends1", "trends2",
         "character", "breeds", "categories", "mission" ) ]);
     }
 
@@ -75,7 +77,7 @@ class Character extends Controller
             ])
             ?? []
         );
-        $this->view->render($this->page . $act, [ compact("act","characters") ]);
+        $this->render($this->page . $act, [ compact("act","characters") ]);
     }
 
     public function save(array $data): ?string
@@ -108,7 +110,7 @@ class Character extends Controller
 
     public function story(array $data): void
     {
-        $this->view->setPath("Modals")->render($this->page);
+        $this->setPath("Modals")->render($this->page);
     }
 
     public function delete(array $data): string

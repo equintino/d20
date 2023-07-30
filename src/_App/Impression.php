@@ -54,7 +54,7 @@ class Impression extends Controller
         $offerTotal = formatCurrency($offerTotal);
         $depositTotal = formatCurrency($depositTotal);
         $outputTotal = formatCurrency($outputTotal);
-        $this->view->setPath("Modals")->render("impression", [ compact("depositTotal", "titheTotal",
+        $this->setPath("Modals")->render("impression", [ compact("depositTotal", "titheTotal",
         "offerTotal", "outputTotal", "titles", "outputDescription", "totalBalance", "month", "year"
         ) ]);
     }
@@ -62,7 +62,7 @@ class Impression extends Controller
     public function previousPrint(array $data): void
     {
         var_dump($data);
-        $this->view->setPath("Modals")->render("impression", [ $data ]);
+        $this->setPath("Modals")->render("impression", [ $data ]);
     }
 
     // public function numberMonth(string $name, bool $key=false)

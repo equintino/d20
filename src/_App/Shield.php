@@ -18,7 +18,7 @@ class Shield extends Controller
         }
         $login = (new Session())->getUser();
 
-        $this->view->render($this->page, [ compact("groups", "screens", "login", "pages") ]);
+        $this->render($this->page, [ compact("groups", "screens", "login", "pages") ]);
     }
 
     public function removeGroup(): array

@@ -32,8 +32,7 @@
         </ul>
         <div class="navbar navbar-right">
             <ul class="nav navbar">
-                <?php if(!empty($this->group) !== null && !empty($this->group->name) &&
-                    (strtolower($this->group->name) === "mestre" || preg_match('/\*/', $this->group->access))): ?>
+                <?php if (strtolower($group->name) === "mestre" || preg_match('/\*/', $group->access)): ?>
                 <li class="nav-item dropdown">
                     <a class="nav-item nav-link dropdown-toggle menu-right" href="#" role="button"
                     aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">Mestre</a>
@@ -45,16 +44,16 @@
                     </div>
                 </li>
                 <?php endif ?>
-                <?php if(!empty($this->group->access) && (preg_match("/user/", $this->group->access)
-                        || preg_match("/\*/", $this->group->access))): ?>
+                <?php if(!empty($group->access) && (preg_match("/user/", $group->access)
+                        || preg_match("/\*/", $group->access))): ?>
                     <li>
                         <a data-id="user" data-page="user" class="nav-link icon-login" href="<?= url("user") ?>" >
                             <i class="fa fa-id-card" title="Cadastro de Login"></i>
                         </a>
                     </li>
                 <?php endif ?>
-                <?php if(!empty($this->group->access) && (preg_match("/shield/", $this->group->access)
-                        || preg_match("/\*/", $this->group->access))): ?>
+                <?php if(!empty($group->access) && (preg_match("/shield/", $group->access)
+                        || preg_match("/\*/", $group->access))): ?>
                     <li>
                         <a data-id="shield" data-page="shield" class="nav-link icon-shield"
                             href="<?= url("shield") ?>" >
@@ -62,8 +61,8 @@
                         </a>
                     </li>
                 <?php endif ?>
-                <?php if(!empty($this->group->access) && (preg_match("/config/", $this->group->access)
-                        || preg_match("/\*/", $this->group->access))): ?>
+                <?php if(!empty($group->access) && (preg_match("/config/", $group->access)
+                        || preg_match("/\*/", $group->access))): ?>
                     <li>
                         <a data-id="config" class="nav-link icon-config" href="<?= url("config") ?>">
                             <i class="fa fa-cog" title="Configuração" ></i>

@@ -33,6 +33,10 @@ export default class Menu extends AbstractServices {
         for (let name in cookies) {
             Cookie.deleteCookie(name)
         }
+        this.open({
+            method: 'POST',
+            url: 'exit'
+        })
         fn()
     }
 }

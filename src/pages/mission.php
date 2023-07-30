@@ -33,7 +33,7 @@
 <main id="mission">
     <?php if (empty($act)): ?>
     <div id="init">
-        <?php if ($this->group->id == "1" || strtolower($this->group->name) === "mestre"): ?>
+        <?php if ($group->id == "1" || strtolower($group->name) === "mestre"): ?>
             <button class="btn btn-oval" value="new" >Nova</button>
         <?php endif ?>
         <button class="btn btn-oval" value="list">Lista</button>

@@ -8,20 +8,20 @@ class Breed extends Controller
 
     public function init(?array $data): void
     {
-        $this->view->render($this->page);
+        $this->render($this->page);
     }
 
     public function add(): void
     {
         $act = "add";
-        $this->view->render($this->page, [ compact("act") ]);
+        $this->render($this->page, [ compact("act") ]);
     }
 
     public function list(): void
     {
         $act = "list";
         $breeds = (new \Models\Breed())->activeAll();
-        $this->view->render($this->page, [ compact("act", "breeds") ]);
+        $this->render($this->page, [ compact("act", "breeds") ]);
     }
 
     public function list2(): string
@@ -42,7 +42,7 @@ class Breed extends Controller
     {
         $id = $data["id"];
         $breed = (new \Models\Breed())->load($id);
-        $this->view->setPath("Modals")->render($this->page, [ compact("breed") ]);
+        $this->setPath("Modals")->render($this->page, [ compact("breed") ]);
     }
 
     public function load(array $data)

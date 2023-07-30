@@ -13,18 +13,7 @@
     $router = new Router(url(), ":");
     $session = new Session();
 
-    if (!$session->getUser()) {
-        // echo "<script>window.location.assign(" . url('/') . ")</script>";
-        // header('Location: ' . url('/config'));
-        // $router->redirect("/ops/{$router->error()}");
-        // $router->redirect('/');
-        // var_dump(
-        // $router->namespace("_App");
-        // $router->post("/enter", "Login:enter");
-        // $router->post("/register", "Register:add");
-        (new Web())->start();
-        // );
-    } else {
+    if ($session->getUser()) {
         /**  Web Routes */
         $router->namespace("_App");
         $router->get("/home", "Web:home");
@@ -153,11 +142,8 @@
         $router->post("/config/delete", "Config:delete");
 
         /** Logout */
-        $router->get("/exit", function () {
+        $router->post("/exit", function () {
             (new Session())->destroy();
-            // header("Location: " . url());
-            // return print json_encode(true);
-            // echo "<script>window.location.reload()</script>";
         });
 
         /** Error Routes */
@@ -171,6 +157,8 @@
         if ($router->error()) {
             $router->redirect("/ops/{$router->error()}");
         }
+    } else {
+        (new Web())->start();
     }
 
     ob_end_flush();

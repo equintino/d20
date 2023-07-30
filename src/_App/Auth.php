@@ -2,7 +2,7 @@
 
 namespace _App;
 
-class Auth
+class Auth extends Controller
 {
     public function login(): void
     {
@@ -14,7 +14,7 @@ class Auth
 
     public function token($login)
     {
-        $this->view->setPath("Modals")->render("token", [ compact("login") ]);
+        $this->setPath("Modals")->render("token", [ compact("login") ]);
     }
 
     public function save()

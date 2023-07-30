@@ -17,8 +17,6 @@ class Login
         $this->session = new Session("ses");
         $this->db = $db;
         $this->session->setDb($db);
-        // $this->login = $login;
-        // $this->password = $password;
         $_SESSION['login'] = $this->session;
     }
 
@@ -43,7 +41,7 @@ class Login
             $this->message = json_encode("reset password");
         } elseif ($this->user->validate($this->password, $this->user->password)) {
             $this->setSession();
-            $this->message = json_encode(1);
+            $this->message = json_encode(true);
         } else {
             $this->message = json_encode("Invalid password");
         }

@@ -30,7 +30,7 @@ class Player extends Controller
                 "mission_id=missions.id"
             ]
         )->where();
-        $this->view->render($this->page, [ compact("players") ]);
+        $this->render($this->page, [ compact("players") ]);
     }
 
     public function add(): void
@@ -39,7 +39,7 @@ class Player extends Controller
         $login = $_SESSION["login"];
         $breeds = (new \Models\Breed())->activeAll();
         $classes = (new \Models\Category())->activeAll();
-        $this->view->render($this->page, [ compact("act", "login", "breeds", "classes") ]);
+        $this->render($this->page, [ compact("act", "login", "breeds", "classes") ]);
     }
 
     public function edit(array $data)
@@ -61,7 +61,7 @@ class Player extends Controller
         $breeds = (new \Models\Breed())->activeAll();
         $categories = (new \Models\Category())->activeAll();
         $mission = (!empty($character->mission_id) ? (new \Models\Mission())->load($character->mission_id) : null);
-        $this->view->setPath("Modals")->render($this->page,
+        $this->setPath("Modals")->render($this->page,
             [
                 compact("act", "login", "trends1", "trends2",
                 "character", "breeds", "categories", "mission")
@@ -73,7 +73,7 @@ class Player extends Controller
     {
         $act = "list";
         $players = ((new \Models\Player())->search(["user_id" => $_SESSION["login"]->id]) ?? []);
-        $this->view->render($this->page, [ compact("act", "players") ]);
+        $this->render($this->page, [ compact("act", "players") ]);
     }
 
     public function save(array $data)
@@ -100,7 +100,7 @@ class Player extends Controller
 
     public function story(array $data): void
     {
-        $this->view->setPath("Modals")->render($this->page);
+        $this->setPath("Modals")->render($this->page);
     }
 
     public function delete(array $data): string

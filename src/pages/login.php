@@ -77,6 +77,6 @@
             </ul>
         </form>
     </div>
-    <div><a id="add" href="#" >Novo Cadastro</a></div>
+    <div><a id="add" href="#!" >Novo Cadastro</a></div>
     Revisão <span id="version"></span>
 </main>

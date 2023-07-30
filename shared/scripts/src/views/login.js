@@ -59,6 +59,7 @@ export default class Login extends AbstractViews {
 
     confAddLogin(fn) {
         this.#addLogin.addEventListener('click', (e) => {
+            e.preventDefault()
             fn()
         })
     }

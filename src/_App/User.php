@@ -12,7 +12,7 @@ class User extends Controller
     {
         $params = [];
         $company_id = ($data["company_id"] ?? null);
-        $this->view->render("user", $params);
+        $this->render("user", $params);
     }
 
     public function list(?array $data): void
@@ -28,7 +28,7 @@ class User extends Controller
         $user = (new \Models\User())->find($login);
         $groups = (new Group())->activeAll();
 
-        $this->view->setPath("Modals")->render("user", [ compact("act", "login", "users", "user", "groups") ]);
+        $this->setPath("Modals")->render("user", [ compact("act", "login", "users", "user", "groups") ]);
     }
 
     public function add(): void
@@ -36,7 +36,7 @@ class User extends Controller
         $act = "edit";
         $groups = (new Group())->activeAll();
 
-        $this->view->setPath("Modals")->render("user", [ compact("act", "groups") ]);
+        $this->setPath("Modals")->render("user", [ compact("act", "groups") ]);
     }
 
     public function edit(array $data): void
@@ -46,7 +46,7 @@ class User extends Controller
         $user = (new \Models\User())->find(($login));
         $groups = (new Group())->all();
 
-        $this->view->setPath("Modals")->render("user", [ compact("act", "user", "groups") ]);
+        $this->setPath("Modals")->render("user", [ compact("act", "user", "groups") ]);
     }
 
     public function save(array $data): string
@@ -90,7 +90,7 @@ class User extends Controller
     {
         $login = $data['login'];
         $user = (new \Models\User())->find([ "login" => $data['login']])[0];
-        $this->view->setPath('Modals')->render('token', [ compact('login', 'user') ]);
+        $this->setPath('Modals')->render('token', [ compact('login', 'user') ]);
     }
 
     public function delete(array $data): ?string

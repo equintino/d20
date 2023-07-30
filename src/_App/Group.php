@@ -30,7 +30,8 @@ class Group extends Controller
         $screens = Safety::screens("/pages");
         $group_id = ((new User())->find($_SESSION["login"]->login)->group_id ?? null);
 
-        $this->view->render("shield", [ compact("groups", "screens", "group_id") ]);
+        // $this->view->render("shield", [ compact("groups", "screens", "group_id") ]);
+        $this->render("shield", [ compact("groups", "screens", "group_id") ]);
     }
 
     public function access(array $data): string
@@ -54,7 +55,8 @@ class Group extends Controller
 
     public function add(): void
     {
-        ($this->view->setPath("Modals")->render("group"));
+        // ($this->view->setPath("Modals")->render("group"));
+        ($this->setPath("Modals")->render("group"));
     }
 
     public function save(): void

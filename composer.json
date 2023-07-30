@@ -25,7 +25,8 @@
             "Database\\": "src/Database",
             "Models\\": "src/Models",
             "Support\\": "src/Support",
-            "Traits\\": "src/Traits"
+            "Traits\\": "src/Traits",
+            "Views\\": "src/Views"
         }
     }
 }

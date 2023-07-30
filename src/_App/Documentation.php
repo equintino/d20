@@ -10,20 +10,20 @@ class Documentation extends Controller
     {
         $act = "show";
         $documentations = ((new \Models\Documentation())->all() ?? []);
-        $this->view->render($this->page, [ compact("act","documentations") ]);
+        $this->render($this->page, [ compact("act","documentations") ]);
     }
 
     public function add(?array $data)
     {
         $act = "add";
-        $this->view->render($this->page, [ compact("act") ]);
+        $this->render($this->page, [ compact("act") ]);
     }
 
     public function show(array $data): void
     {
         $id = $data["id"];
         $link = "documentation/show/id/{$id}";
-        $this->view->setPath("Modals")->render("image", [ compact("link") ]);
+        $this->setPath("Modals")->render("image", [ compact("link") ]);
     }
 
     public function showImage(array $data): void
@@ -50,6 +50,6 @@ class Documentation extends Controller
             $file["tmp_name"] = $files["tmp_name"][$key];
             $ids[] = $documentation->fileSave($file);
         }
-        return print(json_encode($documentation->message()));
+        return print json_encode($documentation->message());
     }
 }

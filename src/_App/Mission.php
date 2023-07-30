@@ -11,13 +11,14 @@ class Mission extends Controller
     public function init(?array $data): void
     {
         $login = (new Session())->getUser();
-        $this->view->render($this->page, [ compact("login") ]);
+        $group = (new \Models\Group())->load($login->group_id);
+        $this->render($this->page, [ compact("login", "group") ]);
     }
 
     public function add(): void
     {
         $act = "add";
-        $this->view->render($this->page, [ compact("act") ]);
+        $this->render($this->page, [ compact("act") ]);
     }
 
     public function edit(array $data)
@@ -86,7 +87,7 @@ class Mission extends Controller
                 }
             }
         }
-        $this->view->setPath("Modals")->render(
+        $this->setPath("Modals")->render(
             $this->page, [ compact("id", "mission", "characters", "personages", "missionRequests", "missionRequest") ]
         );
     }
@@ -121,7 +122,7 @@ class Mission extends Controller
     {
         $mission = (new \Models\Mission())->load($data['mission']);
         // $mission = $data["mission"];
-        $this->view->setPath("Modals")->render("map", [ compact("mission") ]);
+        $this->setPath("Modals")->render("map", [ compact("mission") ]);
     }
 
     public function personages(array $data): string
@@ -194,7 +195,7 @@ class Mission extends Controller
     {
         $map = (new \Models\Map())->load($data['id']);
         $image = (new \Models\Image())->load($data['image_id']);
-        $this->view->setPath("Modals")->render("map", [ compact("image", "map") ]);
+        $this->setPath("Modals")->render("map", [ compact("image", "map") ]);
     }
 
     public function mapDelete(array $data): ?string
@@ -212,7 +213,7 @@ class Mission extends Controller
         $groupId = (new \Models\User())->find($login->login)->group_id;
         $group = (!empty($groupId) ? (new \Models\Group())->load($groupId) : null);
 
-        $this->view->render($this->page, [ compact("act", "missions", "login", "group") ]);
+        $this->render($this->page, [ compact("act", "missions", "login", "group") ]);
     }
 
     public function save(array $data)

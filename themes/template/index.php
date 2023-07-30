@@ -50,4 +50,3 @@
     </body>
 </html>
 <script type="module" src="./shared/scripts/src/index.js" ></script>
-<!-- <script type="text/javascript" src="<?= url() . "/" . theme("assets/scripts.js") ?>" ></script> -->

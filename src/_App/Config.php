@@ -26,7 +26,7 @@ class Config extends Controller
         $config = $this->config;
         // $activeConnection = Connect::getConfConnection();
         $activeConnection = $this->config->getConfConnection();
-        $this->view->render("config", [ compact("config","activeConnection") ]);
+        $this->render("config", [ compact("config","activeConnection") ]);
         // $this->view->render("config", [ compact("config") ]);
     }
 
@@ -34,7 +34,7 @@ class Config extends Controller
     {
         $act = "add";
         $types = $this->config->types;
-        ($this->view->setPath("Modals")->render("config", [ compact("act", "types") ]));
+        ($this->setPath("Modals")->render("config", [ compact("act", "types") ]));
     }
 
     public function edit(array $data): void
