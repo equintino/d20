@@ -33,7 +33,7 @@ export default class User extends AbstractControllers {
                     formData
                 })
                 this.view.setBtnModal({
-                    buttons: '<button class="btn btn-rpg btn-danger" value="save">Gravar alteração"<button>',
+                    buttons: '<button class="btn btn-rpg btn-danger" value="save">Gravar alteração<button>',
                     fn: ({ e, formData, form }) => {
                         if (e.target.value === 'save') {
                             let resp = this.getDataFile({

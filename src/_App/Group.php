@@ -2,14 +2,14 @@
 
 namespace _App;
 
-use Traits\GroupTrait;
+// use Traits\GroupTrait;
 use Models\User;
 use Core\Safety;
 use Core\Session;
 
 class Group extends Controller
 {
-    use GroupTrait;
+    // use GroupTrait;
 
     public function init()
     {
@@ -26,7 +26,7 @@ class Group extends Controller
 
     public function list(): void
     {
-        $groups = $this->group()->all() ?? [];
+        $groups = (new \Models\Group())->activeAll() ?? [];
         $screens = Safety::screens("/pages");
         $group_id = ((new User())->find($_SESSION["login"]->login)->group_id ?? null);
 
@@ -43,7 +43,7 @@ class Group extends Controller
 
     public function load(array $data): void
     {
-        $group = $this->group()->find($data["groupName"]);
+        $group = (new \Models\Group())->find($data["groupName"]);
         if ($group) {
             $security["access"] = [];
             foreach (explode(",", $group->access) as $screen) {
@@ -62,7 +62,7 @@ class Group extends Controller
     public function save(): void
     {
         $params = $this->getPost($_POST);
-        $group = $this->group();
+        $group = new \Models\Group();
 
         $group->bootstrap($params);
         $group->save();
@@ -86,7 +86,7 @@ class Group extends Controller
     {
         // $id = $data["groupId"];
         $id = $data["id"];
-        $group = $this->group()->load($id);
+        $group = (new \Models\Group())->load($id);
         $group->destroy();
         echo json_encode($group->message());
     }
