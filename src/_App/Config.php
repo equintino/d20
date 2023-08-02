@@ -2,8 +2,6 @@
 
 namespace _App;
 
-use Core\Connect;
-
 class Config extends Controller
 {
     protected $page = " config";
@@ -24,10 +22,8 @@ class Config extends Controller
     public function list(): void
     {
         $config = $this->config;
-        // $activeConnection = Connect::getConfConnection();
         $activeConnection = $this->config->getConfConnection();
         $this->render("config", [ compact("config","activeConnection") ]);
-        // $this->view->render("config", [ compact("config") ]);
     }
 
     public function add(): void
@@ -44,17 +40,11 @@ class Config extends Controller
         $config = $this->config;
         $config::$local = $connectionName;
 
-        ($this->view->setPath("Modals")->render("config", [ compact("config", "types", "connectionName") ]));
+        ($this->setPath("Modals")->render("config", [ compact("config", "types", "connectionName") ]));
     }
 
     public function save(array $data): void
     {
-        // $params = $this->getPost($_POST);
-        // $data = $params["data"];
-        // var_dump(
-        //     // $params,
-        //     $data
-        // );die;
         $this->config->save($data);
         echo json_encode($this->config->message());
     }

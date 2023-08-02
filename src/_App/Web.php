@@ -16,11 +16,6 @@ class Web extends Controller
     public function start()
     {
         $route = filter_input(INPUT_GET, "route", FILTER_UNSAFE_RAW);
-        // $config = new Config(".config.ini");
-        // $connectionList = true;
-        // $login = filter_input(INPUT_COOKIE, "login", FILTER_UNSAFE_RAW);
-        // $connectionName= filter_input(INPUT_COOKIE, "connectionName", FILTER_UNSAFE_RAW);
-        // $checked = filter_input(INPUT_COOKIE, "remember", FILTER_UNSAFE_RAW);
 
         $logged = (new Login())->start($route);
 

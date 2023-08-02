@@ -79,7 +79,6 @@ class Config
     public function address(): ?string
     {
         return substr(strstr(strstr(self::$dataFile->{self::$local}->dsn, "="), ";", true),1);
-        // return substr(strstr(strstr(self::$file[self::$local]["dsn"], "="), ";", true),1);
     }
 
     private function setAddress(string $address)
@@ -90,7 +89,6 @@ class Config
     public function database(): ?string
     {
         return substr(strrchr(self::$dataFile->{self::$local}->dsn, "="), 1);
-        // return substr(strrchr(self::$file[self::$local]["dsn"], "="), 1);
     }
 
     private function setDatabase(string $database)
@@ -111,7 +109,6 @@ class Config
     public function user(): ?string
     {
         return self::$dataFile->{self::$local}->user;
-        // return self::$file[self::$local]["user"];
     }
 
     public function getUser(): ?string

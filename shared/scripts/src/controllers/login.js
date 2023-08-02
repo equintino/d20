@@ -53,9 +53,7 @@ export default class Login extends AbstractControllers {
                 url: 'enter',
                 formData
             })
-            if (response === 'reset password') {
-                return this.#token()
-            }
+            if (response === 'reset password') return this.#token(formData)
             if (response == 1) {
                 this.service.setCookie(formData)
                 return window.location.reload()
@@ -124,7 +122,7 @@ export default class Login extends AbstractControllers {
         this.view.autoFocusModal('name')
     }
 
-    #token() {
+    #token(formData) {
         this.openModal({
             title: 'RESET DE SENHA',
             page: 'user/token',
@@ -159,6 +157,10 @@ export default class Login extends AbstractControllers {
                             this.view.loading.hide()
                         }
                     }
+                })
+                this.view.setFocus({
+                    elem,
+                    property: '[name=password]'
                 })
             }
         })

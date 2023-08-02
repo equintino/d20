@@ -3,7 +3,6 @@
 namespace Views;
 
 use Core\Session;
-use Core\Safety;
 use Models\Group;
 use Database\CreationProcess;
 
@@ -26,7 +25,6 @@ class View
         return $this;
     }
 
-    // public function render(string $page, array $params = [])
     public function render(string $page, array $params): void
     {
         /** makes variables available to the page */
@@ -38,11 +36,6 @@ class View
             }
         }
 
-        // if (!strpos($this->path, "Server") && !strpos($this->path, "Modals") && empty($this->access)
-        //     && !Safety::restrictAccess($page)) {
-        //     return print "<h5 align='center' style='color: var(--cor-primary)'>Restricted access</h5>";
-        // }
-        // include_once $this->path . "/{$page}.php";
         include_once "{$page}.php";
     }
 
@@ -58,18 +51,6 @@ class View
         /** makes variables available to the page */
         if ($params) {
             extract($params);
-            // foreach ($params as $param) {
-            //     if (!empty($param)) {
-            //         $param = (is_object($param) ? (array) $param : $param);
-            //         extract($param->data);
-            //         foreach ($param as $value) {
-            //             if (!empty($value)) {
-            //                 $value = (is_object($value) ? (array) $value : $value);
-            //                 extract($value);
-            //             }
-            //         }
-            //     }
-            // }
         }
         require_once !empty($path) ? $path : $this->theme . "/index.php";
     }

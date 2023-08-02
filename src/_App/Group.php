@@ -2,15 +2,11 @@
 
 namespace _App;
 
-// use Traits\GroupTrait;
 use Models\User;
 use Core\Safety;
-use Core\Session;
 
 class Group extends Controller
 {
-    // use GroupTrait;
-
     public function init()
     {
         $groups = (new \Models\Group())->activeAll();
@@ -30,13 +26,11 @@ class Group extends Controller
         $screens = Safety::screens("/pages");
         $group_id = ((new User())->find($_SESSION["login"]->login)->group_id ?? null);
 
-        // $this->view->render("shield", [ compact("groups", "screens", "group_id") ]);
         $this->render("shield", [ compact("groups", "screens", "group_id") ]);
     }
 
     public function access(array $data): string
     {
-        // $groupId = $data["groupId"];
         $id = $data["id"];
         return print json_encode(explode(",", (new \Models\Group())->load($id)->access));
     }
@@ -55,7 +49,6 @@ class Group extends Controller
 
     public function add(): void
     {
-        // ($this->view->setPath("Modals")->render("group"));
         ($this->setPath("Modals")->render("group"));
     }
 
@@ -71,12 +64,9 @@ class Group extends Controller
 
     public function update(): void
     {
-        // $pages = $_POST["pages"];
-        // $groupId = $_POST["groupId"];
         $access = $_POST['pages'];
         $groupId = $_POST["id"];
         $group = (new \Models\Group())->load($groupId);
-        // $access = implode(",", $pages);
         $group->access = "home,error,{$access}";
         $group->save(true);
         echo json_encode($group->message());
@@ -84,7 +74,6 @@ class Group extends Controller
 
     public function delete(array $data): void
     {
-        // $id = $data["groupId"];
         $id = $data["id"];
         $group = (new \Models\Group())->load($id);
         $group->destroy();
