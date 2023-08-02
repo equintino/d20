@@ -13,11 +13,6 @@ class FileTransation
         $this->setConst($text);
     }
 
-    // public static function getLocal(): ?bool
-    // {
-    //     return self::$local;
-    // }
-
     public static function setLocal(string $connectionName)
     {
         if (!defined("CONF_CONNECTION")) {
@@ -70,7 +65,6 @@ class FileTransation
 
             self::$local = ( !fwrite($handle, $text) ? false : true );
             fclose($handle);
-            //header('Refresh:0');
         }
     }
 

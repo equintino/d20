@@ -20,7 +20,7 @@ $login = filter_input(INPUT_COOKIE, "login", FILTER_UNSAFE_RAW);
 $login = (isset($login) ? base64_decode(filter_input(INPUT_COOKIE, "login", FILTER_UNSAFE_RAW)) : null);
 
 /** set constants */
-$constText = "CONF_CONNECTION=local\r\nCONF_URL_BASE=initial-default-project\r\nCONF_URL_TEST=test/initial-default-project\r\nCONF_BASE_THEME=layout\r\nCONF_VIEW_THEME=template2\r\nCONF_SITE_NAME=Site-Address\r\nCONF_SITE_TITLE=System Name\r\nCONF_SITE_DESC=System Description";
+$constText = "CONF_CONNECTION=Mysql\r\nCONF_URL_BASE=d20new\r\nCONF_URL_TEST=test/d20\r\nCONF_BASE_THEME=layout\r\nCONF_VIEW_THEME=template\r\nCONF_SITE_NAME=www.d20.com.br\r\nCONF_SITE_TITLE=RPG Game\r\nCONF_SITE_DESC=RPG Game System";
 (new Support\FileTransation(".env", $constText))->getConst();
 
 /** url */
