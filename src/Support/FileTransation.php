@@ -34,29 +34,6 @@ class FileTransation
         fclose($handle);
     }
 
-    public static function saveFile()
-    {
-        $handle = fopen(__DIR__ . "/../../.env", "r+b");
-        $string = "";
-        while ($row = fgets($handle)) {
-            $parter = key($params);
-            if (preg_match("/$parter/", $row)) {
-                $string .= $parter . "=" . $params[$parter];
-            } else {
-                $string .= $row;
-            }
-        }
-
-        ftruncate($handle, 0);
-        rewind($handle);
-        if (!fwrite($handle, $string)) {
-            die("Could not change the file");
-        } else {
-            echo json_encode("Successfully changed");
-        }
-        fclose($handle);
-    }
-
     public static function setConst(string $text=null)
     {
         if (!file_exists(self::$file)) {

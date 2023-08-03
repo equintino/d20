@@ -37,9 +37,7 @@ class Login extends Controller {
     /** conferir o uso */
     public function enter(array $data): void
     {
-        foreach ($data as $key => $value) {
-            $$key = $value;
-        }
+        extract($data);
         $lg = (new \Core\Login($login, $password, $db))->user();
         $lg->validate();
 

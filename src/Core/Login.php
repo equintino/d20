@@ -48,7 +48,7 @@ class Login
         return $this->message;
     }
 
-    public function setSession()
+    private function setSession(): void
     {
         $this->session->setLogin($this->login);
         $this->session->setPassword($this->password);
