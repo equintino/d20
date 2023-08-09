@@ -9,20 +9,16 @@ class Login extends Controller {
         '/enter'
     ];
 
-    public function construct()
-    {
-        parent::__construct();
-    }
-
     public function start(?string $route)
     {
         if (empty($_SESSION['login']) && !in_array($route, $this->initRoutes)) {
-            return true;
+            // return true;
+            return false;
         }
 
-        if ($route === '/login') {
-            $this->init();
-        }
+        // if ($route === '/login') {
+        //     $this->init();
+        // }
 
         if ($route === '/enter') {
             $this->enter($_POST);
@@ -31,16 +27,16 @@ class Login extends Controller {
 
     public function init(): void
     {
-        $this->render('login');
+        $this->view->render('login');
     }
 
     /** conferir o uso */
-    public function enter(array $data): void
+    public function enter(array $data): ?string
     {
         extract($data);
         $lg = (new \Core\Login($login, $password, $db))->user();
         $lg->validate();
 
-        echo $lg->message ?? null;
+        return print $lg->message ?? null;
     }
 }

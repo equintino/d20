@@ -10,7 +10,7 @@ use Database\CreationProcess;
 
 abstract class Controller
 {
-    private $path;
+    protected $path;
     public $group;
     private $access;
     protected $view;
@@ -19,10 +19,10 @@ abstract class Controller
 
     public function __construct()
     {
-        $this->path  = __DIR__ . "/../pages";
+        // $this->path  = __DIR__ . "/../pages";
         $this->view = new View(__DIR__ . "/../../themes/" . CONF_VIEW_THEME . "/");
-        $this->validate();
-        $this->loading = theme("assets/img/loading.png");
+        // $this->validate();
+        // $this->loading = theme("assets/img/loading.png");
     }
 
     protected function getPost($data)
@@ -41,9 +41,11 @@ abstract class Controller
         return $params;
     }
 
-    protected function seo(string $title, string $desc, string $url, string $img, bool $follow = false)
+    protected function seo(
+        string $title, string $desc, string $url, string $img, string $logo, bool $follow = false
+    )
     {
-        return compact("title", "desc", "url", "img", "follow");
+        return compact("title", "desc", "url", "img", "logo", "follow");
     }
 
     private function login()
@@ -81,18 +83,18 @@ abstract class Controller
         }
     }
 
-    public function setPath(string $path): Controller
-    {
-        $this->path = __DIR__ . "/../{$path}";
-        return $this;
-    }
+    // public function setPath(string $path): Controller
+    // {
+    //     $this->path = __DIR__ . "/../{$path}";
+    //     return $this;
+    // }
 
-    public function render(string $page, array $params = [])
-    {
-        if (!strpos($this->path, "Server") && !strpos($this->path, "Modals") && empty($this->access)
-            && !Safety::restrictAccess($page)) {
-            return print "<h5 align='center' style='color: var(--cor-primary)'>Restricted access</h5>";
-        }
-        $this->view->render($this->path . "/{$page}", $params);
-    }
+    // public function render(string $page, array $params = [])
+    // {
+    //     if (!strpos($this->path, "Server") && !strpos($this->path, "Modals") && empty($this->access)
+    //         && !Safety::restrictAccess($page)) {
+    //         return print "<h5 align='center' style='color: var(--cor-primary)'>Restricted access</h5>";
+    //     }
+    //     $this->view->render($this->path . "/{$page}", $params);
+    // }
 }

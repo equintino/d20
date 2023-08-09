@@ -16,8 +16,8 @@
     if ($session->getUser()) {
         /**  Web Routes */
         $router->namespace("_App");
-        $router->get("/home", "Web:home");
         $router->get("/", "Web:init");
+        $router->get("/home", "Web:home");
 
         /**  The Users' Screens */
         $router->namespace("_App");
@@ -127,10 +127,6 @@
 
         /** Server */
         $router->namespace("_App");
-        $router->post("/login", "Login:init");
-        $router->get("/login", "Login:init");
-        $router->post("/enter", "Login:enter");
-        $router->post("/register", "Register:add");
         $router->post("/group", "Group:init");
         $router->post("/user", "User:save");
         $router->get("/carousel", "Avatar:carousel");

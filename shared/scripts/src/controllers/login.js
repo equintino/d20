@@ -1,9 +1,9 @@
 import AbstractControllers from "./abstractcontrollers.js"
 
 export default class Login extends AbstractControllers {
-    constructor(deps) {
-        super(deps)
-    }
+    // constructor(deps) {
+    //     super(deps)
+    // }
 
     static initializer({ login }) {
         login.init()

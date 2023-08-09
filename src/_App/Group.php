@@ -20,6 +20,16 @@ class Group extends Controller
         return print json_encode($list);
     }
 
+    public function getThisGroup(int $id)
+    {
+        return (new \Models\Group())->load($id);
+    }
+
+    public function getGroup(): array
+    {
+        return (new \Models\Group())->activeAll();
+    }
+
     public function list(): void
     {
         $groups = (new \Models\Group())->activeAll() ?? [];
@@ -37,7 +47,8 @@ class Group extends Controller
 
     public function load(array $data): void
     {
-        $group = (new \Models\Group())->find($data["groupName"]);
+        $gp = new \Models\Group();
+        $group = $gp->find($data["groupName"]);
         if ($group) {
             $security["access"] = [];
             foreach (explode(",", $group->access) as $screen) {

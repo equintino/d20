@@ -4,12 +4,22 @@ namespace Traits;
 
 trait AuthTrait
 {
-    public function login(): void
+    private function login(?string $route, array $groups): bool
     {
-        if (!empty($_SESSION["login"])) {
-            header("Location: " . url());
+        switch ($route) {
+            case '/login':
+                $this->setPath('pages')->render('login');
+                break;
+            case '/register':
+                $this->setPath('Modals')->render('register', [ compact('groups') ]);
+                break;
+            case '/enter':
+                (new \_App\Login())->enter($_POST);
+                break;
+            default:
+                return true;
         }
-        (new Web())->start();
+        return false;
     }
 
     public function token($login)

@@ -21,12 +21,12 @@
             </div>
         </header>
         <div class="header2">
-            <section class="loading">
+            <section class="loading" style="display: none">
                 <img class="schedule" src="" alt="" height="50px"/>
             </section>
             <span id="alert" style="display: none;"></span>
 
-            <section id="boxe_main" class="fadeInDown" >
+            <section id="boxe_main" class="fadeInDown" style="display: none">
                 <div id="title"></div>
                 <span id="close"><i class="fa fa-times-circle"></i></span>
                 <span id="message"></span>
@@ -35,7 +35,7 @@
                 <div id="mask_main" style="display: none"></div>
             </section>
 
-            <section id="boxe2_main" class="fadeInDown" >
+            <section id="boxe2_main" class="fadeInDown" style="display: none">
                 <div id="title2"></div>
                 <span id="close2"><i class="fa fa-times-circle"></i></span>
                 <span id="message2"></span>

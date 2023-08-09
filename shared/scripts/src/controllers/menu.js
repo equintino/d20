@@ -1,10 +1,6 @@
 import AbstractControllers from "./abstractcontrollers.js"
 
 export default class Menu extends AbstractControllers {
-    constructor(deps) {
-        super(deps)
-    }
-
     static initializer( menu, fn ) {
         menu.init(fn)
     }
