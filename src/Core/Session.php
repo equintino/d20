@@ -5,7 +5,7 @@ namespace Core;
 class Session
 {
     private $user;
-    public string $login;
+    private string $login;
     public string $password;
     public readonly string $db;
 

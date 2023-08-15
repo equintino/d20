@@ -8,16 +8,33 @@
 
     use CoffeeCode\Router\Router;
     use Core\Session;
-    use _App\Web;
+    // use _App\Web;
 
     $router = new Router(url(), ":");
     $session = new Session();
+    // $web = new Web();
 
-    if ($session->getUser()) {
+    // if (!$session->getUser()) {
+    //     // $web->start();
+    // }
+
+    // if ($session->getUser()) {
         /**  Web Routes */
         $router->namespace("_App");
-        $router->get("/", "Web:init");
-        $router->get("/home", "Web:home");
+        // $router->get("/", "Web:init");
+        $router->get("/", "Web:start");
+        // $router->get("/home", "Web:home");
+
+
+        /** testando */
+        $router->post('/login', "Web:_login");
+        $router->post('/register', "Web:register");
+        $router->post('/enter', "Web:enter");
+
+
+
+    if ($session->getUser()) {
+        $router->get('/home', 'Web:home');
 
         /**  The Users' Screens */
         $router->namespace("_App");
@@ -46,7 +63,8 @@
 
         /** The Characters */
         $router->namespace("_App");
-        $router->get("/character", "Character:init");
+        // $router->get("/character", "Character:init");
+        $router->get("/character", "Character:_init");
         $router->get("/character/add", "Character:add");
         $router->get("/character/list", "Character:list");
         $router->post("/character/save", "Character:save");
@@ -83,7 +101,7 @@
 
         /** The Avatar */
         $router->namespace("_App");
-        $router->get("/avatar", "Avatar:init");
+        $router->get("/avatar", "Avatar:_init");
         $router->post("/avatar", "Avatar:getAvatars");
         $router->get("/avatar/add", "Avatar:add");
         $router->get("/avatar/list", "Avatar:list");
@@ -141,6 +159,7 @@
         $router->post("/exit", function () {
             (new Session())->destroy();
         });
+    }
 
         /** Error Routes */
         $router->namespace("_App")->group("/ops");
@@ -153,8 +172,8 @@
         if ($router->error()) {
             $router->redirect("/ops/{$router->error()}");
         }
-    } else {
-        (new Web())->start();
-    }
+    // } else {
+        // $web->start();
+    // }
 
     ob_end_flush();

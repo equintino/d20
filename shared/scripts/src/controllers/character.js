@@ -43,6 +43,7 @@ export default class Character extends AbstractControllers {
     }
 
     #setModal({ formData, list }) {
+        formData.append('source', 'character')
         this.openModal({
             page: 'avatar/show',
             formData: formData,

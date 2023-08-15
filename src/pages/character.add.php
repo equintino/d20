@@ -28,9 +28,9 @@
                 <input type="hidden" name="story" value="" />
                 <section class="side-left">
                     <label>Jogador: </label>
-                    <input class="input-rpg" name="name" value="<?= (strtoupper($login->login) ??
+                    <input class="input-rpg" name="name" value="<?= (strtoupper($user->login) ??
                         null) ?>" disabled />
-                    <input type="hidden" name="user_id" value="<?= ($login->id ?? null) ?>" />
+                    <input type="hidden" name="user_id" value="<?= ($user->id ?? null) ?>" />
                     <label>Personagem: </label>
                     <input class="input-rpg" type="text" name="personage" required>
                     <div style="flex-grow: 2">
@@ -43,8 +43,8 @@
                         <span>
                             <select id="myClass" class="input-rpg" name="category_id" required>
                                 <option></option>
-                                <?php foreach ($classes as $class): ?>
-                                <option value="<?= $class->id ?>"><?= strtoupper($class->name) ?></option>
+                                <?php foreach ($categories as $category): ?>
+                                <option value="<?= $category->id ?>"><?= strtoupper($category->name) ?></option>
                                 <?php endforeach ?>
                             </select>
                         </span>

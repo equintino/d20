@@ -14,7 +14,7 @@
     }
 </style>
 <form id="avatarList" method="POST" action="#">
-    <?php if ($source !== "character"): ?>
+    <?php if (empty($source) || $source === "character"): ?>
     <div style="float: left">
         <section>
             <label class="label-rpg">Raça:</lebel>

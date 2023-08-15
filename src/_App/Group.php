@@ -25,10 +25,10 @@ class Group extends Controller
         return (new \Models\Group())->load($id);
     }
 
-    public function getGroup(): array
-    {
-        return (new \Models\Group())->activeAll();
-    }
+    // public function getGroup(): array
+    // {
+    //     return (new \Models\Group())->activeAll();
+    // }
 
     public function list(): void
     {
@@ -36,7 +36,7 @@ class Group extends Controller
         $screens = Safety::screens("/pages");
         $group_id = ((new User())->find($_SESSION["login"]->login)->group_id ?? null);
 
-        $this->render("shield", [ compact("groups", "screens", "group_id") ]);
+        $this->render("shield", compact("groups", "screens", "group_id"));
     }
 
     public function access(array $data): string

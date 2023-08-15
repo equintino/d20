@@ -5,10 +5,6 @@ import AbstractServices from './abstractservices.js'
 const capitalize = utils.capitalize
 
 export default class Menu extends AbstractServices {
-    constructor() {
-        super()
-    }
-
     getCookie(name) {
         return Cookie.getCookie(name)
     }
@@ -23,7 +19,8 @@ export default class Menu extends AbstractServices {
             'avatar'   : 'Gerenciamento de Avatar',
             'player'   : 'Gerenciamento de Jogadores',
             'user'     : 'Gerenciamento de Usuários',
-            'shield'   : 'Gerenciamento de Acessos'
+            'shield'   : 'Gerenciamento de Acessos',
+            'config'   : 'Gerenciamento Conexão com o Banco'
         }
         return ident[page]
     }

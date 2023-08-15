@@ -9,20 +9,23 @@ class Login
 {
     public readonly Session $session;
     public readonly ?User $user;
+    public readonly string $password;
     public string $message;
     private $db;
 
-    public function __construct(readonly string $login, readonly string $password, string $db)
+    public function __construct()
     {
         $this->session = new Session("ses");
-        $this->db = $db;
-        $this->session->setDb($db);
-        $_SESSION['login'] = $this->session;
     }
 
-    public function user(): Login | string
+    public function user(string $login, string $password, string $db): Login | string
     {
-        $this->user = (new User())->find($this->login);
+        $this->user = (new User())->find($login);
+        $this->db = $db;
+        $this->session->setDb($db);
+        $this->password = $password;
+        $_SESSION['login'] = $this->session;
+
         if (!empty($this->user->message()) && preg_match("/doesn't exist/", $this->user->message())) {
             $this->user->createThisTable();
             $this->message = "No data";
@@ -40,7 +43,7 @@ class Login
         } elseif ($this->user->token) {
             $this->message = json_encode("reset password");
         } elseif ($this->user->validate($this->password, $this->user->password)) {
-            $this->setSession();
+            $this->setSession($this->user->login);
             $this->message = json_encode(true);
         } else {
             $this->session->destroy();
@@ -49,9 +52,9 @@ class Login
         return $this->message;
     }
 
-    private function setSession(): void
+    private function setSession($login): void
     {
-        $this->session->setLogin($this->login);
+        $this->session->setLogin($login);
         $this->session->setPassword($this->password);
         FileTransation::setLocal($this->db);
         $this->session->setUser($this->user);

@@ -9,7 +9,7 @@ class Image extends Controller
 
     public function __construct()
     {
-        parent::__construct();
+        // parent::__construct();
         $this->class = new \Models\Image();
     }
 

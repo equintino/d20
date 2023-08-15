@@ -23,14 +23,14 @@ class Config extends Controller
     {
         $config = $this->config;
         $activeConnection = $this->config->getConfConnection();
-        $this->render("config", [ compact("config","activeConnection") ]);
+        $this->render("config", compact("config","activeConnection"));
     }
 
     public function add(): void
     {
         $act = "add";
         $types = $this->config->types;
-        ($this->setPath("Modals")->render("config", [ compact("act", "types") ]));
+        ($this->setPath("Modals")->render("config", compact("act", "types")));
     }
 
     public function edit(array $data): void
@@ -40,7 +40,7 @@ class Config extends Controller
         $config = $this->config;
         $config::$local = $connectionName;
 
-        ($this->setPath("Modals")->render("config", [ compact("config", "types", "connectionName") ]));
+        ($this->setPath("Modals")->render("config", compact("config", "types", "connectionName")));
     }
 
     public function save(array $data): void

@@ -6,7 +6,7 @@ class Avatar extends Controller
 {
     protected $page = "avatar";
 
-    public function init(?array $data): void
+    public function _init(?array $data): void
     {
         $this->render($this->page);
     }
@@ -21,7 +21,7 @@ class Avatar extends Controller
         $act = "add";
         $breeds = (new \Models\Breed())->activeAll();
         $categories = (new \Models\Category())->activeAll();
-        $this->render($this->page,  [ compact("act", "breeds", "categories") ]);
+        $this->render($this->page,  compact("act", "breeds", "categories"));
     }
 
     public function list(): void
@@ -30,7 +30,8 @@ class Avatar extends Controller
         $avatars = (new \Models\Avatar())->activeAll();
         $breeds = (new \Models\Breed())->activeAll();
         $categories = (new \Models\Category())->activeAll();
-        $this->render($this->page, [ compact("act", "avatars", "breeds", "categories") ]);
+        // $this->render($this->page, [ compact("act", "avatars", "breeds", "categories") ]);
+        $this->render($this->page, compact("act", "avatars", "breeds", "categories"));
     }
 
     public function getAvatars(array $data): string
@@ -58,7 +59,7 @@ class Avatar extends Controller
         $categories = (new \Models\Category())->activeAll();
         $avatar = (new \Models\Avatar())->load($id);
         echo "<script>var act='edit'</script>";
-        $this->setPath("Modals")->render($this->page, [ compact("act", "avatar", "breeds", "categories") ]);
+        $this->setPath("Modals")->render($this->page, compact("act", "avatar", "breeds", "categories"));
     }
 
     public function show(array $data): void
@@ -79,15 +80,15 @@ class Avatar extends Controller
             }
         }
         $this->setPath("Modals")->render($this->page . $act,
-            [
                 compact("list", "act", "categories", "idCategory", "idBreed", "currentCat", "source", "breeds")
-            ]
         );
     }
 
     public function save(array $data)
     {
-        $avatars = (!empty($data["id"]) ? (new \Models\Avatar())->load($data["id"]) : new \Models\Avatar());
+        $avatars = (
+            !empty($data["id"]) ? (new \Models\Avatar())->load($data["id"]) : new \Models\Avatar()
+        );
         $files = $_FILES["image"];
         if (is_array($files["name"])) {
             for ($x = 0; $x < count($files["name"]); $x++) {

@@ -6,27 +6,35 @@ use Core\Session;
 use Models\Mission;
 use Models\Breed;
 use Models\Category;
-use Models\Photo;
+// use Models\Photo;
 
 class Character extends Controller
 {
     protected $page = "character";
+    // public readonly Web $web;
 
-    public function init(?array $data): void
+    // public function __construct()
+    // {
+    //     parent::__construct();
+    //     $this->web = new Web();
+    // }
+
+    // public function init(?array $data): void
+    public function _init(?array $data): void
     {
-        // $this->view->render($this->page);
         $this->render($this->page);
     }
 
     public function add(): void
     {
         $act = ".add";
-        $login = (new Session())->getUser();
+        $user = (new Session())->getUser();
+        // $login = (new Session())->getUser();
         $breeds = (new Breed())->activeAll();
-        $classes = (new Category())->activeAll();
+        $categories = (new Category())->activeAll();
 
-        // $this->view->render($this->page . $act, [ compact("login", "breeds", "classes") ]);
-        $this->render($this->page . $act, [ compact("login", "breeds", "classes") ]);
+        $this->render($this->page . $act, compact("user", "breeds", "categories"));
+        // $this->render($this->page . $act);
     }
 
     public function edit(array $data)
@@ -48,8 +56,8 @@ class Character extends Controller
         $breeds = (new Breed())->activeAll();
         $categories = (new Category())->activeAll();
         $mission = (!empty($character->mission_id) ? (new Mission())->load($character->mission_id) : null);
-        $this->setPath("Modals")->render($this->page, [ compact( "act", "login", "trends1", "trends2",
-        "character", "breeds", "categories", "mission" ) ]);
+        $this->setPath("Modals")->render($this->page, compact( "act", "login", "trends1", "trends2",
+        "character", "breeds", "categories", "mission" ));
     }
 
     public function list()
@@ -77,7 +85,7 @@ class Character extends Controller
             ])
             ?? []
         );
-        $this->render($this->page . $act, [ compact("act","characters") ]);
+        $this->render($this->page . $act, compact("act","characters"));
     }
 
     public function save(array $data): ?string

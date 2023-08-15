@@ -2,35 +2,69 @@
 
 namespace _App;
 
-use Traits\AuthTrait;
-use Views\View;
+// use Traits\AuthTrait;
+// use Views\View;
+// use Core\Session;
 // use Core\Safety;
 
 class Web extends Controller
 {
-    use AuthTrait;
+    // public $web;
+    // use AuthTrait;
+    // private $user;
+    // private $categories;
 
-    public function __construct()
+    // public function __construct()
+    // {
+    //     $this->web = new \Views\Web();
+    //     // parent::__construct();
+    //     // $this->view = new \Views\View(__DIR__ . "/../../themes/" . CONF_VIEW_THEME . "/");
+    //     // $this->path  = __DIR__ . "/../pages";
+    //     // $this->user = (new \Core\Session())->getUser();
+    //     // $this->categories = (new \Models\Category())->activeAll();
+    // }
+
+    /** no login */
+    public function start(): void
     {
-        parent::__construct();
-        $this->view = new View(__DIR__ . "/../../themes/" . CONF_VIEW_THEME . "/");
-        $this->path  = __DIR__ . "/../pages";
+        // $route = filter_input(INPUT_GET, "route", FILTER_UNSAFE_RAW);
+        // $groups = $this->group()->activeAll();
+
+        // if ($this->login($route, $groups)) {
+             $this->setPath('public')->render('index');
+        // }
     }
 
-    public function start()
+    public function _login(): void
     {
-        $route = filter_input(INPUT_GET, "route", FILTER_UNSAFE_RAW);
-        $groups = (new Group())->getGroup();
-
-        if ($this->login($route, $groups) && empty($_SESSION['login'])) {
-            $this->setPath('public')->render('index');
-        }
+        $this->setPath('pages')->render('login');
     }
 
-    public function init()
+    public function register(): void
     {
-        // $params['group'] = $this->group;
-        // $params['group'] = (new Group())->getGroup();
+        $groups = $this->group()->activeAll();
+        $this->setPath('Modals')->render('register', compact('groups'));
+    }
+
+    public function enter(): string
+    {
+        return (new Login())->enter($_POST);
+    }
+
+    public function home(): void
+    {
+        $this->setPath('pages')->render("home");
+    }
+
+    public function error($data): void
+    {
+        $errcode = $data["errcode"];
+        $this->render("error", compact("errcode"));
+    }
+
+    /** after login */
+    private function init(): void
+    {
         $id = $_SESSION['login']->group_id;
         $params['group'] = (new Group())->getThisGroup($id);
         $head = $this->seo(
@@ -40,45 +74,33 @@ class Web extends Controller
             url() . "//" . theme("assets/img/loading.png"),
             url() . "//" . theme("assets/img/logo-menu.png")
         );
-        $this->view->insertTheme($params, null, $head);
-        // $this->render('home');
+        $this->view->insertTheme($params, $head);
     }
 
-    public function setPath(string $path): Web
+    protected function render(string $page, array $params = []): void
     {
-        $this->path = __DIR__ . "/../{$path}";
-        return $this;
-    }
+        // if ((new Session())->getUser()) { $this->init(); }
+        if ($this->getUser()) { $this->init(); }
 
-    public function render(string $page, array $params = [])
-    {
+        // $params['user'] = $this->user;
+        // $params['categories'] = $this->categories;
         // if (!strpos($this->path, "Server") && !strpos($this->path, "Modals") && empty($this->access)
         //     && !Safety::restrictAccess($page)) {
         //     return print "<h5 align='center' style='color: var(--cor-primary)'>Restricted access</h5>";
         // }
+        // $this->view->render($this->path . "/{$page}", $params);
         $this->view->render($this->path . "/{$page}", $params);
     }
 
-    public function home(): void
-    {
-        $this->render("home");
-    }
-
-    public function error($data): void
-    {
-        $errcode = $data["errcode"];
-        $this->render("error", [ compact("errcode") ]);
-    }
-
-    public function version(): string
-    {
-        $file = __DIR__ . "/../../version";
-        if (file_exists($file)) {
-            foreach (file($file) as $row) {
-                if (!preg_match("/^#/", $row)) {
-                    return $row;
-                }
-            }
-        }
-    }
+    // private function version(): string
+    // {
+    //     $file = __DIR__ . "/../../version";
+    //     if (file_exists($file)) {
+    //         foreach (file($file) as $row) {
+    //             if (!preg_match("/^#/", $row)) {
+    //                 return $row;
+    //             }
+    //         }
+    //     }
+    // }
 }

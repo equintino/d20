@@ -4,42 +4,41 @@ namespace Views;
 
 class View
 {
-    private $path;
     public $theme;
+    public $path;
 
-    public function __construct(string $theme = null)
+    public function __construct(
+        string $theme = __DIR__ . "/../../themes/" . CONF_VIEW_THEME . "/",
+        string $path = '/../pages'
+    )
     {
         $this->theme = $theme;
-        $this->path  = __DIR__ . "/../pages";
+        $this->path  = __DIR__ . $path;
     }
 
-    public function setPath(string $path): View
-    {
-        $this->path = __DIR__ . "/../{$path}";
-        return $this;
-    }
+    // public function setPath(string $path): View
+    // {
+    //     $this->path = __DIR__ . "/../{$path}";
+    //     return $this;
+    // }
 
-    public function render(string $page, array $params): void
+    public function render(string $page, array $params = []): void
     {
         /** makes variables available to the page */
         if (!empty($params)) {
-            foreach ($params as $value) {
-                if (is_array($value)) {
-                    extract($value);
-                }
-            }
+            extract($params);
         }
 
         include_once "{$page}.php";
     }
 
-    public function insertTheme(array $params = null, string $path = null, $head): void
+    public function insertTheme(array $params, array $head): void
     {
+        $params['head'] = $head;
         /** makes variables available to the page */
         if ($params) {
             extract($params);
         }
         include_once $this->theme . '/index.php';
-        // require_once !empty($path) ? $path : $this->theme . "/index.php";
     }
 }
