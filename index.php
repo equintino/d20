@@ -8,28 +8,16 @@
 
     use CoffeeCode\Router\Router;
     use Core\Session;
-    // use _App\Web;
 
     $router = new Router(url(), ":");
     $session = new Session();
-    // $web = new Web();
 
-    // if (!$session->getUser()) {
-    //     // $web->start();
-    // }
-
-    // if ($session->getUser()) {
-        /**  Web Routes */
-        $router->namespace("_App");
-        // $router->get("/", "Web:init");
-        $router->get("/", "Web:start");
-        // $router->get("/home", "Web:home");
-
-
-        /** testando */
-        $router->post('/login', "Web:_login");
-        $router->post('/register', "Web:register");
-        $router->post('/enter', "Web:enter");
+    /**  Web Routes */
+    $router->namespace("_App");
+    $router->get("/", "Web:start");
+    $router->post('/login', "Web:_login");
+    $router->post('/register', "Web:register");
+    $router->post('/enter', "Web:enter");
 
 
 
@@ -161,19 +149,16 @@
         });
     }
 
-        /** Error Routes */
-        $router->namespace("_App")->group("/ops");
-        $router->get("/{errcode}", "Web:error");
+    /** Error Routes */
+    $router->namespace("_App")->group("/ops");
+    $router->get("/{errcode}", "Web:error");
 
-        /** Routes */
-        $router->dispatch();
+    /** Routes */
+    $router->dispatch();
 
-        /**  Error Redirect */
-        if ($router->error()) {
-            $router->redirect("/ops/{$router->error()}");
-        }
-    // } else {
-        // $web->start();
-    // }
+    /**  Error Redirect */
+    if ($router->error()) {
+        $router->redirect("/ops/{$router->error()}");
+    }
 
     ob_end_flush();

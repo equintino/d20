@@ -2,6 +2,4 @@
 
 namespace Views;
 
-class Web extends View
-{
-}
+class Web extends View{}

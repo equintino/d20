@@ -16,12 +16,6 @@ class View
         $this->path  = __DIR__ . $path;
     }
 
-    // public function setPath(string $path): View
-    // {
-    //     $this->path = __DIR__ . "/../{$path}";
-    //     return $this;
-    // }
-
     public function render(string $page, array $params = []): void
     {
         /** makes variables available to the page */
