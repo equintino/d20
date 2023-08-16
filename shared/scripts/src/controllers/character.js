@@ -212,7 +212,6 @@ export default class Character extends AbstractControllers {
     #avatar({ formData }) {
         this.view.loading.show()
         formData.append('act', 'list')
-        formData.append('source', 'character')
 
         this.openModal({
             page: 'avatar/show',
@@ -306,6 +305,7 @@ export default class Character extends AbstractControllers {
                                 (property === 'category_id' || property === 'breed_id')
                                     && e.type === 'change'
                             )) {
+                            formData.append('source', 'edit')
                             this.#avatar({ formData })
                         }
                     }

@@ -40,8 +40,9 @@ class Character extends Controller
         $breeds = $this->breed()->activeAll();
         $categories = $this->category()->activeAll();
         $mission = (!empty($character->mission_id) ? $this->mission()->load($character->mission_id) : null);
-        $this->setPath("Modals")->render($this->page, compact( "act", "login", "trends1", "trends2",
-        "character", "breeds", "categories", "mission" ));
+        $this->setPath("Modals")->render($this->page,
+            compact( "act", "login", "trends1", "trends2",
+                "character", "breeds", "categories", "mission" ));
     }
 
     public function list(): void

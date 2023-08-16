@@ -30,7 +30,6 @@ class Avatar extends Controller
         $avatars = (new \Models\Avatar())->activeAll();
         $breeds = (new \Models\Breed())->activeAll();
         $categories = (new \Models\Category())->activeAll();
-        // $this->render($this->page, [ compact("act", "avatars", "breeds", "categories") ]);
         $this->render($this->page, compact("act", "avatars", "breeds", "categories"));
     }
 
@@ -64,7 +63,6 @@ class Avatar extends Controller
 
     public function show(array $data): void
     {
-        // $list = json_decode($data["list"]);
         $list = null;
         $idCategory = $data["category_id"];
         $idBreed = $data["breed_id"];
