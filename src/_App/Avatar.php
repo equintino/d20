@@ -6,10 +6,10 @@ class Avatar extends Controller
 {
     protected $page = "avatar";
 
-    public function _init(?array $data): void
-    {
-        $this->render($this->page);
-    }
+    // public function _init(?array $data): void
+    // {
+    //     $this->render($this->page);
+    // }
 
     public function carousel(): void
     {

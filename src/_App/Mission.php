@@ -2,16 +2,14 @@
 
 namespace _App;
 
-use Core\Session;
-
 class Mission extends Controller
 {
-    protected $page = "mission";
+    public string $page = "mission";
 
-    public function init(?array $data): void
+    public function _init(): void
     {
-        $login = (new Session())->getUser();
-        $group = (new \Models\Group())->load($login->group_id);
+        $login = $this->session()->getUser();
+        $group = $this->group()->load($login->group_id);
         $this->render($this->page, compact("login", "group"));
     }
 
@@ -24,8 +22,8 @@ class Mission extends Controller
     public function edit(array $data)
     {
         $id = $data["id"];
-        $mission = (new \Models\Mission())->load($id);
-        $allCharacters = (new \Models\Character())->join(
+        $mission = $this->mission()->load($id);
+        $allCharacters = $this->character()->join(
             "characters.id,login,characters.personage,characters.active,story,trend1,trend2,characters.user_id,"
             . "breed_id,image_id,players.mission_id",
             [
@@ -95,7 +93,7 @@ class Mission extends Controller
     public function load(array $data): ?string
     {
         $name = filter_var($data["name"], FILTER_UNSAFE_RAW);
-        $mission = (new \Models\Mission())->load($name);
+        $mission = $this->mission()->load($name);
         $dataMission = [
             "id" => $mission->id,
             "name" => $mission->name,
@@ -108,7 +106,7 @@ class Mission extends Controller
     public function loadId(array $data): ?string
     {
         $id = filter_var($data["id"], FILTER_UNSAFE_RAW);
-        $mission = (new \Models\Mission())->load($id);
+        $mission = $this->mission()->load($id);
         $dataMission = [
             "id" => $mission->id,
             "name" => $mission->name,
@@ -120,8 +118,7 @@ class Mission extends Controller
 
     public function map(array $data): void
     {
-        $mission = (new \Models\Mission())->load($data['mission']);
-        // $mission = $data["mission"];
+        $mission = $this->mission()->load($data['mission']);
         $this->setPath("Modals")->render("map", compact("mission"));
     }
 

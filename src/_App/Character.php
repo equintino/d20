@@ -4,12 +4,12 @@ namespace _App;
 
 class Character extends Controller
 {
-    protected $page = "character";
+    public string $page = "character";
 
-    public function _init(?array $data): void
-    {
-        $this->render($this->page);
-    }
+    // public function _init(?array $data): void
+    // {
+    //     $this->render($this->page);
+    // }
 
     public function add(): void
     {

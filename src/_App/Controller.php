@@ -3,25 +3,26 @@
 namespace _App;
 
 use Traits\ClassTraits;
-use Views\View;
-use Core\Session;
 
 abstract class Controller
 {
     use ClassTraits;
 
-    protected $path;
     protected $view;
-    protected $seo;
-    protected $loading;
+    protected $path;
 
     public function __construct()
     {
-        $this->view = new View();
+        $this->view = $this->view();
         $this->path  = __DIR__ . "/../pages";
     }
 
-    protected function getPost($data)
+    public function _init(): void
+    {
+        $this->render($this->page);
+    }
+
+    protected function getPost($data): array
     {
         foreach ($data as $key => $value) {
             $params[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -29,7 +30,7 @@ abstract class Controller
         return $params;
     }
 
-    protected function getGet($data)
+    protected function getGet($data): array
     {
         foreach ($data as $key => $value) {
             $params[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -46,7 +47,7 @@ abstract class Controller
 
     protected function getUser()
     {
-        return (new Session())->getUser();
+        return $this->session()->getUser();
     }
 
     protected function setPath(string $path): Controller

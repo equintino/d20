@@ -100,8 +100,8 @@
 
         /** The Mission */
         $router->namespace("_App");
-        $router->get("/mission", "Mission:init");
-        $router->get("/mission/init", "Mission:init");
+        $router->get("/mission", "Mission:_init");
+        // $router->get("/mission/init", "Mission:init");
         $router->get("/mission/add", "Mission:add");
         $router->post("/mission/save", "Mission:save");
         $router->post("/mission/update", "Mission:update");
