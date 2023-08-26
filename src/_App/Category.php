@@ -6,9 +6,9 @@ class Category extends Controller
 {
     protected $page = "category";
 
-    public function init(?array $data): void
+    public function __construct()
     {
-        $this->render($this->page);
+        parent::__construct(new \Models\Category());
     }
 
     public function add(): void
@@ -20,21 +20,21 @@ class Category extends Controller
     public function list(): void
     {
         $act = "list";
-        $categories = (new \Models\Category())->activeAll();
+        $categories = $this->class->activeAll();
         $this->render($this->page, compact("act", "categories"));
     }
 
     public function edit(array $data): void
     {
         $id = $data["id"];
-        $category = (new \Models\Category())->load($id);
+        $category = $this->class->load($id);
         $this->setPath("Modals")->render($this->page, compact("category"));
     }
 
     public function load(array $data)
     {
         $id = $data["id"];
-        $category = (new \Models\Category())->load($id);
+        $category = $this->class->load($id);
 
         return print json_encode([
             "name" => $category->name,
@@ -45,12 +45,12 @@ class Category extends Controller
 
     public function save(array $data)
     {
-        $category = (!empty($data['id']) ? (new \Models\Category())->load($data["id"]) : new \Models\Category());
+        $category = (!empty($data['id']) ? $this->class->load($data["id"]) : $this->class);
         if ($_FILES["image"]["error"] === 0) {
             if (empty($category->image_id)) {
-                $data["image_id"] = (new \Models\Image())->fileSave($_FILES["image"]);
+                $data["image_id"] = $this->image()->fileSave($_FILES["image"]);
             } else {
-                $image = (new \Models\Image())->load($category->image_id);
+                $image = $this->image()->load($category->image_id);
                 $image->fileSave($_FILES["image"]);
             }
         }
@@ -61,7 +61,7 @@ class Category extends Controller
 
     public function delete(array $data)
     {
-        $category = (new \Models\Category())->find($data["name"])[0];
+        $category = $this->class->find($data["name"])[0];
         $category->destroy();
         return print json_encode($category->message());
     }

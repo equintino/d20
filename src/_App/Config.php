@@ -5,39 +5,37 @@ namespace _App;
 class Config extends Controller
 {
     protected $page = " config";
-    private $config;
 
     public function __construct()
     {
-        parent::__construct();
-        $this->config = new \Config\Config();
+        parent::__construct(new \Config\Config());
     }
 
     public function init(array $data): string
     {
-        $this->config->save($data);
-        return print $this->config->message();
+        $this->class->save($data);
+        return print $this->class->message();
     }
 
     public function list(): void
     {
-        $config = $this->config;
-        $activeConnection = $this->config->getConfConnection();
+        $config = $this->class;
+        $activeConnection = $this->class->getConfConnection();
         $this->render("config", compact("config","activeConnection"));
     }
 
     public function add(): void
     {
         $act = "add";
-        $types = $this->config->types;
+        $types = $this->class->types;
         ($this->setPath("Modals")->render("config", compact("act", "types")));
     }
 
     public function edit(array $data): void
     {
-        $types = $this->config->types;
+        $types = $this->class->types;
         $connectionName = $data["connectionName"];
-        $config = $this->config;
+        $config = $this->class;
         $config::$local = $connectionName;
 
         ($this->setPath("Modals")->render("config", compact("config", "types", "connectionName")));
@@ -45,20 +43,20 @@ class Config extends Controller
 
     public function save(array $data): void
     {
-        $this->config->save($data);
-        echo json_encode($this->config->message());
+        $this->class->save($data);
+        echo json_encode($this->class->message());
     }
 
     public function update(): void
     {
         $params = $this->getPost($_POST);
-        $this->config->update($params);
-        echo json_encode($this->config->message());
+        $this->class->update($params);
+        echo json_encode($this->class->message());
     }
 
     public function delete(array $data): void
     {
-        $this->config->delete($data["connectionName"]);
-        echo json_encode($this->config->message());
+        $this->class->delete($data["connectionName"]);
+        echo json_encode($this->class->message());
     }
 }

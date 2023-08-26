@@ -6,10 +6,15 @@ class Documentation extends Controller
 {
     protected $page = "documentation";
 
+    public function __construct()
+    {
+        parent::__construct(new \Models\Documentation());
+    }
+
     public function init(?array $data): void
     {
         $act = "show";
-        $documentations = ((new \Models\Documentation())->all() ?? []);
+        $documentations = ($this->class->all() ?? []);
         $this->render($this->page, compact("act","documentations"));
     }
 
@@ -29,7 +34,7 @@ class Documentation extends Controller
     public function showImage(array $data): void
     {
         $id = $data["id"];
-        $documentation = (new \Models\Documentation())->load($id);
+        $documentation = $this->class->load($id);
         $type = $documentation->type;
         header("Content-Type: {$type}");
         echo $documentation->image;
@@ -41,7 +46,7 @@ class Documentation extends Controller
         $names = $data["names"];
         $descriptions = $data["descriptions"];
         $keys = array_keys(array_filter($files["name"]));
-        $documentation = new \Models\Documentation();
+        $documentation = $this->class;
         foreach ($keys as $key) {
             $file["name"] = $names[$key];
             $file["description"] = $descriptions[$key];

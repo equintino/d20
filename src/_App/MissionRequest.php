@@ -4,12 +4,18 @@ namespace _App;
 
 class MissionRequest extends Mission
 {
+
+    public function __construct()
+    {
+        parent::__construct(new \Models\MissionRequest());
+    }
+
     public function init(?array $data): void
     {
         $login = $_SESSION["login"];
         $mission_id = $data["mission_id"];
         $act = $data["act"];
-        $players = (new \Models\Player())->join(
+        $players = $this->player()->join(
             "characters.id,personage,users.login,characters.user_id",
             [
                 "users",
@@ -37,7 +43,7 @@ class MissionRequest extends Mission
     {
         $data["character_id"] = (int) $data["character_id"];
         $data["mission_id"] = (int) $data["mission_id"];
-        $missionRequest = new \Models\MissionRequest();
+        $missionRequest = $this->class;
         $missionRequest->bootstrap($data);
         $missionRequest->save();
         return print json_encode($missionRequest->message());
@@ -46,14 +52,14 @@ class MissionRequest extends Mission
     public function save(array $data)
     {
         $action = $data["action"];
-        $missionRequest = (new \Models\MissionRequest())->load($data["missionR"]);
+        $missionRequest = $this->class->load($data["missionR"]);
 
         if ($action === "reject") {
             $missionRequest->destroy();
             return print json_encode($missionRequest->message());
         }
         if ($action === "acept") {
-            $character = (new \Models\Character())->load($missionRequest->character_id);
+            $character = $this->character()->load($missionRequest->character_id);
             $character->mission_id = (int) $data["missionR"];
             $character->save();
             return print json_encode($character->message());

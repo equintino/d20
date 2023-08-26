@@ -11,8 +11,9 @@ abstract class Controller
     protected $view;
     protected $path;
 
-    public function __construct()
+    public function __construct(object $class = null)
     {
+        $this->class = $class;
         $this->view = $this->view();
         $this->path  = __DIR__ . "/../pages";
     }

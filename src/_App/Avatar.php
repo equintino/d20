@@ -6,10 +6,10 @@ class Avatar extends Controller
 {
     protected $page = "avatar";
 
-    // public function _init(?array $data): void
-    // {
-    //     $this->render($this->page);
-    // }
+    public function __construct()
+    {
+        parent::__construct(new \Models\Avatar());
+    }
 
     public function carousel(): void
     {
@@ -19,17 +19,17 @@ class Avatar extends Controller
     public function add(): void
     {
         $act = "add";
-        $breeds = (new \Models\Breed())->activeAll();
-        $categories = (new \Models\Category())->activeAll();
+        $breeds = $this->breed()->activeAll();
+        $categories = $this->category()->activeAll();
         $this->render($this->page,  compact("act", "breeds", "categories"));
     }
 
     public function list(): void
     {
         $act = "list";
-        $avatars = (new \Models\Avatar())->activeAll();
-        $breeds = (new \Models\Breed())->activeAll();
-        $categories = (new \Models\Category())->activeAll();
+        $avatars = $this->class->activeAll();
+        $breeds = $this->breed()->activeAll();
+        $categories = $this->category()->activeAll();
         $this->render($this->page, compact("act", "avatars", "breeds", "categories"));
     }
 
@@ -39,7 +39,7 @@ class Avatar extends Controller
             "breed_id" => $data["breed_id"],
             "category_id" => $data["category_id"]
         ];
-        $avatars = (new \Models\Avatar())->search($search);
+        $avatars = $this->class->search($search);
         foreach ($avatars as $avatar) {
             $response[] = [
                 "id" => $avatar->id,
@@ -54,9 +54,9 @@ class Avatar extends Controller
     {
         $id = ( $data["id"] ?? null );
         $act = "edit";
-        $breeds = (new \Models\Breed())->activeAll();
-        $categories = (new \Models\Category())->activeAll();
-        $avatar = (new \Models\Avatar())->load($id);
+        $breeds = $this->breed()->activeAll();
+        $categories = $this->category()->activeAll();
+        $avatar = $this->class->load($id);
         echo "<script>var act='edit'</script>";
         $this->setPath("Modals")->render($this->page, compact("act", "avatar", "breeds", "categories"));
     }
@@ -69,8 +69,8 @@ class Avatar extends Controller
         $act = (!empty($data["act"]) ? ".{$data['act']}" : null);
         $source = ($data["source"] ?? null);
         $currentCat = "";
-        $categories = (new \Models\Category())->activeAll();
-        $breeds = (new \Models\Breed())->activeAll();
+        $categories = $this->category()->activeAll();
+        $breeds = $this->breed()->activeAll();
         foreach ($categories as $category) {
             if ($category->id == $idCategory) {
                 $currentCat = $category;
@@ -85,7 +85,7 @@ class Avatar extends Controller
     public function save(array $data)
     {
         $avatars = (
-            !empty($data["id"]) ? (new \Models\Avatar())->load($data["id"]) : new \Models\Avatar()
+            !empty($data["id"]) ? $this->class->load($data["id"]) : new \Models\Avatar()
         );
         $files = $_FILES["image"];
         if (is_array($files["name"])) {
@@ -95,14 +95,14 @@ class Avatar extends Controller
                 $file["tmp_name"] = $files["tmp_name"][$x];
                 $file["size"] = $files["size"][$x];
                 if ($files["error"][$x] === 0) {
-                    $data["image_id"] = (new \Models\Image())->fileSave($file);
+                    $data["image_id"] = $this->image()->fileSave($file);
                 }
                 $avatars->bootstrap($data);
                 $avatars->save();
             }
         } else {
             if ($files["error"] === 0) {
-                $image = (new \Models\Image())->load($avatars->image_id);
+                $image = $this->image()->load($avatars->image_id);
                 $data["image_id"] = $image->fileSave($files);
             }
             $avatars->bootstrap($data);
@@ -113,8 +113,8 @@ class Avatar extends Controller
 
     public function delete(array $data): ?string
     {
-        $avatar = (new \Models\Avatar())->load($data["id"]);
-        $image = (new \Models\Image())->load($avatar->image_id);
+        $avatar = $this->class->load($data["id"]);
+        $image = $this->image()->load($avatar->image_id);
         $image->destroy();
         $avatar->destroy();
         return print json_encode($avatar->message());

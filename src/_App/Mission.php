@@ -6,6 +6,11 @@ class Mission extends Controller
 {
     public string $page = "mission";
 
+    public function __construct()
+    {
+        parent::__construct(new \Models\Mission());
+    }
+
     public function _init(): void
     {
         $login = $this->session()->getUser();
@@ -22,7 +27,7 @@ class Mission extends Controller
     public function edit(array $data)
     {
         $id = $data["id"];
-        $mission = $this->mission()->load($id);
+        $mission = $this->class->load($id);
         $allCharacters = $this->character()->join(
             "characters.id,login,characters.personage,characters.active,story,trend1,trend2,characters.user_id,"
             . "breed_id,image_id,players.mission_id",
@@ -42,7 +47,7 @@ class Mission extends Controller
         )
         ->where();
         $characters = $allCharacters;
-        $missionRequests = (new \Models\MissionRequest)->join(
+        $missionRequests = $this->MissionRequest()->join(
             "mission_requests.id, player, character_id, mission_requests.mission_id,
             characters.personage, missions.name",
             [
@@ -64,7 +69,7 @@ class Mission extends Controller
         ]);
         $missionRequest = function ($characterId, $id) {
             return !empty(
-                (new \Models\MissionRequest())->search([
+                $this->MissionRequest()->search([
                     "character_id" => $characterId,
                     "mission_id" => $id
                 ])
@@ -93,7 +98,7 @@ class Mission extends Controller
     public function load(array $data): ?string
     {
         $name = filter_var($data["name"], FILTER_UNSAFE_RAW);
-        $mission = $this->mission()->load($name);
+        $mission = $this->class->load($name);
         $dataMission = [
             "id" => $mission->id,
             "name" => $mission->name,
@@ -106,7 +111,7 @@ class Mission extends Controller
     public function loadId(array $data): ?string
     {
         $id = filter_var($data["id"], FILTER_UNSAFE_RAW);
-        $mission = $this->mission()->load($id);
+        $mission = $this->class->load($id);
         $dataMission = [
             "id" => $mission->id,
             "name" => $mission->name,
@@ -116,18 +121,16 @@ class Mission extends Controller
         return print json_encode($dataMission);
     }
 
-    public function map(array $data): void
+    public function _map(array $data): void
     {
-        $mission = $this->mission()->load($data['mission']);
+        $mission = $this->class->load($data['mission']);
         $this->setPath("Modals")->render("map", compact("mission"));
     }
 
     public function personages(array $data): string
     {
-        // $missionName = str_replace('_', ' ', filter_var($data["nameMission"], FILTER_UNSAFE_RAW));
-        // $missionId = (new \Models\Mission())->find($missionName)->id;
         $idMission = filter_var($data['id']);
-        $players = (new \Models\Player())->join(
+        $players = $this->Player()->join(
             "*",
             [
                 "characters",
@@ -155,14 +158,14 @@ class Mission extends Controller
 
     public function mapSave(array $data): ?string
     {
-        $map = new \Models\Map();
+        $map = $this->map();
         if (!empty($data['id'])) {
             $map = $map->load($data['id']);
         }
         $file = $_FILES["image"];
         if ($file["error"] === 0) {
             $idImage = ($map->image_id ?? null);
-            $data["image_id"] = (new \Models\Image())->fileSave($file, $idImage);
+            $data["image_id"] = $this->image()->fileSave($file, $idImage);
         }
         $map->bootstrap($data);
         $map->save();
@@ -173,7 +176,7 @@ class Mission extends Controller
     {
         $idMission = $data["id"];
         $images = [];
-        $maps = (new \Models\Map())->search(["mission_id" => $idMission]);
+        $maps = $this->map()->search(["mission_id" => $idMission]);
         if ($maps) {
             foreach ($maps as $map) {
                 $images[] = [
@@ -185,19 +188,18 @@ class Mission extends Controller
             }
         }
         return print json_encode($images);
-        // return print(json_encode($images) ?? null);
     }
 
     public function mapEdit(array $data): void
     {
-        $map = (new \Models\Map())->load($data['id']);
-        $image = (new \Models\Image())->load($data['image_id']);
+        $map = $this->map()->load($data['id']);
+        $image = $this->image()->load($data['image_id']);
         $this->setPath("Modals")->render("map", compact("image", "map"));
     }
 
     public function mapDelete(array $data): ?string
     {
-        $map = (new \Models\Map())->load($data["id"]);
+        $map = $this->map()->load($data["id"]);
         $map->destroy();
         return print json_encode($map->message());
     }
@@ -206,16 +208,16 @@ class Mission extends Controller
     {
         $act = "list";
         $login = $_SESSION["login"];
-        $missions = ((new \Models\Mission())->activeAll() ?? []);
-        $groupId = (new \Models\User())->find($login->login)->group_id;
-        $group = (!empty($groupId) ? (new \Models\Group())->load($groupId) : null);
+        $missions = ($this->class->activeAll() ?? []);
+        $groupId = $this->user()->find($login->login)->group_id;
+        $group = (!empty($groupId) ? $this->group()->load($groupId) : null);
 
         $this->render($this->page, compact("act", "missions", "login", "group"));
     }
 
     public function save(array $data)
     {
-        $mission = new \Models\Mission();
+        $mission = $this->class;
         $mission->bootstrap($data);
         $mission->save();
         return print $mission->message();
@@ -223,12 +225,12 @@ class Mission extends Controller
 
     public function update(array $data)
     {
-        $mission = (new \Models\Mission())->load($data["id"]);
+        $mission = $this->class->load($data["id"]);
         $mission->name = $data["name"];
         $mission->place = $data["place"];
         $mission->story = $data["story"];
         $mission->save();
-        $players = (new \Models\Player())->find([
+        $players = $this->player()->find([
             "mission_id" => $data["id"]
         ]);
         if (!empty($players)) {
@@ -242,8 +244,8 @@ class Mission extends Controller
         if (!empty($data["personages-add"])) {
             foreach ($data["personages-add"] as $characterId) {
                 $characterIds[] = $characterId;
-                $userId = (new \Models\Character())->load($characterId)->user_id;
-                $player = new \Models\Player();
+                $userId = $this->character()->load($characterId)->user_id;
+                $player = $this->player();
                 $player->bootstrap([
                     "character_id" => $characterId,
                     "mission_id" => $data["id"],
@@ -251,7 +253,7 @@ class Mission extends Controller
                 ]);
                 $player->save();
                 if (strpos('success', $player->message()) !== -1) {
-                    $missionRequests = (new \Models\MissionRequest())->search([
+                    $missionRequests = $this->missionRequest()->search([
                         "character_id" => $characterId
                     ]);
                     foreach ($missionRequests as $missionRequest) {
@@ -266,15 +268,15 @@ class Mission extends Controller
     public function delete(array $data): string
     {
         $id = $data["id"];
-        $mission = (new \Models\Mission())->load($id);
-        $belongPersonage = (new \Models\Character())->search(["mission_id" => $id]);
+        $mission = $this->class->load($id);
+        $belongPersonage = $this->character()->search(["mission_id" => $id]);
         if (!empty($belongPersonage)) {
             return alertLatch("This mission belong personages");
         }
-        $maps = (new \Models\Map())->search(["mission_id" => $mission->id]);
+        $maps = $this->map()->search(["mission_id" => $mission->id]);
         /** deleting images */
         foreach ($maps as $map) {
-            (new \Models\Image())->load($map->image_id)->destroy();
+            $this->image()->load($map->image_id)->destroy();
         }
         $mission->destroy();
         return print json_encode($mission->message());

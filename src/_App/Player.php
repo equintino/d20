@@ -8,9 +8,14 @@ class Player extends Controller
 {
     protected $page = "player";
 
+    public function __construct()
+    {
+        parent::__construct(new \Models\Player());
+    }
+
     public function init(?array $data): void
     {
-        $players = (new \Models\Player())->join(
+        $players = $this->class->join(
             "players.id,players.character_id,users.login,missions.name,characters.active,"
             . "characters.personage,trend1,trend2",
             [
@@ -37,8 +42,8 @@ class Player extends Controller
     {
         $act = "add";
         $login = $_SESSION["login"];
-        $breeds = (new \Models\Breed())->activeAll();
-        $classes = (new \Models\Category())->activeAll();
+        $breeds = $this->breed()->activeAll();
+        $classes = $this->category()->activeAll();
         $this->render($this->page, compact("act", "login", "breeds", "classes"));
     }
 
@@ -57,10 +62,10 @@ class Player extends Controller
             "neutral" => "NEUTRO",
             "chaotic" => "CAÓTICO"
         ];
-        $character = (new \Models\Character())->load($id);
-        $breeds = (new \Models\Breed())->activeAll();
-        $categories = (new \Models\Category())->activeAll();
-        $mission = (!empty($character->mission_id) ? (new \Models\Mission())->load($character->mission_id) : null);
+        $character = $this->character()->load($id);
+        $breeds = $this->breed()->activeAll();
+        $categories = $this->category()->activeAll();
+        $mission = (!empty($character->mission_id) ? $this->mission()->load($character->mission_id) : null);
         $this->setPath("Modals")->render($this->page,
                 compact("act", "login", "trends1", "trends2",
                 "character", "breeds", "categories", "mission")
@@ -70,13 +75,13 @@ class Player extends Controller
     public function list()
     {
         $act = "list";
-        $players = ((new \Models\Player())->search(["user_id" => $_SESSION["login"]->id]) ?? []);
+        $players = ($this->class->search(["user_id" => $_SESSION["login"]->id]) ?? []);
         $this->render($this->page, compact("act", "players"));
     }
 
     public function save(array $data)
     {
-        $player = new \Models\Player();
+        $player = $this->class;
         if (empty($player->find([ "character_id" => $data["character_id"] ]))) {
             $player->bootstrap($data);
         } else {
@@ -88,7 +93,7 @@ class Player extends Controller
 
     public function update(array $data): string
     {
-        $player = (new \Models\Player())->load($data["id"]);
+        $player = $this->class->load($data["id"]);
         $player->user_id = $data["user_id"];
         $player->character_id = $data["character_id"];
         $player->mission_id = $data["mission_id"];
@@ -104,7 +109,7 @@ class Player extends Controller
     public function delete(array $data): string
     {
         $id = $data["id"];
-        $player = (new \Models\Player())->load($id);
+        $player = $this->class->load($id);
         $player->destroy();
         return print json_encode($player->message());
     }

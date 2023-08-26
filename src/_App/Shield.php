@@ -3,7 +3,6 @@
 namespace _App;
 
 use Core\Safety;
-use Core\Session;
 
 class Shield extends Controller
 {
@@ -16,14 +15,14 @@ class Shield extends Controller
         foreach ($screens as $screen) {
             $pages[] = Safety::renameScreen($screen);
         }
-        $login = (new Session())->getUser();
+        $login = $this->session()->getUser();
 
         $this->render($this->page, compact("groups", "screens", "login", "pages"));
     }
 
     public function removeGroup(): array
     {
-        $groups = (new \Models\Group())->activeAll();
+        $groups = $this->group()->activeAll();
         array_shift($groups);
         return $groups;
     }

@@ -4,13 +4,11 @@ namespace _App;
 
 class Image extends Controller
 {
-    private \Models\Image $class;
-    private $id;
+    private int $id;
 
     public function __construct()
     {
-        // parent::__construct();
-        $this->class = new \Models\Image();
+        parent::__construct(new \Models\Image());
     }
 
     public function init(array $data)
@@ -21,9 +19,9 @@ class Image extends Controller
 
     public function save(array $data)
     {
-        $image = (new \Models\Image())->load($data["id"]);
+        $image = $this->class->load($data["id"]);
         $image->fileSave($_FILES["image"], $data["id"]);
-        return print(json_encode($image->message()));
+        return print json_encode($image->message());
     }
 
     public function showImage()
@@ -40,14 +38,14 @@ class Image extends Controller
     public function getImage(array $data)
     {
         $file = $data["file"];
-        return print(("assets/img/{$file}"));
+        return print "assets/img/{$file}";
     }
 
     public function delete(array $data)
     {
         $file = $this->class->load($data["id"]);
         $file->destroy();
-        return print(json_encode($file->message()));
+        return print json_encode($file->message());
     }
 
 }

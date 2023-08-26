@@ -2,14 +2,19 @@
 
 namespace _App;
 
-use Models\User;
 use Core\Safety;
 
 class Group extends Controller
 {
+
+    public function __construct()
+    {
+        parent::__construct(new \Models\Group());
+    }
+
     public function init()
     {
-        $groups = (new \Models\Group())->activeAll();
+        $groups = $this->class->activeAll();
         foreach ($groups as $group) {
             $list[$group->name] = [
                 'id' => $group->id,
@@ -22,19 +27,14 @@ class Group extends Controller
 
     public function getThisGroup(int $id)
     {
-        return (new \Models\Group())->load($id);
+        return $this->class->load($id);
     }
-
-    // public function getGroup(): array
-    // {
-    //     return (new \Models\Group())->activeAll();
-    // }
 
     public function list(): void
     {
-        $groups = (new \Models\Group())->activeAll() ?? [];
+        $groups = $this->class->activeAll() ?? [];
         $screens = Safety::screens("/pages");
-        $group_id = ((new User())->find($_SESSION["login"]->login)->group_id ?? null);
+        $group_id = ($this->user()->find($_SESSION["login"]->login)->group_id ?? null);
 
         $this->render("shield", compact("groups", "screens", "group_id"));
     }
@@ -42,12 +42,12 @@ class Group extends Controller
     public function access(array $data): string
     {
         $id = $data["id"];
-        return print json_encode(explode(",", (new \Models\Group())->load($id)->access));
+        return print json_encode(explode(",", $this->class->load($id)->access));
     }
 
     public function load(array $data): void
     {
-        $gp = new \Models\Group();
+        $gp = $this->class;
         $group = $gp->find($data["groupName"]);
         if ($group) {
             $security["access"] = [];
@@ -66,7 +66,7 @@ class Group extends Controller
     public function save(): void
     {
         $params = $this->getPost($_POST);
-        $group = new \Models\Group();
+        $group = $this->class;
 
         $group->bootstrap($params);
         $group->save();
@@ -77,7 +77,7 @@ class Group extends Controller
     {
         $access = $_POST['pages'];
         $groupId = $_POST["id"];
-        $group = (new \Models\Group())->load($groupId);
+        $group = $this->class->load($groupId);
         $group->access = "home,error,{$access}";
         $group->save(true);
         echo json_encode($group->message());
@@ -86,7 +86,7 @@ class Group extends Controller
     public function delete(array $data): void
     {
         $id = $data["id"];
-        $group = (new \Models\Group())->load($id);
+        $group = $this->class->load($id);
         $group->destroy();
         echo json_encode($group->message());
     }

@@ -4,12 +4,12 @@ namespace _App;
 
 class Character extends Controller
 {
-    public string $page = "character";
+    protected string $page = "character";
 
-    // public function _init(?array $data): void
-    // {
-    //     $this->render($this->page);
-    // }
+    public function __construct()
+    {
+        parent::__construct(new \Models\Character());
+    }
 
     public function add(): void
     {
@@ -36,7 +36,7 @@ class Character extends Controller
             "neutral" => "NEUTRO",
             "chaotic" => "CAÓTICO"
         ];
-        $character = $this->character()->load($id);
+        $character = $this->class->load($id);
         $breeds = $this->breed()->activeAll();
         $categories = $this->category()->activeAll();
         $mission = (!empty($character->mission_id) ? $this->mission()->load($character->mission_id) : null);
@@ -51,7 +51,7 @@ class Character extends Controller
         $login = $_COOKIE['login'];
         $userId = $this->user()->find(['login' => $login])[0]->id;
         $characters = (
-            $this->character()->join(
+            $this->class->join(
                 "characters.id,image_id,breed_id,category_id,story,players.mission_id,personage",
                 [
                     "characters",
@@ -74,7 +74,7 @@ class Character extends Controller
 
     public function save(array $data): ?string
     {
-        $characters = $this->character();
+        $characters = $this->class;
         if (!empty($characters->find($data["personage"]))) {
             return print json_encode("<span class='warning'>This personage already exists</span>");
         }
@@ -88,7 +88,7 @@ class Character extends Controller
 
     public function update(array $data): string
     {
-        $character = $this->character()->load($data["id"]);
+        $character = $this->class->load($data["id"]);
         $character->personage = $data["personage"];
         $character->breed_id = $data["breed_id"];
         $character->image_id = $data["image_id"];
@@ -108,7 +108,7 @@ class Character extends Controller
     public function delete(array $data): string
     {
         $id = $data["id"];
-        $character = $this->character()->load($id);
+        $character = $this->class->load($id);
         $character->destroy();
         return print $character->message();
     }

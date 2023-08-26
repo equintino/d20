@@ -2,11 +2,14 @@
 
 namespace _App;
 
-use Models\Group;
-
 class User extends Controller
 {
     protected $page = " user";
+
+    public function __construct()
+    {
+        parent::__construct(new \Models\User());
+    }
 
     public function init(?array $data): void
     {
@@ -20,13 +23,13 @@ class User extends Controller
         $act = "list";
         $login = $_SESSION["login"]->login;
         if (!empty($data["company_id"])) {
-            $users = (new \Models\User())->find(["company_id" => $data["company_id"]]);
+            $users = $this->class->find(["company_id" => $data["company_id"]]);
         } else {
-            $users = (new \Models\User())->all();
+            $users = $this->class->all();
         }
 
-        $user = (new \Models\User())->find($login);
-        $groups = (new Group())->activeAll();
+        $user = $this->class->find($login);
+        $groups = $this->group()->activeAll();
 
         $this->setPath("Modals")->render("user", compact("act", "login", "users", "user", "groups"));
     }
@@ -34,7 +37,7 @@ class User extends Controller
     public function add(): void
     {
         $act = "edit";
-        $groups = (new Group())->activeAll();
+        $groups = $this->group()->activeAll();
 
         $this->setPath("Modals")->render("user", compact("act", "groups"));
     }
@@ -43,8 +46,8 @@ class User extends Controller
     {
         $act = "edit";
         $login = $data["login"];
-        $user = (new \Models\User())->find(($login));
-        $groups = (new Group())->all();
+        $user = $this->class->find(($login));
+        $groups = $this->group()->all();
 
         $this->setPath("Modals")->render("user", compact("act", "user", "groups"));
     }
@@ -54,9 +57,9 @@ class User extends Controller
         $data["user"] = &$data["login"];
         if (empty($data['id'])) {
             $data = $this->confPassword($data);
-            $user = new \Models\User();
+            $user = $this->class;
         } else {
-            $user = (new \Models\User())->load($data['id']);
+            $user = $this->class->load($data['id']);
         }
 
         $user->bootstrap($data);
@@ -66,7 +69,7 @@ class User extends Controller
 
     public function update(array $data): void
     {
-        $user = (new \Models\User())->find($data['login']);
+        $user = $this->class->find($data['login']);
         foreach ($data as $key => $value) {
             if ($key === 'password') {
                 $user->setPasswd($value);
@@ -81,7 +84,7 @@ class User extends Controller
 
     public function reset(array $data): void
     {
-        $user = (new \Models\User())->find($data["login"]);
+        $user = $this->class->find($data["login"]);
         $user->token($data["login"]);
         echo json_encode($user->message());
     }
@@ -89,13 +92,13 @@ class User extends Controller
     public function token(array $data)
     {
         $login = $data['login'];
-        $user = (new \Models\User())->find([ "login" => $data['login']])[0];
+        $user = $this->class->find([ "login" => $data['login']])[0];
         $this->setPath('Modals')->render('token', compact('login', 'user'));
     }
 
     public function delete(array $data): ?string
     {
-        $user = (new \Models\User())->find($data["login"]);
+        $user = $this->class->find($data["login"]);
         $user->destroy();
         return print json_encode($user->message());
     }

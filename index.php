@@ -51,7 +51,6 @@
 
         /** The Characters */
         $router->namespace("_App");
-        // $router->get("/character", "Character:init");
         $router->get("/character", "Character:_init");
         $router->get("/character/add", "Character:add");
         $router->get("/character/list", "Character:list");
@@ -79,7 +78,7 @@
 
         /** The Category */
         $router->namespace("_App");
-        $router->get("/category", "Category:init");
+        $router->get("/category", "Category:_init");
         $router->get("/category/add", "Category:add");
         $router->post("/category/save", "Category:save");
         $router->get("/category/list", "Category:list");
@@ -101,7 +100,6 @@
         /** The Mission */
         $router->namespace("_App");
         $router->get("/mission", "Mission:_init");
-        // $router->get("/mission/init", "Mission:init");
         $router->get("/mission/add", "Mission:add");
         $router->post("/mission/save", "Mission:save");
         $router->post("/mission/update", "Mission:update");
@@ -112,7 +110,7 @@
         $router->post("/mission/personages", "Mission:personages");
         $router->post("/mission/edit", "Mission:edit");
         $router->get("/mission/list", "Mission:list");
-        $router->post("/map/add", "Mission:map");
+        $router->post("/map/add", "Mission:_map");
         $router->post("/map/save", "Mission:mapSave");
         $router->post("/map/load", "Mission:mapLoad");
         $router->post("/map/edit", "Mission:mapEdit");
