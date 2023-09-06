@@ -14,10 +14,18 @@
 
     /**  Web Routes */
     $router->namespace("_App");
-    $router->get("/", "Web:start");
-    $router->post('/login', "Web:_login");
-    $router->post('/register', "Web:register");
-    $router->post('/enter', "Web:enter");
+    // $router->get("/", "Web:start");
+    // $router->post('/login', "Web:_login");
+    // $router->post('/register', "Web:register");
+    // $router->post('/enter', "Web:enter");
+    // $router->post('/user/save', "Web:save");
+
+
+    $router->get("/", "Login:start");
+    $router->post('/login', "Login:login");
+    $router->post('/register', "Login:register");
+    $router->post('/enter', "Login:enter");
+    $router->post('/user/save', "Login:save");
 
 
 
@@ -26,7 +34,7 @@
 
         /**  The Users' Screens */
         $router->namespace("_App");
-        $router->get("/user", "User:init");
+        $router->get("/user", "User:_init");
         $router->get("/user/add", "User:add");
         $router->post("/user/save", "User:save");
         $router->get("/user/list", "User:list");
@@ -42,11 +50,12 @@
 
         /** The Group's Screens */
         $router->namespace("_App");
+        $router->post("/group", "Group:init");
         $router->post("/group/{login}", "Group:access");
         $router->post("/group/add", "Group:add");
         $router->post("/group/save", "Group:save");
         $router->post("/group/delete", "Group:delete");
-        $router->post("/group/access", "Group:access");
+        // $router->post("/group/access", "Group:access");
         $router->post("/group/update", "Group:update");
 
         /** The Characters */
@@ -131,7 +140,6 @@
 
         /** Server */
         $router->namespace("_App");
-        $router->post("/group", "Group:init");
         $router->post("/user", "User:save");
         $router->get("/carousel", "Avatar:carousel");
         $router->get("/config", "Config:list");
@@ -149,7 +157,8 @@
 
     /** Error Routes */
     $router->namespace("_App")->group("/ops");
-    $router->get("/{errcode}", "Web:error");
+    // $router->get("/{errcode}", "Web:error");
+    $router->get("/{errcode}", "Login:error");
 
     /** Routes */
     $router->dispatch();

@@ -6,10 +6,10 @@ class Config extends Controller
 {
     protected $page = " config";
 
-    public function __construct()
-    {
-        parent::__construct(new \Config\Config());
-    }
+    // public function __construct()
+    // {
+    //     parent::__construct();
+    // }
 
     public function init(array $data): string
     {

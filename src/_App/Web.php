@@ -2,28 +2,15 @@
 
 namespace _App;
 
-class Web extends Controller
+class Web
 {
-    /** no login */
-    public function start(): void
-    {
-        $this->setPath('public')->render('index');
-    }
+    private object $class;
+    private string $path;
 
-    public function _login(): void
+    public function __construct()
     {
-        $this->setPath('pages')->render('login');
-    }
-
-    public function register(): void
-    {
-        $groups = $this->group()->activeAll();
-        $this->setPath('Modals')->render('register', compact('groups'));
-    }
-
-    public function enter(): string
-    {
-        return (new Login())->enter($_POST);
+        $this->class = new \Views\Web();
+        $this->setPath('pages');
     }
 
     public function home(): void
@@ -38,9 +25,9 @@ class Web extends Controller
     }
 
     /** after login */
-    private function init(): void
+    private function init(\Core\Session $session): void
     {
-        $id = $_SESSION['login']->group_id;
+        $id = $session->getUser()->group_id;
         $params['group'] = (new Group())->getThisGroup($id);
         $head = $this->seo(
             CONF_SITE_NAME . " - " . CONF_SITE_TITLE,
@@ -49,13 +36,27 @@ class Web extends Controller
             url() . "//" . theme("assets/img/loading.png"),
             url() . "//" . theme("assets/img/logo-menu.png")
         );
-        $this->view->insertTheme($params, $head);
+        $this->class->insertTheme($params, $head);
     }
 
-    protected function render(string $page, array $params = []): void
+    public function render(string $page, array $params = []): void
     {
-        if ($this->getUser()) { $this->init(); }
+        $session = new \Core\Session();
+        if ($session->getUser()) { $this->init($session); }
 
-        $this->view->render($this->path . "/{$page}", $params);
+        $this->class->render($this->path . "/{$page}", $params);
+    }
+
+    public function setPath(string $path): Web
+    {
+        $this->path = __DIR__ . "/../{$path}";
+        return $this;
+    }
+
+    protected function seo(
+        string $title, string $desc, string $url, string $img, string $logo, bool $follow = false
+    )
+    {
+        return compact("title", "desc", "url", "img", "logo", "follow");
     }
 }

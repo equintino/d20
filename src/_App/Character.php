@@ -6,17 +6,17 @@ class Character extends Controller
 {
     protected string $page = "character";
 
-    public function __construct()
-    {
-        parent::__construct(new \Models\Character());
-    }
+    // public function __construct()
+    // {
+    //     parent::__construct();
+    // }
 
     public function add(): void
     {
         $act = ".add";
-        $user = $this->session()->getUser();
-        $breeds = $this->breed()->activeAll();
-        $categories = $this->category()->activeAll();
+        $user = $this->session->getUser();
+        $breeds = $this->breed->activeAll();
+        $categories = $this->category->activeAll();
 
         $this->render($this->page . $act, compact("user", "breeds", "categories"));
     }
@@ -37,9 +37,9 @@ class Character extends Controller
             "chaotic" => "CAÓTICO"
         ];
         $character = $this->class->load($id);
-        $breeds = $this->breed()->activeAll();
-        $categories = $this->category()->activeAll();
-        $mission = (!empty($character->mission_id) ? $this->mission()->load($character->mission_id) : null);
+        $breeds = $this->breed->activeAll();
+        $categories = $this->category->activeAll();
+        $mission = (!empty($character->mission_id) ? $this->mission->load($character->mission_id) : null);
         $this->setPath("Modals")->render($this->page,
             compact( "act", "login", "trends1", "trends2",
                 "character", "breeds", "categories", "mission" ));
@@ -49,7 +49,7 @@ class Character extends Controller
     {
         $act = ".list";
         $login = $_COOKIE['login'];
-        $userId = $this->user()->find(['login' => $login])[0]->id;
+        $userId = $this->user->find(['login' => $login])[0]->id;
         $characters = (
             $this->class->join(
                 "characters.id,image_id,breed_id,category_id,story,players.mission_id,personage",

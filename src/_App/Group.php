@@ -2,19 +2,19 @@
 
 namespace _App;
 
-use Core\Safety;
-
 class Group extends Controller
 {
+    private \Models\Group $_group;
 
     public function __construct()
     {
         parent::__construct(new \Models\Group());
+        $this->_group = new \Models\Group();
     }
 
-    public function init()
+    public function init(): string
     {
-        $groups = $this->class->activeAll();
+        $groups = $this->_group->activeAll();
         foreach ($groups as $group) {
             $list[$group->name] = [
                 'id' => $group->id,
@@ -25,37 +25,10 @@ class Group extends Controller
         return print json_encode($list);
     }
 
-    public function getThisGroup(int $id)
-    {
-        return $this->class->load($id);
-    }
-
-    public function list(): void
-    {
-        $groups = $this->class->activeAll() ?? [];
-        $screens = Safety::screens("/pages");
-        $group_id = ($this->user()->find($_SESSION["login"]->login)->group_id ?? null);
-
-        $this->render("shield", compact("groups", "screens", "group_id"));
-    }
-
     public function access(array $data): string
     {
         $id = $data["id"];
-        return print json_encode(explode(",", $this->class->load($id)->access));
-    }
-
-    public function load(array $data): void
-    {
-        $gp = $this->class;
-        $group = $gp->find($data["groupName"]);
-        if ($group) {
-            $security["access"] = [];
-            foreach (explode(",", $group->access) as $screen) {
-                array_push($security["access"], Safety::renameScreen($screen));
-            }
-            echo json_encode($security);
-        }
+        return print json_encode(explode(",", $this->_group->load($id)->access));
     }
 
     public function add(): void
@@ -63,31 +36,41 @@ class Group extends Controller
         ($this->setPath("Modals")->render("group"));
     }
 
-    public function save(): void
+    public function save(): string
     {
         $params = $this->getPost($_POST);
-        $group = $this->class;
+        $group = $this->_group;
 
         $group->bootstrap($params);
         $group->save();
-        echo json_encode($group->message());
+        return print json_encode($group->message());
     }
 
-    public function update(): void
+    public function delete(array $data): string
+    {
+        $id = $data["id"];
+        $group = $this->_group->load($id);
+        $group->destroy();
+        return print json_encode($group->message());
+    }
+
+    public function update(): string
     {
         $access = $_POST['pages'];
         $groupId = $_POST["id"];
-        $group = $this->class->load($groupId);
+        $group = $this->_group->load($groupId);
         $group->access = "home,error,{$access}";
         $group->save(true);
-        echo json_encode($group->message());
+        return print json_encode($group->message());
     }
 
-    public function delete(array $data): void
+    public function getListGroup()
     {
-        $id = $data["id"];
-        $group = $this->class->load($id);
-        $group->destroy();
-        echo json_encode($group->message());
+        return $this->_group->activeAll();
+    }
+
+    public function getThisGroup(int $id): \Models\Group
+    {
+        return $this->_group->load($id);
     }
 }

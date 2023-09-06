@@ -4,24 +4,18 @@ namespace _App;
 
 class User extends Controller
 {
-    protected $page = " user";
+    protected $page = "user";
 
     public function __construct()
     {
         parent::__construct(new \Models\User());
-    }
-
-    public function init(?array $data): void
-    {
-        $params = [];
-        $company_id = ($data["company_id"] ?? null);
-        $this->render("user", $params);
+        $this->group = new Group();
     }
 
     public function list(?array $data): void
     {
         $act = "list";
-        $login = $_SESSION["login"]->login;
+        $login = $this->getUser()->login;
         if (!empty($data["company_id"])) {
             $users = $this->class->find(["company_id" => $data["company_id"]]);
         } else {
@@ -29,16 +23,14 @@ class User extends Controller
         }
 
         $user = $this->class->find($login);
-        $groups = $this->group()->activeAll();
-
+        $groups = $this->group->getListGroup();
         $this->setPath("Modals")->render("user", compact("act", "login", "users", "user", "groups"));
     }
 
     public function add(): void
     {
         $act = "edit";
-        $groups = $this->group()->activeAll();
-
+        $groups = $this->group->getListGroup();
         $this->setPath("Modals")->render("user", compact("act", "groups"));
     }
 
@@ -47,8 +39,7 @@ class User extends Controller
         $act = "edit";
         $login = $data["login"];
         $user = $this->class->find(($login));
-        $groups = $this->group()->all();
-
+        $groups = $this->group->getListGroup();
         $this->setPath("Modals")->render("user", compact("act", "user", "groups"));
     }
 
@@ -61,7 +52,6 @@ class User extends Controller
         } else {
             $user = $this->class->load($data['id']);
         }
-
         $user->bootstrap($data);
         $user->save(true);
         return print json_encode($user->message());
