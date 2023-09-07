@@ -25,24 +25,35 @@ class Web
     }
 
     /** after login */
-    private function init(\Core\Session $session): void
+    // public function init(): void
+    // {
+    //     $session = new \Core\Session();
+    //     $id = $session->getUser()->group_id;
+    //     $params['group'] = (new Group())->getThisGroup($id);
+    //     $head = $this->seo(
+    //         CONF_SITE_NAME . " - " . CONF_SITE_TITLE,
+    //         CONF_SITE_DESC,
+    //         url(),
+    //         url() . "//" . theme("assets/img/loading.png"),
+    //         url() . "//" . theme("assets/img/logo-menu.png")
+    //     );
+    //     $this->class->insertTheme($params, $head);
+    // }
+
+    public function render(string $page, array $params = []): void
     {
-        $id = $session->getUser()->group_id;
-        $params['group'] = (new Group())->getThisGroup($id);
-        $head = $this->seo(
+        $session = new \Core\Session();
+        $id = !empty($session->getUser()->login)? $session->getUser()->group_id : null;
+        $params['group'] = $id ? (new Group())->getThisGroup($id) : null;
+        $params['head'] = $this->seo(
             CONF_SITE_NAME . " - " . CONF_SITE_TITLE,
             CONF_SITE_DESC,
             url(),
             url() . "//" . theme("assets/img/loading.png"),
             url() . "//" . theme("assets/img/logo-menu.png")
         );
-        $this->class->insertTheme($params, $head);
-    }
-
-    public function render(string $page, array $params = []): void
-    {
-        $session = new \Core\Session();
-        if ($session->getUser()) { $this->init($session); }
+        // $session = new \Core\Session();
+        // if ($session->getUser()) { $this->init($session); }
 
         $this->class->render($this->path . "/{$page}", $params);
     }

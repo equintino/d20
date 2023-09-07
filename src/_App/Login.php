@@ -36,7 +36,6 @@ class Login extends Controller {
         extract($data);
         $lg = $this->class->user($login, $password, $db);
         $lg->validate();
-
         return print $lg->message ?? null;
     }
 

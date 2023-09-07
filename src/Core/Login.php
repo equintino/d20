@@ -42,6 +42,8 @@ class Login
             $this->message = json_encode("No exist login");
         } elseif ($this->user->token) {
             $this->message = json_encode("reset password");
+        } elseif ($this->user->active === 0) {
+            $this->message = json_encode('Login inactive');
         } elseif ($this->user->validate($this->password, $this->user->password)) {
             $this->setSession($this->user->login);
             $this->message = json_encode(true);
