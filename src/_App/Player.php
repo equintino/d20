@@ -42,6 +42,32 @@ class Player extends Controller
         return $this->class->find($search);
     }
 
+    public function join(string $fields, array $entitys, array $joins, array $ons): \Models\Player
+    {
+        return $this->class->join($fields, $entitys, $joins, $ons);
+    }
+
+    public function save(array $data): string
+    {
+        $player = $this->class;
+        if (empty($player->find([ "character_id" => $data["character_id"] ]))) {
+            $player->id = null;
+            $player->bootstrap($data);
+        } else {
+            return print json_encode("This player has been in a mission");
+        }
+        $player->save();
+        return json_encode($player->message());
+    }
+
+    public function delete(array $data): string
+    {
+        $id = $data["id"];
+        $player = $this->class->load($id);
+        $player->destroy();
+        return print json_encode($player->message());
+    }
+
     // public function add(): void
     // {
     //     $act = "add";
@@ -83,24 +109,6 @@ class Player extends Controller
     //     $this->render($this->page, compact("act", "players"));
     // }
 
-    public function join(string $fields, array $entitys, array $joins, array $ons): \Models\Player
-    {
-        return $this->class->join($fields, $entitys, $joins, $ons);
-    }
-
-    public function save(array $data): string
-    {
-        $player = $this->class;
-        if (empty($player->find([ "character_id" => $data["character_id"] ]))) {
-            $player->id = null;
-            $player->bootstrap($data);
-        } else {
-            return print json_encode("This player has been in a mission");
-        }
-        $player->save();
-        return json_encode($player->message());
-    }
-
     // public function update(array $data): string
     // {
     //     $player = $this->class->load($data["id"]);
@@ -115,12 +123,4 @@ class Player extends Controller
     // {
     //     $this->setPath("Modals")->render($this->page);
     // }
-
-    public function delete(array $data): string
-    {
-        $id = $data["id"];
-        $player = $this->class->load($id);
-        $player->destroy();
-        return print json_encode($player->message());
-    }
 }
