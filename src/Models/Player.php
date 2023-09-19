@@ -71,10 +71,12 @@ class Player extends Model implements Models
             return null;
         }
 
-        return (is_array($search) ? $find->fetchAll(\PDO::FETCH_CLASS, __CLASS__) : $find->fetchObject(__CLASS__));
+        return is_array($search) ? $find->fetchAll(\PDO::FETCH_CLASS, __CLASS__) : $find->fetchObject(__CLASS__);
     }
 
-    public function all(int $limit=30, int $offset=0, string $columns = "*", string $order = "id", bool $msgDb = false ): ?array
+    public function all(
+        int $limit=30, int $offset=0, string $columns = "*", string $order = "id", bool $msgDb = false
+    ): ?array
     {
         $all = $this->read("SELECT {$columns} FROM  "
             . self::$entity . " "

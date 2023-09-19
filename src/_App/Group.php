@@ -4,17 +4,14 @@ namespace _App;
 
 class Group extends Controller
 {
-    private \Models\Group $_group;
-
     public function __construct()
     {
         parent::__construct(new \Models\Group());
-        $this->_group = new \Models\Group();
     }
 
     public function init(): string
     {
-        $groups = $this->_group->activeAll();
+        $groups = $this->class->activeAll();
         foreach ($groups as $group) {
             $list[$group->name] = [
                 'id' => $group->id,
@@ -28,7 +25,7 @@ class Group extends Controller
     public function access(array $data): string
     {
         $id = $data["id"];
-        return print json_encode(explode(",", $this->_group->load($id)->access));
+        return print json_encode(explode(",", $this->class->load($id)->access));
     }
 
     public function add(): void
@@ -39,8 +36,7 @@ class Group extends Controller
     public function save(): string
     {
         $params = $this->getPost($_POST);
-        $group = $this->_group;
-
+        $group = $this->class;
         $group->bootstrap($params);
         $group->save();
         return print json_encode($group->message());
@@ -49,7 +45,7 @@ class Group extends Controller
     public function delete(array $data): string
     {
         $id = $data["id"];
-        $group = $this->_group->load($id);
+        $group = $this->class->load($id);
         $group->destroy();
         return print json_encode($group->message());
     }
@@ -58,7 +54,7 @@ class Group extends Controller
     {
         $access = $_POST['pages'];
         $groupId = $_POST["id"];
-        $group = $this->_group->load($groupId);
+        $group = $this->class->load($groupId);
         $group->access = "home,error,{$access}";
         $group->save(true);
         return print json_encode($group->message());
@@ -66,11 +62,11 @@ class Group extends Controller
 
     public function getListGroup()
     {
-        return $this->_group->activeAll();
+        return $this->class->activeAll();
     }
 
     public function getThisGroup(int $id): \Models\Group
     {
-        return $this->_group->load($id);
+        return $this->class->load($id);
     }
 }

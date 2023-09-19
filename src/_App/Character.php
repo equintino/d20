@@ -6,18 +6,21 @@ class Character extends Controller
 {
     protected string $page = "character";
 
-    // public function __construct()
-    // {
-    //     parent::__construct();
-    // }
+    public function __construct()
+    {
+        parent::__construct(new \Models\Character());
+        $this->breed = new Breed();
+        $this->category = new Category();
+        $this->user = new User();
+        // $this->mission = new Mission();
+    }
 
     public function add(): void
     {
         $act = ".add";
-        $user = $this->session->getUser();
-        $breeds = $this->breed->activeAll();
-        $categories = $this->category->activeAll();
-
+        $user = $this->getUser();
+        $breeds = $this->breed->getBreeds();
+        $categories = $this->category->getCategories();
         $this->render($this->page . $act, compact("user", "breeds", "categories"));
     }
 
@@ -37,19 +40,28 @@ class Character extends Controller
             "chaotic" => "CAÓTICO"
         ];
         $character = $this->class->load($id);
-        $breeds = $this->breed->activeAll();
-        $categories = $this->category->activeAll();
+        $breeds = $this->breed->getBreeds();
+        $categories = $this->category->getCategories();
         $mission = (!empty($character->mission_id) ? $this->mission->load($character->mission_id) : null);
         $this->setPath("Modals")->render($this->page,
             compact( "act", "login", "trends1", "trends2",
                 "character", "breeds", "categories", "mission" ));
     }
 
+    public function load(int $id): \Models\Character
+    {
+        return $this->class->load($id);
+    }
+
+    public function search(array $search)
+    {
+        return $this->class->search($search);
+    }
+
     public function list(): void
     {
         $act = ".list";
-        $login = $_COOKIE['login'];
-        $userId = $this->user->find(['login' => $login])[0]->id;
+        $userId = $this->getUser()->id;
         $characters = (
             $this->class->join(
                 "characters.id,image_id,breed_id,category_id,story,players.mission_id,personage",
@@ -70,6 +82,11 @@ class Character extends Controller
             ?? []
         );
         $this->render($this->page . $act, compact("act","characters"));
+    }
+
+    public function join(string $fields, array $entitys, array $joins, array $ons): \Models\Character
+    {
+        return $this->class->join($fields, $entitys, $joins, $ons);
     }
 
     public function save(array $data): ?string

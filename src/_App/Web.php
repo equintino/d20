@@ -24,22 +24,6 @@ class Web
         $this->render("error", compact("errcode"));
     }
 
-    /** after login */
-    // public function init(): void
-    // {
-    //     $session = new \Core\Session();
-    //     $id = $session->getUser()->group_id;
-    //     $params['group'] = (new Group())->getThisGroup($id);
-    //     $head = $this->seo(
-    //         CONF_SITE_NAME . " - " . CONF_SITE_TITLE,
-    //         CONF_SITE_DESC,
-    //         url(),
-    //         url() . "//" . theme("assets/img/loading.png"),
-    //         url() . "//" . theme("assets/img/logo-menu.png")
-    //     );
-    //     $this->class->insertTheme($params, $head);
-    // }
-
     public function render(string $page, array $params = []): void
     {
         $session = new \Core\Session();
@@ -52,9 +36,6 @@ class Web
             url() . "//" . theme("assets/img/loading.png"),
             url() . "//" . theme("assets/img/logo-menu.png")
         );
-        // $session = new \Core\Session();
-        // if ($session->getUser()) { $this->init($session); }
-
         $this->class->render($this->path . "/{$page}", $params);
     }
 

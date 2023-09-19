@@ -76,7 +76,7 @@ export default class Config extends AbstractControllers {
                     const formData = new FormData(form)
                     const resp = this.getDataFile({
                             method: 'POST',
-                            url: 'config/save',
+                            url: 'config/update',
                             formData
                         })
                     if (resp.indexOf('success') !== -1) {

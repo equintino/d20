@@ -9,12 +9,18 @@ class Category extends Controller
     public function __construct()
     {
         parent::__construct(new \Models\Category());
+        $this->image = new Image();
     }
 
     public function add(): void
     {
         $act = "add";
         $this->render($this->page, compact("act"));
+    }
+
+    public function getCategories(): array
+    {
+        return $this->class->activeAll();
     }
 
     public function list(): void
@@ -48,9 +54,9 @@ class Category extends Controller
         $category = (!empty($data['id']) ? $this->class->load($data["id"]) : $this->class);
         if ($_FILES["image"]["error"] === 0) {
             if (empty($category->image_id)) {
-                $data["image_id"] = $this->image()->fileSave($_FILES["image"]);
+                $data["image_id"] = $this->image->fileSave($_FILES["image"]);
             } else {
-                $image = $this->image()->load($category->image_id);
+                $image = $this->image->load($category->image_id);
                 $image->fileSave($_FILES["image"]);
             }
         }

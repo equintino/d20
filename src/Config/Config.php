@@ -30,7 +30,7 @@ class Config
 
     public static function getConfig(): ?object
     {
-        return self::$dataFile->{self::getConfConnection()} ?? null;
+        return self::$dataFile->{self::$local} ?? null;
     }
 
     /** contant file env */
@@ -141,23 +141,27 @@ class Config
         return base64_decode($passwd);
     }
 
-    public function confirmSave(): bool
+    public function confirmSave(array $data): bool
     {
-        if (array_key_exists(self::$local, self::$file)) {
-            $this->message = "<span class=warning >The connection name already exists</span>";
-            return false;
-        } else {
-            return $this->save();
-        }
+        $connectionName = $data['connectionName'];
+        return empty(self::$dataFile->$connectionName) ? true : false;
     }
 
     public function save(array $data): bool
+    {
+        if (!$this->confirmSave($data)) {
+            return $this->message = "<span class=warning >The connection name already exists</span>";
+        }
+        return $this->update($data);
+    }
+
+    public function update(array $data): bool
     {
         $connectionName = $data["connectionName"];
         $file = (self::$dataFile ?? new \StdClass());
         $this->setConfConnection($data);
 
-        $file->$connectionName = [
+        $file->$connectionName = (object) [
             'dsn' => $this->getDsn(),
             'user' => $this->getUser(),
             'passwd' => $this->getPasswd()
@@ -166,28 +170,6 @@ class Config
         $saved = $this->saveFile($file);
         $this->message = ($saved ? "<span class='success'>Data saved successfully</span>"
             : "<span class='danger'>Erro ao salvar</span>");
-        return $saved;
-    }
-
-    public function update(array $data): bool
-    {
-        $file = (object) $this->getFile();
-        $this->setConfConnection($data["data"]);
-        parse_str($data["data"], $data);
-        $connectionName = $data["connectionName"];
-
-        $file->$connectionName = [
-            "dsn" => $this->getDsn(),
-            "user" => $this->getUser(),
-            "passwd" => $file->$connectionName["passwd"]
-        ];
-
-        $saved = $this->saveFile((array) $file);
-
-        $this->message = (
-            $saved ? "<span class='success'>Data saved successfully</span>"
-                : "<span class='error'>Erro ao salvar</span>"
-        );
         return $saved;
     }
 

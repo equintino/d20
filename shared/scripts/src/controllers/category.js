@@ -1,10 +1,6 @@
 import AbstractControllers from "./abstractcontrollers.js"
 
 export default class Category extends AbstractControllers {
-    constructor(cls) {
-        super(cls)
-    }
-
     optInit(btnName) {
         const page = (btnName === 'new' ? 'category/add' : 'category/list')
         this.showPage({

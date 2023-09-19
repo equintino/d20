@@ -14,20 +14,11 @@
 
     /**  Web Routes */
     $router->namespace("_App");
-    // $router->get("/", "Web:start");
-    // $router->post('/login', "Web:_login");
-    // $router->post('/register', "Web:register");
-    // $router->post('/enter', "Web:enter");
-    // $router->post('/user/save', "Web:save");
-
-
     $router->get("/", "Login:start");
     $router->post('/login', "Login:login");
     $router->post('/register', "Login:register");
     $router->post('/enter', "Login:enter");
     $router->post('/user/save', "Login:save");
-
-
 
     if ($session->getUser()) {
         $router->get('/home', 'Web:home');
@@ -46,7 +37,7 @@
 
         /** The Shield's Screens */
         $router->namespace("_App");
-        $router->get("/shield", "Shield:init");
+        $router->get("/shield", "Shield:_init");
 
         /** The Group's Screens */
         $router->namespace("_App");
@@ -55,7 +46,6 @@
         $router->post("/group/add", "Group:add");
         $router->post("/group/save", "Group:save");
         $router->post("/group/delete", "Group:delete");
-        // $router->post("/group/access", "Group:access");
         $router->post("/group/update", "Group:update");
 
         /** The Characters */
@@ -157,7 +147,6 @@
 
     /** Error Routes */
     $router->namespace("_App")->group("/ops");
-    // $router->get("/{errcode}", "Web:error");
     $router->get("/{errcode}", "Login:error");
 
     /** Routes */

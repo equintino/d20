@@ -40,9 +40,6 @@
     </div>
     <?php elseif ($act === "add"): ?>
     <div id="add">
-        <section>
-            <button class="btn btn-rpg btn-info" style="margin-top: 20px" value="back">Voltar</button>
-        </section>
         <section id="register">
             <fieldset class="fieldset">
                 <legend>CADASTRO DE MISSÃO</legend>
@@ -64,10 +61,9 @@
                     </section>
                 </form>
             </fieldset>
-            <!-- <div style="float: left; margin-left: 40px">
-                <button type="button" class="btn btn-rpg btn-silver" value="back">Voltar</button>
-            </div> -->
-            <!-- <div style="text-align: right; margin-right: 40px"> -->
+            <div style="float: left; margin-left: 40px">
+                <button type="button" class="btn btn-rpg btn-info" value="back">Voltar</button>
+            </div>
             <div class="buttons">
                 <button type="reset" class="btn-rpg btn-silver" value="clear">Limpar</button>
                 <button type="submit" class="btn-rpg btn-green" value="save">Salvar</button>

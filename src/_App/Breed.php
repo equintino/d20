@@ -9,6 +9,7 @@ class Breed extends Controller
     public function __construct()
     {
         parent::__construct(new \Models\Breed());
+        $this->image = new Image();
     }
 
     public function init(?array $data): void
@@ -20,6 +21,11 @@ class Breed extends Controller
     {
         $act = "add";
         $this->render($this->page, compact("act"));
+    }
+
+    public function getBreeds()
+    {
+        return $this->class->activeAll();
     }
 
     public function list(): void
@@ -73,12 +79,12 @@ class Breed extends Controller
 
     public function save(array $data)
     {
-        $breed = (!empty($data['id']) ? $this->class->load($data["id"]) : $this->breed());
+        $breed = (!empty($data['id']) ? $this->class->load($data["id"]) : $this->class);
         if ($_FILES["image"]["error"] === 0) {
             if (empty($breed->image_id)) {
-                $data["image_id"] = $this->image()->fileSave($_FILES["image"]);
+                $data["image_id"] = $this->image->fileSave($_FILES["image"]);
             } else {
-                $image = $this->image()->load($breed->image_id);
+                $image = $this->image->load($breed->image_id);
                 $image->fileSave($_FILES["image"]);
             }
         }

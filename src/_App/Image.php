@@ -17,6 +17,16 @@ class Image extends Controller
         $this->showImage();
     }
 
+    public function load(int $id): \Models\Image
+    {
+        return $this->class->load($id);
+    }
+
+    public function fileSave(array $file, int $id = null)
+    {
+        return $this->class->fileSave($file, $id);
+    }
+
     public function save(array $data)
     {
         $image = $this->class->load($data["id"]);

@@ -11,16 +11,11 @@ trait ClassTraits {
     protected $group;
     protected $user;
     protected $character;
+    protected $mission;
     protected $missionRequest;
     protected $player;
     protected $map;
     protected $image;
     protected $breed;
-
-    // public function initClass()
-    // {
-    //     $this->view = new \Views\View();
-    //     $this->session = new \Core\Session();
-    //     $this->group = new \_App\Group();
-    // }
+    protected $category;
 }

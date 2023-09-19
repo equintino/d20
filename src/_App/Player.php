@@ -2,8 +2,6 @@
 
 namespace _App;
 
-use Models\Photo;
-
 class Player extends Controller
 {
     protected $page = "player";
@@ -15,6 +13,7 @@ class Player extends Controller
 
     public function init(?array $data): void
     {
+        $login = $this->getUser()->login;
         $players = $this->class->join(
             "players.id,players.character_id,users.login,missions.name,characters.active,"
             . "characters.personage,trend1,trend2",
@@ -35,7 +34,12 @@ class Player extends Controller
                 "mission_id=missions.id"
             ]
         )->where();
-        $this->render($this->page, compact("players"));
+        $this->render($this->page, compact("login", "players"));
+    }
+
+    public function find(array $search)
+    {
+        return $this->class->find($search);
     }
 
     public function add(): void
@@ -79,16 +83,22 @@ class Player extends Controller
         $this->render($this->page, compact("act", "players"));
     }
 
-    public function save(array $data)
+    public function join(string $fields, array $entitys, array $joins, array $ons): \Models\Player
+    {
+        return $this->class->join($fields, $entitys, $joins, $ons);
+    }
+
+    public function save(array $data): string
     {
         $player = $this->class;
         if (empty($player->find([ "character_id" => $data["character_id"] ]))) {
+            $player->id = null;
             $player->bootstrap($data);
         } else {
             return print json_encode("This player has been in a mission");
         }
         $player->save();
-        return print json_encode($player->message());
+        return json_encode($player->message());
     }
 
     public function update(array $data): string

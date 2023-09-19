@@ -9,6 +9,9 @@ class Avatar extends Controller
     public function __construct()
     {
         parent::__construct(new \Models\Avatar());
+        $this->category = new Category();
+        $this->breed = new Breed();
+        $this->image = new Image();
     }
 
     public function carousel(): void
@@ -19,8 +22,8 @@ class Avatar extends Controller
     public function add(): void
     {
         $act = "add";
-        $breeds = $this->breed()->activeAll();
-        $categories = $this->category()->activeAll();
+        $breeds = $this->breed->getBreeds();
+        $categories = $this->category->getCategories();
         $this->render($this->page,  compact("act", "breeds", "categories"));
     }
 
@@ -28,8 +31,8 @@ class Avatar extends Controller
     {
         $act = "list";
         $avatars = $this->class->activeAll();
-        $breeds = $this->breed()->activeAll();
-        $categories = $this->category()->activeAll();
+        $breeds = $this->breed->getBreeds();
+        $categories = $this->category->getCategories();
         $this->render($this->page, compact("act", "avatars", "breeds", "categories"));
     }
 
@@ -54,8 +57,8 @@ class Avatar extends Controller
     {
         $id = ( $data["id"] ?? null );
         $act = "edit";
-        $breeds = $this->breed()->activeAll();
-        $categories = $this->category()->activeAll();
+        $breeds = $this->breed->getBreeds();
+        $categories = $this->category->getCategories();
         $avatar = $this->class->load($id);
         echo "<script>var act='edit'</script>";
         $this->setPath("Modals")->render($this->page, compact("act", "avatar", "breeds", "categories"));
@@ -69,8 +72,8 @@ class Avatar extends Controller
         $act = (!empty($data["act"]) ? ".{$data['act']}" : null);
         $source = ($data["source"] ?? null);
         $currentCat = "";
-        $categories = $this->category()->activeAll();
-        $breeds = $this->breed()->activeAll();
+        $categories = $this->category->getCategories();
+        $breeds = $this->breed->getBreeds();
         foreach ($categories as $category) {
             if ($category->id == $idCategory) {
                 $currentCat = $category;
@@ -95,14 +98,14 @@ class Avatar extends Controller
                 $file["tmp_name"] = $files["tmp_name"][$x];
                 $file["size"] = $files["size"][$x];
                 if ($files["error"][$x] === 0) {
-                    $data["image_id"] = $this->image()->fileSave($file);
+                    $data["image_id"] = $this->image->fileSave($file);
                 }
                 $avatars->bootstrap($data);
                 $avatars->save();
             }
         } else {
             if ($files["error"] === 0) {
-                $image = $this->image()->load($avatars->image_id);
+                $image = $this->image->load($avatars->image_id);
                 $data["image_id"] = $image->fileSave($files);
             }
             $avatars->bootstrap($data);
@@ -114,7 +117,7 @@ class Avatar extends Controller
     public function delete(array $data): ?string
     {
         $avatar = $this->class->load($data["id"]);
-        $image = $this->image()->load($avatar->image_id);
+        $image = $this->image->load($avatar->image_id);
         $image->destroy();
         $avatar->destroy();
         return print json_encode($avatar->message());

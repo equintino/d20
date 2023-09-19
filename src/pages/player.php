@@ -26,7 +26,6 @@
             </thead>
             <tbody>
                 <?php
-                    $login = $_SESSION["login"]->login;
                     foreach ($players as $player):
                             $arrow = ($login === $player->login ? "<i class='fa fa-arrow-right'
                             aria-hidden='true' ></i>" : null);

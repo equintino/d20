@@ -6,15 +6,9 @@ class Config extends Controller
 {
     protected $page = " config";
 
-    // public function __construct()
-    // {
-    //     parent::__construct();
-    // }
-
-    public function init(array $data): string
+    public function __construct()
     {
-        $this->class->save($data);
-        return print $this->class->message();
+        parent::__construct(new \Config\Config());
     }
 
     public function list(): void
@@ -35,28 +29,32 @@ class Config extends Controller
     {
         $types = $this->class->types;
         $connectionName = $data["connectionName"];
+        $this->class::$local = $connectionName;
         $config = $this->class;
-        $config::$local = $connectionName;
-
-        ($this->setPath("Modals")->render("config", compact("config", "types", "connectionName")));
+        $address = $this->class->address();
+        $database = $this->class->database();
+        $user = $this->class->user();
+        $this->setPath("Modals")->render("config", compact(
+            "config", "types", "connectionName", "address", "database", "user"
+        ));
     }
 
-    public function save(array $data): void
+    public function save(array $data): string
     {
         $this->class->save($data);
-        echo json_encode($this->class->message());
+        return print json_encode($this->class->message());
     }
 
-    public function update(): void
+    public function update(): string
     {
         $params = $this->getPost($_POST);
         $this->class->update($params);
-        echo json_encode($this->class->message());
+        return print json_encode($this->class->message());
     }
 
-    public function delete(array $data): void
+    public function delete(array $data): string
     {
         $this->class->delete($data["connectionName"]);
-        echo json_encode($this->class->message());
+        return print json_encode($this->class->message());
     }
 }

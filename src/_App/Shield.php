@@ -6,23 +6,23 @@ use Core\Safety;
 
 class Shield extends Controller
 {
-    private string $page = "shield";
+    protected string $page = 'shield';
 
-    public function init(): void
+    public function _init(): void
     {
+        $this->group = new Group();
         $groups = $this->removeGroup();
         $screens = Safety::screens("/pages");
         foreach ($screens as $screen) {
             $pages[] = Safety::renameScreen($screen);
         }
-        $login = $this->session()->getUser();
-
+        $login = $this->getUser();
         $this->render($this->page, compact("groups", "screens", "login", "pages"));
     }
 
     public function removeGroup(): array
     {
-        $groups = $this->group()->activeAll();
+        $groups = $this->group->getListGroup();
         array_shift($groups);
         return $groups;
     }

@@ -3,8 +3,6 @@
 namespace _App;
 
 use Traits\ClassTraits;
-use Views\View;
-use Core\Session;
 
 abstract class Controller
 {
@@ -14,16 +12,9 @@ abstract class Controller
 
     public function __construct(object $class = null)
     {
-        // $this->initClass();
         $this->class = $class;
         $this->web = new Web();
         $this->session = new \Core\Session();
-        // $this->path  = __DIR__ . "/../pages";
-        // echo '<pre>';
-        // var_dump(
-        //     $this,
-        //     $class
-        // );die;
     }
 
     public function _init(): void
@@ -47,13 +38,6 @@ abstract class Controller
         return $params;
     }
 
-    // protected function seo(
-    //     string $title, string $desc, string $url, string $img, string $logo, bool $follow = false
-    // )
-    // {
-    //     return compact("title", "desc", "url", "img", "logo", "follow");
-    // }
-
     protected function getUser()
     {
         return $this->session->getUser();
@@ -64,13 +48,8 @@ abstract class Controller
         return $this->web->setPath($path);
     }
 
-    // protected function render(string $page, array $params = []): void
-    // {
-    //     $this->view->render($this->path . "/{$page}", $params);
-    // }
-
-    protected function render()
+    protected function render(string $page, array $params = [])
     {
-        $this->web->render($this->page);
+        $this->web->render($page, $params);
     }
 }
