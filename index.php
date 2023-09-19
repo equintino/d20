@@ -130,7 +130,7 @@
 
         /** Server */
         $router->namespace("_App");
-        $router->post("/user", "User:save");
+        // $router->post("/user", "User:save");
         $router->get("/carousel", "Avatar:carousel");
         $router->get("/config", "Config:list");
         $router->post("/config/register", "Config:add");

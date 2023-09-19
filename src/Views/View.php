@@ -22,7 +22,6 @@ class View
         if (!empty($params)) {
             extract($params);
         }
-
         include_once "{$page}.php";
     }
 

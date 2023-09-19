@@ -12,7 +12,6 @@ class Character extends Controller
         $this->breed = new Breed();
         $this->category = new Category();
         $this->user = new User();
-        // $this->mission = new Mission();
     }
 
     public function add(): void
