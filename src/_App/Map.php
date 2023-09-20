@@ -9,7 +9,7 @@ class Map extends Controller
     public function __construct()
     {
         parent::__construct(new \Models\Map());
-        $this->image = new \_App\Image();
+        $this->image = new Image();
     }
 
     public function getMaps(): array

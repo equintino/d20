@@ -188,7 +188,7 @@ class Avatar extends Model implements Models
                 }
             }
             $stmt->execute();
-        } catch (PDOException $exception) {
+        } catch (\PDOException $exception) {
             $this->fail = $exception;
             return null;
         }

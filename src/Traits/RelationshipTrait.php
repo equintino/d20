@@ -11,7 +11,6 @@ trait RelationshipTrait
         for ($x = 0; $x < count($joins); $x++) {
             $this->sql .= " {$joins[$x]} {$entitys[$x+1]} ON {$ons[$x]}";
         }
-
         return $this;
     }
 
@@ -28,8 +27,6 @@ trait RelationshipTrait
             }
         }
         $this->sql .= " {$params}";
-
-        // return $this->read($this->sql)->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
         return $this->read($this->sql)->fetchAll();
     }
 }

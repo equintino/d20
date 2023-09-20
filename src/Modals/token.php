@@ -22,5 +22,4 @@
     <label class="label" for="password">Digite sua nova senha</label>
     <input class="form-input" type="password" name="confPassword" required/>
     <label class="label" for="confPassword">Confirme</label>
-    <!-- <button id="btn-token" class="button-style mt-3" >Enviar</button> -->
 </form>

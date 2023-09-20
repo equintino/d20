@@ -202,7 +202,7 @@ class Image extends Model implements Models
                 }
             }
             $stmt->execute();
-        } catch (PDOException $exception) {
+        } catch (\PDOException $exception) {
             $this->fail = $exception;
             return null;
         }
@@ -246,7 +246,7 @@ class Image extends Model implements Models
     private function lastId()
     {
         $lastData = $this->all(1, 0, "id", "id DESC");
-        return ($lastData ? $lastData[0]->id + 1 : 1);
+        return $lastData ? $lastData[0]->id + 1 : 1;
     }
 
     private function validateFields()

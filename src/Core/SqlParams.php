@@ -13,12 +13,14 @@ class SqlParams extends Model
     /** pagination */
     public function limitParams(?string $type): ?string
     {
-        switch($type) {
+        switch ($type) {
             case "sqlsrv":
                 $this->sql .= " OFFSET :offset ROWS FETCH NEXT :limit ROWS ONLY";
                 break;
             case "mysql":
                 $this->sql .= " LIMIT :limit OFFSET :offset";
+                break;
+            default:
         }
         return $this->sql;
     }

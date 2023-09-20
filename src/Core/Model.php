@@ -45,7 +45,7 @@ abstract class Model
 
     public function __get($name)
     {
-        return ($this->data->$name ?? null);
+        return $this->data->$name ?? null;
     }
 
     public function __isset($name)
@@ -156,7 +156,7 @@ abstract class Model
 
         $sql = "UPDATE {$entity} SET {$dataSet} WHERE {$terms}";
         $this->execute($sql, $params);
-        return ($stmt->rowCount ?? 1);
+        return $stmt->rowCount ?? 1;
     }
 
     protected function delete(string $entity, string $terms, string $params, bool $msgDb = false): ?int
@@ -165,7 +165,7 @@ abstract class Model
             $stmt = Connect::getInstance($msgDb)->prepare("DELETE FROM {$entity} WHERE {$terms}");
             parse_str($params, $params);
             $stmt->execute($params);
-            return ($stmt->rowCount() ?? 1);
+            return $stmt->rowCount() ?? 1;
         } catch (\PDOException $exception) {
             $this->fail = $exception;
             return null;
@@ -250,7 +250,7 @@ abstract class Model
                 }
             }
             $stmt->execute();
-        } catch (PDOException $exception) {
+        } catch (\PDOException $exception) {
             $this->fail = $exception;
         }
         return $stmt;

@@ -8,6 +8,8 @@ class Login extends Controller {
     {
         parent::__construct(new \Core\Login());
         $this->web = new Web();
+        $this->group = new Group();
+        $this->user = new User();
     }
 
     public function start(): void
@@ -22,13 +24,13 @@ class Login extends Controller {
 
     public function register(): void
     {
-        $groups = (new Group())->getListGroup();
+        $groups = $this->group->getListGroup();
         $this->web->setPath('Modals')->render('register', compact('groups'));
     }
 
     public function save(array $data): string
     {
-        return (new User())->save($data);
+        return $this->user->save($data);
     }
 
     public function enter(array $data): ?string

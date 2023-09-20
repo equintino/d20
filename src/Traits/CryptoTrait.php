@@ -11,6 +11,6 @@ trait CryptoTrait
 
     public function validate($passwd, $hash)
     {
-        return (crypt($passwd, $hash) == $hash);
+        return crypt($passwd, $hash) == $hash;
     }
 }

@@ -49,7 +49,7 @@ class AjaxTransaction
         $password = $this->params["password"];
         $confPassword = $this->params["confPassword"];
         if ($password !== $confPassword) {
-            print(json_encode("<span class='warning'>The password was not confirmed</span>"));
+            print json_encode("<span class='warning'>The password was not confirmed</span>");
             die;
         }
     }
@@ -135,6 +135,7 @@ class AjaxTransaction
                 $data = $this->class->find($this->search);
                 $this->class = $data;
                 break;
+            default:
         }
     }
 

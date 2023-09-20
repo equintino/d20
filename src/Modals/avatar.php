@@ -56,9 +56,7 @@
                 </div>
             </section>
             <section class="side-right" >
-                <!--<div id="thumb_image" > -->
-                    <img id="thumb_image" src="image/id/<?= ($avatar->image_id ?? null) ?>" alt="" height="300px"/>
-                <!-- </div> -->
+                <img id="thumb_image" src="image/id/<?= ($avatar->image_id ?? null) ?>" alt="" height="300px"/>
                 <div>
                     <label>Imagem:</label>
                     <input id="image" class="input-rpg" type="file" name="image" />

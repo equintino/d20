@@ -8,4 +8,4 @@ foreach ((new Models\Group())->activeAll() as $value) {
         ];
     }
 }
-return print(json_encode($groups));
+return print json_encode($groups);
